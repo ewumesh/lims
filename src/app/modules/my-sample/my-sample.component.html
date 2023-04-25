@@ -1,0 +1,66 @@
+<mat-card class="p-4" style="height: calc(100vh - 100px);">
+  <div class="row mb-3">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+      <input class="form-control" placeholder="search" />
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="sn">
+      <th mat-header-cell *matHeaderCellDef>S.No.</th>
+      <td mat-cell *matCellDef="let element"> {{element.sn}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="sampleId">
+      <th mat-header-cell *matHeaderCellDef> Sample ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.sampleId}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sampleName">
+      <th mat-header-cell *matHeaderCellDef> Sample Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.sampleName}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="submissionDate">
+      <th mat-header-cell *matHeaderCellDef> Submission Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.submissionDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip class="custom-chip" [ngClass]="{
+          'status-pending' : element.status == 'pending',
+          'status-success' : element.status == 'success',
+          'status-rejected' : element.status == 'rejected'}
+        ">{{element.status | titlecase}}</mat-chip>
+
+       </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row">
+          <div class="col-md-12">
+            <button title="View details" class="btn btn-outline-primary btn-sm btn-rounded mr-1"><i class="fa fa-eye"></i></button>
+            <button title="Download" class="btn btn-outline-primary btn-sm btn-rounded"><i class="fa fa-download"></i></button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</mat-card>

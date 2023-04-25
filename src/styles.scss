@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// Z-INDEX Tracking
+app-root {
+  z-index: 1;
+}
+
+app-toast,
+.toast-class {
+  z-index: 2;
+}
+
+** {
+  font-family: Poppins;
+}
+
+* {
+  font-family: Poppins;
+}
+
+// For Input and select custom style
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: #fff;
+}
+
+.mat-mdc-text-field-wrapper {
+  height: 45px !important;
+}
+
+.custom-select {
+  .mat-mdc-text-field-wrapper {
+
+    .mdc-text-field--outlined {
+
+      .mat-mdc-form-field-infix {
+        padding: 18px 0 !important;
+      }
+    }
+  }
+
+  .mat-mdc-select-value {
+    padding-top: 10px !important;
+  }
+
+}
+
+// for status color
+.custom-chip {
+  height: 20px !important;
+  font-size: 12px !important;
+}
+.status-pending {
+  background-color: #ffc600 !important;
+  .mat-mdc-chip-action-label {
+    color: #fff !important;
+  }
+}
+
+.status-success {
+  background-color: #008b38 !important;
+  .mat-mdc-chip-action-label {
+    color: #fff !important;
+  }
+}
+
+.status-rejected {
+  background-color: #9e2a2b !important;
+  .mat-mdc-chip-action-label {
+    color: #fff !important;
+  }
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}

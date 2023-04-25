@@ -1,0 +1,111 @@
+<mat-card class="p-4">
+  <div class="db-content">
+
+    <div *ngIf="!isLoading && !accountDetails?.is_active"
+      class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
+      <strong>Hello {{accountDetails?.first_name}}!</strong> You account is not verified yet.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- <img src="../../../assets/profile.jpg" alt="" class="user-img mb-4"> -->
+
+    <div class="change-password ">
+      <div class="row">
+
+
+        <div class="col-md-10 d-flex">
+          <div>
+            <ngx-avatar [name]="accountDetails?.username"></ngx-avatar>
+
+          </div>
+          <div style="padding-left: 1%;">
+            <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}}  {{accountDetails?.last_name}}</h1>
+            <h3>User ID: {{accountDetails?.id}}</h3>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary change-password-btn">Change Password</button>
+        </div>
+      </div>
+
+
+    </div>
+
+    <form [formGroup]="userForm">
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Username</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="userName" placeholder="User Name" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="email" placeholder="Email" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Phone Number</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="phoneNumber" placeholder="Phone Number" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Client Category</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="clientCategory" placeholder="Client Category" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email" class="col-form-label">Valid Up To</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="userValidUpTo" placeholder="Valid Upto" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- <div class="row mb-2">
+        <div class="col-md-6">
+          <p class="uf-name">Username</p>
+          <p class="uf-content">Manish Basnet</p>
+        </div>
+        <div class="col-md-6">
+          <p class="uf-name">Email Address</p>
+          <p class="uf-content">manishbasnet@gmail.com</p>
+        </div>
+      </div> -->
+
+    <!-- <div class="row mb-2">
+        <div class="col-md-6">
+          <p class="uf-name">Phone Number</p>
+          <p class="uf-content">+977 9869469665</p>
+        </div>
+        <div class="col-md-6">
+          <p class="uf-name">Client Category</p>
+          <p class="uf-content">Industry</p>
+        </div>
+      </div> -->
+
+    <!-- <div class="row mb-2">
+        <div class="col-md-6">
+          <p class="uf-name">User Valid Upto</p>
+          <p class="uf-content">30 DEC 2024</p>
+        </div>
+      </div> -->
+
+  </div>
+</mat-card>

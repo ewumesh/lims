@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+
+.card {
+  border-radius: 10px;
+  background: rgba(0, 0 , 255, 0.7);
+  height: 150px;
+
+  font-size: 5rem;
+  line-height: 10rem;
+  color: white;
+  text-align: center;
+}
+

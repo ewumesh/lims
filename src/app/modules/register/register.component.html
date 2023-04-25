@@ -1,0 +1,124 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="form-container row">
+    <div class="login-intro mb-3">
+      <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
+      <p class="lims">Laboratory Inventory Management System<br>(LIMS)</p>
+      <hr class="divider">
+      <p class="login-detail">Enter your registrationdetails</p>
+    </div>
+    <form class="userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
+      <div>
+        <label for="exampleInputFullName1" class="form-label">First Name*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput formControlName="firstName" placeholder="Enter your First Name" />
+          <mat-error [@rowsAnimation]="displayMessage?.firstName" class="text-danger"
+            *ngIf="displayMessage?.firstName">{{displayMessage?.firstName}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <label for="exampleInputFullName1" class="form-label">Last Name*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput formControlName="lastName" placeholder="Enter your Last Name" />
+          <mat-error [@rowsAnimation]="displayMessage?.lastName" class="text-danger"
+            *ngIf="displayMessage?.lastName">{{displayMessage?.lastName}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <label for="exampleInputEmail1" class="form-label">Email Address (इ-मेल ठेगाना)*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput formControlName="email" placeholder="Enter your Email" />
+          <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
+            *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <label for="password" class="form-label">Password*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input type="password" matInput formControlName="password" placeholder="Enter Password" />
+          <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
+            *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput formControlName="phoneNumber" placeholder="Enter your Full Name" />
+          <mat-error [@rowsAnimation]="displayMessage?.phoneNumber" class="text-danger"
+            *ngIf="displayMessage?.phoneNumber">{{displayMessage?.phoneNumber}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <div>
+          <label class="list-heading form-label">Client Category (
+            ग्राहक वर्ग)*</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="category" placeholder="Select Category">
+              <mat-option value="1">Industry</mat-option>
+              <mat-option disabled value="2">Government Agency</mat-option>
+              <mat-option disabled value="3">Importer/Exporter</mat-option>
+              <mat-option disabled value="4">DFTQC Section</mat-option>
+            </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.category" class="text-danger"
+              *ngIf="displayMessage?.category">{{displayMessage?.category}}</mat-error>
+          </mat-form-field>
+
+          <div class="hide" *ngIf="registerForm.value.category" [@rowsAnimation]="registerForm.value.category">
+            <fieldset class="subform">
+              <div class="mb-1">
+                <label class="form-label">Department Name</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input matInput formControlName="departmentName" placeholder="Enter Department Name" />
+                    <mat-error [@rowsAnimation]="displayMessage?.departmentName" class="text-danger"
+                      *ngIf="displayMessage?.departmentName">{{displayMessage?.departmentName}}</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="mb-1">
+                <label class="form-label">Department address</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input matInput formControlName="departmentAddress" placeholder="Enter Department Address" />
+                    <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
+                      *ngIf="displayMessage?.departmentAddress">{{displayMessage?.departmentAddress}}</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="mb-1">
+                <label class="form-label">Registration No.</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input matInput formControlName="registrationNumber" placeholder="Enter Department Address" />
+                    <mat-error [@rowsAnimation]="displayMessage?.registrationNumber" class="text-danger"
+                      *ngIf="displayMessage?.registrationNumber">{{displayMessage?.registrationNumber}}</mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="mb-1">
+                <label for="file2">Registration Document</label>
+                <input type="file" name="file2" id="file2" />
+                <button type="button" onclick="deleteFile('file2')">Remove File</button>
+              </div>
+              <div class="mb-1">
+                <label for="secfile2">AP Renew Document</label>
+                <input type="file" name="secfile2" id="secfile2" />
+                <button type="button" onclick="deleteFile('secfile2')">Remove File</button>
+
+              </div>
+              <div class="mb-1">
+                <label class="form-label">Date</label>
+                <np-datepicker
+                [ngModelOptions]="{standalone: true}"
+                monthDisplayType="short"
+                dayDisplayType="short"
+                [(ngModel)]="date"
+                placeholder="asasd"
+                class="nepali-datepicker">
+              </np-datepicker>
+              </div>
+              <!-- {{date| json}} -->
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+
+      <button type="submit" class="form-control form-control-lg" id="submit">Submit</button>
+    </form>
+  </div>
+</div>

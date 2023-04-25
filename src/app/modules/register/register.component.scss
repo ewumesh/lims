@@ -1,0 +1,176 @@
+
+/*End of Login*/
+.form-container {
+  background: rgb(93 118 155 / 10%);
+  padding: 40px;
+  width: 30vw;
+}
+
+.login-intro {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-intro .lims {
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.divider {
+  color: rgba(0, 0, 0, 0.4);
+  height: 1px;
+  width: 100%;
+}
+
+.login-intro>.login-detail {
+  font-size: 20px;
+  font-weight: 500;
+  color: #2260bf;
+}
+
+.np-logo {
+  width: 25%;
+  object-fit: cover;
+  padding: 10px;
+}
+
+input {
+  border-radius: 3px !important;
+  font-size: 16px !important;
+  padding: 12px !important;
+}
+
+input::placeholder {
+  font-size: 14px;
+}
+
+#login {
+  background: #2260bf !important;
+  color: #ffffff;
+}
+
+#login:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.login-additional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-additional>.fp {
+  color: #2260bf;
+}
+
+.login-additional>.register {
+  color: #ffffff;
+  background: #2260bf;
+  padding: 8px 18px;
+  text-decoration: none;
+}
+
+/*End of Login*/
+
+
+
+/*Registration*/
+
+.toptitle {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.toptitle h4 {
+  border-bottom: 1px solid #c4cfda;
+  padding: .5rem 0;
+}
+
+.toptitle h5 {
+  color: #0D6EFD;
+}
+
+.userregister {
+  background-color: #eef1f5;
+  border-radius: .5rem;
+}
+
+.hide {
+  background-color: #d4dfe7;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 0.2rem;
+}
+
+.hide label.form-label {
+  margin-bottom: 0.15rem !important;
+  font-size: .9rem;
+}
+
+.hide .form-control {
+  padding: .25rem 0.5rem;
+  font-size: .9rem;
+}
+
+.hide input#file {
+  font-size: .9rem !important;
+}
+
+.form-select {
+  border-radius: 3px !important;
+  font-size: 16px !important;
+  padding: 12px !important;
+}
+
+.subform input[type=file] {
+  font-size: .8rem !important;
+  color: #0044ff;
+}
+
+#submit {
+  width: 100%;
+  background: #2260bf !important;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+#submit:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.subform button[type=button] {
+  font-size: .8rem;
+  background-color: red;
+  margin: .25rem 0;
+  padding: .25em .7rem;
+  border: red;
+  color: white;
+}
+
+/*End of Registration*/
+
+
+::ng-deep {
+  .datepicker__input {
+    width: 100% !important;
+      height: 45px !important;
+      border-radius: 4px !important;
+      border: 1px solid gray !important;
+
+  }
+  .datepicker__input:focus + label {
+    color: #6200EE !important;
+    top: 0 !important;
+    transform: translateY(-50%) scale(.9) !important;
+  }
+
+  .datepicker__input:focus {
+    border-color: #6200EE !important;
+  }
+  }

@@ -1,0 +1,47 @@
+<h2 *ngIf="!data.name" mat-dialog-title>Add New Category</h2>
+<h2 *ngIf="data.name" mat-dialog-title>Edit Category {{data?.name}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="categoryForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Category Name *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="form-control custom-input" matInput formControlName="name" placeholder="Enter Category Name" />
+                <mat-error [@rowsAnimation]="displayMessage?.name" class="text-danger"
+              *ngIf="displayMessage?.name">{{displayMessage?.name}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="mb-2">Address *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="form-control custom-input" matInput formControlName="address" placeholder="Enter Category Address" />
+                <mat-error [@rowsAnimation]="displayMessage?.address" class="text-danger"
+              *ngIf="displayMessage?.address">{{displayMessage?.address}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="mb-2">Registration Number *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="form-control custom-input" matInput formControlName="reg_no" placeholder="Enter Category Registration Number" />
+                <mat-error [@rowsAnimation]="displayMessage?.reg_no" class="text-danger"
+              *ngIf="displayMessage?.reg_no">{{displayMessage?.reg_no}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-primary mx-1" (click)="saveChanges()">Save</button>
+  <button class="btn btn-danger mx-1" [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

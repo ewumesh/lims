@@ -1,0 +1,55 @@
+<div>
+  <div class="row pt-3">
+    <div class="col-md-8"></div>
+    <div class="col-md-2 text-right">
+      <button (click)="openDialog(null)" class="btn btn-primary w-100 mt-1">Add Category</button>
+    </div>
+    <div class="col-md-2 text-left">
+      <mat-form-field class="w-100 px-2" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="table">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="sn">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Category Name </th>
+      <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let c"> {{c.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="regNo">
+      <th mat-header-cell *matHeaderCellDef> Registration Number </th>
+      <td mat-cell *matCellDef="let c"> {{c.reg_no}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action"  >
+      <th mat-header-cell *matHeaderCellDef  style="text-align: right;"> Action </th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
+        <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

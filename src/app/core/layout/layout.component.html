@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid w-100">
+  <div class="row">
+    <div class="col-md-2 p-0">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="col-md-10 p-0">
+      <div class="mt-100">
+        <!-- <ul class="breadcrumb">
+          <li><a href="Javascript:;">LIMS</a>&nbsp; <i class="fa fa-angle-right"></i>&nbsp; </li>
+          <li *ngFor="let b of breadcrumbs; let i = index"><a href="Javascript:;">{{b | titlecase}}</a>&nbsp; <i *ngIf="i === breadcrumbs.length-2" class="fa fa-angle-right"></i>&nbsp;</li>
+        </ul> -->
+        <!-- <h1 *ngFor="let b of breadcrumbs; let i = index">{{b}}</h1> -->
+
+        <div style="padding:0 2%; border-bottom: 1px solid rgba(97, 97, 97, 0.2);position: sticky;top: 100px;background-color: #fff;z-index: 5;">
+          <div class="three">
+            <h2 class="m-0 pt-3"><span *ngFor="let b of breadcrumbs; let i = index"><span *ngIf="i === breadcrumbs.length-1">{{b | titlecase}}</span></span></h2>
+          </div>
+        </div>
+        <div style="padding:2%;background-color:#eeeef5;height: 100vh;">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

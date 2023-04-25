@@ -1,0 +1,35 @@
+/*my account*/
+.db-content .user-img{
+  width: 150px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 3%;
+}
+.uf-name{
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+}
+.uf-content{
+  width: 100%;
+  border: 1px solid rgba(0,0,0,0.09);
+  /* background-color: rgba(0,0,0,0.05); */
+  padding: 10px 12px;
+}
+.user-alert{
+  border-radius: 0;
+}
+.change-password{
+  background: #eef1f5;
+  padding: 20px;
+  font-weight: 500;
+}
+.change-password-btn{
+  border-radius: 0;
+  font-weight: 500;
+}
+/*end of my account*/
+
+.custom-input {
+  padding-top: 10px !important;
+}

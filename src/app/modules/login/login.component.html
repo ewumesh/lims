@@ -1,0 +1,53 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="form-container">
+    <div class="login-intro mb-3">
+      <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
+      <p class="lims">Laboratory Inventory Management System<br>(LIMS)</p>
+      <hr class="divider">
+      <p class="login-detail">Enter your login details</p>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="saveChanges()">
+      <div class="row">
+        <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+          <div class="alert alert-info" role="alert">
+            {{message?.messageBody}}
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <label for="email" class="col-form-label">Email (इमेल ठेगाना)*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="email" placeholder="Enter your Email" />
+            <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
+              *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <label for="password" class="col-form-label">Password (पासवर्ड)*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="password" type="password" placeholder="Enter your Email" />
+            <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
+              *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 d-grid gap-2">
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary btn-block text-center">
+            <span *ngIf="!isLoading">Login</span>
+            <span *ngIf="isLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="mb-4 mt-4 login-additional">
+      <a href="Javascript:;" (click)="navigateToForgotPassword()" class="fp mb-4">Forgot Password?</a>
+      <p class="rg">Don't have an account?</p>
+      <a class="register" (click)="navigateToRegister()" href="Javascript:;">Register</a>
+    </div>
+  </div>
+</div>

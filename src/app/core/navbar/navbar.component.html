@@ -1,0 +1,22 @@
+<div class="container-fluid db-top-bar">
+  <div class="db-lims-logo">
+    <div class="logo">
+      <img src="../../../assets/nepal-government.png" alt="">
+    </div>
+    <p>Laboratory Inventory<br>Management System</p>
+  </div>
+  <div class="db-user-profile">
+    <div class="notification-div" style="margin-right: 1rem;">
+      <a href="Javascript:;" [matMenuTriggerFor]="menu">
+        <mat-icon matBadge="1" matBadgeColor="warn" class="pt-1" aria-hidden="false" aria-label="Notification"
+          fontIcon="notifications"></mat-icon>
+      </a>
+
+      <mat-menu #menu="matMenu" class="notification-menu">
+        <app-notifications></app-notifications>
+      </mat-menu>
+    </div>
+    <img class="cursor-pointer" (click)="navigateToProfile()" src="../../../assets/profile.jpg" alt="">
+    <p class="cursor-pointer" (click)="navigateToProfile()"><span class="username">{{userDetails?.username}}</span><br>{{userDetails?.email}}</p>
+  </div>
+</div>
