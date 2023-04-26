@@ -2,8 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren }
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddOrUpdateCategoryComponent } from './coponents/add-or-update-category.component';
-import { SettingsService } from 'src/app/services/settings/settings.service';
+import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { delay } from 'rxjs';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
@@ -44,12 +43,6 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
     this.genericValidator = new GenericValidator({
       'name': {
         'required': 'Category Name is required.'
-      },
-      'address': {
-        'required': 'Address is required.'
-      },
-      'reg_no': {
-        'required': 'Registration No. is required.'
       }
     })
   }
@@ -62,8 +55,8 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
   private initForm() {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
-      address: ['', Validators.required],
-      reg_no: ['', Validators.required]
+      address: [''],
+      reg_no: ['']
     })
   }
 

@@ -77,3 +77,37 @@ app-toast,
 .cursor-pointer:hover {
   cursor: pointer;
 }
+
+.btn-lims-primary {
+  background-color: #E7F0F7 !important;
+  color: #58667E;
+  border: none;
+  mat-icon {
+    color: #58667E !important;
+  }
+}
+
+.btn-lims-danger {
+  background-color: #FFDBDB !important;
+  border: none !important;
+  color: #FD371F;
+  mat-icon {
+    color: #FD371F !important;
+  }
+}
+
+.bg-lims-primary {
+  background-color: #E7F0F7 !important;
+}
+
+.text-lims-primary {
+  color: #2460B9 !important;
+}
+
+.text-lims-secondary{
+  color: #58667E !important;
+}
+
+.text-bold {
+  font-weight: 700 !important;
+}

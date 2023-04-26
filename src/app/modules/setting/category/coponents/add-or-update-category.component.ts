@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SettingsService } from 'src/app/services/settings/settings.service';
+import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { rowsAnimation } from 'src/app/shared/animations/animations';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 

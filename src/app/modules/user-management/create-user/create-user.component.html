@@ -1,0 +1,123 @@
+<div class="row m-0">
+  <div class="col-md-12 bg-white p-4">
+    <h2>User Category</h2>
+
+    <mat-radio-group [(ngModel)]="userCategory" name="radioButtons" (change)="onRadioButtonChange($event)">
+			<mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
+			<mat-radio-button id="radio_2" value="2">User</mat-radio-button>
+		</mat-radio-group>
+  </div>
+  <div class="col-md-12 bg-white p-4">
+    <h2>User Details</h2>
+    <form class="userregister" [formGroup]="userForm" (ngSubmit)="saveChanges()">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="exampleInputFullName1" class="form-label">First Name*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="firstName" placeholder="Enter your First Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.firstName" class="text-danger"
+              *ngIf="displayMessage?.firstName">{{displayMessage?.firstName}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputFullName1" class="form-label">Last Name*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="lastName" placeholder="Enter your Last Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.lastName" class="text-danger"
+              *ngIf="displayMessage?.lastName">{{displayMessage?.lastName}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputEmail1" class="form-label">Email Address</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="email" placeholder="Enter your Email" />
+            <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
+              *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="phoneNumber" placeholder="Enter your Full Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.phoneNumber" class="text-danger"
+              *ngIf="displayMessage?.phoneNumber">{{displayMessage?.phoneNumber}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="password" class="form-label">Password*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" type="password" matInput formControlName="password"
+              placeholder="Enter Password" />
+            <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
+              *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="password" class="form-label">Confirm Password*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" type="password" matInput formControlName="confirmPassword"
+              placeholder="Re-enter Password" />
+            <mat-error [@rowsAnimation]="displayMessage?.confirmPassword" class="text-danger"
+              *ngIf="displayMessage?.confirmPassword">{{displayMessage?.confirmPassword}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+          <label class="list-heading form-label">Client Category</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="role" placeholder="Select Category">
+              <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.role" class="text-danger"
+              *ngIf="displayMessage?.role">{{displayMessage?.role}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <h2 *ngIf="userCategory === '2'">Department Details</h2>
+
+        <div *ngIf="userCategory === '2'" class="col-md-6">
+          <label for="exampleInputEmail1" class="form-label">Department Name</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="departmentName" placeholder="Enter Department Name" />
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="userCategory === '2'" class="col-md-6">
+          <label for="exampleInputEmail1" class="form-label">Department Address</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="departmentAddress" placeholder="Enter Department Address" />
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="userCategory === '2'" class="col-md-12 mb-3">
+          <label for="exampleInputEmail1" class="form-label">Documents</label>
+          <input class="form-control" type="file" placeholder="Upload file" />
+        </div>
+
+        <h2 *ngIf="userCategory === '2'">User Renew Details</h2>
+
+        <div *ngIf="userCategory === '2'" class="col-md-12">
+          <label for="exampleInputEmail1" class="form-label">Renewed Date</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="renewedDate" placeholder="Enter Renew Date" />
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="userCategory === '2'" class="col-md-12 mb-3">
+          <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
+          <input class="form-control" type="file" placeholder="Upload file" />
+        </div>
+
+
+        <div class="col-md-12">
+          <button type="submit" class="form-control" id="submit">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

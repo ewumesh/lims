@@ -11,7 +11,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddOrUpdateCategoryComponent } from './coponents/add-or-update-category.component';
 import { ClientCategoryComponent } from './client-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SettingsService } from 'src/app/services/settings/settings.service';
+import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 
 @NgModule({

@@ -1,15 +1,14 @@
-<div>
-  <div class="row pt-3">
+<div class="bg-white">
+  <div class="row m-0 pt-3">
     <div class="col-md-8"></div>
     <div class="col-md-2 text-right"></div>
     <div class="col-md-2 text-left">
       <mat-form-field class="w-100 px-2" appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
       </mat-form-field>
     </div>
   </div>
-  <div class="row" style="background-color: #fff;padding: 1%;">
+  <div class="row m-0" style="background-color: #fff;padding: 1%;">
     <div class="col-md-4">
       <div class="row">
         <div class="col-md-12 pa-4">

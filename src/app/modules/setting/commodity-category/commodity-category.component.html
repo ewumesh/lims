@@ -1,55 +1,77 @@
-<div>
+<div class="bg-white p-4">
   <div class="row pt-3">
     <div class="col-md-8"></div>
     <div class="col-md-2 text-right">
-      <button (click)="openDialog(null)" class="btn btn-primary w-100 mt-1">Add Category</button>
     </div>
     <div class="col-md-2 text-left">
       <mat-form-field class="w-100 px-2" appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+        <input class="custom-unput" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
       </mat-form-field>
     </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="table">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12 pa-4">
+          <form [formGroup]="categoryForm">
+            <div class="row">
+              <div class="col-md-12 text-center pt-2">
+                <h1>Add Commodity Category</h1>
+                <hr />
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Commodity Category Name *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="name"
+                      placeholder="Enter Category Name" />
+                    <mat-error [@rowsAnimation]="displayMessage?.name" class="text-danger"
+                      *ngIf="displayMessage?.name">{{displayMessage?.name}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="sn">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let e"> {{e.id}} </td>
-    </ng-container>
+              <div class="text-end">
+                <button class="btn btn-primary mx-1" (click)="saveChanges()">Save</button>
+                <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
+              </div>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Category Name </th>
-      <td mat-cell *matCellDef="let c"> {{c.name}} </td>
-    </ng-container>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table mat-table [dataSource]="dataSource" class="table">
 
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Address </th>
-      <td mat-cell *matCellDef="let c"> {{c.address}} </td>
-    </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="sn">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="regNo">
-      <th mat-header-cell *matHeaderCellDef> Registration Number </th>
-      <td mat-cell *matCellDef="let c"> {{c.reg_no}} </td>
-    </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Category Name </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="action"  >
-      <th mat-header-cell *matHeaderCellDef  style="text-align: right;"> Action </th>
-      <td mat-cell *matCellDef="let element" style="text-align: right;">
-        <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
-        <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
+          <td mat-cell *matCellDef="let element" style="text-align: right;">
+            <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
+            <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button>
+          </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+
 </div>

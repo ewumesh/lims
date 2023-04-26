@@ -19,6 +19,9 @@ export class AuthenticationService {
     private router: Router
   ) { }
 
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
   userLogin(payload: LoginModel): Observable<any> {
     return this.http.post(`${this.url}/api/account/auth/login/`, payload).pipe(map((data: any) => {
       console.log(data, "DTAA")

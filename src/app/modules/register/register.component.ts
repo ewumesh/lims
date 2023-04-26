@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   labelImport: ElementRef;
   fileToUpload: File = null;
 
+  clientCategories: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private title: Title,
@@ -50,9 +52,6 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       'lastName': {
         'required': 'Last Name is required.'
-      },
-      'userName': {
-        'required': 'User Name is required.'
       },
       'email': {
         'required': 'Email is required.'
@@ -77,11 +76,15 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       'date': {
         'required': 'Date is required.'
+      },
+      'username': {
+        'required': 'Username is required.'
       }
     })
   }
 
   ngOnInit(): void {
+    this.getClientCategories();
     this.initForm();
   }
 
@@ -144,6 +147,12 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 5000);
+  }
+
+  getClientCategories() {
+    this.authService.getCategories().subscribe(res => {
+      this.clientCategories = res;
+    })
   }
 
   ngAfterViewInit(): void {

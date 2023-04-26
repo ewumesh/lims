@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommodityCategoriesComponent } from './commodity-category.component';
 import { RouterModule } from '@angular/router';
-import { AddOrUpdateCommodityCategoryComponent } from './components/add-or-update-commodity-category.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,9 +10,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
 
 @NgModule({
-  declarations: [CommodityCategoriesComponent,AddOrUpdateCommodityCategoryComponent],
+  declarations: [CommodityCategoriesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -31,6 +31,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DeleteConfirmModule
    ],
   exports: [],
-  providers: [],
+  providers: [CommodityCategoryService],
 })
 export class CommodityCategoriesModule {}

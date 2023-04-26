@@ -32,6 +32,15 @@
             *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
         </mat-form-field>
       </div>
+
+      <div>
+        <label for="userName" class="form-label">Username*</label>
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput formControlName="username" placeholder="Enter your username" />
+          <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
+            *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error>
+        </mat-form-field>
+      </div>
       <div>
         <label for="password" class="form-label">Password*</label>
         <mat-form-field appearance="outline" class="w-100">

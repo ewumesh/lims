@@ -19,7 +19,7 @@
             <h2 class="m-0 pt-3"><span *ngFor="let b of breadcrumbs; let i = index"><span *ngIf="i === breadcrumbs.length-1">{{b | titlecase}}</span></span></h2>
           </div>
         </div>
-        <div style="padding:2%;background-color:#eeeef5;height: 100vh;">
+        <div style="padding:2%;background-color:#eeeef5;min-height: 100vh;">
           <router-outlet></router-outlet>
         </div>
       </div>
