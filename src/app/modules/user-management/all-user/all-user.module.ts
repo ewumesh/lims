@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
+import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 
 @NgModule({
   declarations: [AllUsersComponent],
@@ -29,7 +30,9 @@ import { AllUsersService } from 'src/app/services/user-management/all-user/all-u
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+
+    DeleteConfirmModule
    ],
   exports: [],
   providers: [AllUsersService],

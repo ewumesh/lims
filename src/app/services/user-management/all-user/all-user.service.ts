@@ -21,6 +21,10 @@ export class AllUsersService {
     return this.http.get(`${this.url}/api/account/users/`);
   }
 
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`${this.url}/api/account/users/${userId}/`);
+  }
+
   // addCategory(payload: any):Observable<any>  {
   //   return this.http.post(`${this.url}/api/client-category/`, payload);
   // }

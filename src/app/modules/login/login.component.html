@@ -27,7 +27,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
           <label for="password" class="col-form-label">Password (पासवर्ड)*</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input matInput formControlName="password" type="password" placeholder="Enter your Email" />
+            <input matInput formControlName="password" type="password" placeholder="Enter your Password" />
             <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
               *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
           </mat-form-field>

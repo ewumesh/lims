@@ -60,7 +60,9 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'settings/client-category', loadChildren: () => import('src/app/modules/setting/category/client-category.module').then(m => m.ClientCategoryModule)},
 
-      {path: 'settings/commodity-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule)}
+      {path: 'settings/commodity-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule)},
+
+      {path: 'user-details/:id', loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module').then(m => m.ViewUserDetailsModule)}
     ]),
   ],
   exports: [],

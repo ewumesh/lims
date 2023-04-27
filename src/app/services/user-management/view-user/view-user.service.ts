@@ -7,17 +7,13 @@ import { environment } from 'src/environments/environments';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateUserService {
+export class ViewUserDetailsService {
 
   url = environment.apiURL;
 
   constructor(private http: HttpClient) {}
 
-  getCategories():Observable<any> {
-    return this.http.get(`${this.url}/api/client-category/?page=2&records=4`);
-  }
-
-  createUser(payload: any):Observable<any> {
-    return this.http.post(`${this.url}/api/account/users/`, payload)
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
   }
 }

@@ -47,10 +47,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       this.title.setTitle('Register - Laboratory Inventory Management System')
 
     this.genericValidator = new GenericValidator({
-      'firstName': {
+      'first_name': {
         'required': 'First Name is required.'
       },
-      'lastName': {
+      'last_name': {
         'required': 'Last Name is required.'
       },
       'email': {
@@ -90,8 +90,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initForm() {
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       phoneNumber: ['', Validators.required],

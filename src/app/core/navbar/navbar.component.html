@@ -7,14 +7,18 @@
   </div>
   <div class="db-user-profile">
     <div class="notification-div" style="margin-right: 1rem;">
-      <a href="Javascript:;" [matMenuTriggerFor]="menu">
+      <a href="Javascript:;" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
         <mat-icon matBadge="1" matBadgeColor="warn" class="pt-1" aria-hidden="false" aria-label="Notification"
           fontIcon="notifications"></mat-icon>
       </a>
 
-      <mat-menu #menu="matMenu" class="notification-menu">
+      <!-- <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+        Popover on bottom
+      </button> -->
+
+      <!-- <mat-menu #menu="matMenu" class="notification-menu">
         <app-notifications></app-notifications>
-      </mat-menu>
+      </mat-menu> -->
     </div>
     <img class="cursor-pointer" (click)="navigateToProfile()" src="../../../assets/profile.jpg" alt="">
     <p class="cursor-pointer" (click)="navigateToProfile()"><span class="username">{{userDetails?.username}}</span><br>{{userDetails?.email}}</p>

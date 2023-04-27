@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { response } from 'express';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
+import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 
 @Component({
   templateUrl: './all-user.component.html',
@@ -13,7 +16,9 @@ import { AllUsersService } from 'src/app/services/user-management/all-user/all-u
 export class AllUsersComponent implements OnInit, AfterViewInit {
   constructor(
     private title: Title,
-    private allUsersService: AllUsersService
+    private allUsersService: AllUsersService,
+    private dialog: MatDialog,
+    private router:Router
   ) {
     this.title.setTitle('All Users - Laboratory Inventory Management System');
 
@@ -22,7 +27,7 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource([]);
   }
 
-  clientCategories:any[] = [];
+  clientCategories: any[] = [];
 
   displayedColumns: string[] = ['sn', 'userId', 'userName', 'fullName', 'email', 'registerDate', 'userRole', 'action'];
   dataSource: MatTableDataSource<any>;
@@ -46,6 +51,20 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     this.allUsersService.getUsersList().subscribe(response => {
       this.dataSource.data = response;
     })
+  }
+
+  deleteUser(userId) {
+    this.dialog.open(DeleteConfirmComponent).afterClosed().subscribe(_ => {
+      if (_) {
+        this.allUsersService.deleteUser(userId).subscribe(response => {
+          this.getAllUsers();
+        })
+      }
+    })
+  }
+
+  viewUserDetails(id) {
+    this.router.navigate(['/dashboard/user-details', id]);
   }
 
 

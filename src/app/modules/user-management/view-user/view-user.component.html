@@ -1,0 +1,59 @@
+<div class="row bg-white m-0">
+  <div class="col-md-12 p-4">
+    <div class="row m-0">
+      <div class="col-md-12">
+        <h1 class="text-lims-primary">User Category</h1>
+        <hr/>
+        <mat-chip-listbox>
+          <mat-chip-option  selected color="primary">
+            Admin
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </div>
+
+    <div class="row m-0 mt-5">
+      <div class="col-md-12">
+        <h1 class="text-lims-primary">Client Category</h1>
+        <hr/>
+        <mat-chip-listbox>
+          <mat-chip-option  selected color="primary">
+            Admin
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </div>
+
+    <hr/>
+    <h1 class="text-lims-primary">Personal Details</h1>
+    <div class="row">
+      <div class="col-md-3">
+        <h2 class="text-lims-secondary">
+          <span class="text-bold">Full Name:</span> {{userDetails.first_name | titlecase}} {{userDetails.last_name | titlecase}}
+        </h2>
+      </div>
+
+      <div class="col-md-3">
+        <h2 class="text-lims-secondary">
+          <span class="text-bold">Email:</span> {{userDetails.email}}
+        </h2>
+      </div>
+
+      <div class="col-md-3">
+        <h2 class="text-lims-secondary">
+          <span class="text-bold">Phone Number: </span>
+          <span *ngIf="userDetails?.phone">{{userDetails?.phone}}</span>
+          <span *ngIf="!userDetails?.phone" class="text-muted">N/A</span>
+        </h2>
+      </div>
+
+      <div class="col-md-3">
+        <h2 class="text-lims-secondary">
+          <span class="text-bold">Username: </span>
+          <span *ngIf="userDetails?.username">{{userDetails?.username}}</span>
+          <span *ngIf="!userDetails?.username" class="text-muted">N/A</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>

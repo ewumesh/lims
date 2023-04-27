@@ -10,18 +10,18 @@
       <div>
         <label for="exampleInputFullName1" class="form-label">First Name*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="firstName" placeholder="Enter your First Name" />
-          <mat-error [@rowsAnimation]="displayMessage?.firstName" class="text-danger"
-            *ngIf="displayMessage?.firstName">{{displayMessage?.firstName}}</mat-error>
+          <input matInput formControlName="first_name" placeholder="Enter your First Name" />
+          <mat-error [@rowsAnimation]="displayMessage?.first_name" class="text-danger"
+            *ngIf="displayMessage?.first_name">{{displayMessage?.first_name}}</mat-error>
         </mat-form-field>
       </div>
 
       <div>
         <label for="exampleInputFullName1" class="form-label">Last Name*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="lastName" placeholder="Enter your Last Name" />
-          <mat-error [@rowsAnimation]="displayMessage?.lastName" class="text-danger"
-            *ngIf="displayMessage?.lastName">{{displayMessage?.lastName}}</mat-error>
+          <input matInput formControlName="last_name" placeholder="Enter your Last Name" />
+          <mat-error [@rowsAnimation]="displayMessage?.last_name" class="text-danger"
+            *ngIf="displayMessage?.last_name">{{displayMessage?.last_name}}</mat-error>
         </mat-form-field>
       </div>
       <div>
