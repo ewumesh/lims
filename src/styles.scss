@@ -87,6 +87,12 @@ app-toast,
   }
 }
 
+.btn-lims-primary:hover {
+  background-color: #e7f0f775 !important;
+  transition: 1s !important;
+  // border: 1px solid #e7f0f746 !important;
+}
+
 .btn-lims-danger {
   background-color: #FFDBDB !important;
   border: none !important;
@@ -96,8 +102,13 @@ app-toast,
   }
 }
 
+.btn-lims-danger:hover {
+  background-color: #ffdbdb79 !important;
+  transition: 1s !important;
+}
+
 .bg-lims-primary {
-  background-color: #E7F0F7 !important;
+  background-color: #2460B9 !important;
 }
 
 .text-lims-primary {
@@ -114,4 +125,8 @@ app-toast,
 
 .h-45 {
   height: 45px !important;
+}
+
+.text-white {
+  color: #fff !important;
 }

@@ -16,4 +16,8 @@ export class ViewUserDetailsService {
   getUserDetails(userId):Observable<any> {
     return this.http.get(`${this.url}/api/account/users/${userId}/`);
   }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/?page=2&records=4`);
+  }
 }

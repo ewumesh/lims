@@ -13,6 +13,7 @@ import { ClientCategoryComponent } from './client-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     DeleteConfirmModule
    ],
   exports: [],

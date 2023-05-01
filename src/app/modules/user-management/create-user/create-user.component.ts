@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateUserService } from 'src/app/services/user-management/create-user/create-user.service';
 import { rowsAnimation } from 'src/app/shared/animations/animations';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
@@ -15,6 +15,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 export class CreateUserComponent implements OnInit, AfterViewInit {
 
   userForm: FormGroup;
+  userId = null;
 
   genericValidator: GenericValidator;
   displayMessage: any = {};
@@ -24,6 +25,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   userCategory = '1';
 
   clientCategories: any[] = [];
+  roles: any[] = [];
 
   message: any = {};
 
@@ -35,8 +37,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     private cService: CreateUserService,
     private router: Router,
     private toast: ToastService,
+    private route:ActivatedRoute
     ) {
     this.title.setTitle('Create User - Laboratory Inventory Management System');
+
+    this.initForm();
 
     this.genericValidator = new GenericValidator({
       'first_name': {
@@ -54,21 +59,34 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       'password': {
         'required': 'Password is required.'
       },
-      'phoneNumber': {
+      'phone': {
         'required': 'Phone Number is required.'
       },
       'confirmPassword': {
         'required': 'Confirm Password is required.'
       },
-      'category': {
+      'client_category': {
         'required': 'Client Category is required.'
       }
     })
   }
 
   ngOnInit(): void {
-    this.initForm();
+    this.userId = this.route.snapshot.paramMap.get('id');
+
     this.getClientCategories();
+    this.getUserRoles();
+
+    if(this.userId) {
+      this.cService.getUserDetails(this.userId).subscribe(response => {
+        this.patchForm(response);
+      })
+    }
+  }
+
+  patchForm(userDetails:any) {
+    userDetails.password = '';
+    this.userForm.patchValue(userDetails);
   }
 
   getClientCategories() {
@@ -77,16 +95,22 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getUserRoles() {
+    this.cService.getUserRole().subscribe(response => {
+      this.roles = response;
+    })
+  }
+
   initForm() {
     this.userForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       username: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      phone: ['', Validators.required],
       email: ['', Validators.required],
       password:['', Validators.required],
       confirmPassword: ['',Validators.required],
-      category: ['', Validators.required],
+      client_category: ['', Validators.required],
       departmentName: [],
       departmentAddress: [],
       registrationNumber: [''],
@@ -97,15 +121,16 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   saveChanges() {
     this.isLoading = true;
     let payload = {
+      id: this.userId,
       userCategory: this.userCategory,
       username: this.userForm.value.username,
       first_name: this.userForm.value.first_name,
       last_name: this.userForm.value.last_name,
-      phoneNumber: this.userForm.value.phoneNumber,
+      phone: this.userForm.value.phone,
       email: this.userForm.value.email,
       password: this.userForm.value.password,
       confirmPassword: this.userForm.value.confirmPassword,
-      category: this.userForm.value.category,
+      client_category: this.userForm.value.client_category,
       departmentName: this.userForm.value.departmentName,
       departmentAddress: this.userForm.value.departmentAddress,
       registrationNumber: this.userForm.value.registrationNumber,
@@ -117,7 +142,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       return;
     }
-    this.cService.createUser(payload).subscribe(response => {
+    if(this.userId === null) {
+      this.cService.createUser(payload).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
         'User Created Successfully!');
@@ -136,6 +162,28 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
           this.dismissMessage();
         }, 3000);
     })
+  } else {
+    this.cService.updateUser(payload).subscribe(response => {
+      this.toast.showToast(
+        TOAST_STATE.success,
+        'User Updated Successfully!');
+        this.isLoading = false;
+        this.dismissMessage();
+
+      this.router.navigate(['/dashboard/all-users']);
+    },
+    (error) => {
+      this.isLoading = false;
+      this.toast.showToast(
+        TOAST_STATE.danger,
+        error?.error?.message);
+
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+    }
+    )
+  }
   }
 
   private dismissMessage(): void {

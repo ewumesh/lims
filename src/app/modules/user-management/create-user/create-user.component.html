@@ -8,9 +8,9 @@
     <h2>User Category</h2>
 
     <mat-radio-group [(ngModel)]="userCategory" name="radioButtons" (change)="onRadioButtonChange($event)">
-			<mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
-			<mat-radio-button id="radio_2" value="2">User</mat-radio-button>
-		</mat-radio-group>
+      <mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
+      <mat-radio-button id="radio_2" value="2">User</mat-radio-button>
+    </mat-radio-group>
   </div>
   <div class="col-md-12 bg-white p-4">
     <h2>User Details</h2>
@@ -46,9 +46,9 @@
         <div class="col-md-4">
           <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="phoneNumber" placeholder="Enter your Full Name" />
-            <mat-error [@rowsAnimation]="displayMessage?.phoneNumber" class="text-danger"
-              *ngIf="displayMessage?.phoneNumber">{{displayMessage?.phoneNumber}}</mat-error>
+            <input class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
+              *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
           </mat-form-field>
         </div>
 
@@ -75,8 +75,7 @@
         <div class="col-md-6">
           <label for="password" class="form-label">User Name*</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" type="text" matInput formControlName="username"
-              placeholder="Enter username" />
+            <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
             <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
               *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error>
           </mat-form-field>
@@ -85,64 +84,69 @@
         <div class="col-md-6">
           <label class="list-heading form-label">Client Category</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="category" placeholder="Select Category">
+            <mat-select formControlName="client_category" placeholder="Select Category">
               <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
             </mat-select>
-            <mat-error [@rowsAnimation]="displayMessage?.category" class="text-danger"
-              *ngIf="displayMessage?.category">{{displayMessage?.category}}</mat-error>
+            <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
+              *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
           </mat-form-field>
         </div>
 
 
-        <div class="row m-0" *ngIf="userForm.value.category">
-        <h2>Department Details</h2>
+        <div class="row m-0" *ngIf="userForm.value.client_category|| userId !== null">
+          <h2>Department Details</h2>
 
-        <div class="col-md-6">
-          <label for="exampleInputEmail1" class="form-label">Department Name</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="departmentName" placeholder="Enter Department Name" />
-          </mat-form-field>
-        </div>
+          <div class="col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Department Name</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="departmentName"
+                placeholder="Enter Department Name" />
+            </mat-form-field>
+          </div>
 
-        <div class="col-md-6">
-          <label for="exampleInputEmail1" class="form-label">Department Address</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="departmentAddress" placeholder="Enter Department Address" />
-          </mat-form-field>
-        </div>
+          <div class="col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Department Address</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="departmentAddress"
+                placeholder="Enter Department Address" />
+            </mat-form-field>
+          </div>
 
-        <div class="col-md-12 mb-3">
-          <label for="exampleInputEmail1" class="form-label">Documents</label>
-          <input class="form-control" type="file" placeholder="Upload file" />
-        </div>
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1" class="form-label">Documents</label>
+            <input class="form-control" type="file" placeholder="Upload file" />
+          </div>
 
-        <h2>User Renew Details</h2>
+          <h2>User Renew Details</h2>
 
-        <div class="col-md-12">
-          <label for="exampleInputEmail1" class="form-label">Renewed Date</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="date" placeholder="Enter Renew Date" />
-          </mat-form-field>
-        </div>
+          <div class="col-md-12">
+            <label for="exampleInputEmail1" class="form-label">Renewed Date</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="date" placeholder="Enter Renew Date" />
+            </mat-form-field>
+          </div>
 
-        <div class="col-md-12 mb-3">
-          <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
-          <input class="form-control" type="file" placeholder="Upload file" />
-        </div>
+          <div class="col-md-12 mb-3">
+            <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
+            <input class="form-control" type="file" placeholder="Upload file" />
+          </div>
 
 
-        <!-- <div class="col-md-12">
+          <!-- <div class="col-md-12">
           <button type="submit" class="form-control btn-lims-primary" id="submit">Create</button>
         </div> -->
-      </div>
-      <div class="col-md-12">
-        <button [disabled]="isLoading" type="submit" class="form-control btn-lims-primary" id="submit">
-          <span *ngIf="!isLoading">Create User</span>
+        </div>
+        <div class="col-md-12">
+          <button [disabled]="isLoading" type="submit" class="form-control btn-lims-primary" id="submit">
+            <span *ngIf="!isLoading">
+              <span *ngIf="userId">Update User</span>
+              <span *ngIf="!userId">Create User</span>
+            </span>
             <span *ngIf="isLoading">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>
-        </button>
-      </div>
+          </button>
+        </div>
       </div>
     </form>
   </div>

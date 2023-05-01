@@ -9,3 +9,19 @@
 .custom-border {
   border: 1px solid #0000002e;
 }
+
+.custom-input {
+  padding-top: 10px !important;
+}
+
+.paginator-border {
+  border: 1px solid #0000002e !important;
+}
+
+.paginator {
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      height: 30px !important;
+    }
+  }
+}

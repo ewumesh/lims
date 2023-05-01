@@ -17,8 +17,9 @@
               </button>
               <span *ngFor="let b of breadcrumbs; let i = index">
                 <span *ngIf="b === 'user-details'"> User Details</span>
+                <span *ngIf="b === 'update-user'"> Update User</span>
                 <span *ngIf="i === breadcrumbs.length-1">
-                  <span *ngIf="breadcrumbs[1] !== 'user-details'">
+                  <span *ngIf="breadcrumbs[1] !== 'user-details' && breadcrumbs[1] !== 'update-user'">
                     &nbsp;{{removeHyphen(b) | titlecase}}
                   </span>
                 </span>

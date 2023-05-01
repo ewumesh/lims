@@ -1,38 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserRequestsComponent } from './user-request.component';
 import { RouterModule } from '@angular/router';
+
+import { PermissionService } from 'src/app/services/user-management/permission/permission.service';
+import { PermissionComponent } from './permission.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
-import { UserRequestsService } from 'src/app/services/user-requests/user-requests.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [UserRequestsComponent],
+  declarations: [PermissionComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: UserRequestsComponent}
+      {path: '', component: PermissionComponent}
     ]),
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-
-    DeleteConfirmModule
-  ],
+    MatIconModule
+   ],
   exports: [],
-  providers: [UserRequestsService],
+  providers: [PermissionService],
 })
-export class UserRequestsModule {}
+export class PermissionModule {}

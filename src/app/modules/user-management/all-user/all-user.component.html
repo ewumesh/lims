@@ -86,7 +86,7 @@
       <td mat-cell *matCellDef="let row">
         <button (click)="viewUserDetails(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
         <button class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
-        <button class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+        <button (click)="updateUser(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
         <button (click)="deleteUser(row.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
       </td>
     </ng-container>
@@ -99,6 +99,6 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 

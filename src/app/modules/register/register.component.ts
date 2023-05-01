@@ -59,10 +59,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       'password': {
         'required': 'Password is required.'
       },
-      'phoneNumber': {
+      'phone': {
         'required': 'Phone Number is required.'
       },
-      'category': {
+      'client_category': {
         'required': 'Category is required.'
       },
       'departmentName': {
@@ -94,8 +94,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       last_name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      category: ['', Validators.required],
+      phone: ['', Validators.required],
+      client_category: ['', Validators.required],
       departmentName: ['', Validators.required],
       departmentAddress: ['', Validators.required],
       registrationNumber: ['', Validators.required],
@@ -151,7 +151,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getClientCategories() {
     this.authService.getCategories().subscribe(res => {
-      this.clientCategories = res;
+      this.clientCategories = res?.results;
     })
   }
 

@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
   }
 
   navigateToPricing() {
-    this.router.navigate(['/dashboard/pricing']);
+    this.router.navigate(['/dashboard/commodity-pricing']);
   }
 
   navigateToUserRequests() {
@@ -84,6 +84,23 @@ export class SidebarComponent implements OnInit {
   navigateToCommodityCategory() {
     this.router.navigate(['/dashboard/settings/commodity-category']);
   }
+
+  navigateCommoditiesParameter() {
+    this.router.navigate(['/dashboard/commodities-parameter']);
+  }
+
+  navigateToCommodities() {
+    this.router.navigate(['/dashboard/commodities']);
+  }
+
+  gotoRole() {
+    this.router.navigate(['/dashboard/user-role']);
+  }
+
+  gotoPermission() {
+    this.router.navigate(['/dashboard/user-permissions'])
+  }
+
 
   logout() {
     this.toast.showToast(

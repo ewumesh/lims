@@ -39,7 +39,7 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'my-account', loadChildren: () => import('src/app/modules/my-account/my-account.module').then(m => m.MyAccountModule)},
 
-      {path: 'pricing', loadChildren: () => import('src/app/modules/pricing/pricing.module').then(m => m.PricingModule)},
+      {path: 'commodity-pricing', loadChildren: () => import('src/app/modules/pricing/pricing.module').then(m => m.PricingModule)},
 
       // For Admin
       {path: 'user-requests', loadChildren: () => import('src/app/modules/user-requests/user-request.module').then(m => m.UserRequestsModule)},
@@ -48,9 +48,15 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'create-user', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule)},
 
+      {path: 'update-user/:id', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule)},
+
       {path: 'create-admin', loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module').then(m => m.CreateAdminModule)},
 
       {path: 'all-users', loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module').then(m => m.AllUsersModule)},
+
+      {path: 'user-role', loadChildren: () => import('src/app/modules/user-management/role/role.module').then(m => m.RoleModule)},
+
+      {path: 'user-permissions', loadChildren: () => import('src/app/modules/user-management/permisssion/permission.module').then(m => m.PermissionModule)},
 
       {path: 'search-sample', loadChildren: () => import('src/app/modules/search-sample/search-sampole.module').then(m => m.SearchSampleModule)},
 
@@ -62,7 +68,13 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'settings/commodity-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule)},
 
-      {path: 'user-details/:id', loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module').then(m => m.ViewUserDetailsModule)}
+      {path: 'user-details/:id', loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module').then(m => m.ViewUserDetailsModule)},
+
+      {path: 'commodities-parameter', loadChildren: () => import('src/app/modules/commodities/parameter/parameter.module').then(m => m.ParameterModule)},
+
+      {path: 'commodities-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule)},
+
+      {path: 'commodities', loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module').then(m => m.CommoditiesModule)}
     ]),
   ],
   exports: [],

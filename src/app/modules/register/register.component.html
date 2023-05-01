@@ -52,9 +52,9 @@
       <div>
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="phoneNumber" placeholder="Enter your Full Name" />
-          <mat-error [@rowsAnimation]="displayMessage?.phoneNumber" class="text-danger"
-            *ngIf="displayMessage?.phoneNumber">{{displayMessage?.phoneNumber}}</mat-error>
+          <input matInput formControlName="phone" placeholder="Enter your Phone Number" />
+          <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
+            *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -62,17 +62,14 @@
           <label class="list-heading form-label">Client Category (
             ग्राहक वर्ग)*</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="category" placeholder="Select Category">
-              <mat-option value="1">Industry</mat-option>
-              <mat-option disabled value="2">Government Agency</mat-option>
-              <mat-option disabled value="3">Importer/Exporter</mat-option>
-              <mat-option disabled value="4">DFTQC Section</mat-option>
+            <mat-select formControlName="client_category" placeholder="Select Category">
+              <mat-option *ngFor="let c of clientCategories; let i = index" [value]="c.id">{{c.name | titlecase}}</mat-option>
             </mat-select>
-            <mat-error [@rowsAnimation]="displayMessage?.category" class="text-danger"
-              *ngIf="displayMessage?.category">{{displayMessage?.category}}</mat-error>
+            <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
+              *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
           </mat-form-field>
 
-          <div class="hide" *ngIf="registerForm.value.category" [@rowsAnimation]="registerForm.value.category">
+          <div class="hide" *ngIf="registerForm.value.client_category" [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="subform">
               <div class="mb-1">
                 <label class="form-label">Department Name</label>

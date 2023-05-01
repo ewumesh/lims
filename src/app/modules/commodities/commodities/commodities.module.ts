@@ -1,38 +1,37 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserRequestsComponent } from './user-request.component';
+import { CommoditiesComponent } from './commodities.component';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
-import { UserRequestsService } from 'src/app/services/user-requests/user-requests.service';
+import { MatIconModule } from '@angular/material/icon';
+import { CommoditiesService } from 'src/app/services/commodities/commodities/commodities.service';
 
 @NgModule({
-  declarations: [UserRequestsComponent],
+  declarations: [CommoditiesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: UserRequestsComponent}
+      {path: '', component: CommoditiesComponent}
     ]),
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-
-    DeleteConfirmModule
-  ],
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatIconModule,
+    MatSelectModule
+   ],
   exports: [],
-  providers: [UserRequestsService],
+  providers: [CommoditiesService],
 })
-export class UserRequestsModule {}
+export class CommoditiesModule {}

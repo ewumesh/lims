@@ -1,0 +1,132 @@
+<div class="bg-white p-4">
+  <div class="row pt-3">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-select class="custom-select" placeholder="Select Status">
+          <mat-option>1</mat-option>
+          <mat-option>2</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button class="btn btn-primary mx-2 h-45">Apply</button>
+    </div>
+    <div class="col-md-2 text-right">
+    </div>
+    <div class="col-md-2 text-left">
+      <mat-form-field class="w-100 px-2" appearance="outline">
+        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12 pa-4">
+          <form [formGroup]="commoditiesForm">
+            <div class="row">
+              <div class="col-md-12 text-center pt-2">
+                <h1>Add Commodity</h1>
+                <hr />
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Commodity Name *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="commodity_name"
+                      placeholder="Enter Commodity Name" />
+                    <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
+                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Parent Category *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="parent_category"
+                      placeholder="Enter Parent Category" />
+                    <mat-error [@rowsAnimation]="displayMessage?.parent_category" class="text-danger"
+                      *ngIf="displayMessage?.parent_category">{{displayMessage?.parent_category}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Test Duration *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="test_duration"
+                      placeholder="Enter Test duration" />
+                    <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
+                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Commodity Price *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="commodity_price"
+                      placeholder="Enter Commodity Price" />
+                    <mat-error [@rowsAnimation]="displayMessage?.commodity_price" class="text-danger"
+                      *ngIf="displayMessage?.commodity_price">{{displayMessage?.commodity_price}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="text-end">
+                <button class="btn btn-primary mx-1" (click)="saveChanges()">Save</button>
+                <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <table mat-table [dataSource]="dataSource" class="table custom-border mb-0">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="sn">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="commodity">
+          <th mat-header-cell *matHeaderCellDef> Commodities </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="testDuration">
+          <th mat-header-cell *matHeaderCellDef> TestDuration </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
+          <td mat-cell *matCellDef="let element" style="text-align: right;">
+            <button (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+            <button (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+
+</div>

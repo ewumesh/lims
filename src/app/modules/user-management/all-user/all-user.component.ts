@@ -43,7 +43,7 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   getClientCategories() {
     this.allUsersService.getCategories().subscribe(response => {
-      this.clientCategories = response;
+      this.clientCategories = response.results;
     })
   }
 
@@ -65,6 +65,10 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   viewUserDetails(id) {
     this.router.navigate(['/dashboard/user-details', id]);
+  }
+
+  updateUser(id) {
+    this.router.navigate(['/dashboard/update-user', id]);
   }
 
 

@@ -1,28 +1,26 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { delay } from 'rxjs';
-import { SettingsService } from 'src/app/services/settings/category/settings.service';
-import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
+import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
-  templateUrl: './commodity-category.component.html',
-  styleUrls: ['./commodity-category.scss']
+  templateUrl: './parameter.component.html',
+  styleUrls: ['./parameter.scss']
 })
-export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
-
+export class ParameterComponent implements OnInit {
   displayedColumns: string[] = ['sn', 'name', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  categoryForm: FormGroup;
+  parameterForm: FormGroup;
 
   // Used for form validation
   genericValidator: GenericValidator;
@@ -33,7 +31,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
-    private sService: CommodityCategoryService,
+    private sService: ParameterService,
     private fb: FormBuilder,
     private toast: ToastService
   ) {
@@ -45,7 +43,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
    }
 
   private initForm() {
-    this.categoryForm = this.fb.group({
+    this.parameterForm = this.fb.group({
       name: ['', Validators.required],
       address: [''],
       reg_no: ['']
@@ -58,8 +56,8 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
-    this.sService.getAllCommodityCategories().subscribe(res => {
-      this.dataSource.data = res.results;
+    this.sService.getCategories().subscribe(res => {
+      this.dataSource.data = res;
     })
   }
 
@@ -80,7 +78,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   patchForm(data) {
-    this.categoryForm.patchValue(
+    this.parameterForm.patchValue(
       { name: data.name })
   }
 
@@ -101,25 +99,25 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   saveChanges() {
     if (this.existingCategory?.id) {
-      this.sService.updateCategory(this.categoryForm.value, this.existingCategory.id).subscribe(res => {
+      this.sService.updateCategory(this.parameterForm.value, this.existingCategory.id).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,
           res.message);
         this.getCategories();
         this.dismissMessage();
-        this.categoryForm.reset();
-        this.categoryForm.clearValidators();
+        this.parameterForm.reset();
+        this.parameterForm.clearValidators();
         this.existingCategory = null;
       })
     } else {
-      this.sService.addCategory(this.categoryForm.value).subscribe(res => {
+      this.sService.addCategory(this.parameterForm.value).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,
           res.message);
         this.getCategories();
         this.dismissMessage();
-        this.categoryForm.reset();
-        this.categoryForm.clearValidators();
+        this.parameterForm.reset();
+        this.parameterForm.clearValidators();
         this.existingCategory = null;
       })
     }
@@ -132,7 +130,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   reset() {
-    this.categoryForm.reset();
+    this.parameterForm.reset();
   }
 
   ngAfterViewInit() {
@@ -142,8 +140,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   private validation() {
     this.genericValidator
-      .initValidationProcess(this.categoryForm, this.formInputElements)
+      .initValidationProcess(this.parameterForm, this.formInputElements)
       .subscribe({ next: m => this.displayMessage = m });
   }
-
 }

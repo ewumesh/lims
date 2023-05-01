@@ -103,7 +103,7 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
 
   getCategories() {
     this.sService.getCategories().subscribe(res => {
-      this.dataSource.data = res;
+      this.dataSource.data = res.results;
     })
   }
 

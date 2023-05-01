@@ -17,7 +17,19 @@ export class CreateUserService {
     return this.http.get(`${this.url}/api/client-category/?page=2&records=4`);
   }
 
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
+
   createUser(payload: any):Observable<any> {
     return this.http.post(`${this.url}/api/account/users/`, payload)
+  }
+
+  updateUser(payload):Observable<any> {
+    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, payload)
+  }
+
+  getUserRole():Observable<any> {
+    return this.http.get(`${this.url}/api/account/groups`);
   }
 }

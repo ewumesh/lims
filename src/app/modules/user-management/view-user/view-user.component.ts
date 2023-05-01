@@ -11,6 +11,7 @@ export class ViewUserDetailsComponent implements OnInit {
   userId:any;
 
   userDetails: any = {};
+  categories:any[] = [];
 
   constructor(
     private service:ViewUserDetailsService,
@@ -20,11 +21,22 @@ export class ViewUserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.getUserDetails();
+    this.gerCategories();
   }
 
   getUserDetails() {
     this.service.getUserDetails(this.userId).subscribe(response => {
       this.userDetails = response;
     })
+  }
+
+  gerCategories() {
+    this.service.getCategories().subscribe(response => {
+      this.categories = response.results;
+    })
+  }
+
+  getClientName(clientId) {
+    return this.categories.find(c => c.id === clientId)?.name;
   }
 }
