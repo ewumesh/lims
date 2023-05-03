@@ -45,10 +45,13 @@
                 <div class="form-group">
                   <label class="mb-2">Parent Category *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="parent_category"
+                    <mat-select class="custom-select" placeholder="Select Category" formControlName="parent_category">
+                      <mat-option *ngFor="let item of commodityCategories" [value]="item.id"> {{item.name}}</mat-option>
+                    </mat-select>
+                    <!-- <input class="form-control custom-input" matInput formControlName="parent_category"
                       placeholder="Enter Parent Category" />
                     <mat-error [@rowsAnimation]="displayMessage?.parent_category" class="text-danger"
-                      *ngIf="displayMessage?.parent_category">{{displayMessage?.parent_category}}</mat-error>
+                      *ngIf="displayMessage?.parent_category">{{displayMessage?.parent_category}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>

@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatTooltipModule,
     DeleteConfirmModule
    ],
   exports: [],

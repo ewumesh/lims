@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AllUsersComponent],
@@ -31,6 +33,8 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
 
     DeleteConfirmModule
    ],

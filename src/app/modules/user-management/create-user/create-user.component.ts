@@ -31,6 +31,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean;
 
+  userRoles: any[] = [];
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -76,12 +78,19 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
     this.getClientCategories();
     this.getUserRoles();
+    this.getRoles();
 
     if(this.userId) {
       this.cService.getUserDetails(this.userId).subscribe(response => {
         this.patchForm(response);
       })
     }
+  }
+
+  getRoles() {
+    this.cService.getRole().subscribe(response => {
+      this.userRoles = response.roles;
+    })
   }
 
   patchForm(userDetails:any) {
@@ -114,15 +123,20 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       departmentName: [],
       departmentAddress: [],
       registrationNumber: [''],
-      date: []
+      date: [],
+      role: '',
+      group: ['']
     })
   }
 
   saveChanges() {
     this.isLoading = true;
+    let group = [];
+    group.push(this.userForm.value.group);
     let payload = {
       id: this.userId,
       userCategory: this.userCategory,
+      group: group,
       username: this.userForm.value.username,
       first_name: this.userForm.value.first_name,
       last_name: this.userForm.value.last_name,
@@ -134,8 +148,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       departmentName: this.userForm.value.departmentName,
       departmentAddress: this.userForm.value.departmentAddress,
       registrationNumber: this.userForm.value.registrationNumber,
-      date: this.userForm.value.date
+      date: this.userForm.value.date,
+      role: this.userForm.value.role
     }
+
+    console.log(payload, 'PAYLOAD')
     if (this.userForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';

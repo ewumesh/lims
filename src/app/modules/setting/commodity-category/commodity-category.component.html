@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="col-md-8">
-      <table mat-table [dataSource]="dataSource" class="table custom-border mb-0">
+      <table mat-table [dataSource]="dataSource" class="table custom-border mb-0" [@collectionInOut]="dataSource.data?.length">
 
         <!-- Position Column -->
         <ng-container matColumnDef="sn">

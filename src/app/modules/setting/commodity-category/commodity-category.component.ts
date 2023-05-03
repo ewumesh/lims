@@ -6,13 +6,15 @@ import { MatTableDataSource } from '@angular/material/table';
 import { delay } from 'rxjs';
 import { SettingsService } from 'src/app/services/settings/category/settings.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
   templateUrl: './commodity-category.component.html',
-  styleUrls: ['./commodity-category.scss']
+  styleUrls: ['./commodity-category.scss'],
+  animations: [collectionInOut]
 })
 export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 

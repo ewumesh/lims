@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CommoditiesService } from 'src/app/services/commodities/commodities/commodities.service';
+import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
 
 @NgModule({
   declarations: [CommoditiesComponent],
@@ -32,6 +33,6 @@ import { CommoditiesService } from 'src/app/services/commodities/commodities/com
     MatSelectModule
    ],
   exports: [],
-  providers: [CommoditiesService],
+  providers: [CommoditiesService, CommodityCategoryService],
 })
 export class CommoditiesModule {}

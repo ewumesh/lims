@@ -11,6 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [RoleComponent],
@@ -28,6 +31,8 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
     DeleteConfirmModule
    ],
   exports: [],

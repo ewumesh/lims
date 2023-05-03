@@ -32,4 +32,8 @@ export class CreateUserService {
   getUserRole():Observable<any> {
     return this.http.get(`${this.url}/api/account/groups`);
   }
+
+  getRole():Observable<any> {
+    return this.http.get(`${this.url}/api/account/roles/`)
+  }
 }

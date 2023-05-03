@@ -25,3 +25,23 @@
     }
   }
 }
+
+.custom-chip {
+  // mat-chip-option{
+  height: 25px !important;
+  // }
+
+  ::ng-deep {
+    .mat-mdc-chip-action-label {
+      color: #fff !important;
+    }
+  }
+}
+
+.chip-color-primary {
+  background-color: #2260bf !important;
+}
+
+.chip-color-error {
+  background-color: #FD371F !important;
+}

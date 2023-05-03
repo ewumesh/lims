@@ -11,9 +11,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { SetPermissionComponent } from './dialog/set-permission';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [PermissionComponent],
+  declarations: [PermissionComponent, SetPermissionComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,9 +31,14 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [PermissionService],
+  entryComponents: [SetPermissionComponent]
 })
 export class PermissionModule {}

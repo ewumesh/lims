@@ -4,14 +4,14 @@
       {{message?.messageBody}}
     </div>
   </div>
-  <div class="col-md-12 bg-white p-4">
+  <!-- <div class="col-md-12 bg-white p-4">
     <h2>User Category</h2>
 
     <mat-radio-group [(ngModel)]="userCategory" name="radioButtons" (change)="onRadioButtonChange($event)">
       <mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
       <mat-radio-button id="radio_2" value="2">User</mat-radio-button>
     </mat-radio-group>
-  </div>
+  </div> -->
   <div class="col-md-12 bg-white p-4">
     <h2>User Details</h2>
     <form class="userregister" [formGroup]="userForm" (ngSubmit)="saveChanges()">
@@ -72,7 +72,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="password" class="form-label">User Name*</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
@@ -81,7 +81,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label class="list-heading form-label">Client Category</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="client_category" placeholder="Select Category">
@@ -92,8 +92,26 @@
           </mat-form-field>
         </div>
 
+        <div class="col-md-4">
+          <label class="list-heading form-label">Select Role</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="role" placeholder="Select Role">
+              <mat-option [value]="item.role_id" *ngFor="let item of userRoles">{{item.role_name | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-        <div class="row m-0" *ngIf="userForm.value.client_category|| userId !== null">
+        <div class="col-md-4">
+          <label class="list-heading form-label">Select Group</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="group" placeholder="Select Role" multiple>
+              <mat-option [value]="item.id" *ngFor="let item of roles">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="row m-0" *ngIf="userForm.value.client_category">
           <h2>Department Details</h2>
 
           <div class="col-md-6">

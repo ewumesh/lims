@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
+import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [ParameterComponent],
@@ -25,10 +27,11 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
 
     DeleteConfirmModule
    ],
   exports: [],
-  providers: [ParameterService],
+  providers: [ParameterService, CommodityCategoryService],
 })
 export class ParameterModule {}

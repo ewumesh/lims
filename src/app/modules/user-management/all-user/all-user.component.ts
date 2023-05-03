@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,38 +8,72 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 
 @Component({
   templateUrl: './all-user.component.html',
-  styleUrls: ['./all-user.scss']
+  styleUrls: ['./all-user.scss'],
+  animations:[collectionInOut]
 })
 export class AllUsersComponent implements OnInit, AfterViewInit {
   constructor(
     private title: Title,
     private allUsersService: AllUsersService,
     private dialog: MatDialog,
-    private router:Router
+    private router:Router,
+    private fb: FormBuilder
   ) {
     this.title.setTitle('All Users - Laboratory Inventory Management System');
 
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource([]);
+    // this.dataSource = new MatTableDataSource([]);
   }
 
   clientCategories: any[] = [];
 
   displayedColumns: string[] = ['sn', 'userId', 'userName', 'fullName', 'email', 'registerDate', 'userRole', 'action'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  filterForm: FormGroup;
+
+  isLoading: boolean = true;
+  filterBtnLoading: boolean = false;
+
+  roles: any[] = [];
+
+  statusList: any[] = [
+    {id: 1, name: 'Pending'},
+    {id: 2, name: 'Active'},
+    {id:3, name: 'Suspended'},
+    {id: 4, name: 'Rejected'}
+  ]
 
   ngOnInit(): void {
+    this.getUserRoles();
+    this.initFilterForm();
     this.getClientCategories();
     this.getAllUsers();
+  }
+
+  initFilterForm() {
+    this.filterForm = this.fb.group({
+      search_text: '',
+      rate: '',
+      client_category: '',
+      status: ''
+    })
+  }
+
+  filterUserList() {
+    this.filterBtnLoading = true;
+    setTimeout(() => {
+      this.filterBtnLoading = false;
+    }, 1000);
   }
 
   getClientCategories() {
@@ -47,9 +82,26 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getUserRoles() {
+    this.allUsersService.getUserRoles().subscribe(response => {
+      this.roles = response;
+    })
+  }
+
+  getRoleName(id) {
+    let role = this.roles.find(x => x.id === id);
+    if(role) {
+      return role.name;
+    } else {
+    return id;
+    }
+  }
+
   getAllUsers() {
+    this.isLoading = true;
     this.allUsersService.getUsersList().subscribe(response => {
       this.dataSource.data = response;
+      this.isLoading = false;
     })
   }
 

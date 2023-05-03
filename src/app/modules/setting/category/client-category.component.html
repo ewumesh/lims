@@ -1,10 +1,10 @@
 <div class="bg-white">
   <div class="row m-0 pt-3">
     <div class="col-md-8"></div>
-    <div class="col-md-2 text-right"></div>
+    <div class="col-md-2 text-end pt-3"><span class="font-bold">Filter:</span></div>
     <div class="col-md-2 text-left">
       <mat-form-field class="w-100 px-2" appearance="outline">
-        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+      <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
       </mat-form-field>
     </div>
   </div>
@@ -31,7 +31,13 @@
               </div>
 
               <div class="text-end">
-                <button class="btn btn-primary mx-1" (click)="saveChanges()">Save</button>
+                <button class="btn btn-primary mx-1" (click)="saveChanges()">
+                  Save
+                  <!-- <span *ngIf="!loadingFormBtn">Save</span>
+            <span *ngIf="loadingFormBtn">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+            </span> -->
+                </button>
                 <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
               </div>
 
@@ -42,7 +48,7 @@
 
     </div>
     <div class="col-md-8">
-      <table mat-table [dataSource]="dataSource" class="table custom-border mb-0">
+      <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length" class="table custom-border mb-0">
 
         <ng-container matColumnDef="sn">
           <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -60,14 +66,30 @@
             <!-- <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
             <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button> -->
 
-            <button (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
-        <button (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
+            <button [matTooltip]="'Edit Category'" (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+        <button [matTooltip]="'Delete Category'" (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
           </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center py-5" colspan="8">
+            <img src="../../../../assets/no-data.svg" />
+            <div class="text-muted">Data Not Available.</div>
+
+          </td>
+        </tr>
       </table>
+
+      <div class="row" *ngIf="isLoading">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
 
       <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>

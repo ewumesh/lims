@@ -5,16 +5,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { delay } from 'rxjs';
 import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
+import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
   templateUrl: './parameter.component.html',
-  styleUrls: ['./parameter.scss']
+  styleUrls: ['./parameter.scss'],
+  animations: [collectionInOut]
 })
 export class ParameterComponent implements OnInit {
-  displayedColumns: string[] = ['sn', 'name', 'action'];
+  displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -29,9 +32,12 @@ export class ParameterComponent implements OnInit {
   private formInputElements: ElementRef[];
   existingCategory: any;
 
+  commodityCategories: any[] = [];
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
+    private cService: CommodityCategoryService,
     private fb: FormBuilder,
     private toast: ToastService
   ) {
@@ -45,14 +51,27 @@ export class ParameterComponent implements OnInit {
   private initForm() {
     this.parameterForm = this.fb.group({
       name: ['', Validators.required],
+      test_type: '',
+      parent_commodity: '',
+      ref_test_method: '',
+      unit: '',
+      mandatory_standard: '',
+      parameter_price: '',
       address: [''],
-      reg_no: ['']
+      reg_no: [''],
     })
   }
 
   ngOnInit(): void {
     this.initForm();
     this.getCategories();
+    this.getCommodityCategories();
+  }
+
+  getCommodityCategories() {
+    this.cService.getAllCommodityCategories().subscribe(response => {
+      this.commodityCategories = response.results;
+    })
   }
 
   getCategories() {
@@ -98,6 +117,10 @@ export class ParameterComponent implements OnInit {
   }
 
   saveChanges() {
+
+    let payload = {
+      test_type: this.parameterForm.value.test_type
+    }
     if (this.existingCategory?.id) {
       this.sService.updateCategory(this.parameterForm.value, this.existingCategory.id).subscribe(res => {
         this.toast.showToast(
@@ -110,6 +133,7 @@ export class ParameterComponent implements OnInit {
         this.existingCategory = null;
       })
     } else {
+      console.log(this.parameterForm.value, "PARAAMETER VALUES")
       this.sService.addCategory(this.parameterForm.value).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,

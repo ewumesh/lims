@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
@@ -8,14 +9,24 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
   styleUrls: ['../layout/layout.component.scss', './sidebar.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  userDetails:any = {};
+
   constructor(
     public router: Router,
-    private toast: ToastService
+    private toast: ToastService,
+    private sharedService: SharedService
   ) {
-
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    console.log(this.userDetails, 'user...')
+    // console.log(JSON.parse(localStorage.getItem('userDetails')), 'user details...');
   }
 
   ngOnInit(): void { }
+
+  getUserRoles() {
+
+  }
 
   navigateToSampleForm() {
     this.router.navigate(['/dashboard/add-sample']);
@@ -94,11 +105,15 @@ export class SidebarComponent implements OnInit {
   }
 
   gotoRole() {
-    this.router.navigate(['/dashboard/user-role']);
+    this.router.navigate(['/dashboard/user-group']);
   }
 
   gotoPermission() {
     this.router.navigate(['/dashboard/user-permissions'])
+  }
+
+  gotoAllCommodities() {
+    this.router.navigate(['/dashboard/commodities/all-commodities']);
   }
 
 

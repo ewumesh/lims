@@ -29,7 +29,8 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
 
   private initForm() {
     this.userForm = this.fb.group({
-      userName: ['', Validators.required],
+      full_name:'',
+      username: ['', Validators.required],
       email: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       clientCategory: ['Internal Client', Validators.required],
@@ -48,12 +49,13 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.userForm.get('email').setValue(this.accountDetails?.email);
+      this.userForm.get('username').setValue(this.accountDetails.username)
       if(this.accountDetails?.first_name) {
-      this.userForm.get('fullName').setValue(this.accountDetails?.first_name);
+      this.userForm.get('full_name').setValue(this.accountDetails?.first_name);
       }
-      if(this.accountDetails.phone) {
-      this.userForm.get('phoneNumber').setValue(this.accountDetails?.phone);
-      }
+      // if(this.accountDetails.phone) {
+      // this.userForm.get('phoneNumber').setValue(this.accountDetails?.phone);
+      // }
 
       this.userForm.disable();
     }, 1500);

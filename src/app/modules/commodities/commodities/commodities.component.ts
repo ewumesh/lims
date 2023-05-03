@@ -30,9 +30,12 @@ export class CommoditiesComponent implements OnInit {
   private formInputElements: ElementRef[];
   existingCategory: any;
 
+  commodityCategories: any[] = [];
+
   constructor(
     public dialog: MatDialog,
     private sService: CommoditiesService,
+    private cService: CommodityCategoryService,
     private fb: FormBuilder,
     private toast: ToastService
   ) {
@@ -54,12 +57,19 @@ export class CommoditiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getCommodityCategories();
     this.getCommodities();
   }
 
   getCommodities() {
     this.sService.getCommodities().subscribe(res => {
       this.dataSource.data = res.results;
+    })
+  }
+
+  getCommodityCategories() {
+    this.cService.getAllCommodityCategories().subscribe(response => {
+      this.commodityCategories = response.results;
     })
   }
 

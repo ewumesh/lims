@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Select Role</h2>
+<mat-dialog-content>
+<mat-form-field appearance="outline" class="w-100" >
+          <mat-select [formControl]="selectedRoles" class="custom-select" multiple placeholder="Select Role">
+            <mat-option *ngFor="let role of data.allRoles" [value]="role">{{role.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button class="btn btn-primary btn-lims-danger mx-1" mat-dialog-close>Cancel</button>
+  <button (click)="save()" class="btn btn-primary btn-lims-primary mx-1" [mat-dialog-close]="true" cdkFocusInitial>Set</button>
+</mat-dialog-actions>

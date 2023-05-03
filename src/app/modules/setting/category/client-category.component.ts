@@ -7,13 +7,13 @@ import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-con
 import { delay } from 'rxjs';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
-import { rowsAnimation } from 'src/app/shared/animations/animations';
+import { collectionInOut, rowsAnimation } from 'src/app/shared/animations/animations';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
   templateUrl: './client-category.component.html',
   styleUrls: ['./client-category.scss'],
-  animations: [rowsAnimation]
+  animations: [rowsAnimation, collectionInOut]
 })
 export class ClientCategoryComponent implements OnInit, AfterViewInit {
 
@@ -33,6 +33,10 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   existingCategory: any;
+
+  isLoading: boolean = true;
+
+  loadingFormBtn: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -72,8 +76,10 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
   }
 
   saveChanges() {
+    this.loadingFormBtn = true;
       if(this.existingCategory?.id) {
         this.sService.updateCategory(this.categoryForm.value, this.existingCategory.id).subscribe(res => {
+          this.loadingFormBtn = false;
           this.toast.showToast(
             TOAST_STATE.success,
             res.message);
@@ -85,6 +91,7 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
         })
       } else {
       this.sService.addCategory(this.categoryForm.value).subscribe(res => {
+        this.loadingFormBtn = false;
         this.toast.showToast(
           TOAST_STATE.success,
           res.message);
@@ -102,8 +109,10 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
+    this.isLoading = true;
     this.sService.getCategories().subscribe(res => {
       this.dataSource.data = res.results;
+      this.isLoading = false;
     })
   }
 

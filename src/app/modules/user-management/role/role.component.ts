@@ -5,11 +5,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RoleService } from 'src/app/services/user-management/role/role.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 
 @Component({
   templateUrl: './role.component.html',
-  styleUrls: ['./role.scss']
+  styleUrls: ['./role.scss'],
+  animations: [collectionInOut]
 })
 export class RoleComponent implements OnInit {
 
@@ -26,6 +28,8 @@ export class RoleComponent implements OnInit {
   displayedColumns: string[] = ['sn', 'name', 'action'];
   dataSource: MatTableDataSource<any>;
 
+  isLoading: boolean = true;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -41,7 +45,6 @@ export class RoleComponent implements OnInit {
   }
 
   private patchForm(formData) {
-    console.log(formData, "PAT")
     this.roleForm.patchValue(formData);
   }
 
@@ -49,6 +52,7 @@ export class RoleComponent implements OnInit {
   getUserRoles() {
     this.roleService.getUserRoles().subscribe(response => {
       this.dataSource = response;
+      this.isLoading = false;
     })
   }
 

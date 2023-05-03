@@ -10,6 +10,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotificationComponent } from './notification/notification.component';
+import { SharedService } from '../services/shared/shared.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'all-users', loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module').then(m => m.AllUsersModule)},
 
-      {path: 'user-role', loadChildren: () => import('src/app/modules/user-management/role/role.module').then(m => m.RoleModule)},
+      {path: 'user-group', loadChildren: () => import('src/app/modules/user-management/role/role.module').then(m => m.RoleModule)},
 
       {path: 'user-permissions', loadChildren: () => import('src/app/modules/user-management/permisssion/permission.module').then(m => m.PermissionModule)},
 
@@ -74,10 +75,12 @@ import { NotificationComponent } from './notification/notification.component';
 
       {path: 'commodities-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule)},
 
-      {path: 'commodities', loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module').then(m => m.CommoditiesModule)}
+      {path: 'commodities', loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module').then(m => m.CommoditiesModule)},
+
+      {path: 'commodities/all-commodities', loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module').then(m => m.AllCommoditiesModule)}
     ]),
   ],
   exports: [],
-  providers: [],
+  providers: [SharedService],
 })
 export class LayoutModule { }

@@ -13,10 +13,14 @@ export class PermissionService {
   constructor(private http: HttpClient) {}
 
   getPermissions():Observable<any> {
-    return this.http.get(`${this.url}/api/account/permissions/`)
+    return this.http.get(`${this.url}/api/account/permission-has-group/`)
   }
 
   getUserRoles(): Observable<any> {
     return this.http.get(`${this.url}/api/account/groups/`);
+  }
+
+  savePermissions(payload): Observable<any> {
+    return this.http.post(`${this.url}/api/account/permission-has-group/`, payload)
   }
 }
