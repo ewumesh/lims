@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Title } from '@angular/platform-browser';
+import { PricingService } from 'src/app/services/pricing/pricing.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 /**
  * @title Table with expandable rows
@@ -17,21 +19,27 @@ import { Title } from '@angular/platform-browser';
     ]),
   ],
 })
-export class PricingComponent {
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['expand', 'commodities', 'rate', 'duration'];
+export class PricingComponent implements OnInit {
+  dataSource = new MatTableDataSource();
+  columnsToDisplay = ['expand', 'name', 'price', 'test_duration'];
   expandedElement: any | null;
 
-  constructor(private title: Title) {
+  constructor(
+    private title: Title,
+    private pricingService: PricingService
+    ) {
     this.title.setTitle('Pricing - Laboratory Inventory Management System');
   }
-}
 
-const ELEMENT_DATA:any[] = [
-  {
-    commodities: 'Milk',
-    rate: '8980000',
-    duration: '44 Days',
+  ngOnInit(): void {
+    this.getAllCommodities();
   }
-];
+
+  getAllCommodities() {
+    this.pricingService.getAllCommodities().subscribe(res=> {
+      this.dataSource = res.results;
+    })
+  }
+
+}
 

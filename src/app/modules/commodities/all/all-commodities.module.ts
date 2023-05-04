@@ -8,6 +8,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AllCommoditiesComponent],
@@ -21,9 +24,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule
    ],
   exports: [],
-  providers: [],
+  providers: [AllCommoditiesService],
 })
 export class AllCommoditiesModule {}

@@ -48,10 +48,11 @@ export class CommoditiesComponent implements OnInit {
 
   private initForm() {
     this.commoditiesForm = this.fb.group({
-      commodity_name: ['', Validators.required],
+      name: ['', Validators.required],
       parent_category: [''],
-      test_duration: [],
-      commodity_price: ''
+      test_duration: [''],
+      price: '',
+      units: ''
     })
   }
 

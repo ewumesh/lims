@@ -33,10 +33,10 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="commodity_name"
+                    <input class="form-control custom-input" matInput formControlName="name"
                       placeholder="Enter Commodity Name" />
-                    <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
-                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error>
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
+                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>
@@ -62,8 +62,20 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="form-control custom-input" matInput formControlName="test_duration"
                       placeholder="Enter Test duration" />
-                    <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
-                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error>
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
+                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Units*</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="units"
+                      placeholder="Enter Units" />
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
+                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>
@@ -72,10 +84,10 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Price *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="commodity_price"
+                    <input class="form-control custom-input" matInput formControlName="price"
                       placeholder="Enter Commodity Price" />
-                    <mat-error [@rowsAnimation]="displayMessage?.commodity_price" class="text-danger"
-                      *ngIf="displayMessage?.commodity_price">{{displayMessage?.commodity_price}}</mat-error>
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
+                      *ngIf="displayMessage?.commodity_price">{{displayMessage?.commodity_price}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>

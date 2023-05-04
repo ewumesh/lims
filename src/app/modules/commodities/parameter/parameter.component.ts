@@ -54,17 +54,18 @@ export class ParameterComponent implements OnInit {
       test_type: '',
       parent_commodity: '',
       ref_test_method: '',
-      unit: '',
+      units: '',
       mandatory_standard: '',
-      parameter_price: '',
+      price: '',
       address: [''],
       reg_no: [''],
+      remarks: '.'
     })
   }
 
   ngOnInit(): void {
     this.initForm();
-    this.getCategories();
+    this.getParameters();
     this.getCommodityCategories();
   }
 
@@ -74,9 +75,9 @@ export class ParameterComponent implements OnInit {
     })
   }
 
-  getCategories() {
-    this.sService.getCategories().subscribe(res => {
-      this.dataSource.data = res;
+  getParameters() {
+    this.sService.getParameters().subscribe(res => {
+      this.dataSource = res.results;
     })
   }
 
@@ -104,8 +105,8 @@ export class ParameterComponent implements OnInit {
   deleteCategory(id: number) {
     this.dialog.open(DeleteConfirmComponent).afterClosed().subscribe(_ => {
       if (_) {
-        this.sService.deleteCategory(id).pipe(delay(400)).subscribe(_ => {
-          this.getCategories();
+        this.sService.deleteParameter(id).pipe(delay(400)).subscribe(_ => {
+          this.getParameters();
         })
       }
     })
@@ -122,11 +123,11 @@ export class ParameterComponent implements OnInit {
       test_type: this.parameterForm.value.test_type
     }
     if (this.existingCategory?.id) {
-      this.sService.updateCategory(this.parameterForm.value, this.existingCategory.id).subscribe(res => {
+      this.sService.updateParameter(this.parameterForm.value, this.existingCategory.id).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,
           res.message);
-        this.getCategories();
+        this.getParameters();
         this.dismissMessage();
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
@@ -134,11 +135,11 @@ export class ParameterComponent implements OnInit {
       })
     } else {
       console.log(this.parameterForm.value, "PARAAMETER VALUES")
-      this.sService.addCategory(this.parameterForm.value).subscribe(res => {
+      this.sService.addParameter(this.parameterForm.value).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,
           res.message);
-        this.getCategories();
+        this.getParameters();
         this.dismissMessage();
         this.parameterForm.reset();
         this.parameterForm.clearValidators();

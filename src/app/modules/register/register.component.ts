@@ -103,7 +103,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       apRenewDoc: ['', Validators.required],
       date: [this.date],
       username: ['', Validators.required],
-      role: 1
+      role: 5
     })
   }
 

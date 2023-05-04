@@ -14,6 +14,10 @@ tr.example-detail-row {
 //   background: #efefef;
 // }
 
+th {
+  border: 1px solid #0000002d;
+}
+
 .example-element-row td {
   border-bottom-width: 0;
 }
@@ -53,3 +57,29 @@ mat-icon {
 .mdc-data-table__cell {
   border: 1px solid #e0e0e0 !important;
 }
+
+
+.custom-input {
+  padding-top: 10px !important;
+}
+
+.mat-mdc-header-row {
+  background-color: #E7F0F7 !important;
+}
+
+.custom-border {
+  border: 1px solid #0000002e !important;
+}
+
+.paginator-border {
+  border: 1px solid #0000002e !important;
+}
+
+.paginator {
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      height: 30px !important;
+    }
+  }
+}
+

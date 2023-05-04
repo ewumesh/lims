@@ -13,19 +13,20 @@ export class ParameterService {
 
   constructor(private http: HttpClient) {}
 
-  getCategories():Observable<any> {
-    return this.http.get(`${this.url}/api/client-category/`)
+  getParameters():Observable<any> {
+    return this.http.get(`${this.url}/api/test-result/`)
   }
 
-  addCategory(payload: any):Observable<any>  {
-    return this.http.post(`${this.url}/api/client-category/`, payload);
+  addParameter(payload: any):Observable<any>  {
+    return this.http.post(`${this.url}/api/test-result/`, payload);
   }
 
-  updateCategory(payload: any, id:number):Observable<any> {
-    return this.http.put(`${this.url}/api/client-category/${id}/`, payload);
+  updateParameter(payload: any, id:number):Observable<any> {
+    return this.http.put(`${this.url}/api/test-result/${id}/`, payload);
   }
 
-  deleteCategory(id:number):Observable<any> {
-    return this.http.delete(`${this.url}/api/client-category/${id}`);
+  deleteParameter(id:number):Observable<any> {
+    return this.http.delete(`${this.url}/api/test-result/${id}`);
   }
+
 }
