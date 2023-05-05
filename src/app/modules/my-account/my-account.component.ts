@@ -14,6 +14,10 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   accountDetails: any;
   isLoading:boolean = true;
 
+  clientCategories: any[] = [];
+
+  roles: any[] = [];
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -25,17 +29,30 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getAccountDetails();
     this.initForm();
+    this.getClientCategories();
+    this.getRoles();
   }
 
   private initForm() {
     this.userForm = this.fb.group({
-      full_name:'',
+      first_name:'',
+      last_name: '',
       username: ['', Validators.required],
       email: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      clientCategory: ['Internal Client', Validators.required],
+      phone: ['', Validators.required],
+      client_category: [, Validators.required],
       userValidUpTo: ['2030-01-01', Validators.required]
     })
+  }
+
+  getRoleName(roleId) {
+    let role = this.roles.find(a => a.role_id === roleId);
+    if(role) {
+      return role.role_name;
+    } else {
+      return roleId;
+    }
+
   }
 
   getAccountDetails() {
@@ -46,18 +63,31 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getRoles() {
+    this.accountService.getUserRoles().subscribe(res => {
+      this.roles = res.roles;
+    })
+  }
+
+  getClientCategories() {
+    this.accountService.getClientCategories().subscribe( res => {
+      this.clientCategories = res.results;
+    })
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.userForm.get('email').setValue(this.accountDetails?.email);
-      this.userForm.get('username').setValue(this.accountDetails.username)
-      if(this.accountDetails?.first_name) {
-      this.userForm.get('full_name').setValue(this.accountDetails?.first_name);
-      }
+      this.userForm.patchValue(this.accountDetails);
+      // this.userForm.get('email').setValue(this.accountDetails?.email);
+      // this.userForm.get('username').setValue(this.accountDetails.username)
+      // if(this.accountDetails?.first_name) {
+      // this.userForm.get('full_name').setValue(this.accountDetails?.first_name);
+      // }
       // if(this.accountDetails.phone) {
       // this.userForm.get('phoneNumber').setValue(this.accountDetails?.phone);
       // }
 
-      this.userForm.disable();
+      // this.userForm.disable();
     }, 1500);
 
   }

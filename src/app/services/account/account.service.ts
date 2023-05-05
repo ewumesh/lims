@@ -16,4 +16,12 @@ export class AccountService {
   getProfileDetails(userId:number):Observable<any> {
     return this.http.get(`${this.url}/api/account/users/${userId}/`)
   }
+
+  getClientCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
+  getUserRoles(): Observable<any> {
+    return this.http.get(`${this.url}/api/account/roles/`);
+  }
 }

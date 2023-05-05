@@ -82,17 +82,6 @@
         </div>
 
         <div class="col-md-4">
-          <label class="list-heading form-label">Client Category</label>
-          <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="client_category" placeholder="Select Category">
-              <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
-            </mat-select>
-            <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
-              *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="col-md-4">
           <label class="list-heading form-label">Select Role</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="role" placeholder="Select Role">
@@ -101,12 +90,23 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" *ngIf="userForm.get('role').value === 1 || userForm.get('role').value === 2 || userForm.get('role').value === 3 || userForm.get('role').value === 4 ">
           <label class="list-heading form-label">Select Group</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="group" placeholder="Select Role" multiple>
               <mat-option [value]="item.id" *ngFor="let item of roles">{{item.name | titlecase}}</mat-option>
             </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4" *ngIf="userForm.get('role').value === 5">
+          <label class="list-heading form-label">Client Category</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="client_category" placeholder="Select Category">
+              <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
+              *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
           </mat-form-field>
         </div>
 

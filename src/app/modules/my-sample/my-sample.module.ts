@@ -7,6 +7,12 @@ import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 
 import { MySampleComponent } from './my-sample.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [MySampleComponent],
@@ -18,7 +24,15 @@ import { MySampleComponent } from './my-sample.component';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule
    ],
   exports: [],
   providers: [],

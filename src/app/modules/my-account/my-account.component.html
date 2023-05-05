@@ -20,7 +20,10 @@
           </div>
           <div style="padding-left: 1%;">
             <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}}  {{accountDetails?.last_name}}</h1>
-            <h3>User ID: {{accountDetails?.id}}</h3>
+            <div *ngIf="accountDetails && accountDetails?.role">
+              <mat-chip style="background-color: #2260bf;height: 20px;"><span class="text-white">{{getRoleName(accountDetails?.role)}}</span></mat-chip>
+
+            </div>
           </div>
         </div>
         <div class="col-md-2">
@@ -33,7 +36,26 @@
 
     <form [formGroup]="userForm">
       <div class="row mb-2">
-        <div class="col-md-6">
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email" class="col-form-label">First Name</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="first_name" placeholder="First Name" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email" class="col-form-label">last Name</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="last_name" placeholder="Last Name" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-md-4">
           <div class="form-group">
             <label for="email" class="col-form-label">Username</label>
             <mat-form-field appearance="outline" class="w-100">
@@ -54,28 +76,31 @@
           <div class="form-group">
             <label for="email" class="col-form-label">Phone Number</label>
             <mat-form-field appearance="outline" class="w-100">
-              <input class="custom-input" matInput formControlName="phoneNumber" placeholder="Phone Number" />
+              <input class="custom-input" matInput formControlName="phone" placeholder="Phone Number" />
             </mat-form-field>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="accountDetails?.role === 5">
           <div class="form-group">
             <label for="email" class="col-form-label">Client Category</label>
             <mat-form-field appearance="outline" class="w-100">
-              <input class="custom-input" matInput formControlName="clientCategory" placeholder="Client Category" />
+              <!-- <input class="custom-input" matInput formControlName="client_category" placeholder="Client Category" /> -->
+              <mat-select class="custom-select" formControlName="client_category">
+                <mat-option *ngFor="let item of clientCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
 
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <div class="form-group">
             <label for="email" class="col-form-label">Valid Up To</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="userValidUpTo" placeholder="Valid Upto" />
             </mat-form-field>
           </div>
-        </div>
+        </div> -->
       </div>
     </form>
     <!-- <div class="row mb-2">

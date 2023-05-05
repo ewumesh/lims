@@ -17,4 +17,8 @@ export class PricingService {
   getAllCommodities():Observable<any> {
     return this.http.get(`${this.url}/api/commodity/`)
   }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/commodity-category/`)
+  }
 }

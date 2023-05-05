@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AvatarModule } from 'ngx-avatar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [MyAccountComponent],
@@ -23,7 +25,9 @@ import { AvatarModule } from 'ngx-avatar';
     MatFormFieldModule,
     MatCardModule,
     HttpClientModule,
-    AvatarModule
+    AvatarModule,
+    MatSelectModule,
+    MatChipsModule
    ],
   exports: [],
   providers: [AccountService],
