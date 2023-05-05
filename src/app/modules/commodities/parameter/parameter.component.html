@@ -46,7 +46,7 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Category *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <mat-select class="custom-select" formControlName="parent_commodity" placeholder="Select Category">
+                    <mat-select class="custom-select" formControlName="commodity" placeholder="Select Category">
                       <mat-option *ngFor="let item of commodityCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
                     </mat-select>
                   </mat-form-field>

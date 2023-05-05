@@ -45,7 +45,7 @@
                 <div class="form-group">
                   <label class="mb-2">Parent Category *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <mat-select class="custom-select" placeholder="Select Category" formControlName="parent_category">
+                    <mat-select class="custom-select" placeholder="Select Category" formControlName="category">
                       <mat-option *ngFor="let item of commodityCategories" [value]="item.id"> {{item.name}}</mat-option>
                     </mat-select>
                     <!-- <input class="form-control custom-input" matInput formControlName="parent_category"

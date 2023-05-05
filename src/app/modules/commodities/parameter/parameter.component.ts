@@ -52,7 +52,7 @@ export class ParameterComponent implements OnInit {
     this.parameterForm = this.fb.group({
       name: ['', Validators.required],
       test_type: '',
-      parent_commodity: '',
+      commodity: '',
       ref_test_method: '',
       units: '',
       mandatory_standard: '',
