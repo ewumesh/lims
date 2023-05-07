@@ -16,6 +16,8 @@
                 <mat-icon class="mt-1" aria-hidden="false" aria-label="back" fontIcon="keyboard_arrow_left"></mat-icon>
               </button>
               <span *ngFor="let b of breadcrumbs; let i = index">
+                <!-- {{breadcrumbs[1] | json}} -->
+                <!-- <span *ngIf="breadcrumbs.length > 2 && breadcrumbs[1] === 'add-sample'">View Sample Details</span> -->
                 <span *ngIf="b === 'user-details'"> User Details</span>
                 <span *ngIf="b === 'update-user'"> Update User</span>
                 <span *ngIf="i === breadcrumbs.length-1">

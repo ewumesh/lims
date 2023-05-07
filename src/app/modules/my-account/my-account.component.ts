@@ -18,6 +18,8 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
 
   roles: any[] = [];
 
+  userFullName: string = '';
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -59,6 +61,7 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     let userId = JSON.parse(localStorage.getItem('userDetails')).id;
     this.accountService.getProfileDetails(userId).subscribe(res => {
       this.accountDetails = res;
+      this.userFullName = res?.first_name + ' ' + res?.last_name;
       this.isLoading = false;
     })
   }

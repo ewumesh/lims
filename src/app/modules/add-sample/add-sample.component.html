@@ -14,9 +14,7 @@
       <div class="col-sm-6">
         <label for="sampleName" class="col-form-label">Name of Sample (नमूनाको नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="sampleName" placeholder="Enter Sample Name" />
-          <mat-error [@rowsAnimation]="displayMessage?.sampleName" class="text-danger"
-            *ngIf="displayMessage?.sampleName">{{displayMessage?.sampleName}}</mat-error>
+          <input class="custom-input" matInput formControlName="name" placeholder="Enter Sample Name" />
         </mat-form-field>
       </div>
 
@@ -24,9 +22,7 @@
         <label for="email" class="col-form-label">Condition of sample while received (नमूना प्राप्त गर्दाको
           अवस्था)*</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="sampleCondition" placeholder="Enter Sample Condition" />
-            <mat-error [@rowsAnimation]="displayMessage?.sampleCondition" class="text-danger"
-              *ngIf="displayMessage?.sampleCondition">{{displayMessage?.sampleCondition}}</mat-error>
+            <input class="custom-input" matInput formControlName="condition" placeholder="Enter Sample Condition" />
           </mat-form-field>
       </div>
     </div>
@@ -34,22 +30,19 @@
     <div class="row mb-3">
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
-        <!-- <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="mfd" placeholder="Enter manufactured date" />
-          <mat-error [@rowsAnimation]="displayMessage?.mfd" class="text-danger"
-            *ngIf="displayMessage?.mfd">{{displayMessage?.mfd}}</mat-error>
-        </mat-form-field> -->
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput class="custom-input" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()" (click)="mfdPicker.open()" placeholder="Enter Manufactured Date" formControlName="mfd"/>
 
-        <np-datepicker placeholder="asasd" class="nepali-datepicker"></np-datepicker>
+            <mat-datepicker #mfdPicker></mat-datepicker>
+        </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
-        <!-- <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="bbd" placeholder="Enter best before date" />
-          <mat-error [@rowsAnimation]="displayMessage?.bbd" class="text-danger"
-            *ngIf="displayMessage?.bbd">{{displayMessage?.bbd}}</mat-error>
-        </mat-form-field> -->
-        <np-datepicker placeholder="asasd" class="nepali-datepicker"></np-datepicker>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput [matDatepicker]="dfbPicker" (focus)="dfbPicker.open()" (click)="dfbPicker.open()" class="custom-input" placeholder="Enter Best Before Date" formControlName="dfb"/>
+          <mat-datepicker #dfbPicker></mat-datepicker>
+        </mat-form-field>
       </div>
     </div>
 
@@ -57,17 +50,13 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Batch/Lot No. (ब्याच/ लट नं)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="batchOrLotNumber" placeholder="Enter batch or lot No." />
-          <mat-error [@rowsAnimation]="displayMessage?.batchOrLotNumber" class="text-danger"
-            *ngIf="displayMessage?.batchOrLotNumber">{{displayMessage?.batchOrLotNumber}}</mat-error>
+          <input class="custom-input" matInput formControlName="batch" placeholder="Enter batch or lot No." />
         </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Brand (ब्राण्ड)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="brandName" placeholder="Enter Brand Name" />
-          <mat-error [@rowsAnimation]="displayMessage?.brandName" class="text-danger"
-            *ngIf="displayMessage?.brandName">{{displayMessage?.brandName}}</mat-error>
+          <input class="custom-input" matInput formControlName="brand" placeholder="Enter Brand Name" />
         </mat-form-field>
       </div>
     </div>
@@ -76,20 +65,17 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Purpose of Analysis (प्रयोगशाला विश्लेषणको उदेश्य)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="proposeOfAnalysis" placeholder="Enter purpose of analysis" />
-          <mat-error [@rowsAnimation]="displayMessage?.proposeOfAnalysis" class="text-danger"
-            *ngIf="displayMessage?.proposeOfAnalysis">{{displayMessage?.proposeOfAnalysis}}</mat-error>
+          <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" />
         </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Report Required by Date (विश्लेषण प्रतिवेदन प्राप्त हुने अनुमानित
           मिति)*</label>
-          <!-- <mat-form-field appearance="outline" class="w-100">
-            <input matInput formControlName="reportRequiredByDate" placeholder="Enter Date" />
-            <mat-error [@rowsAnimation]="displayMessage?.reportRequiredByDate" class="text-danger"
-              *ngIf="displayMessage?.reportRequiredByDate">{{displayMessage?.reportRequiredByDate}}</mat-error>
-          </mat-form-field> -->
-          <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()" (click)="reportDatePicker.open()" formControlName="report_date" placeholder="Enter Report Date" />
+            <mat-datepicker #reportDatePicker></mat-datepicker>
+          </mat-form-field>
+          <!-- <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker> -->
       </div>
     </div>
 
@@ -98,7 +84,7 @@
         <label for="email" class="col-form-label">Amendments to Report (if any) (प्रतिवेदनमा संशोधन गर्नुपर्ने
           भएमा)</label>
           <mat-form-field appearance="outline" class="w-100">
-            <textarea class="custom-input" matInput formControlName="amendmentsToReport" placeholder="Enter Amendments to report"></textarea>
+            <textarea class="custom-input" matInput formControlName="amendments" placeholder="Enter Amendments to report"></textarea>
           </mat-form-field>
       </div>
       <div class="col-sm-6">
@@ -114,22 +100,22 @@
         <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
           वस्तु)*</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="commodityForAnalysis" placeholder="Select Category">
+            <mat-select formControlName="commodity_id" placeholder="Select Category">
               <mat-option value="1">Milk</mat-option>
               <mat-option value="2">Sugar</mat-option>
               <mat-option value="3">Water</mat-option>
               <mat-option value="4">Salt</mat-option>
             </mat-select>
-            <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
-              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error>
+            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
+              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
           </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
         <section class="example-section">
-          <mat-radio-group formControlName="reportingLanguage">
-            <mat-radio-button class="example-margin" value="after">नेपाली</mat-radio-button>
-            <mat-radio-button class="example-margin" value="before">English</mat-radio-button>
+          <mat-radio-group formControlName="language">
+            <mat-radio-button class="example-margin" value="np">नेपाली</mat-radio-button>
+            <mat-radio-button class="example-margin" value="en">English</mat-radio-button>
           </mat-radio-group>
         </section>
       </div>
@@ -137,7 +123,7 @@
 
     <div class="mb-4 row">
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-primary">Submit ( पेश गर्नुहोस् )</button>
+        <button [disabled]="sampleId" type="submit" class="btn btn-primary">Submit ( पेश गर्नुहोस् )</button>
       </div>
     </div>
   </form>

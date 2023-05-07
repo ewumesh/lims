@@ -32,6 +32,8 @@ import { SharedService } from '../services/shared/shared.service';
 
       {path: 'add-sample', loadChildren: () => import('src/app/modules/add-sample/add-sample.module').then(m => m.AddSampleModule)},
 
+      {path: 'add-sample/:id', loadChildren: () => import('src/app/modules/add-sample/add-sample.module').then(m => m.AddSampleModule)},
+
       {path: 'comodities', loadChildren: () => import('src/app/modules/comodities/comodities.module').then(m => m.ComoditiesModule)},
 
       {path: 'my-samples', loadChildren: () => import('src/app/modules/my-sample/my-sample.module').then(m => m.MySampleModule)},

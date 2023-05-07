@@ -10,6 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { NpDatepickerModule } from 'angular-nepali-datepicker';
+import { AddSampleService } from 'src/app/services/add-sample/add-sample.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [AddSampleFormComponent],
@@ -25,9 +28,13 @@ import { NpDatepickerModule } from 'angular-nepali-datepicker';
     MatSelectModule,
     MatCheckboxModule,
     MatRadioModule,
-    NpDatepickerModule
+    NpDatepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
-  providers: [],
+  providers: [
+    AddSampleService
+  ],
 })
 export class AddSampleModule {}

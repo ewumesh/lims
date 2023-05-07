@@ -15,13 +15,13 @@
 
         <div class="col-md-10 d-flex">
           <div>
-            <ngx-avatar [name]="accountDetails?.username"></ngx-avatar>
+            <ngx-avatar  [name]="userFullName"></ngx-avatar>
 
           </div>
           <div style="padding-left: 1%;">
             <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}}  {{accountDetails?.last_name}}</h1>
             <div *ngIf="accountDetails && accountDetails?.role">
-              <mat-chip style="background-color: #2260bf;height: 20px;"><span class="text-white">{{getRoleName(accountDetails?.role)}}</span></mat-chip>
+              <mat-chip style="background-color: #2260bf;height: 20px;border-radius: 4px;"><span class="text-white">{{getRoleName(accountDetails?.role)}}</span></mat-chip>
 
             </div>
           </div>

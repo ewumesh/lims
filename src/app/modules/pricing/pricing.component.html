@@ -26,17 +26,18 @@
     </form>
 
     <table *ngIf="!isLoading" class="t" mat-table [dataSource]="dataSource" multiTemplateDataRows [@collectionInOut]="dataSource.data?.length">
-      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
         <ng-container *ngIf="column !== 'expand'; else action">
           <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
           <td mat-cell *matCellDef="let element">
+            <span *ngIf="column === 'sn'">{{element.id}}</span>
             <span *ngIf="element[column]">
               <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
               <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
               <span *ngIf="column == 'name'">{{element[column] | titlecase}}</span>
               <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
             </span>
-            <span *ngIf="!element[column]" class="text-muted">N/A</span>
+            <span *ngIf="!element[column] && column !== 'sn'" class="text-muted">N/A</span>
            </td>
         </ng-container>
         <ng-template #action>

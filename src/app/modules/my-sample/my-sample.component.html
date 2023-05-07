@@ -47,23 +47,22 @@
     <ng-container matColumnDef="sampleName">
       <th mat-header-cell *matHeaderCellDef> Sample Name </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.username">{{row.username | titlecase}} </span>
-        <span *ngIf="!row.username" class="text-muted">N/A</span>
+        <span *ngIf="row.name">{{row.name | titlecase}} </span>
+        <span *ngIf="!row.name" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="submissionDate">
       <th mat-header-cell *matHeaderCellDef> Submission Date </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.first_name || row.last_name"> {{row.first_name | titlecase}}  {{row.last_name | titlecase}}</span>
-        <span *ngIf="!row.first_name && !row.last_name" class="text-muted">N/A</span>
+        {{row.report_date}}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.email">{{row.email}} </span>
+        <span *ngIf="row.email">{{row.status}} </span>
         <span *ngIf="!row.email" class="text-muted">N/A</span>
       </td>
     </ng-container>
@@ -71,7 +70,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <button [matTooltip]="'View Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
+        <button (click)="viewSampleDetails(row.id)" [matTooltip]="'View Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
         <button [matTooltip]="'Download Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
       </td>
     </ng-container>

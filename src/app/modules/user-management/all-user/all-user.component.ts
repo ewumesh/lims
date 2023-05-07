@@ -10,6 +10,7 @@ import { response } from 'express';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
+import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
   templateUrl: './all-user.component.html',
@@ -22,7 +23,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     private allUsersService: AllUsersService,
     private dialog: MatDialog,
     private router:Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toast: ToastService
   ) {
     this.title.setTitle('All Users - Laboratory Inventory Management System');
 
@@ -105,11 +107,32 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     })
   }
 
+  private dismissMessage(): void {
+    setTimeout(() => {
+      this.toast.dismissToast();
+    }, 5000);
+  }
+
   deleteUser(userId) {
     this.dialog.open(DeleteConfirmComponent).afterClosed().subscribe(_ => {
       if (_) {
         this.allUsersService.deleteUser(userId).subscribe(response => {
+          this.toast.showToast(
+            TOAST_STATE.success,
+            response.message);
           this.getAllUsers();
+
+          this.dismissMessage();
+        },
+        (error) => {
+          this.isLoading = false;
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            error?.error?.message);
+
+            setTimeout(() => {
+              this.dismissMessage();
+            }, 3000);
         })
       }
     })

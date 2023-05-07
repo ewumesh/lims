@@ -141,6 +141,28 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.dismissMessage();
 
+    },
+    (error) => {
+      if (error.status === 400) {
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          'All the field(s) are not valid.');
+
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+      } else {
+        console.log(error, "ERR")
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          error?.error?.error);
+
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+      }
+      this.isLoading = false;
+
     })
   }
 

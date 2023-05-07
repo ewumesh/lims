@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MySampleService } from 'src/app/services/my-sample/my-sample.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 
 @Component({
@@ -11,7 +13,7 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
   animations: [collectionInOut]
 })
 export class MySampleComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status','action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -21,19 +23,28 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
 
+
   constructor(
     private title: Title,
-    private fb: FormBuilder
-    ) {
+    private fb: FormBuilder,
+    private service: MySampleService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.title.setTitle('My Sample - Laboratory Inventory Management System');
-   }
+  }
 
   ngOnInit(): void {
     this.initFilterForm();
+    this.getSamples();
 
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
+  }
+
+  viewSampleDetails(id) {
+    this.router.navigate(['/dashboard/add-sample', id]);
   }
 
   initFilterForm() {
@@ -42,6 +53,14 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       status: '',
       from: '',
       to: ''
+    })
+  }
+
+  getSamples() {
+    this.service.getMySamples().subscribe(response => {
+      console.log(response, "SAMPLES...")
+
+      this.dataSource = response.results;
     })
   }
 

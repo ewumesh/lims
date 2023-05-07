@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MySampleService } from 'src/app/services/my-sample/my-sample.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [MySampleComponent],
@@ -32,9 +34,10 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
    ],
   exports: [],
-  providers: [],
+  providers: [MySampleService],
 })
 export class MySampleModule {}
