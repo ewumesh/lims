@@ -95,7 +95,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell text-center" colspan="8">No data matching the filter "{{input.value}}"</td>
+      <td class="mat-cell text-center py-5" colspan="8">
+        <img src="../../../../assets/no-data.svg" />
+        <div class="text-muted">Data Not Available.</div>
+
+      </td>
     </tr>
   </table>
 

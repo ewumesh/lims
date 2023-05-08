@@ -102,8 +102,18 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           setTimeout(() => {
             this.dismissMessage();
           }, 3000);
+        }else if(error.status === 500) {
+
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'Internal Server Error');
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+
+
         } else {
-          console.log(error, "ERR")
           this.toast.showToast(
             TOAST_STATE.danger,
             error?.error?.error);

@@ -3,10 +3,10 @@ import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/fo
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { delay } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
-import { collectionInOut } from 'src/app/shared/animations/animations';
+import { collectionInOut, rowsAnimation } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
@@ -14,10 +14,10 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 @Component({
   templateUrl: './parameter.component.html',
   styleUrls: ['./parameter.scss'],
-  animations: [collectionInOut]
+  animations: [collectionInOut, rowsAnimation ]
 })
 export class ParameterComponent implements OnInit {
-  displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price', 'action'];
+  displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price','testMethod','mandatoryStandards','formula', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -34,6 +34,8 @@ export class ParameterComponent implements OnInit {
 
   commodityCategories: any[] = [];
 
+  listOfParameters: Observable<any>;
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
@@ -44,22 +46,54 @@ export class ParameterComponent implements OnInit {
     this.genericValidator = new GenericValidator({
       'name': {
         'required': 'Category Name is required.'
-      }
+      },
+      'test_type': {
+        'required': 'Test Type is required.'
+      },
+      'commodity_category': {
+        'required': 'Commodity Category is required.'
+      },
+      'ref_test_method': {
+        'required': 'Test Method is required.'
+      },
+      'units': {
+        'required': 'Units is required.'
+      },
+      'mandatory_standard': {
+        'required': 'Mandatory Standard is required.'
+      },
+      'price': {
+        'required': 'Price is required.'
+      },
+      'formula': {
+        'required': 'Formula is required.'
+      },
     })
    }
 
   private initForm() {
     this.parameterForm = this.fb.group({
+      // name: ['', Validators.required],
+      // test_type: ['', Validators.required],
+      // commodity_category: ['', Validators.required],
+      // ref_test_method: ['', Validators.required],
+      // units: ['', Validators.required],
+      // mandatory_standard: ['', Validators.required],
+      // price: ['', Validators.required],
+      // remarks: '.',
+      // formula: ['', Validators.required]
+
+      id: '',
+
       name: ['', Validators.required],
-      test_type: '',
-      commodity: '',
-      ref_test_method: '',
-      units: '',
-      mandatory_standard: '',
-      price: '',
-      address: [''],
-      reg_no: [''],
-      remarks: '.'
+      test_type: [''],
+      commodity_category: [''],
+      ref_test_method: [''],
+      units: [''],
+      mandatory_standard: [''],
+      price: [''],
+      remarks: '.',
+      formula: ['']
     })
   }
 
@@ -78,28 +112,35 @@ export class ParameterComponent implements OnInit {
   getParameters() {
     this.sService.getParameters().subscribe(res => {
       this.dataSource = res.results;
+      this.listOfParameters = res.results;
+
+      console.log(this.listOfParameters, 'parameters...')
     })
+  }
+
+  displayFn(data: any): string {
+    return data && data.name ? data.name : '';
   }
 
   openDialog(data) {
     this.existingCategory = data;
-    this.patchForm(data);
-    // console.log(data, 'data..')
-    // let instance: MatDialogRef<AddOrUpdateCommodityCategoryComponent, any>;
-    // instance = this.dialog.open(AddOrUpdateCommodityCategoryComponent, {
-    //   width:'500px',
-    //   data: data ? data : {},
-    //   autoFocus: false,
-    // });
-
-    // instance.afterClosed().subscribe(result => {
-    //   this.getCategories();
-    // });
+    this.patchForm(data)
   }
 
   patchForm(data) {
     this.parameterForm.patchValue(
-      { name: data.name })
+      {
+        id: data?.id,
+        name: data?.name,
+        test_type: data?.test_type,
+        commodity_category: data?.commodity_category,
+        ref_test_method: data?.ref_test_method,
+        units: data?.units,
+        mandatory_standard: data?.mandatory_standard,
+        formula: data?.formula,
+        price: data?.price,
+      })
+      console.log(this.parameterForm.value, 'parameter value')
   }
 
   deleteCategory(id: number) {

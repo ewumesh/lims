@@ -11,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotificationComponent } from './notification/notification.component';
 import { SharedService } from '../services/shared/shared.service';
+import { LayoutService } from './layout.service';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,6 @@ import { SharedService } from '../services/shared/shared.service';
     ]),
   ],
   exports: [],
-  providers: [SharedService],
+  providers: [SharedService, LayoutService],
 })
 export class LayoutModule { }

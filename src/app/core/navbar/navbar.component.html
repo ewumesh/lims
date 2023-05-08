@@ -21,6 +21,6 @@
       </mat-menu> -->
     </div>
     <img class="cursor-pointer" (click)="navigateToProfile()" src="../../../assets/profile.jpg" alt="">
-    <p class="cursor-pointer" (click)="navigateToProfile()"><span class="username">{{userDetails?.username}}</span><br>{{userDetails?.email}}</p>
+    <p class="cursor-pointer" (click)="navigateToProfile()"><span class="username">{{getRoleName(userDetails?.role)}}</span><br>{{userDetails?.email}}</p>
   </div>
 </div>

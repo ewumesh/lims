@@ -19,24 +19,24 @@
               Dashboard</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="userDetails.role === 5">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/commodity-pricing'}" href="Javascript:;" (click)="navigateToPricing()">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="insert_chart"></mat-icon>
               Commodity Pricing</a>
           </li>
           <!-- Admin -->
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-requests'}" (click)="navigateToUserRequests()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="assignment_ind"></mat-icon>
                User Requests</a>
           </li>
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/sample-requests'}" (click)="navigateToSampleRequests()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="input"></mat-icon>
                Sample Requests</a>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/create-admin' || this.router.url === 'all-users'}"  href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle"></mat-icon>
                User Management <mat-icon class="pt-2" aria-hidden="false" aria-label="add" fontIcon="arrow_drop_down"></mat-icon></a>
@@ -71,13 +71,13 @@
               </div>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/search-sample'}" (click)="navigateToSearchSample()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="image_search"></mat-icon>
                Search Sample</a>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/lab-report'}" (click)="navigateToLabReport()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
                Lab Report</a>
@@ -131,7 +131,7 @@
 
           <!-- Admin -->
 
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link"  href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseT" aria-expanded="false" aria-controls="collapseTwo">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle"></mat-icon>
                Commodities <mat-icon class="pt-2" aria-hidden="false" aria-label="add" fontIcon="arrow_drop_down"></mat-icon></a>
@@ -166,12 +166,12 @@
               </div>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="userDetails.role === 5">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/my-samples'}" (click)="navigateToMySamples()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="local_drink"></mat-icon>
               My Samples</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="userDetails.role === 5">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/report-view'}" (click)="navigateToReportView()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
               Report View</a>

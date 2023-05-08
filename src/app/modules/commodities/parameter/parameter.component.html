@@ -1,12 +1,32 @@
 <div class="bg-white p-4">
   <div class="row pt-3">
-    <div class="col-md-8"></div>
-    <div class="col-md-2 text-right">
-    </div>
+    <div class="col-md-4"></div>
     <div class="col-md-2 text-left">
       <mat-form-field class="w-100 px-2" appearance="outline">
         <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
       </mat-form-field>
+    </div>
+    <div class="col-md-2 text-right">
+      <mat-form-field appearance="outline">
+        <mat-select class="custom-select" placeholder="Select Test Type">
+          <mat-option value="1">Chemical Test</mat-option>
+          <mat-option value="2">Microbiological Test</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-2 text-left">
+      <button class="btn btn-primary w-100 h-45">Filter</button>
+    </div>
+
+    <div class="col-md-2 text-left dropdown">
+      <button [matMenuTriggerFor]="downloadMenu" class="btn btn-primary dropdown-toggle w-100 h-45">
+        Download</button>
+
+        <mat-menu class="download-menu" #downloadMenu="matMenu">
+          <button mat-menu-item>PDF</button>
+          <button mat-menu-item>CSV</button>
+        </mat-menu>
     </div>
   </div>
 
@@ -24,10 +44,13 @@
                 <div class="form-group">
                   <label class="mb-2">Parameter Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="name"
-                      placeholder="Enter Parameter Name" />
-                    <mat-error [@rowsAnimation]="displayMessage?.name" class="text-danger"
-                      *ngIf="displayMessage?.name">{{displayMessage?.name}}</mat-error>
+                    <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of listOfParameters" [value]="option.name">
+                        {{option.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+
                   </mat-form-field>
                 </div>
               </div>
@@ -36,8 +59,12 @@
                 <div class="form-group">
                   <label class="mb-2">Test Type *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="test_type"
-                      placeholder="Enter Test Type" />
+                    <mat-select placeholder="Select Test type" class="custom-select" formControlName="test_type">
+                      <mat-option value="1">Chemical Test</mat-option>
+                      <mat-option value="2">Microbiological Test</mat-option>
+                    </mat-select>
+                    <mat-error [@rowsAnimation]="displayMessage?.test_type" class="text-danger"
+                      *ngIf="displayMessage?.test_type">{{displayMessage?.test_type}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -46,9 +73,11 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Category *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <mat-select class="custom-select" formControlName="commodity" placeholder="Select Category">
+                    <mat-select class="custom-select" formControlName="commodity_category" placeholder="Select Category">
                       <mat-option *ngFor="let item of commodityCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
                     </mat-select>
+                    <mat-error [@rowsAnimation]="displayMessage?.commodity_category" class="text-danger"
+                      *ngIf="displayMessage?.commodity_category">{{displayMessage?.commodity_category}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -57,8 +86,19 @@
                 <div class="form-group">
                   <label class="mb-2">Ref. Test Method *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="ref_test_method"
-                      placeholder="Enter Ref. Test Method" />
+                    <!-- <input class="form-control custom-input" matInput formControlName="ref_test_method"
+                      placeholder="Enter Ref. Test Method" /> -->
+
+                      <input placeholder="Enter Ref. Test Method" type="text" class="form-control custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
+                    <mat-autocomplete #autoUnits="matAutocomplete">
+                      <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
+                        {{option.ref_test_method}}
+                      </mat-option>
+                    </mat-autocomplete>
+
+
+                      <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
+                      *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -67,18 +107,17 @@
                 <div class="form-group">
                   <label class="mb-2">Units *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="units"
-                      placeholder="Enter Unit" />
-                  </mat-form-field>
-                </div>
-              </div>
+                    <!-- <input class="form-control custom-input" matInput formControlName="units"
+                      placeholder="Enter Unit" /> -->
 
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Test Type *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="test_type"
-                      placeholder="Enter Test Type" />
+                      <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
+                    <mat-autocomplete #autoUnits="matAutocomplete">
+                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                        {{option.units}}
+                      </mat-option>
+                    </mat-autocomplete>
+                      <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                      *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -89,6 +128,20 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="form-control custom-input" matInput formControlName="mandatory_standard"
                       placeholder="Enter Mandatory Standard" />
+                      <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
+                      *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Formula *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="form-control custom-input" matInput formControlName="formula"
+                      placeholder="Enter Formula" />
+                      <mat-error [@rowsAnimation]="displayMessage?.formula" class="text-danger"
+                      *ngIf="displayMessage?.formula">{{displayMessage?.formula}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -99,6 +152,8 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="form-control custom-input" matInput formControlName="price"
                       placeholder="Enter Parameter Price"/>
+                      <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
+                      *ngIf="displayMessage?.price">{{displayMessage?.price}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -129,25 +184,55 @@
         </ng-container>
 
         <ng-container matColumnDef="commodities">
-          <th mat-header-cell *matHeaderCellDef> Commodities </th>
+          <th mat-header-cell *matHeaderCellDef> Commodity Category </th>
           <td mat-cell *matCellDef="let c"> {{c.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="testType">
           <th mat-header-cell *matHeaderCellDef> Test Type </th>
-          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+          <td mat-cell *matCellDef="let c">
+            <span *ngIf="c.test_type === '1'">Chemical Test</span>
+            <span *ngIf="c.test_type === '2'">Microbiological Test</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="testMethod">
+          <th mat-header-cell *matHeaderCellDef> Test Method</th>
+          <td mat-cell *matCellDef="let c">
+            <span *ngIf="c.ref_test_method">{{c.ref_test_method | titlecase}}</span>
+            <span *ngIf="!c.ref_test_method" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mandatoryStandards">
+          <th mat-header-cell *matHeaderCellDef> Mandatory Standards</th>
+          <td mat-cell *matCellDef="let c">
+            <span *ngIf="c.mandatory_standard">{{c.mandatory_standard}}</span>
+            <span *ngIf="!c.mandatory_standard" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="formula">
+          <th mat-header-cell *matHeaderCellDef> Formula</th>
+          <td mat-cell *matCellDef="let c">
+            <span *ngIf="c.formula">{{c.formula}}</span>
+            <span *ngIf="!c.formula" class="text-muted">N/A</span>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+          <td mat-cell *matCellDef="let c"> Rs.{{c.price}} </td>
         </ng-container>
 
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
-            <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
-            <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button>
+            <!-- <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
+            <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button> -->
+
+            <button (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+            <button (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
           </td>
         </ng-container>
 
