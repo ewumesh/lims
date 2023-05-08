@@ -1,19 +1,7 @@
 <form  [formGroup]="filterForm" class="row">
-  <div class="col-md-6">
+  <div class="col-md-7">
     <mat-form-field appearance="outline" class="w-100">
-      <!-- <mat-label>Filter</mat-label> -->
       <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
-    </mat-form-field>
-  </div>
-  <div class="col-md-1">
-    <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Rate" formControlName="rate">
-        <mat-option value="1">1</mat-option>
-        <mat-option  value="2">2</mat-option>
-        <mat-option  value="3">3</mat-option>
-        <mat-option  value="4">4</mat-option>
-        <mat-option  value="5">5</mat-option>
-      </mat-select>
     </mat-form-field>
   </div>
   <div class="col-md-2">

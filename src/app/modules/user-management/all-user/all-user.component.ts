@@ -86,14 +86,14 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   getUserRoles() {
     this.allUsersService.getUserRoles().subscribe(response => {
-      this.roles = response;
+      this.roles = response.roles;
     })
   }
 
   getRoleName(id) {
-    let role = this.roles.find(x => x.id === id);
+    let role = this.roles.find(x => x.role_id === id);
     if(role) {
-      return role.name;
+      return role.role_name;
     } else {
     return id;
     }

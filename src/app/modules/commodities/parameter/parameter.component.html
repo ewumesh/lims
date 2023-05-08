@@ -45,7 +45,7 @@
                   <label class="mb-2">Parameter Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-autocomplete #auto="matAutocomplete">
                       <mat-option *ngFor="let option of listOfParameters" [value]="option.name">
                         {{option.name}}
                       </mat-option>
@@ -54,6 +54,23 @@
                   </mat-form-field>
                 </div>
               </div>
+
+              <!-- <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Parameter Name *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+
+                      <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="autoUnits">
+                    <mat-autocomplete #autoUnits="matAutocomplete">
+                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                        {{option.units}}
+                      </mat-option>
+                    </mat-autocomplete>
+                      <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                      *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div> -->
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -71,13 +88,13 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Commodity Category *</label>
+                  <label class="mb-2">Commodity *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <mat-select class="custom-select" formControlName="commodity_category" placeholder="Select Category">
-                      <mat-option *ngFor="let item of commodityCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+                    <mat-select class="custom-select" formControlName="commodity" placeholder="Select Commodity">
+                      <mat-option *ngFor="let item of commodities" [value]="item.id">{{item.name | titlecase}}</mat-option>
                     </mat-select>
-                    <mat-error [@rowsAnimation]="displayMessage?.commodity_category" class="text-danger"
-                      *ngIf="displayMessage?.commodity_category">{{displayMessage?.commodity_category}}</mat-error>
+                    <mat-error [@rowsAnimation]="displayMessage?.commodity" class="text-danger"
+                      *ngIf="displayMessage?.commodity">{{displayMessage?.commodity}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>

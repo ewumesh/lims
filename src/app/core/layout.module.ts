@@ -80,7 +80,13 @@ import { LayoutService } from './layout.service';
 
       {path: 'commodities', loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module').then(m => m.CommoditiesModule)},
 
-      {path: 'commodities/all-commodities', loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module').then(m => m.AllCommoditiesModule)}
+      {path: 'commodities/all-commodities', loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module').then(m => m.AllCommoditiesModule)},
+
+      // Analyst
+      {path: 'test-request', loadChildren: () => import('src/app/modules/analyst/test-request/test-request.module').then(m => m.TestRequestModule)},
+
+      {path: 'test-report', loadChildren: () => import('src/app/modules/analyst/test-report/test-report.module').then(m => m.TestReportModule)},
+
     ]),
   ],
   exports: [],

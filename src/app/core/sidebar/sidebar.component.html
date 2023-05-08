@@ -19,6 +19,18 @@
               Dashboard</a>
           </li>
 
+          <li class="nav-item" *ngIf="userDetails?.role === 4">
+            <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/test-request'}" (click)="gotoTestRequest()" href="Javascript:;">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="timeline"></mat-icon>
+              Test Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails?.role === 4">
+            <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/test-report'}" (click)="gotoTestReport()" href="Javascript:;">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="how_to_vote"></mat-icon>
+              Test Report</a>
+          </li>
+
           <li class="nav-item" *ngIf="userDetails.role === 5">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/commodity-pricing'}" href="Javascript:;" (click)="navigateToPricing()">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="insert_chart"></mat-icon>

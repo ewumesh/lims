@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CommoditiesService } from 'src/app/services/commodities/commodities/commodities.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [CommoditiesComponent],
@@ -30,7 +31,8 @@ import { CommodityCategoryService } from 'src/app/services/settings/commodity-ca
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
    ],
   exports: [],
   providers: [CommoditiesService, CommodityCategoryService],

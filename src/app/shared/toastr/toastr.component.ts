@@ -31,4 +31,9 @@ export class ToastComponent implements OnInit {
     this.toast.dismissToast();
   }
 
+  hideMessage() {
+    this.toast.dismissToast();
+    this.showsToast = false;
+  }
+
 }

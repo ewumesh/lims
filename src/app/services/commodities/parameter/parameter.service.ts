@@ -17,6 +17,10 @@ export class ParameterService {
     return this.http.get(`${this.url}/api/test-result/`)
   }
 
+  getCommodities():Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/`)
+  }
+
   addParameter(payload: any):Observable<any>  {
     return this.http.post(`${this.url}/api/test-result/`, payload);
   }

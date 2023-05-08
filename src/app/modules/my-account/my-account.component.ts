@@ -20,6 +20,8 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
 
   userFullName: string = '';
 
+  isChangePassword: boolean = false;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -45,6 +47,14 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
       client_category: [, Validators.required],
       userValidUpTo: ['2030-01-01', Validators.required]
     })
+  }
+
+  changePassword() {
+    this.isChangePassword = true;
+  }
+
+  cancel() {
+    this.isChangePassword = false;
   }
 
   getRoleName(roleId) {

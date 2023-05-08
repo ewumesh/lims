@@ -111,7 +111,7 @@
         </div>
 
 
-        <div class="row m-0" *ngIf="userForm.value.client_category">
+        <div class="row m-0" *ngIf="userForm.get('role').value === 5 && userForm.value.client_category">
           <h2>Department Details</h2>
 
           <div class="col-md-6">
@@ -154,8 +154,8 @@
           <button type="submit" class="form-control btn-lims-primary" id="submit">Create</button>
         </div> -->
         </div>
-        <div class="col-md-12">
-          <button [disabled]="isLoading" type="submit" class="form-control btn-lims-primary" id="submit">
+        <div class="col-md-12 text-end">
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary" id="submit">
             <span *ngIf="!isLoading">
               <span *ngIf="userId">Update User</span>
               <span *ngIf="!userId">Create User</span>

@@ -36,6 +36,8 @@ export class ParameterComponent implements OnInit {
 
   listOfParameters: Observable<any>;
 
+  commodities: any[] = [];
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
@@ -50,7 +52,7 @@ export class ParameterComponent implements OnInit {
       'test_type': {
         'required': 'Test Type is required.'
       },
-      'commodity_category': {
+      'commodity': {
         'required': 'Commodity Category is required.'
       },
       'ref_test_method': {
@@ -87,7 +89,7 @@ export class ParameterComponent implements OnInit {
 
       name: ['', Validators.required],
       test_type: [''],
-      commodity_category: [''],
+      commodity: [''],
       ref_test_method: [''],
       units: [''],
       mandatory_standard: [''],
@@ -101,11 +103,18 @@ export class ParameterComponent implements OnInit {
     this.initForm();
     this.getParameters();
     this.getCommodityCategories();
+    this.getCommodities();
   }
 
   getCommodityCategories() {
     this.cService.getAllCommodityCategories().subscribe(response => {
       this.commodityCategories = response.results;
+    })
+  }
+
+  getCommodities() {
+    this.sService.getCommodities().subscribe(res => {
+      this.commodities = res.results;
     })
   }
 
@@ -133,7 +142,7 @@ export class ParameterComponent implements OnInit {
         id: data?.id,
         name: data?.name,
         test_type: data?.test_type,
-        commodity_category: data?.commodity_category,
+        commodity: data?.commodity,
         ref_test_method: data?.ref_test_method,
         units: data?.units,
         mandatory_standard: data?.mandatory_standard,
@@ -173,6 +182,37 @@ export class ParameterComponent implements OnInit {
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
         this.existingCategory = null;
+      },
+      (error) => {
+        if (error.status === 400) {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'All the field(s) are not valid.');
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        }else if(error.status === 500) {
+
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'Internal Server Error');
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+
+
+        } else {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            error?.error?.error);
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        }
+
       })
     } else {
       console.log(this.parameterForm.value, "PARAAMETER VALUES")
@@ -185,6 +225,37 @@ export class ParameterComponent implements OnInit {
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
         this.existingCategory = null;
+      },
+      (error) => {
+        if (error.status === 400) {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'All the field(s) are not valid.');
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        }else if(error.status === 500) {
+
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'Internal Server Error');
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+
+
+        } else {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            error?.error?.error);
+
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        }
+
       })
     }
   }

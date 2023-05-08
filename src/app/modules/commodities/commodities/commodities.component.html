@@ -1,21 +1,30 @@
 <div class="bg-white p-4">
   <div class="row pt-3">
     <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-2 text-left">
+      <mat-form-field class="w-100 px-2" appearance="outline">
+        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
       <mat-form-field appearance="outline">
         <mat-select class="custom-select" placeholder="Select Status">
           <mat-option>1</mat-option>
           <mat-option>2</mat-option>
         </mat-select>
       </mat-form-field>
-      <button class="btn btn-primary mx-2 h-45">Apply</button>
     </div>
-    <div class="col-md-2 text-right">
+
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100 mx-2 h-45">Apply</button>
     </div>
-    <div class="col-md-2 text-left">
-      <mat-form-field class="w-100 px-2" appearance="outline">
-        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
-      </mat-form-field>
+    <div class="col-md-2">
+      <button class="btn btn-primary dropdown-toggle w-100 mx-2 h-45" [matMenuTriggerFor]="downloadMenu">Download</button>
+
+      <mat-menu class="download-menu" #downloadMenu="matMenu">
+        <button mat-menu-item>PDF</button>
+        <button mat-menu-item>CSV</button>
+      </mat-menu>
     </div>
   </div>
 
@@ -137,6 +146,14 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center py-5" colspan="8">
+            <img src="../../../../assets/no-data.svg" />
+            <div class="text-muted">Data Not Available.</div>
+
+          </td>
+        </tr>
       </table>
 
       <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">

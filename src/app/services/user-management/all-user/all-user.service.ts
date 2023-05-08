@@ -26,7 +26,7 @@ export class AllUsersService {
   }
 
   getUserRoles():Observable<any> {
-    return this.http.get(`${this.url}/api/account/groups/`);
+    return this.http.get(`${this.url}/api/account/roles/`);
   }
 
   // addCategory(payload: any):Observable<any>  {

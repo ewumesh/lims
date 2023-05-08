@@ -116,6 +116,14 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/dashboard/commodities/all-commodities']);
   }
 
+  gotoTestReport() {
+    this.router.navigate(['/dashboard/test-report']);
+  }
+
+  gotoTestRequest() {
+    this.router.navigate(['/dashboard/test-request']);
+  }
+
 
   logout() {
     this.toast.showToast(
