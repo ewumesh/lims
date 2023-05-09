@@ -13,8 +13,8 @@ export class CommodityCategoryService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCommodityCategories():Observable<any> {
-    return this.http.get(`${this.url}/api/commodity-category/`)
+  getAllCommodityCategories(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/commodity-category/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`)
   }
 
   addCategory(payload: any):Observable<any>  {

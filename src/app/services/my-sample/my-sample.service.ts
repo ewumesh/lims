@@ -17,4 +17,8 @@ export class MySampleService {
   getMySamples(): Observable<any> {
     return this.http.get(`${this.url}/api/sample-form/`);
   }
+
+  deleteSample(id):Observable<any> {
+    return this.http.delete(`${this.url}/api/sample-form/${id}/`)
+  }
 }

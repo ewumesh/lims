@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
 
@@ -17,22 +18,77 @@ import { AllCommoditiesService } from 'src/app/services/commodities/all-commodit
 export class AllCommoditiesComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['expand', 'name', 'price', 'test_duration'];
+  columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration', 'download'];
   expandedElement: any | null;
 
   allCommodities: any = [];
 
-  constructor(private allCommoditiesService: AllCommoditiesService) { }
+  commodityCategories: any[] = [];
+
+  filterForm: FormGroup;
+
+  isLoading: boolean = true;
+
+  constructor(
+    private allCommoditiesService: AllCommoditiesService,
+    private fb: FormBuilder
+    ) { }
 
   ngOnInit(): void {
     this.getAllCommodities();
+    this.getCommodityCategories();
+
+    this.initFilterForm();
   }
 
   getAllCommodities() {
-    this.allCommoditiesService.getAllCommodities().subscribe(res => {
+    this.dataSource = null
+    this.isLoading = true;
+    let payload = {
+      search: '',
+      catetegory: '',
+      page: '',
+      size: ''
+    }
+    this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
       // this.allCommodities = res;
       this.dataSource = res.results;
+      this.isLoading = false;
     })
+  }
+
+  getCommodityCategories(){
+    this.allCommoditiesService.getCommodityCategories().subscribe(res => {
+      this.commodityCategories = res?.results;
+    })
+  }
+
+  initFilterForm() {
+    this.filterForm = this.fb.group({
+      search: '',
+      category: ''
+    })
+  }
+
+  filter() {
+    this.isLoading = true;
+    this.dataSource = null
+    let payload = {
+      search: this.filterForm.value.search,
+      catetegory: '',
+      page: '',
+      size: ''
+    }
+
+    this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
+      this.dataSource = res.results;
+      this.isLoading = false;
+    })
+  }
+
+  reset() {
+    this.filterForm.reset();
+    this.getAllCommodities();
   }
 }
 

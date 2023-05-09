@@ -38,6 +38,10 @@ export class ParameterComponent implements OnInit {
 
   commodities: any[] = [];
 
+  filterForm: FormGroup;
+
+  isLoading: boolean = true;
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
@@ -104,10 +108,23 @@ export class ParameterComponent implements OnInit {
     this.getParameters();
     this.getCommodityCategories();
     this.getCommodities();
+    this.initFilterForm();
+  }
+
+  initFilterForm() {
+    this.filterForm = this.fb.group({
+      search: '',
+      test_type: ''
+    })
   }
 
   getCommodityCategories() {
-    this.cService.getAllCommodityCategories().subscribe(response => {
+    let payload = {
+      search: '',
+      page: '',
+      size: ''
+    }
+    this.cService.getAllCommodityCategories(payload).subscribe(response => {
       this.commodityCategories = response.results;
     })
   }
@@ -119,12 +136,38 @@ export class ParameterComponent implements OnInit {
   }
 
   getParameters() {
-    this.sService.getParameters().subscribe(res => {
-      this.dataSource = res.results;
+    this.isLoading = true;
+    let payload = {
+      search: '',
+      page: '',
+      size: '',
+      test_type: ''
+    }
+    this.sService.getParameters(payload).subscribe(res => {
+      this.dataSource = res;
       this.listOfParameters = res.results;
-
-      console.log(this.listOfParameters, 'parameters...')
+      this.isLoading = false;
     })
+  }
+
+  filter() {
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      test_type: this.filterForm.value.test_type
+    }
+    this.sService.getParameters(payload).subscribe(res => {
+      this.dataSource = res;
+      this.listOfParameters = res;
+      this.isLoading = false;
+    })
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+    this.getParameters();
   }
 
   displayFn(data: any): string {

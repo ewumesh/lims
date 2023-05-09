@@ -26,12 +26,16 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   categoryForm: FormGroup;
 
+  isLoading: boolean = true;
+
   // Used for form validation
   genericValidator: GenericValidator;
   displayMessage: any = {};
   @ViewChildren(FormControlName, { read: ElementRef })
   private formInputElements: ElementRef[];
   existingCategory: any;
+
+  filterForm: FormGroup;
 
   constructor(
     public dialog: MatDialog,
@@ -47,10 +51,31 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
    }
 
   private initForm() {
+    this.initFilterForm();
+
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
       address: [''],
       reg_no: ['']
+    })
+  }
+
+  initFilterForm() {
+    this.filterForm = this.fb.group({
+      search: ''
+    })
+  }
+
+  filter() {
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: ''
+    }
+    this.sService.getAllCommodityCategories(payload).subscribe(res => {
+      this.dataSource.data = res.results;
+      this.isLoading = false;
     })
   }
 
@@ -60,9 +85,21 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
-    this.sService.getAllCommodityCategories().subscribe(res => {
+    let payload = {
+      search: ' ',
+      page: ' ',
+      size: ' '
+    }
+    this.sService.getAllCommodityCategories(payload).subscribe(res => {
       this.dataSource.data = res.results;
+      this.isLoading = false;
     })
+  }
+
+  resetFilter() {
+    this.isLoading = true;
+    this.filterForm.reset();
+    this.getCategories();
   }
 
   openDialog(data) {

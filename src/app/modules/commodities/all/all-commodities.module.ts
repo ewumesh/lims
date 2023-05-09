@@ -11,6 +11,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [AllCommoditiesComponent],
@@ -26,7 +30,13 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatTooltipModule
    ],
   exports: [],
   providers: [AllCommoditiesService],

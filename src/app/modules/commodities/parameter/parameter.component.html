@@ -1,35 +1,4 @@
 <div class="bg-white p-4">
-  <div class="row pt-3">
-    <div class="col-md-4"></div>
-    <div class="col-md-2 text-left">
-      <mat-form-field class="w-100 px-2" appearance="outline">
-        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
-      </mat-form-field>
-    </div>
-    <div class="col-md-2 text-right">
-      <mat-form-field appearance="outline">
-        <mat-select class="custom-select" placeholder="Select Test Type">
-          <mat-option value="1">Chemical Test</mat-option>
-          <mat-option value="2">Microbiological Test</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-2 text-left">
-      <button class="btn btn-primary w-100 h-45">Filter</button>
-    </div>
-
-    <div class="col-md-2 text-left dropdown">
-      <button [matMenuTriggerFor]="downloadMenu" class="btn btn-primary dropdown-toggle w-100 h-45">
-        Download</button>
-
-        <mat-menu class="download-menu" #downloadMenu="matMenu">
-          <button mat-menu-item>PDF</button>
-          <button mat-menu-item>CSV</button>
-        </mat-menu>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-md-4">
       <div class="row">
@@ -106,7 +75,7 @@
                     <!-- <input class="form-control custom-input" matInput formControlName="ref_test_method"
                       placeholder="Enter Ref. Test Method" /> -->
 
-                      <input placeholder="Enter Ref. Test Method" type="text" class="form-control custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
+                      <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
                     <mat-autocomplete #autoUnits="matAutocomplete">
                       <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
                         {{option.ref_test_method}}
@@ -127,7 +96,7 @@
                     <!-- <input class="form-control custom-input" matInput formControlName="units"
                       placeholder="Enter Unit" /> -->
 
-                      <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
+                      <input placeholder="Enter Parameter Name" type="text" class="custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
                     <mat-autocomplete #autoUnits="matAutocomplete">
                       <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
                         {{option.units}}
@@ -143,7 +112,7 @@
                 <div class="form-group">
                   <label class="mb-2">Mandatory Standards *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="mandatory_standard"
+                    <input class=" custom-input" matInput formControlName="mandatory_standard"
                       placeholder="Enter Mandatory Standard" />
                       <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
                       *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
@@ -155,7 +124,7 @@
                 <div class="form-group">
                   <label class="mb-2">Formula *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="formula"
+                    <input class=" custom-input" matInput formControlName="formula"
                       placeholder="Enter Formula" />
                       <mat-error [@rowsAnimation]="displayMessage?.formula" class="text-danger"
                       *ngIf="displayMessage?.formula">{{displayMessage?.formula}}</mat-error>
@@ -167,7 +136,7 @@
                 <div class="form-group">
                   <label class="mb-2">Parameter Price *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="price"
+                    <input class=" custom-input" matInput formControlName="price"
                       placeholder="Enter Parameter Price"/>
                       <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
                       *ngIf="displayMessage?.price">{{displayMessage?.price}}</mat-error>
@@ -186,7 +155,40 @@
       </div>
     </div>
     <div class="col-md-8">
-      <table mat-table [dataSource]="dataSource" class="table custom-border" [@collectionInOut]="dataSource.data?.length">
+      <form [formGroup]="filterForm" class="row">
+        <div class="col-md-3 text-left">
+          <mat-form-field class="w-100 px-2" appearance="outline">
+            <input formControlName="search" class="custom-input" matInput placeholder="Enter keyword" #input>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-select formControlName="test_type" class="custom-select" placeholder="Select Test Type">
+              <mat-option value="1">Chemical Test</mat-option>
+              <mat-option value="2">Microbiological Test</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <button (click)="filter()" class="btn btn-primary w-100 h-45">Filter</button>
+        </div>
+
+        <div class="col-md-2 text-left">
+          <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
+        </div>
+
+        <div class="col-md-2 text-left dropdown">
+          <button [matMenuTriggerFor]="downloadMenu" class="btn btn-primary dropdown-toggle w-100 h-45">
+            Download</button>
+
+            <mat-menu class="download-menu" #downloadMenu="matMenu">
+              <button mat-menu-item>PDF</button>
+              <button mat-menu-item>CSV</button>
+            </mat-menu>
+        </div>
+      </form>
+      <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0" [@collectionInOut]="dataSource?.length">
 
         <!-- SN Column -->
         <ng-container matColumnDef="sn">
@@ -264,6 +266,14 @@
           </td>
         </tr>
       </table>
+
+      <div class="row" *ngIf="isLoading">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
 
       <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>

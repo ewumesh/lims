@@ -13,8 +13,8 @@ export class CommoditiesService {
 
   constructor(private http: HttpClient) {}
 
-  getCommodities(): Observable<any> {
-    return this.http.get(`${this.url}/api/commodity/`);
+  getCommodities(payload): Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
   }
 
   addCommodity(payload):Observable<any> {

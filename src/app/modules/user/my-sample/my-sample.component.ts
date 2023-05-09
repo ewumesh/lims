@@ -41,6 +41,10 @@ export class MySampleComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
+
+    this.service.deleteSample(1).subscribe(res => {
+      console.log(res)
+    })
   }
 
   viewSampleDetails(id) {

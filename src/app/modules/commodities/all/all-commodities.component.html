@@ -1,24 +1,54 @@
 <div class="row bg-white p-3 m-0">
   <div class="col-md-12">
 
-    <div class="row">
+    <form  [formGroup]="filterForm" class="row">
       <div class="col-md-4">
         <div class="form-group">
           <mat-form-field appearance="outline" class="w-100">
-            <input class="form-control custom-input" matInput
+            <input formControlName="search" class="custom-input" matInput
               placeholder="Search" />
           </mat-form-field>
         </div>
       </div>
-    </div>
 
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+      <div class="col-md-3">
+        <mat-form-field class="w-100" appearance="outline">
+        <mat-select formControlName="category" class="custom-select" placeholder="Select Commodity Category">
+          <mat-option *ngFor="let category of commodityCategories" [value]="category.id">{{category.name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button (click)="filter()" class="btn btn-primary h-45 w-100">Filter</button>
+      </div>
+
+      <div class="col-md-1">
+        <button (click)="reset()" class="btn btn-danger w-100 h-45">Reset</button>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary dropdown-toggle h-45 w-100" [matMenuTriggerFor]="downloadMenu">Download</button>
+
+        <mat-menu class="download-menu" #downloadMenu="matMenu">
+          <button mat-menu-item>PDF</button>
+          <button mat-menu-item>CSV</button>
+        </mat-menu>
+      </div>
+
+    </form>
+
+    <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" multiTemplateDataRows>
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <ng-container *ngIf="column !== 'expand'; else action">
           <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
           <td mat-cell *matCellDef="let element">
             <span *ngIf="column === 'price'">Rs.{{element[column]}} </span>
             <span *ngIf="column === 'test_duration'">{{element[column]}} Days</span>
+
+            <span *ngIf="column === 'sn'">{{element.id}}</span>
+            <span *ngIf="column === 'download'">
+              <button [matTooltip]="'Download Commodity with parameters'"class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
+            </span>
             <span *ngIf="column!== 'price' && column!=='test_duration'">{{element[column]}} </span>
 
           </td>
@@ -27,9 +57,9 @@
           <th mat-header-cell *matHeaderCellDef style="width: 20px !important;"> </th>
           <td mat-cell *matCellDef="let element">
             <div *ngIf="element?.test_result.length > 0">
-            <mat-icon (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement ===
+            <mat-icon class="expand-icon" (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement ===
               element
-              ? 'expand_less' : 'expand_more'}}</mat-icon>
+              ? 'indeterminate_check_box' : 'add_box'}}</mat-icon>
               </div>
           </td>
         </ng-template>
@@ -79,6 +109,14 @@
         </td>
       </tr>
     </table>
+
+    <div class="row" *ngIf="isLoading">
+      <div class="col-md-12 text-center py-3">
+        <div class="spinner-border text-dark" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
 
     <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>

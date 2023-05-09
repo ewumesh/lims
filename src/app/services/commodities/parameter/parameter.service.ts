@@ -13,8 +13,8 @@ export class ParameterService {
 
   constructor(private http: HttpClient) {}
 
-  getParameters():Observable<any> {
-    return this.http.get(`${this.url}/api/test-result/`)
+  getParameters(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/test-result/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`)
   }
 
   getCommodities():Observable<any> {

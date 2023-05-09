@@ -23,6 +23,8 @@ export class CommoditiesComponent implements OnInit {
 
   commoditiesForm: FormGroup;
 
+  filterForm: FormGroup;
+
   // Used for form validation
   genericValidator: GenericValidator;
   displayMessage: any = {};
@@ -31,6 +33,8 @@ export class CommoditiesComponent implements OnInit {
   existingCategory: any;
 
   commodityCategories: any[] = [];
+
+  isLoading: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -60,18 +64,56 @@ export class CommoditiesComponent implements OnInit {
     this.initForm();
     this.getCommodityCategories();
     this.getCommodities();
+    this.initFilterForm();
+  }
+
+  initFilterForm() {
+    this.filterForm = this.fb.group({
+      search: ''
+    })
   }
 
   getCommodities() {
-    this.sService.getCommodities().subscribe(res => {
+    this.isLoading = true;
+    let payload = {
+      search: '',
+      page: '',
+      size: ''
+    }
+    this.sService.getCommodities(payload).subscribe(res => {
       this.dataSource.data = res.results;
+      this.isLoading = false;
     })
   }
 
   getCommodityCategories() {
-    this.cService.getAllCommodityCategories().subscribe(response => {
+    let payload = {
+      search: '',
+      page: '',
+      size: ''
+    }
+    this.cService.getAllCommodityCategories(payload).subscribe(response => {
       this.commodityCategories = response.results;
+      // this.isLoading = false;
     })
+  }
+
+  filter() {
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: ''
+    }
+    this.sService.getCommodities(payload).subscribe(res => {
+      this.dataSource.data = res.results;
+      this.isLoading = false;
+    })
+  }
+
+  resetfilter() {
+    this.filterForm.reset();
+    this.getCommodities();
   }
 
   openDialog(data) {

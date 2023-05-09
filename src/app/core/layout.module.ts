@@ -37,13 +37,13 @@ import { LayoutService } from './layout.service';
 
       {path: 'comodities', loadChildren: () => import('src/app/modules/comodities/comodities.module').then(m => m.ComoditiesModule)},
 
-      {path: 'my-samples', loadChildren: () => import('src/app/modules/my-sample/my-sample.module').then(m => m.MySampleModule)},
+      {path: 'my-samples', loadChildren: () => import('src/app/modules/user/my-sample/my-sample.module').then(m => m.MySampleModule)},
 
-      {path: 'report-view', loadChildren: () => import('src/app/modules/report-view/report-view.module').then(m => m.ReportViewModule)},
+      {path: 'report-view', loadChildren: () => import('src/app/modules/user/report-view/report-view.module').then(m => m.ReportViewModule)},
 
       {path: 'my-account', loadChildren: () => import('src/app/modules/my-account/my-account.module').then(m => m.MyAccountModule)},
 
-      {path: 'commodity-pricing', loadChildren: () => import('src/app/modules/pricing/pricing.module').then(m => m.PricingModule)},
+      {path: 'commodity-pricing', loadChildren: () => import('src/app/modules/user/pricing/pricing.module').then(m => m.PricingModule)},
 
       // For Admin
       {path: 'user-requests', loadChildren: () => import('src/app/modules/user-requests/user-request.module').then(m => m.UserRequestsModule)},

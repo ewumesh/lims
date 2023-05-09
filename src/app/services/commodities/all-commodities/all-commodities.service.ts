@@ -14,7 +14,11 @@ export class AllCommoditiesService {
 
   }
 
-  getAllCommodities():Observable<any> {
-    return this.http.get(`${this.url}/api/commodity/`);
+  getAllCommodities(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
+  }
+
+  getCommodityCategories(): Observable<any> {
+    return this.http.get(`${this.url}/api/commodity-category/`);
   }
 }

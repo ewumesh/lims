@@ -1,33 +1,4 @@
 <div class="bg-white p-4">
-  <div class="row pt-3">
-    <div class="col-md-4"></div>
-    <div class="col-md-2 text-left">
-      <mat-form-field class="w-100 px-2" appearance="outline">
-        <input class="custom-input" matInput (keyup)="applyFilter($event)" placeholder="Enter keyword" #input>
-      </mat-form-field>
-    </div>
-    <div class="col-md-2">
-      <mat-form-field appearance="outline">
-        <mat-select class="custom-select" placeholder="Select Status">
-          <mat-option>1</mat-option>
-          <mat-option>2</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="col-md-2">
-      <button class="btn btn-primary w-100 mx-2 h-45">Apply</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary dropdown-toggle w-100 mx-2 h-45" [matMenuTriggerFor]="downloadMenu">Download</button>
-
-      <mat-menu class="download-menu" #downloadMenu="matMenu">
-        <button mat-menu-item>PDF</button>
-        <button mat-menu-item>CSV</button>
-      </mat-menu>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-md-4">
       <div class="row">
@@ -42,7 +13,7 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="name"
+                    <input class="custom-input" matInput formControlName="name"
                       placeholder="Enter Commodity Name" />
                     <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
                       *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
@@ -69,7 +40,7 @@
                 <div class="form-group">
                   <label class="mb-2">Test Duration *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="test_duration"
+                    <input class="custom-input" matInput formControlName="test_duration"
                       placeholder="Enter Test duration" />
                     <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
                       *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
@@ -81,7 +52,7 @@
                 <div class="form-group">
                   <label class="mb-2">Units*</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="units"
+                    <input class="custom-input" matInput formControlName="units"
                       placeholder="Enter Units" />
                     <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
                       *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
@@ -93,7 +64,7 @@
                 <div class="form-group">
                   <label class="mb-2">Commodity Price *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="price"
+                    <input class="custom-input" matInput formControlName="price"
                       placeholder="Enter Commodity Price" />
                     <!-- <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
                       *ngIf="displayMessage?.commodity_price">{{displayMessage?.commodity_price}}</mat-error> -->
@@ -112,7 +83,38 @@
       </div>
     </div>
     <div class="col-md-8">
-      <table mat-table [dataSource]="dataSource" class="table custom-border mb-0">
+      <form [formGroup]="filterForm" class="row">
+        <div class="col-md-6 text-left">
+          <mat-form-field class="w-100 px-2" appearance="outline">
+            <input formControlName="search" class="custom-input" matInput placeholder="Enter Commodity Name" #input>
+          </mat-form-field>
+        </div>
+        <!-- <div class="col-md-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-select class="custom-select" placeholder="Select Status">
+              <mat-option>1</mat-option>
+              <mat-option>2</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-md-2">
+          <button (click)="filter()" class="btn btn-primary w-100 mx-2 h-45">Filter</button>
+        </div>
+
+        <div class="col-md-2">
+          <button (click)="resetfilter()" class="btn btn-danger w-100 mx-2 h-45">Reset</button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary dropdown-toggle w-100 mx-2 h-45" [matMenuTriggerFor]="downloadMenu">Download</button>
+
+          <mat-menu class="download-menu" #downloadMenu="matMenu">
+            <button mat-menu-item>PDF</button>
+            <button mat-menu-item>CSV</button>
+          </mat-menu>
+        </div>
+      </form>
+      <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0">
 
         <!-- Position Column -->
         <ng-container matColumnDef="sn">
@@ -155,6 +157,14 @@
           </td>
         </tr>
       </table>
+
+      <div class="row" *ngIf="isLoading">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
 
       <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
