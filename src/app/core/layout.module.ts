@@ -87,6 +87,11 @@ import { LayoutService } from './layout.service';
 
       {path: 'test-report', loadChildren: () => import('src/app/modules/analyst/test-report/test-report.module').then(m => m.TestReportModule)},
 
+      // Supervisor
+      {path: 'samples', loadChildren: () => import('src/app/modules/supervisor/assigned-sample/my-assigned-sample.module').then(m => m.MyAssignedSampleModule)},
+
+      // Analyst
+      {path: 'test-request-details/:id', loadChildren: () => import('src/app/modules/analyst/test-request-details/test-request-details.module').then(m => m.TestRequestDetailsModule)},
     ]),
   ],
   exports: [],

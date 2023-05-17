@@ -7,7 +7,7 @@
   </div>
   <div class="col-md-1">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Rate">
+      <mat-select placeholder="Select Role">
         <mat-option value="1">1</mat-option>
         <mat-option  value="2">2</mat-option>
         <mat-option  value="3">3</mat-option>
@@ -19,16 +19,6 @@
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Client Category">
         <mat-option *ngFor="let item of clientCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-md-2">
-    <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Status">
-        <mat-option value="1">1</mat-option>
-        <mat-option  value="2">2</mat-option>
-        <mat-option  value="3">3</mat-option>
-        <mat-option  value="4">4</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

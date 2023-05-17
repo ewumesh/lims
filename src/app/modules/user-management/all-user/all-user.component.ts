@@ -64,9 +64,9 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   initFilterForm() {
     this.filterForm = this.fb.group({
-      search_text: '',
-      rate: '',
-      client_category: '',
+      search: '',
+      role: '',
+      client_category_id: '',
       status: ''
     })
   }
@@ -101,10 +101,38 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   getAllUsers() {
     this.isLoading = true;
-    this.allUsersService.getUsersList().subscribe(response => {
+    let payload = {
+      search: '',
+      page: '',
+      size: '',
+      role: '',
+      client_category_id: ''
+    }
+    this.isLoading = true;
+    this.allUsersService.getUsersList(payload).subscribe(response => {
       this.dataSource.data = response;
       this.isLoading = false;
     })
+  }
+
+  filter() {
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      role: this.filterForm.value.role,
+      client_category_id: this.filterForm.value.client_category_id
+    }
+    this.isLoading = true;
+    this.allUsersService.getUsersList(payload).subscribe(response => {
+      this.dataSource.data = response;
+      this.isLoading = false;
+    })
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+    this.getAllUsers();
   }
 
   private dismissMessage(): void {

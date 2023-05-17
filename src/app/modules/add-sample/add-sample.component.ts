@@ -31,6 +31,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   sampleId: any;
 
+  userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+  commodities:any[] = [];
+
+  commodityParameters: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private title: Title,
@@ -82,7 +88,22 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     if(this.sampleId) {
     this.getSampleDetails();
     }
+    this.getCommodities();
     this.initForm();
+    this.getParametersOfCommodity();
+  }
+
+  getCommodities() {
+    this.service.getCommodities().subscribe(response => {
+      this.commodities = response.results;
+    })
+  }
+
+  getParametersOfCommodity() {
+    this.addSampleForm.get('commodity_id').valueChanges.subscribe(id => {
+      let parameters = this.commodities.find(x => x.id === id)?.test_result;
+      this.commodityParameters = parameters;
+    })
   }
 
   getSampleDetails() {
@@ -106,7 +127,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       note: [''],
       commodity_id: [''],
       language: [''],
-      parameter: ['Test']
+      parameters: [['Test']],
+      owner_user: ''
     })
   }
 
@@ -131,8 +153,9 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       note: this.addSampleForm.value.note,
       commodity_id: this.addSampleForm.value.commodity_id,
       language: this.addSampleForm.value.language,
-      parameter: this.addSampleForm.value.parameter
-
+      parameters: this.addSampleForm.value.parameters,
+      owner_user: this.userDetails.email,
+      form_available: 'smu'
     }
 
     this.service.addSample(payload).subscribe(response => {

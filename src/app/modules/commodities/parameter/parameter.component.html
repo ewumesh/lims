@@ -188,7 +188,7 @@
             </mat-menu>
         </div>
       </form>
-      <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0" [@collectionInOut]="dataSource?.length">
+      <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0" tabindex="0" [@collectionInOut]="dataSource?.length">
 
         <!-- SN Column -->
         <ng-container matColumnDef="sn">
@@ -203,15 +203,18 @@
         </ng-container>
 
         <ng-container matColumnDef="commodities">
-          <th mat-header-cell *matHeaderCellDef> Commodity Category </th>
+          <th mat-header-cell *matHeaderCellDef > Commodity Category </th>
           <td mat-cell *matCellDef="let c"> {{c.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="testType">
           <th mat-header-cell *matHeaderCellDef> Test Type </th>
           <td mat-cell *matCellDef="let c">
+            <span *ngIf="c.test_type">
             <span *ngIf="c.test_type === '1'">Chemical Test</span>
             <span *ngIf="c.test_type === '2'">Microbiological Test</span>
+            </span>
+            <span *ngIf="!c.test_type" class="text-muted">N/A</span>
           </td>
         </ng-container>
 
@@ -224,7 +227,7 @@
         </ng-container>
 
         <ng-container matColumnDef="mandatoryStandards">
-          <th mat-header-cell *matHeaderCellDef> Mandatory Standards</th>
+          <th mat-header-cell *matHeaderCellDef style="width:20%;"> Mandatory Standards</th>
           <td mat-cell *matCellDef="let c">
             <span *ngIf="c.mandatory_standard">{{c.mandatory_standard}}</span>
             <span *ngIf="!c.mandatory_standard" class="text-muted">N/A</span>
@@ -275,7 +278,7 @@
         </div>
       </div>
 
-      <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      <mat-paginator #paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
     </div>
   </div>

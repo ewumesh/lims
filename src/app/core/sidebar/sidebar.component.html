@@ -188,6 +188,15 @@
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
               Report View</a>
           </li>
+
+          <!-- Supervisor -->
+          <li class="nav-item" *ngIf="userDetails.role === 3">
+            <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/samples'}" (click)="navigateToSampleSuperVisor()" href="Javascript:;">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
+              Assigned Sample</a>
+          </li>
+          <!-- End Supervisor -->
+
           <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/my-account'}" (click)="navigateToAccount()" href="Javascript:;">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="account_box"></mat-icon>

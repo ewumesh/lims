@@ -1,0 +1,49 @@
+<div class="row m-0" style="padding: 3%;">
+  <div class="col-md-10">
+    <h2>Assign Sample To Analyst</h2>
+  </div>
+  <div class="col-md-2 text-end">
+    <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+  </div>
+  <hr />
+
+  <div class="col-md-12">
+    <form [formGroup]="assignToAnalystform" class="row">
+      <div class="col-md-12">
+        <label for="user" class="form-label">Select Analyst</label>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-select placeholder="Select Analyst" formControlName="analyst_user" class="custom-select">
+            <mat-option *ngFor="let user of users" [value]="user.email">{{user?.first_name}} {{user?.last_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <label for="user" class="form-label">Commodity</label>
+        <!-- <mat-form-field appearance="outline" class="w-100">
+        <input class="custom-input"  matInput formControlName="commodity_id" placeholder="Enter Commodity" />
+      </mat-form-field> -->
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-select formControlName="commodity_id" placeholder="Select Commodity" class="custom-select">
+            <mat-option disabled *ngFor="let c of commodities" [value]="c.id">{{c?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <label for="user" class="form-label">Select Parameter</label>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-select formControlName="parameters" multiple placeholder="Select Parameter" class="custom-select">
+            <span *ngFor="let c of commodityParameters">
+            <mat-option [disabled]="c.exist === true"  [value]="c.id">{{c?.name}}</mat-option>
+            </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12 text-end mt-4">
+        <button (click)="submit()" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

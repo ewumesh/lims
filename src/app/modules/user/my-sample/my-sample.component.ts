@@ -42,9 +42,9 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
     }, 2000);
 
-    this.service.deleteSample(1).subscribe(res => {
-      console.log(res)
-    })
+    // this.service.deleteSample(1).subscribe(res => {
+    //   console.log(res)
+    // })
   }
 
   viewSampleDetails(id) {

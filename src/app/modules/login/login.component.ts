@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           setTimeout(() => {
             this.dismissMessage();
           }, 3000);
-        }else if(error.status === 500) {
+        }else if(error.status === 500 && error.status > 500 ) {
 
           this.toast.showToast(
             TOAST_STATE.danger,

@@ -42,9 +42,6 @@ th {
   line-height: normal;
 }
 
-.example-element-description {
-  padding: 16px;
-}
 
 .example-element-description-attribution {
   opacity: 0.5;
@@ -85,5 +82,15 @@ mat-icon {
 
 .expand-icon {
   color: yellowgreen;
+}
+
+.expanded-table {
+  th {
+    padding: 13px !important;
+  }
+
+  td {
+    padding: 13px;
+  }
 }
 

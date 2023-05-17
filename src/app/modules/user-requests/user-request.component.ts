@@ -49,9 +49,16 @@ export class UserRequestsComponent {
   }
 
   getAllUsers() {
-    // this.userRequestsService.getUsersList().subscribe(response => {
-    //   this.dataSource.data = response;
-    // })
+    let payload = {
+      search: '',
+      page: '',
+      size: '',
+      cilent_category: '',
+      role: ''
+    }
+    this.userRequestsService.getUserRequests(payload).subscribe(response => {
+      this.dataSource.data = response;
+    })
   }
 
   deleteUser(userId) {

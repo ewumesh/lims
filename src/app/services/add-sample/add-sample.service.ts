@@ -21,4 +21,8 @@ export class AddSampleService {
   getSampleDetails(sampleId): Observable<any> {
     return this.http.get(`${this.url}/api/sample-form/${sampleId}/`);
   }
+
+  getCommodities():Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/`)
+  }
 }

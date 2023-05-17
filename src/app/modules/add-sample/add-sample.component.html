@@ -2,7 +2,7 @@
 
 <!-- <div class="db-content"> -->
   <form [formGroup]="addSampleForm" (ngSubmit)="saveChanges()" class="sample-form">
-    <p class="text-center sample-detail">Please enter your sample details</p>
+    <p class="sample-detail">Please enter your sample details</p>
     <hr class="divider">
 
     <div class="row">
@@ -101,15 +101,24 @@
           वस्तु)*</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="commodity_id" placeholder="Select Category">
-              <mat-option value="1">Milk</mat-option>
-              <mat-option value="2">Sugar</mat-option>
-              <mat-option value="3">Water</mat-option>
-              <mat-option value="4">Salt</mat-option>
+              <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name | titlecase}}</mat-option>
             </mat-select>
             <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
               *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
           </mat-form-field>
       </div>
+
+      <div class="col-sm-6">
+        <label style="width:100%;" class="list-heading form-label">Parameters *</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select multiple formControlName="parameters" placeholder="Select Parameter">
+              <mat-option *ngFor="let parameter of commodityParameters" [value]="parameter.id">{{parameter.name | titlecase}}</mat-option>
+            </mat-select>
+            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
+              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
+          </mat-form-field>
+      </div>
+
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
         <section class="example-section">

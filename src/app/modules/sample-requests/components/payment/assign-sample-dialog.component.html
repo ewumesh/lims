@@ -1,0 +1,51 @@
+<div class="row m-0" style="padding: 3%;">
+  <div class="col-md-10">
+    <h2>Sample Payment</h2>
+  </div>
+  <div class="col-md-2 text-end">
+    <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+  </div>
+  <hr />
+
+  <div class="col-md-12">
+    <form [formGroup]="assignSampleForm" class="row">
+
+        <div class="col-md-12">
+          <label class="form-label">Tax Voucher No.</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" formControlName="voucher_number" matInput placeholder="Tax Voucher No." />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Tax Register Date</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" formControlName="register_date" matInput placeholder="Tax Register Date" />
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-md-12">
+          <label class="form-label">Tax Title No</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput placeholder="Tax Title No." />
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-md-12">
+          <label class="form-label">Amount</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input type="number" formControlName="amount" class="custom-input" matInput placeholder="Rs. 39000" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12">
+          <label for="formFile" class="form-label">Payment Receipt</label>
+          <input class="form-control" type="file" id="formFile">
+        </div>
+
+      <div class="col-md-12 text-end mt-4">
+        <button (click)="payNow()" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

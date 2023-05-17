@@ -1,0 +1,26 @@
+<div class="row m-0" style="padding: 3%;">
+  <div class="col-md-10">
+    <h2>Sample Payment</h2>
+  </div>
+  <div class="col-md-2 text-end">
+    <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+  </div>
+  <hr />
+
+  <div class="col-md-12">
+    <form [formGroup]="form" class="row">
+      <div class="col-md-12">
+        <label for="user" class="form-label">Select User</label>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-select multiple placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12 text-end mt-4">
+        <button (click)="submit()" class="btn btn-primary btn-sm">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

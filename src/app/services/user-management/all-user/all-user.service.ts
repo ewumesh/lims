@@ -17,8 +17,8 @@ export class AllUsersService {
     return this.http.get(`${this.url}/api/client-category/`);
   }
 
-  getUsersList():Observable<any> {
-    return this.http.get(`${this.url}/api/account/users/`);
+  getUsersList(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
   }
 
   deleteUser(userId: number): Observable<any> {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,7 +16,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
   styleUrls: ['./parameter.scss'],
   animations: [collectionInOut, rowsAnimation ]
 })
-export class ParameterComponent implements OnInit {
+export class ParameterComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price','testMethod','mandatoryStandards','formula', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
@@ -139,8 +139,8 @@ export class ParameterComponent implements OnInit {
     this.isLoading = true;
     let payload = {
       search: '',
-      page: '',
-      size: '',
+      page: '1',
+      size: '10',
       test_type: ''
     }
     this.sService.getParameters(payload).subscribe(res => {

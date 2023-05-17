@@ -1,29 +1,44 @@
 <form  [formGroup]="filterForm" class="row">
-  <div class="col-md-7">
+  <div
+
+    [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-6' : 'col-md-8'"
+    >
     <mat-form-field appearance="outline" class="w-100">
-      <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
+      <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
   </div>
   <div class="col-md-2">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-select formControlName="role" class="custom-select" placeholder="Select Role">
+        <mat-option *ngFor="let role of roles" [value]="role.role_id">{{role.role_name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div class="col-md-2" *ngIf="filterForm.get('role')?.value === 5">
+    <!-- <mat-form-field appearance="outline" class="custom-select w-100">
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
+      </mat-select>
+    </mat-form-field> -->
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Client Category" formControlName="client_category">
+      <mat-select placeholder="Client Category" formControlName="client_category_id">
         <mat-option *ngFor="let item of clientCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-md-2">
-    <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Status" formControlName="status">
-        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
   <div class="col-md-1 text-end">
-    <button (click)="filterUserList()" [disabled]="filterBtnLoading" class="btn btn-primary w-100 h-45">
+    <button (click)="filter()" [disabled]="filterBtnLoading" class="btn btn-primary w-100 h-45">
       <span *ngIf="!filterBtnLoading">Filter</span>
             <span *ngIf="filterBtnLoading">
               <i class="fa fa-circle-o-notch fa-spin"></i>
             </span>
+    </button>
+  </div>
+
+  <div class="col-md-1 text-end">
+    <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">
+      Reset
     </button>
   </div>
 </form>

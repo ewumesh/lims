@@ -124,6 +124,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/dashboard/test-request']);
   }
 
+  navigateToSampleSuperVisor() {
+    this.router.navigate(['/dashboard/samples'])
+  }
+
 
   logout() {
     this.toast.showToast(

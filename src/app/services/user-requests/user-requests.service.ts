@@ -16,10 +16,7 @@ export class UserRequestsService {
     private http: HttpClient
   ) { }
 
-  getUserRequests(): Observable<any> {
-    return this.http.get(`${this.url}/api/user-requests`).pipe(map((data: any) => {
-      console.log(data, "DTAA")
-      return data;
-    }))
+  getUserRequests(payload): Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&is_verified=0`);
   }
 }

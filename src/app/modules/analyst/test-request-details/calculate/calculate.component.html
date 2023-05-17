@@ -1,0 +1,40 @@
+<div class="row m-0 p-0">
+  <div class="col-md-12 m-0 p-0">
+    <div class="row m-0">
+      <div class="col-md-10">
+        <h1 class="mb-0" mat-dialog-title>Calculation</h1>
+      </div>
+      <div class="col-md-2 text-end pt-2">
+        <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+      </div>
+    </div>
+
+    <hr class="mt-0" />
+
+    <mat-dialog-content>
+      <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm">
+        <ng-container *ngFor="let control of formControls">
+          <div>
+          <label [for]="control.name">{{ control.label }}</label>
+          <mat-form-field class="w-100" appearance="outline">
+            <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number" [formControlName]="control.name">
+          </mat-form-field>
+          </div>
+        </ng-container>
+      </form>
+
+      <div class="row" *ngIf="!isControlGenerated">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Cancel</button>
+      <button (click)="submit()" class="btn btn-primary btn-sm mx-1">Submit</button>
+    </mat-dialog-actions>
+  </div>
+</div>
