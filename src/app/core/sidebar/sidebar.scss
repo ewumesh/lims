@@ -22,3 +22,12 @@
 .active-route {
   color: #2260bf !important;
 }
+
+.nav-link {
+  font-size: 12px !important;
+
+  mat-icon {
+    font-size: 16px;
+    padding-top: 11px !important;
+  }
+}

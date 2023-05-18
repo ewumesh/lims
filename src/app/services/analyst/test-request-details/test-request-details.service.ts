@@ -25,6 +25,6 @@ export class TestRequestDetailsService {
   }
 
   calculateResult(payload):Observable<any> {
-    return this.http.post(`${this.url}/api/sample-form-has-calculate-result/`, payload)
+    return this.http.post(`${this.url}/api/formula-calculate/`, payload)
   }
 }

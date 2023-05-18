@@ -66,7 +66,7 @@ export class TestRequestDetailsComponent implements OnInit {
     })
 
     instance.afterClosed().subscribe(res => {
-
+      this.getTestResultDetails();
     })
    }
 }

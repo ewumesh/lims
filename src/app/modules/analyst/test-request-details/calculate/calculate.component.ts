@@ -15,6 +15,7 @@ export class CalculateComponent implements OnInit {
   formControls: any[] = [];
 
   isControlGenerated: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,22 +38,23 @@ export class CalculateComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.calculateForm.value, "form Value")
-
-    let formData = this.calculateForm.value;
-
-    formData.sample_form = this.data.details.sample_form.id;
-    formData.commodity = this.data.details.sample_form.commodity_id;
-    formData.parameter = this.data?.parameters?.id;
-
-    console.log(formData, 'final form data')
-
-    this.service.calculateResult(formData).subscribe(res => {
-
+    let requestPayload = {
+      formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
+      sample_form: this.data.details.sample_form.id,
+      commodity: this.data.details.sample_form.commodity_id,
+      parameter: this.data?.parameters?.id
+    }
+    this.service.calculateResult(requestPayload).subscribe(res => {
+      this.dialogRef.close();
     })
   }
 
+  convertToString(data) {
+    return data.toString
+  }
+
   getFormParameters() {
+    this.isLoading = true;
     let payload = {
       commodity_id: this.data?.details?.sample_form?.commodity_id,
       parameter_id: this.data.parameters.id,
@@ -61,6 +63,7 @@ export class CalculateComponent implements OnInit {
 
     this.service.getFormParameters(payload).subscribe(res => {
       this.formControls = res.fields;
+      this.isLoading = false;
     })
   }
 
