@@ -13,6 +13,8 @@ import { NpDatepickerModule } from 'angular-nepali-datepicker';
 import { AddSampleService } from 'src/app/services/add-sample/add-sample.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [AddSampleFormComponent],
@@ -30,7 +32,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     NpDatepickerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatCardModule
    ],
   exports: [],
   providers: [

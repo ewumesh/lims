@@ -69,7 +69,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <button (click)="save(row)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">Modify</button>
+        <button [matTooltip]="'Modity Permission'" (click)="save(row)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">Modify</button>
       </td>
     </ng-container>
 

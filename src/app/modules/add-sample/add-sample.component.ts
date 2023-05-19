@@ -5,16 +5,18 @@ import { Subject } from 'rxjs';
 
 // Custom component(s)
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
-import { rowsAnimation } from 'src/app/shared/animations/animations';
+import { collectionInOut, rowsAnimation } from 'src/app/shared/animations/animations';
 import { AddSampleService } from 'src/app/services/add-sample/add-sample.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe, formatDate } from '@angular/common';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   templateUrl: './add-sample.component.html',
   styleUrls: ['./add-sample.component.scss'],
-  animations: [rowsAnimation]
+  animations: [rowsAnimation, collectionInOut]
 })
 export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly toDestroy$ = new Subject<void>();
@@ -36,6 +38,50 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   commodities:any[] = [];
 
   commodityParameters: any[] = [];
+
+  totalPrice = 0;
+
+  // for parameter table
+  displayedColumns: string[] = ['select', 'position', 'name', 'price'];
+  dataSource = new MatTableDataSource<any>();
+  selection = new SelectionModel<any>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+
+    let totalPrice = 0;
+
+    this.selection.selected.forEach(a => {
+      // if(a) {
+      totalPrice = totalPrice+a.id;
+      // }
+    })
+    this.totalPrice = totalPrice;
+
+    console.log(totalPrice, 'TOTAL PRICE')
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+  //
 
   constructor(
     private fb: FormBuilder,
@@ -103,6 +149,9 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     this.addSampleForm.get('commodity_id').valueChanges.subscribe(id => {
       let parameters = this.commodities.find(x => x.id === id)?.test_result;
       this.commodityParameters = parameters;
+      this.dataSource.data = parameters
+
+      console.log(this.dataSource, 'jaha')
     })
   }
 
@@ -231,3 +280,4 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     this.toDestroy$.complete();
   }
 }
+

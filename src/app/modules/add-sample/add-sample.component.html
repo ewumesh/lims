@@ -1,6 +1,6 @@
 <div class="bg-white pa-4">
 
-<!-- <div class="db-content"> -->
+  <!-- <div class="db-content"> -->
   <form [formGroup]="addSampleForm" (ngSubmit)="saveChanges()" class="sample-form">
     <p class="sample-detail">Please enter your sample details</p>
     <hr class="divider">
@@ -21,9 +21,9 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Condition of sample while received (नमूना प्राप्त गर्दाको
           अवस्था)*</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="condition" placeholder="Enter Sample Condition" />
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <input class="custom-input" matInput formControlName="condition" placeholder="Enter Sample Condition" />
+        </mat-form-field>
       </div>
     </div>
 
@@ -31,16 +31,18 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput class="custom-input" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()" (click)="mfdPicker.open()" placeholder="Enter Manufactured Date" formControlName="mfd"/>
+          <input matInput class="custom-input" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
+            (click)="mfdPicker.open()" placeholder="Enter Manufactured Date" formControlName="mfd" />
 
-            <mat-datepicker #mfdPicker></mat-datepicker>
+          <mat-datepicker #mfdPicker></mat-datepicker>
         </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
 
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput [matDatepicker]="dfbPicker" (focus)="dfbPicker.open()" (click)="dfbPicker.open()" class="custom-input" placeholder="Enter Best Before Date" formControlName="dfb"/>
+          <input matInput [matDatepicker]="dfbPicker" (focus)="dfbPicker.open()" (click)="dfbPicker.open()"
+            class="custom-input" placeholder="Enter Best Before Date" formControlName="dfb" />
           <mat-datepicker #dfbPicker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -71,11 +73,12 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Report Required by Date (विश्लेषण प्रतिवेदन प्राप्त हुने अनुमानित
           मिति)*</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()" (click)="reportDatePicker.open()" formControlName="report_date" placeholder="Enter Report Date" />
-            <mat-datepicker #reportDatePicker></mat-datepicker>
-          </mat-form-field>
-          <!-- <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker> -->
+        <mat-form-field appearance="outline" class="w-100">
+          <input class="custom-input" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()"
+            (click)="reportDatePicker.open()" formControlName="report_date" placeholder="Enter Report Date" />
+          <mat-datepicker #reportDatePicker></mat-datepicker>
+        </mat-form-field>
+        <!-- <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker> -->
       </div>
     </div>
 
@@ -83,14 +86,16 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Amendments to Report (if any) (प्रतिवेदनमा संशोधन गर्नुपर्ने
           भएमा)</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <textarea class="custom-input" matInput formControlName="amendments" placeholder="Enter Amendments to report"></textarea>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <textarea class="custom-input" matInput formControlName="amendments"
+            placeholder="Enter Amendments to report"></textarea>
+        </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Note (if any) (अन्य केही भएमा)</label>
         <mat-form-field appearance="outline" class="w-100">
-          <textarea class="custom-input custom-textarea" matInput formControlName="note" placeholder="Enter.."></textarea>
+          <textarea class="custom-input custom-textarea" matInput formControlName="note"
+            placeholder="Enter.."></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -99,25 +104,24 @@
       <div class="col-sm-6">
         <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
           वस्तु)*</label>
-          <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="commodity_id" placeholder="Select Category">
-              <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name | titlecase}}</mat-option>
-            </mat-select>
-            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
+        <mat-form-field appearance="outline" class="custom-select w-100">
+          <mat-select formControlName="commodity_id" placeholder="Select Category">
+            <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
+              titlecase}}</mat-option>
+          </mat-select>
+          <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
               *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
-          </mat-form-field>
+        </mat-form-field>
       </div>
 
-      <div class="col-sm-6">
+      <!-- <div class="col-sm-6">
         <label style="width:100%;" class="list-heading form-label">Parameters *</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select multiple formControlName="parameters" placeholder="Select Parameter">
               <mat-option *ngFor="let parameter of commodityParameters" [value]="parameter.id">{{parameter.name | titlecase}}</mat-option>
             </mat-select>
-            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
-              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
           </mat-form-field>
-      </div>
+      </div> -->
 
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
@@ -130,12 +134,63 @@
       </div>
     </div>
 
-    <div class="mb-4 row">
-      <div class="col-sm-4">
-        <button [disabled]="sampleId" type="submit" class="btn btn-primary">Submit ( पेश गर्नुहोस् )</button>
+    <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0">
+      <mat-card style="box-shadow: none;">
+        <table mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length">
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+          </tr>
+        </table>
+
+        <div class="row">
+          <div class="col-md-12 text-end mr-5">
+            <b>Total:</b> Rs.{{totalPrice}}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="my-4 row">
+      <div class="col-sm-12 text-end">
+        <button [disabled]="sampleId" type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </form>
 
-<!-- </div> -->
+  <!-- </div> -->
 </div>
+

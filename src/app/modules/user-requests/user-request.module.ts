@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 import { UserRequestsService } from 'src/app/services/user-requests/user-requests.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [UserRequestsComponent],
@@ -29,6 +30,7 @@ import { UserRequestsService } from 'src/app/services/user-requests/user-request
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatTooltipModule,
 
     DeleteConfirmModule
   ],

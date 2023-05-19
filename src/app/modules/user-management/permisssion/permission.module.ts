@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { SetPermissionComponent } from './dialog/set-permission';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [PermissionComponent, SetPermissionComponent],
@@ -35,6 +36,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCheckboxModule,
     MatChipsModule,
     MatSelectModule,
+    MatTooltipModule,
     MatDialogModule
    ],
   exports: [],

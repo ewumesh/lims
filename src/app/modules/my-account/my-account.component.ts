@@ -91,6 +91,7 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.userForm.patchValue(this.accountDetails);
+      this.userForm.disable();
       // this.userForm.get('email').setValue(this.accountDetails?.email);
       // this.userForm.get('username').setValue(this.accountDetails.username)
       // if(this.accountDetails?.first_name) {
