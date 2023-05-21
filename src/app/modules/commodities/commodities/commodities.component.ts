@@ -15,7 +15,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
   styleUrls: ['./commodities.component.scss']
 })
 export class CommoditiesComponent implements OnInit {
-  displayedColumns: string[] = ['sn', 'commodity', 'price','testDuration', 'action'];
+  displayedColumns: string[] = ['sn', 'commodity', 'price','testDuration','units','category', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -98,6 +98,11 @@ export class CommoditiesComponent implements OnInit {
     })
   }
 
+  getCommodityCategoryName(id) {
+    let category = this.commodityCategories?.find(a => a.id === id);
+    return category?.name
+  }
+
   filter() {
     this.isLoading = true;
     let payload = {
@@ -134,7 +139,14 @@ export class CommoditiesComponent implements OnInit {
 
   patchForm(data) {
     this.commoditiesForm.patchValue(
-      { name: data.name })
+      {
+        name: data.name,
+        category: data.category,
+        test_duration: data.test_duration,
+        units: data.units,
+        price: data.price
+       }
+      )
   }
 
   deleteCategory(id: number) {

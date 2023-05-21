@@ -79,7 +79,16 @@ export class TestRequestComponent implements OnInit {
   }
 
   filter() {
-
+    let payload = {
+      page: '',
+      size: '',
+      search: this.filterForm.value.search,
+      user: this.userDetails?.email
+    }
+    this.service.getTestRequests(payload).subscribe(res => {
+      this.dataSource = res.results;
+      this.isLoading= false;
+    })
   }
 
   reset() {

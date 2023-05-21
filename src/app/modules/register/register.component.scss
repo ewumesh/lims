@@ -1,10 +1,10 @@
 
-/*End of Login*/
-.form-container {
-  background: rgb(93 118 155 / 10%);
-  padding: 40px;
-  width: 30vw;
-}
+// /*End of Login*/
+// .form-container {
+//   background: rgb(93 118 155 / 10%);
+//   padding: 40px;
+//   width: 30vw;
+// }
 
 .login-intro {
   display: flex;
@@ -96,7 +96,7 @@ input::placeholder {
 }
 
 .userregister {
-  background-color: #eef1f5;
+  // background-color: #eef1f5;
   border-radius: .5rem;
 }
 
@@ -174,3 +174,52 @@ input::placeholder {
     border-color: #6200EE !important;
   }
   }
+
+
+
+
+
+
+
+
+.form-container{
+  max-width: 500px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 40px;
+  margin-top: 4rem;
+}
+
+.re-img{
+  width:250px;
+}
+
+.fp .mb-4 .ng-tns-c16-1{
+    color: #2260BF;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.register{
+border-radius:4px;
+}
+.register:hover{
+background-color:#1a4e9e;
+}
+.form-label{
+margin-bottom:0;
+}
+.lims{
+font-size:16px;
+}
+.login-detail{
+font-size:16px;
+}
+.input#secfile2,
+.subform[_ngcontent-serverApp-c19] input[type=file][_ngcontent-serverApp-c19]{
+width:250px;
+}
+.subform[_ngcontent-serverApp-c19] button[type=button][_ngcontent-serverApp-c19]{
+margin-left:13px;
+border-radius:4px;
+}

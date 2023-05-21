@@ -1,18 +1,19 @@
 <div class="row bg-white m-0">
-  <div class="col-md-12 p-4">
+  <div class="col-md-12 p-4" *ngIf="userDetails.id">
     <div class="row m-0">
       <div class="col-md-12">
         <h1 class="text-lims-primary">User Category</h1>
         <hr/>
-        <mat-chip class="bg-primary text-white chip">Admin</mat-chip>
+        <span class="badge badge-primary" style="background-color: #2260bf;">Admin</span>
       </div>
     </div>
 
-    <div class="row m-0 mt-5">
+    <div class="row m-0 mt-5" *ngIf="userDetails?.role === 5">
       <div class="col-md-12">
-        <h1 class="text-lims-primary">Client Category</h1>
+        <h1 class="text-lims-primary">Client Details</h1>
         <hr/>
-        <mat-chip *ngIf="userDetails?.client_category" class="bg-primary text-white">{{getClientName(userDetails?.client_category)}}</mat-chip>
+        <span *ngIf="userDetails?.client_category" class="badge badge-primary" style="background-color: #2260bf;">{{getClientName(userDetails?.client_category)}}</span>
+        <!-- <mat-chip *ngIf="userDetails?.client_category" class="bg-primary text-white">{{getClientName(userDetails?.client_category)}}</mat-chip> -->
         <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
       </div>
     </div>
@@ -21,31 +22,47 @@
     <h1 class="text-lims-primary">Personal Details</h1>
     <div class="row">
       <div class="col-md-4">
-        <h2>
+        <h3>
           <span class="text-bold">Full Name:</span> {{userDetails.first_name | titlecase}} {{userDetails.last_name | titlecase}}
-        </h2>
+        </h3>
       </div>
 
       <div class="col-md-4">
-        <h2>
+        <h3>
           <span class="text-bold">Email:</span> {{userDetails.email}}
-        </h2>
+        </h3>
       </div>
 
       <div class="col-md-4">
-        <h2>
+        <h3>
           <span class="text-bold">Phone Number: </span>
           <span *ngIf="userDetails?.phone">{{userDetails?.phone}}</span>
           <span *ngIf="!userDetails?.phone" class="text-muted">N/A</span>
-        </h2>
+        </h3>
       </div>
 
       <div class="col-md-4">
-        <h2>
+        <h3>
           <span class="text-bold">Username: </span>
           <span *ngIf="userDetails?.username">{{userDetails?.username}}</span>
           <span *ngIf="!userDetails?.username" class="text-muted">N/A</span>
-        </h2>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Joined Date: </span>
+          <span *ngIf="userDetails?.date_joined">{{userDetails?.date_joined | date}}</span>
+          <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!userDetails.id">
+    <div class="col-md-12 text-center py-3">
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
   </div>

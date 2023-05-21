@@ -24,7 +24,7 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 })
 export class PricingComponent implements OnInit {
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration'];
+  columnsToDisplay = ['expand','sn', 'name', 'price','units', 'test_duration'];
   expandedElement: any | null;
 
   filterForm: FormGroup;

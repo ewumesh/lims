@@ -64,8 +64,8 @@
           <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
 
-        <button (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
-        <button (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
+        <button [matTooltip]="'Edit'" (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+        <button [matTooltip]="'Delete'" (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
           </td>
         </ng-container>
 

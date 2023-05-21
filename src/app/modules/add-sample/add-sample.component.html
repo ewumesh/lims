@@ -15,6 +15,7 @@
         <label for="sampleName" class="col-form-label">Name of Sample (नमूनाको नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="name" placeholder="Enter Sample Name" />
+          <mat-error class="text-danger" *ngIf="displayMessage?.name">{{displayMessage.name}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -23,6 +24,7 @@
           अवस्था)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="condition" placeholder="Enter Sample Condition" />
+          <mat-error class="text-danger" *ngIf="displayMessage?.condition">{{displayMessage.condition}}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -31,19 +33,21 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput class="custom-input" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
+          <input matInput class="custom-input" [max]="maxDate" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
             (click)="mfdPicker.open()" placeholder="Enter Manufactured Date" formControlName="mfd" />
 
           <mat-datepicker #mfdPicker></mat-datepicker>
+          <mat-error class="text-danger" *ngIf="displayMessage?.mfd">{{displayMessage.mfd}}</mat-error>
         </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
 
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput [matDatepicker]="dfbPicker" (focus)="dfbPicker.open()" (click)="dfbPicker.open()"
+          <input matInput [matDatepicker]="dfbPicker" [min]="maxDate" (focus)="dfbPicker.open()" (click)="dfbPicker.open()"
             class="custom-input" placeholder="Enter Best Before Date" formControlName="dfb" />
           <mat-datepicker #dfbPicker></mat-datepicker>
+          <mat-error class="text-danger" *ngIf="displayMessage?.dfb">{{displayMessage.dfb}}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -52,13 +56,15 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Batch/Lot No. (ब्याच/ लट नं)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="batch" placeholder="Enter batch or lot No." />
+          <input type="number" class="custom-input" matInput formControlName="batch" placeholder="Enter batch or lot No." />
+          <mat-error class="text-danger" *ngIf="displayMessage?.batch">{{displayMessage.batch}}</mat-error>
         </mat-form-field>
       </div>
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Brand (ब्राण्ड)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="brand" placeholder="Enter Brand Name" />
+          <mat-error class="text-danger" *ngIf="displayMessage?.brand">{{displayMessage.brand}}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -68,6 +74,7 @@
         <label for="email" class="col-form-label">Purpose of Analysis (प्रयोगशाला विश्लेषणको उदेश्य)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" />
+          <mat-error class="text-danger" *ngIf="displayMessage?.purpose">{{displayMessage.purpose}}</mat-error>
         </mat-form-field>
       </div>
       <div class="col-sm-6">
@@ -77,6 +84,7 @@
           <input class="custom-input" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()"
             (click)="reportDatePicker.open()" formControlName="report_date" placeholder="Enter Report Date" />
           <mat-datepicker #reportDatePicker></mat-datepicker>
+          <mat-error class="text-danger" *ngIf="displayMessage?.report_date">{{displayMessage.report_date}}</mat-error>
         </mat-form-field>
         <!-- <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker> -->
       </div>
@@ -94,8 +102,9 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Note (if any) (अन्य केही भएमा)</label>
         <mat-form-field appearance="outline" class="w-100">
-          <textarea class="custom-input custom-textarea" matInput formControlName="note"
-            placeholder="Enter.."></textarea>
+          <input class="custom-input custom-textarea" matInput formControlName="note"
+            placeholder="Enter..">
+            <!-- <mat-error class="text-danger" *ngIf="displayMessage?.brand">{{displayMessage.brand}}</mat-error> -->
         </mat-form-field>
       </div>
     </div>
@@ -109,6 +118,7 @@
             <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
               titlecase}}</mat-option>
           </mat-select>
+          <mat-error class="text-danger" *ngIf="displayMessage?.commodity_id">{{displayMessage.commodity_id}}</mat-error>
           <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
               *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
         </mat-form-field>
@@ -136,6 +146,7 @@
 
     <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0">
       <mat-card style="box-shadow: none;">
+        <div *ngIf="selection.selected.length < 1" class="alert alert-warning">Please Select atleast one Parameter</div>
         <table mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length">
 
           <!-- Checkbox Column -->

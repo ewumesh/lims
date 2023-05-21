@@ -84,7 +84,12 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let t of element.test_result">
-                    <td>{{t.test_type | titlecase}}</td>
+                    <td>
+                      <span *ngIf="t.test_type">
+                        {{t.test_type | titlecase}}
+                      </span>
+                      <span class="text-muted">N/A</span>
+                    </td>
                     <td>{{t.name}}</td>
                     <td>{{t.ref_test_method}}</td>
                     <td>{{t.formula}}</td>

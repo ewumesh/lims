@@ -61,7 +61,14 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   }
 
   getSamples() {
-    this.service.getMySamples().subscribe(response => {
+    let payload = {
+      search:'',
+      to: '',
+      from: '',
+      page: '',
+      size: ''
+    }
+    this.service.getMySamples(payload).subscribe(response => {
       console.log(response, "SAMPLES...")
 
       this.dataSource = response.results;
@@ -73,6 +80,17 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   }
 
   filterUserList() {
+    let payload = {
+      search:this.filterForm.value.search_text,
+      to: '',
+      from: '',
+      page: '',
+      size: ''
+    }
+    this.service.getMySamples(payload).subscribe(response => {
+      console.log(response, "SAMPLES...")
 
+      this.dataSource = response.results;
+    })
   }
 }

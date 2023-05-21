@@ -19,4 +19,12 @@ export class UserRequestsService {
   getUserRequests(payload): Observable<any> {
     return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&is_verified=0`);
   }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
+  getUserRoles():Observable<any> {
+    return this.http.get(`${this.url}/api/account/roles/`);
+  }
 }

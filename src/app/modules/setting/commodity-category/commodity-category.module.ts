@@ -12,6 +12,7 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [CommodityCategoriesComponent],
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTooltipModule,
     MatIconModule,
 
     DeleteConfirmModule

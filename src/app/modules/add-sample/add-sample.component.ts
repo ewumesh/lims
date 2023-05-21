@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
@@ -8,10 +8,11 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 import { collectionInOut, rowsAnimation } from 'src/app/shared/animations/animations';
 import { AddSampleService } from 'src/app/services/add-sample/add-sample.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DatePipe, formatDate } from '@angular/common';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: './add-sample.component.html',
@@ -24,6 +25,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   addSampleForm: FormGroup;
   isLoading: boolean;
   message: any;
+
+  maxDate: any;
 
   // Used for form validation
   genericValidator: GenericValidator;
@@ -52,12 +55,16 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     const numRows = this.dataSource.data.length;
 
     let totalPrice = 0;
+    let selectedId = []
 
     this.selection.selected.forEach(a => {
       // if(a) {
-      totalPrice = totalPrice+a.id;
+      totalPrice = totalPrice+a.price;
+
+      selectedId.push(a.id);
       // }
     })
+    this.addSampleForm.value.parameters = selectedId;
     this.totalPrice = totalPrice;
 
     console.log(totalPrice, 'TOTAL PRICE')
@@ -95,39 +102,39 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.title.setTitle('Add Sample - Laboratory Inventory Management System');
 
-    // this.genericValidator = new GenericValidator({
-    //   'sampleName': {
-    //     'required': 'Sample Name is required.'
-    //   },
-    //   'sampleCondition': {
-    //     'required': 'Sample Condition is required.'
-    //   },
-    //   'mfd': {
-    //     'required': 'Manufactured is required.'
-    //   },
-    //   'bbd': {
-    //     'required': 'Best before date is required.'
-    //   },
-    //   'batchOrLotNumber': {
-    //     'required': 'Batch/Lot No is required.'
-    //   },
-    //   'brandName': {
-    //     'required': 'Brand Name is required.'
-    //   },
-    //   'proposeOfAnalysis': {
-    //     'required': 'Purpose of Analysis is required.'
-    //   },
-    //   'reportRequiredByDate': {
-    //     'required': 'Report Required by Date is required.'
-    //   },
-    //   'commodityForAnalysis': {
-    //     'required': 'Commodity for Analysis is required.'
-    //   },
-    //   'reportingLanguage': {
-    //     'required': 'Reporting Language is required.'
-    //   },
+    this.genericValidator = new GenericValidator({
+      'name': {
+        'required': 'Sample Name is required.'
+      },
+      'condition': {
+        'required': 'Sample Condition is required.'
+      },
+      'mfd': {
+        'required': 'Manufactured is required.'
+      },
+      'dfb': {
+        'required': 'Best before date is required.'
+      },
+      'batch': {
+        'required': 'Batch/Lot No is required.'
+      },
+      'brand': {
+        'required': 'Brand Name is required.'
+      },
+      'purpose': {
+        'required': 'Purpose of Analysis is required.'
+      },
+      'report_date': {
+        'required': 'Report Required by Date is required.'
+      },
+      'commodity_id': {
+        'required': 'Commodity for Analysis is required.'
+      },
+      // 'note': {
+      //   'required': 'Note is required.'
+      // },
 
-    // })
+    })
   }
 
   ngOnInit(): void {
@@ -163,22 +170,35 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private initForm() {
+    this.maxDate = new Date();
     this.addSampleForm = this.fb.group({
-      name: [''],
-      condition: [''],
-      mfd: [''],
-      dfb: [''],
-      batch: [''],
-      brand: [''],
-      purpose: [''],
-      report_date: [''],
+      name: ['', Validators.required],
+      condition: ['', Validators.required],
+      mfd: ['', [Validators.required]],
+      dfb: ['', Validators.required],
+      batch: ['', Validators.required],
+      brand: ['', Validators.required],
+      purpose: ['', Validators.required],
+      report_date: ['', Validators.required],
       amendments: [''],
       note: [''],
-      commodity_id: [''],
+      commodity_id: ['', Validators.required],
       language: [''],
       parameters: [['Test']],
       owner_user: ''
     })
+  }
+
+  disableFutureDatesFilter(date: Date | null): boolean {
+    const currentDate = new Date();
+
+    // Disable current date and future dates
+    return date && date <= currentDate;
+  }
+
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   saveChanges() {
@@ -188,16 +208,18 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     }
 
+    console.log(this.addSampleForm.value, 'VALUE..')
+
     let payload = {
 
       name: this.addSampleForm.value.name,
       condition: this.addSampleForm.value.condition,
-      mfd: this.formatDate(this.addSampleForm.value.mfd, 'yyyy-MM-dd'),
-      dfb: this.formatDate(this.addSampleForm.value.dfb, 'yyyy-MM-dd'),
+      mfd: this.format(this.addSampleForm.value.mfd),
+      dfb: this.format(this.addSampleForm.value.dfb),
       batch: this.addSampleForm.value.batch,
       brand: this.addSampleForm.value.brand,
       purpose: this.addSampleForm.value.purpose,
-      report_date: this.formatDate(this.addSampleForm.value.report_date, 'yyyy-MM-dd'),
+      report_date: this.format(this.addSampleForm.value.report_date),
       amendments: this.addSampleForm.value.amendments,
       note: this.addSampleForm.value.note,
       commodity_id: this.addSampleForm.value.commodity_id,
@@ -246,12 +268,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   formatDate(date: Date, format: string): string {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
+    const year = date?.getFullYear();
+    const month = (date?.getMonth() + 1).toString().padStart(2, '0');
+    const day = date?.getDate().toString().padStart(2, '0');
+    const hours = date?.getHours().toString().padStart(2, '0');
+    const minutes = date?.getMinutes().toString().padStart(2, '0');
+    const seconds = date?.getSeconds().toString().padStart(2, '0');
 
     const formatString = format
       .replace('yyyy', year.toString())
@@ -266,7 +288,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
   ngAfterViewInit(): void {
-    // this.validation();
+    this.validation();
   }
 
   private validation() {
