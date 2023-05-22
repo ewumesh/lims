@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="col-md-4 text-end">
-          <button *ngIf="!isChangePassword" type="button" class="btn btn-primary change-password-btn">Change Password</button>
+          <button (click)="changePassword()" type="button" class="btn btn-primary change-password-btn">Change Password</button>
 
           <button *ngIf="isChangePassword" class="btn btn-primary btn-lims-primary mx-1" (click)="changePassword()">Save</button>
           <button *ngIf="isChangePassword" class="btn btn-primary btn-lims-danger mx-1" (click)="cancel()">Cancel</button>

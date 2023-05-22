@@ -39,6 +39,8 @@ import { LayoutService } from './layout.service';
 
       {path: 'my-samples', loadChildren: () => import('src/app/modules/user/my-sample/my-sample.module').then(m => m.MySampleModule)},
 
+      {path: 'sample-details/:id', loadChildren: () => import('src/app/modules/user/view-sample/view-sample.module').then(m => m.ViewSampleModule)},
+
       {path: 'report-view', loadChildren: () => import('src/app/modules/user/report-view/report-view.module').then(m => m.ReportViewModule)},
 
       {path: 'my-account', loadChildren: () => import('src/app/modules/my-account/my-account.module').then(m => m.MyAccountModule)},

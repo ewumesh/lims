@@ -22,7 +22,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   private readonly toDestroy$ = new Subject<void>();
 
   addSampleForm: FormGroup;
-  isLoading: boolean;
+  isLoading: boolean = true;
   message: any;
 
   maxDate: any;
@@ -42,6 +42,10 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   commodityParameters: any[] = [];
 
   totalPrice = 0;
+  priceOfCommodity: number = 0;
+
+
+  // isParameter = false
 
   // for parameter table
   displayedColumns: string[] = ['select', 'position', 'name', 'price'];
@@ -153,11 +157,13 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getParametersOfCommodity() {
     this.addSampleForm.get('commodity_id').valueChanges.subscribe(id => {
-      let parameters = this.commodities.find(x => x.id === id)?.test_result;
-      this.commodityParameters = parameters;
-      this.dataSource.data = parameters
+      let parameters = this.commodities.find(x => x.id === id);
+      this.priceOfCommodity = parameters.price
+      this.commodityParameters = parameters.test_result;
+      this.dataSource.data = parameters.test_result;
+      this.isLoading = false;
+      this.addSampleForm.value.isParameter = false;
 
-      console.log(this.dataSource, 'jaha')
     })
   }
 
@@ -184,7 +190,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       commodity_id: ['', Validators.required],
       language: [''],
       parameters: [['Test']],
-      owner_user: ''
+      owner_user: '',
+      isParameter: false
     })
   }
 

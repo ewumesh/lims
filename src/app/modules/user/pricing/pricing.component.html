@@ -63,6 +63,7 @@
                     <th scope="col">Test Type</th>
                     <th scope="col">Parameter</th>
                     <th scope="col">Test Method</th>
+                    <th scope="col">Mandatory Standard</th>
                     <th scope="col">Price</th>
                     <!-- <th scope="col">Duration</th> -->
                   </tr>
@@ -75,6 +76,7 @@
                     </td>
                     <td>{{item.name | titlecase}}</td>
                     <td>{{item.ref_test_method | titlecase}}</td>
+                    <td>{{item.mandatory_standard}}</td>
                     <td>Rs.{{item.price}}</td>
                     <!-- <td>5 Days</td> -->
                   </tr>

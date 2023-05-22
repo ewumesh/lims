@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 
 import { AccountService } from 'src/app/services/account/account.service';
+import { changePasswordComponent } from './change-password/change-password';
 
 @Component({
   templateUrl: './my-account.component.html',
@@ -25,7 +27,8 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   constructor(
     private title: Title,
     private fb: FormBuilder,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private dialog: MatDialog
   ) {
     this.title.setTitle('My Account - Laboratory Inventory Management System')
   }
@@ -50,7 +53,18 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   }
 
   changePassword() {
-    this.isChangePassword = true;
+    // this.isChangePassword = true;
+    let instance: MatDialogRef<changePasswordComponent, any>;
+
+    instance = this.dialog.open(changePasswordComponent, {
+      data: this.accountDetails ? this.accountDetails : null,
+      width: '600px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+
+    })
   }
 
   cancel() {

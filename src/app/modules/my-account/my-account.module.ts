@@ -11,9 +11,11 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { AvatarModule } from 'ngx-avatar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
+import { changePasswordComponent } from './change-password/change-password';
 
 @NgModule({
-  declarations: [MyAccountComponent],
+  declarations: [MyAccountComponent, changePasswordComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -27,7 +29,8 @@ import { MatChipsModule } from '@angular/material/chips';
     HttpClientModule,
     AvatarModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [AccountService],

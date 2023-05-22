@@ -23,7 +23,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
 
-
+userDetails: any;
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -32,6 +32,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
     private router: Router
   ) {
     this.title.setTitle('My Sample - Laboratory Inventory Management System');
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
   }
 
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   }
 
   viewSampleDetails(id) {
-    this.router.navigate(['/dashboard/add-sample', id]);
+    this.router.navigate(['/dashboard/sample-details', id]);
   }
 
   initFilterForm() {
@@ -66,7 +67,8 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       to: '',
       from: '',
       page: '',
-      size: ''
+      size: '',
+      user: this.userDetails.email
     }
     this.service.getMySamples(payload).subscribe(response => {
       console.log(response, "SAMPLES...")

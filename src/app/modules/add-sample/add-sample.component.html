@@ -144,10 +144,16 @@
       </div>
     </div>
 
-    <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0">
+    <div class="col-md-12" *ngIf="addSampleForm.value.commodity_id">
+        <b>Price of Commodity:</b> Rs.{{priceOfCommodity}}
+
+        <mat-checkbox formControlName="isParameter">Select Parameters</mat-checkbox>
+    </div>
+
+    <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0 && !isLoading && addSampleForm.value.isParameter === true">
       <mat-card style="box-shadow: none;">
         <div *ngIf="selection.selected.length < 1" class="alert alert-warning">Please Select atleast one Parameter</div>
-        <table mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length">
+        <table mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length && addSampleForm.value.isParameter">
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
@@ -186,6 +192,14 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
           </tr>
         </table>
+
+        <div class="row" *ngIf="isLoading">
+          <div class="col-md-12 text-center py-3">
+            <div class="spinner-border text-dark" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
 
         <div class="row">
           <div class="col-md-12 text-end mr-5">

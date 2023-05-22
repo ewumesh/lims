@@ -231,10 +231,12 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         this.existingCategory = null;
       },
       (error) => {
+
         if (error.status === 400) {
+          console.log(error.status, "ERRROROROR")
           this.toast.showToast(
             TOAST_STATE.danger,
-            'All the field(s) are not valid.');
+            error.message);
 
           setTimeout(() => {
             this.dismissMessage();

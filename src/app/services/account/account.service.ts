@@ -24,4 +24,8 @@ export class AccountService {
   getUserRoles(): Observable<any> {
     return this.http.get(`${this.url}/api/account/roles/`);
   }
+
+  changePassword(payload):Observable<any> {
+    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, payload)
+  }
 }
