@@ -74,6 +74,9 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       'formula': {
         'required': 'Formula is required.'
       },
+      'formula_notation': {
+        'required': 'Formula Notation is required'
+      }
     })
    }
 
@@ -99,7 +102,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       mandatory_standard: [''],
       price: [''],
       remarks: '.',
-      formula: ['']
+      formula: [''],
+      formula_notation: ['']
     })
   }
 
@@ -191,8 +195,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         mandatory_standard: data?.mandatory_standard,
         formula: data?.formula,
         price: data?.price,
+        formula_notation: data?.formula_notation
       })
-      console.log(this.parameterForm.value, 'parameter value')
   }
 
   deleteCategory(id: number) {

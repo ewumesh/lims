@@ -134,6 +134,18 @@
 
               <div class="col-md-12">
                 <div class="form-group">
+                  <label class="mb-2">Formula Notations *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class=" custom-input" matInput formControlName="formula_notation"
+                      placeholder="Enter Formula Notation" />
+                      <mat-error [@rowsAnimation]="displayMessage?.formula_notation" class="text-danger"
+                      *ngIf="displayMessage?.formula_notation">{{displayMessage?.formula_notation}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
                   <label class="mb-2">Parameter Price *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input class=" custom-input" matInput formControlName="price"
