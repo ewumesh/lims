@@ -31,6 +31,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private readonly toDestroy$ = new Subject<void>();
 
+  registrationDocUrl: any;
+  img: any;
+  renewDoc: any;
+
   @ViewChild('labelImport')
   labelImport: ElementRef;
   fileToUpload: File = null;
@@ -65,13 +69,13 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       'client_category': {
         'required': 'Category is required.'
       },
-      'departmentName': {
+      'department_name': {
         'required': 'Department Name is required.'
       },
-      'departmentAddress': {
+      'department_address': {
         'required': 'Department Address is required.'
       },
-      'registrationNumber': {
+      'registration_number': {
         'required': 'Registration Number is required.'
       },
       'date': {
@@ -88,6 +92,16 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initForm();
   }
 
+  uploadFile(event) {
+    let file = event.target.files[0];
+     this.img = file;
+  }
+
+  uploadRenewDoc(event) {
+    let file = event.target.files[0];
+    this.renewDoc = file;
+  }
+
   private initForm() {
     this.registerForm = this.fb.group({
       first_name: ['', Validators.required],
@@ -96,19 +110,16 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       password: ['', Validators.required],
       phone: ['', Validators.required],
       client_category: ['', Validators.required],
-      departmentName: ['', Validators.required],
-      departmentAddress: ['', Validators.required],
-      registrationNumber: ['', Validators.required],
-      registrationDoc: ['', Validators.required],
-      apRenewDoc: ['', Validators.required],
-      date: [this.date],
+      department_name: ['', Validators.required],
+      department_address: ['', Validators.required],
+      registration_number: ['', Validators.required],
+      // date: [this.date],
       username: ['', Validators.required],
       role: 5
     })
   }
 
   saveChanges() {
-    console.log(this.registerForm.value, "FORM VALUE...", this.date)
     if (this.registerForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
@@ -125,13 +136,16 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.isLoading = true;
 
-    this.authService.userRegister(this.registerForm.value).subscribe(response => {
+    this.authService.userRegister(this.registerForm.value, this.img, this.renewDoc).subscribe(response => {
 
       this.toast.showToast(
         TOAST_STATE.success,
         response.message);
 
         this.isLoading = false;
+
+        this.renewDoc = null;
+        this.img = null;
 
         setTimeout(() => {
           this.router.navigate(['/login']);

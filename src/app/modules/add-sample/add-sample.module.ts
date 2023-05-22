@@ -16,7 +16,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 
-import {MatMomentDateModule} from '@angular/material-moment-adapter'
 
 @NgModule({
   declarations: [AddSampleFormComponent],
@@ -35,7 +34,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter'
     NpDatepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule,
     MatTableModule,
     MatCheckboxModule,
     MatCardModule

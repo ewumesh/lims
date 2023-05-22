@@ -74,39 +74,43 @@
               <div class="mb-1">
                 <label class="form-label">Department Name</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="departmentName" placeholder="Enter Department Name" />
-                    <mat-error [@rowsAnimation]="displayMessage?.departmentName" class="text-danger"
-                      *ngIf="displayMessage?.departmentName">{{displayMessage?.departmentName}}</mat-error>
+                    <input matInput formControlName="department_name" placeholder="Enter Department Name" />
+                    <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
+                      *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
                   </mat-form-field>
               </div>
               <div class="mb-1">
                 <label class="form-label">Department address</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="departmentAddress" placeholder="Enter Department Address" />
+                    <input matInput formControlName="department_address" placeholder="Enter Department Address" />
                     <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
-                      *ngIf="displayMessage?.departmentAddress">{{displayMessage?.departmentAddress}}</mat-error>
+                      *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
                   </mat-form-field>
               </div>
               <div class="mb-1">
                 <label class="form-label">Registration No.</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="registrationNumber" placeholder="Enter Department Address" />
-                    <mat-error [@rowsAnimation]="displayMessage?.registrationNumber" class="text-danger"
-                      *ngIf="displayMessage?.registrationNumber">{{displayMessage?.registrationNumber}}</mat-error>
+                    <input matInput formControlName="registration_number" placeholder="Enter Department Address" />
+                    <mat-error [@rowsAnimation]="displayMessage?.registration_number" class="text-danger"
+                      *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
                   </mat-form-field>
               </div>
               <div class="mb-1">
                 <label for="file2">Registration Document</label>
-                <input class="re-img" type="file" name="file2" id="file2" />
-                <button type="button" onclick="deleteFile('file2')">Remove File</button>
+                <input (change)="uploadFile($event)" class="form-control" type="file" />
+                <span *ngIf="!img" class="text-danger">Registration Document is Required</span>
+                <!-- <input class="re-img" type="file" name="file2" id="file2" /> -->
+                <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
               <div class="mb-1">
                 <label for="secfile2">AP Renew Document</label>
-                <input class="re-img" type="file" name="secfile2" id="secfile2" />
-                <button type="button" onclick="deleteFile('secfile2')">Remove File</button>
+                <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
+                <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span>
+                <!-- <input class="re-img" type="file" name="secfile2" id="secfile2" />
+                <button type="button" onclick="deleteFile('secfile2')">Remove File</button> -->
 
               </div>
-              <div class="mb-1">
+              <!-- <div class="mb-1">
                 <label class="form-label">Date</label>
                 <np-datepicker
                 [ngModelOptions]="{standalone: true}"
@@ -116,8 +120,7 @@
                 placeholder="asasd"
                 class="nepali-datepicker">
               </np-datepicker>
-              </div>
-              <!-- {{date| json}} -->
+              </div> -->
             </fieldset>
           </div>
         </div>
