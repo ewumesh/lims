@@ -3,6 +3,7 @@ import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/fo
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ForgotPasswordService } from 'src/app/services/forgot-password/forgot-password.service';
 
 import { rowsAnimation } from 'src/app/shared/animations/animations';
 import { ToastService } from 'src/app/shared/toastr/toastr.service';
@@ -30,7 +31,8 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     private fb: FormBuilder,
     private router: Router,
     private toast: ToastService,
-    private title: Title
+    private title: Title,
+    private fService: ForgotPasswordService
     ) {
       this.title.setTitle('Forgot Password - Laboratory Information Management System')
 
@@ -57,6 +59,10 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
       this.message.messageBody = 'All the fileds with (*) are required.';
       return;
     }
+
+    this.fService.forgotPassword(this.forgotPasswordForm.value).subscribe(res => {
+      console.log(res, 'RES..')
+    })
   }
 
   navigateToRegister() {

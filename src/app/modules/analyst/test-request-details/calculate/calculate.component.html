@@ -5,7 +5,8 @@
         <h1 class="mb-0" mat-dialog-title>Calculation</h1>
       </div>
       <div class="col-md-2 text-end pt-2">
-        <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+        <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false"
+            aria-label="edit" fontIcon="close"></mat-icon></button>
       </div>
     </div>
 
@@ -13,27 +14,37 @@
 
     <mat-dialog-content>
       <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm">
+        <div class="col-md-12">
+          <div class="col-md-12"><label style="font-weight:bold">Parameter:{{requestDetails?.parameters?.name}}</label>
+          </div>
+        </div>
+        <hr>
         <ng-container *ngFor="let control of formControls">
           <div>
-          <label [for]="control.name">{{ control.label }}</label>
-          <mat-form-field class="w-100" appearance="outline">
-            <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number" [formControlName]="control.name">
-          </mat-form-field>
+            <label [for]="control.name">{{ control.label }}</label>
+            <mat-form-field class="w-100" appearance="outline">
+              <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
+                [formControlName]="control.name">
+            </mat-form-field>
           </div>
         </ng-container>
       </form>
 
       <div class="row">
-        <div class="col-md-12"><label style="font-weight:bold">{{requestDetails?.parameters?.name}}</label></div>
-        <hr>
-        <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula_notation">
+
+        <div class="col-md-6">
           <label style="font-weight:bold">Notations</label>
-          <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span class="text-danger">*</span>{{n | titlecase}}</div>
-      </div>
-      <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
-        <label style="font-weight:bold">Formula</label>
-        <div>{{requestDetails?.parameters?.formula}}</div>
-      </div>
+          <div *ngIf="requestDetails.parameters?.formula_notation">
+            <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span
+                class="text-danger">*</span>{{n | titlecase}}</div>
+          </div>
+          <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
+
+        </div>
+        <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
+          <label style="font-weight:bold">Formula</label>
+          <div>{{requestDetails?.parameters?.formula}}</div>
+        </div>
       </div>
 
       <div class="row" *ngIf="!isControlGenerated">
@@ -47,7 +58,12 @@
 
     <mat-dialog-actions align="end">
       <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Cancel</button>
-      <button (click)="submit()" class="btn btn-primary btn-sm mx-1">Submit</button>
+      <button (click)="submit()" class="btn btn-primary btn-sm mx-1">
+        <span *ngIf="!isCalculating">Submit</span>
+        <span *ngIf="isCalculating">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+      </button>
     </mat-dialog-actions>
   </div>
 </div>

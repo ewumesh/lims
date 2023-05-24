@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'login', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/login/login.module').then(b => b.LoginModule) },
   { path: 'register', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/register/register.module').then(b => b.RegisterModule) },
   { path: 'forgot-password', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/forgot-password/forgot-password.module').then(b => b.ForgotPasswordModule) },
+  { path: 'password-reset', loadChildren: () => import('src/app/modules/password-reset/password-reset.module').then(b => b.PasswordResetModule) },
   {
     path: 'dashboard', component: LayoutComponent, children: [
       { path: '', loadChildren: () => import('src/app/core/layout.module').then(b => b.LayoutModule) }

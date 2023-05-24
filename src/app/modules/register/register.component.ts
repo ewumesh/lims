@@ -195,6 +195,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.validation();
   }
 
+  gotoLogin() {
+    this.router.navigate(['/login'])
+  }
+
   private validation() {
     this.genericValidator
       .initValidationProcess(this.registerForm, this.formInputElements)

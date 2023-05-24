@@ -72,6 +72,7 @@
               <table class="table table-bordered expanded-table mb-0">
                 <thead>
                   <tr>
+                    <th>S.N</th>
                     <th scope="col">Test Type</th>
                     <!-- <th></th> -->
                     <th scope="col">Parameter</th>
@@ -83,7 +84,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let t of element.test_result">
+                  <tr *ngFor="let t of element.test_result; let i =index">
+                    <td>{{i+1}}</td>
                     <td>
                       <span *ngIf="t.test_type">
                         {{t.test_type | titlecase}}
