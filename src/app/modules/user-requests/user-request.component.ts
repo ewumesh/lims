@@ -27,7 +27,7 @@ export class UserRequestsComponent {
     private router:Router,
     private fb: FormBuilder
   ) {
-    this.title.setTitle('All Users - Laboratory Inventory Management System');
+    this.title.setTitle('All Users - Laboratory Information Management System');
 
 
     // Assign the data to the data source for the table to render

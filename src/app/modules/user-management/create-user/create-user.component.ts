@@ -33,6 +33,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   userRoles: any[] = [];
 
+  doc: any;
+  renewDoc: any;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -41,7 +44,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     private toast: ToastService,
     private route:ActivatedRoute
     ) {
-    this.title.setTitle('Create User - Laboratory Inventory Management System');
+    this.title.setTitle('Create User - Laboratory Information Management System');
 
     this.initForm();
 
@@ -71,6 +74,16 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         'required': 'Client Category is required.'
       }
     })
+  }
+
+  uploadDocument(event) {
+    let file = event.target.files[0];
+    this.doc = file;
+  }
+
+  uploadRenewDoc(event) {
+    let file = event.target.files[0];
+    this.renewDoc = file;
   }
 
   ngOnInit(): void {
@@ -145,9 +158,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       password: this.userForm.value.password,
       confirmPassword: this.userForm.value.confirmPassword,
       client_category: this.userForm.value.client_category,
-      departmentName: this.userForm.value.departmentName,
-      departmentAddress: this.userForm.value.departmentAddress,
-      registrationNumber: this.userForm.value.registrationNumber,
+      department_name: this.userForm.value.departmentName,
+      department_address: this.userForm.value.departmentAddress,
+      registration_number: this.userForm.value.registrationNumber,
       date: this.userForm.value.date,
       role: this.userForm.value.role
     }
@@ -160,7 +173,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       return;
     }
     if(this.userId === null) {
-      this.cService.createUser(payload).subscribe(response => {
+      this.cService.createUser(payload, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
         'User Created Successfully!');

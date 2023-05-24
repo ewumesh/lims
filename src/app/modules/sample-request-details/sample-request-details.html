@@ -1,0 +1,119 @@
+<div class="row bg-white m-0 p-2" *ngIf="sampleDetails">
+  <div class="col-md-12">
+    <h2 class="text-lims-primary mb-0">Sample Details</h2>
+    <hr class=""/>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Sample Name:</span> {{sampleDetails?.name | titlecase}}
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Condition:</span> {{sampleDetails?.condition}}
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Manufactured Date: </span>
+          <span *ngIf="sampleDetails?.mfd">{{sampleDetails?.mfd}}</span>
+          <span *ngIf="!sampleDetails?.mfd" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Best Before Date: </span>
+          <span *ngIf="sampleDetails?.dfb">{{sampleDetails?.dfb}}</span>
+          <span *ngIf="!sampleDetails?.dfb" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Batch: </span>
+          <span *ngIf="sampleDetails?.batch">{{sampleDetails?.batch}}</span>
+          <span *ngIf="!sampleDetails?.batch" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Brand: </span>
+          <span *ngIf="sampleDetails?.brand">{{sampleDetails?.brand}}</span>
+          <span *ngIf="!sampleDetails?.brand" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Purpose of Analysis: </span>
+          <span *ngIf="sampleDetails?.purpose">{{sampleDetails?.purpose}}</span>
+          <span *ngIf="!sampleDetails?.purpose" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Report Required Date: </span>
+          <span *ngIf="sampleDetails?.report_date">{{sampleDetails?.report_date | date}}</span>
+          <span *ngIf="!sampleDetails?.report_date" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Amendments: </span>
+          <span *ngIf="sampleDetails?.amendments">{{sampleDetails?.amendments}}</span>
+          <span *ngIf="!sampleDetails?.amendments" class="text-muted">N/A</span>
+        </h3>
+      </div>
+
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold">Report Required Date: </span>
+          <span *ngIf="sampleDetails?.report_date">{{sampleDetails?.report_date | date}}</span>
+          <span *ngIf="!sampleDetails?.report_date" class="text-muted">N/A</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <h2 class="text-lims-primary mb-0">Commodity Details</h2>
+    <hr class=""/>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h3>
+          <span class="text-bold"> Name:</span> {{getCommodityName(sampleDetails?.commodity_id) | titlecase}}
+        </h3>
+      </div>
+
+      <div class="col-md-8">
+        <b>Parameters:</b><span class="badge badge-primary mx-1" style="background-color: #2260bf;" *ngFor="let p of sampleDetails?.parameters">{{p.name}}</span>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-end">
+          <hr/>
+          <button (click)="pay()" *ngIf="!sampleDetails?.payment" class="btn btn-primary btn-sm mx-1">Pay</button>
+          <button (click)="assign()" *ngIf="sampleDetails?.payment" class="btn btn-primary btn-sm mx-1">Assign</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="row bg-white" *ngIf="!sampleDetails">
+  <div class="col-md-12 text-center py-3">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>

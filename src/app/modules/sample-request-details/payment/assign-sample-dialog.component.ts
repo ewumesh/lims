@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SampleRequestsService } from 'src/app/services/sample-request/sample-request.service';
+import { SampleRequestDetailsService } from 'src/app/services/sample-request-details/sample-request-details.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
@@ -18,12 +18,14 @@ export class AssignSampleDialogComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  paymentReceipt: any;
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AssignSampleDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    private service: SampleRequestsService,
+    private service: SampleRequestDetailsService,
     private toast: ToastService
   ) { }
 
@@ -37,6 +39,11 @@ export class AssignSampleDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
+
+  uploadImage(event) {
+    let file = event.target.files[0];
+    this.paymentReceipt = file;
+   }
 
   getUserList() {
     let payload = {
@@ -70,7 +77,7 @@ export class AssignSampleDialogComponent implements OnInit {
       register_date: this.assignSampleForm.value.register_date,
       amount: this.assignSampleForm.value.amount
     }
-    this.service.sampleRequestPayment(payload).subscribe(res => {
+    this.service.sampleRequestPayment(payload, this.paymentReceipt).subscribe(res => {
       this.dialogRef.close();
       this.toast.showToast(TOAST_STATE.success, res.message);
     },

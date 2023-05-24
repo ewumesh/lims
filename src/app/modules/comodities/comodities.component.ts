@@ -17,7 +17,7 @@ export class ComoditiesComponent implements OnInit {
     private title: Title,
     private commodityService: ComoditiesService
   ) {
-    this.title.setTitle('Comodities - Laboratory Inventory Management System');
+    this.title.setTitle('Comodities - Laboratory Information Management System');
   }
 
   ngOnInit(): void {

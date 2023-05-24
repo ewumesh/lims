@@ -132,21 +132,21 @@
 
           <div class="col-md-12 mb-3">
             <label for="exampleInputEmail1" class="form-label">Documents</label>
-            <input class="form-control" type="file" placeholder="Upload file" />
+            <input  (change)="uploadDocument($event)" class="form-control" type="file" placeholder="Upload file" />
           </div>
 
           <h2>User Renew Details</h2>
 
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <label for="exampleInputEmail1" class="form-label">Renewed Date</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="date" placeholder="Enter Renew Date" />
             </mat-form-field>
-          </div>
+          </div> -->
 
           <div class="col-md-12 mb-3">
             <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
-            <input class="form-control" type="file" placeholder="Upload file" />
+            <input (change)="uploadRenewDoc($event)" class="form-control" type="file" placeholder="Upload file" />
           </div>
 
 

@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     console.log(this.authenticationService.isLoggedIn(), 'HAHA')
 
-    this.title.setTitle('Login - Laboratory Inventory Management System');
+    this.title.setTitle('Login - Laboratory Information Management System');
 
     this.genericValidator = new GenericValidator({
       'email': {

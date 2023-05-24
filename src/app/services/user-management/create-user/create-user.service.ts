@@ -21,8 +21,23 @@ export class CreateUserService {
     return this.http.get(`${this.url}/api/account/users/${userId}/`);
   }
 
-  createUser(payload: any):Observable<any> {
-    return this.http.post(`${this.url}/api/account/users/`, payload)
+  objectToFormData(obj: any): FormData {
+    const formData = new FormData();
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        formData.append(key, obj[key]);
+      }
+    }
+
+    return formData;
+  }
+
+  createUser(payload: any, doc, renewDoc):Observable<any> {
+    const formData:FormData = this.objectToFormData(payload);
+    formData.append('registration_document', doc, doc?.name);
+    formData.append('renew_document', renewDoc, renewDoc?.name);
+    return this.http.post(`${this.url}/api/account/users/`, formData)
   }
 
   updateUser(payload):Observable<any> {

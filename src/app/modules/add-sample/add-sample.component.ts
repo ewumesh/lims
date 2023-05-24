@@ -103,7 +103,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   ) {
     this.sampleId = this.route.snapshot.paramMap.get('id');
 
-    this.title.setTitle('Add Sample - Laboratory Inventory Management System');
+    this.title.setTitle('Add Sample - Laboratory Information Management System');
 
     this.genericValidator = new GenericValidator({
       'name': {
@@ -191,7 +191,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       language: [''],
       parameters: [['Test']],
       owner_user: '',
-      isParameter: false
+      isParameter: false,
+      status: 'pending'
     })
   }
 
@@ -232,7 +233,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
       owner_user: this.userDetails.email,
-      form_available: 'smu'
+      form_available: 'smu',
+      status: 'pending'
     }
 
     this.service.addSample(payload).subscribe(response => {
@@ -250,17 +252,17 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
           this.toast.showToast(
             TOAST_STATE.danger,
             'Entered Data not Valid. Please check it once.');
-          setTimeout(() => {
+          // setTimeout(() => {
             this.dismissMessage();
-          }, 3000);
+          // }, 3000);
         } else {
           this.toast.showToast(
             TOAST_STATE.danger,
             error?.error?.message);
 
-          setTimeout(() => {
+          // setTimeout(() => {
             this.dismissMessage();
-          }, 3000);
+          // }, 3000);
         }
         this.isLoading = false;
       })

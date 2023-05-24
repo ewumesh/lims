@@ -14,14 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SampleRequestsService } from 'src/app/services/sample-request/sample-request.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AssignSampleDialogComponent } from './components/payment/assign-sample-dialog.component';
-import { AssignSampleComponent } from './components/assign/assign-sample.component';
+// import { AssignSampleDialogComponent } from '../sample-request-details/payment/assign-sample-dialog.component';
+// import { AssignSampleComponent } from '../sample-request-details/assign/assign-sample.component';
 
 @NgModule({
   declarations: [
     SampleRequestsComponent,
-    AssignSampleDialogComponent,
-    AssignSampleComponent
+    // AssignSampleDialogComponent,
+    // AssignSampleComponentasdasd
   ],
   imports: [
     CommonModule,

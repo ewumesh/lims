@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 
 import { AccountService } from 'src/app/services/account/account.service';
 import { changePasswordComponent } from './change-password/change-password';
+import { ViewImageComponent } from './view-image/view-image';
 
 @Component({
   templateUrl: './my-account.component.html',
@@ -30,7 +31,7 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     private accountService: AccountService,
     private dialog: MatDialog
   ) {
-    this.title.setTitle('My Account - Laboratory Inventory Management System')
+    this.title.setTitle('My Account - Laboratory Information Management System')
   }
 
   ngOnInit() {
@@ -38,6 +39,26 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     this.initForm();
     this.getClientCategories();
     this.getRoles();
+  }
+
+  viewImage(url) {
+        // this.isChangePassword = true;
+        let instance: MatDialogRef<ViewImageComponent, any>;
+
+        instance = this.dialog.open(ViewImageComponent, {
+          data: url ? url : null,
+          width: '800px',
+          autoFocus: false,
+        })
+
+        instance.afterClosed().subscribe(res => {
+
+        })
+  }
+
+  getClientCategoryName(id) {
+    let client = this.clientCategories.find(a => a.id === id);
+    return client?.name;
   }
 
   private initForm() {

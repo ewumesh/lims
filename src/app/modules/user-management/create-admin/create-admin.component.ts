@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class CreateAdminComponent implements OnInit {
   constructor(private title: Title) {
-    this.title.setTitle('Create Admin - Laboratory Inventory Management System');
+    this.title.setTitle('Create Admin - Laboratory Information Management System');
    }
 
   ngOnInit(): void { }

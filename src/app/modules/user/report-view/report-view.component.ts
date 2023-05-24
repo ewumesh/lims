@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 export class ReportViewComponent implements OnInit {
 
   constructor(private title: Title) {
-    this.title.setTitle('Report View - Laboratory Inventory Management System');
+    this.title.setTitle('Report View - Laboratory Information Management System');
   }
 
   ngOnInit(): void { }

@@ -20,6 +20,8 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
     @ViewChildren(FormControlName, { read: ElementRef })
     private formInputElements: ElementRef[];
 
+    userDetails:any;
+
   constructor(
     private fb:FormBuilder,
     private dialogRef: MatDialogRef<changePasswordComponent>,
@@ -32,13 +34,15 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
       'old_password': {
         'required': 'Old Password is required.'
       },
-      'new_password': {
+      'password': {
         'required': 'New Password is required.'
       },
       'confirm_password': {
         'required': 'Confirm Password is required.'
       },
     })
+
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
    }
 
   ngOnInit(): void {
@@ -50,9 +54,39 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
     let payload = this.data;
     console.log(payload, 'pay')
 
-    this.service.changePassword(payload).subscribe(res => {
+    this.service.changePassword(this.changePasswordForm.value).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'Password Changed Successfully.')
       this.dissmissMessage();
+      this.dialogRef.close();
+    },(error) => {
+      if (error.status === 400) {
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          'All the field(s) are not valid.');
+
+        setTimeout(() => {
+          this.dissmissMessage();
+        }, 3000);
+      }else if(error.status === 500 && error.status > 500 ) {
+
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          'Internal Server Error');
+
+        setTimeout(() => {
+          this.dissmissMessage();
+        }, 3000);
+
+
+      } else {
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          error?.error?.error);
+
+        setTimeout(() => {
+          this.dissmissMessage();
+        }, 3000);
+      }
     })
   }
 
@@ -65,8 +99,9 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
 
   initForm() {
     this.changePasswordForm = this.fb.group({
+      id: this.userDetails.id,
       old_password: ['', Validators.required],
-      new_password: ['', Validators.required],
+      password: ['', Validators.required],
       confirm_password: ['', Validators.required]
     },{ validators: passwordMatchValidator })
   }

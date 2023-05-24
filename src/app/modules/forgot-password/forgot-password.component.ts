@@ -32,7 +32,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     private toast: ToastService,
     private title: Title
     ) {
-      this.title.setTitle('Forgot Password - Laboratory Inventory Management System')
+      this.title.setTitle('Forgot Password - Laboratory Information Management System')
 
       this.genericValidator = new GenericValidator({
         'email': {

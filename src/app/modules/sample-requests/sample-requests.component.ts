@@ -6,8 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { SampleRequestsService } from 'src/app/services/sample-request/sample-request.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
-import { AssignSampleDialogComponent } from './components/payment/assign-sample-dialog.component';
-import { AssignSampleComponent } from './components/assign/assign-sample.component';
+// import { AssignSampleDialogComponent } from './components/payment/assign-sample-dialog.component';
+// import { AssignSampleComponent } from '../sample-request-details/assign/assign-sample.component';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './sample-requests.component.html',
@@ -30,9 +31,14 @@ export class SampleRequestsComponent implements OnInit {
     private title: Title,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private service: SampleRequestsService
+    private service: SampleRequestsService,
+    private router: Router
     ) {
-    this.title.setTitle('Sample Requests - Laboratory Inventory Management System');
+    this.title.setTitle('Sample Requests - Laboratory Information Management System');
+  }
+
+  viewSampleRequests(id) {
+    this.router.navigate(['/dashboard/sample-request-details', id]);
   }
 
   ngOnInit(): void {
@@ -66,26 +72,26 @@ export class SampleRequestsComponent implements OnInit {
   }
 
   asignSampleTo(data) {
-    let instance: MatDialogRef<AssignSampleDialogComponent, any>;
+    // let instance: MatDialogRef<AssignSampleDialogComponent, any>;
 
-    instance = this.dialog.open(AssignSampleDialogComponent, {
-      data: data ? data : null,
-      width: '600px',
-      autoFocus: false,
-    })
+    // instance = this.dialog.open(AssignSampleDialogComponent, {
+    //   data: data ? data : null,
+    //   width: '600px',
+    //   autoFocus: false,
+    // })
 
-    instance.afterClosed().subscribe(res => {
+    // instance.afterClosed().subscribe(res => {
 
-    })
+    // })
   }
 
   assign(data) {
-    let instance: MatDialogRef<AssignSampleComponent, any>;
+    // let instance: MatDialogRef<AssignSampleComponent, any>;
 
-    instance = this.dialog.open(AssignSampleComponent, {
-      data: data ? data : null,
-      width: '600px',
-      autoFocus: false,
-    })
+    // instance = this.dialog.open(AssignSampleComponent, {
+    //   data: data ? data : null,
+    //   width: '600px',
+    //   autoFocus: false,
+    // })
   }
 }

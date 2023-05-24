@@ -26,6 +26,6 @@ export class AccountService {
   }
 
   changePassword(payload):Observable<any> {
-    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, payload)
+    return this.http.patch(`${this.url}/api/account/users/${payload.id}/`, payload)
   }
 }

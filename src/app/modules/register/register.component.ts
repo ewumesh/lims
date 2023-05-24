@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     private toast: ToastService,
     private router: Router
     ) {
-      this.title.setTitle('Register - Laboratory Inventory Management System')
+      this.title.setTitle('Register - Laboratory Information Management System')
 
     this.genericValidator = new GenericValidator({
       'first_name': {

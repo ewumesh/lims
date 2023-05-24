@@ -37,7 +37,7 @@
 
     </div>
 
-    <form [formGroup]="userForm">
+    <!-- <form [formGroup]="userForm">
       <div class="row mb-2">
 
         <div class="col-md-4">
@@ -88,52 +88,107 @@
           <div class="form-group">
             <label for="email" class="col-form-label">Client Category</label>
             <mat-form-field appearance="outline" class="w-100">
-              <!-- <input class="custom-input" matInput formControlName="client_category" placeholder="Client Category" /> -->
               <mat-select class="custom-select" formControlName="client_category">
                 <mat-option *ngFor="let item of clientCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
-
-        <!-- <div class="col-md-6">
-          <div class="form-group">
-            <label for="email" class="col-form-label">Valid Up To</label>
-            <mat-form-field appearance="outline" class="w-100">
-              <input class="custom-input" matInput formControlName="userValidUpTo" placeholder="Valid Upto" />
-            </mat-form-field>
-          </div>
-        </div> -->
       </div>
-    </form>
-    <!-- <div class="row mb-2">
-        <div class="col-md-6">
-          <p class="uf-name">Username</p>
-          <p class="uf-content">Manish Basnet</p>
-        </div>
-        <div class="col-md-6">
-          <p class="uf-name">Email Address</p>
-          <p class="uf-content">manishbasnet@gmail.com</p>
-        </div>
-      </div> -->
+    </form> -->
 
-    <!-- <div class="row mb-2">
-        <div class="col-md-6">
-          <p class="uf-name">Phone Number</p>
-          <p class="uf-content">+977 9869469665</p>
-        </div>
-        <div class="col-md-6">
-          <p class="uf-name">Client Category</p>
-          <p class="uf-content">Industry</p>
-        </div>
-      </div> -->
+    <div class="row bg-white m-0 p-2" *ngIf="accountDetails">
+      <div class="col-md-12">
+        <h2 class="text-lims-primary mb-0">Personal Details</h2>
+        <hr class=""/>
+      </div>
 
-    <!-- <div class="row mb-2">
-        <div class="col-md-6">
-          <p class="uf-name">User Valid Upto</p>
-          <p class="uf-content">30 DEC 2024</p>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Full Name:</span> {{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name | titlecase}}
+            </h3>
+          </div>
+
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Email:</span> {{accountDetails?.email}}
+            </h3>
+          </div>
+
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Phone Number: </span>
+              <span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
+              <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
+            </h3>
+          </div>
+
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Username: </span>
+              <span *ngIf="accountDetails?.username">{{accountDetails?.username}}</span>
+              <span *ngIf="!accountDetails?.username" class="text-muted">N/A</span>
+            </h3>
+          </div>
+
+          <div class="col-md-4" *ngIf="accountDetails?.role === 5">
+            <h3>
+              <span class="text-bold">Client Category: </span>
+              <span *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
+              <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+            </h3>
+          </div>
         </div>
-      </div> -->
+      </div>
+
+      <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+        <h2 class="text-lims-primary mb-0">Department Details</h2>
+        <hr class=""/>
+
+        <div class="row">
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Department Name:</span> {{accountDetails?.department_name | titlecase}}
+            </h3>
+          </div>
+
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Department Address:</span> {{accountDetails?.department_address | titlecase}}
+            </h3>
+          </div>
+
+          <div class="col-md-4">
+            <h3>
+              <span class="text-bold">Registration Number:</span> {{accountDetails?.registration_number}}
+            </h3>
+          </div>
+          </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+        <h2 class="text-lims-primary mb-0">Documents</h2>
+        <hr class=""/>
+
+        <div class="row">
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Registration Documents</span>
+            </h3>
+            <img (click)="viewImage(accountDetails?.registration_document)" [src]="accountDetails?.registration_document" />
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Renew Documents</span>
+            </h3>
+            <img (click)="viewImage(accountDetails?.renew_document)" [src]="accountDetails?.renew_document" />
+          </div>
+          </div>
+      </div>
+    </div>
 
   </div>
 </mat-card>

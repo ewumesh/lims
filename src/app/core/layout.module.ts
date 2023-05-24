@@ -52,6 +52,8 @@ import { LayoutService } from './layout.service';
 
       {path: 'sample-requests', loadChildren: () => import('src/app/modules/sample-requests/sample-requests.module').then(m => m.SampleRequestsModule)},
 
+      {path: 'sample-request-details/:id', loadChildren: () => import('src/app/modules/sample-request-details/sample-request.module').then(m => m.SampleRequestDetailsModule)},
+
       {path: 'create-user', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule)},
 
       {path: 'update-user/:id', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule)},

@@ -13,9 +13,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { changePasswordComponent } from './change-password/change-password';
+import { ViewImageComponent } from './view-image/view-image';
 
 @NgModule({
-  declarations: [MyAccountComponent, changePasswordComponent],
+  declarations: [MyAccountComponent, changePasswordComponent, ViewImageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

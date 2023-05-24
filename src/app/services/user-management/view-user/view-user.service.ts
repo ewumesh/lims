@@ -20,4 +20,8 @@ export class ViewUserDetailsService {
   getCategories():Observable<any> {
     return this.http.get(`${this.url}/api/client-category/?page=2&records=4`);
   }
+
+  approveUser(payload):Observable<any> {
+    return this.http.patch(`${this.url}/api/account/users/${payload.id}/`, payload)
+  }
 }

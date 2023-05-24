@@ -31,7 +31,7 @@ userDetails: any;
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.title.setTitle('My Sample - Laboratory Inventory Management System');
+    this.title.setTitle('My Sample - Laboratory Information Management System');
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
   }
 

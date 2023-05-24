@@ -39,7 +39,7 @@ export class PricingComponent implements OnInit {
     private pricingService: PricingService,
     private fb: FormBuilder
     ) {
-    this.title.setTitle('Pricing - Laboratory Inventory Management System');
+    this.title.setTitle('Pricing - Laboratory Information Management System');
   }
 
   ngOnInit(): void {

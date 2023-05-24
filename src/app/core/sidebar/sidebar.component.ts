@@ -136,6 +136,7 @@ export class SidebarComponent implements OnInit {
     setTimeout(() => {
       localStorage.clear();
       this.router.navigate(['/login']);
+      this.toast.dismissToast();
     }, 1000);
   }
 }

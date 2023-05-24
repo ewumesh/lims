@@ -56,6 +56,10 @@
           <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
         </h3>
       </div>
+
+      <div class="col-md-12 text-end">
+        <button (click)="approveuser()" *ngIf="loggedUser?.role === 1 && userDetails.is_verified === 0" class="btn btn-success btn-sm">Approve</button>
+      </div>
     </div>
   </div>
 
