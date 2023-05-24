@@ -56,13 +56,23 @@ export class PasswordResetComponent implements OnInit {
   }
 
   saveChanges() {
+
+    this.isLoading = true;
+    if (this.forgotPasswordForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isLoading = false;
+      return;
+    }
     let userToken = this.route.snapshot.queryParamMap.get('token');
     let query = this.route.snapshot.queryParamMap.get('pk');
     this.resetPasswordService.changePassword(this.forgotPasswordForm.value,query, userToken).subscribe(response => {
       this.router.navigate(['/login']);
-      this.toast.showToast(TOAST_STATE.success, 'Password Reset Successfully!')
+      this.toast.showToast(TOAST_STATE.success, 'Password Reset Successfully!');
+      this.isLoading = false;
     },
     (error) => {
+      this.isLoading = false;
       if (error.status === 400) {
         this.toast.showToast(
           TOAST_STATE.danger,

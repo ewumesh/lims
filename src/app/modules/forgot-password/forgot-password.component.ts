@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { ForgotPasswordService } from 'src/app/services/forgot-password/forgot-password.service';
 
 import { rowsAnimation } from 'src/app/shared/animations/animations';
-import { ToastService } from 'src/app/shared/toastr/toastr.service';
+import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
@@ -26,6 +26,8 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
 
    isLoading:boolean = false;
    message: any;
+
+   isResetLinkSended: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +56,7 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   saveChanges() {
+    this.isLoading = true;
     if (this.forgotPasswordForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
@@ -61,12 +64,22 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     }
 
     this.fService.forgotPassword(this.forgotPasswordForm.value).subscribe(res => {
-      console.log(res, 'RES..')
+      this.isResetLinkSended = true;
+      this.toast.showToast(TOAST_STATE.success,'Password reset link is sent.');
+      this.dismissToast();
+      this.isLoading = false;
     })
   }
 
+  dismissToast() {
+    setTimeout(() => {
+      this.toast.dismissToast();
+    }, 2500);
+
+  }
+
   navigateToRegister() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/login']);
   }
 
   ngAfterViewInit(): void {
