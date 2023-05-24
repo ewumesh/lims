@@ -24,7 +24,7 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 })
 export class PricingComponent implements OnInit {
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['expand','sn', 'name', 'price','units', 'test_duration'];
+  columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration'];
   expandedElement: any | null;
 
   filterForm: FormGroup;
@@ -56,14 +56,33 @@ export class PricingComponent implements OnInit {
   }
 
   filterUserList() {
-
-  }
-
-  getAllCommodities() {
-    this.pricingService.getAllCommodities().subscribe(res=> {
+    let payload = {
+      page: '',
+      size: '',
+      search: this.filterForm.value.search_text,
+      category: this.filterForm.value.category
+    }
+    this.pricingService.getAllCommodities(payload).subscribe(res=> {
       this.dataSource = res.results;
       this.isLoading = false;
     })
+  }
+
+  getAllCommodities() {
+    let payload = {
+      page: '',
+      size: '',
+      search: ''
+    }
+    this.pricingService.getAllCommodities(payload).subscribe(res=> {
+      this.dataSource = res.results;
+      this.isLoading = false;
+    })
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+    this.getAllCommodities();
   }
 
   getCommoditiesCategories() {

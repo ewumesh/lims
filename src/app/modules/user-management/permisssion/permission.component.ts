@@ -47,8 +47,6 @@ export class PermissionComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.getUserRoles();
     this.getAllPermissions();
-
-    console.log(this.selectedRoles, 'ROLS')
   }
 
   generateColumn() {

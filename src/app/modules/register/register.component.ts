@@ -166,7 +166,6 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dismissMessage();
         }, 3000);
       } else {
-        console.log(error, "ERR")
         this.toast.showToast(
           TOAST_STATE.danger,
           error?.error?.error);

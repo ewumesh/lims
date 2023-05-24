@@ -21,7 +21,9 @@ export class ComoditiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.commodityService.getComodities().subscribe(res => console.log(res, 'RES..'))
+    this.commodityService.getComodities().subscribe(res => {
+
+    })
   }
 
   ngAfterViewInit() {

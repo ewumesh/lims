@@ -70,7 +70,6 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     this.addSampleForm.value.parameters = selectedId;
     this.totalPrice = totalPrice;
 
-    console.log(totalPrice, 'TOTAL PRICE')
     return numSelected === numRows;
   }
 
@@ -215,8 +214,6 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     }
 
-    console.log(this.addSampleForm.value, 'VALUE..')
-
     let payload = {
 
       name: this.addSampleForm.value.name,
@@ -247,7 +244,6 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.isLoading = true;
     },
       (error) => {
-        console.log(error.status, 'ERROR..')
         if (error.status === 400) {
           this.toast.showToast(
             TOAST_STATE.danger,

@@ -23,6 +23,19 @@
         </ng-container>
       </form>
 
+      <div class="row">
+        <div class="col-md-12"><label style="font-weight:bold">{{requestDetails?.parameters?.name}}</label></div>
+        <hr>
+        <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula_notation">
+          <label style="font-weight:bold">Notations</label>
+          <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span class="text-danger">*</span>{{n | titlecase}}</div>
+      </div>
+      <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
+        <label style="font-weight:bold">Formula</label>
+        <div>{{requestDetails?.parameters?.formula}}</div>
+      </div>
+      </div>
+
       <div class="row" *ngIf="!isControlGenerated">
         <div class="col-md-12 text-center py-3">
           <div class="spinner-border text-dark" role="status">

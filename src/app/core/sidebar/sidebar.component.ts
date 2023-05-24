@@ -18,8 +18,6 @@ export class SidebarComponent implements OnInit {
     private sharedService: SharedService
   ) {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    console.log(this.userDetails, 'user...')
-    // console.log(JSON.parse(localStorage.getItem('userDetails')), 'user details...');
   }
 
   ngOnInit(): void { }

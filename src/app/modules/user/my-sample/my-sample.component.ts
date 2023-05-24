@@ -71,8 +71,6 @@ userDetails: any;
       user: this.userDetails.email
     }
     this.service.getMySamples(payload).subscribe(response => {
-      console.log(response, "SAMPLES...")
-
       this.dataSource = response.results;
     })
   }
@@ -90,8 +88,6 @@ userDetails: any;
       size: ''
     }
     this.service.getMySamples(payload).subscribe(response => {
-      console.log(response, "SAMPLES...")
-
       this.dataSource = response.results;
     })
   }

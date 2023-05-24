@@ -63,7 +63,6 @@ export class SampleRequestDetailsComponent implements OnInit {
       id: this.sampleId
     }
     this.service.getSampleDetails(payload).subscribe(res => {
-      console.log(res, 'rE')
       this.sampleDetails = res;
     })
   }
@@ -81,7 +80,6 @@ export class SampleRequestDetailsComponent implements OnInit {
     }
 
     this.service.getCommodities(payload).subscribe(res =>{
-      console.log(res, 'dwa')
       this.commodities = res.results;
     })
   }

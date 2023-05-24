@@ -65,8 +65,6 @@ export class AssignSampleComponent implements OnInit {
       // commodity_id: this.data?.commodity_id
     }
 
-    console.log(payload, 'PAYLOAD')
-
     this.service.assignSampleToSupervisor(payload, this.data.id).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, res?.message);
       this.dialogRef.close();

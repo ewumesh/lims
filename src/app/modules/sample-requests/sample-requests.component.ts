@@ -61,7 +61,6 @@ export class SampleRequestsComponent implements OnInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      console.log(response, 'sample requests')
       this.dataSource = response.results;
       this.isLoading = false;
     })

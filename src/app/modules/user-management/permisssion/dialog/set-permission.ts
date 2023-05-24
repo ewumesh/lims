@@ -47,10 +47,7 @@ export class SetPermissionComponent implements OnInit {
       groups: result
     }
 
-    console.log(payload, 'payload..')
-
     this.permissionService.savePermissions(payload).subscribe(response => {
-      console.log(response, 'success')
       // this.getAllPermissions();
       this.dialogRef.close();
     })

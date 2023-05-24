@@ -233,7 +233,6 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       (error) => {
 
         if (error.status === 400) {
-          console.log(error.status, "ERRROROROR")
           this.toast.showToast(
             TOAST_STATE.danger,
             error.message);
@@ -264,7 +263,6 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
       })
     } else {
-      console.log(this.parameterForm.value, "PARAAMETER VALUES")
       this.sService.addParameter(this.parameterForm.value).subscribe(res => {
         this.toast.showToast(
           TOAST_STATE.success,

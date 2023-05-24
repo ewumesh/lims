@@ -52,7 +52,6 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
   save() {
     this.data.password = this.changePasswordForm.value.new_password;
     let payload = this.data;
-    console.log(payload, 'pay')
 
     this.service.changePassword(this.changePasswordForm.value).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'Password Changed Successfully.')

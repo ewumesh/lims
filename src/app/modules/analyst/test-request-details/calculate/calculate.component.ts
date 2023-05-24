@@ -17,13 +17,24 @@ export class CalculateComponent implements OnInit {
   isControlGenerated: boolean = false;
   isLoading: boolean = false;
 
+  notations = 'a= Test Variable a, b=Test Variable b, c=Test Variable c';
+
+  requestDetails = null;
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
     private dialogRef: MatDialogRef<CalculateComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    ) { }
+    ) {
+      this.requestDetails = this.data;
+    }
+
+   splitStringByComma(input: string): string[] {
+      const result: string[] = input?.split(',');
+      return result;
+    }
 
   ngOnInit(): void {
     this.getFormParameters();

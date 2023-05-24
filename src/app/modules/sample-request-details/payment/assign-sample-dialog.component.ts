@@ -32,8 +32,6 @@ export class AssignSampleDialogComponent implements OnInit {
   ngOnInit(): void {
     this.initAssignSampleForm();
     this.getUserList();
-
-    console.log(this.data, 'DATA...')
   }
 
   closeDialog() {

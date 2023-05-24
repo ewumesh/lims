@@ -18,7 +18,6 @@ export class ComoditiesService {
 
   getComodities(): Observable<any> {
     return this.http.get(`${this.url}/api/commodity-category`).pipe(map((data: any) => {
-      console.log(data, "DTAA")
       return data;
     }))
   }

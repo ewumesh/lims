@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    console.log(this.authenticationService.isLoggedIn(), 'HAHA')
-
     this.title.setTitle('Login - Laboratory Information Management System');
 
     this.genericValidator = new GenericValidator({

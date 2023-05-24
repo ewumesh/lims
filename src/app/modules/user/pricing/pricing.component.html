@@ -2,7 +2,7 @@
   <div class="col-md-12">
 
     <form  [formGroup]="filterForm" class="row">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <mat-form-field appearance="outline" class="w-100">
           <!-- <mat-label>Filter</mat-label> -->
           <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
@@ -15,13 +15,17 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-md-3 text-end">
+      <div class="col-md-2 text-end">
         <button (click)="filterUserList()" class="btn btn-primary w-100 h-45"> Filter
           <!-- <span *ngIf="!filterBtnLoading">Filter</span>
                 <span *ngIf="filterBtnLoading">
                   <i class="fa fa-circle-o-notch fa-spin"></i>
                 </span> -->
         </button>
+      </div>
+
+      <div class="col-md-2">
+        <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
       </div>
     </form>
 
@@ -60,7 +64,7 @@
               <table class="table table-bordered expanded-table mb-0" style="background-color: #fff;">
                 <thead>
                   <tr>
-                    <th scope="col">Test Type</th>
+                    <!-- <th scope="col">Test Type</th> -->
                     <th scope="col">Parameter</th>
                     <!-- <th scope="col">Test Method</th> -->
                     <th scope="col">Mandatory Standard</th>
@@ -70,10 +74,10 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of element.test_result">
-                    <td>
+                    <!-- <td>
                       <span *ngIf="item.test_type">{{item.test_type | titlecase}}</span>
                       <span *ngIf="!item.test_type" class="text-muted">N/A</span>
-                    </td>
+                    </td> -->
                     <td>{{item.name | titlecase}}</td>
                     <!-- <td>{{item.ref_test_method | titlecase}}</td> -->
                     <td>{{item.mandatory_standard}}</td>

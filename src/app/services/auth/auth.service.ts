@@ -24,7 +24,6 @@ export class AuthenticationService {
   }
   userLogin(payload: LoginModel): Observable<any> {
     return this.http.post(`${this.url}/api/account/auth/login/`, payload).pipe(map((data: any) => {
-      console.log(data, "DTAA")
       localStorage.setItem('ACCESS_TOKEN', data.access);
       localStorage.setItem('REFRESH_TOKEN', data.refresh);
       localStorage.setItem('userDetails', JSON.stringify(data.user));
