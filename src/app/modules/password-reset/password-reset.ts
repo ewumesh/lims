@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ResetPasswordService } from 'src/app/services/reset-password/reset-password.service';
 import { passwordMatchValidator } from 'src/app/shared/password-match/password-match';
-import { ToastService } from 'src/app/shared/toastr/toastr.service';
+import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
@@ -28,6 +29,8 @@ export class PasswordResetComponent implements OnInit {
     private router: Router,
     private toast: ToastService,
     private title: Title,
+    private resetPasswordService: ResetPasswordService,
+    private route: ActivatedRoute
   ) {
     this.title.setTitle('Password Reset- Laboratory Information Management System')
 
@@ -53,9 +56,52 @@ export class PasswordResetComponent implements OnInit {
   }
 
   saveChanges() {
+    let userToken = this.route.snapshot.queryParamMap.get('token');
+    let query = this.route.snapshot.queryParamMap.get('pk');
+    this.resetPasswordService.changePassword(this.forgotPasswordForm.value,query, userToken).subscribe(response => {
+      this.router.navigate(['/login']);
+      this.toast.showToast(TOAST_STATE.success, 'Password Reset Successfully!')
+    },
+    (error) => {
+      if (error.status === 400) {
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          'All the field(s) are not valid.');
 
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+      }else if(error.status === 500 || error.status > 500 ) {
+
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          'Internal Server Error');
+
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+
+
+      } else {
+        this.toast.showToast(
+          TOAST_STATE.danger,
+          error?.error?.error);
+
+        setTimeout(() => {
+          this.dismissMessage();
+        }, 3000);
+      }
+      this.isLoading = false;
+
+    })
   }
 
+  dismissMessage() {
+    setTimeout(() => {
+      this.toast.dismissToast();
+    }, 2500);
+
+  }
 
   navigateToRegister() {}
 }

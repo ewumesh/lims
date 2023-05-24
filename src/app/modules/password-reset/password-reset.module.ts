@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordService } from 'src/app/services/reset-password/reset-password.service';
 
 @NgModule({
   declarations: [PasswordResetComponent],
@@ -22,6 +23,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
    ],
   exports: [],
-  providers: [],
+  providers: [ResetPasswordService],
 })
 export class PasswordResetModule {}
