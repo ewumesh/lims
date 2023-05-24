@@ -20,18 +20,18 @@ export class LayoutService {
 
 
   constructor(private http: HttpClient) {
-    this.chatSocket = new WebSocket('ws://192.168.1.179:8000/asynchronous/chat/admin/');
-    console.log(this.chatSocket, 'Socket Connected');
-    this.subscribeToMessages();
+    // this.chatSocket = new WebSocket('ws://192.168.1.179:8000/asynchronous/chat/admin/');
+    // console.log(this.chatSocket, 'Socket Connected');
+    // this.subscribeToMessages();
   }
 
-  subscribeToMessages() {
-    this.chatSocket.onmessage = (event: MessageEvent) => {
-      const message = event.data;
-      // Process the message as needed
-      console.log('Received message:', message);
-    }
-  }
+  // subscribeToMessages() {
+  //   this.chatSocket.onmessage = (event: MessageEvent) => {
+  //     const message = event.data;
+  //     // Process the message as needed
+  //     console.log('Received message:', message);
+  //   }
+  // }
 
   getRoles():Observable<any> {
     return this.http.get(`${this.url}/api/account/roles/`)
