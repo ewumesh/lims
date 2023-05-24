@@ -12,6 +12,6 @@ export class ResetPasswordService {
   constructor(private http: HttpClient) {}
 
   changePassword(payload, query, userToken):Observable<any> {
-    return this.http.patch(`${this.url}/api/email-management/password-reset/${query}/${userToken}`, payload)
+    return this.http.patch(`${this.url}/api/email-management/password-reset/${query}/${userToken}/`, payload)
   }
 }
