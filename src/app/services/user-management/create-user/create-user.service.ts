@@ -33,15 +33,22 @@ export class CreateUserService {
     return formData;
   }
 
-  createUser(payload: any, doc, renewDoc):Observable<any> {
+  createUser(payload: any, doc?, renewDoc?):Observable<any> {
     const formData:FormData = this.objectToFormData(payload);
     formData.append('registration_document', doc, doc?.name);
     formData.append('renew_document', renewDoc, renewDoc?.name);
     return this.http.post(`${this.url}/api/account/users/`, formData)
   }
 
-  updateUser(payload):Observable<any> {
-    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, payload)
+  updateUser(payload, doc?,renewDoc?):Observable<any> {
+    const formData:FormData = this.objectToFormData(payload);
+    if(doc) {
+    formData.append('registration_document', doc, doc?.name);
+    }
+    if(renewDoc) {
+    formData.append('renew_document', renewDoc, renewDoc?.name);
+    }
+    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, formData)
   }
 
   getUserRole():Observable<any> {

@@ -133,9 +133,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       password:['', Validators.required],
       confirmPassword: ['',Validators.required],
       client_category: ['', Validators.required],
-      departmentName: [],
-      departmentAddress: [],
-      registrationNumber: [''],
+      department_name: [],
+      department_address: [],
+      registration_number: [''],
       date: [],
       role: '',
       group: ['']
@@ -158,9 +158,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       password: this.userForm.value.password,
       confirmPassword: this.userForm.value.confirmPassword,
       client_category: this.userForm.value.client_category,
-      department_name: this.userForm.value.departmentName,
-      department_address: this.userForm.value.departmentAddress,
-      registration_number: this.userForm.value.registrationNumber,
+      department_name: this.userForm.value.department_name,
+      department_address: this.userForm.value.department_address,
+      registration_number: this.userForm.value.registration_number,
       date: this.userForm.value.date,
       role: this.userForm.value.role
     }
@@ -193,7 +193,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         }, 3000);
     })
   } else {
-    this.cService.updateUser(payload).subscribe(response => {
+    this.cService.updateUser(payload, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
         'User Updated Successfully!');
