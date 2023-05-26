@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="col-md-4 text-end">
-          <button (click)="changePassword()" type="button" class="btn btn-primary change-password-btn">Change Password</button>
+          <button matTooltip="Change Password" (click)="changePassword()" type="button" class="btn btn-primary change-password-btn">Change Password</button>
 
           <button *ngIf="isChangePassword" class="btn btn-primary btn-lims-primary mx-1" (click)="changePassword()">Save</button>
           <button *ngIf="isChangePassword" class="btn btn-primary btn-lims-danger mx-1" (click)="cancel()">Cancel</button>
@@ -177,14 +177,14 @@
             <h3>
               <span class="text-bold">Registration Documents</span>
             </h3>
-            <img (click)="viewImage(accountDetails?.registration_document)" [src]="accountDetails?.registration_document" />
+            <img matTooltip="View Image" alt="Registration Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.registration_document)" [src]="accountDetails?.registration_document" />
           </div>
 
           <div class="col-md-6">
             <h3>
               <span class="text-bold">Renew Documents</span>
             </h3>
-            <img (click)="viewImage(accountDetails?.renew_document)" [src]="accountDetails?.renew_document" />
+            <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.renew_document)" [src]="accountDetails?.renew_document" />
           </div>
           </div>
       </div>

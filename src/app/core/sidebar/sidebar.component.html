@@ -193,6 +193,12 @@
           <li class="nav-item" *ngIf="userDetails.role === 3">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/samples'}" (click)="navigateToSampleSuperVisor()" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
+              Lab Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 3">
+            <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/assigned-sample'}" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
               Assigned Sample</a>
           </li>
           <!-- End Supervisor -->

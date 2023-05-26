@@ -10,11 +10,13 @@ import { ToastComponent } from './shared/toastr/toastr.component';
 import { ToastService } from './shared/toastr/toastr.service';
 import { AuthGuard } from './services/auth.guard';
 import { JwtInterceptor } from './services/token-interceptor';
+import { NotFoundComponent } from './components/not-found/404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToastComponent
+    ToastComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

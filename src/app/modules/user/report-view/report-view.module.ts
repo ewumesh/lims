@@ -15,6 +15,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { ReportViewService } from 'src/app/services/report-view/report-view.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [ReportViewComponent],
@@ -34,7 +36,9 @@ import { ReportViewService } from 'src/app/services/report-view/report-view.serv
     MatPaginatorModule,
     MatTooltipModule,
     MatChipsModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
    ],
   exports: [],
   providers: [ReportViewService],

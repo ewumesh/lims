@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { changePasswordComponent } from './change-password/change-password';
 import { ViewImageComponent } from './view-image/view-image';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [MyAccountComponent, changePasswordComponent, ViewImageComponent],
@@ -31,7 +32,8 @@ import { ViewImageComponent } from './view-image/view-image';
     AvatarModule,
     MatSelectModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
    ],
   exports: [],
   providers: [AccountService],
