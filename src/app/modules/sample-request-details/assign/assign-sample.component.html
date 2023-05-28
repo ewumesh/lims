@@ -12,7 +12,7 @@
       <div class="col-md-12">
         <label for="user" class="form-label">Select User</label>
         <mat-form-field class="w-100" appearance="outline">
-          <mat-select multiple placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
+          <mat-select placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
             <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>

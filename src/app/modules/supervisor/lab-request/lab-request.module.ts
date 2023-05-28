@@ -10,24 +10,40 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LabRequestService } from 'src/app/services/supervisor/lab-request/lab-request.service';
+import { AvatarModule } from 'ngx-avatar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { StatusHandlerDirective } from 'src/app/shared/status-handler/status-handler';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, NativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [LabRequestComponent],
+  declarations: [
+    LabRequestComponent,
+    StatusHandlerDirective
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path: '', component: LabRequestComponent}
     ]),
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule,
+    AvatarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
-  providers: [],
+  providers: [LabRequestService],
 })
 export class LabRequestModule {}

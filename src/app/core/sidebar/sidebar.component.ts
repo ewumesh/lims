@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
@@ -10,120 +10,69 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 })
 export class SidebarComponent implements OnInit {
 
-  userDetails:any = {};
+  userDetails: any = {};
+
+  activatedRoute: string = '';
 
   constructor(
     public router: Router,
     private toast: ToastService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private route: ActivatedRoute
   ) {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.router.events.subscribe(a => {
+      this.activatedRoute = this.router.url.split('?')[0];
+    });
   }
 
   ngOnInit(): void { }
 
-  getUserRoles() {
+  routes = [
+    // user pages
+    { id: 1, role: 5, pathName: 'My Sample', path: '/dashboard/my-sample', icon: 'local_drink', subRoutes: [], dropdownId: '' },
+    { id: 2, role: 5, pathName: 'Commodity Pricing', path: '/dashboard/commodity-pricing', icon: 'insert_chart', subRoutes: [], dropdownId: '' },
+    { id: 3, role: 5, pathName: 'Report View', path: '/dashboard/report-view', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
-  }
+    //supervisor pages
+    { id: 4, role: 3, pathName: 'Lab Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 5, role: 3, pathName: 'Assigned Sample(s)', path: '/dashboard/assigned-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 6, role: 3, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
-  navigateToSampleForm() {
-    this.router.navigate(['/dashboard/add-sample']);
-  }
+    // analyst pages
+    { id: 7, role: 4, pathName: 'Test Request', path: '/dashboard/test-request', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 8, role: 4, pathName: 'Test Report', path: '/dashboard/test-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
-  navigateToDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
+    // verifier pages
+    { id: 9, role: 6, pathName: 'Sample Verify', path: '', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 10, role: 6, pathName: 'Verify Report', path: '', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
-  navigateToComodities() {
-    this.router.navigate(['/dashboard/comodities']);
-  }
+    // admin pages
+    { id: 11, role: 1, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 12, role: 1, pathName: 'Sample Request', path: '/dashboard/sample-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    {
+      id: 13, role: 1, pathName: 'User Management', path: '', icon: 'supervised_user_circle', dropdownId: 'collapsepoaopoppo',
+      subRoutes: [
+        { id: 1, pathName: 'All User', path: '/dashboard/all-users' },
+        { id: 2, pathName: 'Create User', path: '/dashboard/create-user' }
+      ]
+    },
+    { id: 14, role: 1, pathName: 'Search Sample', path: '/dashboard/search-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 15, role: 1, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
-  navigateToMySamples() {
-    this.router.navigate(['/dashboard/my-samples']);
-  }
+    {
+      id: 16, role: 1, pathName: 'Commodities', path: '', icon: 'supervised_user_circle', dropdownId: 'commoditiesId',
+      subRoutes: [
+        { id: 1, pathName: 'All', path: '/dashboard/commodities/all-commodities' },
+        { id: 2, pathName: 'Category', path: '/dashboard/settings/commodity-category' },
+        { id: 3, pathName: 'Commodities', path: '/dashboard/commodities' },
+        { id: 4, pathName: 'Parameter', path: '/dashboard/commodities-parameter' },
+      ]
+    },
+  ]
 
-  navigateToReportView() {
-    this.router.navigate(['/dashboard/report-view']);
-  }
-
-  navigateToAccount() {
-    this.router.navigate(['/dashboard/my-account']);
-  }
-
-  navigateToPricing() {
-    this.router.navigate(['/dashboard/commodity-pricing']);
-  }
-
-  navigateToUserRequests() {
-    this.router.navigate(['/dashboard/user-requests'])
-  }
-
-  navigateToSampleRequests() {
-    this.router.navigate(['/dashboard/sample-requests'])
-  }
-
-  navigateToCreateUser() {
-    this.router.navigate(['/dashboard/create-user']);
-  }
-
-  navigateToCreateAdmin() {
-    this.router.navigate(['/dashboard/create-admin'])
-  }
-
-  navigateToAllUsers() {
-    this.router.navigate(['/dashboard/all-users']);
-  }
-
-  navigateToLabReport() {
-    this.router.navigate(['/dashboard/lab-report']);
-  }
-
-  navigateToSearchSample() {
-    this.router.navigate(['/dashboard/search-sample']);
-  }
-
-  navigateToAssignedSample() {
-    this.router.navigate(['/dashboard/assigned-sample']);
-  }
-
-  navigateToClientCategory() {
-    this.router.navigate(['/dashboard/settings/client-category']);
-  }
-
-  navigateToCommodityCategory() {
-    this.router.navigate(['/dashboard/settings/commodity-category']);
-  }
-
-  navigateCommoditiesParameter() {
-    this.router.navigate(['/dashboard/commodities-parameter']);
-  }
-
-  navigateToCommodities() {
-    this.router.navigate(['/dashboard/commodities']);
-  }
-
-  gotoRole() {
-    this.router.navigate(['/dashboard/user-group']);
-  }
-
-  gotoPermission() {
-    this.router.navigate(['/dashboard/user-permissions'])
-  }
-
-  gotoAllCommodities() {
-    this.router.navigate(['/dashboard/commodities/all-commodities']);
-  }
-
-  gotoTestReport() {
-    this.router.navigate(['/dashboard/test-report']);
-  }
-
-  gotoTestRequest() {
-    this.router.navigate(['/dashboard/test-request']);
-  }
-
-  navigateToSampleSuperVisor() {
-    this.router.navigate(['/dashboard/samples'])
+  navigate(path) {
+    this.router.navigate([`${path}`]);
   }
 
 
