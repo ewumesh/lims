@@ -106,7 +106,8 @@ export class AssignComponent implements OnInit, AfterViewInit {
       form_available: 'analyst',
       parameter: this.assignToAnalystform.value.parameters,
       sample_form: this.data.id,
-      supervisor_user: [this.userDetails.id]
+      supervisor_user: [this.userDetails.id],
+      commodity: this.assignToAnalystform.value.commodity_id
     }
 
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {

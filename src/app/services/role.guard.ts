@@ -12,12 +12,13 @@ export class RoleGuard implements CanActivate {
     private authService: AuthenticationService
     ) { }
 
-  userRole = JSON.parse(localStorage.getItem('userDetails'))?.role;
+  userRole:any;
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const requiredRole = next.data['requiredRole'] // Access the required role from route data
+      this.userRole = JSON.parse(localStorage.getItem('userDetails'))?.role;
 
     console.log(requiredRole, this.userRole, this.authService.isLoggedIn(), "MINE ROLE..");
 

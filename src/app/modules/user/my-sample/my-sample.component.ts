@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,11 +20,18 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = true;
 
-  statusList: any = [];
+  statusList: any[] = [
+    { id: 1, name: 'pending' },
+    { id: 2, name: 'success' },
+    { id: 3, name: 'rejected' },
+    { id: 4, name: 'verified' },
+    { id: 5, name: 'pending' },
+    { id: 6, name: 'processing' }
+  ];
 
   filterForm: FormGroup;
 
-userDetails: any;
+  userDetails: any;
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -61,9 +69,19 @@ userDetails: any;
     })
   }
 
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  reset() {
+    this.filterForm.reset();
+    this.getSamples();
+  }
+
   getSamples() {
     let payload = {
-      search:'',
+      search: '',
       to: '',
       from: '',
       page: '',
@@ -81,14 +99,16 @@ userDetails: any;
 
   filterUserList() {
     let payload = {
-      search:this.filterForm.value.search_text,
-      to: '',
-      from: '',
+      search: this.filterForm.value.search_text,
+      to: this.format(this.filterForm.value.to),
+      from: this.format(this.filterForm.value.from),
       page: '',
       size: ''
     }
     this.service.getMySamples(payload).subscribe(response => {
       this.dataSource = response.results;
+    }, (error) => {
+
     })
   }
 }

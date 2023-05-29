@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Title } from '@angular/platform-browser';
 import { PricingService } from 'src/app/services/pricing/pricing.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { collectionInOut } from 'src/app/shared/animations/animations';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 /**
  * @title Table with expandable rows
@@ -22,9 +24,14 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
     collectionInOut
   ],
 })
-export class PricingComponent implements OnInit {
-  dataSource = new MatTableDataSource();
+export class PricingComponent implements OnInit, AfterViewInit {
+
   columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   expandedElement: any | null;
 
   filterForm: FormGroup;
@@ -89,6 +96,10 @@ export class PricingComponent implements OnInit {
     this.pricingService.getCategories().subscribe(res => {
       this.categories = res.results;
     })
+  }
+
+  ngAfterViewInit(): void {
+      this.dataSource.paginator = this.paginator
   }
 
 }
