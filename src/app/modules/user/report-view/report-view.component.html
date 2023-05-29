@@ -1,5 +1,5 @@
 <form  [formGroup]="filterForm" class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
     </mat-form-field>
@@ -28,6 +28,11 @@
   <div class="col-md-1 text-end">
     <button (click)="filterUserList()" class="btn btn-primary w-100 h-45">
       Filter
+    </button>
+  </div>
+  <div class="col-md-1 text-end">
+    <button (click)="reset()" class="btn btn-danger w-100 h-45">
+      Reset
     </button>
   </div>
 </form>

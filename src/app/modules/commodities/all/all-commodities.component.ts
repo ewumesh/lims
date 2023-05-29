@@ -50,7 +50,7 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
       search: '',
       catetegory: '',
       page: '',
-      size: ''
+      size: 100
     }
     this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
       // this.allCommodities = res;
@@ -79,7 +79,7 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
       search: this.filterForm.value.search,
       catetegory: '',
       page: '',
-      size: ''
+      size: 100
     }
 
     this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {

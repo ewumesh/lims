@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AssignComponent } from './component/assign.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [MyAssignedComponent, AssignComponent],
@@ -35,7 +36,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
    ],
   exports: [],
   providers: [AssignedSampleService],

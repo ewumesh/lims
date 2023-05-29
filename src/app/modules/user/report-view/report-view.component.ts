@@ -56,6 +56,10 @@ export class ReportViewComponent implements OnInit,AfterViewInit {
     })
   }
 
+  reset() {
+
+  }
+
   getSamples() {
     let payload = {
       search:'',
@@ -63,6 +67,7 @@ export class ReportViewComponent implements OnInit,AfterViewInit {
       from: '',
       page: '',
       size: '',
+      status: 'completed',
       user: this.userDetails.email
     }
     this.service.getMySamples(payload).subscribe(response => {

@@ -65,7 +65,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   filterUserList() {
     let payload = {
       page: '',
-      size: '',
+      size: 100,
       search: this.filterForm.value.search_text,
       category: this.filterForm.value.category
     }
@@ -78,7 +78,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
   getAllCommodities() {
     let payload = {
       page: '',
-      size: '',
+      size: 100,
       search: ''
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
