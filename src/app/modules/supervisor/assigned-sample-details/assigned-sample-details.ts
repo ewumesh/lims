@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,18 +11,28 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
   styleUrls: ['./assigned-sample.scss'],
   animations: [collectionInOut]
 })
-export class AssignedSampleDetailsComponent implements OnInit {
+export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
   isLoading:boolean = false;
   userDetails: any;
   tStatus = 'pending'
 
+  isFilterBtnLoading: boolean = false;
+
   displayedColumns: string[] = ['sn', 'parameter', 'assignedDate', 'assignTo', 'status', 'action'];
   dataSource = new MatTableDataSource<any>([{id: 12, name: 'Test Sample', commodity: 'No Commodity', assignedDate: '2001-02-22', assigned: [{id: 1, name: 'Umesh Thapa'}, {id: 2, name: 'Manish Basnet'}], status: 'processing'}]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  statusList: any[]  = [];
+
+  statusList: any[] = [
+    { id: 1, name: 'pending' },
+    { id: 2, name: 'success' },
+    { id: 3, name: 'rejected' },
+    { id: 4, name: 'verified' },
+    { id: 5, name: 'pending' },
+    { id: 6, name: 'processing' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +58,24 @@ export class AssignedSampleDetailsComponent implements OnInit {
   }
 
   filter() {
+    this.isFilterBtnLoading = true;
 
+    let payload = {
+      page: '',
+      size: '',
+      search: this.filterForm.value.search,
+      from : this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to),
+      status: this.filterForm.value.status
+    }
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+  }
+
+  ngAfterViewInit(): void {
+      this.dataSource.paginator = this.paginator;
   }
 
 }

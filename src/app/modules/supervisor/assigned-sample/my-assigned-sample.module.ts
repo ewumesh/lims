@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { AssignComponent } from './component/assign.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [MyAssignedComponent, AssignComponent],
@@ -31,7 +33,9 @@ import { AssignComponent } from './component/assign.component';
     MatPaginatorModule,
     MatTableModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
   providers: [AssignedSampleService],

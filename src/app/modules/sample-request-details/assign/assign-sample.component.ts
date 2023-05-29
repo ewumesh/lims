@@ -1,19 +1,28 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SampleRequestsService } from 'src/app/services/sample-request/sample-request.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
   templateUrl: './assign-sample.component.html',
   styleUrls: ['./assign-sample.scss']
 })
-export class AssignSampleComponent implements OnInit {
+export class AssignSampleComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
 
   users: any[] = [];
   isLoading: boolean = false;
+
+      // Used for form validation
+      genericValidator: GenericValidator;
+      displayMessage: any = {};
+      @ViewChildren(FormControlName, { read: ElementRef })
+      private formInputElements: ElementRef[];
+
+      message: any
 
   constructor(
     private fb: FormBuilder,
@@ -22,7 +31,14 @@ export class AssignSampleComponent implements OnInit {
     public data: any,
     private service: SampleRequestsService,
     private toast: ToastService
-  ) { }
+  ) {
+
+    this.genericValidator = new GenericValidator({
+      'supervisor_user': {
+        'required': 'User is required.'
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -45,7 +61,7 @@ export class AssignSampleComponent implements OnInit {
 
   private initForm() {
     this.form = this.fb.group({
-      supervisor_user: '',
+      supervisor_user: ['',Validators.required],
       form_available: '',
       sample_form: '',
 
@@ -53,10 +69,17 @@ export class AssignSampleComponent implements OnInit {
   }
 
   closeDialog() {
-
+    this.dialogRef.close();
   }
 
   submit() {
+    this.isLoading = true;
+    if (this.form.pristine) {
+      this.message = {};
+      this.isLoading = false;
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      return;
+    }
     let payload = {
       supervisor_user: this.form.value.supervisor_user,
       form_available: 'supervisor',
@@ -68,8 +91,10 @@ export class AssignSampleComponent implements OnInit {
     this.service.assignSampleToSupervisor(payload, this.data.id).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, res?.message);
       this.dialogRef.close();
+      this.isLoading = false;
     },
     (error) => {
+      this.isLoading = false;
       if (error.status === 400) {
         this.toast.showToast(
           TOAST_STATE.danger,
@@ -107,5 +132,15 @@ export class AssignSampleComponent implements OnInit {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 5000);
+  }
+
+  private validation() {
+    this.genericValidator
+      .initValidationProcess(this.form, this.formInputElements)
+      .subscribe({ next: m => this.displayMessage = m });
+  }
+
+  ngAfterViewInit(): void {
+      this.validation();
   }
 }

@@ -22,7 +22,7 @@ export class RoleGuard implements CanActivate {
     console.log(requiredRole, this.userRole, this.authService.isLoggedIn(), "MINE ROLE..");
 
     if (this.authService.isLoggedIn()) {
-      if (this.userRole === requiredRole) {
+      if (requiredRole.includes(this.userRole)) {
         return true; // User has the required role, allow access to the route
       } else {
         // Redirect to a forbidden page or show an error message

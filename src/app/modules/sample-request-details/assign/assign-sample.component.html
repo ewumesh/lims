@@ -9,17 +9,29 @@
 
   <div class="col-md-12">
     <form [formGroup]="form" class="row">
+      <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-info" role="alert">
+          {{message?.messageBody}}
+        </div>
+      </div>
       <div class="col-md-12">
-        <label for="user" class="form-label">Select User</label>
+        <label for="user" class="form-label">Select User *</label>
         <mat-form-field class="w-100" appearance="outline">
           <mat-select placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
             <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
           </mat-select>
+          <mat-error class="text-danger" *ngIf="displayMessage?.supervisor_user">{{displayMessage?.supervisor_user}}</mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-md-12 text-end mt-4">
-        <button (click)="submit()" class="btn btn-primary btn-sm">Submit</button>
+        <button (click)="submit()" class="btn btn-primary btn-sm">
+
+          <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
       </div>
     </form>
   </div>

@@ -48,8 +48,8 @@ export class SampleRequestDetailsComponent implements OnInit {
       autoFocus: false,
     })
     instance.afterClosed().subscribe(res => {
-      // this.getSampleDetails();
-      this.router.navigate(['/dashboard/sample-requests'])
+      this.getSampleDetails();
+      // this.router.navigate(['/dashboard/sample-requests'])
     })
    }
 

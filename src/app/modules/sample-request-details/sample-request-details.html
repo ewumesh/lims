@@ -74,13 +74,13 @@
         </h3>
       </div>
 
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <h3>
           <span class="text-bold">Report Required Date: </span>
           <span *ngIf="sampleDetails?.report_date">{{sampleDetails?.report_date | date}}</span>
           <span *ngIf="!sampleDetails?.report_date" class="text-muted">N/A</span>
         </h3>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -103,8 +103,8 @@
       <div class="row">
         <div class="col-md-12 text-end">
           <hr/>
-          <button (click)="pay()" *ngIf="!sampleDetails?.payment" class="btn btn-primary btn-sm mx-1">Pay</button>
-          <button (click)="assign()" *ngIf="sampleDetails?.payment" class="btn btn-primary btn-sm mx-1">Assign</button>
+          <button (click)="pay()"  class="btn btn-primary btn-sm mx-1">Pay</button>
+          <button (click)="assign()" class="btn btn-primary btn-sm mx-1">Assign</button>
         </div>
       </div>
   </div>

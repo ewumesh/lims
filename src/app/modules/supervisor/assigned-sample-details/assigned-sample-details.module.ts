@@ -13,6 +13,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { AvatarModule } from 'ngx-avatar';
 import { StatusHandlerDirective } from 'src/app/shared/status-handler/status-handler';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { StatusHandlerDirective } from 'src/app/shared/status-handler/status-han
     MatInputModule,
     MatTooltipModule,
     MatIconModule,
-    AvatarModule
+    AvatarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
   providers: [],

@@ -235,7 +235,11 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     this.service.addSample(payload).subscribe(response => {
+      if(this.userDetails.id === 1) {
+        this.router.navigate(['/dashboard/sample-requests']);
+      } else {
       this.router.navigate(['/dashboard/my-samples']);
+      }
       this.toast.showToast(
         TOAST_STATE.success,
         response?.message);

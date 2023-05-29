@@ -6,7 +6,13 @@ import { ForbiddenComponent } from "./components/forbidden/forbidden";
 
 const routes: Routes = [
   {
-    path: '', loadChildren: () => import('src/app/modules/dashboard/dashboard.module').then(b => b.DashboardModule)
+    path: '',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2,3,4,5,6]
+    },
+    loadChildren: () => import('src/app/modules/dashboard/dashboard.module')
+    .then(b => b.DashboardModule)
   },
 
   // User Routes...
@@ -15,7 +21,7 @@ const routes: Routes = [
     path: 'commodity-pricing',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 5
+      requiredRole: [5]
     },
     loadChildren: () => import('src/app/modules/user/pricing/pricing.module').
       then(m => m.PricingModule)
@@ -26,18 +32,28 @@ const routes: Routes = [
     path: 'my-sample',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 5
+      requiredRole: [5]
     },
     loadChildren: () => import('src/app/modules/user/my-sample/my-sample.module')
       .then(m => m.MySampleModule)
   },
+
+  {
+    path: 'sample-details/:id',
+    data: {
+      requiredRole: [5]
+    },
+    loadChildren: () => import('src/app/modules/user/view-sample/view-sample.module')
+    .then(m => m.ViewSampleModule)
+  },
+
 
   // Users' Added Sample Report
   {
     path: 'report-view',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 5
+      requiredRole: [5]
     },
     loadChildren: () => import('src/app/modules/user/report-view/report-view.module').
       then(m => m.ReportViewModule)
@@ -51,7 +67,7 @@ const routes: Routes = [
     path: 'samples',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 3
+      requiredRole: [3]
     },
     loadChildren: () => import('src/app/modules/supervisor/assigned-sample/my-assigned-sample.module').
       then(m => m.MyAssignedSampleModule)
@@ -62,10 +78,10 @@ const routes: Routes = [
     path: 'assigned-sample',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 3
+      requiredRole: [3]
     },
     loadChildren: () => import('src/app/modules/supervisor/lab-request/lab-request.module')
-    .then(m => m.LabRequestModule)
+      .then(m => m.LabRequestModule)
   },
 
   // Assigned Sample Details...
@@ -73,76 +89,256 @@ const routes: Routes = [
     path: 'assigned-sample-details/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: 3
+      requiredRole: [3]
     },
     loadChildren: () => import('src/app/modules/supervisor/assigned-sample-details/assigned-sample-details.module')
-    .then(m => m.AssignedSampleDetailsModule)
+      .then(m => m.AssignedSampleDetailsModule)
   },
   // End Supervisor Routes...
 
-  { path: 'add-sample', loadChildren: () => import('src/app/modules/add-sample/add-sample.module').then(m => m.AddSampleModule) },
+  {
+    path: 'add-sample',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1, 5]
+    },
+    loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
+      .then(m => m.AddSampleModule)
+  },
 
-  { path: 'add-sample/:id', loadChildren: () => import('src/app/modules/add-sample/add-sample.module').then(m => m.AddSampleModule) },
+  {
+    path: 'add-sample/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1, 5]
+    },
+    loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
+      .then(m => m.AddSampleModule)
+  },
 
   { path: 'comodities', loadChildren: () => import('src/app/modules/comodities/comodities.module').then(m => m.ComoditiesModule) },
 
-  { path: 'sample-details/:id', loadChildren: () => import('src/app/modules/user/view-sample/view-sample.module').then(m => m.ViewSampleModule) },
-
   {
     path: 'my-account',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2,3,4,5,6]
+    },
     loadChildren: () => import('src/app/modules/my-account/my-account.module').then(m => m.MyAccountModule)
   },
 
   // For Admin
-  { path: 'user-requests', loadChildren: () => import('src/app/modules/user-requests/user-request.module').then(m => m.UserRequestsModule) },
-
-  { path: 'sample-requests', loadChildren: () => import('src/app/modules/sample-requests/sample-requests.module').then(m => m.SampleRequestsModule) },
-
-  { path: 'sample-request-details/:id', loadChildren: () => import('src/app/modules/sample-request-details/sample-request.module').then(m => m.SampleRequestDetailsModule) },
-
-  { path: 'create-user', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule) },
-
-  { path: 'update-user/:id', loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module').then(m => m.CreateUserModule) },
-
-  { path: 'create-admin', loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module').then(m => m.CreateAdminModule) },
-
-  { path: 'all-users',
-  canActivate: [RoleGuard],
-  data: {
-    requiredRole: 1
+  {
+    path: 'user-requests',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2]
+    },
+    loadChildren: () => import('src/app/modules/user-requests/user-request.module')
+    .then(m => m.UserRequestsModule)
   },
-   loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module')
-   .then(m => m.AllUsersModule) },
 
-  { path: 'user-group', loadChildren: () => import('src/app/modules/user-management/role/role.module').then(m => m.RoleModule) },
+  {
+    path: 'sample-requests',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1, 2]
+    },
+    loadChildren: () => import('src/app/modules/sample-requests/sample-requests.module')
+    .then(m => m.SampleRequestsModule)
+  },
 
-  { path: 'user-permissions', loadChildren: () => import('src/app/modules/user-management/permisssion/permission.module').then(m => m.PermissionModule) },
+  {
+    path: 'sample-request-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2]
+    },
+    loadChildren: () => import('src/app/modules/sample-request-details/sample-request.module')
+    .then(m => m.SampleRequestDetailsModule)
+  },
 
-  { path: 'search-sample', loadChildren: () => import('src/app/modules/search-sample/search-sampole.module').then(m => m.SearchSampleModule) },
+  {
+    path: 'create-user',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
+    .then(m => m.CreateUserModule)
+  },
 
-  { path: 'lab-report', loadChildren: () => import('src/app/modules/lab-report/lab-report.module').then(m => m.LabReportModule) },
+  {
+    path: 'update-user/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
+    .then(m => m.CreateUserModule)
+  },
 
-  { path: 'settings/client-category', loadChildren: () => import('src/app/modules/setting/category/client-category.module').then(m => m.ClientCategoryModule) },
+  {
+    path: 'create-admin',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module')
+    .then(m => m.CreateAdminModule)
+  },
 
-  { path: 'settings/commodity-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule) },
+  {
+    path: 'all-users',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module')
+      .then(m => m.AllUsersModule)
+  },
 
-  { path: 'user-details/:id', loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module').then(m => m.ViewUserDetailsModule) },
+  {
+    path: 'user-group',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/role/role.module')
+    .then(m => m.RoleModule)
+  },
 
-  { path: 'commodities-parameter', loadChildren: () => import('src/app/modules/commodities/parameter/parameter.module').then(m => m.ParameterModule) },
+  {
+    path: 'user-permissions',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/user-management/permisssion/permission.module').
+    then(m => m.PermissionModule)
+  },
 
-  { path: 'commodities-category', loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module').then(m => m.CommodityCategoriesModule) },
+  {
+    path: 'search-sample',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/search-sample/search-sampole.module')
+    .then(m => m.SearchSampleModule)
+  },
 
-  { path: 'commodities', loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module').then(m => m.CommoditiesModule) },
+  {
+    path: 'lab-report',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,3]
+    },
+    loadChildren: () => import('src/app/modules/lab-report/lab-report.module')
+    .then(m => m.LabReportModule)
+  },
 
-  { path: 'commodities/all-commodities', loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module').then(m => m.AllCommoditiesModule) },
+  {
+    path: 'settings/client-category',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/setting/category/client-category.module')
+    .then(m => m.ClientCategoryModule)
+  },
+
+  {
+    path: 'settings/commodity-category',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
+    .then(m => m.CommodityCategoriesModule)
+  },
+
+  {
+    path: 'user-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,3]
+    },
+    loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module')
+    .then(m => m.ViewUserDetailsModule)
+  },
+
+  {
+    path: 'commodities-parameter',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/commodities/parameter/parameter.module')
+    .then(m => m.ParameterModule)
+  },
+
+  {
+    path: 'commodities-category',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
+    .then(m => m.CommodityCategoriesModule)
+  },
+
+  {
+    path: 'commodities',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module')
+    .then(m => m.CommoditiesModule)
+  },
+
+  {
+    path: 'commodities/all-commodities',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1]
+    },
+    loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module')
+    .then(m => m.AllCommoditiesModule)
+  },
 
   // Analyst
-  { path: 'test-request', loadChildren: () => import('src/app/modules/analyst/test-request/test-request.module').then(m => m.TestRequestModule) },
+  {
+    path: 'test-request',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [4]
+    },
+    loadChildren: () => import('src/app/modules/analyst/test-request/test-request.module')
+      .then(m => m.TestRequestModule)
+  },
 
-  { path: 'test-report', loadChildren: () => import('src/app/modules/analyst/test-report/test-report.module').then(m => m.TestReportModule) },
+  {
+    path: 'test-report',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [4]
+    },
+    loadChildren: () => import('src/app/modules/analyst/test-report/test-report.module')
+      .then(m => m.TestReportModule)
+  },
 
   // Analyst
-  { path: 'test-request-details/:id', loadChildren: () => import('src/app/modules/analyst/test-request-details/test-request-details.module').then(m => m.TestRequestDetailsModule) },
+  {
+    path: 'test-request-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [4]
+    },
+    loadChildren: () => import('src/app/modules/analyst/test-request-details/test-request-details.module')
+      .then(m => m.TestRequestDetailsModule)
+  },
 
   // Access Denied
   { path: 'access-denied', component: ForbiddenComponent },

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,11 +12,13 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
   styleUrls: ['./lab-request.scss'],
   animations: [collectionInOut]
 })
-export class LabRequestComponent implements OnInit {
+export class LabRequestComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
-  isLoading:boolean = false;
+  isLoading:boolean = true;
   userDetails: any;
+
+  isFilterBtnLoading: boolean = false;
 
   displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
@@ -44,10 +47,24 @@ export class LabRequestComponent implements OnInit {
    }
 
    getSamples() {
-    this.service.getAllAssignedSamples().subscribe(response => {
+    this.isLoading = true;
+    let payload = {
+      search: '',
+      page: '',
+      size: '',
+      from: '',
+      to: ''
+    }
+    this.service.getAllAssignedSamples(payload).subscribe(response => {
       console.log(response);
       this.samples = response.results;
       this.dataSource = response.results;
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
     })
    }
 
@@ -64,11 +81,37 @@ export class LabRequestComponent implements OnInit {
     })
   }
 
-  filter() {
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
 
+  filter() {
+    this.isFilterBtnLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to)
+    }
+    this.service.getAllAssignedSamples(payload).subscribe(response => {
+      console.log(response);
+      this.samples = response.results;
+      this.dataSource = response.results;
+      this.isLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    })
   }
 
   reset() {
     this.filterForm.reset();
+  }
+
+  ngAfterViewInit(): void {
+      this.dataSource.paginator = this.paginator;
   }
 }

@@ -27,7 +27,10 @@
   </div>
   <div class="col-md-1 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
-      Filter
+      <span *ngIf="!isFilterBtnLoading">Filter</span>
+            <span *ngIf="isFilterBtnLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+            </span>
     </button>
   </div>
 
@@ -37,7 +40,6 @@
     </button>
   </div>
 </form>
-
 
 <div>
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
@@ -80,13 +82,14 @@
     <ng-container matColumnDef="assigned">
       <th mat-header-cell *matHeaderCellDef> Assigned </th>
       <td mat-cell *matCellDef="let row">
-        <div class="authors-container" data-collaborators="10">
-          <div class="author" *ngFor="let user of row.assigned">
+        <div *ngIf="row && row.assigned" class="authors-container" data-collaborators="10">
+          <div class="author" *ngFor="let user of row?.assigned">
             <div class="mask cursor-pointer">
               <ngx-avatar size="40" [name]="user.name" [matTooltip]="user.name"></ngx-avatar>
             </div>
           </div>
         </div>
+        <div *ngIf="!row.assigned" class="text-muted">N/A</div>
       </td>
     </ng-container>
 

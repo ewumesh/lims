@@ -1,5 +1,5 @@
 <form [formGroup]="filterForm" class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
@@ -7,13 +7,15 @@
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <!-- <mat-label>From</mat-label> -->
-      <input class="custom-input" matInput placeholder="Select Date (From)" />
+      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
+      <mat-datepicker #fromPicker></mat-datepicker>
     </mat-form-field>
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <!-- <mat-label>To</mat-label> -->
-      <input class="custom-input" matInput placeholder="Select Date (To)" />
+      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
+      <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
   </div>
   <div class="col-md-2">
@@ -25,7 +27,16 @@
   </div>
   <div class="col-md-1 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
-      Filter
+      <span *ngIf="!isFilterBtnLoading">Filter</span>
+            <span *ngIf="isFilterBtnLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+            </span>
+    </button>
+  </div>
+
+  <div class="col-md-1">
+    <button class="btn btn-danger w-100 h-45">
+      Reset
     </button>
   </div>
 </form>

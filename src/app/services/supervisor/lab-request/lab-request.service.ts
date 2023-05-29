@@ -11,7 +11,8 @@ export class LabRequestService {
 
   constructor(private http: HttpClient) {}
 
-  getAllAssignedSamples(): Observable<any> {
+  getAllAssignedSamples(payload): Observable<any> {
     return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users`)
+    // return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users?search=${payload.serarch}&limit=${payload.size}&offset=${payload.page}&from=${payload.from}&to=${payload.to}`)
   }
 }

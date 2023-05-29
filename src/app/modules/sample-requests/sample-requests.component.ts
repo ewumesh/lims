@@ -25,7 +25,14 @@ export class SampleRequestsComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  statusList: any[] = [];
+  statusList: any[] = [
+    { id: 1, name: 'pending' },
+    { id: 2, name: 'success' },
+    { id: 3, name: 'rejected' },
+    { id: 4, name: 'verified' },
+    { id: 5, name: 'pending' },
+    { id: 6, name: 'processing' }
+  ];
 
   constructor(
     private title: Title,
