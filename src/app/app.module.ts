@@ -11,12 +11,14 @@ import { ToastService } from './shared/toastr/toastr.service';
 import { AuthGuard } from './services/auth.guard';
 import { JwtInterceptor } from './services/token-interceptor';
 import { NotFoundComponent } from './components/not-found/404.component';
+import { StatusHandlerDirective } from './shared/status-handler/status-handler';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToastComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    StatusHandlerDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -28,7 +30,7 @@ import { NotFoundComponent } from './components/not-found/404.component';
     AppRoutingModule
 
   ],
-  exports: [MatMenuModule],
+  exports: [MatMenuModule, StatusHandlerDirective],
   providers: [
     // AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

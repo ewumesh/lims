@@ -1,14 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SampleRequestDetailsService } from 'src/app/services/sample-request-details/sample-request-details.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
 @Component({
   templateUrl: './assign-sample-dialog.component.html',
   styleUrls: ['./assign-sample-dialog.scss']
 })
-export class AssignSampleDialogComponent implements OnInit {
+export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
 
   assignSampleForm: FormGroup;
 
@@ -16,9 +17,19 @@ export class AssignSampleDialogComponent implements OnInit {
 
   users: any[] = [];
 
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   paymentReceipt: any;
+
+  // Used for form validation
+  genericValidator: GenericValidator;
+  displayMessage: any = {};
+  @ViewChildren(FormControlName, { read: ElementRef })
+  private formInputElements: ElementRef[];
+
+  message: any
+
+  isPaymentReceipt: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +38,20 @@ export class AssignSampleDialogComponent implements OnInit {
     public data: any,
     private service: SampleRequestDetailsService,
     private toast: ToastService
-  ) { }
+  ) {
+
+    this.genericValidator = new GenericValidator({
+      'voucher_number': {
+        'required': 'Voucher Number is required.'
+      },
+      'register_date': {
+        'required': 'Date is required.'
+      },
+      'amount': {
+        'required': 'Amount is required.'
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.initAssignSampleForm();
@@ -41,7 +65,8 @@ export class AssignSampleDialogComponent implements OnInit {
   uploadImage(event) {
     let file = event.target.files[0];
     this.paymentReceipt = file;
-   }
+    this.isPaymentReceipt = true;
+  }
 
   getUserList() {
     let payload = {
@@ -59,15 +84,23 @@ export class AssignSampleDialogComponent implements OnInit {
 
   initAssignSampleForm() {
     this.assignSampleForm = this.fb.group({
-      voucher_number: '',
+      voucher_number: ['', Validators.required],
       owner_email: [this.data?.owner_user],
       sample_form: [this.data?.id],
-      register_date: '',
-      amount: ['']
+      register_date: ['', Validators.required],
+      amount: ['', Validators.required]
     })
   }
 
   payNow() {
+    this.isLoading = true;
+    if (this.assignSampleForm.pristine || !this.isPaymentReceipt) {
+      this.message = {};
+      this.isLoading = false;
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      return;
+    }
+
     let payload = {
       voucher_number: this.assignSampleForm.value.voucher_number,
       owner_email: this.data?.owner_user,
@@ -117,5 +150,15 @@ export class AssignSampleDialogComponent implements OnInit {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 5000);
+  }
+
+  ngAfterViewInit(): void {
+    this.validation();
+  }
+
+  private validation() {
+    this.genericValidator
+      .initValidationProcess(this.assignSampleForm, this.formInputElements)
+      .subscribe({ next: m => this.displayMessage = m });
   }
 }

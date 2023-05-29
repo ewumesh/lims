@@ -9,6 +9,7 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 // import { AssignSampleDialogComponent } from './components/payment/assign-sample-dialog.component';
 // import { AssignSampleComponent } from '../sample-request-details/assign/assign-sample.component';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: './sample-requests.component.html',
@@ -18,12 +19,14 @@ import { Router } from '@angular/router';
 export class SampleRequestsComponent implements OnInit {
 
   filterForm: FormGroup;
+  isfilterBtnLoading: boolean = false;
 
   displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isLoading: boolean = true;
+  isFilterBtnLoading: boolean = false;
 
   statusList: any[] = [
     { id: 1, name: 'pending' },
@@ -56,11 +59,19 @@ export class SampleRequestsComponent implements OnInit {
   private initFilterForm() {
     this.filterForm = this.fb.group({
       search: '',
-      status: ''
+      status: '',
+      from: '',
+      to: '',
     })
   }
 
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
   getSampleRequests() {
+    this.isLoading = true;
     let payload = {
       search: '',
       page: '',
@@ -70,11 +81,35 @@ export class SampleRequestsComponent implements OnInit {
     this.service.getAllSampleRequsets(payload).subscribe(response => {
       this.dataSource = response.results;
       this.isLoading = false;
+    }, (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
     })
   }
 
   filterUserList() {
+    this.isfilterBtnLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to)
+    }
 
+    this.service.getAllSampleRequsets(payload).subscribe(response => {
+      this.dataSource = response.results;
+      this.isLoading = false;
+      this.isfilterBtnLoading = false;
+    },(error) => {
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
+    })
+  }
+
+  resetFilter() {
+    this.filterForm.reset();
+    this.getSampleRequests();
   }
 
   asignSampleTo(data) {

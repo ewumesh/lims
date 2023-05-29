@@ -19,6 +19,7 @@ import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-con
 export class UserRequestsComponent {
 
   filterForm: FormGroup;
+  isLoading:boolean = true;
 
   constructor(
     private title: Title,
@@ -43,6 +44,7 @@ export class UserRequestsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  isFilterBtnLoading: boolean = false;
 
   ngOnInit(): void {
     this.getClientCategories();
@@ -67,6 +69,8 @@ export class UserRequestsComponent {
   }
 
   filter() {
+    this.isFilterBtnLoading = true;
+    this.isLoading = true;
     let payload = {
       search: this.filterForm.value.search,
       page: '',
@@ -76,6 +80,8 @@ export class UserRequestsComponent {
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
     })
   }
 
@@ -91,6 +97,7 @@ export class UserRequestsComponent {
   }
 
   getAllUsers() {
+    this.isLoading = true;
     let payload = {
       search: '',
       page: '',
@@ -100,6 +107,10 @@ export class UserRequestsComponent {
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
+      this.isLoading = false;
+    }, (error) => {
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
     })
   }
 

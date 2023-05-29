@@ -43,7 +43,10 @@ export class SampleRequestDetailsService {
 
   sampleRequestPayment(payload, image): Observable<any> {
     const formData:FormData = this.objectToFormData(payload);
-    formData.append('payment_receipt', image, image?.name);
+
+    if(image) {
+      formData.append('payment_receipt', image, image?.name);
+    }
     return this.http.post(`${this.url}/api/sample-form-has-payment/`, formData);
   }
 

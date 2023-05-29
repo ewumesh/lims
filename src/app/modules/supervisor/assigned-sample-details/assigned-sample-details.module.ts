@@ -19,7 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AssignedSampleDetailsComponent,
-    StatusHandlerDirective
+    // StatusHandlerDirective
   ],
   imports: [
     CommonModule,

@@ -116,7 +116,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
   }
 
   filter() {
-    let payload = {
+    this.filterBtnLoading = true;
+      let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
@@ -127,6 +128,9 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     this.allUsersService.getUsersList(payload).subscribe(response => {
       this.dataSource.data = response;
       this.isLoading = false;
+      this.filterBtnLoading = false;
+    },(error) => {
+      this.filterBtnLoading = false;
     })
   }
 

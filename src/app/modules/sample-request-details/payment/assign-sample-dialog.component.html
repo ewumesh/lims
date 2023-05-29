@@ -9,18 +9,25 @@
 
   <div class="col-md-12">
     <form [formGroup]="assignSampleForm" class="row">
-
+      <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-info" role="alert">
+          {{message?.messageBody}}
+        </div>
+      </div>
         <div class="col-md-12">
           <label class="form-label">Tax Voucher No.</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" formControlName="voucher_number" matInput placeholder="Tax Voucher No." />
+            <mat-error class="text-danger" *ngIf="displayMessage?.voucher_number">{{displayMessage?.voucher_number}}</mat-error>
           </mat-form-field>
         </div>
 
         <div class="col-md-12">
           <label class="form-label">Tax Register Date</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" formControlName="register_date" matInput placeholder="Tax Register Date" />
+            <input formControlName="register_date" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date" />
+            <mat-datepicker #toPicker></mat-datepicker>
+            <mat-error class="text-danger" *ngIf="displayMessage?.register_date">{{displayMessage?.register_date}}</mat-error>
           </mat-form-field>
         </div>
 
@@ -35,16 +42,24 @@
           <label class="form-label">Amount</label>
           <mat-form-field appearance="outline" class="w-100">
             <input type="number" formControlName="amount" class="custom-input" matInput placeholder="Rs. 39000" />
+            <mat-error class="text-danger" *ngIf="displayMessage?.amount">{{displayMessage?.amount}}</mat-error>
           </mat-form-field>
         </div>
 
         <div class="col-md-12">
           <label for="formFile" class="form-label">Payment Receipt</label>
           <input (change)="uploadImage($event)" class="form-control" type="file" id="formFile">
+          <mat-error *ngIf="!isPaymentReceipt" class="text-danger" >Payment Receipt is Required.</mat-error>
         </div>
 
       <div class="col-md-12 text-end mt-4">
-        <button (click)="payNow()" class="btn btn-primary btn-sm">Submit</button>
+        <button (click)="payNow()" class="btn btn-primary btn-sm">
+
+          <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
       </div>
     </form>
   </div>

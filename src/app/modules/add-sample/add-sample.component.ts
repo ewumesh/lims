@@ -188,7 +188,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       note: [''],
       commodity_id: ['', Validators.required],
       language: [''],
-      parameters: [['Test']],
+      parameters: [''],
       owner_user: '',
       isParameter: false,
       status: 'pending'

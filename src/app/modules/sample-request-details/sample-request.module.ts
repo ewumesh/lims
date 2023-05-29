@@ -11,6 +11,8 @@ import { AssignSampleDialogComponent } from './payment/assign-sample-dialog.comp
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AssignSampleComponent } from './assign/assign-sample.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent],
@@ -25,7 +27,9 @@ import { AssignSampleComponent } from './assign/assign-sample.component';
     MatSelectModule,
     MatDialogModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
   providers: [SampleRequestDetailsService],

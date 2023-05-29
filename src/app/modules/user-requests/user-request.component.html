@@ -20,16 +20,21 @@
     </mat-form-field>
   </div>
   <div class="col-md-1 text-end">
-    <button (click)="filter()" class="btn btn-primary w-100 h-45">Filter</button>
+    <button [disabled]="isFilterBtnLoading" (click)="filter()" class="btn btn-primary w-100 h-45">
+      <span *ngIf="!isFilterBtnLoading">Filter</span>
+            <span *ngIf="isFilterBtnLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+            </span>
+    </button>
   </div>
   <div class="col-md-1 text-end">
-    <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
+    <button [disabled]="isFilterBtnLoading" (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
   </div>
 </form>
 
 
 <div>
-  <table class="custom-border" mat-table [dataSource]="dataSource" matSort [@collectionInOut]="dataSource.data.length">
+  <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort [@collectionInOut]="dataSource.data.length">
 
     <ng-container matColumnDef="sn">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> S.N </th>
@@ -92,6 +97,14 @@
       </td>
     </tr>
   </table>
+
+  <div class="row" *ngIf="isLoading">
+    <div class="col-md-12 text-center py-3">
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
 
   <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
