@@ -5,6 +5,7 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { ViewUserDetailsComponent } from './view-user.component';
 import { ViewUserDetailsService } from 'src/app/services/user-management/view-user/view-user.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ViewUserDetailsService } from 'src/app/services/user-management/view-us
     RouterModule.forChild([
       {path: '', component: ViewUserDetailsComponent}
     ]),
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [ViewUserDetailsService],

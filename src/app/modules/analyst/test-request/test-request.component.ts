@@ -48,7 +48,7 @@ export class TestRequestComponent implements OnInit {
       page: '',
       size: '',
       search: '',
-      user: this.userDetails?.email
+      user: this.userDetails?.id
     }
     this.service.getTestRequests(payload).subscribe(res => {
       this.dataSource = res.results;

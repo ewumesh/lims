@@ -82,7 +82,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       search: ''
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
-      this.dataSource = res.results;
+      this.dataSource.data = res.results;
       this.isLoading = false;
     })
   }

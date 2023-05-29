@@ -60,7 +60,7 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource = response.results;
+      this.dataSource.data = response.results;
       this.isLoading = false;
     },
     (error) => {

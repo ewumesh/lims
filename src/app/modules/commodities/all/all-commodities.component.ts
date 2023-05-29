@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
 
@@ -15,11 +16,12 @@ import { AllCommoditiesService } from 'src/app/services/commodities/all-commodit
     ]),
   ],
 })
-export class AllCommoditiesComponent implements OnInit {
+export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
-  dataSource = new MatTableDataSource();
   columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration', 'download'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   expandedElement: any | null;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   allCommodities: any = [];
 
@@ -42,7 +44,7 @@ export class AllCommoditiesComponent implements OnInit {
   }
 
   getAllCommodities() {
-    this.dataSource = null
+    // this.dataSource = null
     this.isLoading = true;
     let payload = {
       search: '',
@@ -52,7 +54,7 @@ export class AllCommoditiesComponent implements OnInit {
     }
     this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
       // this.allCommodities = res;
-      this.dataSource = res.results;
+      this.dataSource.data = res.results;
       this.isLoading = false;
     })
   }
@@ -89,6 +91,10 @@ export class AllCommoditiesComponent implements OnInit {
   reset() {
     this.filterForm.reset();
     this.getAllCommodities();
+  }
+
+  ngAfterViewInit(): void {
+      this.dataSource.paginator = this.paginator
   }
 }
 

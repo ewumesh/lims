@@ -58,7 +58,7 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
     this.service.getAllAssignedSamples(payload).subscribe(response => {
       console.log(response);
       this.samples = response.results;
-      this.dataSource = response.results;
+      this.dataSource.data = response.results;
       this.isLoading = false;
       this.isFilterBtnLoading = false;
     },

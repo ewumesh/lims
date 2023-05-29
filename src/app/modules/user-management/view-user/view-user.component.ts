@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ViewUserDetailsService } from 'src/app/services/user-management/view-user/view-user.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { ViewImageComponent } from '../../my-account/view-image/view-image';
 
 @Component({
   templateUrl: './view-user.component.html',
@@ -19,7 +21,8 @@ export class ViewUserDetailsComponent implements OnInit {
   constructor(
     private service:ViewUserDetailsService,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private dialog: MatDialog
     ) {
       this.loggedUser = JSON.parse(localStorage.getItem('userDetails'));
     }
@@ -40,6 +43,20 @@ export class ViewUserDetailsComponent implements OnInit {
       this.toast.showToast(TOAST_STATE.success, 'User Approved Successfully!');
       this.getUserDetails();
     })
+  }
+
+  viewImage(url) {
+    let instance: MatDialogRef<ViewImageComponent, any>;
+
+        instance = this.dialog.open(ViewImageComponent, {
+          data: url ? url : null,
+          width: '800px',
+          autoFocus: false,
+        })
+
+        instance.afterClosed().subscribe(res => {
+
+        })
   }
 
   dismissMessage() {

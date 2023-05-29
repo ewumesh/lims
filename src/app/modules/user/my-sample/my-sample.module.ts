@@ -17,6 +17,7 @@ import { MySampleService } from 'src/app/services/my-sample/my-sample.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [MySampleComponent],
@@ -26,7 +27,6 @@ import { MatNativeDateModule } from '@angular/material/core';
       {path: '', component: MySampleComponent}
     ]),
     MatTableModule,
-    MatPaginatorModule,
     MatCardModule,
     MatChipsModule,
     MatPaginatorModule,
@@ -39,7 +39,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
    ],
   exports: [],
   providers: [MySampleService],

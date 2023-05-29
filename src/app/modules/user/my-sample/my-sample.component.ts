@@ -19,6 +19,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isLoading: boolean = true;
+  isFilterBtnLoading: boolean = false;
 
   statusList: any[] = [
     { id: 1, name: 'pending' },
@@ -89,7 +90,10 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       user: this.userDetails.email
     }
     this.service.getMySamples(payload).subscribe(response => {
-      this.dataSource = response.results;
+      this.dataSource.data = response.results;
+    },(error) => {
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
     })
   }
 
@@ -98,17 +102,20 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   }
 
   filterUserList() {
+    this.isFilterBtnLoading = true;
     let payload = {
       search: this.filterForm.value.search_text,
       to: this.format(this.filterForm.value.to),
       from: this.format(this.filterForm.value.from),
       page: '',
-      size: ''
+      size: '',
+      user: this.userDetails.email
     }
     this.service.getMySamples(payload).subscribe(response => {
       this.dataSource = response.results;
+      this.isFilterBtnLoading = false;
     }, (error) => {
-
+      this.isFilterBtnLoading = false;
     })
   }
 }
