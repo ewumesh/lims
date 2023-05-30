@@ -21,6 +21,8 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
     private formInputElements: ElementRef[];
 
     userDetails:any;
+    isLoading = false;
+    message:any;
 
   constructor(
     private fb:FormBuilder,
@@ -50,6 +52,14 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
   }
 
   save() {
+    this.isLoading = true;
+    if (this.changePasswordForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isLoading = false;
+      return;
+    }
+
     this.data.password = this.changePasswordForm.value.new_password;
     let payload = this.data;
 
@@ -57,6 +67,7 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
       this.toast.showToast(TOAST_STATE.success, 'Password Changed Successfully.')
       this.dissmissMessage();
       this.dialogRef.close();
+      this.isLoading = false;
     },(error) => {
       if (error.status === 400) {
         this.toast.showToast(
@@ -86,6 +97,7 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
           this.dissmissMessage();
         }, 3000);
       }
+      this.isLoading = false;
     })
   }
 

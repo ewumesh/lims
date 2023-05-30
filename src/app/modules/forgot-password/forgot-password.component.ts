@@ -18,16 +18,16 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
   private readonly toDestroy$ = new Subject<void>();
 
   forgotPasswordForm: FormGroup;
-   // Used for form validation
-   genericValidator: GenericValidator;
-   displayMessage: any = {};
-   @ViewChildren(FormControlName, { read: ElementRef })
-   private formInputElements: ElementRef[];
+  // Used for form validation
+  genericValidator: GenericValidator;
+  displayMessage: any = {};
+  @ViewChildren(FormControlName, { read: ElementRef })
+  private formInputElements: ElementRef[];
 
-   isLoading:boolean = false;
-   message: any;
+  isLoading: boolean = false;
+  message: any;
 
-   isResetLinkSended: boolean = false;
+  isResetLinkSended: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,15 +35,16 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     private toast: ToastService,
     private title: Title,
     private fService: ForgotPasswordService
-    ) {
-      this.title.setTitle('Forgot Password - Laboratory Information Management System')
+  ) {
+    this.title.setTitle('Forgot Password - Laboratory Information Management System')
 
-      this.genericValidator = new GenericValidator({
-        'email': {
-          'required': 'Email is required.'
-        }
-      })
-    }
+    this.genericValidator = new GenericValidator({
+      'email': {
+        'required': 'Email is required.',
+        'pattern': 'Email is not valid.'
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -51,7 +52,12 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
 
   initForm() {
     this.forgotPasswordForm = this.fb.group({
-      email: ['', Validators.required]
+      email: ['',
+        [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+        ]
+      ]
     })
   }
 
@@ -60,12 +66,17 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     if (this.forgotPasswordForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isLoading = false;
       return;
     }
 
     this.fService.forgotPassword(this.forgotPasswordForm.value).subscribe(res => {
       this.isResetLinkSended = true;
-      this.toast.showToast(TOAST_STATE.success,'Password reset link is sent.');
+      this.toast.showToast(TOAST_STATE.success, 'Password reset link is sent.');
+      this.dismissToast();
+      this.isLoading = false;
+    }, (error) => {
+      this.toast.showToast(TOAST_STATE.danger, error?.error.message);
       this.dismissToast();
       this.isLoading = false;
     })

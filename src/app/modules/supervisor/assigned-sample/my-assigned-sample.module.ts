@@ -12,13 +12,13 @@ import { AssignedSampleService } from 'src/app/services/supervisor/assigned-samp
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { AssignComponent } from './component/assign.component';
+// import { AssignComponent } from '../lab-request-details/component/assign.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [MyAssignedComponent, AssignComponent],
+  declarations: [MyAssignedComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -58,7 +58,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         'required': 'Last Name is required.'
       },
       'email': {
-        'required': 'Email is required.'
+        'required': 'Email is required.',
+        'pattern': 'Email is not valid.'
       },
       'password': {
         'required': 'Password is required.'
@@ -106,7 +107,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.registerForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', Validators.required],
       phone: ['', Validators.required],
       client_category: ['', Validators.required],

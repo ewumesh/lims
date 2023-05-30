@@ -1,4 +1,9 @@
 <div class="row bg-white m-0">
+  <div *ngIf="!accountDetails?.is_active"
+  class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
+  <strong>Hello {{accountDetails?.first_name}}!</strong> You account is not verified yet.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
   <div class="col-md-12 p-4">
     <div class="grid">
       <div class="card cursor-pointer">

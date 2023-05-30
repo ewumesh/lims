@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChildren, ElementRef, AfterViewInit } fr
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AssignedSampleService } from 'src/app/services/supervisor/assigned-sample/assigned-sample.service';
+import { LabRequestDetailsService } from 'src/app/services/supervisor/lab-request-details/lab-request-details.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
@@ -28,7 +29,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
     message: any
 
   constructor(
-    private service: AssignedSampleService,
+    private service: LabRequestDetailsService,
     private fb:FormBuilder,
     private dialogRef: MatDialogRef<AssignComponent>,
     @Inject(MAT_DIALOG_DATA)
@@ -46,11 +47,16 @@ export class AssignComponent implements OnInit, AfterViewInit {
     }
 
   ngOnInit(): void {
+    this.commodityParameters = this.data.parameters;
     this.getUsers();
-    this.initForm();
     this.getCommodities();
-
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    this.initForm();
+    this.disableCommodityFiled();
+   }
+
+   disableCommodityFiled() {
+    this.assignToAnalystform.get('commodity').disable();
    }
 
    private validation() {
@@ -61,11 +67,10 @@ export class AssignComponent implements OnInit, AfterViewInit {
 
 
    private initForm() {
-    this.commodityParameters = this.data.parameters;
 
     this.assignToAnalystform = this.fb.group({
       analyst_user: ['', Validators.required],
-      commodity_id: this.data.commodity_id,
+      commodity: [this.data.commodity],
       parameters: ['', Validators.required]
     })
    }
@@ -88,7 +93,12 @@ export class AssignComponent implements OnInit, AfterViewInit {
   }
 
   getCommodities() {
-    this.service.getCommodities().subscribe(res => {
+    let payload = {
+      page: '',
+      size: '',
+      search: ''
+    }
+    this.service.getCommodities(payload).subscribe(res => {
       this.commodities = res.results;
     })
   }
@@ -107,7 +117,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
       parameter: this.assignToAnalystform.value.parameters,
       sample_form: this.data.id,
       supervisor_user: [this.userDetails.id],
-      commodity: this.assignToAnalystform.value.commodity_id
+      commodity: this.assignToAnalystform.value.commodity
     }
 
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {

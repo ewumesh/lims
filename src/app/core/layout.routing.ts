@@ -73,6 +73,16 @@ const routes: Routes = [
       then(m => m.MyAssignedSampleModule)
   },
 
+  {
+    path: 'lab-sample-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [3]
+    },
+    loadChildren: () => import('src/app/modules/supervisor/lab-request-details/lab-request-details.module').
+      then(m => m.LabRequestDetailsModule)
+  },
+
   // Assigned Samples
   {
     path: 'assigned-sample',

@@ -6,9 +6,12 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  accountDetails: any;
   constructor(private title: Title) {
     this.title.setTitle('Dashboard - Laboratory Information Management System');
    }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.accountDetails = JSON.parse(localStorage.getItem('userDetails'))
+  }
 }

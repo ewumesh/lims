@@ -1,10 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AssignedSampleDetailsService } from 'src/app/services/supervisor/assigned-sample-details/assign-sample-details.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
+import { ViewReportComponent } from './view-report/view-report';
 
 @Component({
   templateUrl: './assigned-sample-details.html',
@@ -21,7 +24,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
   isFilterBtnLoading: boolean = false;
 
   displayedColumns: string[] = ['sn', 'parameter', 'assignedDate', 'assignTo', 'status', 'action'];
-  dataSource = new MatTableDataSource<any>([{id: 12, name: 'Test Sample', commodity: 'No Commodity', assignedDate: '2001-02-22', assigned: [{id: 1, name: 'Umesh Thapa'}, {id: 2, name: 'Manish Basnet'}], status: 'processing'}]);
+  dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -36,11 +39,40 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private service: AssignedSampleDetailsService,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
     this.initFilterForm();
+    this.getAssignedSamples()
+  }
+
+  viewReport(data) {
+    let instance: MatDialogRef<ViewReportComponent, any>;
+
+    instance = this.dialog.open(ViewReportComponent, {
+      data: data ? data : null,
+      width: '600px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+      // this.getSampleRequests();
+    })
+  }
+
+  getAssignedSamples() {
+    let sampleId =this.route.snapshot.paramMap.get('id');
+    let payload = {
+      sampleId: sampleId
+    }
+    this.service.getAssignedSamples(payload).subscribe(res => {
+      console.log(res, 'RES')
+      this.dataSource.data = res.results;
+    })
   }
 
   initFilterForm() {

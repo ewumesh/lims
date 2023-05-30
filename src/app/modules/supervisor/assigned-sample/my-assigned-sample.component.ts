@@ -5,8 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AssignedSampleService } from 'src/app/services/supervisor/assigned-sample/assigned-sample.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
-import { AssignComponent } from './component/assign.component';
+// import { AssignComponent } from './component/assign.component';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './my-assigned-sample.component.html',
@@ -37,7 +38,8 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private service: AssignedSampleService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +71,10 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     })
   }
 
+  viewDetails(id) {
+    this.router.navigate(['/dashboard/lab-sample-details', id])
+  }
+
   initFilterForm() {
     this.filterForm = this.fb.group({
       search: '',
@@ -83,19 +89,19 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     return datePipe.transform(date, 'yyyy-MM-dd');
   }
 
-  assign(data) {
-    let instance: MatDialogRef<AssignComponent, any>;
+  // assign(data) {
+  //   let instance: MatDialogRef<AssignComponent, any>;
 
-    instance = this.dialog.open(AssignComponent, {
-      data: data ? data : null,
-      width: '600px',
-      autoFocus: false,
-    })
+  //   instance = this.dialog.open(AssignComponent, {
+  //     data: data ? data : null,
+  //     width: '600px',
+  //     autoFocus: false,
+  //   })
 
-    instance.afterClosed().subscribe(res => {
-      this.getSampleRequests();
-    })
-  }
+  //   instance.afterClosed().subscribe(res => {
+  //     this.getSampleRequests();
+  //   })
+  // }
 
   filter() {
     this.isFilterBtnLoading = true;

@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 // import { StatusHandlerDirective } from 'src/app/shared/status-handler/status-handler';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateModule } from '@angular/material/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatNativeDateModule, NativeDateModule } from '@angular/material/core';
     MatTooltipModule,
     AvatarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
    ],
   exports: [],
   providers: [LabRequestService],

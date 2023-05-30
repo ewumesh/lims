@@ -129,7 +129,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       'report_date': {
         'required': 'Report Required by Date is required.'
       },
-      'commodity_id': {
+      'commodity': {
         'required': 'Commodity for Analysis is required.'
       },
       // 'note': {
@@ -155,7 +155,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   getParametersOfCommodity() {
-    this.addSampleForm.get('commodity_id').valueChanges.subscribe(id => {
+    this.addSampleForm.get('commodity').valueChanges.subscribe(id => {
       let parameters = this.commodities.find(x => x.id === id);
       this.priceOfCommodity = parameters.price
       this.commodityParameters = parameters.test_result;
@@ -186,7 +186,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: ['', Validators.required],
       amendments: [''],
       note: [''],
-      commodity_id: ['', Validators.required],
+      commodity: ['', Validators.required],
       language: [''],
       parameters: [''],
       owner_user: '',
@@ -226,7 +226,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: this.format(this.addSampleForm.value.report_date),
       amendments: this.addSampleForm.value.amendments,
       note: this.addSampleForm.value.note,
-      commodity_id: this.addSampleForm.value.commodity_id,
+      commodity: this.addSampleForm.value.commodity,
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
       owner_user: this.userDetails.email,

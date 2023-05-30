@@ -35,7 +35,7 @@ export class TestRequestDetailsComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
       id: id,
-      user: this.userDetails.email
+      user: this.userDetails.id
     }
     this.isLoading = true;
     this.service.getTestRequestDetails(payload).subscribe(response => {

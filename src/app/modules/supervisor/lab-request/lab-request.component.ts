@@ -57,8 +57,8 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
     }
     this.service.getAllAssignedSamples(payload).subscribe(response => {
       console.log(response);
-      this.samples = response.results;
-      this.dataSource.data = response.results;
+      this.samples = response;
+      this.dataSource.data = response;
       this.isLoading = false;
       this.isFilterBtnLoading = false;
     },
@@ -68,8 +68,8 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
     })
    }
 
-   viewAssignedSampleDetails() {
-    this.router.navigate(['/dashboard/assigned-sample-details',1])
+   viewAssignedSampleDetails(id) {
+    this.router.navigate(['/dashboard/assigned-sample-details',id])
   }
 
   initFilterForm() {

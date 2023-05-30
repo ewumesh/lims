@@ -1,0 +1,23 @@
+<div class="row m-0" style="padding: 3%;">
+  <div class="col-md-10">
+    <h2>View Report</h2>
+  </div>
+  <div class="col-md-2 text-end">
+    <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit"
+        fontIcon="close"></mat-icon></button>
+  </div>
+  <hr />
+  <mat-dialog-content>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button (click)="closeDialog" class="btn btn-danger btn-sm mx-1">Close</button>
+    <button class="btn btn-primary btn-sm mx-1">
+      <span *ngIf="!isLoading">Save</span>
+                <span *ngIf="isLoading">
+                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                </span>
+    </button>
+  </mat-dialog-actions>
+</div>

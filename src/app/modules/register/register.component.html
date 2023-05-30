@@ -127,7 +127,7 @@
       </div>
 
 
-      <button type="submit" class="btn btn-primary w-100 h-45" id="submit">Submit</button>
+      <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">Submit</button>
 
       <button (click)="gotoLogin()" type="button" class="bt btn-default w-100 h-45 mt-3">Back to Login</button>
     </form>

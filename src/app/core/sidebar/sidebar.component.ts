@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit {
     { id: 4, role: 3, pathName: 'Lab Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 5, role: 3, pathName: 'Assigned Sample(s)', path: '/dashboard/assigned-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 6, role: 3, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    // { id: 60, role: 3, pathName: 'Lab Report Details', path: '/dashboard/lab-sample-details', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // analyst pages
     { id: 7, role: 4, pathName: 'Test Request', path: '/dashboard/test-request', icon: 'file_copy', subRoutes: [], dropdownId: '' },

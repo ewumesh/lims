@@ -15,11 +15,16 @@ import { AvatarModule } from 'ngx-avatar';
 import { StatusHandlerDirective } from 'src/app/shared/status-handler/status-handler';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AssignedSampleDetailsService } from 'src/app/services/supervisor/assigned-sample-details/assign-sample-details.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ViewReportComponent } from './view-report/view-report';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AssignedSampleDetailsComponent,
     // StatusHandlerDirective
+    ViewReportComponent
   ],
   imports: [
     CommonModule,
@@ -38,9 +43,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     AvatarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule,
+    MatDialogModule
    ],
   exports: [],
-  providers: [],
+  providers: [AssignedSampleDetailsService],
 })
 export class AssignedSampleDetailsModule {}
