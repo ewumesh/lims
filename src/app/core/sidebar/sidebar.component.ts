@@ -37,16 +37,15 @@ export class SidebarComponent implements OnInit {
     //supervisor pages
     { id: 4, role: 3, pathName: 'Lab Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 5, role: 3, pathName: 'Assigned Sample(s)', path: '/dashboard/assigned-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    { id: 6, role: 3, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    // { id: 60, role: 3, pathName: 'Lab Report Details', path: '/dashboard/lab-sample-details', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 6, role: 3, pathName: 'Lab Report', path: '/dashboard/lab-reports', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // analyst pages
     { id: 7, role: 4, pathName: 'Test Request', path: '/dashboard/test-request', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 8, role: 4, pathName: 'Test Report', path: '/dashboard/test-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // verifier pages
-    { id: 9, role: 6, pathName: 'Sample Verify', path: '', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    { id: 10, role: 6, pathName: 'Verify Report', path: '', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 9, role: 6, pathName: 'Sample Verify', path: '/dashboard/sample-verify', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 10, role: 6, pathName: 'Verify Report', path: '/dashboard/verify-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // admin pages
     { id: 11, role: 1, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },

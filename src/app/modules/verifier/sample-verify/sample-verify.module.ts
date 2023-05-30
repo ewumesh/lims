@@ -1,45 +1,40 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SampleVerifyComponent } from './sample-verify.component';
 import { RouterModule } from '@angular/router';
-import { TestRequestComponent } from './test-request.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { TestRequestService } from 'src/app/services/analyst/test-request/test-request.service';
+import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { SampleVerifyService } from 'src/app/services/verifier/sample-verify/sample-verify.service';
 
 @NgModule({
-  declarations: [TestRequestComponent],
+  declarations: [SampleVerifyComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: TestRequestComponent}
+      {path: '', component: SampleVerifyComponent}
     ]),
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule,
     MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
-    MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule,
 
-    DeleteConfirmModule,
     SharedModule
-
    ],
   exports: [],
-  providers: [TestRequestService],
+  providers: [SampleVerifyService],
 })
-export class TestRequestModule {}
+export class SampleVerifyModule {}

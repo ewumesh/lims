@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,11 +11,11 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
   styleUrls: ['./test-request.scss'],
   animations: [collectionInOut]
 })
-export class TestRequestComponent implements OnInit {
+export class TestRequestComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'submissionDate', 'requestedDate', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'submissionDate', 'requestedDate','status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -51,7 +51,7 @@ export class TestRequestComponent implements OnInit {
       user: this.userDetails?.id
     }
     this.service.getTestRequests(payload).subscribe(res => {
-      this.dataSource = res.results;
+      this.dataSource.data = res.results;
       this.isLoading= false;
     })
   }
@@ -93,5 +93,9 @@ export class TestRequestComponent implements OnInit {
 
   reset() {
     this.filterForm.reset();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 }

@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { TestReportService } from 'src/app/services/analyst/test-report/test-report.service';
 
 @Component({
-  templateUrl: './test-report.component.html',
-  styleUrls: ['./test-report.scss']
+  templateUrl: './verify-report.component.html',
+  styleUrls: ['./verify-report.scss']
 })
-export class TestReportComponent implements OnInit, AfterViewInit {
+export class VerifyReportComponent implements OnInit, AfterViewInit {
+
   filterForm: FormGroup;
 
   displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'submissionDate', 'requestedDate', 'action'];
@@ -17,26 +17,15 @@ export class TestReportComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private service: TestReportService
-    ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.intiForm();
-  }
+  ngOnInit(): void { }
 
-  intiForm() {
-    this.filterForm = this.fb.group({
-      search: ''
-    })
+  filter() {
+
   }
 
   reset() {
-
-  }
-
-  filter() {
 
   }
 

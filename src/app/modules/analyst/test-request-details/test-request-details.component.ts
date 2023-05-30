@@ -15,7 +15,7 @@ import { CalculateComponent } from './calculate/calculate.component';
 })
 export class TestRequestDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['sn', 'parameter', 'methods', 'units', 'result', 'action'];
+  displayedColumns: string[] = ['sn', 'parameter', 'methods','formula','mandatory_standard', 'units', 'result', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

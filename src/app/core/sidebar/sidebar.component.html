@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar">
 
-          <li *ngIf="userDetails?.role === 5 || userDetails?.role === 1" class="nav-item m-0">
+          <li *ngIf="(userDetails?.role === 5 || userDetails?.role === 1) && userDetails.is_verified" class="nav-item m-0">
             <a class="nav-link active" aria-current="page" href="Javascript:;" (click)="navigate('/dashboard/add-sample')" id="add-sample">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
 

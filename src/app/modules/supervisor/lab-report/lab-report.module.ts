@@ -1,41 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LabReportComponent } from './lab-report.component';
 import { RouterModule } from '@angular/router';
-
-import { TestReportComponent } from './test-report.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { LabReportService } from 'src/app/services/supervisor/lab-report/lab-report.service';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TestReportService } from 'src/app/services/analyst/test-report/test-report.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [TestReportComponent],
+  declarations: [LabReportComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: TestReportComponent}
+      {path: '', component: LabReportComponent}
     ]),
-    MatFormFieldModule,
     MatInputModule,
+    MatFormFieldModule,
     MatSelectModule,
-    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     MatTooltipModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-
-    SharedModule
+    MatDatepickerModule,
+    MatNativeDateModule
    ],
   exports: [],
-  providers: [TestReportService],
+  providers: [LabReportService],
 })
-export class TestReportModule {}
+export class LabReportModule {}

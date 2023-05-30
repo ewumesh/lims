@@ -55,7 +55,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
 
     instance = this.dialog.open(ViewReportComponent, {
       data: data ? data : null,
-      width: '600px',
+      // width: '600px',
       autoFocus: false,
     })
 
@@ -65,13 +65,17 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
   }
 
   getAssignedSamples() {
+    this.isLoading = true;
     let sampleId =this.route.snapshot.paramMap.get('id');
     let payload = {
       sampleId: sampleId
     }
     this.service.getAssignedSamples(payload).subscribe(res => {
       console.log(res, 'RES')
-      this.dataSource.data = res.results;
+      this.dataSource.data = res.parameters;
+      this.isLoading = false;
+    }, (error) => {
+      this.isLoading = false;
     })
   }
 

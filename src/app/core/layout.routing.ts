@@ -83,6 +83,16 @@ const routes: Routes = [
       then(m => m.LabRequestDetailsModule)
   },
 
+  {
+    path: 'lab-reports',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [3]
+    },
+    loadChildren: () => import('src/app/modules/supervisor/lab-report/lab-report.module').
+      then(m => m.LabReportModule)
+  },
+
   // Assigned Samples
   {
     path: 'assigned-sample',
@@ -349,6 +359,28 @@ const routes: Routes = [
     loadChildren: () => import('src/app/modules/analyst/test-request-details/test-request-details.module')
       .then(m => m.TestRequestDetailsModule)
   },
+
+  // Verifier
+  {
+    path: 'sample-verify',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [6]
+    },
+    loadChildren: () => import('src/app/modules/verifier/sample-verify/sample-verify.module')
+      .then(m => m.SampleVerifyModule)
+  },
+
+  {
+    path: 'verify-report',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [6]
+    },
+    loadChildren: () => import('src/app/modules/verifier/verify-report/verify-report.module')
+      .then(m => m.VerifyReportModule)
+  },
+
 
   // Access Denied
   { path: 'access-denied', component: ForbiddenComponent },
