@@ -64,6 +64,11 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
     })
   }
 
+  assign() {
+    let sampleId =this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/dashboard/lab-sample-details',sampleId])
+  }
+
   getAssignedSamples() {
     this.isLoading = true;
     let sampleId =this.route.snapshot.paramMap.get('id');

@@ -3,10 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SampleVerifyService } from 'src/app/services/verifier/sample-verify/sample-verify.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 
 @Component({
   templateUrl: './sample-verify.component.html',
-  styleUrls: ['./sample-verify.scss']
+  styleUrls: ['./sample-verify.scss'],
+  animations: [collectionInOut]
 })
 export class SampleVerifyComponent implements OnInit, AfterViewInit {
 
@@ -25,11 +27,18 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getSampleDetails();
   }
 
   initForm() {
     this.filterForm = this.fb.group({
       search: ''
+    })
+  }
+
+  getSampleDetails() {
+    this.service.getSmaples().subscribe(res => {
+      this.dataSource.data = res;
     })
   }
 

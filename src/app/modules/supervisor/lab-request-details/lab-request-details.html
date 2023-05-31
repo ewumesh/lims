@@ -93,7 +93,7 @@
       </div>
   </div>
 
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="sampleDetails?.payment?.payment_receipt">
     <h2 class="text-lims-primary mb-0">Payment Details</h2>
     <hr class=""/>
 
@@ -107,15 +107,17 @@
         </h3>
         <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(sampleDetails?.payment.payment_receipt)" [src]="sampleDetails?.payment.payment_receipt" />
       </div>
-
-      <div class="row">
-        <div class="col-md-12 text-end">
-          <hr/>
-          <button (click)="assign(sampleDetails)" class="btn btn-primary btn-sm mx-1">Assign</button>
-        </div>
-      </div>
   </div>
+
+
 </div>
+
+<!-- <div class="row"> -->
+  <div class="col-md-12 text-end">
+    <hr/>
+    <button (click)="assign(sampleDetails)" class="btn btn-primary btn-sm mx-1">Assign</button>
+  </div>
+<!-- </div> -->
 
 <div class="row bg-white" *ngIf="!sampleDetails">
   <div class="col-md-12 text-center py-3">

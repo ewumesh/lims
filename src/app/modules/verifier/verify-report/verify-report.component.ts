@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 
 @Component({
   templateUrl: './verify-report.component.html',
-  styleUrls: ['./verify-report.scss']
+  styleUrls: ['./verify-report.scss'],
+  animations: [collectionInOut]
 })
 export class VerifyReportComponent implements OnInit, AfterViewInit {
 
@@ -17,9 +19,17 @@ export class VerifyReportComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initform();
+  }
+
+  initform() {
+    this.filterForm = this.fb.group({
+      search: ''
+    })
+  }
 
   filter() {
 
