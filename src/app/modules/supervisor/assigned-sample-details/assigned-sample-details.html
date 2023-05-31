@@ -94,7 +94,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <button *ngIf="row.exist" (click)="viewReport(row)" [matTooltip]="'View Details'" class="btn btn-primary btn-sm mx-1 pt-2">View Report</button>
+        <button *ngIf="row.exist" (click)="viewReport(row.id)" [matTooltip]="'View Details'" class="btn btn-primary btn-sm mx-1 pt-2">View</button>
         <button (click)="assign()" *ngIf="!row.exist" class="btn btn-primary btn-sm">Assign</button>
       </td>
     </ng-container>
@@ -118,6 +118,12 @@
     </div>
   </div>
 
-  <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
-    aria-label="Select page of users"></mat-paginator>
+  <div class="row m-0 p-0">
+    <div class="col-md-12 bg-white text-end p-4">
+      <button (click)="generateReport()" class="btn btn-primary">Generate Report</button>
+    </div>
+  </div>
+
+  <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
+    aria-label="Select page of users"></mat-paginator> -->
 </div>

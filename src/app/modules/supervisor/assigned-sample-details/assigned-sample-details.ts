@@ -27,6 +27,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  sampleDetails: any;
 
   statusList: any[] = [
     { id: 1, name: 'pending' },
@@ -50,11 +51,17 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
     this.getAssignedSamples()
   }
 
-  viewReport(data) {
+  viewReport(id) {
+    let sampleId =this.route.snapshot.paramMap.get('id');
+    let reportData = {
+      data: this.sampleDetails,
+      parameterId: id,
+      sampleId: sampleId
+    }
     let instance: MatDialogRef<ViewReportComponent, any>;
 
     instance = this.dialog.open(ViewReportComponent, {
-      data: data ? data : null,
+      data: reportData ? reportData : null,
       // width: '600px',
       autoFocus: false,
     })
@@ -69,6 +76,11 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/dashboard/lab-sample-details',sampleId])
   }
 
+  generateReport() {
+    let sampleId =this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/dashboard/sample-report', sampleId]);
+  }
+
   getAssignedSamples() {
     this.isLoading = true;
     let sampleId =this.route.snapshot.paramMap.get('id');
@@ -78,6 +90,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
     this.service.getAssignedSamples(payload).subscribe(res => {
       console.log(res, 'RES')
       this.dataSource.data = res.parameters;
+      this.sampleDetails = res;
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;

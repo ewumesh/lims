@@ -1,4 +1,4 @@
-<div class="row m-0" style="padding: 3%;">
+<div class="row m-0" style="padding: 1%;">
   <div class="col-md-10">
     <h2>View Report</h2>
   </div>
@@ -8,25 +8,103 @@
   </div>
   <hr />
   <mat-dialog-content>
-    <div class="row">
-      <div class="col-md-6">
-        <span class="text-bold">Commodity:</span> oasjdoiasjdoijasd
+    <!-- <mat-card> -->
+      <div *ngIf="!isLoading" class="row img-thumbnail py-1">
+        <div class="col-md-12">
+          <h1>Sample Details</h1>
+        </div>
+        <div class="col-md-6">
+          <span class="text-bold">Sample Name:</span> {{sampleDetails?.name | titlecase}}
+        </div>
+
+        <div class="col-md-6">
+          <span class="text-bold">Created Date:</span> {{sampleDetails?.created_date | date}}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">MFD:</span> {{sampleDetails?.mfd | date}}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">Batch:</span> {{sampleDetails?.batch }}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">Condition:</span> {{sampleDetails?.condition | titlecase}}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">Best Before Date:</span> {{sampleDetails?.dfb | date}}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">Brand:</span> {{sampleDetails?.brand | titlecase}}
+        </div>
+
+        <div class="col-md-6 mt-1">
+          <span class="text-bold">Amendments:</span> {{sampleDetails?.amendments | titlecase}}
+        </div>
+
+        <div class="col-md-12 mt-3">
+          <h1 class="mb-0">Parameter Details</h1>
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Parameter Name:</span> {{sampleParameterDetails?.name | titlecase}}
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Test Method:</span> {{sampleParameterDetails?.ref_test_method }}
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Formula:</span> {{sampleParameterDetails?.formula | titlecase}}
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Units:</span> {{sampleParameterDetails?.units }}
+        </div>
+
+        <div class="col-md-12 mt-3">
+          <h1 class="mb-0">Analyst Details</h1>
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Analyst:</span> {{analystDetails?.first_name}}  {{analystDetails?.last_name}}
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Status:</span>
+          <span class="badge badge-primary" style="padding: 8px;" [statusColor]="analystDetails?.status">{{analystDetails?.status }}</span>
+
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Commodity:</span> {{data?.data?.commodity?.name }}
+        </div>
+
+        <div class="col-md-6 pt-3">
+          <span class="text-bold">Assigned Date:</span> {{analystDetails?.assigned_date | date }}
+        </div>
       </div>
 
-      <div class="col-md-6">
-        <span class="text-bold">Submitted Date:</span> 2022-02-11
+      <div class="row" *ngIf="isLoading">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </div>
-    </div>
-
+    <!-- </mat-card> -->
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button (click)="closeDialog" class="btn btn-danger btn-sm mx-1">Close</button>
+    <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Close</button>
     <button class="btn btn-primary btn-sm mx-1">
       <span *ngIf="!isLoading">Save</span>
-                <span *ngIf="isLoading">
-                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                </span>
+      <span *ngIf="isLoading">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+      </span>
     </button>
   </mat-dialog-actions>
 </div>

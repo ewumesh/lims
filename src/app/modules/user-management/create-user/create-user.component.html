@@ -90,7 +90,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4" *ngIf="userForm.get('role').value === 1 || userForm.get('role').value === 2 || userForm.get('role').value === 3 || userForm.get('role').value === 4 ">
+        <div class="col-md-4" *ngIf="(userForm.get('role').value === 1 || userForm.get('role').value === 2 || userForm.get('role').value === 3 || userForm.get('role').value === 4 ) && roles.length > 0">
           <label class="list-heading form-label">Select Group</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="group" placeholder="Select Role" multiple>

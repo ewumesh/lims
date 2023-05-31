@@ -19,6 +19,7 @@ import { AssignedSampleDetailsService } from 'src/app/services/supervisor/assign
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ViewReportComponent } from './view-report/view-report';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDatepickerModule,
     MatNativeDateModule,
     SharedModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
    ],
   exports: [],
   providers: [AssignedSampleDetailsService],

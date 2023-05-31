@@ -1,0 +1,8 @@
+<app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
+<div class="row" *ngIf="isLoading">
+  <div class="col-md-12 text-center py-3">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>

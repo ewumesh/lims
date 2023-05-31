@@ -35,9 +35,9 @@ export class SidebarComponent implements OnInit {
     { id: 3, role: 5, pathName: 'Report View', path: '/dashboard/report-view', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     //supervisor pages
-    { id: 4, role: 3, pathName: 'Lab Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    { id: 5, role: 3, pathName: 'Assigned Sample(s)', path: '/dashboard/assigned-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    { id: 6, role: 3, pathName: 'Lab Report', path: '/dashboard/lab-reports', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 4, role: 3, pathName: 'Sample Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 5, role: 3, pathName: 'Assigned Sample', path: '/dashboard/assigned-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 6, role: 3, pathName: 'Sample Report', path: '/dashboard/lab-reports', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // analyst pages
     { id: 7, role: 4, pathName: 'Test Request', path: '/dashboard/test-request', icon: 'file_copy', subRoutes: [], dropdownId: '' },
@@ -58,6 +58,15 @@ export class SidebarComponent implements OnInit {
       ]
     },
     { id: 14, role: 1, pathName: 'Search Sample', path: '/dashboard/search-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    {
+      id: 160, role: 1, pathName: 'Settings', path: '', icon: 'settings', dropdownId: 'setting',
+      subRoutes: [
+        { id: 1, pathName: 'Client Categories', path: '/dashboard/settings/client-category' },
+        { id: 2, pathName: 'Group', path: '/dashboard/user-group' },
+        { id: 3, pathName: 'Permission', path: '/dashboard/user-permissions' },
+        // { id: 4, pathName: 'Parameter', path: '/dashboard/commodities-parameter' },
+      ]
+    },
     { id: 15, role: 1, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     {
