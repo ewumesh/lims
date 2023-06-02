@@ -14,4 +14,8 @@ export class SampleReportService {
   getAssignedSamples(payload):Observable<any> {
     return this.http.get(`${this.url}/api/report/detail-sample-form-has-parameter-has-assigned-analyst/${payload.id}/`)
   }
+
+  sendReportForVerification(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/sample-form-has-verifier/`, payload)
+  }
 }

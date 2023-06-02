@@ -123,6 +123,16 @@ const routes: Routes = [
     loadChildren: () => import('src/app/modules/supervisor/sample-report/sample-report.module')
       .then(m => m.SampleReportModule)
   },
+
+  {
+    path: 'sample-report-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [3]
+    },
+    loadChildren: () => import('src/app/modules/supervisor/lab-report-details/lab-report-details.module')
+      .then(m => m.LabReportDetailsModule)
+  },
   // End Supervisor Routes...
 
   {

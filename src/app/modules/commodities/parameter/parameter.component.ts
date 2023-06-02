@@ -163,8 +163,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       test_type: this.filterForm.value.test_type
     }
     this.sService.getParameters(payload).subscribe(res => {
-      this.dataSource = res;
-      this.listOfParameters = res;
+      this.dataSource = res.results;
+      this.listOfParameters = res.results;
       this.isLoading = false;
     })
   }

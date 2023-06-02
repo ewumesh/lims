@@ -1,4 +1,19 @@
-<app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
+
+<div>
+  <app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
+  <div class="row">
+    <div class="col-md-12 text-end mt-3">
+      <button class="btn btn-primary btn-sm mx-1">Download Report</button>
+      <button (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
+        <span *ngIf="!isSending">Send for Verificationin</span>
+            <span *ngIf="isSending">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="row" *ngIf="isLoading">
   <div class="col-md-12 text-center py-3">
     <div class="spinner-border text-dark" role="status">

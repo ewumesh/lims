@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ReportComponent } from 'src/app/shared/report/report';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [SampleReportComponent, ReportComponent],
@@ -13,6 +14,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RouterModule.forChild([
       {path: '', component: SampleReportComponent}
     ]),
+    MatIconModule,
+
     SharedModule
    ],
   exports: [],

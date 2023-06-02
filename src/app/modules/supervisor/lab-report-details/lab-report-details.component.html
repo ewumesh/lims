@@ -1,30 +1,28 @@
 <form [formGroup]="filterForm" class="row">
-  <div class="col-md-4">
+  <div class="col-md-10">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
   </div>
-  <div class="col-md-2">
+  <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <!-- <mat-label>From</mat-label> -->
       <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
       <mat-datepicker #fromPicker></mat-datepicker>
     </mat-form-field>
-  </div>
-  <div class="col-md-2">
+  </div> -->
+  <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <!-- <mat-label>To</mat-label> -->
       <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
-  </div>
-  <div class="col-md-2">
+  </div> -->
+  <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Status" formControlName="status">
         <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  </div> -->
   <div class="col-md-1 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
       <span *ngIf="!isFilterBtnLoading">Filter</span>
@@ -127,5 +125,3 @@
   <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
     aria-label="Select page of users"></mat-paginator> -->
 </div>
-
-<button (click)="downloadAsPDF()">DOWNLOAD....</button>

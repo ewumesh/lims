@@ -1,101 +1,98 @@
 <div class="row">
   <div class="db-content">
-      <div class="top-view-page p-2 mb-3">
-          <div class="row log-details p-3">
-              <div class="col-md-3">
-                  <div class="row">
-                      <p>Supervise By</p>
-                      <h4>Manish Basnet</h4>
-                  </div>
-                  <div class="row mt-2">
-                      <p>Created By</p>
-                      <h4>Manoj Das</h4>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="row">
-                      <p>Assigned Date</p>
-                      <h4>2023-01-11</h4>
-                  </div>
-                  <div class="row mt-2">
-                      <p>Created at</p>
-                      <h4>2023-01-05</h4>
-                  </div>
-              </div>
-              <div class="col-md-3">
-                  <div class="row">
-                      <p>Verified By</p>
-                      <h4>N/A</h4>
-                  </div>
-                  <!-- <div class="row mt-2">
+    <div class="top-view-page p-2 mb-3">
+      <div class="row log-details p-3">
+        <div class="col-md-3">
+          <div class="row">
+            <p>Supervise By</p>
+            <h4>Manish Basnet</h4>
+          </div>
+          <div class="row mt-2">
+            <p>Created By</p>
+            <h4>Manoj Das</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="row">
+            <p>Assigned Date</p>
+            <h4>2023-01-11</h4>
+          </div>
+          <div class="row mt-2">
+            <p>Created at</p>
+            <h4>2023-01-05</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="row">
+            <p>Verified By</p>
+            <h4>N/A</h4>
+          </div>
+          <!-- <div class="row mt-2">
                       <p>Rejected at</p>
                       <h4>Lorem</h4>
                   </div> -->
-              </div>
-              <div class="col-md-3 log-status">
-                  <span style="padding: 8px"
-                      class="badge badge-primary" [statusColor]="reportDetails.status">
-                      {{reportDetails.status}}</span>
-              </div>
-          </div>
+        </div>
+        <div class="col-md-3 log-status">
+          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails.status">
+            {{reportDetails.status}}</span>
+        </div>
       </div>
-      <div class="view-page">
-          <h3 class="view-page-heading">Sample Details</h3>
-          <div class="row">
-              <div class="col-md-4">
-                  <h4>Sample ID</h4>
-                  <p>{{reportDetails.id}}</p>
-              </div>
-              <div class="col-md-4">
-                  <h4>Sample Name </h4>
-                  <p>{{reportDetails.name}}</p>
-              </div>
-              <div class="col-md-4">
-                  <h4>Commodity   </h4>
-                  <p>{{reportDetails?.commodity?.name}}</p>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-4">
-                  <h4>MFD</h4>
-                  <p>{{reportDetails.mfd | date}}</p>
-              </div>
-              <div class="col-md-4">
-                  <h4>Best Before Date</h4>
-                  <p>{{reportDetails.dfb | date}}</p>
-              </div>
-
-              <div class="col-md-4">
-                <h4>Batch</h4>
-                <p>{{reportDetails.batch}}</p>
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-md-4">
-                  <h4>Brand</h4>
-                  <p>{{reportDetails.brand}}</p>
-              </div>
-
-              <div class="col-md-4">
-                <h4>Purpose of Analysis</h4>
-                <p>{{reportDetails?.purpose}}</p>
-            </div>
-
-            <div class="col-md-4">
-              <h4>Condition</h4>
-              <p>{{reportDetails.condition}}</p>
-          </div>
-          </div>
-          <div class="row">
-          </div>
+    </div>
+    <div class="view-page">
+      <h3 class="view-page-heading">Sample Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Sample ID</h4>
+          <p>{{reportDetails.id}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Sample Name </h4>
+          <p>{{reportDetails.name}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Commodity </h4>
+          <p>{{reportDetails?.commodity?.name}}</p>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>MFD</h4>
+          <p>{{reportDetails.mfd | date}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Best Before Date</h4>
+          <p>{{reportDetails.dfb | date}}</p>
+        </div>
 
-      <div class="view-page mt-3">
-        <h3 class="view-page-heading">Parameter Details</h3>
-        <div class="row">
-          <div class="col-md-12">
-            <table class="table table-bordered">
-              <tr>
+        <div class="col-md-4">
+          <h4>Batch</h4>
+          <p>{{reportDetails.batch}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Brand</h4>
+          <p>{{reportDetails.brand}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Purpose of Analysis</h4>
+          <p>{{reportDetails?.purpose}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Condition</h4>
+          <p>{{reportDetails.condition}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-page mt-3">
+      <h3 class="view-page-heading">Parameter Details</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered">
+            <tr>
               <th>S.N</th>
               <th>Parameter Name</th>
               <th>Formula</th>
@@ -105,23 +102,28 @@
               <th>Tested By</th>
               <th>Result</th>
               <th>Status</th>
+            </tr>
+            <tbody>
+              <tr *ngFor="let r of reportDetails.parameters; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{r.name | titlecase}}</td>
+                <td>{{r.formula}}</td>
+                <td>{{r.ref_test_method}}</td>
+                <td>{{r.units}}</td>
+                <td>Rs.{{r.price}}</td>
+                <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
+                <td>{{r?.result}}</td>
+                <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
               </tr>
-              <tbody>
-                <tr *ngFor="let r of reportDetails.parameters; let i = index;">
-                  <td>{{i+1}}</td>
-                  <td>{{r.name | titlecase}}</td>
-                  <td>{{r.formula}}</td>
-                  <td>{{r.ref_test_method}}</td>
-                  <td>{{r.units}}</td>
-                  <td>Rs.{{r.price}}</td>
-                  <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
-                  <td>{{r?.result}}</td>
-                  <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
+
+       <!-- <div class="col-md-12 text-end">
+        <button class="btn btn-primary btn-sm mx-1">Download Report</button>
+        <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
+       </div> -->
+      </div>
     </div>
   </div>
 </div>

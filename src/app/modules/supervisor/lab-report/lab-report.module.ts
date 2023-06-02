@@ -14,6 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [LabReportComponent],
@@ -33,7 +35,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSortModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AvatarModule,
+    SharedModule
    ],
   exports: [],
   providers: [LabReportService],

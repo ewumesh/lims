@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./sample-request.scss'],
   animations: [collectionInOut]
 })
-export class SampleRequestsComponent implements OnInit {
+export class SampleRequestsComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
   isfilterBtnLoading: boolean = false;
@@ -79,7 +79,7 @@ export class SampleRequestsComponent implements OnInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource = response.results;
+      this.dataSource.data = response;
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;
@@ -98,7 +98,7 @@ export class SampleRequestsComponent implements OnInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource = response.results;
+      this.dataSource.data = response;
       this.isLoading = false;
       this.isfilterBtnLoading = false;
     },(error) => {
@@ -134,5 +134,11 @@ export class SampleRequestsComponent implements OnInit {
     //   width: '600px',
     //   autoFocus: false,
     // })
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.dataSource.paginator = this.paginator;
   }
 }
