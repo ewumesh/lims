@@ -16,6 +16,7 @@ import { SampleRequestsService } from 'src/app/services/sample-request/sample-re
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 // import { AssignSampleDialogComponent } from '../sample-request-details/payment/assign-sample-dialog.component';
 // import { AssignSampleComponent } from '../sample-request-details/assign/assign-sample.component';
 
@@ -44,6 +45,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
 
     DeleteConfirmModule
    ],

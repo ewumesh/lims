@@ -30,4 +30,16 @@ export class SampleRequestsService {
     // return this.http.post(`${this.url}/api/sample-form-has-parameter-assign-users/`, payload)
     return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
   }
+
+  // #report_type:['pdf','excel','csv']
+// #report_name:['admin-list','users-list','user-with-sample-form','sample-form','commodity','parameter']
+
+downloadReport(payload) {
+  let url = `${this.url}/api/report/get-report/${payload.report_name}/${payload.report_type}/${payload.report_lang}/`
+  this.http.get(url);
+
+  window.location.href = url;
+
+  // return url;
+}
 }

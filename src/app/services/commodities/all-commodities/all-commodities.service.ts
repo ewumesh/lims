@@ -21,4 +21,13 @@ export class AllCommoditiesService {
   getCommodityCategories(): Observable<any> {
     return this.http.get(`${this.url}/api/commodity-category/`);
   }
+
+  downloadReport(payload) {
+    let url = `${this.url}/api/report/get-report/${payload.report_name}/${payload.report_type}/${payload.report_lang}/`
+    this.http.get(url);
+
+    window.location.href = url;
+
+    // return url;
+  }
 }

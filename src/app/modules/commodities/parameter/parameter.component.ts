@@ -169,6 +169,15 @@ export class ParameterComponent implements OnInit, AfterViewInit {
     })
   }
 
+  download(type) {
+    let payload = {
+      report_name: 'parameter',
+      report_type: type,
+      report_lang: 'en'
+    }
+
+    this.sService.downloadReport(payload);
+  }
   resetFilter() {
     this.filterForm.reset();
     this.getParameters();

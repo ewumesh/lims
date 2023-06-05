@@ -25,6 +25,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   isLoading: boolean = true;
   message: any;
 
+  isSampleSent = false;
+
   maxDate: any;
 
   // Used for form validation
@@ -208,9 +210,11 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   saveChanges() {
+    this.isSampleSent = true;
     if (this.addSampleForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isSampleSent = false;
       return;
     }
 
@@ -235,6 +239,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     this.service.addSample(payload).subscribe(response => {
+      this.isSampleSent = false;
       if(this.userDetails.id === 1) {
         this.router.navigate(['/dashboard/sample-requests']);
       } else {
@@ -265,6 +270,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
           // }, 3000);
         }
         this.isLoading = false;
+        this.isSampleSent = false;
       })
 
   }

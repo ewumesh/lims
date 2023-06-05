@@ -62,6 +62,15 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     this.getAllUsers();
   }
 
+  download(fileType) {
+    let payload = {
+      report_type: fileType,
+      report_name: 'users-list',
+      report_lang: 'eng'
+    }
+    this.allUsersService.downloadReport(payload);
+  }
+
   initFilterForm() {
     this.filterForm = this.fb.group({
       search: '',

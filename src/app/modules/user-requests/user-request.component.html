@@ -1,5 +1,5 @@
 <form [formGroup]="filterForm" class="row">
-  <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-6' : 'col-md-8'">
+  <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-4' : 'col-md-6'">
     <mat-form-field appearance="outline" class="w-100">
       <!-- <mat-label>Filter</mat-label> -->
       <input formControlName="search" class="custom-input" matInput  placeholder="Search" #input>
@@ -30,6 +30,13 @@
   <div class="col-md-1 text-end">
     <button [disabled]="isFilterBtnLoading" (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
   </div>
+
+  <div class="col-md-2">    <button class="btn btn-secondary w-100 h-45" [matMenuTriggerFor]="menu">Download <i class="fa fa-caret-down"></i></button>
+    <mat-menu #menu="matMenu">
+      <button (click)="download('excel')" mat-menu-item>EXCEL</button>
+      <button (click)="download('pdf')" mat-menu-item>PDF</button>
+    </mat-menu>
+  </div>
 </form>
 
 
@@ -52,7 +59,7 @@
     </ng-container>
 
     <ng-container matColumnDef="clientType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Type </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </th>
       <td mat-cell *matCellDef="let row">
         {{row.first_name | titlecase}}  {{row.last_name | titlecase}}
       </td>
@@ -66,8 +73,8 @@
     <ng-container matColumnDef="phone">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.role">{{row.role}}</span>
-        <span *ngIf="!row.role" class="text-muted">N/A</span>
+        <span *ngIf="row.phone">{{row.phone}}</span>
+        <span *ngIf="!row.phone" class="text-muted">N/A</span>
       </td>
     </ng-container>
 

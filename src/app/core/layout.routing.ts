@@ -391,6 +391,16 @@ const routes: Routes = [
   },
 
   {
+    path: 'sample-verify-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [6]
+    },
+    loadChildren: () => import('src/app/modules/verifier/sample-verify-details/sample-verify-details.module')
+      .then(m => m.SampleVerifyDetailsModule)
+  },
+
+  {
     path: 'verify-report',
     canActivate: [RoleGuard],
     data: {
@@ -398,6 +408,16 @@ const routes: Routes = [
     },
     loadChildren: () => import('src/app/modules/verifier/verify-report/verify-report.module')
       .then(m => m.VerifyReportModule)
+  },
+
+  {
+    path: 'verify-sample-report/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [6]
+    },
+    loadChildren: () => import('src/app/modules/verifier/verify-sample-report/verify-sample-report.module')
+      .then(m => m.VerifySampleReportModule)
   },
 
 

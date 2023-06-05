@@ -15,6 +15,7 @@ import { AllUsersService } from 'src/app/services/user-management/all-user/all-u
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AllUsersComponent],
@@ -35,6 +36,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSelectModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
 
     DeleteConfirmModule
    ],

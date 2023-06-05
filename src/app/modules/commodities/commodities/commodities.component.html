@@ -105,12 +105,13 @@
         <div class="col-md-2">
           <button (click)="resetfilter()" class="btn btn-danger w-100 mx-2 h-45">Reset</button>
         </div>
+
         <div class="col-md-2">
-          <button class="btn btn-primary dropdown-toggle w-100 mx-2 h-45" [matMenuTriggerFor]="downloadMenu">Download</button>
+          <button class="btn btn-secondary dropdown-toggle h-45 w-100" [matMenuTriggerFor]="downloadMenu">Download</button>
 
           <mat-menu class="download-menu" #downloadMenu="matMenu">
-            <button mat-menu-item>PDF</button>
-            <button mat-menu-item>CSV</button>
+            <button (click)="download('pdf')" mat-menu-item>PDF</button>
+            <button (click)="download('excel')" mat-menu-item>EXCEL</button>
           </mat-menu>
         </div>
       </form>

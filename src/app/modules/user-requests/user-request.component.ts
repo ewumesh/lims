@@ -132,6 +132,15 @@ export class UserRequestsComponent {
     this.router.navigate(['/dashboard/update-user', id]);
   }
 
+  download(type) {
+    let payload = {
+      report_type: type,
+      report_name: 'users-list',
+      report_lang: 'eng'
+    }
+    this.userRequestsService.downloadReport(payload);
+  }
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

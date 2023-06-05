@@ -211,7 +211,12 @@
 
     <div class="my-4 row">
       <div class="col-sm-12 text-end">
-        <button [disabled]="sampleId" type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="sampleId" type="submit" class="btn btn-primary">
+          <span *ngIf="!isSampleSent">Submit</span>
+            <span *ngIf="isSampleSent">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
       </div>
     </div>
   </form>

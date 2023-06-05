@@ -98,6 +98,16 @@ export class CommoditiesComponent implements OnInit {
     })
   }
 
+  download(type) {
+    let payload = {
+      report_name: 'commodity',
+      report_type: type,
+      report_lang: 'en'
+    }
+
+    this.cService.downloadReport(payload);
+  }
+
   getCommodityCategoryName(id) {
     let category = this.commodityCategories?.find(a => a.id === id);
     return category?.name

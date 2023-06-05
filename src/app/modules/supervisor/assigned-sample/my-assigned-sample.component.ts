@@ -62,7 +62,7 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource.data = response;
+      this.dataSource.data = response.results;
       this.isLoading = false;
     },
     (error) => {
@@ -117,7 +117,7 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource = response;
+      this.dataSource = response.results;
       this.isLoading = false;
       this.isFilterBtnLoading = false;
     },

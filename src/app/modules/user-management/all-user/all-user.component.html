@@ -1,8 +1,5 @@
-<form  [formGroup]="filterForm" class="row">
-  <div
-
-    [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-6' : 'col-md-8'"
-    >
+<form [formGroup]="filterForm" class="row">
+  <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-4' : 'col-md-6'">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
@@ -30,9 +27,9 @@
   <div class="col-md-1 text-end">
     <button (click)="filter()" [disabled]="filterBtnLoading" class="btn btn-primary w-100 h-45">
       <span *ngIf="!filterBtnLoading">Filter</span>
-            <span *ngIf="filterBtnLoading">
-              <i class="fa fa-circle-o-notch fa-spin"></i>
-            </span>
+      <span *ngIf="filterBtnLoading">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </span>
     </button>
   </div>
 
@@ -41,11 +38,19 @@
       Reset
     </button>
   </div>
+
+  <div class="col-md-2">    <button class="btn btn-secondary w-100 h-45" [matMenuTriggerFor]="menu">Download <i class="fa fa-caret-down"></i></button>
+    <mat-menu #menu="matMenu">
+      <button (click)="download('excel')" mat-menu-item>EXCEL</button>
+      <button (click)="download('pdf')" mat-menu-item>PDF</button>
+    </mat-menu>
+  </div>
 </form>
 
 
 <div>
-  <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort [@collectionInOut]="dataSource.data?.length">
+  <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
+    [@collectionInOut]="dataSource.data?.length">
 
     <ng-container matColumnDef="sn">
       <th mat-header-cell *matHeaderCellDef> S.N </th>
@@ -68,7 +73,8 @@
     <ng-container matColumnDef="fullName">
       <th mat-header-cell *matHeaderCellDef> Full Name </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.first_name || row.last_name"> {{row.first_name | titlecase}}  {{row.last_name | titlecase}}</span>
+        <span *ngIf="row.first_name || row.last_name"> {{row.first_name | titlecase}} {{row.last_name |
+          titlecase}}</span>
         <span *ngIf="!row.first_name && !row.last_name" class="text-muted">N/A</span>
       </td>
     </ng-container>
@@ -97,10 +103,18 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <button [matTooltip]="'View User Details'" (click)="viewUserDetails(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
-        <button [matTooltip]="'Download User Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
-        <button [matTooltip]="'Edit User Details'" (click)="updateUser(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
-        <button [matTooltip]="'Delete User'" (click)="deleteUser(row.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
+        <button [matTooltip]="'View User Details'" (click)="viewUserDetails(row.id)"
+          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view"
+            fontIcon="remove_red_eye"></mat-icon></button>
+        <button [matTooltip]="'Download User Details'"
+          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download"
+            fontIcon="save_alt"></mat-icon></button>
+        <button [matTooltip]="'Edit User Details'" (click)="updateUser(row.id)"
+          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit"
+            fontIcon="edit"></mat-icon></button>
+        <button [matTooltip]="'Delete User'" (click)="deleteUser(row.id)"
+          class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false"
+            aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
       </td>
     </ng-container>
 
@@ -123,6 +137,6 @@
     </div>
   </div>
 
-  <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
+    aria-label="Select page of users"></mat-paginator>
 </div>
-

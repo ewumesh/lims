@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { SampleVerifyService } from 'src/app/services/verifier/sample-verify/sample-verify.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 
@@ -22,12 +23,17 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: SampleVerifyService
+    private service: SampleVerifyService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.getSampleDetails();
+  }
+
+  viewRequestDetails(id) {
+    this.router.navigate(['/dashboard/sample-verify-details', id]);
   }
 
   initForm() {

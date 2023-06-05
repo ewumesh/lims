@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewUserDetailsService } from 'src/app/services/user-management/view-user/view-user.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { ViewImageComponent } from '../../my-account/view-image/view-image';
+import { LayoutService } from 'src/app/core/layout.service';
 
 @Component({
   templateUrl: './view-user.component.html',
@@ -18,8 +19,13 @@ export class ViewUserDetailsComponent implements OnInit {
 
   loggedUser:any;
 
+  isApprove = false;
+
+  roles: any[] = [];
+
   constructor(
     private service:ViewUserDetailsService,
+    private layoutService: LayoutService,
     private route: ActivatedRoute,
     private toast: ToastService,
     private dialog: MatDialog
@@ -31,9 +37,11 @@ export class ViewUserDetailsComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.getUserDetails();
     this.gerCategories();
+    this.getRoles();
   }
 
   approveuser() {
+    this.isApprove = true;
     let payload = {
       id: this.userDetails.id,
       is_verified: 1
@@ -42,7 +50,20 @@ export class ViewUserDetailsComponent implements OnInit {
     this.service.approveUser(payload).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'User Approved Successfully!');
       this.getUserDetails();
+      this.isApprove = false;
     })
+  }
+
+  getRoles() {
+    this.layoutService.getRoles().subscribe(res => {
+      console.log(res, "RESPONSE")
+      this.roles = res.roles;
+    })
+  }
+
+  getRoleName(id) {
+    let role = this.roles.find(a => a.role_id === id);
+    return role?.role_name
   }
 
   viewImage(url) {

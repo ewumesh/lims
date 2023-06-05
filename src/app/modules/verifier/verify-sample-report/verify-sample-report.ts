@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
-import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
-  templateUrl: './sample-report.component.html',
-  styleUrls: ['./sample-report.scss']
+  templateUrl: './verify-sample-report.html',
+  styleUrls: ['./verify-sample.scss']
 })
-export class SampleReportComponent implements OnInit {
-
+export class VerifySampleReportomponent implements OnInit {
   isLoading = true;
 
   reportDetails: any= {};

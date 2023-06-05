@@ -12,7 +12,7 @@ export class TestRequestDetailsService {
   constructor(private http: HttpClient) {}
 
   getTestRequestDetails(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}`);
+    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}&status=`);
   }
 
 
@@ -26,5 +26,9 @@ export class TestRequestDetailsService {
 
   calculateResult(payload):Observable<any> {
     return this.http.post(`${this.url}/api/formula-calculate/`, payload)
+  }
+
+  sendForVarification(payload, id) {
+    return this.http.patch(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`, payload);
   }
 }

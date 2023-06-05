@@ -123,6 +123,17 @@
     </div>
   </div>
 
+  <div class="row m-0 p-0" *ngIf="testRequestDetails.is_tested && testRequestDetails.status === 'processing'">
+    <div class="col-md-12 text-end py-4 pl-2">
+      <button [disabled]="isSend" (click)="sendToSupervisor()" class="btn btn-primary btn-sm">
+        <span *ngIf="!isSend">Send to Supervisor</span>
+            <span *ngIf="isSend">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+      </button>
+    </div>
+  </div>
+
 
   <!-- <div class="row mt-4 p-4">
     <div class="col-md-12 text-end">

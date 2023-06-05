@@ -13,6 +13,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SampleVerifyDetailsService } from 'src/app/services/verifier/sample-verify-details/sample-verify-details.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [SampleVerifyDetailsComponent],
@@ -31,7 +34,9 @@ import { SampleVerifyDetailsService } from 'src/app/services/verifier/sample-ver
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
-
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
     SharedModule
    ],
   exports: [],

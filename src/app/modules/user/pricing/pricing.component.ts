@@ -70,7 +70,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       category: this.filterForm.value.category
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
-      this.dataSource = res.results;
+      this.dataSource.data = res.results;
       this.isLoading = false;
     })
   }

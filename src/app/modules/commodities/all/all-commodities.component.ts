@@ -43,6 +43,16 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
     this.initFilterForm();
   }
 
+  download(type) {
+    let payload = {
+      report_name: 'commodity-with-parameter',
+      report_type: type,
+      report_lang: 'en'
+    }
+
+    this.allCommoditiesService.downloadReport(payload);
+  }
+
   getAllCommodities() {
     // this.dataSource = null
     this.isLoading = true;

@@ -127,7 +127,12 @@
       </div>
 
 
-      <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">Submit</button>
+      <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">
+        <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+      </button>
 
       <button (click)="gotoLogin()" type="button" class="bt btn-default w-100 h-45 mt-3">Back to Login</button>
     </form>

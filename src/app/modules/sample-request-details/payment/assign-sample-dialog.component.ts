@@ -78,7 +78,7 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getUsersList(payload).subscribe(res => {
-      this.users = res
+      this.users = res;
     })
   }
 
@@ -111,6 +111,7 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
     this.service.sampleRequestPayment(payload, this.paymentReceipt).subscribe(res => {
       this.dialogRef.close();
       this.toast.showToast(TOAST_STATE.success, res.message);
+      this.dismissMessage();
     },
       (error) => {
         if (error.status === 400) {

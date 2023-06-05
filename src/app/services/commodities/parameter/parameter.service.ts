@@ -33,4 +33,13 @@ export class ParameterService {
     return this.http.delete(`${this.url}/api/test-result/${id}`);
   }
 
+  downloadReport(payload) {
+    let url = `${this.url}/api/report/get-report/${payload.report_name}/${payload.report_type}/${payload.report_lang}/`
+    this.http.get(url);
+
+    window.location.href = url;
+
+    // return url;
+  }
+
 }

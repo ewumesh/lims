@@ -28,6 +28,16 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   isLoading: boolean = true;
   isFilterBtnLoading: boolean = false;
 
+  download(type) {
+    let payload = {
+      report_name: 'user-request',
+      report_type: type,
+      report_lang: 'en'
+    }
+
+    this.service.downloadReport(payload);
+  }
+
   statusList: any[] = [
     { id: 1, name: 'pending' },
     { id: 2, name: 'success' },
@@ -79,7 +89,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource.data = response;
+      this.dataSource.data = response.results;
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;
@@ -98,7 +108,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
-      this.dataSource.data = response;
+      this.dataSource.data = response.results;
       this.isLoading = false;
       this.isfilterBtnLoading = false;
     },(error) => {

@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h1 class="text-lims-primary">User Category</h1>
         <hr/>
-        <span class="badge badge-primary" style="background-color: #2260bf;">Admin</span>
+        <span class="badge badge-primary" style="background-color: #2260bf;">{{getRoleName(userDetails.role)}}</span>
       </div>
     </div>
 
@@ -56,10 +56,6 @@
           <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
         </h3>
       </div>
-
-      <!-- <div class="col-md-12 text-end">
-        <button (click)="approveuser()" *ngIf="loggedUser?.role === 1 && userDetails.is_verified === 0" class="btn btn-success btn-sm">Approve</button>
-      </div> -->
     </div>
 
     <!-- <h1 class="text-lims-primary">Documents</h1> -->
@@ -77,6 +73,15 @@
         </h3>
         <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(userDetails?.renew_document)" [src]="userDetails?.renew_document" />
       </div>
+      </div>
+
+      <div class="col-md-12 text-end">
+        <button (click)="approveuser()" *ngIf="loggedUser?.role === 1 && userDetails.is_verified === 0" class="btn btn-success btn-sm">
+          <span *ngIf="!isApprove">Approve</span>
+            <span *ngIf="isApprove">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
       </div>
 
   </div>
