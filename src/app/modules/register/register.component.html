@@ -6,8 +6,8 @@
       <hr class="divider">
       <p class="login-detail">Enter your registrationdetails</p>
     </div>
-    <form class="userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
-      <div>
+    <form class="row userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
+      <div class="col-md-6">
         <label for="exampleInputFullName1" class="form-label">First Name*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="first_name" placeholder="Enter your First Name" />
@@ -16,7 +16,7 @@
         </mat-form-field>
       </div>
 
-      <div>
+      <div class="col-md-6">
         <label for="exampleInputFullName1" class="form-label">Last Name*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="last_name" placeholder="Enter your Last Name" />
@@ -24,7 +24,7 @@
             *ngIf="displayMessage?.last_name">{{displayMessage?.last_name}}</mat-error>
         </mat-form-field>
       </div>
-      <div>
+      <div class="col-md-6">
         <label for="exampleInputEmail1" class="form-label">Email Address (इ-मेल ठेगाना)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="email" placeholder="Enter your Email" />
@@ -33,7 +33,7 @@
         </mat-form-field>
       </div>
 
-      <div>
+      <div class="col-md-6">
         <label for="userName" class="form-label">Username*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="username" placeholder="Enter your username" />
@@ -41,7 +41,7 @@
             *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error>
         </mat-form-field>
       </div>
-      <div>
+      <div class="col-md-6">
         <label for="password" class="form-label">Password*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input type="password" matInput formControlName="password" placeholder="Enter Password" />
@@ -49,7 +49,7 @@
             *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
         </mat-form-field>
       </div>
-      <div>
+      <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="phone" placeholder="Enter your Phone Number" />
@@ -70,8 +70,8 @@
           </mat-form-field>
 
           <div class="hide" *ngIf="registerForm.value.client_category" [@rowsAnimation]="registerForm.value.client_category">
-            <fieldset class="subform">
-              <div class="mb-1">
+            <fieldset class="row subform">
+              <div class="col-md-12 mb-1">
                 <label class="form-label">Department Name</label>
                 <mat-form-field appearance="outline" class="w-100">
                     <input matInput formControlName="department_name" placeholder="Enter Department Name" />
@@ -79,7 +79,7 @@
                       *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
                   </mat-form-field>
               </div>
-              <div class="mb-1">
+              <div class="col-md-6 mb-1">
                 <label class="form-label">Department address</label>
                 <mat-form-field appearance="outline" class="w-100">
                     <input matInput formControlName="department_address" placeholder="Enter Department Address" />
@@ -87,7 +87,7 @@
                       *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
                   </mat-form-field>
               </div>
-              <div class="mb-1">
+              <div class="col-md-6 mb-1">
                 <label class="form-label">Registration No.</label>
                 <mat-form-field appearance="outline" class="w-100">
                     <input matInput formControlName="registration_number" placeholder="Enter Department Address" />
@@ -95,14 +95,14 @@
                       *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
                   </mat-form-field>
               </div>
-              <div class="mb-1">
+              <div class="col-md-12 mb-1">
                 <label for="file2">Registration Document</label>
                 <input (change)="uploadFile($event)" class="form-control" type="file" />
                 <span *ngIf="!img" class="text-danger">Registration Document is Required</span>
                 <!-- <input class="re-img" type="file" name="file2" id="file2" /> -->
                 <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
-              <div class="mb-1">
+              <div class=" col-md-12 mb-1">
                 <label for="secfile2">AP Renew Document</label>
                 <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
                 <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span>

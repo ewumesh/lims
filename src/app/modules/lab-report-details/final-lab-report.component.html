@@ -1,0 +1,143 @@
+<form [formGroup]="filterForm" class="row">
+  <div class="col-md-4">
+    <mat-form-field appearance="outline" class="w-100">
+      <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="outline" class="custom-select w-100">
+      <!-- <mat-label>From</mat-label> -->
+      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()"
+        (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="outline" class="custom-select w-100">
+      <!-- <mat-label>To</mat-label> -->
+      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()"
+        (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">
+    <mat-form-field appearance="outline" class="custom-select w-100">
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-1 text-end">
+    <button (click)="filter()" class="btn btn-primary w-100 h-45">
+      <span *ngIf="!isFilterBtnLoading">Filter</span>
+      <span *ngIf="isFilterBtnLoading">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </span>
+    </button>
+  </div>
+
+  <div class="col-md-1">
+    <button class="btn btn-danger w-100 h-45">
+      Reset
+    </button>
+  </div>
+</form>
+
+
+<div>
+  <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
+    [@collectionInOut]="dataSource.data?.length">
+
+    <ng-container matColumnDef="sn">
+      <th mat-header-cell *matHeaderCellDef> S.N </th>
+      <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="parameter">
+      <th mat-header-cell *matHeaderCellDef> Parameter </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignedDate">
+      <th mat-header-cell *matHeaderCellDef> Assigned Date </th>
+      <td mat-cell *matCellDef="let row">
+        <span *ngIf="row.assigned_date
+        ">{{row.assigned_date
+          | date}} </span>
+        <span *ngIf="!row.assigned_date
+        " class="text-muted">N/A</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignTo">
+      <th mat-header-cell *matHeaderCellDef> Tested By </th>
+      <td mat-cell *matCellDef="let row">
+        <div *ngIf="row && row?.first_name" class="authors-container" data-collaborators="10">
+          <div class="author">
+            <div class="mask cursor-pointer">
+              <ngx-avatar size="40" [name]="row.first_name + ' ' + row.last_name"
+                [matTooltip]="row.first_name + ' ' + row.last_name"></ngx-avatar>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!row?.first_name" class="text-muted">N/A</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let row">
+        <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{
+          row.status | titlecase }}</span>
+
+        <!-- <span *ngIf="row.status">{{row.status}} </span> -->
+        <span *ngIf="!row.status" class="text-muted">N/A</span>
+      </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let row">
+        <button *ngIf="row.exist" (click)="viewReport(row.id)" [matTooltip]="'View Details'"
+          class="btn btn-primary btn-sm mx-1 pt-2">View</button>
+        <button (click)="assign()" *ngIf="!row.exist" class="btn btn-primary btn-sm">Assign</button>
+      </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell text-center py-5" colspan="8">
+        <img src="../../../../assets/no-data.svg" />
+        <div class="text-muted">Data Not Available.</div>
+
+      </td>
+    </tr>
+  </table>
+  <div class="row" *ngIf="isLoading">
+    <div class="col-md-12 text-center py-3">
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-0 p-0">
+    <div class="col-md-12 bg-white text-end p-4">
+      <button (click)="generateReport()" class="btn btn-primary">View Report</button>
+    </div>
+  </div>
+
+  <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
+    aria-label="Select page of users"></mat-paginator> -->
+</div>
+
+
+<div id="pdf-content" style="height: 11.7in;width: 8.3in;">
+
+  <!-- <div style="text-align: center; ">
+    <h1 style=" margin:auto; text-align: center;">National Food and Feed Reference Laboratory</h1>
+    <p style="text-align: center; font-weight: bold; font-size: 20px; margin: 0;">TEST REPORT</p>
+</div> -->
+</div>

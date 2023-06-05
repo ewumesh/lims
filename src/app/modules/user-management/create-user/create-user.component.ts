@@ -157,7 +157,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       email: this.userForm.value.email,
       password: this.userForm.value.password,
       confirmPassword: this.userForm.value.confirmPassword,
-      client_category: this.userForm.value.client_category,
+      client_category: 1,
       department_name: this.userForm.value.department_name,
       department_address: this.userForm.value.department_address,
       registration_number: this.userForm.value.registration_number,

@@ -271,7 +271,7 @@ const routes: Routes = [
     path: 'lab-report',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,3]
+      requiredRole: [1,2,3,4,5,6]
     },
     loadChildren: () => import('src/app/modules/lab-report/lab-report.module')
     .then(m => m.LabReportModule)
@@ -418,6 +418,22 @@ const routes: Routes = [
     },
     loadChildren: () => import('src/app/modules/verifier/verify-sample-report/verify-sample-report.module')
       .then(m => m.VerifySampleReportModule)
+  },
+
+  {
+    path: 'final-report/:id',
+    loadChildren: () => import('src/app/modules/lab-report-details/final-lab-report.module')
+      .then(m => m.FinalLabReportModule)
+  },
+
+  {
+    path: 'report/:id',
+    // canActivate: [RoleGuard],
+    // data: {
+    //   requiredRole: [1]
+    // },
+    loadChildren: () => import('src/app/modules/final-report-view/final-report-view.module')
+      .then(m => m.FinalReportViewModule)
   },
 
 
