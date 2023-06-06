@@ -45,7 +45,8 @@ export class TestRequestDetailsComponent implements OnInit {
       this.service.sendForVarification(payload, id).subscribe(res => {
         console.log(res, 'RESponse')
         this.isSend = false;
-        this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!")
+        this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!");
+        this.getTestResultDetails();
       }, (error) => {
         this.isSend = false;
       })

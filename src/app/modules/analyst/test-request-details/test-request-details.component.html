@@ -123,14 +123,18 @@
     </div>
   </div>
 
-  <div class="row m-0 p-0" *ngIf="testRequestDetails.is_tested && testRequestDetails.status === 'processing'">
-    <div class="col-md-12 text-end py-4 pl-2">
+  <div class="row m-0 p-0" >
+    <div class="col-md-12  text-end py-4 pl-2" *ngIf="testRequestDetails.is_tested && testRequestDetails.status === 'processing'">
       <button [disabled]="isSend" (click)="sendToSupervisor()" class="btn btn-primary btn-sm">
         <span *ngIf="!isSend">Send to Supervisor</span>
             <span *ngIf="isSend">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>
       </button>
+    </div>
+    <div class="text-end p-4" *ngIf="testRequestDetails.is_tested && testRequestDetails.status === 'completed'">
+
+      <span style="background-color: burlywood; padding: 8px" class="badge badge-primary">Sent</span>
     </div>
   </div>
 

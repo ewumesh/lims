@@ -32,19 +32,19 @@ export class VerifySampleReportomponent implements OnInit {
     this.isSending = true;
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
-      sample_form: id,
-      is_verified: false,
-      is_sent: true
+      id: this.sampleStatus[0].id,
+      // sample_form: id,
+      is_verified: true,
+      // is_sent: true
     }
 
     this.service.sendReportForVerification(payload).subscribe(res => {
-      console.log(res, "HAHAHAHAHAHHHHHHH")
       this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
       // this.toast.showToast(
       //   TOAST_STATE.danger,
       //   'All the field(s) are not valid.');
       // this.dissmissMessage();
-      this.isSampleSentForSupervisor()
+      this.isSampleSentForSupervisor();
       this.isSending = false;
     }, (error) => {
       this.isSending = false;

@@ -7,12 +7,15 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './auth/auth.service';
+import * as jwt_decode from 'jsonwebtoken';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthenticationService, private router: Router) { }
+
+  // token = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -26,5 +29,13 @@ export class AuthGuard implements CanActivate {
     }
     return true;
   }
+
+
+  // isTokenExpired(): boolean {
+  //   const decodedToken: any = jwt_decode(this.token);
+  //   const expirationDate: number = decodedToken.exp * 1000; // Convert to milliseconds
+
+  //   return expirationDate < Date.now();
+  // }
 }
 
