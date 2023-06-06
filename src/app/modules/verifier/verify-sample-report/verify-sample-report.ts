@@ -33,9 +33,9 @@ export class VerifySampleReportomponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
       id: this.sampleStatus[0].id,
-      // sample_form: id,
+      sample_form: id,
       is_verified: true,
-      // is_sent: true
+      is_sent: true
     }
 
     this.service.sendReportForVerification(payload).subscribe(res => {

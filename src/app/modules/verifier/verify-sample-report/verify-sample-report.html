@@ -1,8 +1,8 @@
 
 <div>
   <verify-report [reportDetails]="reportDetails" *ngIf="!isLoading"></verify-report>
-  <div class="row" *ngIf="reportDetails.status === 'completed'">
-    <div class="col-md-12 text-end mt-3">
+  <div class="row" *ngIf="reportDetails.status === 'not_verified'">
+    <div class="col-md-12 text-end mt-3" *ngIf="sampleStatus">
       <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
       <button [disabled]="sampleStatus[0].is_verified && sampleStatus[0].is_sent" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
         <span *ngIf="!isSending">Verify</span>
@@ -21,5 +21,3 @@
     </div>
   </div>
 </div>
-
-{{sampleStatus | json}}

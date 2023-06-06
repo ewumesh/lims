@@ -1,7 +1,7 @@
 
 <div>
   <app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
-  <div class="row" *ngIf="reportDetails.status === 'completed'">
+  <div class="row" *ngIf="reportDetails.status === 'not_verified'">
     <div class="col-md-12 text-end mt-3">
       <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
       <button [disabled]="sampleStatus.length > 0" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">

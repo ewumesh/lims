@@ -12,7 +12,7 @@ export class AssignedSampleService {
   constructor(private http: HttpClient) {}
 
   getAllSampleRequsets(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&supervisor_user=${payload.user}&from=${payload.from}&to=${payload.to}`)
+    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&supervisor_user=${payload.user}`)
   }
 
   getUsersList(payload):Observable<any> {

@@ -52,7 +52,7 @@
       <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput formControlName="phone" placeholder="Enter your Phone Number" />
+          <input matInput type="number" formControlName="phone" placeholder="Enter your Phone Number" />
           <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
             *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>
@@ -63,37 +63,39 @@
             ग्राहक वर्ग)*</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="client_category" placeholder="Select Category">
-              <mat-option *ngFor="let c of clientCategories; let i = index" [value]="c.id">{{c.name | titlecase}}</mat-option>
+              <mat-option *ngFor="let c of clientCategories; let i = index" [value]="c.id">{{c.name |
+                titlecase}}</mat-option>
             </mat-select>
             <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
               *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
           </mat-form-field>
 
-          <div class="hide" *ngIf="registerForm.value.client_category" [@rowsAnimation]="registerForm.value.client_category">
+          <div class="hide" *ngIf="registerForm.value.client_category"
+            [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
                 <label class="form-label">Department Name</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="department_name" placeholder="Enter Department Name" />
-                    <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
-                      *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
-                  </mat-form-field>
+                  <input matInput formControlName="department_name" placeholder="Enter Department Name" />
+                  <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
+                    *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
+                </mat-form-field>
               </div>
               <div class="col-md-6 mb-1">
                 <label class="form-label">Department address</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="department_address" placeholder="Enter Department Address" />
-                    <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
-                      *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
-                  </mat-form-field>
+                  <input matInput formControlName="department_address" placeholder="Enter Department Address" />
+                  <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
+                    *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
+                </mat-form-field>
               </div>
               <div class="col-md-6 mb-1">
                 <label class="form-label">Registration No.</label>
                 <mat-form-field appearance="outline" class="w-100">
-                    <input matInput formControlName="registration_number" placeholder="Enter Department Address" />
-                    <mat-error [@rowsAnimation]="displayMessage?.registration_number" class="text-danger"
-                      *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
-                  </mat-form-field>
+                  <input matInput formControlName="registration_number" placeholder="Enter Department Address" />
+                  <mat-error [@rowsAnimation]="displayMessage?.registration_number" class="text-danger"
+                    *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
+                </mat-form-field>
               </div>
               <div class="col-md-12 mb-1">
                 <label for="file2">Registration Document</label>
@@ -129,9 +131,9 @@
 
       <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">
         <span *ngIf="!isLoading">Submit</span>
-            <span *ngIf="isLoading">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-            </span>
+        <span *ngIf="isLoading">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
       </button>
 
       <button (click)="gotoLogin()" type="button" class="bt btn-default w-100 h-45 mt-3">Back to Login</button>
