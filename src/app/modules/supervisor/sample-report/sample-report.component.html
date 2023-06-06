@@ -5,7 +5,7 @@
     <div class="col-md-12 text-end mt-3">
       <button class="btn btn-primary btn-sm mx-1">Download Report</button>
       <button [disabled]="sampleStatus.length > 0" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
-        <span *ngIf="!isSending">Send for Verificationin</span>
+        <span *ngIf="!isSending">Send for Verification</span>
             <span *ngIf="isSending">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>
