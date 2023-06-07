@@ -39,17 +39,26 @@ export class TestRequestDetailsComponent implements OnInit {
       this.isSend = true;
       // this.service.
       let payload  ={
-        status: 'completed'
+        status: 'completed',
+        is_supervisor_sent: true
       }
       let id = this.route.snapshot.paramMap.get('id')
       this.service.sendForVarification(payload, id).subscribe(res => {
         console.log(res, 'RESponse')
         this.isSend = false;
         this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!");
+        this.dismissToast();
         this.getTestResultDetails();
       }, (error) => {
         this.isSend = false;
       })
+    }
+
+    dismissToast() {
+      setTimeout(() => {
+        this.toast.dismissToast();
+      }, 1500);
+
     }
 
   getTestResultDetails() {

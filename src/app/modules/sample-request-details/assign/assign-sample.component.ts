@@ -92,6 +92,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
       this.toast.showToast(TOAST_STATE.success, res?.message);
       this.dialogRef.close();
       this.isLoading = false;
+      this.dismissMessage();
     },
     (error) => {
       this.isLoading = false;
@@ -131,7 +132,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
   private dismissMessage(): void {
     setTimeout(() => {
       this.toast.dismissToast();
-    }, 5000);
+    }, 1000);
   }
 
   private validation() {

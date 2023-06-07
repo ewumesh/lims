@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   private dismissMessage(): void {
     setTimeout(() => {
       this.toast.dismissToast();
-    }, 5000);
+    }, 1000);
   }
 
   navigateToRegister() {

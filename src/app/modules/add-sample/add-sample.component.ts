@@ -46,6 +46,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   totalPrice = 0;
   priceOfCommodity: number = 0;
 
+  responseError = null;
+
 
   // isParameter = false
 
@@ -252,24 +254,13 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
       this.dismissMessage();
       this.isLoading = true;
+      this.message = {};
+      this.responseError = null;
     },
       (error) => {
-        if (error.status === 400) {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'Entered Data not Valid. Please check it once.');
-          // setTimeout(() => {
-            this.dismissMessage();
-          // }, 3000);
-        } else {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            error?.error?.message);
-
-          // setTimeout(() => {
-            this.dismissMessage();
-          // }, 3000);
-        }
+        window.scroll(0,0)
+        this.message = {};
+        this.responseError = error?.error;
         this.isLoading = false;
         this.isSampleSent = false;
       })

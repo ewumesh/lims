@@ -50,6 +50,7 @@ export class ViewUserDetailsComponent implements OnInit {
     this.service.approveUser(payload).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'User Approved Successfully!');
       this.getUserDetails();
+      this.dismissMessage();
       this.isApprove = false;
     })
   }

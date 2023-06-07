@@ -44,6 +44,7 @@ export class VerifySampleReportomponent implements OnInit {
       //   TOAST_STATE.danger,
       //   'All the field(s) are not valid.');
       // this.dissmissMessage();
+      this.dissmissMessage();
       this.isSampleSentForSupervisor();
       this.isSending = false;
     }, (error) => {

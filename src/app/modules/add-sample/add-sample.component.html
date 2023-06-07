@@ -11,6 +11,13 @@
           {{message?.messageBody}}
         </div>
       </div>
+      <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-danger" role="alert">
+          <li *ngFor="let item of responseError | keyvalue">
+            {{item.key}}:{{item.value}}
+          </li>
+        </div>
+      </div>
       <div class="col-sm-6">
         <label for="sampleName" class="col-form-label">Name of Sample (नमूनाको नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">

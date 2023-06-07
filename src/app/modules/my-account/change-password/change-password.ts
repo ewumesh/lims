@@ -21,8 +21,10 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
     private formInputElements: ElementRef[];
 
     userDetails:any;
+
     isLoading = false;
-    message:any;
+    message:any = {};
+    responseError = null;
 
   constructor(
     private fb:FormBuilder,
@@ -56,6 +58,7 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
     if (this.changePasswordForm.pristine) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
+      window.scroll(0,0);
       this.isLoading = false;
       return;
     }
@@ -68,36 +71,13 @@ export class changePasswordComponent implements OnInit, AfterViewInit {
       this.dissmissMessage();
       this.dialogRef.close();
       this.isLoading = false;
+      this.message = {};
+      this.responseError = null;
     },(error) => {
-      if (error.status === 400) {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'All the field(s) are not valid.');
-
-        setTimeout(() => {
-          this.dissmissMessage();
-        }, 3000);
-      }else if(error.status === 500 && error.status > 500 ) {
-
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'Internal Server Error');
-
-        setTimeout(() => {
-          this.dissmissMessage();
-        }, 3000);
-
-
-      } else {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          error?.error?.error);
-
-        setTimeout(() => {
-          this.dissmissMessage();
-        }, 3000);
-      }
-      this.isLoading = false;
+        this.message = {};
+        this.isLoading = false;
+        window.scroll(0,0);
+        this.responseError = error.error;
     })
   }
 

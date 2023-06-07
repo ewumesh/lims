@@ -26,7 +26,8 @@ export class AssignComponent implements OnInit, AfterViewInit {
     @ViewChildren(FormControlName, { read: ElementRef })
     private formInputElements: ElementRef[];
 
-    message: any
+    message: any = {};
+    responseError = null;
 
   constructor(
     private service: LabRequestDetailsService,
@@ -106,6 +107,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
   submit() {
     this.isLoading = true;
     if (this.assignToAnalystform.pristine) {
+      window.scroll(0,0);
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isLoading = false;
@@ -123,38 +125,14 @@ export class AssignComponent implements OnInit, AfterViewInit {
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {
       this.dialogRef.close();
       this.toast.showToast(TOAST_STATE.success, res?.message);
+      this.dismissMessage();
       this.isLoading = false;
+      this.message = {};
+      this.responseError = null;
     },(error) => {
-      if (error.status === 400) {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'All the field(s) are not valid.');
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      } else if (error.status === 500 && error.status > 500) {
-
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'Internal Server Error');
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-
-
-      } else {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          error?.error?.error);
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      }
+      this.message = {};
+      this.responseError = error?.error;
       this.isLoading = false;
-
     })
   }
 

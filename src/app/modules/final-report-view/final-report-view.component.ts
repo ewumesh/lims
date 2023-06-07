@@ -37,9 +37,8 @@ export class FinalReportViewComponent implements OnInit {
     }
 
     this.service.sendReportForVerification(payload).subscribe(res => {
-      console.log(res, "HAHAHAHAHAHHHHHHH")
       this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
-
+      this.dissmissMessage();
       // this.isSampleSentForSupervisor()
       this.isSending = false;
     }, (error) => {

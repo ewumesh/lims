@@ -150,7 +150,7 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
   private dismissMessage(): void {
     setTimeout(() => {
       this.toast.dismissToast();
-    }, 5000);
+    }, 1000);
   }
 
   ngAfterViewInit(): void {

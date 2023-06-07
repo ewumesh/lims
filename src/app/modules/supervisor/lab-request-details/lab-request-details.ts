@@ -70,7 +70,7 @@ export class LabRequestDetailsComponent implements OnInit {
     })
 
     instance.afterClosed().subscribe(res => {
-      // this.getSampleRequests();
+      this.getSampleDetails();
     })
   }
 
