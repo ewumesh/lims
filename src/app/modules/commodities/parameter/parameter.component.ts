@@ -98,7 +98,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
       id: '',
 
-      name: ['', Validators.required],
+      name: [''],
       test_type: [''],
       commodity: [''],
       ref_test_method: [''],
@@ -185,6 +185,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
   resetFilter() {
     this.filterForm.reset();
     this.getParameters();
+    this.message = {};
+    this.responseError = null;
   }
 
   displayFn(data: any): string {
@@ -228,6 +230,14 @@ export class ParameterComponent implements OnInit, AfterViewInit {
   }
 
   saveChanges() {
+    this.submitBtn = true;
+    if (this.parameterForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      window.scroll(0,0);
+      this.submitBtn = false;
+      return;
+    }
 
     let payload = {
       test_type: this.parameterForm.value.test_type
@@ -244,36 +254,10 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         this.existingCategory = null;
       },
       (error) => {
-
-        if (error.status === 400) {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            error.message);
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        }else if(error.status === 500) {
-
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'Internal Server Error');
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-
-
-        } else {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            error?.error?.error);
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        }
-
+        window.scroll(0,0);
+        this.message = {};
+        this.responseError = error.error;
+        this.submitBtn = false;
       })
     } else {
       this.sService.addParameter(this.parameterForm.value).subscribe(res => {
@@ -287,35 +271,10 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         this.existingCategory = null;
       },
       (error) => {
-        if (error.status === 400) {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'All the field(s) are not valid.');
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        }else if(error.status === 500) {
-
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'Internal Server Error');
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-
-
-        } else {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            error?.error?.error);
-
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        }
-
+        window.scroll(0,0);
+        this.message = {};
+        this.responseError = error.error;
+        this.submitBtn = false;
       })
     }
   }
