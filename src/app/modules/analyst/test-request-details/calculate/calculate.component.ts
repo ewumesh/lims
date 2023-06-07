@@ -62,6 +62,8 @@ export class CalculateComponent implements OnInit {
     this.service.calculateResult(requestPayload).subscribe(res => {
       this.isCalculating = false;
       this.dialogRef.close();
+      this.toast.showToast(TOAST_STATE.success, 'Calculate successfully!');
+      this.dismissMessage();
     },
     (error) => {
       this.isCalculating = false;
