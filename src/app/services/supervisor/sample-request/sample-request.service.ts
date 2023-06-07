@@ -16,7 +16,11 @@ export class SampleReportService {
   }
 
   sendReportForVerification(payload):Observable<any> {
-    return this.http.patch(`${this.url}/api/sample-form-has-verifier/${payload.id}/`, payload)
+    return this.http.post(`${this.url}/api/sample-form-has-verifier/`, payload)
+  }
+
+  sendReportForVerificationFrom(payload, id):Observable<any> {
+    return this.http.patch(`${this.url}/api/sample-form-has-verifier/${id}`, payload)
   }
 
   isSentForVrification(payload):Observable<any> {

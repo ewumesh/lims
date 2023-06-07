@@ -17,26 +17,45 @@
               <div class="col-md-12 text-center pt-2">
                 <h1>Add Client Category</h1>
                 <hr />
+                <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    {{message?.messageBody}}
+                  </div>
+                </div>
+
+                <!-- <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    <li *ngFor="let item of responseError | keyvalue">
+                      {{item.value}}
+                    </li>
+                  </div>
+                </div> -->
+
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Category Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input class="form-control custom-input" matInput formControlName="name"
+                    <input class="custom-input" matInput formControlName="name"
                       placeholder="Enter Category Name" />
-                    <mat-error [@rowsAnimation]="displayMessage?.name" class="text-danger"
-                      *ngIf="displayMessage?.name">{{displayMessage?.name}}</mat-error>
+
                   </mat-form-field>
+                  <span [@rowsAnimation]="responseError" class="text-danger"
+                    *ngIf="responseError">
+                    <span *ngFor="let item of responseError | keyvalue">
+                      {{item.value}}
+                    </span>
+                  </span>
                 </div>
               </div>
 
               <div class="text-end">
                 <button class="btn btn-primary mx-1" (click)="saveChanges()">
-                  Save
-                  <!-- <span *ngIf="!loadingFormBtn">Save</span>
+                  <!-- Save -->
+                  <span *ngIf="!loadingFormBtn">Save</span>
             <span *ngIf="loadingFormBtn">
               <i class="fa fa-circle-o-notch fa-spin"></i>
-            </span> -->
+            </span>
                 </button>
                 <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
               </div>

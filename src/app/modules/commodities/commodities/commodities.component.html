@@ -8,6 +8,19 @@
               <div class="col-md-12 text-center pt-2">
                 <h1>Add Commodity</h1>
                 <hr />
+                <div *ngIf="message && message?.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    {{message?.messageBody}}
+                  </div>
+                </div>
+
+                <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                      <li *ngFor="let item of responseError | keyvalue">
+                        {{item.key}}:{{item.value}}
+                      </li>
+                    </div>
+                  </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
@@ -73,7 +86,12 @@
               </div>
 
               <div class="text-end">
-                <button class="btn btn-primary mx-1" (click)="saveChanges()">Save</button>
+                <button class="btn btn-primary mx-1" (click)="saveChanges()">
+                  <span *ngIf="!submitBtn">Save</span>
+            <span *ngIf="submitBtn">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+                </button>
                 <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
               </div>
 

@@ -189,7 +189,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       amendments: [''],
       note: [''],
       commodity: ['', Validators.required],
-      language: [''],
+      language: ['en'],
       parameters: [''],
       owner_user: '',
       isParameter: false,
@@ -215,6 +215,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isSampleSent = false;
+      window.scroll(0,0);
       return;
     }
 

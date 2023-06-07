@@ -37,6 +37,10 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
 
+  message:any = {};
+  responseError = null;
+  formBtnLoading = false;
+
   constructor(
     public dialog: MatDialog,
     private sService: CommodityCategoryService,
@@ -54,7 +58,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
     this.initFilterForm();
 
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       address: [''],
       reg_no: ['']
     })
@@ -93,6 +97,8 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
     this.sService.getAllCommodityCategories(payload).subscribe(res => {
       this.dataSource.data = res.results;
       this.isLoading = false;
+    },(error) => {
+
     })
   }
 
@@ -139,6 +145,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   saveChanges() {
+    this.formBtnLoading = true;
     if (this.existingCategory?.id) {
       this.sService.updateCategory(this.categoryForm.value, this.existingCategory.id).subscribe(res => {
         this.toast.showToast(
@@ -149,6 +156,14 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
         this.categoryForm.reset();
         this.categoryForm.clearValidators();
         this.existingCategory = null;
+
+        this.message = {};
+        this.responseError =null;
+        this.formBtnLoading = false;
+      }, (error) => {
+        this.message = {};
+      this.responseError = error.error;
+      this.formBtnLoading = false;
       })
     } else {
       this.sService.addCategory(this.categoryForm.value).subscribe(res => {
@@ -160,6 +175,14 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
         this.categoryForm.reset();
         this.categoryForm.clearValidators();
         this.existingCategory = null;
+
+        this.message = {};
+        this.responseError = null;
+        this.formBtnLoading = false;
+      }, (error)=> {
+        this.message = {};
+        this.responseError = error.error;
+        this.formBtnLoading = false;
       })
     }
   }

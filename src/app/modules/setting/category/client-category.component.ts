@@ -29,7 +29,8 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
   displayMessage: any = {};
   @ViewChildren(FormControlName, { read: ElementRef })
   private formInputElements: ElementRef[];
-
+  message:any = {};
+  responseError = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   existingCategory: any;
@@ -58,7 +59,7 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
 
   private initForm() {
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       address: [''],
       reg_no: ['']
     })
@@ -77,6 +78,14 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
 
   saveChanges() {
     this.loadingFormBtn = true;
+
+    if (this.categoryForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      window.scroll(0,0);
+      this.loadingFormBtn = false;
+      return;
+    }
       if(this.existingCategory?.id) {
         this.sService.updateCategory(this.categoryForm.value, this.existingCategory.id).subscribe(res => {
           this.loadingFormBtn = false;
@@ -86,8 +95,15 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
             this.getCategories();
             this.dismissMessage();
             this.categoryForm.reset();
-            this.categoryForm.clearValidators();
+            this.categoryForm.value.name = '  ';
+            this.message = {};
+            this.responseError = {};
+            // this.categoryForm.clearValidators();
             this.existingCategory = null;
+        },(error) => {
+          this.loadingFormBtn = false;
+          this.message =  {};
+          this.responseError = error.error;
         })
       } else {
       this.sService.addCategory(this.categoryForm.value).subscribe(res => {
@@ -100,12 +116,19 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
           this.categoryForm.reset();
           this.categoryForm.clearValidators();
           this.existingCategory = null;
+          this.responseError = {};
+      },(error) => {
+        this.responseError = error.error;
+        this.loadingFormBtn = false;
+        this.message =  {};
       })
     }
   }
 
   reset() {
     this.categoryForm.reset();
+    this.message = {};
+    this.responseError = {};
   }
 
   getCategories() {

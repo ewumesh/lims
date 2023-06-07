@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateUserService } from 'src/app/services/user-management/create-user/create-user.service';
 import { rowsAnimation } from 'src/app/shared/animations/animations';
+import { passwordMatchValidator } from 'src/app/shared/password-match/password-match';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 
@@ -55,11 +56,12 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       'last_name': {
         'required': 'Last Name is required.'
       },
-      'user_name': {
+      'username': {
         'required': 'User Name is required.'
       },
       'email': {
-        'required': 'Email is required.'
+        'required': 'Email is required.',
+        'pattern': 'Email is not valid.'
       },
       'password': {
         'required': 'Password is required.'
@@ -67,11 +69,14 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       'phone': {
         'required': 'Phone Number is required.'
       },
-      'confirmPassword': {
+      'confirm_password': {
         'required': 'Confirm Password is required.'
       },
       'client_category': {
         'required': 'Client Category is required.'
+      },
+      'role': {
+        'required': 'Role is required.'
       }
     })
   }
@@ -129,21 +134,28 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       last_name: ['', Validators.required],
       username: ['', Validators.required],
       phone: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password:['', Validators.required],
-      confirmPassword: ['',Validators.required],
+      confirm_password: ['',Validators.required],
       client_category: [1, Validators.required],
       department_name: [],
       department_address: [],
       registration_number: [''],
       date: [],
-      role: '',
+      role: ['', Validators.required],
       group: ['']
-    })
+    },{ validators: passwordMatchValidator })
   }
 
   saveChanges() {
     this.isLoading = true;
+
+    if (this.userForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isLoading = false;
+      return;
+    }
     let group = [];
     group.push(this.userForm.value.group);
     let payload = {
@@ -166,10 +178,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     }
 
     console.log(payload, 'PAYLOAD')
-    if (this.userForm.pristine) {
+    if (this.userForm.pristine || this.userForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isLoading = false;
+      window.scroll(0,0,)
       return;
     }
     if(this.userId === null) {

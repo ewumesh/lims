@@ -15,7 +15,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
   styleUrls: ['./commodities.component.scss']
 })
 export class CommoditiesComponent implements OnInit {
-  displayedColumns: string[] = ['sn', 'commodity', 'price','testDuration','units','category', 'action'];
+  displayedColumns: string[] = ['sn', 'commodity', 'price', 'testDuration', 'units', 'category', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -36,6 +36,10 @@ export class CommoditiesComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  message: any = {};
+  responseError = null;
+  submitBtn = false;
+
   constructor(
     public dialog: MatDialog,
     private sService: CommoditiesService,
@@ -48,11 +52,11 @@ export class CommoditiesComponent implements OnInit {
         'required': 'Category Name is required.'
       }
     })
-   }
+  }
 
   private initForm() {
     this.commoditiesForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       category: [''],
       test_duration: [''],
       price: '',
@@ -150,13 +154,14 @@ export class CommoditiesComponent implements OnInit {
   patchForm(data) {
     this.commoditiesForm.patchValue(
       {
+        id: this.existingCategory?.id,
         name: data.name,
         category: data.category,
         test_duration: data.test_duration,
         units: data.units,
         price: data.price
-       }
-      )
+      }
+    )
   }
 
   deleteCategory(id: number) {
@@ -175,17 +180,28 @@ export class CommoditiesComponent implements OnInit {
   }
 
   saveChanges() {
+    this.message = {};
+    this.responseError = null;
+    this.submitBtn = true;
+    if (this.commoditiesForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      window.scroll(0,0);
+      this.submitBtn = false;
+      return;
+    }
     if (this.existingCategory?.id) {
-      // this.sService.updateCategory(this.commoditiesForm.value, this.existingCategory.id).subscribe(res => {
-      //   this.toast.showToast(
-      //     TOAST_STATE.success,
-      //     res.message);
-      //   this.getCategories();
-      //   this.dismissMessage();
-      //   this.commoditiesForm.reset();
-      //   this.commoditiesForm.clearValidators();
-      //   this.existingCategory = null;
-      // })
+      this.sService.updateCommodity(this.commoditiesForm.value, this.existingCategory.id).subscribe(res => {
+        this.toast.showToast(
+          TOAST_STATE.success,
+          res.message);
+          this.getCommodities();
+          this.dismissMessage();
+          this.commoditiesForm.reset();
+          this.commoditiesForm.clearValidators();
+          this.existingCategory = null;
+          this.submitBtn = false;
+      })
     } else {
       this.sService.addCommodity(this.commoditiesForm.value).subscribe(res => {
         this.toast.showToast(
@@ -196,6 +212,16 @@ export class CommoditiesComponent implements OnInit {
         this.commoditiesForm.reset();
         this.commoditiesForm.clearValidators();
         this.existingCategory = null;
+
+
+        this.message = {};
+        this.responseError = null;
+        this.submitBtn = false;
+      }, (error) => {
+        window.scroll(0, 0);
+        this.message = {};
+        this.responseError = error.error;
+        this.submitBtn = false;
       })
     }
   }

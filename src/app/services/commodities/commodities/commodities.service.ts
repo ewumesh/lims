@@ -21,8 +21,8 @@ export class CommoditiesService {
     return this.http.post(`${this.url}/api/commodity/`,payload);
   }
 
-  updateCommodity(payload):Observable<any> {
-    return this.http.put(`${this.url}/api/commodity/`,payload);
+  updateCommodity(payload, id):Observable<any> {
+    return this.http.put(`${this.url}/api/commodity/${id}/`,payload);
   }
 
   deleteCommodity(commodityId):Observable<any> {

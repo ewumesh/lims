@@ -38,7 +38,7 @@ export class VerifySampleReportomponent implements OnInit {
       // is_sent: true
     }
 
-    this.service.sendReportForVerification(payload).subscribe(res => {
+    this.service.sendReportForVerificationFrom(payload, id).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
       // this.toast.showToast(
       //   TOAST_STATE.danger,

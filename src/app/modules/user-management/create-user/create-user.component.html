@@ -1,6 +1,6 @@
 <div class="row m-0">
-  <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12 m-0 p-0">
-    <div class="alert alert-info" role="alert">
+  <div  class="col-sm-12 col-md-12 col-lg-12 m-0 p-0">
+    <div *ngIf="message && message?.messageBody" class="alert alert-danger" role="alert">
       {{message?.messageBody}}
     </div>
   </div>
@@ -46,7 +46,7 @@
         <div class="col-md-4">
           <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+            <input type="number" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
             <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
               *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
           </mat-form-field>
@@ -65,11 +65,12 @@
         <div class="col-md-4">
           <label for="password" class="form-label">Confirm Password*</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" type="password" matInput formControlName="confirmPassword"
+            <input class="custom-input" type="password" matInput formControlName="confirm_password"
               placeholder="Re-enter Password" />
-            <mat-error [@rowsAnimation]="displayMessage?.confirmPassword" class="text-danger"
-              *ngIf="displayMessage?.confirmPassword">{{displayMessage?.confirmPassword}}</mat-error>
+            <mat-error [@rowsAnimation]="displayMessage?.confirm_password" class="text-danger"
+              *ngIf="displayMessage?.confirm_password">{{displayMessage?.confirm_password}}</mat-error>
           </mat-form-field>
+          <mat-error *ngIf="userForm.hasError('passwordMatch')" class="text-danger">Passwords do not match.</mat-error>
         </div>
 
         <div class="col-md-4">
@@ -87,6 +88,8 @@
             <mat-select formControlName="role" placeholder="Select Role">
               <mat-option [value]="item.role_id" *ngFor="let item of userRoles">{{item.role_name | titlecase}}</mat-option>
             </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.role" class="text-danger"
+              *ngIf="displayMessage?.role">{{displayMessage?.role}}</mat-error>
           </mat-form-field>
         </div>
 

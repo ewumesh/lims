@@ -25,6 +25,10 @@ export class RoleComponent implements OnInit {
 
   existingRole: any;
 
+  message:any = {};
+  responseError = null;
+  loadingFormBtn = false;
+
   displayedColumns: string[] = ['sn', 'name', 'action'];
   dataSource: MatTableDataSource<any>;
 
@@ -62,6 +66,15 @@ export class RoleComponent implements OnInit {
   }
 
   saveChanges() {
+    this.loadingFormBtn = true;
+    if (this.roleForm.pristine) {
+      this.message = {};
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      window.scroll(0,0);
+      this.loadingFormBtn = false;
+      return;
+    }
+
     if (this.existingRole?.id) {
       let payload = {
         id: this.existingRole.id,
@@ -70,11 +83,26 @@ export class RoleComponent implements OnInit {
       this.roleService.updateUserRole(payload).subscribe(response => {
         this.getUserRoles();
         this.reset();
+        this.loadingFormBtn = false;
+        this.message = {};
+        this.responseError = null;
+      },(error) => {
+        this.loadingFormBtn = false;
+        this.message =  {};
+        this.responseError = error.error;
       })
     } else {
       this.roleService.createUserRole(this.roleForm.value).subscribe(response => {
         this.getUserRoles();
         this.reset();
+        this.loadingFormBtn = false;
+        this.message = {};
+        this.responseError = null;
+      },
+      (error) => {
+        this.loadingFormBtn = false;
+        this.message =  {};
+        this.responseError = error.error;
       })
     }
   }
@@ -94,5 +122,7 @@ export class RoleComponent implements OnInit {
 
   reset() {
     this.roleForm.reset();
+    this.message = {};
+    this.responseError = null;
    }
 }
