@@ -42,6 +42,10 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = true;
 
+  message:any = {};
+  responseError = null;
+  submitBtn = false;
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,

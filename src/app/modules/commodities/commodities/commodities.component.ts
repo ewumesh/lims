@@ -133,6 +133,9 @@ export class CommoditiesComponent implements OnInit {
   resetfilter() {
     this.filterForm.reset();
     this.getCommodities();
+    this.message = {};
+    this.responseError = null;
+    this.existingCategory = null;
   }
 
   openDialog(data) {
@@ -201,6 +204,11 @@ export class CommoditiesComponent implements OnInit {
           this.commoditiesForm.clearValidators();
           this.existingCategory = null;
           this.submitBtn = false;
+      }, (error) => {
+        window.scroll(0, 0);
+        this.message = {};
+        this.responseError = error.error;
+        this.submitBtn = false;
       })
     } else {
       this.sService.addCommodity(this.commoditiesForm.value).subscribe(res => {
