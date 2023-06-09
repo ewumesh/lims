@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ReportViewService } from 'src/app/services/report-view/report-view.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [ReportViewComponent],
@@ -39,6 +40,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    SharedModule
    ],
   exports: [],
   providers: [ReportViewService],

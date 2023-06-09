@@ -1,0 +1,42 @@
+<div class="row m-0 p-0">
+  <div class="col-md-12">
+    <h1 class="mb-0" mat-dialog-title>Verify User</h1>
+    <hr />
+  </div>
+  <div class="col-md-12">
+    <!-- <mat-dialog-content> -->
+    <form class="row" autocomplete="off" [formGroup]="approveForm">
+      <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-info" role="alert">
+          {{message?.messageBody}}
+        </div>
+      </div>
+      <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-danger" role="alert">
+          <li *ngFor="let item of responseError | keyvalue">
+            {{item.key}}:{{item.value}}
+          </li>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label class="label">Remarks</label>
+        <!-- <mat-form-field id="remarks" class="w-100" appearance="outline"> -->
+        <!-- <input for="remarks" matInput formControlName="remarks" type="text" matInput placeholder="Enter remarks..."> -->
+        <textarea placeholder="Remarks... " height="200" formControlName="remarks" class="form-control"></textarea>
+        <!-- </mat-form-field> -->
+      </div>
+    </form>
+
+    <!-- </mat-dialog-content> -->
+    <hr />
+    <mat-dialog-actions align="end">
+      <button (click)="close()" class="btn btn-danger btn-sm mx-1">Cancel</button>
+      <button (click)="approveuser()" class="btn btn-primary btn-sm mx-1">
+        <span *ngIf="!isApprove">Verify</span>
+        <span *ngIf="isApprove">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

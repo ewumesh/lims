@@ -27,6 +27,16 @@ const routes: Routes = [
       then(m => m.PricingModule)
   },
 
+  {
+    path: 'sample-test-report/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [5]
+    },
+    loadChildren: () => import('src/app/modules/user/user-report/user-report.module').
+      then(m => m.UserReportModule)
+  },
+
   // Users' Added Sample
   {
     path: 'my-sample',
@@ -139,6 +149,16 @@ const routes: Routes = [
     path: 'add-sample',
     canActivate: [RoleGuard],
     data: {
+      requiredRole: [1, 2, 5]
+    },
+    loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
+      .then(m => m.AddSampleModule)
+  },
+
+  {
+    path: 'update-sample/:id',
+    canActivate: [RoleGuard],
+    data: {
       requiredRole: [1, 5]
     },
     loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
@@ -201,7 +221,7 @@ const routes: Routes = [
     path: 'create-user',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1, 2]
     },
     loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
     .then(m => m.CreateUserModule)
@@ -211,7 +231,7 @@ const routes: Routes = [
     path: 'update-user/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
     .then(m => m.CreateUserModule)
@@ -231,7 +251,7 @@ const routes: Routes = [
     path: 'all-users',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module')
       .then(m => m.AllUsersModule)
@@ -281,7 +301,7 @@ const routes: Routes = [
     path: 'settings/client-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/setting/category/client-category.module')
     .then(m => m.ClientCategoryModule)
@@ -291,7 +311,7 @@ const routes: Routes = [
     path: 'settings/commodity-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1, 2]
     },
     loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
     .then(m => m.CommodityCategoriesModule)
@@ -301,7 +321,7 @@ const routes: Routes = [
     path: 'user-details/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,3]
+      requiredRole: [1,2,3]
     },
     loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module')
     .then(m => m.ViewUserDetailsModule)
@@ -311,7 +331,7 @@ const routes: Routes = [
     path: 'commodities-parameter',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/commodities/parameter/parameter.module')
     .then(m => m.ParameterModule)
@@ -321,7 +341,7 @@ const routes: Routes = [
     path: 'commodities-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
     .then(m => m.CommodityCategoriesModule)
@@ -331,7 +351,7 @@ const routes: Routes = [
     path: 'commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,2]
     },
     loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module')
     .then(m => m.CommoditiesModule)
@@ -341,7 +361,7 @@ const routes: Routes = [
     path: 'commodities/all-commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1, 2]
     },
     loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module')
     .then(m => m.AllCommoditiesModule)

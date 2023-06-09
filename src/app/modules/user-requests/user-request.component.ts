@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,6 +22,8 @@ export class UserRequestsComponent {
   filterForm: FormGroup;
   isLoading:boolean = true;
 
+  userDetails: any;
+
   constructor(
     private title: Title,
     private userRequestsService: UserRequestsService,
@@ -29,7 +32,7 @@ export class UserRequestsComponent {
     private fb: FormBuilder
   ) {
     this.title.setTitle('All Users - Laboratory Information Management System');
-
+    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource([]);
@@ -38,7 +41,7 @@ export class UserRequestsComponent {
   clientCategories: any[] = [];
   roles: any[] = [];
 
-  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate', 'action'];
+  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate','status', 'action'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -58,7 +61,8 @@ export class UserRequestsComponent {
       search: '',
       role: '',
       client_category: '',
-
+      from: '',
+      to: ''
     })
   }
 
@@ -66,6 +70,11 @@ export class UserRequestsComponent {
     this.userRequestsService.getUserRoles().subscribe(res => {
       this.roles = res.roles;
     })
+  }
+
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   filter() {
@@ -76,7 +85,9 @@ export class UserRequestsComponent {
       page: '',
       size: '',
       cilent_category: this.filterForm.value.client_category,
-      role: this.filterForm.value.role
+      role: this.filterForm.value.role,
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to)
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
@@ -98,13 +109,25 @@ export class UserRequestsComponent {
 
   getAllUsers() {
     this.isLoading = true;
-    let payload = {
-      search: '',
-      page: '',
-      size: '',
-      cilent_category: '',
-      role: ''
+    let payload
+    if(this.userDetails.role === 1) {
+      payload = {
+        search: '',
+        page: '',
+        size: '',
+        cilent_category: '',
+        role: ''
+      }
+    } else {
+      payload = {
+        search: '',
+        page: '',
+        size: '',
+        cilent_category: '',
+        role: '5'
+      }
     }
+
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
       this.isLoading = false;

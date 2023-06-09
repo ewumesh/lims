@@ -25,4 +25,12 @@ export class AddSampleService {
   getCommodities():Observable<any> {
     return this.http.get(`${this.url}/api/commodity/`)
   }
+
+  updateSample(payload): Observable<any> {
+    return this.http.put(`${this.url}/api/sample-form/${payload.id}/`, payload)
+  }
+
+  getUsersList(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
+  }
 }

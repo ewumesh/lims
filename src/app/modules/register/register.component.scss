@@ -101,10 +101,15 @@ input::placeholder {
 }
 
 .hide {
-  background-color: #d4dfe7;
+  background-color: #f8f9fa;
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 0.2rem;
+}
+
+.fp{
+  color: #2260bf;
+  text-decoration: none;
 }
 
 .hide label.form-label {

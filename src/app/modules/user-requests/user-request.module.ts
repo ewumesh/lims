@@ -14,6 +14,9 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
 import { UserRequestsService } from 'src/app/services/user-requests/user-requests.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [UserRequestsComponent],
@@ -33,8 +36,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSelectModule,
     MatTooltipModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
-    DeleteConfirmModule
+    DeleteConfirmModule,
+    SharedModule
   ],
   exports: [],
   providers: [UserRequestsService],

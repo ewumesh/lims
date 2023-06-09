@@ -65,6 +65,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
+  removeSpace(value) {
+     return value.replace(/\s/g, '');
+  }
+
   saveChanges() {
     if (this.loginForm.pristine) {
       this.message = {};
@@ -75,7 +79,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
 
     let payload: LoginModel = {
-      email: this.loginForm.value.email,
+      email: this.removeSpace(this.loginForm.value.email),
       password: this.loginForm.value.password
     }
 

@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
 
 @NgModule({
   declarations: [MySampleComponent],
@@ -40,7 +41,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    SharedModule
+    SharedModule,
+    DeleteConfirmModule
    ],
   exports: [],
   providers: [MySampleService],

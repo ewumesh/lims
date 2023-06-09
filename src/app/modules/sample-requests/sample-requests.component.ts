@@ -21,12 +21,14 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   filterForm: FormGroup;
   isfilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isLoading: boolean = true;
   isFilterBtnLoading: boolean = false;
+
+  commodities: any[] = []
 
   download(type) {
     let payload = {
@@ -64,6 +66,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initFilterForm();
     this.getSampleRequests();
+    this.getCommodities();
   }
 
   private initFilterForm() {
@@ -97,7 +100,19 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getCommodities() {
+    this.service.getCommodities().subscribe(res => {
+      this.commodities = res.results
+    })
+  }
+
+  getCommodityName(id) {
+    let c = this.commodities.find(a => a.id === id);
+    return c?.name;
+  }
+
   filterUserList() {
+    this.isLoading = true;
     this.isfilterBtnLoading = true;
     let payload = {
       search: this.filterForm.value.search,

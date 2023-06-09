@@ -15,7 +15,11 @@ export class SampleRequestsService {
   }
 
   getAllSampleRequsets(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu`)
+    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu&from=${payload.from}&to=${payload.to}`)
+  }
+
+  getCommodities():Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/`);
   }
 
   getUsersList(payload):Observable<any> {

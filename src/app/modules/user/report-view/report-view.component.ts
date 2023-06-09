@@ -15,90 +15,90 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 })
 export class ReportViewComponent implements OnInit,AfterViewInit {
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status'];
+  filterForm: FormGroup;
+  isLoading:boolean = false;
+  userDetails: any;
+
+  isFilterBtnLoading: boolean = false;
+
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate','completedDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  isLoading: boolean = true;
-
-  statusList: any = [
-    {id: 1, name: 'pending'},
-    {id: 2, name: 'success'},
-    {id: 3, name: 'rejected'}
-  ];
-
-  filterForm: FormGroup;
-
-  userDetails: any;
-
   constructor(
-    private title: Title,
     private fb: FormBuilder,
     private service: ReportViewService,
-    private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.title.setTitle('Report View - Laboratory Information Management System');
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
-  }
+    ) { }
 
   ngOnInit(): void {
     this.initFilterForm();
     this.getSamples();
   }
 
+  getSamples() {
+    this.isLoading = true;
+    let payload = {
+      search: '',
+      page: '',
+      size: '',
+      from: '',
+      to: ''
+    }
+    this.service.getSampleReportDetails(payload).subscribe(response => {
+      this.dataSource.data = response;
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    })
+   }
+
+   format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
   initFilterForm() {
-    this.filterForm = this.fb.group({
-      search_text: '',
-      status: '',
+    this.filterForm =  this.fb.group({
+      search: '',
       from: '',
       to: ''
     })
   }
 
-  reset() {
-
-  }
-
-  getSamples() {
-    let payload = {
-      search:'',
-      to: '',
-      from: '',
-      page: '',
-      size: '',
-      status: 'completed',
-      user: this.userDetails.email
-    }
-    this.service.getMySamples(payload).subscribe(response => {
-      this.dataSource = response.results;
-      this.isLoading = false;
-    })
-  }
-
-  format(date: Date): string {
-    const datePipe = new DatePipe('en-US');
-    return datePipe.transform(date, 'yyyy-MM-dd');
-  }
-
-  filterUserList() {
-    let payload = {
-      search:this.filterForm.value.search_text,
-      to: this.format(this.filterForm.value.to),
-      from: this.format(this.filterForm.value.from),
-      page: '',
-      size: '',
-      status: this.filterForm.value.status
-    }
-    this.service.getMySamples(payload).subscribe(response => {
-      this.dataSource = response.results;
-      this.isLoading = false;
-    })
-  }
-
   ngAfterViewInit(): void {
-      this.dataSource.paginator = this.paginator
+      this.dataSource.paginator = this.paginator;
   }
 
+  reset() {
+    this.filterForm.reset();
+    this.getSamples();
+  }
 
+  viewAssignedSampleDetails(id) {
+    this.router.navigate(['/dashboard/sample-test-report', id]);
+  }
+
+  filter() {
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to)
+    }
+    this.service.getSampleReportDetails(payload).subscribe(response => {
+      this.dataSource.data = response;
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    })
+  }
 }

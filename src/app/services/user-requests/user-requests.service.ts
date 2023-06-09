@@ -17,7 +17,7 @@ export class UserRequestsService {
   ) { }
 
   getUserRequests(payload): Observable<any> {
-    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&is_verified=0`);
+    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&is_verified=0&from=${payload.from}&to=${payload.to}&role=${payload.role}`);
   }
 
   getCategories():Observable<any> {

@@ -2,7 +2,7 @@
   <div class="form-container row">
     <div class="login-intro mb-3">
       <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
-      <p class="lims">Laboratory Information Management System -<br>(LIMS)</p>
+      <p class="lims" style="line-height: 1.5;">Laboratory Information Management System -(LIMS)</p>
       <hr class="divider">
       <p class="login-detail">Enter your registration details</p>
     </div>
@@ -135,8 +135,9 @@
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
         </span>
       </button>
-
-      <button (click)="gotoLogin()" type="button" class="bt btn-default w-100 h-45 mt-3">Back to Login</button>
+      <div class="text-center mt-4">
+      <a href="Javascript:;" (click)="gotoLogin()" class="fp mb-4">Back to Login</a>
+      </div>
     </form>
   </div>
 </div>

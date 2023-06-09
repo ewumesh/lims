@@ -18,6 +18,14 @@
           </li>
         </div>
       </div>
+      <div class="col-md-12" *ngIf="userDetails?.role === 1 || userDetails?.role === 2">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select formControlName="existing_user" class="custom-select" placeholder="Select User">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user.first_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div class="col-sm-6">
         <label for="sampleName" class="col-form-label">Name of Sample (नमूनाको नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">
@@ -172,7 +180,7 @@
             </th>
             <td mat-cell *matCellDef="let row">
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                [checked]="(selection.isSelected(row) || !row.exists)" [aria-label]="checkboxLabel(row)">
               </mat-checkbox>
             </td>
           </ng-container>
@@ -218,7 +226,7 @@
 
     <div class="my-4 row">
       <div class="col-sm-12 text-end">
-        <button [disabled]="sampleId" type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">
           <span *ngIf="!isSampleSent">Submit</span>
             <span *ngIf="isSampleSent">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

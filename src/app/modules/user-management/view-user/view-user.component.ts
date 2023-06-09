@@ -5,6 +5,7 @@ import { ViewUserDetailsService } from 'src/app/services/user-management/view-us
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { ViewImageComponent } from '../../my-account/view-image/view-image';
 import { LayoutService } from 'src/app/core/layout.service';
+import { ApproveUserComponent } from './approve/approve-user.component';
 
 @Component({
   templateUrl: './view-user.component.html',
@@ -22,6 +23,8 @@ export class ViewUserDetailsComponent implements OnInit {
   isApprove = false;
 
   roles: any[] = [];
+
+  isLoading  = false
 
   constructor(
     private service:ViewUserDetailsService,
@@ -63,6 +66,7 @@ export class ViewUserDetailsComponent implements OnInit {
   }
 
   getRoleName(id) {
+    console.log(id, "EOLE IDL")
     let role = this.roles.find(a => a.role_id === id);
     return role?.role_name
   }
@@ -90,6 +94,20 @@ export class ViewUserDetailsComponent implements OnInit {
   getUserDetails() {
     this.service.getUserDetails(this.userId).subscribe(response => {
       this.userDetails = response;
+    })
+  }
+
+  procceed(data) {
+    let instance: MatDialogRef<ApproveUserComponent, any>;
+
+    instance = this.dialog.open(ApproveUserComponent, {
+      data: this.userId ? this.userId : null,
+      width: '600px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getUserDetails();
     })
   }
 

@@ -1,4 +1,4 @@
-<div class="row bg-white m-0">
+<!-- <div class="row bg-white m-0">
   <div class="col-md-12 p-4" *ngIf="userDetails.id">
     <div class="row m-0">
       <div class="col-md-12">
@@ -13,7 +13,6 @@
         <h1 class="text-lims-primary">Client Details</h1>
         <hr/>
         <span *ngIf="userDetails?.client_category" class="badge badge-primary" style="background-color: #2260bf;">{{getClientName(userDetails?.client_category)}}</span>
-        <!-- <mat-chip *ngIf="userDetails?.client_category" class="bg-primary text-white">{{getClientName(userDetails?.client_category)}}</mat-chip> -->
         <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
       </div>
     </div>
@@ -58,7 +57,6 @@
       </div>
     </div>
 
-    <!-- <h1 class="text-lims-primary">Documents</h1> -->
     <div class="row"  *ngIf="userDetails?.role === 5">
       <div class="col-md-6">
         <h3>
@@ -75,9 +73,9 @@
       </div>
       </div>
 
-      <div class="col-md-12 text-end">
-        <button (click)="approveuser()" *ngIf="loggedUser?.role === 1 && userDetails.is_verified === 0" class="btn btn-success btn-sm">
-          <span *ngIf="!isApprove">Approve</span>
+      <div class="col-md-12 text-end mt-2">
+        <button (click)="procceed()" *ngIf="(loggedUser?.role === 1 || loggedUser?.role === 2) && userDetails.is_verified === 0" class="btn btn-success btn-sm">
+          <span *ngIf="!isApprove">Procceed</span>
             <span *ngIf="isApprove">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>
@@ -93,4 +91,128 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div>
+  <div class="row">
+    <div class="db-content">
+      <div class="top-view-page p-2 mb-3">
+        <div class="row log-details p-3">
+          <div class="col-md-3">
+            <div class="row">
+              <p>Approve By</p>
+              <h4>Manish Basnet</h4>
+            </div>
+            <div class="row mt-2">
+              <p>Requested By</p>
+              <h4>Manoj Das</h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <p>Approved At</p>
+              <h4>2023-01-11</h4>
+            </div>
+            <div class="row mt-2">
+              <p>Requested at</p>
+              <h4>2023-01-05</h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <p>Verified By</p>
+              <h4>N/A</h4>
+            </div>
+          </div>
+          <div class="col-md-3 log-status">
+            <span *ngIf="userDetails.status" style="padding: 8px" class="badge badge-primary" [statusColor]="userDetails.status">
+              {{userDetails.status}}</span>
+              <span class="text-muted" *ngIf="!userDetails.status">N/A</span>
+          </div>
+        </div>
+      </div>
+      <div class="view-page">
+        <h3 class="view-page-heading">User Details</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <h4>User Category</h4>
+            <span *ngIf="userDetails.role" class="badge badge-primary" style="background-color: #2260bf;">{{getRoleName(userDetails.role)}}</span>
+            <span *ngIf="!userDetails.role" class="text-muted">N/A</span>
+          </div>
+          <div class="col-md-4">
+            <h4>Client Category </h4>
+            <span *ngIf="userDetails?.client_category" class="badge badge-primary" style="background-color: #2260bf;">{{getClientName(userDetails?.client_category)}}</span>
+            <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
+          </div>
+          <div class="col-md-4">
+            <h4>Full Name </h4>
+            <p>{{userDetails?.first_name | titlecase}} {{userDetails.last_name | titlecase}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Email</h4>
+            <p *ngIf="userDetails.email">{{userDetails.email}}</p>
+            <span *ngIf="!userDetails.email" class="text-muted">N/A</span>
+          </div>
+          <div class="col-md-4">
+            <h4>Phone Number</h4>
+            <p *ngIf="userDetails.phone">{{userDetails.phone}}</p>
+            <span *ngIf="!userDetails.phone" class="text-muted">N/A</span>
+          </div>
+
+          <div class="col-md-4">
+            <h4>Username</h4>
+            <p *ngIf="userDetails?.username">{{userDetails?.username}}</p>
+          <span *ngIf="!userDetails?.username" class="text-muted">N/A</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Joined Date</h4>
+            <p *ngIf="userDetails?.date_joined">{{userDetails?.date_joined | date}}</p>
+          <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5">
+        <div class="row log-details p-3">
+          <h3 class="view-page-heading">Documents</h3>
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Registration Documents</span>
+            </h3>
+            <img matTooltip="View Image" alt="Registration Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(userDetails?.registration_document)" [src]="userDetails?.registration_document" />
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Renew Documents</span>
+            </h3>
+            <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer" (click)="viewImage(userDetails?.renew_document)" [src]="userDetails?.renew_document" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 text-end mt-2">
+        <button (click)="procceed()" *ngIf="(loggedUser?.role === 1 || loggedUser?.role === 2) && userDetails.is_verified === 0" class="btn btn-success btn-sm">
+          <span *ngIf="!isApprove">Procceed</span>
+            <span *ngIf="isApprove">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="row" *ngIf="isLoading">
+  <div class="col-md-12 text-center py-3">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+

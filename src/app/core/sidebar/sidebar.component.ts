@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
     // user pages
     { id: 1, role: 5, pathName: 'My Sample', path: '/dashboard/my-sample', icon: 'local_drink', subRoutes: [], dropdownId: '' },
     { id: 2, role: 5, pathName: 'Commodity Pricing', path: '/dashboard/commodity-pricing', icon: 'insert_chart', subRoutes: [], dropdownId: '' },
-    { id: 3, role: 5, pathName: 'Report View', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 3, role: 5, pathName: 'Report View', path: '/dashboard/report-view', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     //supervisor pages
     { id: 4, role: 3, pathName: 'Sample Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },
@@ -48,6 +48,27 @@ export class SidebarComponent implements OnInit {
     // verifier pages
     { id: 9, role: 6, pathName: 'Sample Verify', path: '/dashboard/sample-verify', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 10, role: 6, pathName: 'Verify Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+
+    // smu pages
+    { id: 191, role: 2, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 192, role: 2, pathName: 'Sample Request', path: '/dashboard/sample-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    {
+      id: 193, role: 2, pathName: 'User Management', path: '', icon: 'supervised_user_circle', dropdownId: 'collapsepoaopoppo',
+      subRoutes: [
+        { id: 1, pathName: 'All User', path: '/dashboard/all-users' },
+        { id: 2, pathName: 'Create User', path: '/dashboard/create-user' }
+      ]
+    },
+    { id: 195, role: 2, pathName: 'Lab Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    {
+      id: 196, role: 2, pathName: 'Commodities', path: '', icon: 'supervised_user_circle', dropdownId: 'commoditiesId',
+      subRoutes: [
+        { id: 1, pathName: 'All', path: '/dashboard/commodities/all-commodities' },
+        { id: 2, pathName: 'Category', path: '/dashboard/settings/commodity-category' },
+        { id: 3, pathName: 'Commodities', path: '/dashboard/commodities' },
+        { id: 4, pathName: 'Parameter', path: '/dashboard/commodities-parameter' },
+      ]
+    },
 
     // admin pages
     { id: 11, role: 1, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },

@@ -40,6 +40,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = true;
 
+  filterBtnLoading: boolean = false;
+
 
   constructor(
     private title: Title,
@@ -63,6 +65,8 @@ export class PricingComponent implements OnInit, AfterViewInit {
   }
 
   filterUserList() {
+    this.filterBtnLoading = true;
+    this.isLoading = true;
     let payload = {
       page: '',
       size: 100,
@@ -72,14 +76,17 @@ export class PricingComponent implements OnInit, AfterViewInit {
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
       this.dataSource.data = res.results;
       this.isLoading = false;
+      this.filterBtnLoading = false;
     })
   }
 
   getAllCommodities() {
+    this.isLoading = true;
     let payload = {
       page: '',
       size: 100,
-      search: ''
+      search: '',
+      category: ''
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
       this.dataSource.data = res.results;

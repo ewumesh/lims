@@ -39,7 +39,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-  commodities:any[] = [];
+  commodities: any[] = [];
 
   commodityParameters: any[] = [];
 
@@ -48,6 +48,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   responseError = null;
 
+  users = [];
 
   // isParameter = false
 
@@ -66,7 +67,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.selection.selected.forEach(a => {
       // if(a) {
-      totalPrice = totalPrice+a.price;
+      totalPrice = totalPrice + a?.price;
 
       selectedId.push(a.id);
       // }
@@ -144,12 +145,18 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit(): void {
-    if(this.sampleId) {
-    this.getSampleDetails();
-    }
+
     this.getCommodities();
     this.initForm();
     this.getParametersOfCommodity();
+    if (this.sampleId) {
+      this.getSampleDetails();
+      // this.addSampleForm.value.isParameter = true;
+    }
+
+    if(this.userDetails.role === 1 || this.userDetails.role === 2) {
+      this.getUsers();
+    }
   }
 
   getCommodities() {
@@ -161,11 +168,10 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   getParametersOfCommodity() {
     this.addSampleForm.get('commodity').valueChanges.subscribe(id => {
       let parameters = this.commodities.find(x => x.id === id);
-      this.priceOfCommodity = parameters.price
-      this.commodityParameters = parameters.test_result;
-      this.dataSource.data = parameters.test_result;
+      this.priceOfCommodity = parameters?.price
+      this.commodityParameters = parameters?.test_result;
+      this.dataSource.data = parameters?.test_result;
       this.isLoading = false;
-      this.addSampleForm.value.isParameter = false;
 
     })
   }
@@ -173,13 +179,25 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   getSampleDetails() {
     this.service.getSampleDetails(this.sampleId).subscribe(response => {
       this.addSampleForm.patchValue(response);
-      this.addSampleForm.disable();
+      console.log(response, 'ok')
+      this.dataSource.data = response.parameters;
+      let sel: SelectionModel<any>
+      // this.selection.selected = response.parameters
+      // this.addSampleForm.disable();
+
     })
   }
 
   private initForm() {
+    let isParameter;
+    if(this.sampleId) {
+      isParameter = true;
+    } else {
+      isParameter = false;
+    }
     this.maxDate = new Date();
     this.addSampleForm = this.fb.group({
+      existing_user: [''],
       name: ['', Validators.required],
       condition: ['', Validators.required],
       mfd: ['', [Validators.required]],
@@ -194,14 +212,13 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       language: ['en'],
       parameters: [''],
       owner_user: '',
-      isParameter: false,
+      isParameter: isParameter,
       status: 'pending'
     })
   }
 
   disableFutureDatesFilter(date: Date | null): boolean {
     const currentDate = new Date();
-
     // Disable current date and future dates
     return date && date <= currentDate;
   }
@@ -217,12 +234,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isSampleSent = false;
-      window.scroll(0,0);
+      window.scroll(0, 0);
       return;
     }
 
     let payload = {
-
+      id: this.sampleId,
       name: this.addSampleForm.value.name,
       condition: this.addSampleForm.value.condition,
       mfd: this.format(this.addSampleForm.value.mfd),
@@ -241,13 +258,28 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       status: 'pending'
     }
 
+    if(this.sampleId) {
+      this.service.updateSample(payload).subscribe(res => {
+        this.isSampleSent = false;
+        this.router.navigate(['/dashboard/my-sample']);
+        this.toast.showToast(
+          TOAST_STATE.success,
+          res?.message);
+          this.dismissMessage();
+          this.isLoading = true;
+          this.message = {};
+          this.responseError = null;
+      },(error) => {
+        window.scroll(0, 0)
+        this.message = {};
+        this.responseError = error?.error;
+        this.isLoading = false;
+        this.isSampleSent = false;
+      })
+    } else {
     this.service.addSample(payload).subscribe(response => {
       this.isSampleSent = false;
-      if(this.userDetails.id === 1) {
-        this.router.navigate(['/dashboard/sample-requests']);
-      } else {
-      this.router.navigate(['/dashboard/my-sample']);
-      }
+        this.router.navigate(['/dashboard/my-sample']);
       this.toast.showToast(
         TOAST_STATE.success,
         response?.message);
@@ -258,38 +290,33 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       this.responseError = null;
     },
       (error) => {
-        window.scroll(0,0)
+        window.scroll(0, 0)
         this.message = {};
         this.responseError = error?.error;
         this.isLoading = false;
         this.isSampleSent = false;
       })
+    }
 
+  }
+
+  getUsers() {
+    let payload = {
+      page: '',
+      size:'',
+      search: '',
+      role: '5',
+      client_category_id: ''
+    }
+    this.service.getUsersList(payload).subscribe(res => {
+      this.users = res;
+    })
   }
 
   private dismissMessage(): void {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 5000);
-  }
-
-  formatDate(date: Date, format: string): string {
-    const year = date?.getFullYear();
-    const month = (date?.getMonth() + 1).toString().padStart(2, '0');
-    const day = date?.getDate().toString().padStart(2, '0');
-    const hours = date?.getHours().toString().padStart(2, '0');
-    const minutes = date?.getMinutes().toString().padStart(2, '0');
-    const seconds = date?.getSeconds().toString().padStart(2, '0');
-
-    const formatString = format
-      .replace('yyyy', year.toString())
-      .replace('MM', month)
-      .replace('dd', day)
-      .replace('HH', hours)
-      .replace('mm', minutes)
-      .replace('ss', seconds);
-
-    return formatString;
   }
 
 

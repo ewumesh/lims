@@ -14,4 +14,9 @@ export class ReportViewService {
   getMySamples(payload): Observable<any> {
     return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&owner_user=${payload.user}?from=${payload.from}?to=${payload.to}?status=${payload.status}`);
   }
+
+  getSampleReportDetails(payload): Observable<any> {
+    return this.http.get(`${this.url}/api/report/final-report-sample-form/?search=${payload.search}&from=${payload.from}&to=${payload.to}`)
+    // return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users?search=${payload.serarch}&limit=${payload.size}&offset=${payload.page}&from=${payload.from}&to=${payload.to}`)
+  }
 }

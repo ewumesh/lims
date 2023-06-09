@@ -1,4 +1,4 @@
-<div class="row bg-white m-0 p-2" *ngIf="sampleDetails">
+<!-- <div class="row bg-white m-0 p-2" *ngIf="sampleDetails">
   <div class="col-md-12">
     <h2 class="text-lims-primary mb-0">Sample Details</h2>
     <hr class=""/>
@@ -101,6 +101,272 @@
       </div>
   </div>
 </div>
+
+<div class="row bg-white" *ngIf="!sampleDetails">
+  <div class="col-md-12 text-center py-3">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div> -->
+
+<div class="row" *ngIf="sampleDetails">
+  <div *ngIf="!isProcceedForPayment" class="db-content">
+    <div class="top-view-page p-2 mb-3">
+      <div class="row log-details p-3">
+        <div class="col-md-3">
+          <div class="row">
+            <p>Approved By</p>
+            <h4>Manish Basnet</h4>
+          </div>
+          <div class="row mt-2">
+            <p>Created By</p>
+            <h4>Manoj Das</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="row">
+            <p>Approved at</p>
+            <h4>{{sampleDetails?.report_date | date}}</h4>
+          </div>
+          <div class="row mt-2">
+            <p>Created at</p>
+            <h4>{{sampleDetails?.created_date | date}}</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="row">
+            <p>Completed At</p>
+            <h4>N/A</h4>
+          </div>
+        </div>
+        <div class="col-md-3 log-status">
+          <span style="padding: 8px" class="badge badge-primary" [statusColor]="sampleDetails.status">
+            {{sampleDetails.status}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="view-page">
+      <h3 class="view-page-heading">Sample Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Sample ID</h4>
+          <p>{{sampleDetails.id}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Sample Name </h4>
+          <p>{{sampleDetails.name}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Commodity </h4>
+          <p>{{getCommodityName(sampleDetails?.commodity) | titlecase}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>MFD</h4>
+          <p>{{sampleDetails.mfd | date}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Best Before Date</h4>
+          <p>{{sampleDetails.dfb | date}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Batch</h4>
+          <p>{{sampleDetails.batch}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Brand</h4>
+          <p>{{sampleDetails.brand}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Purpose of Analysis</h4>
+          <p>{{sampleDetails?.purpose}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Condition</h4>
+          <p>{{sampleDetails.condition}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-page mt-3">
+      <h3 class="view-page-heading">Parameter Details</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered">
+            <tr>
+              <th>S.N</th>
+              <th>Parameter Name</th>
+              <th>Method</th>
+              <th>Units</th>
+              <th>Result</th>
+              <th>Status</th>
+            </tr>
+            <tbody>
+              <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{r.name | titlecase}}</td>
+                <td>{{r.ref_test_method}}</td>
+                <td>{{r.units}}</td>
+                <td>
+                  <span *ngIf="r.status">
+                    {{r?.results}}
+                  </span>
+                  <span *ngIf="!r.status" class="text-muted">
+                    N/A
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status |
+                    titlecase}}</span>
+                  <span *ngIf="!r.status" class="text-muted">N/A</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isProcceedForPayment">
+    <div class="col-md-12 bg-white p-4">
+      <mat-stepper #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Payment</ng-template>
+          <!-- <ng-template matStepperIcon="chat">
+            <mat-icon>dollar</mat-icon>
+          </ng-template> -->
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="paymentForm" class="row">
+                <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-info" role="alert">
+                    {{message?.messageBody}}
+                  </div>
+                </div>
+                <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    <li *ngFor="let item of responseError | keyvalue">
+                      {{item.key}}:{{item.value}}
+                    </li>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Tax Voucher No.</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="custom-input" formControlName="voucher_number" matInput
+                      placeholder="Tax Voucher No." />
+                    <mat-error class="text-danger"
+                      *ngIf="displayMessage?.voucher_number">{{displayMessage?.voucher_number}}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Tax Register Date</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input formControlName="register_date" class="custom-input" [matDatepicker]="toPicker"
+                      (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date" />
+                    <mat-datepicker #toPicker></mat-datepicker>
+                    <mat-error class="text-danger"
+                      *ngIf="displayMessage?.register_date">{{displayMessage?.register_date}}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                  <label class="form-label">Amount</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input type="number" formControlName="amount" class="custom-input" matInput
+                      placeholder="Rs. 39000" />
+                    <mat-error class="text-danger" *ngIf="displayMessage?.amount">{{displayMessage?.amount}}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                  <label for="formFile" class="form-label">Payment Receipt</label>
+                  <input (change)="uploadImage($event)" class="form-control" type="file" id="formFile">
+                  <mat-error *ngIf="!isPaymentReceipt" class="text-danger">Payment Receipt is Required.</mat-error>
+                </div>
+
+                <div class="col-md-12 text-end mt-4">
+                  <button *ngIf="isProcceedForPayment" class="btn btn-danger btn-sm mx-1" (click)="back()">Back</button>
+                  <button (click)="payNow()" class="btn btn-primary btn-sm">
+
+                    <span *ngIf="!isPaymentProcceed">Pay Now</span>
+                    <span *ngIf="isPaymentProcceed">
+                      <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                    </span>
+                  </button>
+                  <button matStepperNext class="btn btn-secondary mx-1 btn-sm">Next</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Assign to Supervisor</ng-template>
+          <div class="row">
+            <div class="col-md-12">
+
+              <div *ngIf="responseErrorForAssign" class="col-sm-12 col-md-12 col-lg-12">
+                <div class="alert alert-danger" role="alert">
+                  <li *ngFor="let item of responseErrorForAssign | keyvalue">
+                    {{item.key}}:{{item.value}}
+                  </li>
+                </div>
+              </div>
+
+              <form [formGroup]="assignSampleForm" class="row">
+                <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-info" role="alert">
+                    {{message?.messageBody}}
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label for="user" class="form-label">Select User *</label>
+                  <mat-form-field class="w-100" appearance="outline">
+                    <mat-select placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
+                      <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
+                    </mat-select>
+                    <mat-error class="text-danger" *ngIf="displayMessage?.supervisor_user">{{displayMessage?.supervisor_user}}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-12 text-end mt-4">
+                  <button matStepperPrevious class="btn btn-secondary btn-sm mx-1">Back</button>
+
+
+                  <button (click)="assignToSupervisor()" class="btn btn-primary btn-sm">
+
+                    <span *ngIf="!isLoading">Submit</span>
+                      <span *ngIf="isLoading">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                      </span>
+                  </button>
+
+                  <button *ngIf="isProcceedForPayment" class="btn btn-danger btn-sm mx-1" (click)="back()">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-end mt-3">
+      <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
+    </div>
+  </div>
+</div>
+
 
 <div class="row bg-white" *ngIf="!sampleDetails">
   <div class="col-md-12 text-center py-3">
