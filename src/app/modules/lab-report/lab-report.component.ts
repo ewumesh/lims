@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +19,7 @@ export class LabReportComponent implements OnInit {
 
   isFilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -42,7 +43,7 @@ export class LabReportComponent implements OnInit {
       from: '',
       to: ''
     }
-    this.service.getSampleReportDetails().subscribe(response => {
+    this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;
       this.isLoading = false;
       this.isFilterBtnLoading = false;
@@ -55,7 +56,9 @@ export class LabReportComponent implements OnInit {
 
   initFilterForm() {
     this.filterForm =  this.fb.group({
-      search: ''
+      search: '',
+      from: '',
+      to: ''
     })
   }
 
@@ -69,10 +72,31 @@ export class LabReportComponent implements OnInit {
   }
 
   viewAssignedSampleDetails(id) {
-    this.router.navigate(['/dashboard/final-report', id]);
+    this.router.navigate(['/dashboard/report', id]);
+  }
+
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   filter() {
-
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to)
+    }
+    this.service.getSampleReportDetails(payload).subscribe(response => {
+      this.dataSource.data = response;
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    })
   }
 }

@@ -80,7 +80,7 @@ export class SidebarComponent implements OnInit {
         { id: 2, pathName: 'Create User', path: '/dashboard/create-user' }
       ]
     },
-    { id: 14, role: 1, pathName: 'Search Sample', path: '/dashboard/search-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    // { id: 14, role: 1, pathName: 'Search Sample', path: '/dashboard/search-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     {
       id: 160, role: 1, pathName: 'Settings', path: '', icon: 'settings', dropdownId: 'setting',
       subRoutes: [
