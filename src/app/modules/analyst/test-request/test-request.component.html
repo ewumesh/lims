@@ -1,19 +1,21 @@
 <form  [formGroup]="filterForm" class="row">
-  <div class="col-md-9">
+  <div class="col-md-5">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
   </div>
-  <!-- <div class="col-md-2">
+  <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input class="custom-input" matInput placeholder="Select Date (From)"/>
+      <input [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" formControlName="from" class="custom-input" matInput placeholder="Select Date (From)"/>
     </mat-form-field>
+    <mat-datepicker #fromPicker></mat-datepicker>
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input class="custom-input" matInput placeholder="Select Date (To)"/>
+      <input [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" formControlName="to" class="custom-input" matInput placeholder="Select Date (To)"/>
     </mat-form-field>
-  </div> -->
+    <mat-datepicker #toPicker></mat-datepicker>
+  </div>
   <div class="col-md-2 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
       Filter

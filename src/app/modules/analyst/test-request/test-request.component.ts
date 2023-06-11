@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,22 +29,31 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private service: TestRequestService,
     private router: Router
-    ) { }
+    ) {
+      this.initFilterForm();
+    }
 
   ngOnInit(): void {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.getTestRequsest();
-    this.initFilterForm();
     this.getCommodities();
   }
 
   initFilterForm() {
     this.filterForm = this.fb.group({
-      search: ''
+      search: '',
+      from: '',
+      to: ''
     })
   }
 
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
   getTestRequsest() {
+    this.isLoading = true;
     let payload = {
       page: '',
       size: '',
@@ -83,6 +93,8 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       search: this.filterForm.value.search,
+      from: this.format(this.filterForm.value.from),
+      to: this.format(this.filterForm.value.to),
       user: this.userDetails?.id
     }
     this.service.getTestRequests(payload).subscribe(res => {

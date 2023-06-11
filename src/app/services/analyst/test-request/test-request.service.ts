@@ -14,7 +14,7 @@ export class TestRequestService {
   }
 
   getTestRequests(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/?form_available=analyst&analyst_user=${payload.user}&search=${payload.search}`);
+    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/?form_available=analyst&analyst_user=${payload.user}&search=${payload.search}&from=${payload.from}&to=${payload.to}`);
   }
 
 

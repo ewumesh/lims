@@ -85,6 +85,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     let payload = {
       supervisor_user: this.assignSampleForm.value.supervisor_user,
       form_available: 'supervisor',
+      status: 'not_assigned'
       // sample_form: this.data?.id
       // parameter: this.data?.parameters,
       // commodity_id: this.data?.commodity_id

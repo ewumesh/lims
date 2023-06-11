@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TestRequestService } from 'src/app/services/analyst/test-request/test-request.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [TestRequestComponent],
@@ -31,6 +32,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,

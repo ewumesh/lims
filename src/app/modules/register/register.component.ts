@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isLoading: boolean;
   message: any;
+  responseError = null;
 
   date = ''
 
@@ -148,35 +149,20 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         this.renewDoc = null;
         this.img = null;
 
-        setTimeout(() => {
+        // setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 1000);
+        // }, 1000);
 
         this.message = {};
-
         this.dismissMessage();
+        this.responseError = null;
 
     },
     (error) => {
-      if (error.status === 400) {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'All the field(s) are not valid.');
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      } else {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          error?.error?.error);
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      }
-      this.isLoading = false;
-
+        window.scroll(0, 0)
+        this.message = {};
+        this.responseError = error?.error;
+        this.isLoading = false;
     })
   }
 

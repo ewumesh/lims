@@ -28,6 +28,10 @@ export class TestRequestDetailsService {
     return this.http.post(`${this.url}/api/formula-calculate/`, payload)
   }
 
+  setResult(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/sample-form-has-calculate-result/`, payload)
+  }
+
   sendForVarification(payload, id) {
     return this.http.patch(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`, payload);
   }

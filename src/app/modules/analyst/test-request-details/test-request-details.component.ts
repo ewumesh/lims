@@ -99,4 +99,22 @@ export class TestRequestDetailsComponent implements OnInit {
       this.getTestResultDetails();
     })
    }
+
+   saveResult(result, sampleId, parameterId, commodity) {
+    console.log(result, sampleId, parameterId,commodity, 'RESULT')
+
+    let payload = {
+      sample_form: sampleId,
+      result: result,
+      parameter: parameterId,
+      commodity: commodity,
+    }
+
+    this.service.setResult(payload).subscribe(res => {
+      this.toast.showToast(TOAST_STATE.success, "Result Added Successfully!")
+    })
+    let patchPayload = {
+      result: result
+    }
+   }
 }

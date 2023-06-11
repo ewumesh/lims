@@ -7,6 +7,18 @@
       <p class="login-detail">Enter your registration details</p>
     </div>
     <form class="row userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
+      <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-danger" role="alert">
+          {{message?.messageBody}}
+        </div>
+      </div>
+      <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+        <div class="alert alert-danger" role="alert">
+          <li *ngFor="let item of responseError | keyvalue">
+            {{item.key}}:{{item.value}}
+          </li>
+        </div>
+      </div>
       <div class="col-md-6">
         <label for="exampleInputFullName1" class="form-label">First Name*</label>
         <mat-form-field appearance="outline" class="w-100">
