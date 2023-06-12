@@ -174,7 +174,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       department_address: this.userForm.value.department_address,
       registration_number: this.userForm.value.registration_number,
       date: this.userForm.value.date,
-      role: this.userForm.value.role
+      role: this.userForm.value.role,
+      is_verified: true
     }
 
     console.log(payload, 'PAYLOAD')
