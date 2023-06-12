@@ -1,7 +1,16 @@
 <div class="row m-0">
   <div  class="col-sm-12 col-md-12 col-lg-12 m-0 p-0">
-    <div *ngIf="message && message?.messageBody" class="alert alert-danger" role="alert">
-      {{message?.messageBody}}
+    <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+      <div class="alert alert-danger" role="alert">
+        {{message?.messageBody}}
+      </div>
+    </div>
+    <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+      <div class="alert alert-danger" role="alert">
+        <li *ngFor="let item of responseError | keyvalue">
+          {{item.key}}:{{item.value}}
+        </li>
+      </div>
     </div>
   </div>
   <!-- <div class="col-md-12 bg-white p-4">

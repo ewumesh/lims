@@ -37,6 +37,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   doc: any;
   renewDoc: any;
 
+  responseError = null;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -175,7 +177,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       registration_number: this.userForm.value.registration_number,
       date: this.userForm.value.date,
       role: this.userForm.value.role,
-      is_verified: true
+      is_verified: 1
     }
 
     console.log(payload, 'PAYLOAD')
@@ -193,19 +195,28 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         'User Created Successfully!');
         this.isLoading = false;
         this.dismissMessage();
+        this.responseError = null;
+        this.message = {};
 
       this.router.navigate(['/dashboard/all-users']);
     },
-    (error) => {
-      this.isLoading = false;
-      this.toast.showToast(
-        TOAST_STATE.danger,
-        error?.error?.message);
 
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
+    (error) => {
+      window.scroll(0, 0)
+      this.message = {};
+      this.responseError = error?.error;
+      this.isLoading = false;
     })
+    // (error) => {
+    //   this.isLoading = false;
+    //   this.toast.showToast(
+    //     TOAST_STATE.danger,
+    //     error?.error?.message);
+
+    //     setTimeout(() => {
+    //       this.dismissMessage();
+    //     }, 3000);
+    // })
   } else {
     this.cService.updateUser(payload, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
@@ -215,16 +226,18 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         this.dismissMessage();
 
       this.router.navigate(['/dashboard/all-users']);
+      this.responseError = null;
+      this.message = {};
     },
     (error) => {
+      window.scroll(0, 0)
+      this.message = {};
+      this.responseError = error?.error;
       this.isLoading = false;
-      this.toast.showToast(
-        TOAST_STATE.danger,
-        error?.error?.message);
 
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
+        // setTimeout(() => {
+        //   this.dismissMessage();
+        // }, 3000);
     }
     )
   }
