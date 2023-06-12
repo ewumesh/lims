@@ -238,6 +238,13 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     }
 
+    let cUser;
+    if(this.userDetails.role === 5) {
+    cUser = this.userDetails.email;
+    } else {
+      cUser = this.addSampleForm.value.existing_user
+    }
+
     let payload = {
       id: this.sampleId,
       name: this.addSampleForm.value.name,
@@ -253,7 +260,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       commodity: this.addSampleForm.value.commodity,
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
-      owner_user: this.addSampleForm.value.existing_user,
+      owner_user: cUser,
       form_available: 'smu',
       status: 'pending'
     }

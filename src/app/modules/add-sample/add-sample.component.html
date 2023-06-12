@@ -96,7 +96,7 @@
         <label for="email" class="col-form-label">Report Required by Date (विश्लेषण प्रतिवेदन प्राप्त हुने अनुमानित
           मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()"
+          <input class="custom-input" [min]="maxDate" matInput [matDatepicker]="reportDatePicker" (focus)="reportDatePicker.open()"
             (click)="reportDatePicker.open()" formControlName="report_date" placeholder="Enter Report Date" />
           <mat-datepicker #reportDatePicker></mat-datepicker>
           <mat-error class="text-danger" *ngIf="displayMessage?.report_date">{{displayMessage.report_date}}</mat-error>
