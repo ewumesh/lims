@@ -27,7 +27,9 @@ export class LabReportComponent implements OnInit {
     private fb: FormBuilder,
     private service: AdminLabReportService,
     private router: Router
-    ) { }
+    ) {
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
 
   ngOnInit(): void {
     this.initFilterForm();
