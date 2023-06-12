@@ -95,9 +95,9 @@
             <tr>
               <th>S.N</th>
               <th>Parameter Name</th>
-              <th>Formula</th>
+              <!-- <th>Formula</th> -->
               <th>Method</th>
-              <th>Units</th>
+              <!-- <th>Units</th> -->
               <th>Price</th>
               <th>Tested By</th>
               <th>Result</th>
@@ -107,9 +107,9 @@
               <tr *ngFor="let r of reportDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>{{r.formula}}</td>
+                <!-- <td>{{r.formula}}</td> -->
                 <td>{{r.ref_test_method}}</td>
-                <td>{{r.units}}</td>
+                <!-- <td>{{r.units}}</td> -->
                 <td>Rs.{{r.price}}</td>
                 <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
                 <td>{{r?.result}}</td>

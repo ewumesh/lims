@@ -14,6 +14,7 @@ export class LabRequestDetailsComponent implements OnInit {
   userDetails: any;
 
   sampleDetails: any;
+  reportDetails: any;
   isLoading = true;
   commodities: any[] = [];
 
@@ -87,6 +88,7 @@ export class LabRequestDetailsComponent implements OnInit {
 
     this.service.getSamples(payload).subscribe(response => {
       this.sampleDetails = response;
+      this.reportDetails = response;
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;

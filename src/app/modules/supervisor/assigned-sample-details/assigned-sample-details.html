@@ -6,7 +6,6 @@
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <!-- <mat-label>From</mat-label> -->
       <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()"
         (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
       <mat-datepicker #fromPicker></mat-datepicker>
@@ -14,7 +13,6 @@
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <!-- <mat-label>To</mat-label> -->
       <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()"
         (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
       <mat-datepicker #toPicker></mat-datepicker>
@@ -128,17 +126,6 @@
       <button (click)="generateReport()" class="btn btn-primary">Generate Report</button>
     </div>
   </div>
-
-  <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
-    aria-label="Select page of users"></mat-paginator> -->
 </div>
-
-<!-- <button class="btn btn-danger" (click)="generatePDF()">DOWNLOAD....</button> -->
-
 <div id="pdf-content" style="height: 11.7in;width: 8.3in;">
-
-  <!-- <div style="text-align: center; ">
-    <h1 style=" margin:auto; text-align: center;">National Food and Feed Reference Laboratory</h1>
-    <p style="text-align: center; font-weight: bold; font-size: 20px; margin: 0;">TEST REPORT</p>
-</div> -->
 </div>

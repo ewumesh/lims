@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [LabRequestDetailsComponent, AssignComponent],
@@ -26,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ],
   exports: [],
   providers: [LabRequestDetailsService],
