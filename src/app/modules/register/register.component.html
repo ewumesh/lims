@@ -86,7 +86,7 @@
             [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
-                <label class="form-label">Department Name</label>
+                <label class="form-label">Department Name *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_name" placeholder="Enter Department Name" />
                   <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
@@ -94,7 +94,7 @@
                 </mat-form-field>
               </div>
               <div class="col-md-6 mb-1">
-                <label class="form-label">Department address</label>
+                <label class="form-label">Department address *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_address" placeholder="Enter Department Address" />
                   <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
@@ -102,24 +102,24 @@
                 </mat-form-field>
               </div>
               <div class="col-md-6 mb-1">
-                <label class="form-label">Registration No.</label>
+                <label class="form-label">Registration No. *</label>
                 <mat-form-field appearance="outline" class="w-100">
-                  <input matInput formControlName="registration_number" placeholder="Enter Department Address" />
+                  <input matInput formControlName="registration_number" placeholder="Enter Registration Number" />
                   <mat-error [@rowsAnimation]="displayMessage?.registration_number" class="text-danger"
                     *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-md-12 mb-1">
-                <label for="file2">Registration Document</label>
+                <label for="file2">Registration Document*</label>
                 <input (change)="uploadFile($event)" class="form-control" type="file" />
-                <span *ngIf="!img" class="text-danger">Registration Document is Required</span>
+                <!-- <span *ngIf="!img" class="text-danger">Registration Document is Required</span> -->
                 <!-- <input class="re-img" type="file" name="file2" id="file2" /> -->
                 <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
               <div class=" col-md-12 mb-1">
-                <label for="secfile2">AP Renew Document</label>
+                <label for="secfile2">AP Renew Document*</label>
                 <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
-                <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span>
+                <!-- <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span> -->
                 <!-- <input class="re-img" type="file" name="secfile2" id="secfile2" />
                 <button type="button" onclick="deleteFile('secfile2')">Remove File</button> -->
 

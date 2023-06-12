@@ -86,7 +86,11 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
 
   format(date: Date): string {
     const datePipe = new DatePipe('en-US');
-    return datePipe.transform(date, 'yyyy-MM-dd');
+    if(datePipe) {
+      return datePipe.transform(date, 'yyyy-MM-dd');
+    }else {
+      return null
+    }
   }
 
   // assign(data) {

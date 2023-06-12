@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TestRequestDetailsService } from 'src/app/services/analyst/test-request-details/test-request-details.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { CalculateComponent } from './calculate/calculate.component';
@@ -32,7 +32,8 @@ export class TestRequestDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
     ) { }
 
     sendToSupervisor() {
@@ -48,7 +49,8 @@ export class TestRequestDetailsComponent implements OnInit {
         this.isSend = false;
         this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!");
         this.dismissToast();
-        this.getTestResultDetails();
+        // this.getTestResultDetails();
+        this.router.navigate(['/dashboard/test-report'])
       }, (error) => {
         this.isSend = false;
       })
