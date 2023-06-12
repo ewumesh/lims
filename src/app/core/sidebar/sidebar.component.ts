@@ -51,6 +51,7 @@ export class SidebarComponent implements OnInit {
 
     // smu pages
     { id: 191, role: 2, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 9876, role: 2, pathName: 'Track Sample', path: '/dashboard/track-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 192, role: 2, pathName: 'Sample Request', path: '/dashboard/sample-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     {
       id: 193, role: 2, pathName: 'User Management', path: '', icon: 'supervised_user_circle', dropdownId: 'collapsepoaopoppo',
@@ -72,6 +73,7 @@ export class SidebarComponent implements OnInit {
 
     // admin pages
     { id: 11, role: 1, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 10901, role: 1, pathName: 'Track Sample', path: '/dashboard/track-sample', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     { id: 12, role: 1, pathName: 'Sample Request', path: '/dashboard/sample-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },
     {
       id: 13, role: 1, pathName: 'User Management', path: '', icon: 'supervised_user_circle', dropdownId: 'collapsepoaopoppo',

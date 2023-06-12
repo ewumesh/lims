@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-md-4">
-          <label for="exampleInputEmail1" class="form-label">Email Address</label>
+          <label for="exampleInputEmail1" class="form-label">Email Address*</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" matInput formControlName="email" placeholder="Enter your Email" />
             <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
@@ -92,7 +92,7 @@
         </div>
 
         <div class="col-md-4">
-          <label class="list-heading form-label">Select Role</label>
+          <label class="list-heading form-label">Select Role *</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="role" placeholder="Select Role">
               <mat-option [value]="item.role_id" *ngFor="let item of userRoles">{{item.role_name | titlecase}}</mat-option>

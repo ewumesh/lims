@@ -447,6 +447,18 @@ const routes: Routes = [
   },
 
   {
+    path: 'track-sample',
+    loadChildren: () => import('src/app/modules/track-sample/track-sample.module')
+      .then(m => m.TrackSampleModule)
+  },
+
+  {
+    path: 'track-sample-details/:id',
+    loadChildren: () => import('src/app/modules/track-sample-details/track-sample-details.module')
+      .then(m => m.TrackSampleDetailsModule)
+  },
+
+  {
     path: 'report/:id',
     // canActivate: [RoleGuard],
     // data: {

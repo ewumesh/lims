@@ -179,9 +179,9 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   getSampleDetails() {
     this.service.getSampleDetails(this.sampleId).subscribe(response => {
       this.addSampleForm.patchValue(response);
-      console.log(response, 'ok')
-      this.dataSource.data = response.parameters;
-      let sel: SelectionModel<any>
+      // console.log(response, 'ok')
+      // this.dataSource.data = response.parameters;
+      // let sel: SelectionModel<any>
       // this.selection.selected = response.parameters
       // this.addSampleForm.disable();
 
@@ -189,12 +189,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private initForm() {
-    let isParameter;
-    if(this.sampleId) {
-      isParameter = true;
-    } else {
-      isParameter = false;
-    }
+    // let isParameter;
+    // if(this.sampleId) {
+    //   isParameter = true;
+    // } else {
+    //   isParameter = false;
+    // }
     this.maxDate = new Date();
     this.addSampleForm = this.fb.group({
       existing_user: [''],
@@ -212,7 +212,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       language: ['en'],
       parameters: [''],
       owner_user: '',
-      isParameter: isParameter,
+      isParameter: false,
       status: 'pending'
     })
   }
@@ -253,7 +253,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       commodity: this.addSampleForm.value.commodity,
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
-      owner_user: this.userDetails.email,
+      owner_user: this.addSampleForm.value.existing_user,
       form_available: 'smu',
       status: 'pending'
     }
@@ -261,7 +261,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     if(this.sampleId) {
       this.service.updateSample(payload).subscribe(res => {
         this.isSampleSent = false;
-        this.router.navigate(['/dashboard/my-sample']);
+        this.router.navigate(['/dashboard/sample-requests']);
         this.toast.showToast(
           TOAST_STATE.success,
           res?.message);
@@ -279,7 +279,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
     this.service.addSample(payload).subscribe(response => {
       this.isSampleSent = false;
-        this.router.navigate(['/dashboard/sample-requests']);
+        this.router.navigate(['/dashboard/my-sample']);
       this.toast.showToast(
         TOAST_STATE.success,
         response?.message);
