@@ -41,7 +41,7 @@ export class UserRequestsComponent {
   clientCategories: any[] = [];
   roles: any[] = [];
 
-  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate','status', 'action'];
+  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate', 'action'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -80,14 +80,30 @@ export class UserRequestsComponent {
   filter() {
     this.isFilterBtnLoading = true;
     this.isLoading = true;
+
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
-      cilent_category: this.filterForm.value.client_category,
       role: this.filterForm.value.role,
-      from: this.format(this.filterForm.value.from),
-      to: this.format(this.filterForm.value.to)
+      from: from,
+      to: to,
+      clientCategory: this.filterForm.value.client_category,
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
@@ -115,16 +131,20 @@ export class UserRequestsComponent {
         search: '',
         page: '',
         size: '',
-        cilent_category: '',
-        role: ''
+        clientCategory: '',
+        role: '',
+        from: '',
+        to:''
       }
     } else {
       payload = {
         search: '',
         page: '',
         size: '',
-        cilent_category: '',
-        role: '5'
+        clientCategory: '',
+        role: '5',
+        form: '',
+        to:''
       }
     }
 

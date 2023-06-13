@@ -15,7 +15,7 @@ export class SampleRequestsService {
   }
 
   getAllSampleRequsets(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu&from=${payload.from}&to=${payload.to}`)
+    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}`)
   }
 
   getCommodities():Observable<any> {

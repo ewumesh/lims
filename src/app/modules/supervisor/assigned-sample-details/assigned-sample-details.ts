@@ -26,7 +26,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
 
   isFilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'parameter', 'assignedDate', 'assignTo', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'parameter', 'assignedDate', 'assignTo', 'status'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

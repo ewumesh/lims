@@ -2,10 +2,12 @@
 <div>
   <app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
   <div class="row" *ngIf="reportDetails.status === 'not_verified'">
-    <div class="col-md-12 text-end mt-3">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 text-end mt-3">
       <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
-      <button [disabled]="sampleStatus.length > 0" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
-        <span *ngIf="!isSending">Send for Verification</span>
+      <div *ngIf="!reportDetails.is_analyst_test" class="alert alert-info">Waiting for Analyst.</div>
+      <button *ngIf="reportDetails.is_analyst_test" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
+        <span *ngIf="!isSending">Send for Verification </span>
             <span *ngIf="isSending">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>

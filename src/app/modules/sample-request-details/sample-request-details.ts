@@ -181,6 +181,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     }
     this.service.getSampleDetails(payload).subscribe(res => {
       this.sampleDetails = res;
+      console.log(res, 'HAHAHAH')
     })
   }
 

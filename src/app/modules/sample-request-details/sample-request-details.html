@@ -117,28 +117,34 @@
         <div class="col-md-3">
           <div class="row">
             <p>Approved By</p>
-            <h4>Manish Basnet</h4>
+            <h4 class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created By</p>
-            <h4>Manoj Das</h4>
+            <h4>{{sampleDetails?.owner_user?.first_name}} {{sampleDetails?.owner_user?.last_name}}</h4>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row">
             <p>Approved at</p>
-            <h4>{{sampleDetails?.report_date | date}}</h4>
+            <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date: 'long'}}</h4>
+            <h4 *ngIf="!sampleDetails?.approved_date" class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
-            <h4>{{sampleDetails?.created_date | date}}</h4>
+            <h4 *ngIf="sampleDetails?.created_date">
+              {{sampleDetails?.created_date | date: 'long'}}
+            </h4>
+            <h4 class="text-muted" *ngIf="!sampleDetails?.created_date">
+             N/A
+            </h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row">
+          <!-- <div class="row">
             <p>Completed At</p>
             <h4>N/A</h4>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-3 log-status">
           <span style="padding: 8px" class="badge badge-primary" [statusColor]="sampleDetails.status">

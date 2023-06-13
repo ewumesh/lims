@@ -71,7 +71,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
 
   private initFilterForm() {
     this.filterForm = this.fb.group({
-      search: '',
+      search: ' ',
       status: '',
       from: '',
       to: '',
@@ -85,10 +85,27 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
 
   getSampleRequests() {
     this.isLoading = true;
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       search: '',
       page: '',
-      size: ''
+      size: '',
+      from: from,
+      to: to
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
@@ -114,13 +131,30 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   filterUserList() {
     this.isLoading = true;
     this.isfilterBtnLoading = true;
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
-      from: this.format(this.filterForm.value.from),
-      to: this.format(this.filterForm.value.to)
+      from: from,
+      to: to
     }
+
+    console.log(payload);
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
       this.dataSource.data = response.results;
