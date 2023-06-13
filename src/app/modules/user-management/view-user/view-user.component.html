@@ -102,33 +102,38 @@
           <div class="col-md-3">
             <div class="row">
               <p>Approve By</p>
-              <h4>Manish Basnet</h4>
+              <h4 *ngIf="userDetails?.approved_by">{{userDetails?.approved_by?.first_name}} {{userDetails?.approved_by?.first_name}}</h4>
+              <h4 class="text-muted" *ngIf="!userDetails?.approved_by">N/A</h4>
             </div>
             <div class="row mt-2">
-              <p>Requested By</p>
-              <h4>Manoj Das</h4>
+              <p>Created By</p>
+              <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
             </div>
           </div>
           <div class="col-md-3">
             <div class="row">
               <p>Approved At</p>
-              <h4>2023-01-11</h4>
+              <h4 *ngIf="userDetails?.approved_date">2023-01-11</h4>
+              <h4 class="text-muted" *ngIf="!userDetails?.approved_date">N/A</h4>
             </div>
             <div class="row mt-2">
-              <p>Requested at</p>
-              <h4>2023-01-05</h4>
+              <p>Created at</p>
+              <h4 *ngIf="userDetails?.date_joined ">{{userDetails?.date_joined | date:'long'}}</h4>
+              <h4 *ngIf="!userDetails?.date_joined " class="text-muted">N/A</h4>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="row">
+            <!-- <div class="row">
               <p>Verified By</p>
               <h4>N/A</h4>
-            </div>
+            </div> -->
           </div>
           <div class="col-md-3 log-status">
-            <span *ngIf="userDetails.status" style="padding: 8px" class="badge badge-primary" [statusColor]="userDetails.status">
-              {{userDetails.status}}</span>
-              <span class="text-muted" *ngIf="!userDetails.status">N/A</span>
+            <span *ngIf="userDetails.is_verified">
+            <span style="padding: 8px" class="badge badge-primary" [statusColor]="'verified'">
+              Verified</span>
+              </span>
+              <span class="badge badge-primary p-2" [statusColor]="'notVerified'" *ngIf="!userDetails.is_verified">Not verified</span>
           </div>
         </div>
       </div>

@@ -241,8 +241,11 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     let cUser;
     if(this.userDetails.role === 5) {
     cUser = this.userDetails.email;
-    } else {
+    }
+    if(this.userDetails.role !== 5 && this.addSampleForm.value.existing_user) {
       cUser = this.addSampleForm.value.existing_user
+    } else {
+      cUser = this.userDetails.email
     }
 
     let payload = {
@@ -290,7 +293,11 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
     this.service.addSample(payload).subscribe(response => {
       this.isSampleSent = false;
-        this.router.navigate(['/dashboard/my-sample']);
+      if(this.userDetails.role === 5) {
+        this.router.navigate(['/dashboard/my-sample'])
+      } else {
+        this.router.navigate(['/dashboard/sample-requests']);
+      }
       this.toast.showToast(
         TOAST_STATE.success,
         response?.message);

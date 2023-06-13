@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -17,6 +18,8 @@ export class ApproveUserComponent implements OnInit {
   message:any = {};
   responseError = null;
 
+  loggedUserDetails: any;
+
   constructor(
     private fb:FormBuilder,
     private dialogRef: MatDialogRef<ApproveUserComponent>,
@@ -26,7 +29,7 @@ export class ApproveUserComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ViewUserDetailsService
     ) {
-      // this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+      this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     }
 
   ngOnInit(): void {
@@ -45,15 +48,28 @@ export class ApproveUserComponent implements OnInit {
     let payload = {
       id: this.userDetails.id,
       is_verified: 1,
+      approved_by: this.loggedUserDetails.id,
+      approved_date: this.format(new Date()),
       remarks: this.approveForm.value.remarks
     }
+
+    console.log(payload, 'PAYYYY')
 
     this.service.approveUser(payload).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'User Approved Successfully!');
       this.dismissMessage();
       this.isApprove = false;
       this.dialogRef.close();
+    },(error) => {
+      window.scroll(0, 0)
+        this.message = {};
+        this.responseError = error?.error;
     })
+  }
+
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
   }
 
   getUserDetails() {

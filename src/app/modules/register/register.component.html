@@ -6,7 +6,7 @@
       <hr class="divider">
       <p class="login-detail">Enter your registration details</p>
     </div>
-    <form class="row userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
+    <form autocomplete="off" class="row userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
       <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
         <div class="alert alert-danger" role="alert">
           {{message?.messageBody}}

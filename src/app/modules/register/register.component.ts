@@ -84,7 +84,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         'required': 'Date is required.'
       },
       'username': {
-        'required': 'Username is required.'
+        'required': 'Username is required.',
+        'pattern': 'Username must be in small letters only.'
       }
     })
   }
@@ -116,7 +117,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       department_address: ['', Validators.required],
       registration_number: ['', Validators.required],
       // date: [this.date],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern("^[a-z][a-z0-9]*$")]],
       role: 5
     })
   }

@@ -17,7 +17,10 @@
 
           </div>
           <div style="padding-left: 1%;">
-            <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}</h1>
+            <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
+              <mat-icon *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"  style="color: #2260bf;">verified_user</mat-icon>
+              <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"  [matTooltip]="'Not Verified'"  style="background-color:red; font-size: 10px;">Not Verified</span>
+            </h1>
             <div *ngIf="accountDetails && accountDetails?.role">
               <mat-chip style="background-color: #2260bf;height: 20px;border-radius: 4px;"><span
                   class="text-white">{{getRoleName(accountDetails?.role)}}</span></mat-chip>

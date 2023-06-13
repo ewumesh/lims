@@ -59,7 +59,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         'required': 'Last Name is required.'
       },
       'username': {
-        'required': 'User Name is required.'
+        'required': 'User Name is required.',
+        'pattern': 'Username must be in small letters only.'
       },
       'email': {
         'required': 'Email is required.',
@@ -134,7 +135,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     this.userForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.required,Validators.pattern("^[a-z][a-z0-9]*$")]],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password:['', Validators.required],
