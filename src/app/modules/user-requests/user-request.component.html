@@ -2,30 +2,30 @@
   <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-2' : 'col-md-4'">
     <mat-form-field appearance="outline" class="w-100">
       <!-- <mat-label>Filter</mat-label> -->
-      <input formControlName="search" class="custom-input" matInput  placeholder="Search" #input>
+      <input formControlName="search" class="custom-input" matInput  placeholder="Search">
     </mat-form-field>
   </div>
 
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
+      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="From" />
       <mat-datepicker #fromPicker></mat-datepicker>
     </mat-form-field>
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
+      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="To" />
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
   </div>
 
-  <div class="col-md-2" *ngIf="userDetails?.role === 1">
+  <!-- <div class="col-md-2" *ngIf="userDetails?.role === 1">
     <mat-form-field appearance="outline">
       <mat-select class="custom-select" formControlName="role" placeholder="Select Role">
         <mat-option  *ngFor="let r of roles; let i = index;" [value]="r.role_id">{{r.role_name}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  </div> -->
   <!-- <div class="col-md-2" *ngIf="filterForm.get('role')?.value === 5">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Client Category">

@@ -28,11 +28,12 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
     private service: TrackSampleService
   ) { }
 
-  statusList: any[] = [{ id: 1, name: 'pending' }]
+  statusList: any[] = []
 
   ngOnInit(): void {
     this.initFilterForm();
     this.getSamples();
+    this.getStatus();
   }
 
   initFilterForm() {
@@ -41,6 +42,12 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
       from: '',
       to: '',
       status: ''
+    })
+  }
+
+  getStatus() {
+    this.service.getStatus().subscribe(res => {
+      this.statusList = res;
     })
   }
 
@@ -58,16 +65,34 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
 
   filter() {
     this.isFilterBtnLoading = true;
+
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       search: this.filterForm.value.search,
-      from: this.format(this.filterForm.value.from),
-      to: this.format(this.filterForm.value.to),
+      from: from,
+      to: to,
       page: '',
       size: ''
     }
 
     this.service.getSampleDetails(payload).subscribe(res => {
-
+      this.dataSource.data = res
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
     })
   }
 

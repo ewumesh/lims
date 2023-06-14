@@ -81,7 +81,7 @@
     <ng-container matColumnDef="assigned">
       <th mat-header-cell *matHeaderCellDef> Assigned </th>
       <td mat-cell *matCellDef="let row">
-        <div class="authors-container" data-collaborators="10">
+        <div class="authors-container" data-collaborators="10" *ngIf="row.sample_has_parameter_analyst.length > 0">
           <div class="author">
             <div class="mask cursor-pointer">
               <ngx-avatar size="40" [matTooltip]="row?.supervisor_user?.first_name" [name]="row?.supervisor_user?.first_name"></ngx-avatar>

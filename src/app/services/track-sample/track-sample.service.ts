@@ -12,6 +12,10 @@ export class TrackSampleService {
   constructor(private http: HttpClient) {}
 
   getSampleDetails(payload): Observable<any> {
-    return this.http.get(`${this.url}/api/report/track-report-sample-form/`)
+    return this.http.get(`${this.url}/api/report/track-report-sample-form/?search=${payload.search}&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}`)
+  }
+
+  getStatus():Observable<any> {
+    return this.http.get(`${this.url}/api/report/status/`);
   }
 }
