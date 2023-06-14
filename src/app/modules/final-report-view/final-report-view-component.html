@@ -130,7 +130,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="loggedUserDetails.role !== 4">
     <div class="col-md-12 text-end mt-3">
       <button (click)="downloadReport()" class="btn btn-primary btn-sm mx-1">Download Report</button>
     </div>

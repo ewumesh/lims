@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
 
     // verifier pages
     { id: 9, role: 6, pathName: 'Sample Verify', path: '/dashboard/sample-verify', icon: 'file_copy', subRoutes: [], dropdownId: '' },
-    { id: 10, role: 6, pathName: 'Verify Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 10, role: 6, pathName: 'Verified Report', path: '/dashboard/lab-report', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     // smu pages
     { id: 191, role: 2, pathName: 'User Request', path: '/dashboard/user-requests', icon: 'file_copy', subRoutes: [], dropdownId: '' },

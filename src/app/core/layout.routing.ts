@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { RoleGuard } from "../services/role.guard";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found";
 import { ForbiddenComponent } from "./components/forbidden/forbidden";
+import { NotFoundComponent } from "../components/not-found/404.component";
 
 const routes: Routes = [
   {
@@ -474,7 +475,7 @@ const routes: Routes = [
   // Access Denied
 
   // Page Not found
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: NotFoundComponent }
   // End Page Not found
 ]
 

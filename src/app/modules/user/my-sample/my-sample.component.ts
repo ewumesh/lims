@@ -146,7 +146,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       from: '',
       page: '',
       size: '',
-      user: this.userDetails.email
+      user: this.userDetails.email,
     }
     this.service.getMySamples(payload).subscribe(response => {
       this.dataSource.data = response.results;
@@ -165,10 +165,24 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   filterUserList() {
     this.isLoading = true;
     this.isFilterBtnLoading = true;
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
     let payload = {
       search: this.filterForm.value.search_text,
-      to: this.format(this.filterForm.value.to),
-      from: this.format(this.filterForm.value.from),
+      to: to,
+      from: from,
       page: '',
       size: '',
       user: this.userDetails.email

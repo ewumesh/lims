@@ -15,7 +15,7 @@ export class MySampleService {
   }
 
   getMySamples(payload): Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&owner_user=${payload.user}&from=${payload.from}&to=${payload.to}`);
+    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&owner_user=${payload.user}&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}`);
   }
 
   deleteSample(id):Observable<any> {

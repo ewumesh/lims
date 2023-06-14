@@ -16,11 +16,15 @@ export class FinalReportViewComponent implements OnInit {
 
   sampleStatus:any;
 
+  loggedUserDetails: any;
+
   constructor(
     private service: FinalReportViewService,
     private route: ActivatedRoute,
     private toast: ToastService
-    ) { }
+    ) {
+      this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+    }
 
   ngOnInit(): void {
     this.getReportDetails();

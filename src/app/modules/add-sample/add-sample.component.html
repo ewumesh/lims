@@ -14,7 +14,8 @@
       <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
         <div class="alert alert-danger" role="alert">
           <li *ngFor="let item of responseError | keyvalue">
-            {{item.key}}:{{item.value}}
+            <!-- {{item.key}}: -->
+            {{item.value}}
           </li>
         </div>
       </div>
@@ -226,7 +227,7 @@
 
     <div class="my-4 row">
       <div class="col-sm-12 text-end">
-        <button type="submit" class="btn btn-primary">
+        <button [disabled]="addSampleForm.invalid" type="submit" class="btn btn-primary">
           <span *ngIf="!isSampleSent">Submit</span>
             <span *ngIf="isSampleSent">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
