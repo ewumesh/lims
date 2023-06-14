@@ -21,11 +21,15 @@ export class UserReportComponent implements OnInit {
 
   sampleStatus:any;
 
+  userDetails:any;
+
   constructor(
     private service: UserReportService,
     private route: ActivatedRoute,
     private toast: ToastService
-    ) { }
+    ) {
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
 
   ngOnInit(): void {
     this.getReportDetails();

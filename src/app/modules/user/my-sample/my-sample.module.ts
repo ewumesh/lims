@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatCardModule} from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { MySampleComponent } from './my-sample.component';
 import { MatSortModule } from '@angular/material/sort';
@@ -25,7 +25,7 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: MySampleComponent}
+      { path: '', component: MySampleComponent }
     ]),
     MatTableModule,
     MatCardModule,
@@ -43,8 +43,8 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     MatNativeDateModule,
     SharedModule,
     DeleteConfirmModule
-   ],
+  ],
   exports: [],
   providers: [MySampleService],
 })
-export class MySampleModule {}
+export class MySampleModule { }

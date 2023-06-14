@@ -105,6 +105,9 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     private toast: ToastService,
     private route: ActivatedRoute
   ) {
+    if(!this.userDetails.is_verified) {
+      this.router.navigate(['/dashboard'])
+    }
     this.sampleId = this.route.snapshot.paramMap.get('id');
 
     this.title.setTitle('Add Sample - Laboratory Information Management System');

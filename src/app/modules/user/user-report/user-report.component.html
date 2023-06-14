@@ -6,28 +6,31 @@
         <div class="row log-details p-3">
           <div class="col-md-3">
             <div class="row">
-              <p>Approve By</p>
-              <h4>Manish Basnet</h4>
+              <p>Created at</p>
+              <h4>{{reportDetails?.created_date | date: 'long'}}</h4>
             </div>
+
             <div class="row mt-2">
               <p>Created By</p>
-              <h4>Manoj Das</h4>
+              <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
             </div>
           </div>
           <div class="col-md-3">
             <div class="row">
               <p>Approve At</p>
-              <h4>2023-01-11</h4>
+              <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'long'}}</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_date">N/A</h4>
             </div>
-            <div class="row mt-2">
+            <!-- <div class="row mt-2">
               <p>Created at</p>
-              <h4>2023-01-05</h4>
-            </div>
+              <h4>{{reportDetails?.created_date | date: 'long'}}</h4>
+            </div> -->
           </div>
           <div class="col-md-3">
             <div class="row">
-              <p>Verified By</p>
-              <h4>N/A</h4>
+              <p>Completed At</p>
+              <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+              <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date:'long'}}</h4>
             </div>
             <!-- <div class="row mt-2">
                         <p>Rejected at</p>
@@ -95,9 +98,10 @@
           <div class="col-md-12">
             <table class="table table-bordered">
               <tr>
+                <!-- <th></th> -->
                 <th>S.N</th>
                 <th>Parameter Name</th>
-                <!-- <th>Formula</th> -->
+                <th>Test Type</th>
                 <th>Method</th>
                 <th>Units</th>
                 <!-- <th>Price</th> -->
@@ -107,9 +111,16 @@
               </tr>
               <tbody>
                 <tr *ngFor="let r of reportDetails.parameters; let i = index;">
+                  <!-- <td rowspan="3">
+                    <tr>
+                      <td>asdasd</td>
+
+                    </tr>
+
+                  </td> -->
                   <td>{{i+1}}</td>
                   <td>{{r.name | titlecase}}</td>
-                  <!-- <td>{{r.formula}}</td> -->
+                  <td>{{r.test_type}}</td>
                   <td>{{r.ref_test_method}}</td>
                   <td>{{r.units}}</td>
                   <!-- <td>Rs.{{r.price}}</td> -->

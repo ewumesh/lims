@@ -67,11 +67,17 @@ export class PricingComponent implements OnInit, AfterViewInit {
   filterUserList() {
     this.filterBtnLoading = true;
     this.isLoading = true;
+    let c
+    if(this.filterForm.value.category) {
+      c = this.filterForm.value.category;
+    } else  {
+      c= '';
+    }
     let payload = {
       page: '',
       size: 100,
       search: this.filterForm.value.search_text,
-      category: this.filterForm.value.category
+      category: c
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
       this.dataSource.data = res.results;

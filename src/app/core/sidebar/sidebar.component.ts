@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
     // user pages
     { id: 1, role: 5, pathName: 'My Sample', path: '/dashboard/my-sample', icon: 'local_drink', subRoutes: [], dropdownId: '' },
     { id: 2, role: 5, pathName: 'Commodity Pricing', path: '/dashboard/commodity-pricing', icon: 'insert_chart', subRoutes: [], dropdownId: '' },
-    { id: 3, role: 5, pathName: 'Report View', path: '/dashboard/report-view', icon: 'file_copy', subRoutes: [], dropdownId: '' },
+    { id: 3, role: 5, pathName: 'Sample Report', path: '/dashboard/report-view', icon: 'file_copy', subRoutes: [], dropdownId: '' },
 
     //supervisor pages
     { id: 4, role: 3, pathName: 'Sample Request', path: '/dashboard/samples', icon: 'file_copy', subRoutes: [], dropdownId: '' },

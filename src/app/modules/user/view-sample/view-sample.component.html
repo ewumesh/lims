@@ -5,17 +5,18 @@
         <div class="col-md-3">
           <div class="row">
             <p>Approved By</p>
-            <h4>Manish Basnet</h4>
+            <h4 class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created By</p>
-            <h4>N/A</h4>
+            <h4 class="text-muted">{{userDetails.first_name}} {{userDetails.last_name}}</h4>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row">
             <p>Approved at</p>
-            <h4>{{sampleDetails?.report_date | date:'long'}}</h4>
+            <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'long'}}</h4>
+            <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>

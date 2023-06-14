@@ -13,10 +13,13 @@ export class ViewSampleComponent implements OnInit {
 
   commodities:any[] = [];
 
+  userDetails: any;
+
   constructor(
     private route: ActivatedRoute,
     private service: ViewSampleService
     ) {
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.sampleId = this.route.snapshot.paramMap.get('id');
   }
 

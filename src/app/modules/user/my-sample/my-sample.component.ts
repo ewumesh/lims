@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
+
 @Component({
   templateUrl: './my-sample.component.html',
   styleUrls: ['./my-sample.component.scss'],
@@ -18,8 +20,10 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 })
 export class MySampleComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['sn', 'sampleId', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource();
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   isLoading: boolean = true;
   isFilterBtnLoading: boolean = false;
@@ -102,9 +106,10 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
   reset() {
     this.filterForm.reset();
-    this.getSamples();
     this.isLoading = false;
     this.isFilterBtnLoading = false;
+    this.getSamples();
+    // debugger;
   }
 
   deleteSample(userId) {
@@ -148,18 +153,24 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       size: '',
       user: this.userDetails.email,
     }
+
+    // this.service.getMySamples(payload).subscribe({next => this.handleResponse(this)})
     this.service.getMySamples(payload).subscribe(response => {
       this.dataSource.data = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;
+      console.log(response, 'DATA RESPONSE..')
     },(error) => {
       this.isFilterBtnLoading = false;
       this.isLoading = false;
     })
   }
 
+  handleResponse(data) {}
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   filterUserList() {
