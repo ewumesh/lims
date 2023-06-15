@@ -58,6 +58,8 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
       search: '',
       page: '',
       size: '',
+      from: '',
+      to: '',
       user: this.userDetails?.id
     }
 
@@ -110,12 +112,27 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
   filter() {
     this.isFilterBtnLoading = true;
 
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
-      from: this.format(this.filterForm.value.from),
-      to:this.format(this.filterForm.value.to),
+      from: from,
+      to:to,
       status: this.filterForm.value.status,
       user: this.userDetails?.id
     }
