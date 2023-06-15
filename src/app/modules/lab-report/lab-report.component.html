@@ -7,14 +7,14 @@
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()"
-        (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
+        (click)="fromPicker.open()" matInput placeholder="(From)" />
       <mat-datepicker #fromPicker></mat-datepicker>
     </mat-form-field>
   </div>
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()"
-        (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
+        (click)="toPicker.open()" matInput placeholder="(To)" />
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
   </div>

@@ -86,7 +86,8 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
       from: from,
       to: to,
       page: '',
-      size: ''
+      size: '',
+      status: this.filterForm.value.status
     }
 
     this.service.getSampleDetails(payload).subscribe(res => {
