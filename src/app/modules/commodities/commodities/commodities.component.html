@@ -1,6 +1,6 @@
 <div class="bg-white p-4">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="loggedUserDetails?.role ===1">
       <div class="row">
         <div class="col-md-12 pa-4">
           <form [formGroup]="commoditiesForm">
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div  [ngClass]="loggedUserDetails?.role === 1 ? 'col-md-8' : 'col-md-12'">
       <form [formGroup]="filterForm" class="row">
         <div class="col-md-6 text-left">
           <mat-form-field class="w-100 px-2" appearance="outline">
@@ -179,8 +179,8 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
-            <button (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
-            <button (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
+            <button [disabled]="loggedUserDetails?.role !==1" (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+            <button [disabled]="loggedUserDetails?.role !==1" (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
           </td>
         </ng-container>
 

@@ -39,12 +39,15 @@ export class ClientCategoryComponent implements OnInit, AfterViewInit {
 
   loadingFormBtn: boolean = false;
 
+  loggedUserDetails: any;
+
   constructor(
     public dialog: MatDialog,
     private sService: SettingsService,
     private fb: FormBuilder,
     private toast: ToastService,
   ) {
+    this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.genericValidator = new GenericValidator({
       'name': {
         'required': 'Category Name is required.'

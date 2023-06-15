@@ -11,6 +11,7 @@ import { ToastService } from './shared/toastr/toastr.service';
 import { AuthGuard } from './services/auth.guard';
 import { JwtInterceptor } from './services/token-interceptor';
 import { NotFoundComponent } from './components/not-found/404.component';
+import { TokenInterceptor } from './services/token-validator';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { NotFoundComponent } from './components/not-found/404.component';
   exports: [MatMenuModule],
   providers: [
     // AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     ToastService
   ],
   bootstrap: [AppComponent]

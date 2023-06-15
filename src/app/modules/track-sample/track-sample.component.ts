@@ -55,7 +55,8 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
     let paylaod = {
       search: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     }
 
     this.service.getSampleDetails(paylaod).subscribe(res => {

@@ -55,7 +55,10 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     {id: 4, name: 'Rejected'}
   ]
 
+  loggedUserDetails: any;
+
   ngOnInit(): void {
+    this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.getUserRoles();
     this.initFilterForm();
     this.getClientCategories();
@@ -110,15 +113,27 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   getAllUsers() {
     this.isLoading = true;
-    let payload = {
-      search: '',
-      page: '',
-      size: '',
-      role: '',
-      client_category_id: ''
+    let p;
+    if(this.loggedUserDetails.role === 2) {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: 5,
+        client_category_id: ''
+      }
+    } else {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: '',
+        client_category_id: ''
+      }
     }
+
     this.isLoading = true;
-    this.allUsersService.getUsersList(payload).subscribe(response => {
+    this.allUsersService.getUsersList(p).subscribe(response => {
       this.dataSource.data = response;
       this.isLoading = false;
     })

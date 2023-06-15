@@ -112,7 +112,7 @@
         <button [matTooltip]="'Edit User Details'" (click)="updateUser(row.id)"
           class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit"
             fontIcon="edit"></mat-icon></button>
-        <button [matTooltip]="'Delete User'" (click)="deleteUser(row.id)"
+        <button *ngIf="loggedUserDetails.role === 1" [matTooltip]="'Delete User'" (click)="deleteUser(row.id)"
           class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false"
             aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
       </td>

@@ -46,6 +46,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
   responseError = null;
   submitBtn = false;
 
+  loggedUserDetails:any;
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
@@ -53,6 +55,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private toast: ToastService
   ) {
+    this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.genericValidator = new GenericValidator({
       'name': {
         'required': 'Category Name is required.'
