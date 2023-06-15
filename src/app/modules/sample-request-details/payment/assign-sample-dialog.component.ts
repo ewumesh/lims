@@ -103,11 +103,13 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
 
     let payload = {
       voucher_number: this.assignSampleForm.value.voucher_number,
-      owner_email: this.data?.owner_user,
+      owner_email: this.data?.owner_user.email,
       sample_form: this.data?.id,
       register_date: this.assignSampleForm.value.register_date,
       amount: this.assignSampleForm.value.amount
     }
+
+    console.log(payload, this.data, 'ok')
     this.service.sampleRequestPayment(payload, this.paymentReceipt).subscribe(res => {
       this.dialogRef.close();
       this.toast.showToast(TOAST_STATE.success, res.message);

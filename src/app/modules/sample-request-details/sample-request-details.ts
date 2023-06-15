@@ -225,7 +225,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
     let payload = {
       voucher_number: this.paymentForm.value.voucher_number,
-      owner_email: this.sampleDetails?.owner_user,
+      owner_email: this.sampleDetails?.owner_user?.email,
       sample_form: this.sampleDetails?.id,
       register_date: this.paymentForm.value.register_date,
       amount: this.paymentForm.value.amount

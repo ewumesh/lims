@@ -58,7 +58,9 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       search: '',
-      user: this.userDetails?.id
+      user: this.userDetails?.id,
+      from: '',
+      to: ''
     }
     this.service.getTestRequests(payload).subscribe(res => {
       this.dataSource.data = res.results;
@@ -89,12 +91,27 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
   }
 
   filter() {
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
+
     let payload = {
       page: '',
       size: '',
       search: this.filterForm.value.search,
-      from: this.format(this.filterForm.value.from),
-      to: this.format(this.filterForm.value.to),
+      from: from,
+      to: to,
       user: this.userDetails?.id
     }
     this.service.getTestRequests(payload).subscribe(res => {

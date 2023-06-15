@@ -15,13 +15,14 @@
       </div>
 
       <div class="col-md-3">
-        <div class="text-muted">Received Date</div>
-        <div class="font-bold">{{testRequestDetails?.created_date | date}}</div>
+        <div class="text-muted">Assigned By</div>
+        <div *ngIf="testRequestDetails?.sample_form?.supervisor_user?.first_name" class="font-bold">{{testRequestDetails?.sample_form?.supervisor_user?.first_name}} {{testRequestDetails?.sample_form?.supervisor_user?.last_name}}</div>
+        <div class="text-muted" *ngIf="!testRequestDetails?.sample_form?.supervisor_user?.first_name" class="font-bold">N/A</div>
       </div>
 
       <div class="col-md-3">
         <div class="text-muted">Assigned Date</div>
-        <div class="font-bold">{{testRequestDetails?.created_date | date}}</div>
+        <div class="font-bold">{{testRequestDetails?.created_date | date: 'date'}}</div>
       </div>
 
       <!-- <div class="col-md-3">

@@ -5,36 +5,40 @@
         <div class="col-md-3">
           <div class="row">
             <p>Supervise By</p>
-            <h4>Manish Basnet</h4>
+            <h4 *ngIf="reportDetails?.suervisor_user?.first_name">{{reportDetails?.suervisor_user?.first_name}} {{reportDetails?.suervisor_user?.last}}</h4>
+            <h4 *ngIf="!reportDetails?.suervisor_user?.first_name" class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created By</p>
-            <h4>Manoj Das</h4>
+            <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name">N/A</h4>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row">
             <p>Assigned Date</p>
-            <h4>2023-01-11</h4>
+            <h4>{{reportDetails.approved_date | date: 'long'}}</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
-            <h4>2023-01-05</h4>
+            <h4>{{reportDetails?.created_date | date:'long'}}</h4>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row">
             <p>Verified By</p>
-            <h4>N/A</h4>
+            <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
           </div>
-          <!-- <div class="row mt-2">
-                      <p>Rejected at</p>
-                      <h4>Lorem</h4>
-                  </div> -->
+          <div class="row mt-2">
+                      <p>Verified at</p>
+                      <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
+                      <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+                  </div>
         </div>
         <div class="col-md-3 log-status">
-          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails.status">
-            {{reportDetails.status}}</span>
+          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
+            {{reportDetails?.status}}</span>
         </div>
       </div>
     </div>

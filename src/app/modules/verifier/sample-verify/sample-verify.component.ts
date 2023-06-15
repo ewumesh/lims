@@ -33,7 +33,7 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
   }
 
   viewRequestDetails(id) {
-    this.router.navigate(['/dashboard/sample-verify-details', id]);
+    this.router.navigate(['/dashboard/verify-sample-report', id]);
   }
 
   initForm() {
@@ -43,17 +43,32 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
   }
 
   getSampleDetails() {
-    this.service.getSmaples().subscribe(res => {
+    this.isLoading = true;
+    let payload = {
+      search: ''
+    }
+    this.service.getSmaples(payload).subscribe(res => {
       this.dataSource.data = res;
+      this.isLoading = false;
     })
   }
 
   filter() {
+    this.isLoading = true;
+    let payload = {
+      search: this.filterForm.value.search
+    }
 
+    this.service.getSmaples(payload).subscribe(res => {
+      this.dataSource.data = res;
+      this.isLoading = false;
+    })
   }
 
   reset() {
-
+    this.filterForm.reset();
+    this.isLoading = true;
+    this.getSampleDetails();
   }
 
   ngAfterViewInit(): void {
