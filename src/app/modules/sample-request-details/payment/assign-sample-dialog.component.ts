@@ -85,7 +85,7 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
   initAssignSampleForm() {
     this.assignSampleForm = this.fb.group({
       voucher_number: ['', Validators.required],
-      owner_email: [this.data?.owner_user],
+      owner_email: [this.data?.owner_user?.email],
       sample_form: [this.data?.id],
       register_date: ['', Validators.required],
       amount: ['', Validators.required]
