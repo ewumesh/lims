@@ -32,11 +32,7 @@ import { TokenInterceptor } from './services/token-validator';
   exports: [MatMenuModule],
   providers: [
     AuthGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ToastService
   ],
   bootstrap: [AppComponent]

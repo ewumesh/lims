@@ -9,24 +9,19 @@ import { AuthenticationService } from './auth/auth.service';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(
-    private authService: AuthenticationService
-    ) { }
+  constructor(private authService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     const token = this.authService.getToken();
 
     if (token) {
-
       // Check if token is expired
-      const expired = this.isTokenExpired(token);
+      const expired = isTokenExpired(token);
 
       if (expired) {
-        console.log('EXPIRED......')
         // Handle token expiration here
         // For example, redirect to login page
         window.location.href = '/login';
-        // this.authService.logout();
       } else {
         // Add token to request headers
         request = request.clone({
@@ -49,19 +44,18 @@ export class TokenInterceptor implements HttpInterceptor {
         })
       );
   }
-  isTokenExpired(token: string) {
-    const decoded:DecodedToken = jwt_decode(token);
-    const now = Date.now() / 1000;
-
-    if (typeof decoded.exp !== 'undefined' && decoded.exp < now) {
-      return true;
-    }
-
-    return false;
-  }
 }
 
+function isTokenExpired(token: string) {
+  const decoded:DecodedToken = jwt_decode(token);
+  const now = Date.now() / 1000;
 
+  if (typeof decoded.exp !== 'undefined' && decoded.exp < now) {
+    return true;
+  }
+
+  return false;
+}
 
 interface DecodedToken {
   exp: number;
