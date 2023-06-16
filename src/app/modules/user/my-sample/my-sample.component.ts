@@ -108,7 +108,27 @@ export class MySampleComponent implements OnInit, AfterViewInit {
     this.filterForm.reset();
     this.isLoading = false;
     this.isFilterBtnLoading = false;
-    this.getSamples();
+    this.dataSource.data = [];
+    let payload = {
+      search: '',
+      to: '',
+      from: '',
+      page: '',
+      size: '',
+      user: this.userDetails.email,
+    }
+
+    // this.service.getMySamples(payload).subscribe({next => this.handleResponse(this)})
+    this.service.getMySamples(payload).subscribe(response => {
+      this.dataSource.data = response.results;
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
+      console.log(response, 'DATA RESPONSE..')
+    },(error) => {
+      this.isFilterBtnLoading = false;
+      this.isLoading = false;
+    })
+    // this.getSamples();
     // debugger;
   }
 

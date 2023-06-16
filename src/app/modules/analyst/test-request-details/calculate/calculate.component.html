@@ -33,7 +33,7 @@
             <label [for]="control.name">{{ control.label }}</label>
             <mat-form-field class="w-100" appearance="outline">
               <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
-                [formControlName]="control.name">
+                [formControlName]="control.name" required>
             </mat-form-field>
           </div>
         </ng-container>

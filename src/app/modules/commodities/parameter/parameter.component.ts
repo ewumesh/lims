@@ -151,7 +151,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
     let payload = {
       search: '',
       page: '1',
-      size: '10',
+      size: '500',
       test_type: ''
     }
     this.sService.getParameters(payload).subscribe(res => {
@@ -290,6 +290,9 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
   reset() {
     this.parameterForm.reset();
+    this.getParameters();
+    this.getCommodityCategories();
+    this.getCommodities();
   }
 
   ngAfterViewInit() {

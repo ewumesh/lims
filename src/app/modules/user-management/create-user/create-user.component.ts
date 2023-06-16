@@ -113,7 +113,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   getRoles() {
     this.cService.getRole().subscribe(response => {
+      if(this.loggedUserdetails.role === 1) {
       this.userRoles = response.roles;
+      } else {
+        this.userRoles.push({role_name:'user', role_id: 5})
+      }
     })
   }
 
@@ -130,11 +134,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   getUserRoles() {
     this.cService.getUserRole().subscribe(response => {
-      if(this.loggedUserdetails.role !== 1) {
+
         this.roles = response;
-      } else {
-        this.roles.push({role_id:5, role_name:'user'})
-      }
+      // } else {
+      //   this.roles.push({role_id:5, role_name:'user'})
+      // }
 
     })
   }

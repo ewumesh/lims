@@ -56,11 +56,11 @@
                Sample Request</a>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+          <!-- <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/track-sample'|| this.router.url.startsWith('/dashboard/track-sample-details/'))}" (click)="navigate('/dashboard/track-sample')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="track_changes"></mat-icon>
                Track Sample</a>
-          </li>
+          </li> -->
 
           <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
@@ -177,13 +177,13 @@
 
           <!-- Analyst Navs -->
           <li class="nav-item" *ngIf="userDetails.role === 4">
-            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/test-request')}" (click)="navigate('/dashboard/test-request')" href="Javascript:;">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/test-request' || this.router.url.startsWith('/dashboard/test-request-details/'))}" (click)="navigate('/dashboard/test-request')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="local_drink"></mat-icon>
                Test Request</a>
           </li>
 
           <li class="nav-item" *ngIf="userDetails.role === 4">
-            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report' || this.router.url.startsWith('/dashboard/report/'))}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="list_alt"></mat-icon>
                Test Report</a>
           </li>

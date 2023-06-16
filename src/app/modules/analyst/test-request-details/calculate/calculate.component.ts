@@ -58,7 +58,7 @@ export class CalculateComponent implements OnInit {
     let requestPayload = {
       formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
       sample_form: this.data.details.sample_form.id,
-      commodity: this.data.details.sample_form.commodity,
+      commodity: this.data.details.sample_form.commodity.id,
       parameter: this.data?.parameters?.id
     }
     this.service.calculateResult(requestPayload).subscribe(res => {
@@ -88,7 +88,7 @@ export class CalculateComponent implements OnInit {
   getFormParameters() {
     this.isLoading = true;
     let payload = {
-      commodity_id: this.data?.details?.sample_form?.commodity,
+      commodity_id: this.data?.details?.sample_form?.commodity.id,
       parameter_id: this.data.parameters.id,
       sample_form_id: this.data?.details?.sample_form?.id
     };

@@ -173,6 +173,11 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     this.initPaymentForm();
     this.getUserList();
     this.initForm();
+
+    if(this.sampleDetails.payment?.id) {
+      // this.stepper.next();
+      this.stepper.selectedIndex = 2;
+    }
    }
 
   getSampleDetails() {

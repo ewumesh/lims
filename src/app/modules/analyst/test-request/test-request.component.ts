@@ -16,7 +16,7 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
 
   filterForm: FormGroup;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'submissionDate', 'requestedDate','status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'requestedDate','status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
