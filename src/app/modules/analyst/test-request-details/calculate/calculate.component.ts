@@ -23,6 +23,8 @@ export class CalculateComponent implements OnInit {
 
   requestDetails = null;
 
+  responseError = null;
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
@@ -67,34 +69,7 @@ export class CalculateComponent implements OnInit {
     },
     (error) => {
       this.isCalculating = false;
-      if (error.status === 400) {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'All the field(s) are not valid.');
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      }else if(error.status === 500 || error.status > 500 ) {
-
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'Internal Server Error');
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-
-
-      } else {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          error?.error?.error);
-
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      }
+      this.responseError= error?.error
       this.isCalculating = false;
 
     })

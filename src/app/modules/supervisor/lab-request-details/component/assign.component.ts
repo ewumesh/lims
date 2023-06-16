@@ -131,7 +131,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       this.message = {};
       this.responseError = null;
-      this.router.navigate(['/dashboard/assigned-sample'])
+      this.router.navigate(['/dashboard/samples'])
     },(error) => {
       this.message = {};
       this.responseError = error?.error;

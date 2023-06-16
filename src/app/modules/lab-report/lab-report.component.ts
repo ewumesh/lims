@@ -22,12 +22,22 @@ export class LabReportComponent implements OnInit {
   displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  loggedUserDetails:any;
 
   constructor(
     private fb: FormBuilder,
     private service: AdminLabReportService,
     private router: Router
     ) {
+      this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
+      console.log(this.loggedUserDetails, 'POOPO')
+      if(this.loggedUserDetails.role === 4) {
+        this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'action'];
+      } else {
+        this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'status', 'action'];
+      }
+
+
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     }
 

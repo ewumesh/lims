@@ -99,14 +99,13 @@
     <!-- </td>
     </ng-container> -->
 
-    <ng-container matColumnDef="status">
+
+    <ng-container *ngIf="loggedUserDetails.role !== 4" matColumnDef="status" >
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
         <div *ngIf="userDetails?.role === 4 && row.status === 'processing'" >
           <span *ngIf="row.status === 'processing'" style="padding: 8px;" class="badge badge-primary"
             [statusColor]="row.status">Not Verified</span>
-          <!-- <span *ngIf="!row.status === 'processing'" style="padding: 8px;" class="badge badge-primary"
-            [statusColor]="row.status">{{row.status}}</span> -->
         </div>
         <div *ngIf="!userDetails?.role === 4 || row.status !== 'processing'">
           <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{

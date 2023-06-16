@@ -52,6 +52,7 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
   }
 
   getSamples() {
+    this.isLoading = true;
     let paylaod = {
       search: '',
       from: '',
@@ -61,6 +62,7 @@ export class TrackSampleComponent implements OnInit, AfterViewInit {
 
     this.service.getSampleDetails(paylaod).subscribe(res => {
       this.dataSource.data = res;
+      this.isLoading = false;
     })
   }
 

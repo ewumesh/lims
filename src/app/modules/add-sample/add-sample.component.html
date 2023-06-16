@@ -163,7 +163,7 @@
     <div class="col-md-12" *ngIf="addSampleForm.value.commodity">
         <b>Price of Commodity:</b> Rs.{{priceOfCommodity}}
 
-        <mat-checkbox formControlName="isParameter">Select Parameters</mat-checkbox>
+        <mat-checkbox formControlName="isParameter">Select Parameters </mat-checkbox>
     </div>
 
     <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0 && !isLoading && addSampleForm.value.isParameter === true">
@@ -227,7 +227,7 @@
 
     <div class="my-4 row">
       <div class="col-sm-12 text-end">
-        <button [disabled]="addSampleForm.invalid" type="submit" class="btn btn-primary">
+        <button [disabled]="(addSampleForm.invalid || (this.addSampleForm.value.isParameter === true && selection.selected.length < 1) )" type="submit" class="btn btn-primary">
           <span *ngIf="!isSampleSent">Submit</span>
             <span *ngIf="isSampleSent">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

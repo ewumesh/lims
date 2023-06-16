@@ -211,7 +211,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: ['', Validators.required],
       amendments: [''],
       note: [''],
-      commodity: ['', Validators.required],
+      commodity: [[], Validators.required],
       language: ['en'],
       parameters: [''],
       owner_user: '',
@@ -250,6 +250,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
       cUser = this.userDetails.email
     }
+
+    console.log(this.addSampleForm.value, 'oko')
 
     let payload = {
       id: this.sampleId,

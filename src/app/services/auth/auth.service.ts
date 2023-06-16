@@ -47,8 +47,15 @@ export class AuthenticationService {
   userRegister(payload: any, registrationDoc, renewDoc): Observable<any> {
 
     const formData:FormData = this.objectToFormData(payload);
-    formData.append('registration_document', registrationDoc, registrationDoc?.name);
-    formData.append('renew_document', renewDoc, renewDoc?.name);
+    if(registrationDoc) {
+      formData.append('registration_document', registrationDoc, registrationDoc?.name);
+    }
+
+    if(renewDoc) {
+      formData.append('renew_document', renewDoc, renewDoc?.name);
+    }
+
+
     return this.http.post(`${this.url}/api/account/users/`, formData);
   }
 

@@ -50,7 +50,7 @@ export class TestRequestDetailsComponent implements OnInit {
         this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!");
         this.dismissToast();
         // this.getTestResultDetails();
-        this.router.navigate(['/dashboard/test-report'])
+        this.router.navigate(['/dashboard/lab-report'])
       }, (error) => {
         this.isSend = false;
       })

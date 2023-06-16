@@ -39,7 +39,7 @@ export class VerifySampleReportomponent implements OnInit {
     }
 
     this.service.sendReportForVerificationFrom(payload).subscribe(res => {
-      this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
+      this.toast.showToast(TOAST_STATE.success, 'Sample Verified Successfully!');
       // this.toast.showToast(
       //   TOAST_STATE.danger,
       //   'All the field(s) are not valid.');

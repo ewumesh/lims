@@ -36,7 +36,7 @@
           </li>
 
           <li class="nav-item" *ngIf="userDetails?.role === 5">
-            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report' || this.router.url.startsWith('/dashboard/sample-test-report/'))}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/report-view' || this.router.url.startsWith('/dashboard/report/'))}" (click)="navigate('/dashboard/report-view')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
               Sample Report</a>
           </li>
