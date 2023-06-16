@@ -39,6 +39,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   responseError = null;
 
+  loggedUserdetails:any;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -47,6 +49,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     private toast: ToastService,
     private route:ActivatedRoute
     ) {
+      this.loggedUserdetails= JSON.parse(localStorage.getItem('userDetails'))
     this.title.setTitle('Create User - Laboratory Information Management System');
 
     this.initForm();
@@ -127,7 +130,12 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   getUserRoles() {
     this.cService.getUserRole().subscribe(response => {
-      this.roles = response;
+      if(this.loggedUserdetails.role !== 1) {
+        this.roles = response;
+      } else {
+        this.roles.push({role_id:5, role_name:'user'})
+      }
+
     })
   }
 

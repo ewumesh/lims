@@ -8,40 +8,202 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar">
 
-          <li *ngIf="(userDetails?.role === 2 || userDetails?.role === 5 || userDetails?.role === 1) && userDetails.is_verified" class="nav-item m-0">
-            <a class="nav-link active" aria-current="page" href="Javascript:;" (click)="navigate('/dashboard/add-sample')" id="add-sample">
-              <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
-
-              Add Sample</a>
-          </li>
-
           <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard'}" (click)="navigate('/dashboard')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="dashboard"></mat-icon>
               Dashboard</a>
           </li>
 
-          <!-- <li class="nav-item">
+          <li *ngIf="(userDetails?.role === 2 || userDetails?.role === 5 || userDetails?.role === 1) && userDetails.is_verified" class="nav-item m-0">
+            <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/add-sample'}" aria-current="page" href="Javascript:;" (click)="navigate('/dashboard/add-sample')" id="add-sample">
+              <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
+
+              Add Sample</a>
+          </li>
+
+          <!-- User Navs -->
+          <li class="nav-item" *ngIf="userDetails?.role === 5">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/my-sample' || this.router.url.startsWith('/dashboard/sample-details/'))}" (click)="navigate('/dashboard/my-sample')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="local_drink"></mat-icon>
               My Sample</a>
 
-          </li> -->
+          </li>
 
-          <!-- <li class="nav-item">
+          <li class="nav-item" *ngIf="userDetails?.role === 5">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/commodity-pricing')}" (click)="navigate('/dashboard/commodity-pricing')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="insert_chart"></mat-icon>
               Commodity Pricing</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+          <li class="nav-item" *ngIf="userDetails?.role === 5">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report' || this.router.url.startsWith('/dashboard/sample-test-report/'))}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
-              Report View</a>
-          </li> -->
+              Sample Report</a>
+          </li>
 
+          <!-- End User Navs -->
 
-          <span *ngFor="let link of routes; let i = index;">
+          <!-- SMU/Admin Navs -->
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-requests'}" (click)="navigate('/dashboard/user-requests')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="add" fontIcon="assignment_ind"></mat-icon>
+               User Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/sample-requests'|| this.router.url.startsWith('/dashboard/sample-request-details/'))}" (click)="navigate('/dashboard/sample-requests')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="add" fontIcon="input"></mat-icon>
+               Sample Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/track-sample'|| this.router.url.startsWith('/dashboard/track-sample-details/'))}" (click)="navigate('/dashboard/track-sample')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="track_changes"></mat-icon>
+               Track Sample</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="library_books"></mat-icon>
+               Lab Report</a>
+          </li>
+
+          <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link dropdown-toggle" [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/all-users'}"  href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle"></mat-icon>
+               User Management </a>
+
+               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+
+                  <li class="nav-item m-0">
+                    <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/all-users'}" (click)="navigate('/dashboard/all-users')" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       All User</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-user'}" (click)="navigate('/dashboard/create-user')" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Create User</a>
+                  </li>
+                </ul>
+              </div>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/commodities/all-commodities' || this.router.url === '/dashboard/settings/commodity-category' || this.router.url === '/dashboard/commodities' || this.router.url === '/dashboard/commodities-parameter'}"  href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseT" aria-expanded="false" aria-controls="collapseTwo">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work"></mat-icon>
+               Commodities <mat-icon class="pt-2" aria-hidden="false" aria-label="add" fontIcon="arrow_drop_down"></mat-icon></a>
+
+               <div id="collapseT" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+                  <li class="nav-item" style="margin:0 !important;">
+                    <a (click)="navigate('/dashboard/commodities/all-commodities')" class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/commodities/all-commodities'}" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       All</a>
+                  </li>
+
+                  <li class="nav-item m-0"  style="margin:0 !important">
+                    <a (click)="navigate('/dashboard/settings/commodity-category')" [ngClass]="{'active-route':this.router.url === '/dashboard/settings/commodity-category'}" class="nav-link" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Category</a>
+                  </li>
+
+                  <li class="nav-item m-0"  style="margin:0 !important">
+                    <a class="nav-link" href="Javascript:;" (click)="navigate('/dashboard/commodities')" [ngClass]="{'active-route':this.router.url === '/dashboard/commodities'}">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Commodities</a>
+                  </li>
+
+                  <li class="nav-item m-0"  style="margin:0 !important">
+                    <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/commodities-parameter'}" (click)="navigate('/dashboard/commodities-parameter')" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Parameter</a>
+                  </li>
+
+                </ul>
+              </div>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 1">
+            <a class="nav-link" href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSetting" aria-expanded="false" aria-controls="collapseSetting" [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category' || this.router.url === '/dashboard/user-group' || this.router.url === '/dashboard/user-permissions'}">
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="settings"></mat-icon>
+               Settings<mat-icon class="pt-2" aria-hidden="false" aria-label="add" fontIcon="arrow_drop_down"></mat-icon></a>
+
+               <div id="collapseSetting" class="accordion-collapse collapse" data-bs-parent="#collapseSetting">
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+                  <li class="nav-item" style="margin:0 !important;">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category'}" (click)="navigate('/dashboard/settings/client-category')" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Client Categories</a>
+                  </li>
+
+                  <li class="nav-item m-0"  style="margin:0 !important;">
+                    <a (click)="navigate('/dashboard/user-group')" class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-group'}" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Group</a>
+                  </li>
+
+                  <li class="nav-item" style="margin:0 !important;">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-permissions'}" (click)="navigate('/dashboard/user-permissions')" href="Javascript:;">
+                      <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                       Permission</a>
+                  </li>
+                </ul>
+              </div>
+          </li>
+          <!-- End SMU/Admin Navs -->
+
+          <!-- Supervisor Navs -->
+          <li class="nav-item" *ngIf="userDetails.role === 3">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/samples')}" (click)="navigate('/dashboard/samples')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="chrome_reader_mode"></mat-icon>
+               Sample Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 3">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/assigned-sample')}" (click)="navigate('/dashboard/assigned-sample')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="assignment"></mat-icon>
+               Assigned Sample</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 3">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="list_alt"></mat-icon>
+               Sample Report</a>
+          </li>
+          <!-- End Supervisor Navs -->
+
+          <!-- Analyst Navs -->
+          <li class="nav-item" *ngIf="userDetails.role === 4">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/test-request')}" (click)="navigate('/dashboard/test-request')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="local_drink"></mat-icon>
+               Test Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 4">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="list_alt"></mat-icon>
+               Test Report</a>
+          </li>
+          <!-- End Analyst Navs -->
+
+          <!-- Verifier Navs -->
+          <li class="nav-item" *ngIf="userDetails.role === 6">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/sample-verify')}" (click)="navigate('/dashboard/sample-verify')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="local_drink"></mat-icon>
+               Sample Request</a>
+          </li>
+
+          <li class="nav-item" *ngIf="userDetails.role === 6">
+            <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}" (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
+              <mat-icon aria-hidden="false" aria-label="track" fontIcon="list_alt"></mat-icon>
+               Verified Report</a>
+          </li>
+          <!-- End Varifier Navs -->
+
+          <!-- <span *ngFor="let link of routes; let i = index;">
           <li class="nav-item" *ngIf="link.role === userDetails.role && link.subRoutes.length < 1">
             <a class="nav-link" [ngClass]="{'dropdown-toggle': link.subRoutes.length > 0}" [ngClass]="{'active-route': link.path === activatedRoute}" (click)="navigate(link.path)" href="Javascript:;">
               <mat-icon [fontIcon]="link.icon"></mat-icon>
@@ -63,7 +225,7 @@
                 </ul>
               </div>
           </li>
-          </span>
+          </span> -->
 
           <!-- <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard'}" (click)="navigateToDashboard()" href="Javascript:;">

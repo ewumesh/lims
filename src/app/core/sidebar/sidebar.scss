@@ -1,6 +1,6 @@
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -20,14 +20,28 @@
 }
 
 .active-route {
-  color: #2260bf !important;
+  background-color: #2260bf !important;
+  color: #fff;
+  border-radius: 4px;
 }
 
 .nav-link {
-  font-size: 12px !important;
+  font-size: 14px !important;
 
   mat-icon {
     font-size: 16px;
     padding-top: 11px !important;
   }
+}
+
+.nav-link:hover {
+  background-color: #2260bf;
+  // .nav-link {
+    color: #fff !important;
+    border-radius: 4px;
+  // }
+}
+
+.nav-item {
+  margin: 5px 0;
 }

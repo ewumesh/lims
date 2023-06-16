@@ -475,7 +475,7 @@ const routes: Routes = [
   // Access Denied
 
   // Page Not found
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: PageNotFoundComponent  }
   // End Page Not found
 ]
 
