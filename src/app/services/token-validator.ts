@@ -25,8 +25,8 @@ export class TokenInterceptor implements HttpInterceptor {
         console.log('EXPIRED......')
         // Handle token expiration here
         // For example, redirect to login page
-        // window.location.href = '/login';
-        this.authService.logout();
+        window.location.href = '/login';
+        // this.authService.logout();
       } else {
         // Add token to request headers
         request = request.clone({
