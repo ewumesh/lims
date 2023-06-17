@@ -123,7 +123,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       this.dataSource.data = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;
-      console.log(response, 'DATA RESPONSE..')
+      // console.log(response, 'DATA RESPONSE..')
     },(error) => {
       this.isFilterBtnLoading = false;
       this.isLoading = false;
@@ -179,7 +179,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       this.dataSource.data = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;
-      console.log(response, 'DATA RESPONSE..')
+      // console.log(response, 'DATA RESPONSE..')
     },(error) => {
       this.isFilterBtnLoading = false;
       this.isLoading = false;

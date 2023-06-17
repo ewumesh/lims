@@ -4,6 +4,7 @@ import { FinalReportViewComponent } from './final-report-view.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FinalReportViewService } from 'src/app/services/final-report-view/final-report-view.serivce';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 @NgModule({
   declarations: [FinalReportViewComponent],
@@ -12,6 +13,7 @@ import { FinalReportViewService } from 'src/app/services/final-report-view/final
     RouterModule.forChild([
       {path: '', component: FinalReportViewComponent}
     ]),
+    NgxBarcodeModule,
 
     SharedModule
   ],

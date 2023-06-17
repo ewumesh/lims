@@ -95,6 +95,11 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
     }
   }
 
+  reset() {
+    this.filterForm.reset();
+    this.getSampleRequests();
+  }
+
   // assign(data) {
   //   let instance: MatDialogRef<AssignComponent, any>;
 

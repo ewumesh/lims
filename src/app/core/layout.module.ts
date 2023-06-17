@@ -16,6 +16,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RoleGuard } from '../services/role.guard';
 import { ForbiddenComponent } from './components/forbidden/forbidden';
 import { LayoutRoutingModule } from './layout.routing';
+import { NgxBarcodeModule } from 'ngx-barcode';
+import { ViewImageComponent } from '../modules/my-account/view-image/view-image';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { LayoutRoutingModule } from './layout.routing';
     NavbarComponent,
     NotificationComponent,
     PageNotFoundComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    ViewImageComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,8 @@ import { LayoutRoutingModule } from './layout.routing';
     MatTooltipModule,
     MatBadgeModule,
     MatMenuModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+
   ],
   exports: [],
   providers: [SharedService, LayoutService],

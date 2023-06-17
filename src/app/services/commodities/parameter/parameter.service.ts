@@ -17,8 +17,8 @@ export class ParameterService {
     return this.http.get(`${this.url}/api/test-result/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`)
   }
 
-  getCommodities():Observable<any> {
-    return this.http.get(`${this.url}/api/commodity/`)
+  getCommodities(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}`)
   }
 
   addParameter(payload: any):Observable<any>  {

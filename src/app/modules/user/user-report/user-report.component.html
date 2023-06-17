@@ -5,32 +5,30 @@
       <div class="top-view-page p-2 mb-3">
         <div class="row log-details p-3">
           <div class="col-md-3">
-            <div class="row">
-              <p>Created at</p>
-              <h4>{{reportDetails?.created_date | date: 'long'}}</h4>
-            </div>
-
             <div class="row mt-2">
               <p>Created By</p>
               <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
             </div>
+            <div class="row">
+              <p>Created at</p>
+              <h4>{{reportDetails?.created_date | date: 'medium'}}</h4>
+            </div>
+
+
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3"></div>
+          <!-- <div class="col-md-3">
             <div class="row">
               <p>Approve At</p>
-              <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'long'}}</h4>
+              <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
               <h4 class="text-muted" *ngIf="!reportDetails.approved_date">N/A</h4>
             </div>
-            <!-- <div class="row mt-2">
-              <p>Created at</p>
-              <h4>{{reportDetails?.created_date | date: 'long'}}</h4>
-            </div> -->
-          </div>
+          </div> -->
           <div class="col-md-3">
             <div class="row">
               <p>Completed At</p>
               <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
-              <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date:'long'}}</h4>
+              <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date:'medium'}}</h4>
             </div>
             <!-- <div class="row mt-2">
                         <p>Rejected at</p>
@@ -107,7 +105,7 @@
                 <!-- <th>Price</th> -->
                 <th>Mandatory Standards</th>
                 <th>Result</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
               </tr>
               <tbody>
                 <tr *ngFor="let r of reportDetails.parameters; let i = index;">
@@ -126,7 +124,7 @@
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <td>{{r.mandatory_standard}}</td>
                   <td>{{r?.result}}</td>
-                  <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
+                  <!-- <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td> -->
                 </tr>
               </tbody>
             </table>

@@ -460,6 +460,18 @@ const routes: Routes = [
   },
 
   {
+    path: 'sample-assigned',
+    loadChildren: () => import('src/app/modules/assigned-sample-admin/assigned-sample-admin.module')
+      .then(m => m.AssignedSampleAdminModule)
+  },
+
+  {
+    path: 'sample-assigned-details/:id',
+    loadChildren: () => import('src/app/modules/assigned-sample-admin-details/assigned-sample-admin-details.module')
+      .then(m => m.AssignedSampleAdminDetailsModule)
+  },
+
+  {
     path: 'report/:id',
     // canActivate: [RoleGuard],
     // data: {

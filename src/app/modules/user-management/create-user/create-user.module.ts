@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { CreateUserService } from 'src/app/services/user-management/create-user/create-user.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewImageComponent } from '../../my-account/view-image/view-image';
 
 @NgModule({
   declarations: [CreateUserComponent],
@@ -24,7 +26,8 @@ import { CreateUserService } from 'src/app/services/user-management/create-user/
     MatSelectModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [CreateUserService],

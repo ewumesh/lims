@@ -22,7 +22,7 @@ export class RoleGuard implements CanActivate {
       this.userRole = JSON.parse(localStorage.getItem('userDetails'))?.role;
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    console.log(requiredRole, this.userRole, this.authService.isLoggedIn(), "MINE ROLE..");
+    // console.log(requiredRole, this.userRole, this.authService.isLoggedIn(), "MINE ROLE..");
 
     if (this.authService.isLoggedIn()) {
       if (requiredRole.includes(this.userRole)) {

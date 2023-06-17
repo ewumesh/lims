@@ -85,7 +85,7 @@ export class CommoditiesComponent implements OnInit {
     let payload = {
       search: '',
       page: '',
-      size: ''
+      size: 200
     }
     this.sService.getCommodities(payload).subscribe(res => {
       this.dataSource.data = res.results;
@@ -125,7 +125,7 @@ export class CommoditiesComponent implements OnInit {
     let payload = {
       search: this.filterForm.value.search,
       page: '',
-      size: ''
+      size: 200
     }
     this.sService.getCommodities(payload).subscribe(res => {
       this.dataSource.data = res.results;

@@ -60,13 +60,13 @@ export class ViewUserDetailsComponent implements OnInit {
 
   getRoles() {
     this.layoutService.getRoles().subscribe(res => {
-      console.log(res, "RESPONSE")
+      // console.log(res, "RESPONSE")
       this.roles = res.roles;
     })
   }
 
   getRoleName(id) {
-    console.log(id, "EOLE IDL")
+    // console.log(id, "EOLE IDL")
     let role = this.roles.find(a => a.role_id === id);
     return role?.role_name
   }

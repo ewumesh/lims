@@ -38,4 +38,13 @@ export class NavbarComponent implements OnInit {
   navigateToProfile() {
     this.router.navigate(['/dashboard/my-account']);
   }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login'])
+  }
+
+  gotoDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
 }

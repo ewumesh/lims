@@ -163,7 +163,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   getCommodities() {
-    this.service.getCommodities().subscribe(response => {
+    let payload = {
+      search: '',
+      page: '',
+      size: 500
+    }
+    this.service.getCommodities(payload).subscribe(response => {
       this.commodities = response.results;
     })
   }
@@ -251,7 +256,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       cUser = this.userDetails.email
     }
 
-    console.log(this.addSampleForm.value, 'oko')
+    // console.log(this.addSampleForm.value, 'oko')
 
     let payload = {
       id: this.sampleId,

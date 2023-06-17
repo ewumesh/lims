@@ -39,7 +39,7 @@ export class SampleReportComponent implements OnInit {
     }
 
     this.service.sendReportForVerification(payload).subscribe(res => {
-      console.log(res, "HAHAHAHAHAHHHHHHH")
+      // console.log(res, "HAHAHAHAHAHHHHHHH")
       this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
       // this.toast.showToast(
       //   TOAST_STATE.danger,
@@ -65,7 +65,7 @@ export class SampleReportComponent implements OnInit {
       id: id
     }
     this.service.isSentForVrification(payload).subscribe(response => {
-      console.log(response, 'RESPONSE')
+      // console.log(response, 'RESPONSE')
       this.sampleStatus = response.results;
     })
   }

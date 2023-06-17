@@ -27,7 +27,7 @@ export class ViewReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data, 'DATA')
+    // console.log(this.data, 'DATA')
 
     this.getSampleDetails();
   }
@@ -35,7 +35,7 @@ export class ViewReportComponent implements OnInit {
   getSampleDetails() {
     this.isLoading = true;
     this.service.getSampleDetails(this.data.sampleId).subscribe(res => {
-      console.log(res, 'Response..')
+      // console.log(res, 'Response..')
       this.sampleDetails = res;
       this.getParameterDetails();
       this.isLoading = false;

@@ -185,6 +185,9 @@
             <img matTooltip="View Image" alt="Registration Document" style="height: 200px"
               class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.registration_document)"
               [src]="accountDetails?.registration_document" />
+              <div>
+              <button (click)="downloadImage(accountDetails?.registration_document)" class="btn btn-primary btn-sm">Download</button>
+          </div>
           </div>
 
           <div class="col-md-6">
@@ -193,6 +196,9 @@
             </h3>
             <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer"
               (click)="viewImage(accountDetails?.renew_document)" [src]="accountDetails?.renew_document" />
+              <div>
+                <button (click)="downloadImage(accountDetails?.renew_document)" class="btn btn-primary btn-sm">Download</button>
+            </div>
           </div>
         </div>
       </div>

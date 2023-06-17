@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CreateUserService } from 'src/app/services/user-management/create-user/create-user.service';
@@ -7,6 +8,7 @@ import { rowsAnimation } from 'src/app/shared/animations/animations';
 import { passwordMatchValidator } from 'src/app/shared/password-match/password-match';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
+import { ViewImageComponent } from '../../my-account/view-image/view-image';
 
 @Component({
   templateUrl: './create-user.component.html',
@@ -41,13 +43,16 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   loggedUserdetails:any;
 
+  userDetails: any;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
     private cService: CreateUserService,
     private router: Router,
     private toast: ToastService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private dialog: MatDialog
     ) {
       this.loggedUserdetails= JSON.parse(localStorage.getItem('userDetails'))
     this.title.setTitle('Create User - Laboratory Information Management System');
@@ -107,6 +112,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     if(this.userId) {
       this.cService.getUserDetails(this.userId).subscribe(response => {
         this.patchForm(response);
+        this.userDetails = response;
       })
     }
   }
@@ -120,6 +126,21 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  viewImage(url) {
+    // this.isChangePassword = true;
+    let instance: MatDialogRef<ViewImageComponent, any>;
+
+    instance = this.dialog.open(ViewImageComponent, {
+      data: url ? url : null,
+      width: '800px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+
+    })
+}
 
   patchForm(userDetails:any) {
     userDetails.password = '';
@@ -193,7 +214,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       is_verified: 1
     }
 
-    console.log(payload, 'PAYLOAD')
+    // console.log(payload, 'PAYLOAD')
     if (this.userForm.pristine || this.userForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';

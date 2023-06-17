@@ -131,7 +131,7 @@ export class AssignedSampleDetailsComponent implements OnInit, AfterViewInit {
       sampleId: sampleId
     }
     this.service.getAssignedSamples(payload).subscribe(res => {
-      console.log(res, 'RES')
+      // console.log(res, 'RES')
       this.dataSource.data = res.parameters;
       this.sampleDetails = res;
       this.isLoading = false;

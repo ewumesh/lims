@@ -65,7 +65,7 @@ export class FinalLabReportComponent implements OnInit {
       id: sampleId
     }
     this.service.getLabReportDetails(payload).subscribe(res => {
-      console.log(res, 'RES')
+      // console.log(res, 'RES')
       this.dataSource.data = res.parameters;
       this.sampleDetails = res;
       this.isLoading = false;

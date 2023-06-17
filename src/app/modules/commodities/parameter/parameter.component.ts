@@ -141,7 +141,12 @@ export class ParameterComponent implements OnInit, AfterViewInit {
   }
 
   getCommodities() {
-    this.sService.getCommodities().subscribe(res => {
+    let payload = {
+      page: '',
+      size: 500,
+      search: ''
+    }
+    this.sService.getCommodities(payload).subscribe(res => {
       this.commodities = res.results;
     })
   }

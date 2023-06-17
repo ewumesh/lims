@@ -24,7 +24,7 @@ export class TrackSampleDetailsComponent implements OnInit {
   }
 
   getDetails() {
-    console.log(this.sampleId, "IDDDDD")
+    // console.log(this.sampleId, "IDDDDD")
     this.service.getSampleDetails(this.sampleId).subscribe(res => {
       this.reportDetails = res;
     })

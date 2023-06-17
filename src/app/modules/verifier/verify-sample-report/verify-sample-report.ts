@@ -64,7 +64,7 @@ export class VerifySampleReportomponent implements OnInit {
       id: id
     }
     this.service.isSentForVrification(payload).subscribe(response => {
-      console.log(response, 'RESPONSE')
+      // console.log(response, 'RESPONSE')
       this.sampleStatus = response.results;
     })
   }

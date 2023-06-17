@@ -53,7 +53,7 @@ export class ApproveUserComponent implements OnInit {
       remarks: this.approveForm.value.remarks
     }
 
-    console.log(payload, 'PAYYYY')
+    // console.log(payload, 'PAYYYY')
 
     this.service.approveUser(payload).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, 'User Approved Successfully!');

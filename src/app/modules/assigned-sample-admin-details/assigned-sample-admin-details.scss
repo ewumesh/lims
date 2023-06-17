@@ -1,28 +1,25 @@
-.top-view-page {
+
+.top-view-page{
   background-color: white;
   border-radius: 10px;
   padding: 26px;
 }
-
-.log-details p {
+.log-details p{
   margin-bottom: 0;
   font-size: 12px;
   font-family: poppins;
 }
-
-.log-details h4 {
+.log-details h4{
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 0;
   font-family: poppins;
 }
-
-.log-status {
+.log-status{
   display: flex;
   justify-content: end;
   align-items: center;
 }
-
 .view-page .col-md-12 h4,
 .view-page .col-md-4 h4,
 .view-page .col-md-6 h4 {
@@ -30,34 +27,27 @@
   font-family: poppins;
   font-weight: 400;
 }
-
 .view-page p {
   font-family: Poppins;
   font-weight: 600;
   font-size: 16px;
 }
-
-.view-page {
+.view-page{
   padding: 0;
 }
-
 .view-page {
   border-radius: 8px;
 }
-
 .view-page {
   background-color: #fff;
   padding: 24px;
 }
-
 .view-page .row {
   margin-bottom: 10px
 }
-
 .view-page .col-md-6 p {
   font-size: 16px
 }
-
 .view-page-heading {
   font-size: 18px;
   font-family: poppins;
@@ -67,11 +57,9 @@
   padding-bottom: 10px;
   margin-bottom: 30px
 }
-
 .db-content {
   position: relative
 }
-
 // @media(min-width:991px) {
 //   .db-content {
 //       left: 286px;
@@ -80,7 +68,8 @@
 //       padding: 0;
 //   }
 // }
-.verified {
+.verified
+{
   padding: 6px 8px;
   border-radius: 4px;
   text-align: center;
@@ -88,25 +77,12 @@
   line-height: 1.4;
   margin-top: 4px;
 }
-
-.verified {
+.verified{
   font-size: 14px;
   color: rgb(0, 200, 83);
   background: rgba(185, 246, 202, 0.376);
 }
-
-.verified:hover {
+.verified:hover{
   background-color: rgb(0, 200, 83);
   color: #FFFFFF;
-}
-
-
-.bar {
-  .barcode {
-    svg {
-      // rect{
-      height: 60px !important;
-      // }
-    }
-  }
 }

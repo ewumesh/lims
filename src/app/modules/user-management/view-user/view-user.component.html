@@ -113,12 +113,12 @@
           <div class="col-md-3">
             <div class="row">
               <p>Approved At</p>
-              <h4 *ngIf="userDetails?.approved_date">{{userDetails?.approved_date | date:'long'}}</h4>
+              <h4 *ngIf="userDetails?.approved_date">{{userDetails?.approved_date | date:'medium'}}</h4>
               <h4 class="text-muted" *ngIf="!userDetails?.approved_date">N/A</h4>
             </div>
             <div class="row mt-2">
               <p>Created at</p>
-              <h4 *ngIf="userDetails?.date_joined ">{{userDetails?.date_joined | date:'long'}}</h4>
+              <h4 *ngIf="userDetails?.date_joined ">{{userDetails?.date_joined | date:'medium'}}</h4>
               <h4 *ngIf="!userDetails?.date_joined " class="text-muted">N/A</h4>
             </div>
           </div>
@@ -141,7 +141,7 @@
         <h3 class="view-page-heading">User Details</h3>
         <div class="row">
           <div class="col-md-4">
-            <h4>User Category</h4>
+            <h4>User Role</h4>
             <span *ngIf="userDetails.role" class="badge badge-primary" style="background-color: #2260bf;">{{getRoleName(userDetails.role)}}</span>
             <span *ngIf="!userDetails.role" class="text-muted">N/A</span>
           </div>

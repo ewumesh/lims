@@ -45,7 +45,7 @@ export class TestRequestDetailsComponent implements OnInit {
       }
       let id = this.route.snapshot.paramMap.get('id')
       this.service.sendForVarification(payload, id).subscribe(res => {
-        console.log(res, 'RESponse')
+        // console.log(res, 'RESponse')
         this.isSend = false;
         this.toast.showToast(TOAST_STATE.success, "Sent for supervisor successfully!");
         this.dismissToast();
@@ -103,7 +103,7 @@ export class TestRequestDetailsComponent implements OnInit {
    }
 
    saveResult(result, sampleId, parameterId, commodity) {
-    console.log(result, sampleId, parameterId,commodity, 'RESULT')
+    // console.log(result, sampleId, parameterId,commodity, 'RESULT')
 
     let payload = {
       sample_form: sampleId,

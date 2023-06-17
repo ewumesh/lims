@@ -119,11 +119,11 @@
         <div class="col-md-3">
           <div class="row">
             <p>Assigned Date</p>
-            <h4>{{reportDetails.approved_date | date: 'long'}}</h4>
+            <h4>{{reportDetails.approved_date | date: 'medium'}}</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
-            <h4>{{reportDetails?.created_date | date:'long'}}</h4>
+            <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
           </div>
         </div>
         <div class="col-md-3">
@@ -134,7 +134,7 @@
           </div>
           <div class="row mt-2">
                       <p>Verified at</p>
-                      <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
+                      <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'medium'}}</h4>
                       <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
                   </div>
         </div>

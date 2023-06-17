@@ -14,6 +14,7 @@ import { AssignSampleComponent } from './assign/assign-sample.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent],
@@ -31,7 +32,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+
+    SharedModule
    ],
   exports: [],
   providers: [SampleRequestDetailsService],

@@ -18,7 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [MyAccountComponent, changePasswordComponent, ViewImageComponent],
+  declarations: [MyAccountComponent, changePasswordComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

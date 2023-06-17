@@ -56,7 +56,7 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
       to: ''
     }
     this.service.getAllAssignedSamples(payload).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.samples = response;
       this.dataSource.data = response;
       this.isLoading = false;
@@ -110,7 +110,7 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
       to: to
     }
     this.service.getAllAssignedSamples(payload).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.samples = response;
       this.dataSource = response;
       this.isLoading = false;

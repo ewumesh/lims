@@ -30,7 +30,7 @@ export class LabReportComponent implements OnInit {
     private router: Router
     ) {
       this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
-      console.log(this.loggedUserDetails, 'POOPO')
+      // console.log(this.loggedUserDetails, 'POOPO')
       if(this.loggedUserDetails.role === 4) {
         this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'action'];
       } else {

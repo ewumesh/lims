@@ -154,7 +154,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
       to: to
     }
 
-    console.log(payload);
+    // console.log(payload);
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
       this.dataSource.data = response.results;

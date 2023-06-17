@@ -1,41 +1,46 @@
-<div class="row" *ngIf="sampleDetails">
+<div class="row">
   <div class="db-content">
     <div class="top-view-page p-2 mb-3">
       <div class="row log-details p-3">
         <div class="col-md-3">
           <!-- <div class="row">
-            <p>Approved By</p>
-            <h4 class="text-muted">N/A</h4>
+            <p>Supervise By</p>
+            <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.suervisosupervisor_userr_user?.first_name}} {{reportDetails?.supervisor_user?.last}}</h4>
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
           </div> -->
           <div class="row mt-2">
             <p>Created By</p>
-            <h4 class="text-muted">{{userDetails.first_name}} {{userDetails.last_name}}</h4>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="row">
-            <p>Approved at</p>
-            <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'medium'}}</h4>
-            <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
+            <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
-            <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
+            <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
           </div>
+
         </div>
         <div class="col-md-3">
           <div class="row">
-            <p>Completed At</p>
-            <h4>N/A</h4>
+            <p>Assigned Date</p>
+            <h4>{{reportDetails.approved_date | date: 'medium'}}</h4>
           </div>
+
+        </div>
+        <div class="col-md-3">
+          <!-- <div class="row">
+            <p>Verified By</p>
+            <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
+          </div> -->
           <!-- <div class="row mt-2">
-                      <p>Rejected at</p>
-                      <h4>Lorem</h4>
+                      <p>Verified at</p>
+                      <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
+                      <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
                   </div> -->
         </div>
         <div class="col-md-3 log-status">
-          <span style="padding: 8px" class="badge badge-primary" [statusColor]="sampleDetails.status">
-            {{sampleDetails.status}}</span>
+          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
+            {{reportDetails?.status}}</span>
         </div>
       </div>
     </div>
@@ -44,46 +49,46 @@
       <div class="row">
         <div class="col-md-4">
           <h4>Sample ID</h4>
-          <p>{{sampleDetails.id}}</p>
+          <p>{{reportDetails.id}}</p>
         </div>
         <div class="col-md-4">
           <h4>Sample Name </h4>
-          <p>{{sampleDetails.name}}</p>
+          <p>{{reportDetails.name}}</p>
         </div>
         <div class="col-md-4">
           <h4>Commodity </h4>
-          <p>{{(sampleDetails?.commodity.name) | titlecase}}</p>
+          <p>{{reportDetails?.commodity?.name}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4>MFD</h4>
-          <p>{{sampleDetails.mfd | date}}</p>
+          <p>{{reportDetails.mfd | date}}</p>
         </div>
         <div class="col-md-4">
           <h4>Best Before Date</h4>
-          <p>{{sampleDetails.dfb | date}}</p>
+          <p>{{reportDetails.dfb | date}}</p>
         </div>
 
         <div class="col-md-4">
           <h4>Batch</h4>
-          <p>{{sampleDetails.batch}}</p>
+          <p>{{reportDetails.batch}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4>Brand</h4>
-          <p>{{sampleDetails.brand}}</p>
+          <p>{{reportDetails.brand}}</p>
         </div>
 
         <div class="col-md-4">
           <h4>Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose}}</p>
+          <p>{{reportDetails?.purpose}}</p>
         </div>
 
         <div class="col-md-4">
           <h4>Condition</h4>
-          <p>{{sampleDetails.condition}}</p>
+          <p>{{reportDetails.condition}}</p>
         </div>
       </div>
     </div>
@@ -98,32 +103,29 @@
               <th>Parameter Name</th>
               <!-- <th>Formula</th> -->
               <th>Method</th>
-              <th>Units</th>
-              <!-- <th>Price</th> -->
+              <!-- <th>Units</th> -->
+              <th>Price</th>
               <!-- <th>Tested By</th> -->
               <th>Result</th>
-              <!-- <th>Status</th> -->
+              <th>Status</th>
             </tr>
             <tbody>
-              <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
+              <tr *ngFor="let r of reportDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
                 <!-- <td>{{r.formula}}</td> -->
                 <td>{{r.ref_test_method}}</td>
-                <td>{{r.units}}</td>
-                <!-- <td>Rs.{{r.price}}</td> -->
+                <!-- <td>{{r.units}}</td> -->
+                <td>Rs.{{r.price}}</td>
                 <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
-                <!-- <td>
-                  <span *ngIf="r.status">
-                    {{r?.results}}
-                  </span>
-                  <span *ngIf="!r.status" class="text-muted">
-                    N/A
-                  </span>
-                </td> -->
+                <td>
+                  <span *ngIf="r.result">{{r?.result}}</span>
+                  <span *ngIf="!r.result" class="text-muted">N/A</span>
+
+                </td>
                 <td>
                   <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
-                  <span  *ngIf="!r.status" class="text-muted">N/A</span>
+                  <span *ngIf="!r.status" class="text-muted">N/A</span>
                 </td>
               </tr>
             </tbody>
@@ -135,15 +137,6 @@
         <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
        </div> -->
       </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row bg-white" *ngIf="!sampleDetails">
-  <div class="col-md-12 text-center py-3">
-    <div class="spinner-border text-dark" role="status">
-      <span class="sr-only">Loading...</span>
     </div>
   </div>
 </div>

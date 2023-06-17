@@ -19,14 +19,14 @@
           <div class="col-md-3">
             <div class="row">
               <p>Assigned Date</p>
-              <h4>{{reportDetails.approved_date | date: 'long'}}</h4>
+              <h4>{{reportDetails.assigned_date | date: 'medium'}}</h4>
             </div>
             <div class="row mt-2">
               <p>Created at</p>
-              <h4>{{reportDetails?.created_date | date:'long'}}</h4>
+              <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="row">
               <p>Verified By</p>
               <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
@@ -34,11 +34,14 @@
             </div>
             <div class="row mt-2">
                         <p>Verified at</p>
-                        <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
+                        <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'medium'}}</h4>
                         <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
                     </div>
           </div>
-          <div class="col-md-3 log-status">
+          <div class="col-md-2">
+            <ngx-barcode class="bar" [bc-value]="reportDetails?.id" [bc-display-value]="false"></ngx-barcode>
+          </div>
+          <div class="col-md-2 log-status">
             <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
               {{reportDetails?.status}}</span>
           </div>
@@ -54,7 +57,7 @@
 
             <div class="row mt-2">
               <p>Created at</p>
-              <h4>{{reportDetails?.created_date | date:'long'}}</h4>
+              <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
             </div>
             <!-- <div class="row mt-2">
               <p>Created By</p>
@@ -65,7 +68,8 @@
           <div class="col-md-3">
             <div class="row">
               <p>Assigned Date</p>
-              <h4>{{reportDetails.approved_date | date: 'long'}}</h4>
+              <h4 *ngIf="reportDetails.assigned_date">{{reportDetails.assigned_date | date: 'medium'}}</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.assigned_date">N/A</h4>
             </div>
 
           </div>
@@ -76,9 +80,9 @@
               <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
             </div> -->
             <div class="row mt-2">
-                        <p>Verified at</p>
-                        <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
-                        <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+                        <!-- <p>Completed at</p>
+                        <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'medium'}}</h4>
+                        <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4> -->
                     </div>
           </div>
           <div class="col-md-3 log-status">

@@ -22,7 +22,7 @@
       <div class="col-md-12" *ngIf="userDetails?.role === 1 || userDetails?.role === 2">
         <mat-form-field appearance="outline" class="w-100">
           <mat-select formControlName="existing_user" class="custom-select" placeholder="Select User">
-            <mat-option *ngFor="let user of users" [value]="user.email">{{user.first_name}}</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user.email">{{user.first_name}} {{user.last_name}} (<span  style="font-weight: 500;">{{user.email}}</span>)</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

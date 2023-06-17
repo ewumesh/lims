@@ -1,23 +1,21 @@
 <form [formGroup]="filterForm" class="row">
-  <div class="col-md-6">
+  <div class="col-md-10">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
   </div>
-  <div class="col-md-2">
+  <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()"
-        (click)="fromPicker.open()" matInput placeholder="From" />
+      <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="Select Date (From)" />
       <mat-datepicker #fromPicker></mat-datepicker>
     </mat-form-field>
-  </div>
-  <div class="col-md-2">
+  </div> -->
+  <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()"
-        (click)="toPicker.open()" matInput placeholder="To" />
+      <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date (To)" />
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
-  </div>
+  </div> -->
   <!-- <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Status" formControlName="status">
@@ -28,19 +26,18 @@
   <div class="col-md-1 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
       <span *ngIf="!isFilterBtnLoading">Filter</span>
-      <span *ngIf="isFilterBtnLoading">
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-      </span>
+            <span *ngIf="isFilterBtnLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+            </span>
     </button>
   </div>
 
   <div class="col-md-1 text-end">
-    <button [disabled]="isFilterBtnLoading" (click)="resetFilter()" class="btn btn-danger w-100 h-45">
+    <button (click)="reset()" class="btn btn-danger w-100 h-45">
       Reset
     </button>
   </div>
 </form>
-
 
 <div>
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
@@ -48,7 +45,7 @@
 
     <ng-container matColumnDef="sn">
       <th mat-header-cell *matHeaderCellDef> S.N </th>
-      <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </td>
+      <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
     </ng-container>
 
     <ng-container matColumnDef="sampleId">
@@ -59,42 +56,53 @@
     <ng-container matColumnDef="sampleName">
       <th mat-header-cell *matHeaderCellDef> Sample Name </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.name">{{row.name | titlecase}} </span>
-        <span *ngIf="!row.name" class="text-muted">N/A</span>
+        <span *ngIf="row?.name">{{row?.name | titlecase}} </span>
+        <span *ngIf="!row?.name" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="submissionDate">
-      <th mat-header-cell *matHeaderCellDef> Requested Date </th>
+    <ng-container matColumnDef="commodity">
+      <th mat-header-cell *matHeaderCellDef> Commodity </th>
       <td mat-cell *matCellDef="let row">
-        {{row.created_date | date: 'medium'}}
+        <span *ngIf="row.commodity">{{row.commodity?.name}}</span>
+        <span *ngIf="!row.commodity" class="text-muted">N/A</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignedDate">
+      <th mat-header-cell *matHeaderCellDef> Assigned Date </th>
+      <td mat-cell *matCellDef="let row">
+        <span *ngIf="row.created_date">{{row.created_date | date}}</span>
+        <span *ngIf="!row.created_date" class="text-muted">N/A</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assigned">
+      <th mat-header-cell *matHeaderCellDef> Assigned </th>
+      <td mat-cell *matCellDef="let row">
+        <div *ngIf="row && row?.supervisor_user?.first_name" class="authors-container" data-collaborators="10">
+          <div class="author">
+            <div class="mask cursor-pointer">
+              <ngx-avatar size="40" [name]="row.supervisor_user.first_name" [matTooltip]="row.supervisor_user.first_name"></ngx-avatar>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!row.supervisor_user?.first_name" class="text-muted">N/A</div>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.total_assign  === 0">
-          <span *ngIf="row.status" class="badge badge-primary p-2" [statusColor]="row.status">{{row.status}} </span>
-          <span *ngIf="!row.status" class="text-muted">N/A</span>
-        </span>
-        <span *ngIf="row.total_assign  !== 0">
-          <span *ngIf="row.parameters.length !== row.total_assign && row.total_assign > 0"
-            class="badge badge-secondary p-2 mx-1" style="background-color:#577590">{{row?.total_assign}}
-            / {{row.parameters.length}} Assigned</span>
-        </span>
+        <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{ row.status | titlecase }}</span>
+        <span *ngIf="!row.status" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let row">
-        <!-- <button (click)="asignSampleTo(row)" class="btn btn-primary btn-sm">Pay</button> -->
-        <button (click)="viewDetails(row.id)" [matTooltip]="'View Sample Details'"
-          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view"
-            fontIcon="remove_red_eye"></mat-icon></button>
-        <!-- <button (click)="assign(row)" class="btn btn-primary btn-sm mx-1">Assign</button> -->
-        <!-- <button [matTooltip]="'Download Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button> -->
+        <button (click)="viewAssignedSampleDetails(row.id)" [matTooltip]="'View Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
       </td>
     </ng-container>
 

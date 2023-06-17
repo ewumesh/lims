@@ -22,8 +22,8 @@ export class AddSampleService {
     return this.http.get(`${this.url}/api/sample-form/${sampleId}/`);
   }
 
-  getCommodities():Observable<any> {
-    return this.http.get(`${this.url}/api/commodity/`)
+  getCommodities(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&offset=${payload.page}&limit=${payload.size}`)
   }
 
   updateSample(payload): Observable<any> {
@@ -31,6 +31,6 @@ export class AddSampleService {
   }
 
   getUsersList(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
+    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_verified=1`);
   }
 }

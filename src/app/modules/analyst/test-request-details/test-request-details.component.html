@@ -22,7 +22,7 @@
 
       <div class="col-md-3">
         <div class="text-muted">Assigned Date</div>
-        <div class="font-bold">{{testRequestDetails?.created_date | date: 'long'}}</div>
+        <div class="font-bold">{{testRequestDetails?.created_date | date: 'medium'}}</div>
       </div>
 
       <!-- <div class="col-md-3">
@@ -94,8 +94,8 @@
         </mat-form-field>
         <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
 
-        <span *ngIf="row?.result">{{row.result}} </span>
-        <span *ngIf="!row?.result" class="text-muted">N/A</span>
+        <span>{{row.result || '0'}} </span>
+        <!-- <span *ngIf="!row?.result" class="text-muted">N/A</span> -->
       </td>
     </ng-container>
 
