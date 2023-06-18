@@ -27,7 +27,7 @@
                 <div class="form-group">
                   <label class="mb-2">Parameter Name *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="auto">
+                    <input placeholder="Enter Parameter Name" type="text" class=" custom-input" matInput formControlName="name" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete">
                       <mat-option *ngFor="let option of listOfParameters" [value]="option.name">
                         {{option.name}}
@@ -222,8 +222,8 @@
 
         <!-- SN Column -->
         <ng-container matColumnDef="sn">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+          <th mat-header-cell *matHeaderCellDef> S.N. </th>
+          <td mat-cell *matCellDef="let e;let i = index"> {{i+1}} </td>
         </ng-container>
 
         <!-- Name Column -->

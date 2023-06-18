@@ -33,7 +33,7 @@
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort [@collectionInOut]="dataSource.data?.length">
 
     <ng-container matColumnDef="sn">
-      <th mat-header-cell *matHeaderCellDef> S.N </th>
+      <th mat-header-cell *matHeaderCellDef> S.N. </th>
       <td mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </td>
     </ng-container>
 

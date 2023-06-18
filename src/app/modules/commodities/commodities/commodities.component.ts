@@ -175,6 +175,7 @@ export class CommoditiesComponent implements OnInit {
       if (_) {
         this.sService.deleteCommodity(id).pipe(delay(400)).subscribe(_ => {
           this.getCommodities();
+          this.toast.showToast(TOAST_STATE.success, 'Commodity Deleted Successfully!')
         })
       }
     })
