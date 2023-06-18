@@ -19,7 +19,8 @@
           <div class="col-md-3">
             <div class="row">
               <p>Assigned Date</p>
-              <h4>{{reportDetails.assigned_date | date: 'medium'}}</h4>
+              <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
+              <h4 *ngIf="!reportDetails.approved_date" class="text-muted">N/A</h4>
             </div>
             <div class="row mt-2">
               <p>Created at</p>
@@ -68,8 +69,8 @@
           <div class="col-md-3">
             <div class="row">
               <p>Assigned Date</p>
-              <h4 *ngIf="reportDetails.assigned_date">{{reportDetails.assigned_date | date: 'medium'}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails.assigned_date">N/A</h4>
+              <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_date">N/A</h4>
             </div>
 
           </div>
