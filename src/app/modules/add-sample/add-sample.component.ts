@@ -57,6 +57,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   dataSource = new MatTableDataSource<any>();
   selection = new SelectionModel<any>(true, []);
 
+  loggedUser:any;
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -105,6 +107,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     private toast: ToastService,
     private route: ActivatedRoute
   ) {
+    this.loggedUser = JSON.parse(localStorage.getItem('userDetails'));
     if(!this.userDetails.is_verified) {
       this.router.navigate(['/dashboard'])
     }
@@ -148,9 +151,9 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit(): void {
+    this.initForm();
 
     this.getCommodities();
-    this.initForm();
     this.getParametersOfCommodity();
     if (this.sampleId) {
       this.getSampleDetails();
@@ -186,13 +189,26 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getSampleDetails() {
     this.service.getSampleDetails(this.sampleId).subscribe(response => {
-      this.addSampleForm.patchValue(response);
-      // console.log(response, 'ok')
-      // this.dataSource.data = response.parameters;
-      // let sel: SelectionModel<any>
-      // this.selection.selected = response.parameters
-      // this.addSampleForm.disable();
+      let actualResponse = response;
+      this.dataSource.data = response.parameters;
+      let actCommodity =  response.commodity;
 
+      let reqCommodity = response.commodity.id;
+
+      let parameters = response.parameters;
+
+      let actParameter = [];
+      parameters.forEach(a => actParameter.push(a.id));
+      actualResponse.parameters = actParameter;
+
+      actualResponse.commodity = reqCommodity;
+      actualResponse.isParameter = true;
+      this.addSampleForm.patchValue(actualResponse);
+      this.addSampleForm.value.isParameter = true
+
+      let selectedCommodities  = this.commodities.find(a => a.id === response.commodity.id);
+      console.log(selectedCommodities, 'popop')
+      // this.selection.
     })
   }
 
@@ -216,12 +232,13 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: ['', Validators.required],
       amendments: [''],
       note: [''],
-      commodity: [[], Validators.required],
+      commodity: ['', Validators.required],
       language: ['en'],
       parameters: [[]],
       owner_user: '',
       isParameter: false,
-      status: 'pending'
+      status: 'pending',
+      requested_export:['']
     })
   }
 
@@ -247,13 +264,18 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     let cUser;
+    let cOwner;
     if(this.userDetails.role === 5) {
     cUser = this.userDetails.email;
+    cOwner = this.userDetails.id
     }
     if(this.userDetails.role !== 5 && this.addSampleForm.value.existing_user) {
-      cUser = this.addSampleForm.value.existing_user
+      cUser = this.addSampleForm.value.existing_user.email;
+      cOwner = this.addSampleForm.value.existing_user.id;
+
     } else {
-      cUser = this.userDetails.email
+      cUser = this.loggedUser.email,
+      cOwner = this.loggedUser.id
     }
 
     // console.log(this.addSampleForm.value, 'oko')
@@ -275,31 +297,35 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       parameters: this.addSampleForm.value.parameters,
       owner_user: cUser,
       form_available: 'smu',
-      status: 'pending'
+      status: 'pending',
+      requested_export: this.addSampleForm.value.requested_export,
+      owner: cOwner
     }
 
+    console.log(payload, 'PAYLOAD', this.addSampleForm.value)
     if(this.sampleId) {
-      this.service.updateSample(payload).subscribe(res => {
-        this.isSampleSent = false;
-        if(this.userDetails.role === 5) {
-          this.router.navigate(['/dashboard/my-sample'])
-        } else {
-          this.router.navigate(['/dashboard/sample-requests']);
-        }
-        this.toast.showToast(
-          TOAST_STATE.success,
-          res?.message);
-          this.dismissMessage();
-          this.isLoading = true;
-          this.message = {};
-          this.responseError = null;
-      },(error) => {
-        window.scroll(0, 0)
-        this.message = {};
-        this.responseError = error?.error;
-        this.isLoading = false;
-        this.isSampleSent = false;
-      })
+
+      // this.service.updateSample(payload).subscribe(res => {
+      //   this.isSampleSent = false;
+      //   if(this.userDetails.role === 5) {
+      //     this.router.navigate(['/dashboard/my-sample'])
+      //   } else {
+      //     this.router.navigate(['/dashboard/sample-requests']);
+      //   }
+      //   this.toast.showToast(
+      //     TOAST_STATE.success,
+      //     res?.message);
+      //     this.dismissMessage();
+      //     this.isLoading = true;
+      //     this.message = {};
+      //     this.responseError = null;
+      // },(error) => {
+      //   window.scroll(0, 0)
+      //   this.message = {};
+      //   this.responseError = error?.error;
+      //   this.isLoading = false;
+      //   this.isSampleSent = false;
+      // })
     } else {
     this.service.addSample(payload).subscribe(response => {
       this.isSampleSent = false;

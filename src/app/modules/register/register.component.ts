@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   fileToUpload: File = null;
 
   clientCategories: any[] = [];
+  departmentTypes:[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -86,6 +87,9 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       'username': {
         'required': 'Username is required.',
         'pattern': 'Username must be in small letters only.'
+      },
+      'department_type': {
+        'required': 'This Field is required.'
       }
     })
   }
@@ -93,6 +97,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.getClientCategories();
     this.initForm();
+    this.getDepartmentType();
   }
 
   uploadFile(event) {
@@ -118,7 +123,15 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       registration_number: ['', Validators.required],
       // date: [this.date],
       username: ['', [Validators.required, Validators.pattern("^[a-z][a-z0-9]*$")]],
-      role: 5
+      role: 5,
+      department_type: ''
+    })
+  }
+
+  getDepartmentType() {
+    this.authService.getGetDepartmentTypes().subscribe(res => {
+      this.departmentTypes = res?.department_types;
+      console.log(res, 'okopk')
     })
   }
 

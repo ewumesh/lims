@@ -32,6 +32,10 @@ export class AuthenticationService {
     }))
   }
 
+  getGetDepartmentTypes() :Observable<any> {
+    return this.http.get(`${this.url}/api/account/department-types/`)
+}
+
   objectToFormData(obj: any): FormData {
     const formData = new FormData();
 

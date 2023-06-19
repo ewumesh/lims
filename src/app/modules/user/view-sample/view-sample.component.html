@@ -11,6 +11,10 @@
             <p>Created By</p>
             <h4 class="text-muted">{{userDetails.first_name}} {{userDetails.last_name}}</h4>
           </div>
+          <div class="row mt-2">
+            <p>Created at</p>
+            <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
+          </div>
         </div>
         <div class="col-md-3">
           <div class="row">
@@ -18,10 +22,7 @@
             <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'medium'}}</h4>
             <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
           </div>
-          <div class="row mt-2">
-            <p>Created at</p>
-            <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
-          </div>
+
         </div>
         <div class="col-md-3">
           <div class="row">

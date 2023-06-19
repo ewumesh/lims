@@ -93,14 +93,27 @@
                     *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
                 </mat-form-field>
               </div>
+
               <div class="col-md-6 mb-1">
+                <label class="form-label">Department Address *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select formControlName="department_address" placeholder="Select Department Address" class="custom-select" appearance="outline">
+                    <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
+                  </mat-select>
+                  <!-- <input matInput formControlName="department_type" placeholder="Enter Department Type" /> -->
+                  <mat-error [@rowsAnimation]="displayMessage?.department_address" class="text-danger"
+                    *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- <div class="col-md-6 mb-1">
                 <label class="form-label">Department address *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_address" placeholder="Enter Department Address" />
                   <mat-error [@rowsAnimation]="displayMessage?.departmentAddress" class="text-danger"
                     *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
                 </mat-form-field>
-              </div>
+              </div> -->
               <div class="col-md-6 mb-1">
                 <label class="form-label">Registration No. *</label>
                 <mat-form-field appearance="outline" class="w-100">

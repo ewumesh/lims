@@ -29,11 +29,17 @@
         </div>
         <hr>
         <ng-container *ngFor="let control of formControls">
-          <div>
+          <div *ngIf="control.name !== 'nan'">
             <label [for]="control.name">{{ control.label }}</label>
             <mat-form-field class="w-100" appearance="outline">
               <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
                 [formControlName]="control.name" required>
+            </mat-form-field>
+          </div>
+          <div *ngIf="control.name === 'nan'">
+            <label>Enter Value</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input placeholder="Enter Value" [formControlName]="control.name" class="custom-input" matInput type="number" required />
             </mat-form-field>
           </div>
         </ng-container>
