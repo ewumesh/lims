@@ -96,14 +96,24 @@ export class UserRequestsComponent {
       to = '';
     }
 
+    let c = ''
+    if(this.filterForm.value.client_category) {
+      c= this.filterForm.value.client_category;
+    }
+
+    let r = '';
+    if(this.filterForm.value.role) {
+      r = this.filterForm.value.role;
+    }
+
     let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
-      role: this.filterForm.value.role,
+      role:r,
       from: from,
       to: to,
-      clientCategory: this.filterForm.value.client_category,
+      clientCategory: c,
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;

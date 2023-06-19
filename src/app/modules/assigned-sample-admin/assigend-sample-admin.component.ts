@@ -61,7 +61,9 @@ export class AssignedSampleAdminComponent implements OnInit {
 
   initFilterForm() {
     this.filterForm =  this.fb.group({
-      search: ''
+      search: '',
+      from: '',
+      to: ''
     })
   }
 
@@ -78,13 +80,33 @@ export class AssignedSampleAdminComponent implements OnInit {
     this.router.navigate(['/dashboard/sample-assigned-details', id]);
   }
 
+  format(date: Date): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
   filter() {
+
+    let from;
+    let to;
+
+    if(this.filterForm.value.from){
+      from = this.format(this.filterForm.value.from);
+    } else {
+      from = '';
+    }
+
+    if(this.filterForm.value.to){
+      to = this.format(this.filterForm.value.to);
+    } else {
+      to = '';
+    }
     let payload = {
       search: this.filterForm.value.search,
       page: '',
       size: '',
-      from: '',
-      to: ''
+      from: from,
+      to: to
     }
     this.service.getAssignedSampleDetails(payload).subscribe(response => {
       // console.log(response);
