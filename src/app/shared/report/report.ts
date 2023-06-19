@@ -8,7 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ReportComponent implements OnInit {
   status = 'pending';
   @Input() reportDetails;
-  constructor() { }
+  loggedUserDetails: any;
+
+  constructor() {
+    this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+  }
 
   ngOnInit(): void {
     // console.log(this.reportDetails, 'REPORT DETAILS...')

@@ -49,7 +49,7 @@
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput class="custom-input" [max]="maxDate" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
+          <input matInput class="custom-input" [max]="maxDateMFD" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
             (click)="mfdPicker.open()" placeholder="Enter Manufactured Date" formControlName="mfd" />
 
           <mat-datepicker #mfdPicker></mat-datepicker>
@@ -60,7 +60,7 @@
         <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
 
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput [matDatepicker]="dfbPicker" [min]="maxDate" (focus)="dfbPicker.open()" (click)="dfbPicker.open()"
+          <input matInput [matDatepicker]="dfbPicker" [min]="maxDateB" (focus)="dfbPicker.open()" (click)="dfbPicker.open()"
             class="custom-input" placeholder="Enter Best Before Date" formControlName="dfb" />
           <mat-datepicker #dfbPicker></mat-datepicker>
           <mat-error class="text-danger" *ngIf="displayMessage?.dfb">{{displayMessage.dfb}}</mat-error>
@@ -97,6 +97,7 @@
           <mat-radio-group formControlName="requested_export" aria-label="Select an option">
             <mat-radio-button value="requested">Requested</mat-radio-button>
             <mat-radio-button value="export">Export</mat-radio-button>
+            <mat-error class="text-danger" *ngIf="displayMessage?.requested_export">{{displayMessage.requested_export}}</mat-error>
           </mat-radio-group>
         </div>
       </div>
@@ -135,7 +136,7 @@
     <div class="row">
       <div class="col-sm-6">
         <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
-          वस्तु)* {{addSampleForm.value.commodity | json}}</label>
+          वस्तु)* </label>
         <mat-form-field appearance="outline" class="custom-select w-100">
           <mat-select formControlName="commodity" placeholder="Select Category">
             <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |

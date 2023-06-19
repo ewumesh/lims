@@ -46,7 +46,10 @@
         <div class="row">
           <div class="col-md-4">
             <h4>Sample ID</h4>
-            <p>{{reportDetails.id}}</p>
+            <p>
+              <span *ngIf="reportDetails?.user_encode_id">{{reportDetails.user_encode_id}}</span>
+              <span *ngIf="!reportDetails?.user_encode_id" class="text-muted">N/A</span>
+            </p>
           </div>
           <div class="col-md-4">
             <h4>Sample Name </h4>

@@ -79,6 +79,23 @@ export class AssignedSampleAdminComponent implements OnInit {
   }
 
   filter() {
-
+    let payload = {
+      search: this.filterForm.value.search,
+      page: '',
+      size: '',
+      from: '',
+      to: ''
+    }
+    this.service.getAssignedSampleDetails(payload).subscribe(response => {
+      // console.log(response);
+      // this.samples = response;
+      this.dataSource.data = response;
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    },
+    (error) => {
+      this.isLoading = false;
+      this.isFilterBtnLoading = false;
+    })
   }
 }

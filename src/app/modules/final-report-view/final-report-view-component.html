@@ -97,7 +97,11 @@
         <div class="row">
           <div class="col-md-4">
             <h4>Sample ID</h4>
-            <p>{{reportDetails.id}}</p>
+            <!-- analyst_encode_id -->
+            <p *ngIf="loggedUserDetails.role === 4">{{reportDetails?.analyst_encode_id}}</p>
+            <p *ngIf="loggedUserDetails.role === 3">{{reportDetails?.supervisor_encode_id}}</p>
+            <p *ngIf="loggedUserDetails.role === 6">{{reportDetails?.verifier_encode_id}}</p>
+            <p *ngIf="loggedUserDetails.role !== 3 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 6">{{reportDetails.id}}</p>
           </div>
           <div class="col-md-4">
             <h4>Sample Name </h4>

@@ -47,7 +47,7 @@
       <div class="row">
         <div class="col-md-4">
           <h4>Sample ID</h4>
-          <p>{{reportDetails.id}}</p>
+          <p>{{reportDetails.verifier_encode_id}}</p>
         </div>
         <div class="col-md-4">
           <h4>Sample Name </h4>
@@ -116,7 +116,11 @@
                 <td>{{r.units}}</td>
                 <td>Rs.{{r.price}}</td>
                 <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
-                <td>{{r?.result}}</td>
+                <td>
+                  <span *ngIf="r.result">{{r.result}}</span>
+                  <span *ngIf="r?.result === 0">0</span>
+                  <span *ngIf="r?.result" class="text-muted">N/A</span>
+                </td>
                 <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
               </tr>
             </tbody>

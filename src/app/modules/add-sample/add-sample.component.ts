@@ -28,7 +28,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   isSampleSent = false;
 
   maxDate: any;
-
+  maxDateMFD: any;
+  maxDateB: any;
   // Used for form validation
   genericValidator: GenericValidator;
   displayMessage: any = {};
@@ -143,6 +144,10 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       'commodity': {
         'required': 'Commodity for Analysis is required.'
       },
+
+      'requested_export': {
+        'required': 'This field is required.'
+      }
       // 'note': {
       //   'required': 'Note is required.'
       // },
@@ -155,6 +160,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.getCommodities();
     this.getParametersOfCommodity();
+    this.getBestDate();
     if (this.sampleId) {
       this.getSampleDetails();
       // this.addSampleForm.value.isParameter = true;
@@ -173,6 +179,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.service.getCommodities(payload).subscribe(response => {
       this.commodities = response.results;
+    })
+  }
+
+  getBestDate() {
+    this.addSampleForm.get('mfd').valueChanges.subscribe(res => {
+      this.maxDateB = res;
     })
   }
 
@@ -219,12 +231,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     // } else {
     //   isParameter = false;
     // }
-    this.maxDate = new Date();
+    this.maxDateMFD = new Date();
     this.addSampleForm = this.fb.group({
       existing_user: [''],
       name: ['', Validators.required],
       condition: ['', Validators.required],
-      mfd: ['', [Validators.required]],
+      mfd: [null, [Validators.required]],
       dfb: ['', Validators.required],
       batch: ['', Validators.required],
       brand: ['', Validators.required],
@@ -238,7 +250,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       owner_user: '',
       isParameter: false,
       status: 'pending',
-      requested_export:['']
+      requested_export:['requested', Validators.required]
     })
   }
 

@@ -34,6 +34,8 @@ export class ViewSampleComponent implements OnInit {
     }
     this.service.getSampleDetails(payload).subscribe(res => {
       this.sampleDetails = res;
+    }, (error) => {
+      // this.sampleDetails = {}
     })
   }
 
