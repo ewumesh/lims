@@ -47,6 +47,10 @@ export class CreateUserService {
     return this.http.post(`${this.url}/api/account/users/`, formData)
   }
 
+  getGetDepartmentTypes() :Observable<any> {
+    return this.http.get(`${this.url}/api/account/department-types/`)
+}
+
   updateUser(payload, doc?,renewDoc?):Observable<any> {
     const formData:FormData = this.objectToFormData(payload);
     if(doc) {

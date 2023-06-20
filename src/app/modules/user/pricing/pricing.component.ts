@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { debounce, debounceTime } from 'rxjs';
 
 /**
  * @title Table with expandable rows
@@ -94,7 +95,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       search: '',
       category: ''
     }
-    this.pricingService.getAllCommodities(payload).subscribe(res=> {
+    this.pricingService.getAllCommodities(payload).pipe(debounceTime(500)).subscribe(res=> {
       this.dataSource.data = res.results;
       this.isLoading = false;
     })

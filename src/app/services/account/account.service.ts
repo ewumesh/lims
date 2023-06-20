@@ -17,6 +17,10 @@ export class AccountService {
     return this.http.get(`${this.url}/api/account/users/${userId}/`)
   }
 
+  getGetDepartmentTypes() :Observable<any> {
+    return this.http.get(`${this.url}/api/account/department-types/`)
+}
+
   getClientCategories():Observable<any> {
     return this.http.get(`${this.url}/api/client-category/`);
   }

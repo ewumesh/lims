@@ -12,6 +12,7 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 })
 export class ApproveUserComponent implements OnInit {
   isApprove = false;
+  isReject = false;
   userDetails:any;
   approveForm: FormGroup;
 
@@ -40,6 +41,30 @@ export class ApproveUserComponent implements OnInit {
   initApproveForm() {
     this.approveForm = this.fb.group({
       remarks: ''
+    })
+  }
+
+  rejectUser() {
+    this.isReject = true;
+    let payload = {
+      id: this.userDetails.id,
+      is_verified: 0,
+      approved_by: this.loggedUserDetails.id,
+      approved_date: this.format(new Date()),
+      remarks: this.approveForm.value.remarks
+    }
+
+    // console.log(payload, 'PAYYYY')
+
+    this.service.approveUser(payload).subscribe(res => {
+      this.toast.showToast(TOAST_STATE.success, 'User Rejected Successfully!');
+      this.dismissMessage();
+      this.isReject = false;
+      this.dialogRef.close();
+    },(error) => {
+      window.scroll(0, 0)
+        this.message = {};
+        this.responseError = error?.error;
     })
   }
 

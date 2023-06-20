@@ -36,4 +36,8 @@ export class LayoutService {
   getRoles():Observable<any> {
     return this.http.get(`${this.url}/api/account/roles/`)
   }
+
+  getNotification():Observable<any> {
+    return this.http.get(`${this.url}/api/websocket/notification/`)
+  }
 }

@@ -37,6 +37,13 @@
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
         </span>
       </button>
+
+      <button (click)="rejectUser()" class="btn btn-secondary btn-sm mx-1">
+        <span *ngIf="!isReject">Reject</span>
+        <span *ngIf="isReject">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+      </button>
     </mat-dialog-actions>
   </div>
 </div>

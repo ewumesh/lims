@@ -18,8 +18,10 @@
           </div>
           <div style="padding-left: 1%;">
             <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
-              <mat-icon *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"  style="color: #2260bf;">verified_user</mat-icon>
-              <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"  [matTooltip]="'Not Verified'"  style="background-color:red; font-size: 10px;">Not Verified</span>
+              <mat-icon *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
+                style="color: #2260bf;">verified_user</mat-icon>
+              <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"
+                [matTooltip]="'Not Verified'" style="background-color:red; font-size: 10px;">Not Verified</span>
             </h1>
             <div *ngIf="accountDetails && accountDetails?.role">
               <mat-chip style="background-color: #2260bf;height: 20px;border-radius: 4px;"><span
@@ -34,173 +36,297 @@
 
           <!-- <button *ngIf="isChangePassword" class="btn btn-primary mx-1"
             (click)="changePassword()">Save</button> -->
-          <button *ngIf="isChangePassword" class="btn btn-danger mx-1"
-            (click)="cancel()">Back</button>
+          <button *ngIf="isChangePassword" class="btn btn-danger mx-1" (click)="cancel()">Back</button>
         </div>
       </div>
 
 
     </div>
 
-      <div *ngIf="isChangePassword" class="row m-0 p-0">
-        <div class="col-md-12">
+    <div *ngIf="isChangePassword" class="row m-0 p-0">
+      <div class="col-md-12">
         <h1>Change Password</h1>
-        <hr/>
-        </div>
-        <div class="col-md-12">
-            <form class="row" autocomplete="off" [formGroup]="changePasswordForm">
-              <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
-                <div class="alert alert-danger" role="alert">
-                  {{message?.messageBody}}
-                </div>
-              </div>
-              <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
-                <div class="alert alert-danger" role="alert">
-                  <li *ngFor="let item of responseError | keyvalue">
-                    {{item.key}}:{{item.value}}
-                  </li>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label class="label">Old Password:</label>
-                <mat-form-field class="w-100" appearance="outline">
-
-                  <input formControlName="old_password" type="password" matInput class="custom-input" placeholder="Enter old password" />
-                  <mat-error class="text-danger" *ngIf="displayMessage?.old_password">{{displayMessage.old_password}}</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-4">
-                <label class="label">New Password:</label>
-                <mat-form-field class="w-100" appearance="outline">
-                  <input formControlName="password" type="password" matInput class="custom-input" placeholder="Enter new password" />
-                  <mat-error class="text-danger" *ngIf="displayMessage?.password">{{displayMessage.password}}</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-4">
-                <label class="label">Confirm Password:</label>
-                <mat-form-field class="w-100" appearance="outline">
-                  <input formControlName="confirm_password" type="password" matInput class="custom-input" placeholder="Confirm password" />
-                  <mat-error class="text-danger" *ngIf="displayMessage?.confirm_password">{{displayMessage.confirm_password}}</mat-error>
-                </mat-form-field>
-
-                <span *ngIf="changePasswordForm.hasError('passwordMatch')" class="text-danger">Passwords do not match.</span>
-              </div>
-            </form>
-
-          <div class="text-end">
-            <button (click)="cancel()" class="btn btn-danger btn-sm mx-1">Cancel</button>
-            <button (click)="save()" class="btn btn-primary btn-sm mx-1">
-              <span *ngIf="!isSaveBtnLoading">Save</span>
-                        <span *ngIf="isSaveBtnLoading">
-                          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                        </span>
-            </button>
+        <hr />
+      </div>
+      <div class="col-md-12">
+        <form class="row" autocomplete="off" [formGroup]="changePasswordForm">
+          <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-danger" role="alert">
+              {{message?.messageBody}}
+            </div>
           </div>
+          <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-danger" role="alert">
+              <li *ngFor="let item of responseError | keyvalue">
+                {{item.key}}:{{item.value}}
+              </li>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="label">Old Password:</label>
+            <mat-form-field class="w-100" appearance="outline">
+
+              <input formControlName="old_password" type="password" matInput class="custom-input"
+                placeholder="Enter old password" />
+              <mat-error class="text-danger"
+                *ngIf="displayMessage?.old_password">{{displayMessage.old_password}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label class="label">New Password:</label>
+            <mat-form-field class="w-100" appearance="outline">
+              <input formControlName="password" type="password" matInput class="custom-input"
+                placeholder="Enter new password" />
+              <mat-error class="text-danger" *ngIf="displayMessage?.password">{{displayMessage.password}}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label class="label">Confirm Password:</label>
+            <mat-form-field class="w-100" appearance="outline">
+              <input formControlName="confirm_password" type="password" matInput class="custom-input"
+                placeholder="Confirm password" />
+              <mat-error class="text-danger"
+                *ngIf="displayMessage?.confirm_password">{{displayMessage.confirm_password}}</mat-error>
+            </mat-form-field>
+
+            <span *ngIf="changePasswordForm.hasError('passwordMatch')" class="text-danger">Passwords do not
+              match.</span>
+          </div>
+        </form>
+
+        <div class="text-end">
+          <button (click)="cancel()" class="btn btn-danger btn-sm mx-1">Cancel</button>
+          <button (click)="save()" class="btn btn-primary btn-sm mx-1">
+            <span *ngIf="!isSaveBtnLoading">Save</span>
+            <span *ngIf="isSaveBtnLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+          </button>
         </div>
       </div>
+    </div>
+
     <div class="row bg-white m-0 p-2" *ngIf="accountDetails && !isChangePassword">
-      <div class="col-md-12">
-        <h2 class="text-lims-primary mb-0">Personal Details</h2>
-        <hr class="" />
-      </div>
-
-      <div class="col-md-12">
+      <div class="col-md-12" *ngIf="!isAccountEdit">
         <div class="row">
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Full Name:</span> {{accountDetails?.first_name | titlecase}}
-              {{accountDetails?.last_name | titlecase}}
-            </h3>
+          <div class="col-md-12">
+            <h2 class="text-lims-primary mb-0">Personal Details</h2>
+            <hr class="" />
           </div>
 
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Email:</span> {{accountDetails?.email}}
-            </h3>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Full Name:</span> {{accountDetails?.first_name | titlecase}}
+                  {{accountDetails?.last_name | titlecase}}
+                </h3>
+              </div>
+
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Email:</span> {{accountDetails?.email}}
+                </h3>
+              </div>
+
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Phone Number: </span>
+                  <span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
+                  <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
+                </h3>
+              </div>
+
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Username: </span>
+                  <span *ngIf="accountDetails?.username">{{accountDetails?.username}}</span>
+                  <span *ngIf="!accountDetails?.username" class="text-muted">N/A</span>
+                </h3>
+              </div>
+
+              <div class="col-md-4" *ngIf="accountDetails?.role === 5">
+                <h3>
+                  <span class="text-bold">Client Category: </span>
+                  <span
+                    *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
+                  <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+                </h3>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Phone Number: </span>
-              <span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
-              <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
-            </h3>
+          <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+            <h2 class="text-lims-primary mb-0">Department Details</h2>
+            <hr class="" />
+
+            <div class="row">
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Department Name:</span> {{accountDetails?.department_name | titlecase}}
+                </h3>
+              </div>
+
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Department Address:</span> {{accountDetails?.department_address | titlecase}}
+                </h3>
+              </div>
+
+              <div class="col-md-4">
+                <h3>
+                  <span class="text-bold">Registration Number:</span> {{accountDetails?.registration_number}}
+                </h3>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Username: </span>
-              <span *ngIf="accountDetails?.username">{{accountDetails?.username}}</span>
-              <span *ngIf="!accountDetails?.username" class="text-muted">N/A</span>
-            </h3>
-          </div>
+          <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+            <h2 class="text-lims-primary mb-0">Documents</h2>
+            <hr class="" />
 
-          <div class="col-md-4" *ngIf="accountDetails?.role === 5">
-            <h3>
-              <span class="text-bold">Client Category: </span>
-              <span
-                *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
-              <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
-            </h3>
-          </div>
-        </div>
-      </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h3>
+                  <span class="text-bold">Registration Documents</span>
+                </h3>
+                <img matTooltip="View Image" alt="Registration Document" style="height: 200px"
+                  class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.registration_document)"
+                  [src]="accountDetails?.registration_document" />
+                <div>
+                  <button (click)="downloadImage(accountDetails?.registration_document)"
+                    class="btn btn-primary btn-sm">Download</button>
+                </div>
+              </div>
 
-      <div class="col-md-12" *ngIf="accountDetails?.role === 5">
-        <h2 class="text-lims-primary mb-0">Department Details</h2>
-        <hr class="" />
-
-        <div class="row">
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Department Name:</span> {{accountDetails?.department_name | titlecase}}
-            </h3>
-          </div>
-
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Department Address:</span> {{accountDetails?.department_address | titlecase}}
-            </h3>
-          </div>
-
-          <div class="col-md-4">
-            <h3>
-              <span class="text-bold">Registration Number:</span> {{accountDetails?.registration_number}}
-            </h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12" *ngIf="accountDetails?.role === 5">
-        <h2 class="text-lims-primary mb-0">Documents</h2>
-        <hr class="" />
-
-        <div class="row">
-          <div class="col-md-6">
-            <h3>
-              <span class="text-bold">Registration Documents</span>
-            </h3>
-            <img matTooltip="View Image" alt="Registration Document" style="height: 200px"
-              class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.registration_document)"
-              [src]="accountDetails?.registration_document" />
-              <div>
-              <button (click)="downloadImage(accountDetails?.registration_document)" class="btn btn-primary btn-sm">Download</button>
-          </div>
-          </div>
-
-          <div class="col-md-6">
-            <h3>
-              <span class="text-bold">Renew Documents</span>
-            </h3>
-            <img matTooltip="View Image" alt="Renew Document" style="height: 200px" class="img-thumbnail cursor-pointer"
-              (click)="viewImage(accountDetails?.renew_document)" [src]="accountDetails?.renew_document" />
-              <div>
-                <button (click)="downloadImage(accountDetails?.renew_document)" class="btn btn-primary btn-sm">Download</button>
+              <div class="col-md-6">
+                <h3>
+                  <span class="text-bold">Renew Documents</span>
+                </h3>
+                <img matTooltip="View Image" alt="Renew Document" style="height: 200px"
+                  class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.renew_document)"
+                  [src]="accountDetails?.renew_document" />
+                <div>
+                  <button (click)="downloadImage(accountDetails?.renew_document)"
+                    class="btn btn-primary btn-sm">Download</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="isAccountEdit">
+        <div class="col-md-12">
+          <h2 class="text-lims-primary mb-0">Update Account Details</h2>
+          <hr class="" />
+        </div>
+        <form [formGroup]="userForm">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="exampleInputFullName1" class="form-label">First Name*</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="first_name" placeholder="Enter your First Name" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.first_name" class="text-danger"
+                  *ngIf="displayMessage?.first_name">{{displayMessage?.first_name}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <label for="exampleInputFullName1" class="form-label">Last Name*</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="last_name" placeholder="Enter your Last Name" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.last_name" class="text-danger"
+                  *ngIf="displayMessage?.last_name">{{displayMessage?.last_name}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <label for="exampleInputEmail1" class="form-label">Email Address*</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="email" placeholder="Enter your Email" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
+                  *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input type="number" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
+                  *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <label for="password" class="form-label">Username*</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
+                  *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <label class="list-heading form-label">Client Category</label>
+              <mat-form-field appearance="outline" class="custom-select w-100">
+                <mat-select formControlName="client_category" placeholder="Select Category">
+                  <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
+                </mat-select>
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
+                  *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <label for="exampleInputEmail1" class="form-label">Department Name</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="department_name"
+                  placeholder="Enter Department Name" />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <label for="exampleInputEmail1" class="form-label">Department Address</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
+                  <mat-option *ngFor="let a of departmentTypes" [value]="a.code">{{a.name}}</mat-option>
+                </mat-select>
+                <!-- <input class="custom-input" matInput formControlName="department_address"
+                  placeholder="Enter Department Address" /> -->
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+              <label for="exampleInputEmail1" class="form-label">Registration Number</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="registration_number"
+                  placeholder="Enter Registration Number"/>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-12 mb-1">
+              <div *ngIf="userDetails?.role ===5">
+                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="accountDetails?.rew_document" />
+              </div>
+              <label for="file2">Registration Document*</label>
+              <input (change)="uploadFile($event)" class="form-control" type="file" />
+            </div>
+            <div class=" col-md-12 mb-1">
+
+              <div *ngIf="userDetails?.role ===5">
+                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="accountDetails?.registration_document" />
+                </div>
+              <label for="secfile2"> Renew Document*</label>
+              <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
+
+            </div>
+
+          </div>
+        </form>
       </div>
     </div>
 

@@ -1,17 +1,18 @@
-<p>Notification 0120120210</p>
+<div class="row m-0 p-0 ">
+  <!-- <div class="col-md-12">
+    <h3>Notification</h3>
+    <hr>
+  </div> -->
 
-<p>Notification 0120120210</p>
-
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
-<p>Notification 0120120210</p>
+  <div class="col-md-12 m-0 p-0">
+    <mat-list style="width: inherit !important;">
+      <div mat-subheader style="margin: 0;">Notification({{notifications?.length}})</div>
+      <mat-divider></mat-divider>
+      <mat-list-item class="n-list-item" *ngFor="let n of notifications" (click)="navigateTo(n?.path)">
+        <div matListItemTitle [title]="n.notification_message">{{n.notification_message | titlecase}}</div>
+        <div matListItemLine>{{n.created_date | date: 'medium'}}</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </div>
+</div>

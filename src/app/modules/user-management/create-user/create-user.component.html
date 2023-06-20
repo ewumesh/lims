@@ -137,8 +137,11 @@
           <div class="col-md-6">
             <label for="exampleInputEmail1" class="form-label">Department Address</label>
             <mat-form-field appearance="outline" class="w-100">
-              <input class="custom-input" matInput formControlName="department_address"
-                placeholder="Enter Department Address" />
+              <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
+                <mat-option *ngFor="let a of departmentTypes" [value]="a.code">{{a.name}}</mat-option>
+              </mat-select>
+              <!-- <input class="custom-input" matInput formControlName="department_address"
+                placeholder="Enter Department Address" /> -->
             </mat-form-field>
           </div>
 

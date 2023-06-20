@@ -1,0 +1,15 @@
+::ng-deep {
+.cdk-overlay-pane {
+  // top: 76px !important;
+  // right: 0 !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 5% !important;
+}
+
+.mat-mdc-menu-panel {
+  width: 400px !important;
+  max-height: 70vh !important;
+}
+}

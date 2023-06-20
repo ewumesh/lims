@@ -18,6 +18,7 @@ import { ForbiddenComponent } from './components/forbidden/forbidden';
 import { LayoutRoutingModule } from './layout.routing';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ViewImageComponent } from '../modules/my-account/view-image/view-image';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ViewImageComponent } from '../modules/my-account/view-image/view-image'
     MatBadgeModule,
     MatMenuModule,
     LayoutRoutingModule,
+    MatListModule
 
   ],
   exports: [],

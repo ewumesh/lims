@@ -45,6 +45,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   userDetails: any;
 
+  departmentTypes:any[] = [];
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -108,6 +110,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     this.getClientCategories();
     this.getUserRoles();
     this.getRoles();
+    this.getDepartmentTypes();
 
     if(this.userId) {
       this.cService.getUserDetails(this.userId).subscribe(response => {
@@ -181,6 +184,12 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       role: ['', Validators.required],
       group: ['']
     },{ validators: passwordMatchValidator })
+  }
+
+  getDepartmentTypes() {
+    this.cService.getGetDepartmentTypes().subscribe(res => {
+      this.departmentTypes = res?.department_types;
+    })
   }
 
   saveChanges() {

@@ -38,7 +38,10 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   isSaveBtnLoading = false;
   message:any = {};
   responseError = null;
-  userDetails:any = {}
+  userDetails:any = {};
+
+  isAccountEdit = false;
+  departmentTypes:any[] = [];
 
   constructor(
     private title: Title,
@@ -70,6 +73,7 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     this.getClientCategories();
     this.getRoles();
     this.initChangePasswordForm();
+    this.getDepartmentType();
   }
 
   initChangePasswordForm() {
@@ -79,6 +83,12 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
       password: ['', Validators.required],
       confirm_password: ['', Validators.required]
     },{ validators: passwordMatchValidator })
+  }
+
+  uploadFile() {}
+
+  uploadRenewDoc() {
+
   }
 
   viewImage(url) {
@@ -103,13 +113,21 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
 
   private initForm() {
     this.userForm = this.fb.group({
-      first_name:'',
-      last_name: '',
+      first_name:['', Validators.required],
+      last_name: ['', Validators.required],
       username: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       client_category: [, Validators.required],
-      userValidUpTo: ['2030-01-01', Validators.required]
+      department_name: ['', Validators.required],
+      department_address:['', Validators.required],
+      registration_number: ['', Validators.required]
+    })
+  }
+
+  getDepartmentType() {
+    this.accountService.getGetDepartmentTypes().subscribe(res => {
+      this.departmentTypes = res?.department_types;
     })
   }
 

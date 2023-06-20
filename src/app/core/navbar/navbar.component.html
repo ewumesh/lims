@@ -9,7 +9,7 @@
     <div class="notification-div" style="margin-right: 1rem;">
       <a href="Javascript:;" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
         data-bs-content="Bottom popover">
-        <mat-icon matBadge="1" matBadgeColor="warn" class="pt-1" aria-hidden="false" aria-label="Notification"
+        <mat-icon [matMenuTriggerFor]="menu" matBadge="" matBadgeColor="warn" class="pt-1" aria-hidden="false" aria-label="Notification"
           fontIcon="notifications"></mat-icon>
       </a>
 
@@ -17,9 +17,9 @@
         Popover on bottom
       </button> -->
 
-      <!-- <mat-menu #menu="matMenu" class="notification-menu">
+      <mat-menu #menu="matMenu" class="notification-menu">
         <app-notifications></app-notifications>
-      </mat-menu> -->
+      </mat-menu>
     </div>
     <img [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt="">
     <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">Hi,{{userDetails?.first_name |
