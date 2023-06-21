@@ -13,6 +13,10 @@ export class AssignedSampleAdminService {
   constructor(private http: HttpClient){}
 
   getAssignedSampleDetails(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/report/sample-form-assigned-for-smu-superadmin/?search=${payload.search}&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}`)
+    return this.http.get(`${this.url}/api/report/sample-form-assigned-for-smu-superadmin/?search=${payload.search}&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}&status=${payload.status}`)
+  }
+
+  getStatusList(payload?):Observable<any> {
+    return this.http.get(`${this.url}/api/report/status/assigned-sample/`)
   }
 }

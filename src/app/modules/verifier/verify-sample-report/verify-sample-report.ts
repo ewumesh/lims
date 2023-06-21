@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 
@@ -19,7 +19,8 @@ export class VerifySampleReportomponent implements OnInit {
   constructor(
     private service: SampleReportService,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -47,6 +48,7 @@ export class VerifySampleReportomponent implements OnInit {
       this.dissmissMessage();
       this.isSampleSentForSupervisor();
       this.isSending = false;
+      this.router.navigate(['/dashboard/lab-report'])
     }, (error) => {
       this.isSending = false;
     })

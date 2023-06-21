@@ -15,7 +15,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
   styleUrls: ['./commodities.component.scss']
 })
 export class CommoditiesComponent implements OnInit {
-  displayedColumns: string[] = ['sn', 'commodity', 'price', 'testDuration', 'units', 'category', 'action'];
+  displayedColumns: string[] = ['sn', 'commodity', 'price', 'testDuration', 'category', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -63,7 +63,7 @@ export class CommoditiesComponent implements OnInit {
       category: [''],
       test_duration: [''],
       price: '',
-      units: ''
+      // units: ''
     })
   }
 

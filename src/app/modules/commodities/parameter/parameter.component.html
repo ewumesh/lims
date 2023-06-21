@@ -187,12 +187,12 @@
     </div>
     <div  [ngClass]="loggedUserDetails?.role === 1 ? 'col-md-8' : 'col-md-12'">
       <form [formGroup]="filterForm" class="row">
-        <div class="col-md-3 text-left">
+        <div class="col-md-4 text-left">
           <mat-form-field class="w-100 px-2" appearance="outline">
             <input formControlName="search" class="custom-input" matInput placeholder="Enter keyword" #input>
           </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <mat-form-field appearance="outline">
             <mat-select formControlName="test_type" class="custom-select" placeholder="Select Test Type">
               <mat-option value="1">Chemical Test</mat-option>
@@ -201,22 +201,22 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-2 text-left">
+        <div class="col-md-2">
           <button (click)="filter()" class="btn btn-primary w-100 h-45">Filter</button>
         </div>
 
-        <div class="col-md-2 text-left">
+        <div class="col-md-2 ">
           <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
         </div>
 
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
           <button class="btn btn-secondary dropdown-toggle h-45 w-100" [matMenuTriggerFor]="downloadMenu">Download</button>
 
           <mat-menu class="download-menu" #downloadMenu="matMenu">
             <button (click)="download('pdf')" mat-menu-item>PDF</button>
             <button (click)="download('excel')" mat-menu-item>EXCEL</button>
           </mat-menu>
-        </div>
+        </div> -->
       </form>
       <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0" tabindex="0" [@collectionInOut]="dataSource?.length">
 

@@ -1,5 +1,5 @@
 <form [formGroup]="filterForm" class="row">
-  <div class="col-md-6">
+  <div [ngClass]="loggedUserDetails?.role !== 4 ? 'col-md-4' : 'col-md-6'">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
@@ -18,13 +18,13 @@
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
   </div>
-  <!-- <div class="col-md-2">
+  <div class="col-md-2"  *ngIf="loggedUserDetails?.role !== 4">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Status" formControlName="status">
-        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
+        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.value">{{s.name | titlecase}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div> -->
+  </div>
   <div class="col-md-1 text-end">
     <button (click)="filter()" class="btn btn-primary w-100 h-45">
       <span *ngIf="!isFilterBtnLoading">Filter</span>

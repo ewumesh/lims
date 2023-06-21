@@ -107,8 +107,8 @@
         <div class="col-md-3">
           <div class="row">
             <p>Supervise By</p>
-            <h4 *ngIf="reportDetails?.suervisor_user?.first_name">{{reportDetails?.suervisor_user?.first_name}} {{reportDetails?.suervisor_user?.last}}</h4>
-            <h4 *ngIf="!reportDetails?.suervisor_user?.first_name" class="text-muted">N/A</h4>
+            <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created By</p>
@@ -117,22 +117,22 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row">
+          <div class="row" *ngIf="reportDetails.approved_date">
             <p>Assigned Date</p>
             <h4>{{reportDetails.approved_date | date: 'medium'}}</h4>
           </div>
-          <div class="row mt-2">
+          <div class="row mt-2" *ngIf="reportDetails?.created_date">
             <p>Created at</p>
             <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="row">
+          <div class="row" *ngIf="reportDetails.verified_by?.first_name">
             <p>Verified By</p>
             <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
             <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
           </div>
-          <div class="row mt-2">
+          <div class="row mt-2" *ngIf="reportDetails?.completed_date">
                       <p>Verified at</p>
                       <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'medium'}}</h4>
                       <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
@@ -206,6 +206,7 @@
               <th>Units</th>
               <!-- <th>Price</th> -->
               <th>Mandatory Standards</th>
+              <th>Analyst</th>
               <th>Result</th>
               <th>Status</th>
             </tr>
@@ -218,6 +219,7 @@
                 <td>{{r.units}}</td>
                 <!-- <td>Rs.{{r.price}}</td> -->
                 <td>{{r.mandatory_standard}}</td>
+                <td></td>
                 <td>
                   <span *ngIf="r?.result">{{r?.result}}</span>
                   <span *ngIf="!r?.result" class="text-muted">N/A</span>

@@ -89,12 +89,21 @@
     <ng-container matColumnDef="result">
       <th mat-header-cell *matHeaderCellDef> Result </th>
       <td mat-cell class="py-2" *matCellDef="let row; let i  = index;">
-        <!-- <mat-form-field  appearance="outline">
-          <input class="custom-input" matInput [(ngModel)]="row.result" />
-        </mat-form-field>
-        <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
+        <!-- <mat-form-field  appearance="outline"> -->
+          <!-- <input class="custom-input" [(ngModel)]="row.result" /> -->
+        <!-- </mat-form-field> -->
 
-        <span>{{row.result || '0'}} </span>
+        <div class="input-group">
+          <input placeholder="Enter Value" type="text" [(ngModel)]="row.result" class="form-control">
+          <div class="input-group-append">
+            <!-- <span class="input-group-text">Ok</span> -->
+            <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary">Ok</button>
+            <!-- <span class="input-group-text">0.00</span> -->
+          </div>
+        </div>
+        <!-- <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
+
+        <!-- <span>{{row.result || '0'}} </span> -->
         <!-- <span *ngIf="!row?.result" class="text-muted">N/A</span> -->
       </td>
     </ng-container>

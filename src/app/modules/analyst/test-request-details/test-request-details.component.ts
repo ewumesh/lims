@@ -106,10 +106,10 @@ export class TestRequestDetailsComponent implements OnInit {
     // console.log(result, sampleId, parameterId,commodity, 'RESULT')
 
     let payload = {
-      sample_form: sampleId,
+      sample_form: this.testRequestDetails?.sample_form?.analyst_encode_id,
       result: result,
       parameter: parameterId,
-      commodity: commodity,
+      commodity: commodity.id,
     }
 
     this.service.setResult(payload).subscribe(res => {

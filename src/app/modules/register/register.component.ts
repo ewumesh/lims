@@ -67,16 +67,17 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         'required': 'Password is required.'
       },
       'phone': {
-        'required': 'Phone Number is required.'
+        'required': 'Phone Number is required.',
+        'pattern': 'Phone Number not valid(Numbers only).'
       },
       'client_category': {
         'required': 'Category is required.'
       },
       'department_name': {
-        'required': 'Department Name is required.'
+        'required': 'Industry Name is required.'
       },
       'department_address': {
-        'required': 'Department Address is required.'
+        'required': 'Industry Address is required.'
       },
       'registration_number': {
         'required': 'Registration Number is required.'
@@ -116,7 +117,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       client_category: ['', Validators.required],
       department_name: ['', Validators.required],
       department_address: ['', Validators.required],

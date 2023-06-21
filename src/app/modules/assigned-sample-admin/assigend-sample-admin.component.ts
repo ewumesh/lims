@@ -26,6 +26,8 @@ export class AssignedSampleAdminComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  statusList: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private service: AssignedSampleAdminService,
@@ -35,6 +37,7 @@ export class AssignedSampleAdminComponent implements OnInit {
   ngOnInit(): void {
     this.initFilterForm();
     this.getSamples();
+    this.getStatusList();
   }
 
   getSamples() {
@@ -44,7 +47,8 @@ export class AssignedSampleAdminComponent implements OnInit {
       page: '',
       size: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     }
     this.service.getAssignedSampleDetails(payload).subscribe(response => {
       // console.log(response);
@@ -63,7 +67,8 @@ export class AssignedSampleAdminComponent implements OnInit {
     this.filterForm =  this.fb.group({
       search: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     })
   }
 
@@ -83,6 +88,12 @@ export class AssignedSampleAdminComponent implements OnInit {
   format(date: Date): string {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  getStatusList() {
+    this.service.getStatusList().subscribe(res => {
+      this.statusList = res;
+    })
   }
 
   filter() {
@@ -106,7 +117,8 @@ export class AssignedSampleAdminComponent implements OnInit {
       page: '',
       size: '',
       from: from,
-      to: to
+      to: to,
+      status: this.filterForm.value.status
     }
     this.service.getAssignedSampleDetails(payload).subscribe(response => {
       // console.log(response);

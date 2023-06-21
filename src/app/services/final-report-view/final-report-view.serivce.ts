@@ -24,7 +24,7 @@ export class FinalReportViewService {
   }
 
   downloadReport(payload) :Observable<any> {
-    let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/`;
+    let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/${payload.role}`;
     window.location.href = url;
     return this.http.get(url);
   }

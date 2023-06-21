@@ -20,7 +20,7 @@
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Status" formControlName="status">
-        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
+        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.value">{{s.name | titlecase}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

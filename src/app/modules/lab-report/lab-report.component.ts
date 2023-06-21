@@ -24,6 +24,8 @@ export class LabReportComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   loggedUserDetails:any;
 
+  statusList: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private service: AdminLabReportService,
@@ -39,6 +41,13 @@ export class LabReportComponent implements OnInit {
 
 
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+      this.getStatusList();
+    }
+
+    getStatusList() {
+      this.service.getStatusList().subscribe(res => {
+        this.statusList = res;
+      })
     }
 
   ngOnInit(): void {
@@ -53,7 +62,8 @@ export class LabReportComponent implements OnInit {
       page: '',
       size: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     }
     this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;
@@ -70,7 +80,8 @@ export class LabReportComponent implements OnInit {
     this.filterForm =  this.fb.group({
       search: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     })
   }
 
@@ -113,7 +124,8 @@ export class LabReportComponent implements OnInit {
       page: '',
       size: '',
       from: from,
-      to: to
+      to: to,
+      statua: this.filterForm.value.status
     }
     this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;

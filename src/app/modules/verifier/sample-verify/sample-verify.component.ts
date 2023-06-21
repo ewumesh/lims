@@ -21,6 +21,8 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
 
   isLoading: boolean = false;
 
+  statusList: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private service: SampleVerifyService,
@@ -30,6 +32,13 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initForm();
     this.getSampleDetails();
+    this.getStatusList();
+  }
+
+  getStatusList() {
+    this.service.getStatusList().subscribe(res => {
+      this.statusList = res;
+    })
   }
 
   viewRequestDetails(id) {
@@ -38,14 +47,16 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
 
   initForm() {
     this.filterForm = this.fb.group({
-      search: ''
+      search: '',
+      status: ''
     })
   }
 
   getSampleDetails() {
     this.isLoading = true;
     let payload = {
-      search: ''
+      search: '',
+      status: ''
     }
     this.service.getSmaples(payload).subscribe(res => {
       this.dataSource.data = res;
@@ -56,7 +67,8 @@ export class SampleVerifyComponent implements OnInit, AfterViewInit {
   filter() {
     this.isLoading = true;
     let payload = {
-      search: this.filterForm.value.search
+      search: this.filterForm.value.search,
+      status: this.filterForm.value.status
     }
 
     this.service.getSmaples(payload).subscribe(res => {

@@ -260,6 +260,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
         this.existingCategory = null;
+        this.submitBtn = false
       },
       (error) => {
         window.scroll(0,0);
@@ -277,6 +278,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
         this.existingCategory = null;
+        this.submitBtn = false;
       },
       (error) => {
         window.scroll(0,0);

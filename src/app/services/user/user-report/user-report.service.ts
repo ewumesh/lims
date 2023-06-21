@@ -24,8 +24,11 @@ export class UserReportService {
   }
 
   downloadReport(payload) :Observable<any> {
-    let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/`;
-    window.location.href = url;
-    return this.http.get(url);
+    let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.report_lang}/${payload.id}/5/`;
+    setTimeout(() => {
+      window.location.href = url;
+    }, 500);
+
+    return this.http.get(url)
   }
 }

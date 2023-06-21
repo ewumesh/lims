@@ -25,25 +25,29 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   statusList: any[] = [
-    {id: 1, name: 'pending'},
-    {id: 2, name: 'success'},
-    {id: 3, name: 'rejected'},
-    {id: 4, name: 'verified'},
-    {id: 5, name: 'pending'},
-    {id: 6, name: 'processing'}
   ];
 
   samples: any[] = []
+  loggedUserDetails: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private service: LabRequestService
-    ) { }
+    ) {
+      this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
 
   ngOnInit(): void {
     this.initFilterForm();
     this.getSamples();
+    this.getStatusList();
+   }
+
+   getStatusList() {
+    this.service.getStatusList().subscribe(res => {
+      this.statusList = res;
+    })
    }
 
    getSamples() {
@@ -53,7 +57,8 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       from: '',
-      to: ''
+      to: '',
+      status:''
     }
     this.service.getAllAssignedSamples(payload).subscribe(response => {
       // console.log(response);
@@ -107,7 +112,8 @@ export class LabRequestComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       from: from,
-      to: to
+      to: to,
+      status: this.filterForm.value.status
     }
     this.service.getAllAssignedSamples(payload).subscribe(response => {
       // console.log(response);

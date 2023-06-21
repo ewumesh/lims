@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { SampleRequestsService } from 'src/app/services/sample-request/sample-request.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
@@ -30,7 +31,8 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     private service: SampleRequestsService,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
   ) {
 
     this.genericValidator = new GenericValidator({
@@ -90,6 +92,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
 
     this.service.assignSampleToSupervisor(payload, this.data.id).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, res?.message);
+      this.router.navigate(['/dashboard/sample-assigned']);
       this.dialogRef.close();
       this.isLoading = false;
       this.dismissMessage();

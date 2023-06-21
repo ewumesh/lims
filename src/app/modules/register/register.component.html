@@ -64,7 +64,7 @@
       <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput type="number" formControlName="phone" placeholder="Enter your Phone Number" />
+          <input matInput type="text" maxlength="10" formControlName="phone" placeholder="Enter your Phone Number" />
           <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
             *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>
@@ -86,7 +86,7 @@
             [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
-                <label class="form-label">Department Name *</label>
+                <label class="form-label">Industry Name *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_name" placeholder="Enter Department Name" />
                   <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
@@ -95,7 +95,7 @@
               </div>
 
               <div class="col-md-6 mb-1">
-                <label class="form-label">Department Address *</label>
+                <label class="form-label">Industry Address *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-select formControlName="department_address" placeholder="Select Department Address" class="custom-select" appearance="outline">
                     <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
@@ -130,7 +130,7 @@
                 <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
               <div class=" col-md-12 mb-1">
-                <label for="secfile2">AP Renew Document*</label>
+                <label for="secfile2">Renew Document*</label>
                 <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
                 <!-- <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span> -->
                 <!-- <input class="re-img" type="file" name="secfile2" id="secfile2" />

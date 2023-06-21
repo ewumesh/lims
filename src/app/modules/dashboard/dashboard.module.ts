@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 // import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
     ]), MatIconModule
    ],
   exports: [],
-  providers: [],
+  providers: [DashboarService],
 })
 export class DashboardModule {}

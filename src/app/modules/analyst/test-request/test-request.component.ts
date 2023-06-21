@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TestRequestService } from 'src/app/services/analyst/test-request/test-request.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 
@@ -25,6 +26,8 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
   userDetails: any;
   commodities:any[] =[];
 
+  statusList: any[] =[];
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestService,
@@ -37,13 +40,15 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.getTestRequsest();
     this.getCommodities();
+    this.getStatus();
   }
 
   initFilterForm() {
     this.filterForm = this.fb.group({
       search: '',
       from: '',
-      to: ''
+      to: '',
+      status: ''
     })
   }
 
@@ -60,7 +65,8 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
       search: '',
       user: this.userDetails?.id,
       from: '',
-      to: ''
+      to: '',
+      status: this.filterForm.value.status
     }
     this.service.getTestRequests(payload).subscribe(res => {
       this.dataSource.data = res.results;
@@ -72,7 +78,8 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
     let payload = {
       page: '',
       size: '',
-      search: ''
+      search: '',
+      stauts: ''
     }
     this.service.getAllCommodities(payload).subscribe(res => {
       this.commodities = res.results;
@@ -112,11 +119,18 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
       search: this.filterForm.value.search,
       from: from,
       to: to,
-      user: this.userDetails?.id
+      user: this.userDetails?.id,
+      status: this.filterForm.value.status
     }
     this.service.getTestRequests(payload).subscribe(res => {
       this.dataSource = res.results;
       this.isLoading= false;
+    })
+  }
+
+  getStatus() {
+    this.service.getStatusList().subscribe(res => {
+      this.statusList = res;
     })
   }
 
