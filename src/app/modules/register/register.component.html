@@ -1,10 +1,49 @@
+<header>
+  <div class="custom-bg">
+  <div class="container ">
+      <div class="row">
+          <div class="mainheader-top">
+              <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
+              <div class="mainheader-top-text">
+                  <h4>Government of Nepal</h4>
+                  <h3><span> Laboratory Information Management System</span></h3>
+                  <p>Department of Food Technology and Quality Control</p>
+              </div>
+              <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+          </div>
+      </div>
+  </div>
+
+  <nav class="mainheader-nav">
+      <div class="user-name">
+      <ul class="main-ul">
+          <a (click)="goToHome()" href="Javascript:;">
+              <li>Home</li>
+          </a>
+          <a (click)="gotoPricing()" href="Javascript:;">
+              <li>Commodity List</li>
+          </a>
+          <!-- <a href="">
+              <li>FAQ</li>
+          </a> -->
+      </ul>
+  </div>
+  </nav>
+</div>
+
+</header>
+
 <div class="container d-flex justify-content-center align-items-center">
   <div class="form-container row">
-    <div class="login-intro mb-3">
+    <!-- <div class="login-intro mb-3">
       <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
       <p class="lims" style="line-height: 1.5;">Laboratory Information Management System -(LIMS)</p>
       <hr class="divider">
       <p class="login-detail">Enter your registration details</p>
+    </div> -->
+    <div class="login-title text-center">
+      <h3>Register New Account</h3>
+      <p>Please fill in the form below to register. </p>
     </div>
     <form autocomplete="off" class="row userregister" [formGroup]="registerForm" (ngSubmit)="saveChanges()">
       <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
@@ -64,7 +103,7 @@
       <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput type="text" maxlength="10" formControlName="phone" placeholder="Enter your Phone Number" />
+          <input matInput type="number" formControlName="phone" placeholder="Enter your Phone Number" />
           <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
             *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>
@@ -86,7 +125,7 @@
             [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
-                <label class="form-label">Industry Name *</label>
+                <label class="form-label">Department Name *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_name" placeholder="Enter Department Name" />
                   <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
@@ -95,7 +134,7 @@
               </div>
 
               <div class="col-md-6 mb-1">
-                <label class="form-label">Industry Address *</label>
+                <label class="form-label">Department Address *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-select formControlName="department_address" placeholder="Select Department Address" class="custom-select" appearance="outline">
                     <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
@@ -130,7 +169,7 @@
                 <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
               <div class=" col-md-12 mb-1">
-                <label for="secfile2">Renew Document*</label>
+                <label for="secfile2">AP Renew Document*</label>
                 <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
                 <!-- <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span> -->
                 <!-- <input class="re-img" type="file" name="secfile2" id="secfile2" />
@@ -153,7 +192,6 @@
         </div>
       </div>
 
-
       <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">
         <span *ngIf="!isLoading">Submit</span>
         <span *ngIf="isLoading">
@@ -166,3 +204,7 @@
     </form>
   </div>
 </div>
+
+<footer>
+  <p>© Laboratory Information Management System. All Right Reserved.</p>
+</footer>

@@ -1,122 +1,179 @@
-<div class="row">
-  <div class="col-md-12">
-
-    <form  [formGroup]="filterForm" class="row">
-      <div class="col-md-5">
-        <mat-form-field appearance="outline" class="w-100">
-          <!-- <mat-label>Filter</mat-label> -->
-          <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
-        </mat-form-field>
-      </div>
-      <div class="col-md-3">
-        <mat-form-field appearance="outline" class="custom-select w-100">
-          <mat-select placeholder="Category" formControlName="category">
-            <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-2 text-end">
-        <button (click)="filterUserList()" class="btn btn-primary w-100 h-45">
-          <span *ngIf="!filterBtnLoading">Filter</span>
-                <span *ngIf="filterBtnLoading">
-                  <i class="fa fa-circle-o-notch fa-spin"></i>
-                </span>
-        </button>
-      </div>
-
-      <div class="col-md-2">
-        <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
-      </div>
-    </form>
-
-    <table *ngIf="!isLoading" class="t" mat-table [dataSource]="dataSource" multiTemplateDataRows [@collectionInOut]="dataSource.data?.length">
-      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
-        <ng-container *ngIf="column !== 'expand'; else action">
-          <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="column === 'sn'">{{element.id}} </span>
-            <span *ngIf="element[column]">
-              <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
-              <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
-              <span *ngIf="column == 'name'">{{element[column] | titlecase}}</span>
-              <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
-              <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
-            </span>
-            <span *ngIf="!element[column] && column !== 'sn'" class="text-muted">N/A</span>
-           </td>
-        </ng-container>
-        <ng-template #action>
-          <th mat-header-cell *matHeaderCellDef style="width: 20px !important;"> </th>
-          <td mat-cell *matCellDef="let element">
-            <span *ngIf="element?.test_result.length > 0">
-            <mat-icon class="expand-icon" (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement ===
-              element
-              ? 'indeterminate_check_box' : 'add_box'}}</mat-icon>
-              </span>
-          </td>
-        </ng-template>
-      </ng-container>
-
-      <ng-container matColumnDef="expandedDetail">
-        <td style="padding:0" mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-          <div class="example-element-detail"  [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" style="background-color:#eeeef5;">
-            <div class="example-element-description" style="width: 100%;">
-              <table class="table table-bordered expanded-table mb-0" style="background-color: #fff;">
-                <thead>
-                  <tr>
-                    <td>S.N.</td>
-                    <!-- <th scope="col">Test Type</th> -->
-                    <th scope="col">Parameter</th>
-                    <!-- <th scope="col">Test Method</th> -->
-                    <!-- <th scope="col">Mandatory Standard</th> -->
-                    <th scope="col">Price</th>
-                    <!-- <th scope="col">Duration</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of element.test_result; let i = index;">
-                    <td>{{i+1}}</td>
-                    <!-- <td>
-                      <span *ngIf="item.test_type">{{item.test_type | titlecase}}</span>
-                      <span *ngIf="!item.test_type" class="text-muted">N/A</span>
-                    </td> -->
-                    <td>{{item.name | titlecase}}</td>
-                    <!-- <td>{{item.ref_test_method | titlecase}}</td> -->
-                    <!-- <td>{{item.mandatory_standard}}</td> -->
-                    <td>Rs.{{item.price}}</td>
-                    <!-- <td>5 Days</td> -->
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+<header>
+  <div class="custom-bg">
+    <div class="container ">
+      <div class="row">
+        <div class="mainheader-top">
+          <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
+          <div class="mainheader-top-text">
+            <h4>Government of Nepal</h4>
+            <h3><span> Laboratory Information Management System</span></h3>
+            <p>Department of Food Technology and Quality Control</p>
           </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element">
-      </tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell text-center py-5" colspan="8">
-          <img src="../../../../assets/no-data.svg" />
-          <div class="text-muted">Data Not Available.</div>
-
-        </td>
-      </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-
-    <div class="row" *ngIf="isLoading">
-      <div class="col-md-12 text-center py-3">
-        <div class="spinner-border text-dark" role="status">
-          <span class="sr-only">Loading...</span>
+          <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
         </div>
       </div>
     </div>
 
-    <mat-paginator #paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]" aria-label="Select page of commodities"></mat-paginator>
+    <nav class="mainheader-nav">
+      <div class="user-name">
+        <ul class="main-ul">
+          <a (click)="goToHome()" href="Javascript:;">
+            <li>Home</li>
+          </a>
+          <a (click)="gotoPricing()" href="Javascript:;">
+            <li>Commodity List</li>
+          </a>
+          <!-- <a href="">
+              <li>FAQ</li>
+          </a> -->
+        </ul>
+      </div>
+    </nav>
 
   </div>
+
+</header>
+<div class="container justify-content-center align-items-center">
+  <div class="main row" style="margin-bottom: 0 !important;">
+    <div class="px-2 p-3">
+      खाद्य प्रविधि तथा गुण नियन्त्रण विभाग र विभाग मातहतका कार्यालयहरुले प्रदान गर्ने
+      सेवा वापत लाग्ने गैरकर राजस्व दर (नेपाल राजपत्र, खण्ड ७१, संख्या १७ , भाग ५ , मिति २०७८/०४/२५ को सूचना अनुसार )
+    </div>
+  </div>
 </div>
+
+<div class="container justify-content-center align-items-center">
+  <div class="main row pt-3 pb-3">
+    <div class="row">
+      <div class="col-md-12">
+
+        <form [formGroup]="filterForm" class="row">
+          <div class="col-md-5">
+            <mat-form-field appearance="outline" class="w-100">
+              <!-- <mat-label>Filter</mat-label> -->
+              <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field appearance="outline" class="custom-select w-100">
+              <mat-select placeholder="Category" formControlName="category">
+                <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 text-end">
+            <button (click)="filterUserList()" class="btn btn-primary w-100 h-45">
+              <span *ngIf="!filterBtnLoading">Filter</span>
+              <span *ngIf="filterBtnLoading">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+              </span>
+            </button>
+          </div>
+
+          <div class="col-md-2">
+            <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
+          </div>
+        </form>
+
+        <table *ngIf="!isLoading" class="t" mat-table [dataSource]="dataSource" multiTemplateDataRows
+          [@collectionInOut]="dataSource.data?.length">
+          <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
+            <ng-container *ngIf="column !== 'expand'; else action">
+              <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="column === 'sn'">{{element.id}} </span>
+                <span *ngIf="element[column]">
+                  <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
+                  <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
+                  <span *ngIf="column == 'name'">{{element[column] | titlecase}}</span>
+                  <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
+                  <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
+                </span>
+                <span *ngIf="!element[column] && column !== 'sn'" class="text-muted">N/A</span>
+              </td>
+            </ng-container>
+            <ng-template #action>
+              <th mat-header-cell *matHeaderCellDef style="width: 20px !important;"> </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element?.test_result.length > 0">
+                  <mat-icon class="expand-icon"
+                    (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement ===
+                    element
+                    ? 'indeterminate_check_box' : 'add_box'}}</mat-icon>
+                </span>
+              </td>
+            </ng-template>
+          </ng-container>
+
+          <ng-container matColumnDef="expandedDetail">
+            <td style="padding:0" mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+              <div class="example-element-detail"
+                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+                style="background-color:#eeeef5;">
+                <div class="example-element-description" style="width: 100%;">
+                  <table class="table table-bordered expanded-table mb-0" style="background-color: #fff;">
+                    <thead>
+                      <tr>
+                        <td>S.N.</td>
+                        <!-- <th scope="col">Test Type</th> -->
+                        <th scope="col">Parameter</th>
+                        <!-- <th scope="col">Test Method</th> -->
+                        <!-- <th scope="col">Mandatory Standard</th> -->
+                        <th scope="col">Price</th>
+                        <!-- <th scope="col">Duration</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of element.test_result; let i = index;">
+                        <td>{{i+1}}</td>
+                        <!-- <td>
+                          <span *ngIf="item.test_type">{{item.test_type | titlecase}}</span>
+                          <span *ngIf="!item.test_type" class="text-muted">N/A</span>
+                        </td> -->
+                        <td>{{item.name | titlecase}}</td>
+                        <!-- <td>{{item.ref_test_method | titlecase}}</td> -->
+                        <!-- <td>{{item.mandatory_standard}}</td> -->
+                        <td>Rs.{{item.price}}</td>
+                        <!-- <td>5 Days</td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element">
+          </tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell text-center py-5" colspan="8">
+              <img src="../../../../assets/no-data.svg" />
+              <div class="text-muted">Data Not Available.</div>
+
+            </td>
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+
+        <div class="row" *ngIf="isLoading">
+          <div class="col-md-12 text-center py-3">
+            <div class="spinner-border text-dark" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <mat-paginator #paginator class="paginator paginator-border" [pageSizeOptions]="[20,10, 25,  50, 100]"
+          aria-label="Select page of commodities"></mat-paginator>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <p>© Laboratory Information Management System. All Right Reserved.</p>
+</footer>

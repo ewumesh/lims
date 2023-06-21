@@ -51,6 +51,14 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
+  goToHome() {
+    this.router.navigate(['/login']);
+  }
+
+  gotoPricing() {
+    this.router.navigate(['/commodity-pricing']);
+  }
+
   ngOnInit(): void {
     this.dismissMessage();
     this.initForm();

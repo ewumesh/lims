@@ -27,10 +27,16 @@
 
 .nav-link {
   font-size: 14px !important;
+  display: flex;
+  align-items: center;
 
   mat-icon {
     font-size: 16px;
-    padding-top: 11px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // padding-top: 11px !important;
   }
 }
 

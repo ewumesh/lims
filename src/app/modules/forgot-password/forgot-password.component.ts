@@ -50,6 +50,14 @@ export class ForgotPasswordComponent implements OnInit, AfterViewInit, OnDestroy
     this.initForm();
   }
 
+  goToHome() {
+    this.router.navigate(['/login']);
+  }
+
+  gotoPricing() {
+    this.router.navigate(['/commodity-pricing']);
+  }
+
   initForm() {
     this.forgotPasswordForm = this.fb.group({
       email: ['',

@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { debounce, debounceTime } from 'rxjs';
 import { UserPricingService } from 'src/app/services/user-pricing/user-pricing.service';
+import { Router } from '@angular/router';
 
 /**
  * @title Table with expandable rows
@@ -46,9 +47,18 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
   constructor(
     private title: Title,
     private pricingService: UserPricingService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
     ) {
     this.title.setTitle('Pricing - Laboratory Information Management System');
+  }
+
+  goToHome() {
+    this.router.navigate(['/login']);
+  }
+
+  gotoPricing() {
+    this.router.navigate(['/commodity-pricing']);
   }
 
   ngOnInit(): void {
@@ -75,7 +85,7 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
     }
     let payload = {
       page: '',
-      size: 100,
+      size: 500,
       search: this.filterForm.value.search_text,
       category: c
     }
@@ -90,7 +100,7 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     let payload = {
       page: '',
-      size: 100,
+      size: 500,
       search: '',
       category: ''
     }

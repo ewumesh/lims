@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar">
+        <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar mb-4" style="padding-bottom: 10%;">
 
           <li
             *ngIf="(userDetails?.role === 2 || userDetails?.role === 5 || userDetails?.role === 1) && userDetails.is_verified"
@@ -14,9 +14,9 @@
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/add-sample'}"
               aria-current="page" href="Javascript:;" (click)="navigate('/dashboard/add-sample')" id="add-sample">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
-              <span class="mb-1">
+              <!-- <span class="mb-1"> -->
                 Add Sample
-              </span>
+              <!-- </span> -->
             </a>
           </li>
 
@@ -88,7 +88,7 @@
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}"
               (click)="navigate('/dashboard/lab-report')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="library_books"></mat-icon>
-              Lab Report</a>
+              Sample Report</a>
           </li>
 
           <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
@@ -96,7 +96,7 @@
               [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/all-users'}"
               href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
               aria-controls="collapseTwo">
-              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle"></mat-icon>
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -5px;"></mat-icon>
               User Management </a>
 
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -124,7 +124,7 @@
               [ngClass]="{'active-route': this.router.url === '/dashboard/commodities/all-commodities' || this.router.url === '/dashboard/settings/commodity-category' || this.router.url === '/dashboard/commodities' || this.router.url === '/dashboard/commodities-parameter'}"
               href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseT" aria-expanded="false"
               aria-controls="collapseTwo">
-              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work"></mat-icon>
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work" style="margin-top: -5px;"></mat-icon>
               Commodities <mat-icon class="pt-2" aria-hidden="false" aria-label="add"
                 fontIcon="arrow_drop_down"></mat-icon></a>
 
@@ -169,7 +169,7 @@
             <a class="nav-link" href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSetting"
               aria-expanded="false" aria-controls="collapseSetting"
               [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category' || this.router.url === '/dashboard/user-group' || this.router.url === '/dashboard/user-permissions'}">
-              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="settings"></mat-icon>
+              <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work" style="margin-top: -5px;"></mat-icon>
               Settings<mat-icon class="pt-2" aria-hidden="false" aria-label="add"
                 fontIcon="arrow_drop_down"></mat-icon></a>
 

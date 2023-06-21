@@ -4,6 +4,7 @@
 //   width: 30vw;
 //   height: 100vh;
 // }
+​
 .login-intro{
   display: flex;
   align-items: center;
@@ -63,13 +64,20 @@ input::placeholder{
 }
 /*End of Login*/
 
+.main.row{
+  margin-top: 2rem;
+  margin-bottom: 8rem;
+  background-color: white;
+  border-radius: 10px;
+  height: 100%;
+  max-height: 550px;
+}
 
 .form-container{
-  max-width: 500px;
-  border-radius: 10px;
-  background-color: white;
+  // max-width: 500px;
+  // border-radius: 10px;
   padding: 40px;
-  margin-top: 4rem;
+  // margin-top: 4rem;
 }
 
 .fp .mb-4 .ng-tns-c16-1{
@@ -102,3 +110,175 @@ margin-left:13px;
 border-radius:4px;
 }
 
+.user-side-view {
+  background-color: #F1F5FF;
+  border-radius: 0 10px 10px 0;
+  padding: 40px;
+
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #cccccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.user-side-view ul {
+  list-style-type: none;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 1rem 0;
+  padding: 0 10px;
+  overflow-y:scroll;
+  max-height: 390px;
+}
+
+.user-side-view h4{
+  font-weight: 500;
+  font-family: poppins;
+}
+
+.user-side-view ul li {
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.custom-bg{
+  background-color: #F8FAFF!important;
+}
+
+.mainheader-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.mainheader-top .GON-logo {
+  width: 117px;
+  height: max-content;
+}
+
+.mainheader-top .flag {
+  width: 57px;
+  height: max-content;
+}
+
+.mainheader-top-text {
+  text-align: center;
+}
+
+.mainheader-top-text > *{
+  margin-bottom: 5px;
+}
+
+.mainheader-top-text h4 {
+  color: #A40000;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 25.5px;
+}
+
+.mainheader-top-text h3 {
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #000000;
+  text-transform: capitalize;
+}
+
+.mainheader-top-text h3 span {
+  font-weight: 700;
+  color: #1876D2;
+}
+
+.mainheader-top-text p {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 19px;
+  text-transform: capitalize;
+}
+
+.mainheader-nav {
+  background-color: #2460B9;
+}
+
+.mainheader-nav .user-name {
+  display: flex;
+  max-width: 1300px;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.mainheader-nav .main-ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+}
+
+.mainheader-nav .main-ul a {
+  text-decoration: none;
+  color: white;
+  padding: 20px 15px;
+}
+
+.mainheader-nav .main-ul a:hover{
+  background-color:#133a75 ;
+}
+
+.login-title{
+  margin-bottom: 1.3rem;
+}
+
+.login-title h3 {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+
+.login-title p {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+
+}
+
+footer {
+  height: 40px;
+  align-items: center;
+  background-color: red;
+  text-align: center;
+  color: white;
+
+}
+
+footer p {
+  display: grid;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+}

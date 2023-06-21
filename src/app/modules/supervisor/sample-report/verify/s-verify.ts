@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
@@ -21,7 +21,8 @@ export class VerificationComponent implements OnInit {
     public data: any,
     private service: SampleReportService,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
     ) {
       console.log(data, 'data...')
     }
@@ -37,8 +38,12 @@ export class VerificationComponent implements OnInit {
   }
   submit() {
     this.sendForVerification();
-    this.service.patchRemarks(this.remarksForm.value.remarks, this.data.sample_form,).subscribe(res => {
-
+    let payload = {
+      remarks:this.remarksForm.value.remarks
+    }
+    this.service.patchRemarks(payload, this.data.sample_form,).subscribe(res => {
+this.dialogRef.close();
+this.router.navigate(['/dashboard/lab-report']);
     })
   }
 

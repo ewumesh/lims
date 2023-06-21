@@ -101,6 +101,14 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getDepartmentType();
   }
 
+  goToHome() {
+    this.router.navigate(['/login']);
+  }
+
+  gotoPricing() {
+    this.router.navigate(['/commodity-pricing']);
+  }
+
   uploadFile(event) {
     let file = event.target.files[0];
      this.img = file;
