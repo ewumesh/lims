@@ -15,6 +15,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatTableModule } from '@angular/material/table';
     MatNativeDateModule,
     MatTableModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    NgxMatSelectSearchModule
    ],
   exports: [],
   providers: [

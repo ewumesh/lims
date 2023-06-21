@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject, take, takeUntil } from 'rxjs';
 
 // Custom component(s)
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
@@ -12,6 +12,7 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   templateUrl: './add-sample.component.html',
@@ -59,6 +60,44 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   selection = new SelectionModel<any>(true, []);
 
   loggedUser:any;
+
+  /** list of banks */
+  protected banks: any[] = [
+    // {name: 'Bank A (Switzerland)', id: 'A'},
+    // {name: 'Bank B (Switzerland)', id: 'B'},
+    // {name: 'Bank C (France)', id: 'C'},
+    // {name: 'Bank D (France)', id: 'D'},
+    // {name: 'Bank E (France)', id: 'E'},
+    // {name: 'Bank F (Italy)', id: 'F'},
+    // {name: 'Bank G (Italy)', id: 'G'},
+    // {name: 'Bank H (Italy)', id: 'H'},
+    // {name: 'Bank I (Italy)', id: 'I'},
+    // {name: 'Bank J (Italy)', id: 'J'},
+    // {name: 'Bank Kolombia (United States of America)', id: 'K'},
+    // {name: 'Bank L (Germany)', id: 'L'},
+    // {name: 'Bank M (Germany)', id: 'M'},
+    // {name: 'Bank N (Germany)', id: 'N'},
+    // {name: 'Bank O (Germany)', id: 'O'},
+    // {name: 'Bank P (Germany)', id: 'P'},
+    // {name: 'Bank Q (Germany)', id: 'Q'},
+    // {name: 'Bank R (Germany)', id: 'R'}
+  ];
+
+  /** control for the selected bank */
+  public bankCtrl: FormControl = new FormControl();
+
+  /** control for the MatSelect filter keyword */
+  public bankFilterCtrl: FormControl = new FormControl();
+
+  /** list of banks filtered by search keyword */
+  public filteredBanks: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+
+  @ViewChild('singleSelect') singleSelect: MatSelect;
+
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
+
+  //----------------------------
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -169,6 +208,19 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     if(this.userDetails.role === 1 || this.userDetails.role === 2) {
       this.getUsers();
     }
+
+    // set initial selection
+    this.bankCtrl.setValue(this.banks[10]);
+
+    // load the initial bank list
+    this.filteredBanks.next(this.banks.slice());
+
+    // listen for search field value changes
+    this.bankFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanks();
+      });
   }
 
   getCommodities() {
@@ -290,6 +342,10 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       cOwner = this.loggedUser.id
     }
 
+    if(this.bankCtrl.value) {
+      cUser = this.bankCtrl.value.email;
+    }
+
     // console.log(this.addSampleForm.value, 'oko')
 
     let payload = {
@@ -376,6 +432,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.service.getUsersList(payload).subscribe(res => {
       this.users = res;
+      this.banks = res;
     })
   }
 
@@ -387,6 +444,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
   ngAfterViewInit(): void {
+    this.setInitialValue();
     this.validation();
   }
 
@@ -399,6 +457,40 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnDestroy(): void {
     this.toDestroy$.next();
     this.toDestroy$.complete();
+  }
+
+  /**
+   * Sets the initial value after the filteredBanks are loaded initially
+   */
+  protected setInitialValue() {
+    this.filteredBanks
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        this.singleSelect.compareWith = (a: any, b: any) => a && b && a.first_name === b.first_name;
+      });
+  }
+
+  protected filterBanks() {
+    if (!this.banks) {
+      return;
+    }
+    // get the search keyword
+    let search = this.bankFilterCtrl.value;
+    if (!search) {
+      this.filteredBanks.next(this.banks.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredBanks.next(
+      this.banks.filter(bank => bank.first_name.toLowerCase().indexOf(search) > -1)
+    );
   }
 }
 

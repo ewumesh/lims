@@ -20,11 +20,25 @@
         </div>
       </div>
       <div class="col-md-12" *ngIf="userDetails?.role === 1 || userDetails?.role === 2">
-        <mat-form-field appearance="outline" class="w-100">
+        <!-- <mat-form-field appearance="outline" class="w-100">
           <mat-select formControlName="existing_user" class="custom-select" placeholder="Select User">
           <mat-option *ngFor="let user of users" [value]="user">{{user.first_name}} {{user.last_name}} (<span  style="font-weight: 500;">{{user.email}}</span>)</mat-option>
           </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-select class="custom-select" [formControl]="bankCtrl" placeholder="Select User" #singleSelect>
+            <mat-option>
+              <ngx-mat-select-search [formControl]="bankFilterCtrl" placeholderLabel="Search User"
+              noEntriesFoundLabel="'no matching user found'"></ngx-mat-select-search>
+            </mat-option>
+
+            <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+              {{bank.first_name}} {{bank.last_name}} ({{bank?.email}})
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+        {{bankCtrl.value | json}}
       </div>
 
       <div class="col-sm-6">
