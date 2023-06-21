@@ -24,7 +24,9 @@ export class ViewUserDetailsComponent implements OnInit {
 
   roles: any[] = [];
 
-  isLoading  = false
+  isLoading  = false;
+
+  departmentTypes: any[] = [];
 
   constructor(
     private service:ViewUserDetailsService,
@@ -34,6 +36,18 @@ export class ViewUserDetailsComponent implements OnInit {
     private dialog: MatDialog
     ) {
       this.loggedUser = JSON.parse(localStorage.getItem('userDetails'));
+      this.getDepartmentTypes();
+    }
+
+    getDepartmentName(code) {
+      let d = this.departmentTypes.find(a => a.code === code);
+      return d.name;
+    }
+
+    getDepartmentTypes() {
+      this.service.getGetDepartmentTypes().subscribe(res => {
+        this.departmentTypes = res?.department_types;
+      })
     }
 
   ngOnInit(): void {

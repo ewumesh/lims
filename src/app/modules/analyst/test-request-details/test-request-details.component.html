@@ -35,6 +35,14 @@
 </div>
 
 <div class="bg-white">
+  <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+    <div class="alert alert-danger" role="alert">
+      <li *ngFor="let item of responseError | keyvalue">
+        <!-- {{item.key}}: -->
+        {{item.value}}
+      </li>
+    </div>
+  </div>
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
     [@collectionInOut]="dataSource.data?.length">
 

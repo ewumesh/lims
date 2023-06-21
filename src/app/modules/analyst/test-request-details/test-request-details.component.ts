@@ -27,6 +27,8 @@ export class TestRequestDetailsComponent implements OnInit {
 
   isSend = false;
 
+  responseError = null;
+
   constructor(
     private service: TestRequestDetailsService,
     private fb: FormBuilder,
@@ -110,10 +112,15 @@ export class TestRequestDetailsComponent implements OnInit {
       result: result,
       parameter: parameterId,
       commodity: commodity.id,
+      formula_variable_fields_value:'awds'
     }
 
     this.service.setResult(payload).subscribe(res => {
-      this.toast.showToast(TOAST_STATE.success, "Result Added Successfully!")
+      this.toast.showToast(TOAST_STATE.success, "Result Added Successfully!");
+      this.dismissToast();
+      this.getTestResultDetails();
+    },(error) => {
+      this.responseError = error?.error;
     })
     let patchPayload = {
       result: result

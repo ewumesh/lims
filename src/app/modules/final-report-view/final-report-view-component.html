@@ -7,7 +7,7 @@
           <div class="col-md-3">
             <div class="row">
               <p>Supervise By</p>
-              <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last}}</h4>
+              <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
               <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
             </div>
             <div class="row mt-2">
@@ -171,9 +171,9 @@
                   <td>Rs.{{r.price}}</td>
                   <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
                   <td>
-                    <span *ngIf="r.result">{{r.result}}</span>
-                    <span *ngIf="r?.result === 0">0</span>
-                    <span *ngIf="r?.result" class="text-muted">N/A</span>
+                    <span>{{r.result}}</span>
+                    <!-- <span *ngIf="r?.result === 0">0</span>
+                    <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                   </td>
                   <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
                 </tr>

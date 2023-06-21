@@ -6,7 +6,7 @@
     <div class="col-md-2 text-end mt-3">
       <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
       <div *ngIf="!reportDetails.is_analyst_test" class="alert alert-info">Waiting for Analyst.</div>
-      <button [disabled]="sampleStatus[0]?.is_sent" *ngIf="reportDetails.is_analyst_test" (click)="sendForVerification()" class="btn btn-secondary btn-sm mx-1">
+      <button [disabled]="sampleStatus[0]?.is_sent" *ngIf="reportDetails.is_analyst_test" (click)="sentV()" class="btn btn-secondary btn-sm mx-1">
         <span *ngIf="!isSending">Send for Verification</span>
             <span *ngIf="isSending">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

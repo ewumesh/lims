@@ -29,7 +29,7 @@ export class TestRequestDetailsService {
   }
 
   setResult(payload):Observable<any> {
-    return this.http.post(`${this.url}/api/sample-form-has-calculate-result/`, payload)
+    return this.http.post(`${this.url}/api/formula-result-save/`, payload)
   }
 
   sendForVarification(payload, id) {

@@ -100,23 +100,23 @@
       <div class="top-view-page p-2 mb-3">
         <div class="row log-details p-3">
           <div class="col-md-3">
-            <div class="row">
+            <div class="row" *ngIf="userDetails?.approved_by">
               <p>Approve By</p>
               <h4 *ngIf="userDetails?.approved_by">{{userDetails?.approved_by?.first_name}} {{userDetails?.approved_by?.first_name}}</h4>
               <h4 class="text-muted" *ngIf="!userDetails?.approved_by">N/A</h4>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" *ngIf="userDetails?.first_name">
               <p>Created By</p>
               <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="row">
+            <div class="row" *ngIf="userDetails?.approved_date">
               <p>Approved At</p>
               <h4 *ngIf="userDetails?.approved_date">{{userDetails?.approved_date | date:'medium'}}</h4>
               <h4 class="text-muted" *ngIf="!userDetails?.approved_date">N/A</h4>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" *ngIf="userDetails?.date_joined">
               <p>Created at</p>
               <h4 *ngIf="userDetails?.date_joined ">{{userDetails?.date_joined | date:'medium'}}</h4>
               <h4 *ngIf="!userDetails?.date_joined " class="text-muted">N/A</h4>
@@ -178,6 +178,32 @@
             <h4>Joined Date</h4>
             <p *ngIf="userDetails?.date_joined">{{userDetails?.date_joined | date}}</p>
           <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5">
+        <div class="row log-details p-3">
+          <h3 class="view-page-heading">Industry Details</h3>
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Industry Name</span>
+            </h3>
+            <p>{{userDetails?.department_name}}</p>
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Industry Address</span>
+            </h3>
+            <p>{{getDepartmentName(userDetails?.department_address)}}</p>
+          </div>
+
+          <div class="col-md-6">
+            <h3>
+              <span class="text-bold">Registration Number</span>
+            </h3>
+            <p>{{userDetails?.registration_number}}</p>
           </div>
         </div>
       </div>

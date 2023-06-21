@@ -144,6 +144,7 @@ export class CommoditiesComponent implements OnInit {
   openDialog(data) {
     this.existingCategory = data;
     this.patchForm(data);
+    window.scroll(0,0);
     // console.log(data, 'data..')
     // let instance: MatDialogRef<AddOrUpdateCommodityCategoryComponent, any>;
     // instance = this.dialog.open(AddOrUpdateCommodityCategoryComponent, {

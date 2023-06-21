@@ -88,9 +88,11 @@
                     <td>{{i+1}}</td>
                     <td>
                       <span *ngIf="t.test_type">
-                        {{t.test_type | titlecase}}
+                        <span *ngIf="t.test_type === '1'">Chemical Test</span>
+                        <span *ngIf="t.test_type === '2'">Microbiological Test</span>
+                        <!-- {{t.test_type | titlecase}} -->
                       </span>
-                      <span class="text-muted">N/A</span>
+                      <span *ngIf="!t.test_type" class="text-muted">N/A</span>
                     </td>
                     <td>{{t.name}}</td>
                     <td>{{t.ref_test_method}}</td>

@@ -24,4 +24,8 @@ export class ViewUserDetailsService {
   approveUser(payload):Observable<any> {
     return this.http.patch(`${this.url}/api/account/users/${payload.id}/`, payload)
   }
+
+  getGetDepartmentTypes() :Observable<any> {
+    return this.http.get(`${this.url}/api/account/department-types/`)
+}
 }

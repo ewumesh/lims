@@ -26,4 +26,8 @@ export class SampleReportService {
   isSentForVrification(payload):Observable<any> {
     return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id=${payload.id}`)
   }
+
+  patchRemarks(payload, id):Observable<any> {
+    return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
+  }
 }

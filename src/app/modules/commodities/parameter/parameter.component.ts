@@ -203,7 +203,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
   openDialog(data) {
     this.existingCategory = data;
-    this.patchForm(data)
+    this.patchForm(data);
+    window.scroll(0,0);
   }
 
   patchForm(data) {

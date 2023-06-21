@@ -22,7 +22,7 @@
                 <span *ngIf="b === 'update-user'"> Update User</span>
                 <span *ngIf="b === 'test-request-details'"> Test Request Details</span>
                 <span *ngIf="i === breadcrumbs.length-1">
-                  <span *ngIf="breadcrumbs[1] !== 'user-details' && breadcrumbs[1] !== 'update-user' && breadcrumbs[1] !== 'test-request-details'">
+                  <span class="text-uppercase" *ngIf="breadcrumbs[1] !== 'user-details' && breadcrumbs[1] !== 'update-user' && breadcrumbs[1] !== 'test-request-details'">
                     &nbsp;{{removeHyphen(b) | titlecase}}
                   </span>
                 </span>

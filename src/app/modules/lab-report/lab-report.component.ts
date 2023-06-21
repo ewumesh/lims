@@ -125,7 +125,7 @@ export class LabReportComponent implements OnInit {
       size: '',
       from: from,
       to: to,
-      statua: this.filterForm.value.status
+      status: this.filterForm.value.status
     }
     this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;
