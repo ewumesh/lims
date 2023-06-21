@@ -121,7 +121,13 @@
                   </td> -->
                   <td>{{i+1}}</td>
                   <td>{{r.name | titlecase}}</td>
-                  <td>{{r.test_type}}</td>
+                  <td>
+                    <span *ngIf="r.test_type">
+                    <span *ngIf="r.test_type === '1'">Chemical Test</span>
+                        <span *ngIf="r.test_type === '2'">Microbiological Test</span>
+                        </span>
+                        <span *ngIf="!r.test_type">N/A</span>
+                  </td>
                   <td>{{r.ref_test_method}}</td>
                   <td>{{r.units}}</td>
                   <!-- <td>Rs.{{r.price}}</td> -->

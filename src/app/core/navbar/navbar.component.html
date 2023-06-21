@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="../../../assets/nepal-government.png" alt="">
     </div>
-    <p>Laboratory Information<br>Management System/LIMS</p>
+    <p>Laboratory Information<br>Management System-LIMS</p>
   </div>
   <div class="db-user-profile" style="margin-right: 1%;">
     <div class="notification-div" style="margin-right: 1rem;">
@@ -21,12 +21,12 @@
         <app-notifications></app-notifications>
       </mat-menu>
     </div>
-    <img [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt="">
-    <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">Hi,{{userDetails?.first_name |
+    <img style="height: 50px;" [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt="">
+    <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">{{userDetails?.first_name |
         titlecase}}</span><br>{{getRoleName(userDetails?.role)}}</p>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="navigateToProfile()">Profile</button>
+      <button mat-menu-item (click)="navigateToProfile()">My Account</button>
       <button (click)="logout()" mat-menu-item>Logout</button>
     </mat-menu>
   </div>

@@ -5,6 +5,7 @@ import { AuthGuard } from './services/auth.guard';
 import { NotFoundComponent } from './components/not-found/404.component'
 
 const routes: Routes = [
+  { path: 'commodity-pricing', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/user-pricing/user-pricing.module').then(b => b.UserPricingModule) },
   { path: 'login', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/login/login.module').then(b => b.LoginModule) },
   { path: 'register', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/register/register.module').then(b => b.RegisterModule) },
   { path: 'forgot-password', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/forgot-password/forgot-password.module').then(b => b.ForgotPasswordModule) },

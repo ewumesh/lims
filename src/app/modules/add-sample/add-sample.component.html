@@ -85,22 +85,26 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="border:1px solid #00000029; margin: 0; border-radius: 5px;">
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Purpose of Analysis (प्रयोगशाला विश्लेषणको उदेश्य)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" />
           <mat-error class="text-danger" *ngIf="displayMessage?.purpose">{{displayMessage.purpose}}</mat-error>
         </mat-form-field>
-
-        <div style="padding-left: 30px;">
-          <mat-radio-group formControlName="requested_export" aria-label="Select an option">
-            <mat-radio-button value="requested">Requested</mat-radio-button>
-            <mat-radio-button value="export">Export</mat-radio-button>
-            <mat-error class="text-danger" *ngIf="displayMessage?.requested_export">{{displayMessage.requested_export}}</mat-error>
-          </mat-radio-group>
-        </div>
       </div>
+      <div class="col-md-6 pt-4">
+        <div class="mt-2">
+        <mat-radio-group formControlName="requested_export" aria-label="Select an option">
+          <mat-radio-button value="requested">Requested</mat-radio-button>
+          <mat-radio-button value="export">Export</mat-radio-button>
+          <mat-error class="text-danger" *ngIf="displayMessage?.requested_export">{{displayMessage.requested_export}}</mat-error>
+        </mat-radio-group>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Report Required by Date (विश्लेषण प्रतिवेदन प्राप्त हुने अनुमानित
           मिति)*</label>
@@ -110,11 +114,7 @@
           <mat-datepicker #reportDatePicker></mat-datepicker>
           <mat-error class="text-danger" *ngIf="displayMessage?.report_date">{{displayMessage.report_date}}</mat-error>
         </mat-form-field>
-        <!-- <np-datepicker  placeholder="asasd" class="nepali-datepicker"></np-datepicker> -->
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Amendments to Report (if any) (प्रतिवेदनमा संशोधन गर्नुपर्ने
           भएमा)</label>
@@ -123,6 +123,9 @@
             placeholder="Enter Amendments to report"></textarea>
         </mat-form-field>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-6">
         <label for="email" class="col-form-label">Note (if any) (अन्य केही भएमा)</label>
         <mat-form-field appearance="outline" class="w-100">
@@ -131,9 +134,6 @@
             <!-- <mat-error class="text-danger" *ngIf="displayMessage?.brand">{{displayMessage.brand}}</mat-error> -->
         </mat-form-field>
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-sm-6">
         <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
           वस्तु)* </label>

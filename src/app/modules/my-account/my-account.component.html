@@ -12,14 +12,14 @@
     <div class="change-password ">
       <div class="row">
         <div class="col-md-8 d-flex">
-          <div>
+          <div class="mx-1">
             <ngx-avatar [name]="userFullName"></ngx-avatar>
 
           </div>
           <div style="padding-left: 1%;">
             <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
-              <mat-icon *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
-                style="color: #2260bf;">verified_user</mat-icon>
+              <mat-icon class="mt-2" *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
+                style="color: #00d566;">check_circle</mat-icon>
               <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"
                 [matTooltip]="'Not Verified'" style="background-color:red; font-size: 10px;">Not Verified</span>
             </h1>

@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRoles();
+    this.getTokenStatus();
    }
 
   getRoles() {
@@ -46,5 +47,15 @@ export class NavbarComponent implements OnInit {
 
   gotoDashboard() {
     this.router.navigate(['/dashboard']);
+  }
+
+  getTokenStatus() {
+    this.layoutService.getTokenStatus().subscribe(res => {
+      if(res.valid === true) {
+
+      } else {
+        this.logout();
+      }
+    })
   }
 }

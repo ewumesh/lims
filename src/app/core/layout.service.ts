@@ -40,4 +40,8 @@ export class LayoutService {
   getNotification():Observable<any> {
     return this.http.get(`${this.url}/api/websocket/notification/`)
   }
+
+  getTokenStatus(): Observable<any> {
+    return this.http.get(`${this.url}/api/account/check-token-status/`)
+  }
 }
