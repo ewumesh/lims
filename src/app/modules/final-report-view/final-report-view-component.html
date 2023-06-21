@@ -192,7 +192,7 @@
 
   <div class="row" *ngIf="loggedUserDetails.role !== 4">
     <div class="col-md-12 text-end mt-3">
-      <button [disabled]="reportDetails.status !== 'verified'" (click)="downloadReport()" class="btn btn-primary btn-sm mx-1">Download Report</button>
+      <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReport()" class="btn btn-primary btn-sm mx-1">Download Report</button>
     </div>
   </div>
 </div>
