@@ -2,15 +2,17 @@
   <div class="custom-bg">
   <div class="container ">
       <div class="row">
-          <div class="mainheader-top">
-              <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
-              <div class="mainheader-top-text">
-                  <h4>Government of Nepal</h4>
-                  <h3><span> Laboratory Information Management System</span></h3>
-                  <p>Department of Food Technology and Quality Control</p>
-              </div>
-              <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+        <div class="mainheader-top">
+          <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
+          <div class="mainheader-top-text">
+              <h4 class="pb-0 mb-0">Government of Nepal</h4>
+              <span>Ministry of Agriculture and Livestock Development</span>
+              <div style="font-weight: 500;">Department of Food Technology and Quality Control</div>
+              <h3><span> Laboratory Information Management System</span></h3>
+
           </div>
+          <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+      </div>
       </div>
   </div>
 
@@ -33,7 +35,7 @@
 
 </header>
 
-<div class="container d-flex justify-content-center align-items-center">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
   <div class="form-container row">
     <!-- <div class="login-intro mb-3">
       <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
@@ -127,7 +129,7 @@
               <div class="col-md-12 mb-1">
                 <label class="form-label">Industry Name *</label>
                 <mat-form-field appearance="outline" class="w-100">
-                  <input matInput formControlName="department_name" placeholder="Enter Department Name" />
+                  <input matInput formControlName="department_name" placeholder="Enter Industry Name" />
                   <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
                     *ngIf="displayMessage?.department_name">{{displayMessage?.department_name}}</mat-error>
                 </mat-form-field>
@@ -136,7 +138,7 @@
               <div class="col-md-6 mb-1">
                 <label class="form-label">Industry Address *</label>
                 <mat-form-field appearance="outline" class="w-100">
-                  <mat-select formControlName="department_address" placeholder="Select Department Address" class="custom-select" appearance="outline">
+                  <mat-select formControlName="department_address" placeholder="Select Industry Address" class="custom-select" appearance="outline">
                     <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
                   </mat-select>
                   <!-- <input matInput formControlName="department_type" placeholder="Enter Department Type" /> -->
@@ -206,5 +208,5 @@
 </div>
 
 <footer>
-  <p>© Laboratory Information Management System. All Right Reserved.</p>
+  <p>© Laboratory Information Management System. All Right Reserved.Developed by  &nbsp;<a href="https://kantipurinfotech.com/"> Kantipur Infotech</a></p>
 </footer>

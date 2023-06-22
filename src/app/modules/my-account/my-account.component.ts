@@ -125,6 +125,12 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     })
   }
 
+  getIndustryName(code) {
+    let c = this.departmentTypes.find(a => a.code === code);
+    console.log(c, 'ok')
+    return c.name
+  }
+
   getDepartmentType() {
     this.accountService.getGetDepartmentTypes().subscribe(res => {
       this.departmentTypes = res?.department_types;

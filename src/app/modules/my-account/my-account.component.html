@@ -159,19 +159,19 @@
           </div>
 
           <div class="col-md-12" *ngIf="accountDetails?.role === 5">
-            <h2 class="text-lims-primary mb-0">Department Details</h2>
+            <h2 class="text-lims-primary mb-0">Industry Details</h2>
             <hr class="" />
 
             <div class="row">
               <div class="col-md-4">
                 <h3>
-                  <span class="text-bold">Department Name:</span> {{accountDetails?.department_name | titlecase}}
+                  <span class="text-bold">Industry Name:</span> {{accountDetails?.department_name | titlecase}}
                 </h3>
               </div>
 
               <div class="col-md-4">
                 <h3>
-                  <span class="text-bold">Department Address:</span> {{accountDetails?.department_address | titlecase}}
+                  <span class="text-bold">Industry Address:</span> {{getIndustryName(accountDetails?.department_address)}}
                 </h3>
               </div>
 

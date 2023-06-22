@@ -5,9 +5,11 @@
           <div class="mainheader-top">
               <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
               <div class="mainheader-top-text">
-                  <h4>Government of Nepal</h4>
+                  <h4 class="pb-0 mb-0">Government of Nepal</h4>
+                  <span>Ministry of Agriculture and Livestock Development</span>
+                  <div style="font-weight: 500;">Department of Food Technology and Quality Control</div>
                   <h3><span> Laboratory Information Management System</span></h3>
-                  <p>Department of Food Technology and Quality Control</p>
+
               </div>
               <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
           </div>
@@ -35,7 +37,7 @@
 </header>
 
 <div class="container d-flex justify-content-center align-items-center">
-  <div class="main row ">
+  <div class="main row " style="min-height: 85vh;">
     <div class="col-lg-6">
       <div class="form-container">
         <div class="login-title">
@@ -77,7 +79,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 d-grid gap-2">
-              <button [disabled]="isLoading" type="submit" class="btn btn-primary btn-block text-center">
+              <button [disabled]="isLoading" type="submit" class="btn btn-primary btn-block text-center h-45">
                 <span *ngIf="!isLoading">Login</span>
                 <span *ngIf="isLoading">
                   <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
@@ -126,5 +128,5 @@
 
 </div>
 <footer>
-  <p>© Laboratory Information Management System. All Right Reserved.</p>
+  <p>© Laboratory Information Management System. All Right Reserved.Developed by  &nbsp;<a href="https://kantipurinfotech.com/"> Kantipur Infotech</a></p>
 </footer>

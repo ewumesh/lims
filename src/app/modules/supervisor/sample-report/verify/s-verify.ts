@@ -44,6 +44,8 @@ export class VerificationComponent implements OnInit {
     this.service.patchRemarks(payload, this.data.sample_form,).subscribe(res => {
 this.dialogRef.close();
 this.router.navigate(['/dashboard/lab-report']);
+    },(error) => {
+      this.responseError = error.error;
     })
   }
 

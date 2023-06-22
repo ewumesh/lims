@@ -160,6 +160,7 @@
                 <th>Tested By</th>
                 <th>Result</th>
                 <th>Status</th>
+                <th>Remarks</th>
               </tr>
               <tbody>
                 <tr *ngFor="let r of reportDetails.parameters; let i = index;">
@@ -176,6 +177,7 @@
                     <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                   </td>
                   <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
+              <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0" >{{reportDetails?.remarks}}</td>
                 </tr>
               </tbody>
             </table>
