@@ -175,7 +175,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password:[''],
-      confirm_password: ['',Validators.required],
+      confirm_password: [''],
       client_category: [1, Validators.required],
       department_name: [],
       department_address: [],
