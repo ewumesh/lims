@@ -43,6 +43,9 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   isAccountEdit = false;
   departmentTypes:any[] = [];
 
+  doc: any;
+  renewDoc: any;
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -85,10 +88,14 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     },{ validators: passwordMatchValidator })
   }
 
-  uploadFile() {}
+  uploadDocument(event) {
+    let file = event.target.files[0];
+    this.doc = file;
+  }
 
-  uploadRenewDoc() {
-
+  uploadRenewDoc(event) {
+    let file = event.target.files[0];
+    this.renewDoc = file;
   }
 
   viewImage(url) {
@@ -293,5 +300,53 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     const dataURL: string = canvas.toDataURL('image/png');
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
+
+  saveUserDetails() {
+    this.isLoading = true;
+
+    if (this.userForm.pristine) {
+      this.message = {};
+      window.scroll(0,0);
+      this.message.messageBody = 'All the fileds with (*) are required.';
+      this.isLoading = false;
+      return;
+    }
+
+    let payload = {
+      id: this.userDetails.id,
+      group: [],
+      username: this.userForm.value.username,
+      first_name: this.userForm.value.first_name,
+      last_name: this.userForm.value.last_name,
+      phone: this.userForm.value.phone,
+      email: this.userForm.value.email,
+      client_category: 1,
+      department_name: this.userForm.value.department_name,
+      department_address: this.userForm.value.department_address,
+      registration_number: this.userForm.value.registration_number,
+      date: this.userForm.value.date,
+      role: 5,
+      is_verified: 1
+    }
+
+    this.accountService.updateUser(payload, this.doc, this.renewDoc).subscribe(res => {
+      this.toast.showToast(
+        TOAST_STATE.success,
+        'User Updated Successfully!');
+        this.isLoading = false;
+        this.dismissMessage();
+        this.responseError = null;
+        this.message = {};
+        this.isAccountEdit = false;
+    },(error) => {
+      this.responseError = error?.error;
+    })
+  }
+
+  dismissMessage() {
+    setTimeout(() => {
+      this.toast.dismissToast();
+    }, 2000);
   }
 }

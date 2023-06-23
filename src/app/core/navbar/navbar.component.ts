@@ -56,6 +56,12 @@ export class NavbarComponent implements OnInit {
       } else {
         this.logout();
       }
+    },(error) => {
+      console.log(error?.error, 'roo')
+
+      if(error?.error?.valid === false) {
+        this.logout();
+      }
     })
   }
 }

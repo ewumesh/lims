@@ -1,0 +1,200 @@
+<div class="row m-0">
+  <div  class="col-sm-12 col-md-12 col-lg-12 m-0 p-0">
+    <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+      <div class="alert alert-danger" role="alert">
+        {{message?.messageBody}}
+      </div>
+    </div>
+    <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+      <div class="alert alert-danger" role="alert">
+        <li *ngFor="let item of responseError | keyvalue">
+          {{item.key}}:{{item.value}}
+        </li>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-md-12 bg-white p-4">
+    <h2>User Category</h2>
+
+    <mat-radio-group [(ngModel)]="userCategory" name="radioButtons" (change)="onRadioButtonChange($event)">
+      <mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
+      <mat-radio-button id="radio_2" value="2">User</mat-radio-button>
+    </mat-radio-group>
+  </div> -->
+  <div class="col-md-12 bg-white p-4">
+    <h2>User Details</h2>
+    <form class="userregister" [formGroup]="userForm" (ngSubmit)="saveChanges()">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="exampleInputFullName1" class="form-label">First Name*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="first_name" placeholder="Enter your First Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.first_name" class="text-danger"
+              *ngIf="displayMessage?.first_name">{{displayMessage?.first_name}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputFullName1" class="form-label">Last Name*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="last_name" placeholder="Enter your Last Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.last_name" class="text-danger"
+              *ngIf="displayMessage?.last_name">{{displayMessage?.last_name}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputEmail1" class="form-label">Email Address*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="email" placeholder="Enter your Email" />
+            <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
+              *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input type="number" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+            <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
+              *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="password" class="form-label">Password*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" type="password" matInput formControlName="password"
+              placeholder="Enter Password" />
+            <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
+              *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label for="password" class="form-label">Confirm Password*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" type="password" matInput formControlName="confirm_password"
+              placeholder="Re-enter Password" />
+            <mat-error [@rowsAnimation]="displayMessage?.confirm_password" class="text-danger"
+              *ngIf="displayMessage?.confirm_password">{{displayMessage?.confirm_password}}</mat-error>
+          </mat-form-field>
+          <mat-error *ngIf="userForm.hasError('passwordMatch')" class="text-danger">Passwords do not match.</mat-error>
+        </div>
+
+        <div class="col-md-4">
+          <label for="password" class="form-label">User Name*</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
+            <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
+              *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label class="list-heading form-label">Select Role *</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="role" placeholder="Select Role">
+              <mat-option [value]="item.role_id" *ngFor="let item of userRoles">{{item.role_name | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.role" class="text-danger"
+              *ngIf="displayMessage?.role">{{displayMessage?.role}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4" *ngIf="(userForm.get('role').value === 1 || userForm.get('role').value === 2 || userForm.get('role').value === 3 || userForm.get('role').value === 4 ) && roles.length > 0">
+          <label class="list-heading form-label">Select Group</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="group" placeholder="Select Role" multiple>
+              <mat-option [value]="item.id" *ngFor="let item of roles">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4" *ngIf="userForm.get('role').value === 5">
+          <label class="list-heading form-label">Client Category</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="client_category" placeholder="Select Category">
+              <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
+              *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="row m-0" *ngIf="userForm.get('role').value === 5 && userForm.value.client_category">
+          <h2>Department Details</h2>
+
+          <div class="col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Department Name</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="department_name"
+                placeholder="Enter Department Name" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <label for="exampleInputEmail1" class="form-label">Department Address</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
+                <mat-option *ngFor="let a of departmentTypes" [value]="a.code">{{a.name}}</mat-option>
+              </mat-select>
+              <!-- <input class="custom-input" matInput formControlName="department_address"
+                placeholder="Enter Department Address" /> -->
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <label for="exampleInputEmail1" class="form-label">Registration Number</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="registration_number"
+                placeholder="Enter Registration Number"/>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div *ngIf="userId && userDetails?.role ===5">
+            <img (click)="viewImage(userDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.registration_document" />
+            </div>
+            <label for="exampleInputEmail1" class="form-label">Documents</label>
+            <input  (change)="uploadDocument($event)" class="form-control" type="file" placeholder="Upload file" />
+          </div>
+
+          <h2>User Renew Details</h2>
+
+          <!-- <div class="col-md-12">
+            <label for="exampleInputEmail1" class="form-label">Renewed Date</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="date" placeholder="Enter Renew Date" />
+            </mat-form-field>
+          </div> -->
+
+          <div class="col-md-12 mb-3">
+            <div *ngIf="userId && userDetails?.role ===5">
+              <img (click)="viewImage(userDetails?.renew_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.renew_document" />
+            </div>
+            <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
+            <input (change)="uploadRenewDoc($event)" class="form-control" type="file" placeholder="Upload file" />
+          </div>
+
+
+          <!-- <div class="col-md-12">
+          <button type="submit" class="form-control btn-lims-primary" id="submit">Create</button>
+        </div> -->
+        </div>
+        <div class="col-md-12 text-end">
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary" id="submit">
+            <span *ngIf="!isLoading">
+              <span *ngIf="userId">Update User</span>
+              <span *ngIf="!userId">Create User</span>
+            </span>
+            <span *ngIf="isLoading">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

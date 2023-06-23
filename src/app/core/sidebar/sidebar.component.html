@@ -93,7 +93,7 @@
 
           <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link dropdown-toggle"
-              [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/all-users'}"
+              [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/all-users' || this.router.url === '/dashboard/create-admin'}"
               href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
               aria-controls="collapseTwo">
               <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -5px;"></mat-icon>
@@ -114,6 +114,13 @@
                     (click)="navigate('/dashboard/create-user')" href="Javascript:;">
                     <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Create User</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-admin'}"
+                    (click)="navigate('/dashboard/create-admin')" href="Javascript:;">
+                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    Create Admin</a>
                 </li>
               </ul>
             </div>
@@ -462,6 +469,6 @@
     <img style="height: 30px;" class="mt-2" src="../../../assets/kantipur.png" />
   </div>
   <div class="col-md-10" style="padding: 0;">
-    <h6 class="mt-3" style="color: #000;">Developed by <b>Kantipur Infotech</b></h6>
+    <h6 class="mt-3" style="color: #000; margin-left:10%">Developed by <b>Kantipur Infotech</b></h6>
   </div>
 </div>

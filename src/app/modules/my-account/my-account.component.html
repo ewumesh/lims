@@ -313,7 +313,7 @@
                 <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="accountDetails?.rew_document" />
               </div>
               <label for="file2">Registration Document*</label>
-              <input (change)="uploadFile($event)" class="form-control" type="file" />
+              <input (change)="uploadDocument($event)" class="form-control" type="file" />
             </div>
             <div class=" col-md-12 mb-1">
 
@@ -325,6 +325,12 @@
 
             </div>
 
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-end">
+              <hr/>
+            <button class="btn btn-primary btn-sm" (click)="saveUserDetails()">Save</button>
+            </div>
           </div>
         </form>
       </div>
