@@ -25,6 +25,11 @@ export class CalculateComponent implements OnInit {
 
   responseError = null;
 
+  isGenerating = false;
+
+  finalResult = 0;
+  formulaField = ''
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
@@ -53,10 +58,35 @@ export class CalculateComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  resetForm() {
+    this.calculateForm.reset();
+  }
+
+  generate() {
+    this.isGenerating = true;
+    let requestPayload = {
+      formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
+      sample_form: this.data.details.sample_form.id,
+      commodity: this.data.details.sample_form.commodity.id,
+      parameter: this.data?.parameters?.id
+    }
+    this.service.calculateResult(requestPayload).subscribe(res => {
+      this.isGenerating = false;
+      this.toast.showToast(TOAST_STATE.success, 'Calculate Successfully!');
+      this.dismissMessage();
+      this.finalResult = res.result;
+      this.formulaField = res.formula_variable_fields_value;
+      console.log(res, 'res');
+    },(error) => {
+      this.responseError = error?.error;
+      this.isGenerating = false;
+    })
+  }
+
   submit() {
     this.isCalculating = true;
     let requestPayload = {
-      formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
+      formula_variable_fields_value: this.formulaField,
       sample_form: this.data.details.sample_form.id,
       commodity: this.data.details.sample_form.commodity.id,
       parameter: this.data?.parameters?.id
@@ -113,5 +143,27 @@ export class CalculateComponent implements OnInit {
 
     this.calculateForm = this.fb.group(formGroupConfig);
     this.isControlGenerated = true;
+  }
+
+  setResult() {
+    this.isCalculating = true;
+    let payload = {
+      sample_form: this.data.sample_form,
+      result: this.finalResult,
+      parameter: this.data.parameter,
+      commodity: this.data.commodity,
+      formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
+      sample_form_has_parameter: this.data.details?.id
+    }
+
+    this.service.setResult(payload).subscribe(res => {
+      this.toast.showToast(TOAST_STATE.success, 'Result Save Successfully!');
+      this.dismissMessage();
+      this.isCalculating = false;
+      this.dialogRef.close();
+    },(error) => {
+      this.responseError = error?.error;
+      this.isCalculating = false;
+    })
   }
 }

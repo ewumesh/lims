@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
+import { VerificationRemarksComponent } from './component/verification-remarks';
 
 @Component({
   templateUrl: './verify-sample-report.html',
@@ -20,12 +22,25 @@ export class VerifySampleReportomponent implements OnInit {
     private service: SampleReportService,
     private route: ActivatedRoute,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
     this.getReportDetails();
     this.isSampleSentForSupervisor();
+  }
+
+  openRemarks() {
+    let payload = {
+      id: this.sampleStatus[0].id,
+      // sample_form: id,
+      is_verified: true,
+      // is_sent: true
+    }
+    this.dialog.open(VerificationRemarksComponent, {
+      data: payload ? payload : null
+    })
   }
 
 

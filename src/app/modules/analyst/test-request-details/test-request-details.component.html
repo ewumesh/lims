@@ -1,7 +1,7 @@
 <div class="row m-0 mb-3" *ngIf="testRequestDetails">
   <div class="col-md-12 bg-white p-3">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="text-muted">Sample lab ID</div>
         <div class="font-bold">{{testRequestDetails?.sample_form?.analyst_encode_id}}</div>
       </div>
@@ -20,9 +20,14 @@
         <div class="text-muted" *ngIf="!testRequestDetails?.sample_form?.supervisor_user?.first_name" class="font-bold">N/A</div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="text-muted">Assigned Date</div>
         <div class="font-bold">{{testRequestDetails?.created_date | date: 'medium'}}</div>
+      </div>
+
+      <div class="col-md-2 text-end">
+        <span style="padding: 8px;" *ngIf="testRequestDetails?.status" class="badge badge-primary" [statusColor]="testRequestDetails?.status"> {{testRequestDetails?.status | titlecase}}</span>
+        <span *ngIf="!testRequestDetails.status" class="text-muted">N/A</span>
       </div>
 
       <!-- <div class="col-md-3">
@@ -30,6 +35,39 @@
         <div class="font-bold">Test Sample</div>
       </div> -->
 
+    </div>
+  </div>
+
+  <div class="row m-0 p-0 mt-3" *ngIf="testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
+    <div class="col-md-12 bg-white">
+      <!-- <div class="row" style="border: 1px solid #00000024;
+      margin: 2%;">
+        <div class="col-md-6 pt-3">
+          <h3 class="text-muted mb-0 pb-0">Raw Data Sheet</h3>
+          <p class="text-muted">{{testRequestDetails?.created_date | date: 'medium'}}</p>
+        </div>
+        <div class="col-md-6 text-end p-4">
+          <button class="btn btn-primary btn-sm">View Raw Data</button>
+          <button class="btn btn-secondary mx-2 btn-sm">Download</button>
+          <button class="btn btn-danger btn-sm">Print</button>
+        </div>
+      </div> -->
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <td style="width: 60%;">
+              <p class="text-muted mb-0 pb-0">Raw Data Sheet</p>
+              <p class="text-muted mb-0">{{testRequestDetails?.created_date | date: 'medium'}}</p>
+            </td>
+            <td style="width: 40%;" class="text-end pt-3">
+              <button class="btn btn-primary btn-sm">View Raw Data</button>
+          <button class="btn btn-secondary mx-2 btn-sm">Download</button>
+          <button class="btn btn-danger btn-sm">Print</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -71,10 +109,14 @@
     </ng-container>
 
     <ng-container matColumnDef="formula">
-      <th mat-header-cell *matHeaderCellDef> Formula </th>
+      <th mat-header-cell *matHeaderCellDef> Test Type </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.formula">{{row?.formula}} </span>
-        <span *ngIf="!row.formula" class="text-muted">N/A</span>
+        <span *ngIf="row.test_type">
+          <span *ngIf="row?.test_type === '1'">Chemical Test </span>
+          <span *ngIf="row?.test_type === '2'">Microbiological Test</span>
+
+        </span>
+        <span *ngIf="!row.test_type" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
@@ -102,28 +144,29 @@
         <!-- </mat-form-field> -->
 
         <div class="input-group">
-          <input placeholder="Enter Value" type="text" [(ngModel)]="row.result" class="form-control">
+          <!-- <input placeholder="Enter Value" type="text" [(ngModel)]="row.result" class="form-control"> -->
           <div class="input-group-append">
             <!-- <span class="input-group-text">Ok</span> -->
-            <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary">Ok</button>
+            <!-- <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary">Ok</button> -->
             <!-- <span class="input-group-text">0.00</span> -->
           </div>
         </div>
         <!-- <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
 
-        <!-- <span>{{row.result || '0'}} </span> -->
+        <span *ngIf="row.result !== ''">{{row.result}} </span>
+        <span  *ngIf="row.result === ''" >N/A</span>
         <!-- <span *ngIf="!row?.result" class="text-muted">N/A</span> -->
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let row">
-        <!-- <button (click)="asignSampleTo(row)" class="btn btn-primary btn-sm">Pay</button> -->
-        <!-- <button (click)="assign(row)" class="btn btn-primary btn-sm mx-1">Assign</button> -->
-        <button (click)="calculate(row)" [matTooltip]="'Calculate Result'"
-          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">Calculate</button>
-        <!-- <button [matTooltip]="'Download Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button> -->
+    <ng-container matColumnDef="action" wid>
+      <th mat-header-cell *matHeaderCellDef class="text-center" [width] ="200"> Action </th>
+      <td mat-cell *matCellDef="let row" class="text-center">
+        <button *ngIf="!row.result " (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+          class="btn btn-primary btn-sm mx-1 pt-2">Calculate</button>
+
+        <button *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+          class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">Re-Calculate</button>
       </td>
     </ng-container>
 
@@ -146,21 +189,6 @@
     </div>
   </div>
 
-  <div class="row m-0 p-0" >
-    <div class="col-md-12  text-end py-4 pl-2" *ngIf="!testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
-      <button [disabled]="isSend" (click)="sendToSupervisor()" class="btn btn-primary btn-sm">
-        <span *ngIf="!isSend">Send to Supervisor</span>
-            <span *ngIf="isSend">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-            </span>
-      </button>
-    </div>
-    <div class="text-end p-4" *ngIf="testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
-
-      <span style="background-color: burlywood; padding: 8px" class="badge badge-primary">Sent</span>
-    </div>
-  </div>
-
 
   <!-- <div class="row mt-4 p-4">
     <div class="col-md-12 text-end">
@@ -168,4 +196,21 @@
     </div>
   </div> -->
   <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]" aria-label="Select page of users"></mat-paginator> -->
+</div>
+
+
+<div class="row m-0 p-0 mt-3" >
+  <div class="col-md-12  text-end bg-white py-4 pl-2" *ngIf="!testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
+    <!-- <button [disabled]="isSend" (click)="procceed()" class="btn btn-primary btn-sm">
+      <span *ngIf="!isSend">Procceed</span>
+          <span *ngIf="isSend">
+            <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+          </span>
+    </button> -->
+    <button (click)="generateRawDatasheet()" class="btn btn-primary btn-sm">Generate Raw Data Sheet</button>
+  </div>
+  <div class="text-end p-4" *ngIf="testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
+
+    <span style="background-color: burlywood; padding: 8px" class="badge badge-primary">Sent</span>
+  </div>
 </div>

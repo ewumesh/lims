@@ -35,4 +35,8 @@ export class TestRequestDetailsService {
   sendForVarification(payload, id) {
     return this.http.patch(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`, payload);
   }
+
+  getRawDataSheetDetails(id): Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`)
+  }
 }

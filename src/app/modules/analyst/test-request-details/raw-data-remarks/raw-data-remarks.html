@@ -1,0 +1,99 @@
+<div class="row m-0" style="padding: 1%;">
+  <div class="col-md-10">
+    <h2>View Raw Data</h2>
+  </div>
+  <div class="col-md-2 text-end">
+    <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit"
+        fontIcon="close"></mat-icon></button>
+  </div>
+  <hr />
+  <mat-dialog-content>
+    <!-- <mat-card> -->
+    <div class="sample-dialog">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="title">Name of Laboratory</p>
+          <h2 class="detail">Lorem</h2>
+        </div>
+        <div class="col-md-6">
+          <p class="title">Reported date </p>
+          <h2 class="detail">Lorem</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="title">Sample Name</p>
+          <h2 class="detail">{{rawDatasheetDetails?.sample_form?.name || 'N/A'}}</h2>
+        </div>
+        <div class="col-md-4">
+          <p class="title">Date of Receipt</p>
+          <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+        </div>
+        <div class="col-md-4">
+          <p class="title">Sample Codes</p>
+          <h2 class="detail text-uppercase">{{rawDatasheetDetails?.sample_form?.id}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="title">Due Date</p>
+          <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+        </div>
+        <div class="col-md-4">
+          <p class="title">Started on</p>
+          <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+        </div>
+        <div class="col-md-4">
+          <p class="title">Completed on </p>
+          <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="title">Parameters to be analyzed</p>
+          <h2 class="detail">N/A</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="title">Method of Analysis/Testing</p>
+          <h2 class="detail">N/A</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="title">RAW DATA (Observations, Readings, calculations etc.) </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" *ngFor="let p of rawDatasheetDetails?.parameter">
+          <hr/>
+          <div class="formula">
+            <h2>{{p.name}}</h2>
+            <div *ngIf="p?.formula_notation">
+              <div *ngFor="let n of splitStringByComma(p?.formula_notation)">
+                <span class="text-danger">*</span>{{n | titlecase}}
+              </div>
+              <h2>Formula = {{p?.formula}}</h2>
+            </div>
+            <div *ngIf="!p?.formula_notation" class="text-muted">N/A</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- </mat-card> -->
+  </mat-dialog-content>
+  <hr />
+
+  <mat-dialog-actions align="end">
+    <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Cancel</button>
+    <button (click)="procceed()" class="btn btn-primary btn-sm mx-1">Procceed</button>
+    <!-- <button class="btn btn-primary btn-sm mx-1">
+      <span *ngIf="!isLoading">Save</span>
+      <span *ngIf="isLoading">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+      </span>
+    </button> -->
+  </mat-dialog-actions>
+</div>

@@ -13,9 +13,27 @@
     <hr class="mt-0" />
 
     <mat-dialog-content>
-      <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm">
-        <div class="col-md-12">
+      <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm" style="border: 1px solid #00000042;
+      padding: 18px;">
+        <div class="row">
           <div class="col-md-12"><label style="font-weight:bold">Parameter:{{requestDetails?.parameters?.name}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="formControls[0].name !== 'nan'">
+
+          <div class="col-md-6">
+            <label style="font-weight:bold">Notations</label>
+            <div *ngIf="requestDetails.parameters?.formula_notation">
+              <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span
+                  class="text-danger">*</span>{{n | titlecase}}</div>
+            </div>
+            <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
+
+          </div>
+          <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
+            <label style="font-weight:bold">Formula</label>
+            <div>{{requestDetails?.parameters?.formula}}</div>
           </div>
         </div>
 
@@ -36,31 +54,34 @@
                 [formControlName]="control.name" required>
             </mat-form-field>
           </div>
-          <div *ngIf="control.name === 'nan'">
-            <label>Enter Value</label>
-            <mat-form-field appearance="outline" class="w-100">
-              <input placeholder="Enter Value" [formControlName]="control.name" class="custom-input" matInput type="number" required />
-            </mat-form-field>
-          </div>
+          <!-- <div *ngIf="control.name === 'nan'">
+
+            <div class="text-center text-muted py-4" >Formula Not Available.</div>
+          </div> -->
         </ng-container>
-      </form>
 
-      <div class="row">
-
-        <div class="col-md-6">
-          <label style="font-weight:bold">Notations</label>
-          <div *ngIf="requestDetails.parameters?.formula_notation">
-            <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span
-                class="text-danger">*</span>{{n | titlecase}}</div>
+        <div class="row" *ngIf="formControls[0].name !== 'nan'">
+          <div class="col-md-12 text-end">
+            <button class="btn btn-primary btn-sm mx-2" (click)="generate()">
+              <span *ngIf="!isGenerating">Generate</span>
+        <span *ngIf="isGenerating">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="resetForm()">Reset</button>
           </div>
-          <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
+        </div>
 
-        </div>
-        <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
-          <label style="font-weight:bold">Formula</label>
-          <div>{{requestDetails?.parameters?.formula}}</div>
-        </div>
-      </div>
+
+
+      </form>
+      <div class="pt-2">
+        <label> Result</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input placeholder="Enter Value" [(ngModel)]="finalResult" class="custom-input" matInput type="number" required />
+            </mat-form-field>
+            </div>
+
 
       <div class="row" *ngIf="!isControlGenerated">
         <div class="col-md-12 text-center py-3">
@@ -73,7 +94,7 @@
 
     <mat-dialog-actions align="end">
       <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Cancel</button>
-      <button (click)="submit()" class="btn btn-primary btn-sm mx-1">
+      <button (click)="setResult()" class="btn btn-primary btn-sm mx-1">
         <span *ngIf="!isCalculating">Submit</span>
         <span *ngIf="isCalculating">
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

@@ -15,9 +15,13 @@ import { CalculateComponent } from './calculate/calculate.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { AnalystRemarksComponent } from './remarks/analyst-remarks';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
+import { FinalRawDataRemarksComponent } from './raw-data-remarks/component/final-remarks';
 
 @NgModule({
-  declarations: [TestRequestDetailsComponent,CalculateComponent],
+  declarations: [TestRequestDetailsComponent,CalculateComponent, AnalystRemarksComponent, RawDataRemarksComponent,FinalRawDataRemarksComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -35,7 +39,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatInputModule,
 
-    DeleteConfirmModule
+    DeleteConfirmModule,
+    SharedModule
    ],
   exports: [],
   providers: [TestRequestDetailsService],

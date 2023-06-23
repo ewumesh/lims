@@ -8,6 +8,8 @@ import { TestRequestDetailsService } from 'src/app/services/analyst/test-request
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { CalculateComponent } from './calculate/calculate.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { AnalystRemarksComponent } from './remarks/analyst-remarks';
+import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
 
 @Component({
   templateUrl: './test-request-details.component.html',
@@ -86,10 +88,16 @@ export class TestRequestDetailsComponent implements OnInit {
    }
 
    calculate(data) {
+    console.log(data, 'da')
 
     let allValue = {
       parameters: data,
-      details: this.testRequestDetails
+      details: this.testRequestDetails,
+      sample_form: this.testRequestDetails?.sample_form?.analyst_encode_id,
+      // result: result,
+      parameter: data.id,
+      commodity: data.commodity,
+      // formula_variable_fields_value:'awds'
     }
     let instance: MatDialogRef<CalculateComponent, any>;
 
@@ -101,6 +109,17 @@ export class TestRequestDetailsComponent implements OnInit {
 
     instance.afterClosed().subscribe(res => {
       this.getTestResultDetails();
+    })
+   }
+
+   procceed() {
+    let payload  ={
+      status: 'completed',
+      is_supervisor_sent: true,
+      id:this.route.snapshot.paramMap.get('id')
+    }
+    this.dialog.open(AnalystRemarksComponent, {
+      data: payload ? payload : null
     })
    }
 
@@ -125,5 +144,11 @@ export class TestRequestDetailsComponent implements OnInit {
     let patchPayload = {
       result: result
     }
+   }
+
+   generateRawDatasheet() {
+    this.dialog.open(RawDataRemarksComponent, {
+      data: this.testRequestDetails ? this.testRequestDetails: null
+    })
    }
 }

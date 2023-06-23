@@ -380,6 +380,16 @@ const routes: Routes = [
   },
 
   {
+    path: 'raw-data-sheet',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [4]
+    },
+    loadChildren: () => import('src/app/modules/analyst/raw-data/raw-data.module')
+      .then(m => m.RawDataModule)
+  },
+
+  {
     path: 'test-report',
     canActivate: [RoleGuard],
     data: {

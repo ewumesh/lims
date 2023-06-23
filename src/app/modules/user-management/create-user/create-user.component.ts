@@ -76,15 +76,15 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         'required': 'Email is required.',
         'pattern': 'Email is not valid.'
       },
-      'password': {
-        'required': 'Password is required.'
-      },
+      // 'password': {
+      //   'required': 'Password is required.'
+      // },
       'phone': {
         'required': 'Phone Number is required.'
       },
-      'confirm_password': {
-        'required': 'Confirm Password is required.'
-      },
+      // 'confirm_password': {
+      //   'required': 'Confirm Password is required.'
+      // },
       'client_category': {
         'required': 'Client Category is required.'
       },
@@ -106,18 +106,17 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
-
-    this.getClientCategories();
-    this.getUserRoles();
-    this.getRoles();
-    this.getDepartmentTypes();
-
     if(this.userId) {
       this.cService.getUserDetails(this.userId).subscribe(response => {
         this.patchForm(response);
         this.userDetails = response;
       })
     }
+
+    this.getClientCategories();
+    this.getUserRoles();
+    this.getRoles();
+    this.getDepartmentTypes();
   }
 
   getRoles() {
@@ -125,8 +124,12 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       if(this.loggedUserdetails.role === 1) {
       this.userRoles = response.roles;
       } else {
-        this.userRoles.push({role_name:'user', role_id: 5})
+        this.userRoles.push({role_name:'user', role_id: 5});
       }
+
+      // if(this.userId && this.loggedUserdetails.role === 1 && this.userDetails.role !== 5) {
+      //   this.userRoles = response.roles;
+      // }
     })
   }
 
@@ -195,8 +198,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   saveChanges() {
     this.isLoading = true;
 
-    if (this.userForm.pristine) {
+    if (!this.userForm.valid) {
       this.message = {};
+      window.scroll(0,0);
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isLoading = false;
       return;
@@ -224,7 +228,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     }
 
     // console.log(payload, 'PAYLOAD')
-    if (this.userForm.pristine || this.userForm.invalid) {
+    if (this.userForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isLoading = false;

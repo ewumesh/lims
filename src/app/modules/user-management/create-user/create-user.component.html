@@ -62,12 +62,12 @@
         </div>
 
         <div class="col-md-4">
-          <label for="password" class="form-label">Password*</label>
+          <label for="password" class="form-label">Password* {{userForm.valid | json}}</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" type="password" matInput formControlName="password"
               placeholder="Enter Password" />
-            <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
-              *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
+            <!-- <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
+              *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error> -->
           </mat-form-field>
         </div>
 
@@ -76,8 +76,8 @@
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" type="password" matInput formControlName="confirm_password"
               placeholder="Re-enter Password" />
-            <mat-error [@rowsAnimation]="displayMessage?.confirm_password" class="text-danger"
-              *ngIf="displayMessage?.confirm_password">{{displayMessage?.confirm_password}}</mat-error>
+            <!-- <mat-error [@rowsAnimation]="displayMessage?.confirm_password" class="text-danger"
+              *ngIf="displayMessage?.confirm_password">{{displayMessage?.confirm_password}}</mat-error> -->
           </mat-form-field>
           <mat-error *ngIf="userForm.hasError('passwordMatch')" class="text-danger">Passwords do not match.</mat-error>
         </div>

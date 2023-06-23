@@ -35,7 +35,7 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   clientCategories: any[] = [];
 
-  displayedColumns: string[] = ['sn', 'userId', 'userName', 'fullName', 'email', 'registerDate', 'userRole', 'action'];
+  displayedColumns: string[] = ['sn', 'userName', 'fullName', 'email', 'registerDate', 'userRole', 'action'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -198,8 +198,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/dashboard/user-details', id]);
   }
 
-  updateUser(id) {
-    this.router.navigate(['/dashboard/update-user', id]);
+  updateUser(user) {
+    this.router.navigate(['/dashboard/update-user', user.id]);
   }
 
 
