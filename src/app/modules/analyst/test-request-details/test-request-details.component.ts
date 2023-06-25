@@ -10,6 +10,8 @@ import { CalculateComponent } from './calculate/calculate.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { AnalystRemarksComponent } from './remarks/analyst-remarks';
 import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
+import { ViewRawDataComponent } from './view-raw-data/view-raw-data';
+import { ViewRemarksComponent } from './view-remarks/view-remarks';
 
 @Component({
   templateUrl: './test-request-details.component.html',
@@ -30,6 +32,8 @@ export class TestRequestDetailsComponent implements OnInit {
   isSend = false;
 
   responseError = null;
+
+  rawDataSheet:any[] =[];
 
   constructor(
     private service: TestRequestDetailsService,
@@ -85,6 +89,7 @@ export class TestRequestDetailsComponent implements OnInit {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
     this.getTestResultDetails();
+    this.getRawData();
    }
 
    calculate(data) {
@@ -121,6 +126,44 @@ export class TestRequestDetailsComponent implements OnInit {
     this.dialog.open(AnalystRemarksComponent, {
       data: payload ? payload : null
     })
+   }
+
+   downloadRawDatasheet(id) {
+    // let id = this.route.snapshot.paramMap.get('id');
+    this.service.downloadRawData(id).subscribe(res => {
+    })
+   }
+
+   printRawData(id) {
+    // let id = this.route.snapshot.paramMap.get('id');
+    this.service.printRawData(id).subscribe(res => {
+
+    })
+   }
+
+   viewRemarks(data) {
+    console.log(data, 'dpoaw')
+    this.dialog.open(ViewRemarksComponent, {
+      data:data
+    })
+   }
+
+   viewRawData(data) {
+    let obj = {
+      data: data,
+      sample: this.rawDataSheet
+    }
+    this.dialog.open(ViewRawDataComponent, {
+      data: obj,
+      width:'1000px'
+    })
+   }
+
+   getRawData() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getRawData(id).subscribe(res => {
+      this.rawDataSheet = res;
+    }  )
    }
 
    saveResult(result, sampleId, parameterId, commodity) {

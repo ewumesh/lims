@@ -19,9 +19,19 @@ import { AnalystRemarksComponent } from './remarks/analyst-remarks';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
 import { FinalRawDataRemarksComponent } from './raw-data-remarks/component/final-remarks';
+import { ViewRawDataComponent } from './view-raw-data/view-raw-data';
+import { ViewRemarksComponent } from './view-remarks/view-remarks';
 
 @NgModule({
-  declarations: [TestRequestDetailsComponent,CalculateComponent, AnalystRemarksComponent, RawDataRemarksComponent,FinalRawDataRemarksComponent],
+  declarations: [
+    TestRequestDetailsComponent,
+    CalculateComponent,
+    AnalystRemarksComponent,
+    RawDataRemarksComponent,
+    FinalRawDataRemarksComponent,
+    ViewRawDataComponent,
+    ViewRemarksComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

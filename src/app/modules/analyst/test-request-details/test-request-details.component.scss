@@ -29,3 +29,10 @@
 ::ng-deep .mat-form-field-wrapper{
   margin-bottom: -1.25em !important;
 }
+
+.after-disabled:disabled,
+.after-disabled[disabled]{
+  // border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

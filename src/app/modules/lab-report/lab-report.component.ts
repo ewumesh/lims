@@ -33,11 +33,11 @@ export class LabReportComponent implements OnInit {
     ) {
       this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
       // console.log(this.loggedUserDetails, 'POOPO')
-      if(this.loggedUserDetails.role === 4) {
-        this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'action'];
-      } else {
+      // if(this.loggedUserDetails.role === 4) {
+      //   this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'action'];
+      // } else {
         this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'status', 'action'];
-      }
+      // }
 
 
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));

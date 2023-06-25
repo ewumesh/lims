@@ -54,9 +54,13 @@ export class RawDataRemarksComponent implements OnInit {
     })
   }
 
+  download() {
+
+  }
+
   procceed() {
     this.dialog.open(FinalRawDataRemarksComponent, {
-
+      data: this.data
     })
   }
 

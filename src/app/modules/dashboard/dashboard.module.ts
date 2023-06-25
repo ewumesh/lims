@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
-// import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
-
+import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,9 +16,14 @@ import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
     RouterModule.forChild([
       {path: '', component: DashboardComponent},
 
-    ]), MatIconModule
+    ]), MatIconModule,
+    NgChartsModule
    ],
   exports: [],
-  providers: [DashboarService],
+  providers:
+  [
+    DashboarService,
+    { provide: NgChartsConfiguration, useValue: { generateColors: false }}
+  ],
 })
 export class DashboardModule {}
