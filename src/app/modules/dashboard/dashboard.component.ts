@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { BaseChartDirective } from 'ng2-charts';
+// import { BaseChartDirective } from 'ng2-charts';
 import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
 // import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 // import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
