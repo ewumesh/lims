@@ -142,7 +142,16 @@ export class TestRequestDetailsComponent implements OnInit {
    }
 
    viewRemarks(data) {
-    console.log(data, 'dpoaw')
+    this.dialog.open(ViewRemarksComponent, {
+      data:data
+    })
+   }
+
+   supervisorRemarks(d) {
+    console.log(d, 'REMARKSW')
+    let data = {
+      remarks: d?.sample_form?.remarks
+    }
     this.dialog.open(ViewRemarksComponent, {
       data:data
     })

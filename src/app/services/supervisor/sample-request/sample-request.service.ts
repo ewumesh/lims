@@ -30,4 +30,12 @@ export class SampleReportService {
   patchRemarks(payload, id):Observable<any> {
     return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
   }
+
+  getRawDataSheet(id): Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet/${id}/`)
+  }
+
+  sendForRecheck(payload, id):Observable<any> {
+    return this.http.patch(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`, payload)
+  }
 }

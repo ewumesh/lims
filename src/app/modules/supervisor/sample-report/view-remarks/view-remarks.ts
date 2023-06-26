@@ -30,15 +30,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
   `
 })
-export class ViewRemarksComponent implements OnInit {
+export class SupervisorViewRemarksComponent implements OnInit {
   isLoading = false;
   constructor(
-    private dialogRef: MatDialogRef<ViewRemarksComponent>,
+    private dialogRef: MatDialogRef<SupervisorViewRemarksComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    ) { 
-      console.log(data, 'po')
-    }
+    ) { }
 
   ngOnInit(): void { }
 

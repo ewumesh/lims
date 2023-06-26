@@ -30,18 +30,18 @@
           <table class="table">
             <tbody>
               <h3 class="text-bold mb-0 ms-2">Raw Data Sheet</h3>
-              <tr >
+              <tr *ngFor="let a of rawDataSheet">
                 <td style="width: 20%;">
-                  <p class="text-muted mb-0 pb-0">Generated Date</p>
-                  <p class="text-muted mb-0">Date</p>
+                  <p class="mb-0 pb-0">Generated Date</p>
+                  <p class="text-muted mb-0">{{a.created_date | date: 'medium'}}</p>
                 </td>
                 <td style="width: 30%;" class="">
-                  <button  class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
-                  <button  class="btn btn-primary btn-lims-primary btn-sm mx-1">Verifier Remarks</button>
+                  <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
+                  <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Verifier Remarks</button>
                 </td>
     
                 <td style="width: 20%;" class=" text-end">
-                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="'pending'">Pending</span>
+                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a.status">{{a.status}}</span>
                 </td>
                 <td style="width: 30%;" class="text-end">
                   <button  class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
@@ -99,14 +99,14 @@
                 <ng-container matColumnDef="analyst">
                   <th mat-header-cell *matHeaderCellDef> Analyst </th>
                   <td mat-cell *matCellDef="let row">
-                    <div  class="authors-container" data-collaborators="10">
+                    <div *ngIf="row.first_name" class="authors-container" data-collaborators="10">
                       <div class="author">
                         <div class="mask cursor-pointer">
-                          <ngx-avatar size="40" [name]="'Umesh'" [matTooltip]="'Umesh'"></ngx-avatar>
+                          <ngx-avatar size="40" [name]="row.first_name + ' ' + row.last_name" [matTooltip]="row.first_name + ' ' + row.last_name"></ngx-avatar>
                         </div>
                       </div>
                     </div>
-                    <!-- <div *ngIf="row.sample_has_parameter_analyst.length < 1" class="text-muted">N/A</div> -->
+                    <div *ngIf="!row.first_name" class="text-muted">N/A</div>
                   </td>
                 </ng-container>
 

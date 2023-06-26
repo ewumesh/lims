@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
+import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 
 @Component({
     templateUrl: './re-check.html',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 export class ReCheckComponent implements OnInit {
     recheckForm: FormGroup;
 
-    message:any = {};
+    message: any = {};
 
     responseError = null;
 
@@ -20,8 +22,10 @@ export class ReCheckComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private dialogRef: MatDialogRef<ReCheckComponent>,
-        private router: Router
-        ) { }
+        private router: Router,
+        private service: SampleReportService,
+        private toast: ToastService
+    ) { }
 
     ngOnInit() {
         this.initForm();
@@ -35,10 +39,14 @@ export class ReCheckComponent implements OnInit {
 
     closeDialog() {
         this.dialogRef.close();
-        }
+    }
 
-        submit() {
-            
-        }
+    submit() {
+        let status = 'recheck';
+        let id = 7;
+        this.service.sendForRecheck(status, id).subscribe(res => {
+            this.toast.showToast(TOAST_STATE.success, 'Success')
+        })
+    }
 
 }

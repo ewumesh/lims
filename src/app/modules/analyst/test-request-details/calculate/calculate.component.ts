@@ -72,7 +72,7 @@ export class CalculateComponent implements OnInit {
     }
     this.service.calculateResult(requestPayload).subscribe(res => {
       this.isGenerating = false;
-      this.toast.showToast(TOAST_STATE.success, 'Calculate Successfully!');
+      this.toast.showToast(TOAST_STATE.success, res.message);
       this.dismissMessage();
       this.finalResult = res.result;
       this.formulaField = res.formula_variable_fields_value;
@@ -94,7 +94,7 @@ export class CalculateComponent implements OnInit {
     this.service.calculateResult(requestPayload).subscribe(res => {
       this.isCalculating = false;
       this.dialogRef.close();
-      this.toast.showToast(TOAST_STATE.success, 'Calculate successfully!');
+      this.toast.showToast(TOAST_STATE.success, res.message);
       this.dismissMessage();
     },
     (error) => {
@@ -157,7 +157,7 @@ export class CalculateComponent implements OnInit {
     }
 
     this.service.setResult(payload).subscribe(res => {
-      this.toast.showToast(TOAST_STATE.success, 'Result Save Successfully!');
+      this.toast.showToast(TOAST_STATE.success, res.message);
       this.dismissMessage();
       this.isCalculating = false;
       this.dialogRef.close();

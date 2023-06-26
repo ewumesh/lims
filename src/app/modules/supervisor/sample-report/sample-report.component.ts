@@ -9,6 +9,7 @@ import { AssignComponent } from '../lab-request-details/component/assign.compone
 import { ReAssignComponent } from './re-assign/re-assign';
 import { ReCheckComponent } from './re-check/re-check';
 import { VerificationComponent } from './verify/s-verify';
+import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
 
 @Component({
   templateUrl: './sample-report.component.html',
@@ -30,6 +31,14 @@ export class SampleReportComponent implements OnInit {
   displayedColumns: string[] = ['sn', 'testType', 'parameterName', 'method', 'analyst','result','status','action'];
   dataSource = new MatTableDataSource<any>();
 
+  rawDataSheet:any;
+
+  viewRemarks(data) {
+    this.dialog.open(SupervisorViewRemarksComponent, {
+      data: data ? data : null
+    })
+  }
+
   constructor(
     private service: SampleReportService,
     private route: ActivatedRoute,
@@ -42,6 +51,14 @@ export class SampleReportComponent implements OnInit {
   ngOnInit(): void {
     this.getReportDetails();
     this.isSampleSentForSupervisor();
+    this.getRawDataSheetDetails();
+  }
+
+  getRawDataSheetDetails() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getRawDataSheet(id).subscribe(res => {
+      this.rawDataSheet = res;
+    })
   }
 
   sentV() {

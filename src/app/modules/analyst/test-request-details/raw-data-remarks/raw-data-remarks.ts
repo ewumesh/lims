@@ -37,8 +37,7 @@ export class RawDataRemarksComponent implements OnInit {
     this.getRawDatasheetDetails();
   }
 
-  parseJSON(data) {
-    console.log(JSON.parse(data), 'oi')
+  parseJSON(data?) {
     return JSON.parse(data);
   }
 
