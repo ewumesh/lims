@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { LabRequestDetailsService } from 'src/app/services/supervisor/lab-request-details/lab-request-details.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { ViewImageComponent } from '../../my-account/view-image/view-image';
 import { AssignComponent } from './component/assign.component';
 
 @Component({
   templateUrl: './lab-request-details.html',
-  styleUrls: ['./lab-request-details.scss']
+  styleUrls: ['./lab-request-details.scss'],
+  animations: [collectionInOut]
 })
 export class LabRequestDetailsComponent implements OnInit {
+
+  displayedColumns: string[] = ['sn', 'testType', 'parameterName', 'method', 'analyst','action'];
+  dataSource = new MatTableDataSource<any>();
 
   userDetails: any;
 

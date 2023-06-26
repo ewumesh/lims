@@ -147,33 +147,28 @@
       <td style="border-top: none; border-bottom:none;"></td>
       <td colspan="10" style="border-top: none; border-bottom:none;">
           <div class="row m-2">
-              <div class="col-md-6" *ngFor="let p of rawDatasheetDetails?.raw_data">
-                  <!-- <div class="formula">
-                      <h2>Parameter Name</h2>
-                      <p> <span>w =</span> Weight = <span>120</span></p>
-                      <p><span>b =</span>Height = <span>30</span></p>
-                      <h2>Formula = <span>(W*B) / 100</span> = 36 unit</h2>
-                  </div> -->
-
-                  <div class="formula">
-                    <h2>{{p.parameter?.name}}</h2>
-                    <div *ngIf="p?.parameter?.formula_notation">
-                      <div *ngFor="let n of splitStringByComma(p?.parameter?.formula_notation)">
-                        <span class="text-danger">*</span>{{n | titlecase}}
+              <div class="col-md-12" *ngFor="let p of rawDatasheetDetails?.raw_data">
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="formula">
+                        <h2>{{p.parameter?.name}}</h2>
+                        <div *ngIf="p?.parameter?.formula_notation">
+                          <div *ngFor="let n of splitStringByComma(p?.parameter?.formula_notation)">
+                            <span class="text-danger">*</span>{{n | titlecase}}
+                          </div>
+                          <h2>Formula = {{p?.parameter?.formula}}</h2>
+                        </div>
+                        <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                       </div>
-                      <h2>Formula = {{p?.parameter?.formula}}</h2>
                     </div>
-                    <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+                    <div class="col-md-6">
+                      <div *ngFor="let item of parseJSON(p?.input_fields_value) | keyvalue">
+                        <span>{{item.key}}</span> = <span>{{item.value}}</span>
+                   </div>
+                   <div>Result: {{p.result}}</div>
+                    </div>
                   </div>
-
-                  <!-- <span *ngFor="let n of splitStringByComma(parseJSON(p?.input_fields_value))"> -->
-                  <!-- {{parseJSON(p?.input_fields_value)}} -->
-                  <!-- </span> -->
-
-                  <div *ngFor="let item of parseJSON(p?.input_fields_value) | keyvalue">
-                     <span>{{item.key}}</span> = <span>{{item.value}}</span>
-                </div>
-                <div>Result: {{p.result}}</div>
               </div>
               <!-- <div class="col-md-6">
                   <div class="formula">

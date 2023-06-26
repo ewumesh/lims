@@ -13,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AvatarModule } from 'ngx-avatar';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [LabRequestDetailsComponent, AssignComponent],
@@ -22,6 +25,9 @@ import { AvatarModule } from 'ngx-avatar';
       {path: '', component: LabRequestDetailsComponent}
     ]),
     MatTooltipModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,

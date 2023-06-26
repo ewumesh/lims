@@ -11,9 +11,15 @@ import { VerificationComponent } from './verify/s-verify';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AvatarModule } from 'ngx-avatar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ReAssignComponent } from './re-assign/re-assign';
+import { MatSelectModule } from '@angular/material/select';
+import { ReCheckComponent } from './re-check/re-check';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
-  declarations: [SampleReportComponent, ReportComponent, VerificationComponent],
+  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,6 +32,11 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule,
+    AvatarModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatTooltipModule,
 
     SharedModule
    ],

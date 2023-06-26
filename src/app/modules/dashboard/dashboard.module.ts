@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
-// import { NgChartsConfiguration, NgChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
       {path: '', component: DashboardComponent},
 
     ]), MatIconModule,
-    // NgChartsModule
+    NgChartsModule
    ],
   exports: [],
   providers:

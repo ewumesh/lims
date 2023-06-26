@@ -201,22 +201,88 @@
     </div>
 
     <div class="view-page mt-3">
-      <h3 class="view-page-heading">Parameter Details</h3>
+      <!-- <h3 class="view-page-heading">Parameter Details</h3> -->
       <div class="row">
         <div class="col-md-12">
-          <table class="table table-bordered">
+          <div>
+            <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="reportDetails.parameters" matSort
+              [@collectionInOut]="dataSource.data?.length">
+          
+              <ng-container matColumnDef="sn">
+                <th mat-header-cell *matHeaderCellDef> S.N. </th>
+                <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="testType">
+                <th mat-header-cell *matHeaderCellDef> Test Type </th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row.test_type">
+                    <span *ngIf="row.test_type === '1'">Chemical Test</span>
+                    <span *ngIf="row.test_type === '2'">Microbiological Test</span>
+                  </span>
+                  <span class="text-muted" *ngIf="!row.test_type">N/A</span>
+                </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="parameterName">
+                <th mat-header-cell *matHeaderCellDef> Parameter </th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row?.name">{{row?.name | titlecase}} </span>
+                  <span *ngIf="!row?.name" class="text-muted">N/A</span>
+                </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="method">
+                <th mat-header-cell *matHeaderCellDef> Method </th>
+                <td mat-cell *matCellDef="let row">
+                  <span *ngIf="row.name">{{row?.name}}</span>
+                  <span *ngIf="!row.name" class="text-muted">N/A</span>
+                </td>
+              </ng-container>
+        
+          
+              <ng-container matColumnDef="analyst">
+                <th mat-header-cell *matHeaderCellDef> Analyst </th>
+                <td mat-cell *matCellDef="let row">
+                  <div  class="authors-container" data-collaborators="10" *ngIf="row.analyst">
+                    <div class="author">
+                      <div class="mask cursor-pointer">
+                        <ngx-avatar size="40" [name]="row.analyst" [matTooltip]="row.analyst"></ngx-avatar>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="!row.analyst" class="text-muted">N/A</div>
+                </td>
+              </ng-container>
+          
+            
+          
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let row">
+                  <button *ngIf="!row.exist" (click)="assign(row, 'i')" class="btn btn-primary btn-sm">Assign</button>
+                  <button *ngIf="row.exist" (click)="assign(row, 'i')" class="btn btn-primary btn-lims-primary btn-sm">Re-Assign</button>
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div class="row" *ngIf="isLoading">
+              <div class="col-md-12 text-center py-3">
+                <div class="spinner-border text-dark" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <table class="table table-bordered">
             <tr>
               <th>S.N.</th>
               <th>Test Type</th>
               <th>Parameter Name</th>
-              <!-- <th>Formula</th> -->
               <th>Method</th>
-              <!-- <th>Units</th> -->
-              <!-- <th>Price</th> -->
-              <!-- <th>Mandatory Standards</th> -->
               <th>Analyst</th>
-              <!-- <th>Result</th> -->
-              <!-- <th>Status</th> -->
               <th>Action</th>
             </tr>
             <tbody>
@@ -232,11 +298,7 @@
                   
                 </td>
                 <td>{{r.name | titlecase}}</td>
-                <!-- <td>{{r.formula}}</td> -->
                 <td>{{r.ref_test_method}}</td>
-                <!-- <td>{{r.units}}</td> -->
-                <!-- <td>Rs.{{r.price}}</td> -->
-                <!-- <td>{{r.mandatory_standard}}</td> -->
                 <td>
                   <div *ngIf="r.analyst" class="authors-container" data-collaborators="10">
                     <div class="author">
@@ -248,22 +310,13 @@
                   </div>
                   <div class="text-muted" *ngIf="!r.analyst">N/A</div>
                 </td>
-                <!-- <td>
-                  <span *ngIf="r?.result">{{r?.result}}</span>
-                  <span *ngIf="!r?.result" class="text-muted">N/A</span>
-                </td> -->
-                <!-- <td>
-                  <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
-                  <span *ngIf="!r.status" class="text-muted">N/A</span>
-                </td> -->
                 <td>
-                  <!-- {{r | json}} -->
                   <button *ngIf="!r.exist" (click)="assign(r, 'i')" class="btn btn-primary btn-sm">Assign</button>
                   <button *ngIf="r.exist" (click)="assign(r, 'i')" class="btn btn-primary btn-lims-primary btn-sm">Re-Assign</button>
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </div>
       </div>
     </div>

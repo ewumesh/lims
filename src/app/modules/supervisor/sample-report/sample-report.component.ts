@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
+import { collectionInOut } from 'src/app/shared/animations/animations';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { AssignComponent } from '../lab-request-details/component/assign.component';
+import { ReAssignComponent } from './re-assign/re-assign';
+import { ReCheckComponent } from './re-check/re-check';
 import { VerificationComponent } from './verify/s-verify';
 
 @Component({
   templateUrl: './sample-report.component.html',
-  styleUrls: ['./sample-report.scss']
+  styleUrls: ['./sample-report.scss'],
+  animations: [collectionInOut]
 })
 export class SampleReportComponent implements OnInit {
 
@@ -19,12 +25,19 @@ export class SampleReportComponent implements OnInit {
 
   sampleStatus:any;
 
+  loggedUserDetails:any;
+
+  displayedColumns: string[] = ['sn', 'testType', 'parameterName', 'method', 'analyst','result','status','action'];
+  dataSource = new MatTableDataSource<any>();
+
   constructor(
     private service: SampleReportService,
     private route: ActivatedRoute,
     private toast: ToastService,
     private dialog: MatDialog
-    ) { }
+    ) { 
+      this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
 
   ngOnInit(): void {
     this.getReportDetails();
@@ -73,6 +86,43 @@ export class SampleReportComponent implements OnInit {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 2500);
+  }
+
+  reAssign(data) {
+    console.log(data, this.reportDetails, 'ioas')
+    let obj = {
+      commodity: this.reportDetails.commodity.id,
+      parameter: [data.id],
+      sample_form: this.reportDetails.id,
+      supervisor_user: [this.loggedUserDetails.id],
+      form_available: 'analyst',
+    }
+    let instance: MatDialogRef<ReAssignComponent, any>;
+
+    instance = this.dialog.open(ReAssignComponent, {
+      data: obj ? obj : null,
+      width: '600px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+      // this.getSampleDetails();
+    })
+  }
+
+  reCheck() {
+    
+    let instance: MatDialogRef<ReCheckComponent, any>;
+
+    instance = this.dialog.open(ReCheckComponent, {
+      data:  null,
+      width: '600px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+      // this.getSampleDetails();
+    })
   }
 
   isSampleSentForSupervisor() {

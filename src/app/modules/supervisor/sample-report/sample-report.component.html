@@ -1,17 +1,171 @@
-
 <div>
-  <app-report [reportDetails]="reportDetails" *ngIf="!isLoading"></app-report>
-  <div class="row" >
-    <div class="col-md-10"></div>
-    <div class="col-md-2 text-end mt-3">
-      <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
-      <div *ngIf="!reportDetails.is_analyst_test" class="alert alert-info">Waiting for Analyst.</div>
-      <button [disabled]="sampleStatus[0]?.is_sent" *ngIf="reportDetails.is_analyst_test" (click)="sentV()" class="btn btn-secondary btn-sm mx-1">
+
+  <div class="row">
+    <div *ngIf="!reportDetails.is_analyst_test" class="col-md-12 p-3 pt-3" style="border-radius: 5px;">
+
+      <div class="alert alert-secondary">Sample is Sent for Verification.</div>
+    </div>
+    <div class="db-content">
+      <div class="view-page">
+        <div class="row">
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Name </h4>
+            <p class="mb-0">{{reportDetails.name}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Assigned Date</h4>
+            <p class="mb-0">{{reportDetails?.created_date | date: 'medium'}}</p>
+          </div>
+
+          <div class="col-md-4 text-end pt-3">
+            <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
+              {{reportDetails?.status}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-page pb-0 mt-3">
+        <div class="row">
+          <table class="table">
+            <tbody>
+              <h3 class="text-bold mb-0 ms-2">Raw Data Sheet</h3>
+              <tr >
+                <td style="width: 20%;">
+                  <p class="text-muted mb-0 pb-0">Generated Date</p>
+                  <p class="text-muted mb-0">Date</p>
+                </td>
+                <td style="width: 30%;" class="">
+                  <button  class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
+                  <button  class="btn btn-primary btn-lims-primary btn-sm mx-1">Verifier Remarks</button>
+                </td>
+    
+                <td style="width: 20%;" class=" text-end">
+                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="'pending'">Pending</span>
+                </td>
+                <td style="width: 30%;" class="text-end">
+                  <button  class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+              <button  class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <button  class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="view-page mt-3">
+        <!-- <h3 class="view-page-heading">Parameter Details</h3> -->
+        <div class="row">
+          <div class="col-md-12">
+
+            <div>
+              <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="reportDetails.parameters" matSort
+                [@collectionInOut]="dataSource.data?.length">
+            
+                <ng-container matColumnDef="sn">
+                  <th mat-header-cell *matHeaderCellDef> S.N. </th>
+                  <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="testType">
+                  <th mat-header-cell *matHeaderCellDef> Test Type </th>
+                  <td mat-cell *matCellDef="let row">
+                    <span *ngIf="row.test_type">
+                      <span *ngIf="row.test_type === '1'">Chemical Test</span>
+                      <span *ngIf="row.test_type === '2'">Microbiological Test</span>
+                    </span>
+                    <span class="text-muted" *ngIf="!row.test_type">N/A</span>
+                  </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="parameterName">
+                  <th mat-header-cell *matHeaderCellDef> Parameter </th>
+                  <td mat-cell *matCellDef="let row">
+                    <span *ngIf="row?.name">{{row?.name | titlecase}} </span>
+                    <span *ngIf="!row?.name" class="text-muted">N/A</span>
+                  </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="method">
+                  <th mat-header-cell *matHeaderCellDef> Method </th>
+                  <td mat-cell *matCellDef="let row">
+                    <span *ngIf="row.name">{{row?.name}}</span>
+                    <span *ngIf="!row.name" class="text-muted">N/A</span>
+                  </td>
+                </ng-container>
+          
+            
+                <ng-container matColumnDef="analyst">
+                  <th mat-header-cell *matHeaderCellDef> Analyst </th>
+                  <td mat-cell *matCellDef="let row">
+                    <div  class="authors-container" data-collaborators="10">
+                      <div class="author">
+                        <div class="mask cursor-pointer">
+                          <ngx-avatar size="40" [name]="'Umesh'" [matTooltip]="'Umesh'"></ngx-avatar>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div *ngIf="row.sample_has_parameter_analyst.length < 1" class="text-muted">N/A</div> -->
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="result">
+                  <th mat-header-cell *matHeaderCellDef> Result </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{row.result}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let row">
+                    <span class="badge badge-primary" [statusColor]="row.status">{{row.status | titlecase}}</span>
+                  </td>
+                </ng-container>
+            
+              
+            
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let row">
+                    <button (click)="reAssign(row)" class="btn btn-primary btn-sm mx-1">Re-Assign</button>
+                    <button (click)="reCheck()" class="btn btn-primary btn-lims-primary btn-sm">Re-Check</button>
+                  </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <div class="row" *ngIf="isLoading">
+                <div class="col-md-12 text-center py-3">
+                  <div class="spinner-border text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-12 text-end">
+          <button class="btn btn-primary btn-sm mx-1">Download Report</button>
+          <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
+         </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
+      <button [disabled]="sampleStatus[0]?.is_sent" *ngIf="reportDetails.is_analyst_test" (click)="sentV()"
+        class="btn btn-secondary btn-sm mx-1">
         <span *ngIf="!isSending">Send for Verification</span>
-            <span *ngIf="isSending">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-            </span>
+        <span *ngIf="isSending">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
       </button>
+      <!-- <button class="btn btn-primary btn-sm">Generate Report</button> -->
     </div>
   </div>
 </div>

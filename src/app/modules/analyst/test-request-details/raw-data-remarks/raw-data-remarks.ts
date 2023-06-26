@@ -37,6 +37,11 @@ export class RawDataRemarksComponent implements OnInit {
     this.getRawDatasheetDetails();
   }
 
+  parseJSON(data) {
+    console.log(JSON.parse(data), 'oi')
+    return JSON.parse(data);
+  }
+
   splitStringByComma(input: string): string[] {
     const result: string[] = input?.split(',');
     return result;
