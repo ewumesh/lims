@@ -129,7 +129,7 @@
 
   <tr>
       <td class="text-center">3</td>
-      <td colspan="10">Parameters to be analyzed<span class="detail"> N/A </span></td>
+      <td colspan="10">Parameters to be analyzed:<span class="detail"> <span *ngFor="let a of rawDatasheetDetails?.raw_data">{{a.parameter?.name}},</span> </span></td>
   </tr>
   <tr>
       <td class="text-center">4</td>
@@ -204,7 +204,7 @@
       <td class="text-center">6</td>
       <td colspan="10">
           <div class="row">
-              <div class="col-md-6"> Name and Signature of analyst:  <span class="detail"> ......... </span></div>
+              <div class="col-md-6"> Name and Signature of analyst:  <span class="detail"> {{rawDatasheetDetails?.analyst_user.first_name}} {{rawDatasheetDetails?.analyst_user.first_name}} </span></div>
               <div class="col-md-6">Verified by: <span class="detail"> .......... </span></div>
           </div>
       </td>

@@ -128,7 +128,7 @@ export class ReAssignComponent {
       this.isLoading = false;
       this.message = {};
       this.responseError = null;
-      this.router.navigate(['/dashboard/samples'])
+      // this.router.navigate(['/dashboard/samples'])
     },(error) => {
       this.message = {};
       this.responseError = error?.error;

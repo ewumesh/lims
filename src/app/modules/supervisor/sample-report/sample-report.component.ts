@@ -123,7 +123,7 @@ export class SampleReportComponent implements OnInit {
     })
 
     instance.afterClosed().subscribe(res => {
-      // this.getSampleDetails();
+      this.getReportDetails();
     })
   }
 
