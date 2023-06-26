@@ -81,6 +81,29 @@ export class LabRequestDetailsComponent implements OnInit {
       instance.afterClosed().subscribe(res => {
         this.getSampleDetails();
       })
+    } else {
+      let pm = [];
+      this.sampleDetails.parameters.forEach(e => {
+        if(!e.exist) {
+          pm.push(e.id)
+        }
+      });
+
+      let obj = {
+        commodity: this.sampleDetails.commodity.id,
+        parameter:pm,
+        sample_form: this.sampleDetails.id,
+        supervisor_user: [this.userDetails.id],
+        form_available: 'analyst',
+      }
+
+    let instance: MatDialogRef<AssignComponent, any>;
+
+      instance = this.dialog.open(AssignComponent, {
+        data: obj ? obj : null,
+        width: '600px',
+        autoFocus: false,
+      })
     }
   }
 
