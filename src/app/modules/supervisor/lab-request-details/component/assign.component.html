@@ -32,16 +32,16 @@
         </mat-form-field>
       </div>
 
-      <div class="col-md-12" hidden>
+      <!-- <div class="col-md-12" hidden>
         <label for="user" class="form-label">Commodity</label>
         <mat-form-field class="w-100" appearance="outline">
           <mat-select formControlName="commodity" placeholder="Select Commodity" class="custom-select">
             <mat-option disabled *ngFor="let c of commodities" [value]="c.id">{{c?.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
 
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <label for="user" class="form-label">Select Parameter *</label>
         <mat-form-field class="w-100" appearance="outline">
           <mat-select formControlName="parameters" multiple placeholder="Select Parameter" class="custom-select">
@@ -51,12 +51,12 @@
           </mat-select>
           <mat-error class="text-danger" *ngIf="displayMessage?.parameters">{{displayMessage?.parameters}}</mat-error>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <div class="col-md-12 text-end mt-4">
         <button (click)="submit()" class="btn btn-primary btn-sm">
 
-          <span *ngIf="!isLoading">Submit...</span>
+          <span *ngIf="!isLoading">Submit</span>
             <span *ngIf="isLoading">
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading
             </span>

@@ -24,6 +24,11 @@ export class ViewRawDataComponent implements OnInit {
     return result;
   }
 
+  parseJSON(data) {
+    console.log(JSON.parse(data), 'oi')
+    return JSON.parse(data);
+  }
+
   closeDialog() {
     this.dialogRef.close();
   }

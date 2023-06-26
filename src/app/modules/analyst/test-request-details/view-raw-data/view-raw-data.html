@@ -165,6 +165,15 @@
                     </div>
                     <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                   </div>
+
+                  <!-- <span *ngFor="let n of splitStringByComma(parseJSON(p?.input_fields_value))"> -->
+                  <!-- {{parseJSON(p?.input_fields_value)}} -->
+                  <!-- </span> -->
+
+                  <div *ngFor="let item of parseJSON(p?.input_fields_value) | keyvalue">
+                     <span>{{item.key}}</span> = <span>{{item.value}}</span>
+                </div>
+                <div>Result: {{p.result}}</div>
               </div>
               <!-- <div class="col-md-6">
                   <div class="formula">
@@ -207,7 +216,7 @@
   </tr>
   <tr>
       <td class="text-center">7</td>
-      <td colspan="10">Remarks (If any);<span class="detail"> {{rawDatasheetDetails?.remarks}} </span> </td>
+      <td colspan="10">Remarks (If any):<span class="detail"> {{rawDatasheetDetails?.remarks}} </span> </td>
   </tr>
 </table>
     <!-- </mat-card> -->

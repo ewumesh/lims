@@ -74,7 +74,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
     this.assignToAnalystform = this.fb.group({
       analyst_user: ['', Validators.required],
       commodity: [this.data.commodity],
-      parameters: ['', Validators.required]
+      // parameters: ['', Validators.required]
     })
    }
 
@@ -115,14 +115,10 @@ export class AssignComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       return;
     }
-    let payload = {
-      analyst_user: this.assignToAnalystform.value.analyst_user,
-      form_available: 'analyst',
-      parameter: this.assignToAnalystform.value.parameters,
-      sample_form: this.data.id,
-      supervisor_user: [this.userDetails.id],
-      commodity: this.assignToAnalystform.value.commodity
-    }
+    let payload = this.data;
+    payload.analyst_user = this.assignToAnalystform.value.analyst_user,
+
+    console.log(payload ,' PAU')
 
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {
       this.dialogRef.close();

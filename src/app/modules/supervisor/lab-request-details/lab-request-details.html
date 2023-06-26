@@ -102,7 +102,7 @@
 
 <div class="row" *ngIf="sampleDetails">
   <div class="db-content">
-    <div class="top-view-page p-2 mb-3">
+    <!-- <div class="top-view-page p-2 mb-3">
       <div class="row log-details p-3">
         <div class="col-md-3">
           <div class="row">
@@ -143,24 +143,31 @@
             {{reportDetails?.status}}</span>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="view-page">
-      <h3 class="view-page-heading">Sample Details</h3>
+      <!-- <h3 class="view-page-heading">Sample Details</h3> -->
       <div class="row">
-        <div class="col-md-4">
-          <h4>Sample ID</h4>
+        <div class="col-md-3">
+          <h4 class="mb-0">Sample ID</h4>
           <p>{{reportDetails.supervisor_encode_id}}</p>
         </div>
-        <div class="col-md-4">
-          <h4>Sample Name </h4>
+        <div class="col-md-3">
+          <h4 class="mb-0">Sample Name </h4>
           <p>{{reportDetails.name}}</p>
         </div>
-        <div class="col-md-4">
-          <h4>Commodity </h4>
-          <p>{{reportDetails?.commodity?.name}}</p>
+        
+
+        <div class="col-md-3">
+          <h4 class="mb-0">Assigned Date </h4>
+          <p>{{reportDetails.approved_date | date: 'medium'}}</p>
+        </div>
+
+        <div class="col-md-3 text-end pt-3">
+          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
+            {{reportDetails?.status}}</span>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-4">
           <h4>MFD</h4>
           <p>{{reportDetails.mfd | date}}</p>
@@ -174,8 +181,8 @@
           <h4>Batch</h4>
           <p>{{reportDetails.batch}}</p>
         </div>
-      </div>
-      <div class="row">
+      </div> -->
+      <!-- <div class="row">
         <div class="col-md-4">
           <h4>Brand</h4>
           <p>{{reportDetails.brand}}</p>
@@ -190,7 +197,7 @@
           <h4>Condition</h4>
           <p>{{reportDetails.condition}}</p>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="view-page mt-3">
@@ -199,34 +206,58 @@
         <div class="col-md-12">
           <table class="table table-bordered">
             <tr>
-              <th>.</th>
+              <th>S.N.</th>
+              <th>Test Type</th>
               <th>Parameter Name</th>
               <!-- <th>Formula</th> -->
               <th>Method</th>
-              <th>Units</th>
+              <!-- <th>Units</th> -->
               <!-- <th>Price</th> -->
-              <th>Mandatory Standards</th>
+              <!-- <th>Mandatory Standards</th> -->
               <th>Analyst</th>
-              <th>Result</th>
-              <th>Status</th>
+              <!-- <th>Result</th> -->
+              <!-- <th>Status</th> -->
+              <th>Action</th>
             </tr>
             <tbody>
               <tr *ngFor="let r of reportDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
+                <td>
+                  <span *ngIf="r.test_type">
+                    <span *ngIf="r.test_type === '1'">Chemical Test</span>
+                    <span *ngIf="r.test_type === '2'">Microbiological Test</span>
+                    
+                  </span>
+                  <span *ngIf="!r.test_type" class="text-muted">N/A</span>
+                  
+                </td>
                 <td>{{r.name | titlecase}}</td>
                 <!-- <td>{{r.formula}}</td> -->
                 <td>{{r.ref_test_method}}</td>
-                <td>{{r.units}}</td>
+                <!-- <td>{{r.units}}</td> -->
                 <!-- <td>Rs.{{r.price}}</td> -->
-                <td>{{r.mandatory_standard}}</td>
-                <td>{{r.analyst}}</td>
+                <!-- <td>{{r.mandatory_standard}}</td> -->
                 <td>
+                  <div *ngIf="r.analyst" class="authors-container" data-collaborators="10">
+                    <div class="author">
+                      <div class="mask cursor-pointer">
+                        <ngx-avatar size="25" [name]="r.analyst"
+                          [matTooltip]="r.analyst"></ngx-avatar>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-muted" *ngIf="!r.analyst">N/A</div>
+                </td>
+                <!-- <td>
                   <span *ngIf="r?.result">{{r?.result}}</span>
                   <span *ngIf="!r?.result" class="text-muted">N/A</span>
-                </td>
-                <td>
+                </td> -->
+                <!-- <td>
                   <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
                   <span *ngIf="!r.status" class="text-muted">N/A</span>
+                </td> -->
+                <td>
+                  <button (click)="assign(r, 'i')" class="btn btn-primary btn-sm">Assign</button>
                 </td>
               </tr>
             </tbody>
@@ -237,7 +268,7 @@
 
     <div class="col-md-12 text-end">
       <hr />
-      <button (click)="assign(sampleDetails)" class="btn btn-primary btn-sm mx-1">Assign</button>
+      <button (click)="assign(sampleDetails, 'a')" class="btn btn-primary btn-sm mx-1">Assign All</button>
     </div>
   </div>
 </div>

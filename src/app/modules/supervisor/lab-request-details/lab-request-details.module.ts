@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [LabRequestDetailsComponent, AssignComponent],
@@ -28,6 +29,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     MatIconModule,
     MatSelectModule,
+    AvatarModule,
     SharedModule
   ],
   exports: [],

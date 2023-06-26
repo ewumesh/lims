@@ -33,7 +33,7 @@ export class LabRequestDetailsComponent implements OnInit {
   getCommodities() {
     let payload = {
       page: '',
-      size:'',
+      size: '',
       search: ''
     }
 
@@ -61,22 +61,31 @@ export class LabRequestDetailsComponent implements OnInit {
     })
   }
 
-  assign(data) {
-    let instance: MatDialogRef<AssignComponent, any>;
+  assign(data, type) {
+    if (type === 'i') {
+      let obj = {
+        commodity: this.sampleDetails.commodity.id,
+        parameter: [data.id],
+        sample_form: this.sampleDetails.id,
+        supervisor_user: [this.userDetails.id],
+        form_available: 'analyst',
+      }
+      let instance: MatDialogRef<AssignComponent, any>;
 
-    instance = this.dialog.open(AssignComponent, {
-      data: data ? data : null,
-      width: '600px',
-      autoFocus: false,
-    })
+      instance = this.dialog.open(AssignComponent, {
+        data: obj ? obj : null,
+        width: '600px',
+        autoFocus: false,
+      })
 
-    instance.afterClosed().subscribe(res => {
-      this.getSampleDetails();
-    })
+      instance.afterClosed().subscribe(res => {
+        this.getSampleDetails();
+      })
+    }
   }
 
   getSampleDetails() {
-    let sampleId =this.route.snapshot.paramMap.get('id');
+    let sampleId = this.route.snapshot.paramMap.get('id');
     this.isLoading = true;
     let payload = {
       page: '',
