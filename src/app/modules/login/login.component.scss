@@ -67,10 +67,18 @@ input::placeholder{
 .main.row{
   margin-top: 2rem;
   margin-bottom: 8rem;
-  background-color: white;
   border-radius: 10px;
   height: 100%;
-  max-height: 550px;
+}
+
+.main.row .login-side{
+  background-color: white;
+}
+
+@media (min-width:991px){
+  .main.row{
+    max-height: 550px;
+  }
 }
 
 .form-container{

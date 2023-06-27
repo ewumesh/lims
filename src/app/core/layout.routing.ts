@@ -239,6 +239,16 @@ const routes: Routes = [
   },
 
   {
+    path: 'update-admin/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2]
+    },
+    loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module')
+    .then(m => m.CreateAdminModule)
+  },
+
+  {
     path: 'create-admin',
     canActivate: [RoleGuard],
     data: {

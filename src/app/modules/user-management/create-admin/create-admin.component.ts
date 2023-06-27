@@ -122,11 +122,20 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
 
   getRoles() {
     this.cService.getRole().subscribe(response => {
-      if(this.loggedUserdetails.role === 1) {
-      this.userRoles = response.roles;
-      } else {
-        this.userRoles.push({role_name:'user', role_id: 5})
-      }
+      let roleForAdmin =[];
+      response.roles.forEach(a => {
+        if(a.role_id !== 5) {
+          roleForAdmin.push(a);
+        }
+      })
+
+      this.userRoles = roleForAdmin;
+
+      // if(this.loggedUserdetails.role === 1) {
+      // this.userRoles = response.roles;
+      // } else {
+      //   this.userRoles.push({role_name:'user', role_id: 5})
+      // }
     })
   }
 

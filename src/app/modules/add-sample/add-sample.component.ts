@@ -14,6 +14,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
 import { MatSelect } from '@angular/material/select';
 
+import { NepaliDate, DateFormatter } from 'angular-nepali-datepicker';
+
+
 @Component({
   templateUrl: './add-sample.component.html',
   styleUrls: ['./add-sample.component.scss'],
@@ -49,7 +52,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   priceOfCommodity: number = 0;
 
   responseError = null;
-
+date: any;
   users = [];
 
   // isParameter = false
@@ -118,6 +121,10 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     this.totalPrice = totalPrice;
 
     return numSelected === numRows;
+  }
+
+  formatter: DateFormatter = (date) => {
+    return `${ date.year } साल, ${ date.month+1 } महिना, ${ date.day } गते`;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */

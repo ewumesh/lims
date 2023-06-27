@@ -184,7 +184,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       department_address: [],
       registration_number: [''],
       date: [],
-      role: ['', Validators.required],
+      role: [5, Validators.required],
       group: ['']
     },{ validators: passwordMatchValidator })
   }

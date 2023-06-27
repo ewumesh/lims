@@ -199,7 +199,11 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
   }
 
   updateUser(user) {
-    this.router.navigate(['/dashboard/update-user', user.id]);
+    if(user.role === 5) {
+      this.router.navigate(['/dashboard/update-user', user.id]);
+    } else {
+      this.router.navigate(['/dashboard/update-admin', user.id]);
+    }
   }
 
 

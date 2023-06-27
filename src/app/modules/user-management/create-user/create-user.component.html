@@ -82,7 +82,7 @@
           <mat-error *ngIf="userForm.hasError('passwordMatch')" class="text-danger">Passwords do not match.</mat-error>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label for="password" class="form-label">User Name*</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
@@ -91,7 +91,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <label class="list-heading form-label">Select Role *</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="role" placeholder="Select Role">
@@ -100,7 +100,7 @@
             <mat-error [@rowsAnimation]="displayMessage?.role" class="text-danger"
               *ngIf="displayMessage?.role">{{displayMessage?.role}}</mat-error>
           </mat-form-field>
-        </div>
+        </div> -->
 
         <div class="col-md-4" *ngIf="(userForm.get('role').value === 1 || userForm.get('role').value === 2 || userForm.get('role').value === 3 || userForm.get('role').value === 4 ) && roles.length > 0">
           <label class="list-heading form-label">Select Group</label>
@@ -111,7 +111,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4" *ngIf="userForm.get('role').value === 5">
+        <div class="col-md-6" *ngIf="userForm.get('role').value === 5">
           <label class="list-heading form-label">Client Category</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="client_category" placeholder="Select Category">
@@ -124,10 +124,10 @@
 
 
         <div class="row m-0" *ngIf="userForm.get('role').value === 5 && userForm.value.client_category">
-          <h2>Department Details</h2>
+          <h2>Industry Details</h2>
 
           <div class="col-md-6">
-            <label for="exampleInputEmail1" class="form-label">Department Name</label>
+            <label for="exampleInputEmail1" class="form-label">Industry Name</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="department_name"
                 placeholder="Enter Department Name" />
@@ -135,7 +135,7 @@
           </div>
 
           <div class="col-md-6">
-            <label for="exampleInputEmail1" class="form-label">Department Address</label>
+            <label for="exampleInputEmail1" class="form-label">Industry Address</label>
             <mat-form-field appearance="outline" class="w-100">
               <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
                 <mat-option *ngFor="let a of departmentTypes" [value]="a.code">{{a.name}}</mat-option>
