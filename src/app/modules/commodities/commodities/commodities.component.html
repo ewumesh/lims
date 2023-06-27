@@ -36,7 +36,19 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Parent Category *</label>
+                  <label class="mb-2">कमोडिटी नाम *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="custom-input" matInput formControlName="name_nepali"
+                      placeholder="कमोडिटी नाम" />
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
+                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Parent Category(माथिल्लो श्रेणी) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-select class="custom-select" placeholder="Select Category" formControlName="category">
                       <mat-option *ngFor="let item of commodityCategories" [value]="item.id"> {{item.name}}</mat-option>
@@ -61,6 +73,18 @@
                 </div>
               </div>
 
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">परीक्षण अवधि *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="custom-input" matInput formControlName="test_duration_nepali"
+                      placeholder="परीक्षण अवधि" />
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
+                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+
               <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Units*</label>
@@ -78,8 +102,18 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="custom-input" matInput formControlName="price"
                       placeholder="Enter Commodity Price" />
-                    <!-- <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
-                      *ngIf="displayMessage?.commodity_price">{{displayMessage?.commodity_price}}</mat-error> -->
+                    
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">कमोडिटी मूल्य *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="custom-input" matInput formControlName="price_nepali"
+                      placeholder="कमोडिटी मूल्य" />
+                    
                   </mat-form-field>
                 </div>
               </div>

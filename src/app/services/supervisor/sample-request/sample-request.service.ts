@@ -35,7 +35,7 @@ export class SampleReportService {
     return this.http.get(`${this.url}/api/sample-form-raw-data-sheet/${id}/`)
   }
 
-  sendForRecheck(payload, id):Observable<any> {
-    return this.http.patch(`${this.url}/api/sample-form-has-parameter-assign-users/${id}/`, payload)
+  sendForRecheck(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/parameter-has-result-recheck/`, payload)
   }
 }

@@ -62,6 +62,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
     this.categoryForm = this.fb.group({
       name: [''],
+      name_nepali: [''],
       address: [''],
       reg_no: ['']
     })
@@ -129,7 +130,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
 
   patchForm(data) {
     this.categoryForm.patchValue(
-      { name: data.name })
+      { name: data.name,name_nepali:data.name_nepali })
   }
 
   deleteCategory(id: number) {

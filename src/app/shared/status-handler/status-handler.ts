@@ -29,6 +29,9 @@ export class StatusHandlerDirective implements OnChanges {
       case 'rejected':
         this.el.nativeElement.style.background = '#ff3030';
         break;
+        case 'recheck':
+        this.el.nativeElement.style.background = '#ff3030';
+        break;
       case 'warning':
         this.el.nativeElement.style.background = '#ffab00';
         break;

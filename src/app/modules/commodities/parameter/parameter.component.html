@@ -25,7 +25,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Parameter Name *</label>
+                  <label class="mb-2">Parameter Name(प्यारामिटर नाम) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input placeholder="Enter Parameter Name" type="text" class=" custom-input" matInput formControlName="name" [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete">
@@ -57,11 +57,12 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Test Type *</label>
+                  <label class="mb-2">Test Type(परीक्षण प्रकार) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-select placeholder="Select Test type" class="custom-select" formControlName="test_type">
-                      <mat-option value="1">Chemical Test</mat-option>
-                      <mat-option value="2">Microbiological Test</mat-option>
+                      <mat-option value="1">Chemical Test(रासायनिक परीक्षण)</mat-option>
+                      <mat-option value="2">Microbiological Test(माइक्रोबायोलोजिकल परीक्षण)</mat-option>
+                      <mat-option value="3">Instrumental Test(इन्स्ट्रुमेन्टल परीक्षण)</mat-option>
                     </mat-select>
                     <mat-error [@rowsAnimation]="displayMessage?.test_type" class="text-danger"
                       *ngIf="displayMessage?.test_type">{{displayMessage?.test_type}}</mat-error>
@@ -71,7 +72,7 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Commodity *</label>
+                  <label class="mb-2">Commodity(कमोडिटी) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-select class="custom-select" formControlName="commodity" placeholder="Select Commodity">
                       <mat-option *ngFor="let item of commodities" [value]="item.id">{{item.name | titlecase}}</mat-option>
@@ -84,7 +85,7 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Ref. Test Method *</label>
+                  <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <!-- <input class="form-control custom-input" matInput formControlName="ref_test_method"
                       placeholder="Enter Ref. Test Method" /> -->
@@ -105,10 +106,8 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Units *</label>
+                  <label class="mb-2">Units(एकाइ) *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <!-- <input class="form-control custom-input" matInput formControlName="units"
-                      placeholder="Enter Unit" /> -->
 
                       <input placeholder="Enter Parameter Name" type="text" class="custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
                     <mat-autocomplete #autoUnits="matAutocomplete">
@@ -124,7 +123,24 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Mandatory Standards *</label>
+                  <label class="mb-2">एकाइ *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+
+                      <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
+                    <!-- <mat-autocomplete #autoUnits="matAutocomplete">
+                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                        {{option.units}}
+                      </mat-option>
+                    </mat-autocomplete> -->
+                      <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
+                      *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Mandatory Standards*</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input class=" custom-input" matInput formControlName="mandatory_standard"
                       placeholder="Enter Mandatory Standard" />
@@ -136,7 +152,19 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Formula *</label>
+                  <label class="mb-2">तोकिएको मापदण्ड  *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class=" custom-input" matInput formControlName="mandatory_standard_nepali"
+                      placeholder="तोकिएको मापदण्ड" />
+                      <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard_nepali" class="text-danger"
+                      *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Formula(सूत्र) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input class=" custom-input" matInput formControlName="formula"
                       placeholder="Enter Formula" />
@@ -148,13 +176,13 @@
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="mb-2">Formula Notations *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class=" custom-input" matInput formControlName="formula_notation"
-                      placeholder="Enter Formula Notation" />
-                      <mat-error [@rowsAnimation]="displayMessage?.formula_notation" class="text-danger"
-                      *ngIf="displayMessage?.formula_notation">{{displayMessage?.formula_notation}}</mat-error>
-                  </mat-form-field>
+                  <label class="mb-2">Formula Notations(नोटेशन) *</label>
+                  <!-- <mat-form-field appearance="outline" class="w-100"> -->
+                    <textarea class="form-control" formControlName="formula_notation"
+                      placeholder="Enter Formula Notation" ></textarea>
+                      <!-- <mat-error [@rowsAnimation]="displayMessage?.formula_notation" class="text-danger"
+                      *ngIf="displayMessage?.formula_notation">{{displayMessage?.formula_notation}}</mat-error> -->
+                  <!-- </mat-form-field> -->
                 </div>
               </div>
 

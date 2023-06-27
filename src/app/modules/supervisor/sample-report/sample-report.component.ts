@@ -127,18 +127,24 @@ export class SampleReportComponent implements OnInit {
     })
   }
 
-  reCheck() {
-    
+  reCheck(value) {
+    console.log(value, 'VAAAL')
+    let id = this.route.snapshot.paramMap.get('id');
+    let data = {
+      sample_form: id,
+      parameter: value.id,
+      sample_form_has_parameter: value.sample_form_has_parameter
+    }
     let instance: MatDialogRef<ReCheckComponent, any>;
 
     instance = this.dialog.open(ReCheckComponent, {
-      data:  null,
+      data:  data ? data: null,
       width: '600px',
       autoFocus: false,
     })
 
     instance.afterClosed().subscribe(res => {
-      // this.getSampleDetails();
+      this.getReportDetails();
     })
   }
 

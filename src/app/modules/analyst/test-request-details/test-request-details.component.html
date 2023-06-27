@@ -56,7 +56,7 @@
             </td>
             <td style="width: 30%;" class="pt-3">
               <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
-              <button (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+              <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
             </td>
 
             <td style="width: 20%;" class="pt-3 text-end">
@@ -167,8 +167,20 @@
         <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="!row.result " (click)="calculate(row)" [matTooltip]="'Calculate Result'"
           class="btn btn-primary after-disabled btn-sm mx-1 pt-2">Calculate</button>
 
+          <div *ngIf="row.status !== 'recheck'">
+            
         <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
           class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate</button>
+          </div>
+          <div *ngIf="row.status === 'recheck'">
+            <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+          class="btn btn-primary after-disabled btn-lims-danger btn-sm mx-1 pt-2">Re-Check</button>
+          <button [matTooltip]="row.remarks" class="btn btn-outline-primary btn-sm">
+            <!-- <span class="pt-4"> -->
+            <i class="fa fa-info"></i>
+            <!-- </span> -->
+          </button>
+          </div>
       </td>
     </ng-container>
 

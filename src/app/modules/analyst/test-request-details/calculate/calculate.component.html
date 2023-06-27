@@ -37,6 +37,10 @@
           </div>
         </div>
 
+        <div class="text-center text-muted" *ngIf="formControls[0].name === 'nan'">
+          Formula Not Available.
+        </div>
+
         <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
           <div class="alert alert-danger" role="alert">
             <li *ngFor="let item of responseError | keyvalue">
