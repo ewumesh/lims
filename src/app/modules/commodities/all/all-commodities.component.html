@@ -14,7 +14,7 @@
       <div class="col-md-4">
         <mat-form-field class="w-100" appearance="outline">
         <mat-select formControlName="category" class="custom-select" placeholder="Select Commodity Category">
-          <mat-option *ngFor="let category of commodityCategories" [value]="category.id">{{category.name}}</mat-option>
+          <mat-option *ngFor="let category of commodityCategories" [value]="category.id">{{category.name}}<span *ngIf="category.name_nepali">({{category.name_nepali}})</span></mat-option>
         </mat-select>
         </mat-form-field>
       </div>
@@ -40,7 +40,7 @@
     <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" multiTemplateDataRows>
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <ng-container *ngIf="column !== 'expand'; else action">
-          <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
+          <th mat-header-cell *matHeaderCellDef> {{column | titlecase}}  </th>
           <td mat-cell *matCellDef="let element">
             <span *ngIf="column === 'price'">Rs.{{element[column]}} </span>
             <span *ngIf="column === 'test_duration'">{{element[column]}} Days</span>
@@ -49,7 +49,10 @@
             <span *ngIf="column === 'download'">
               <button [matTooltip]="'Download Commodity with parameters'"class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
             </span>
-            <span *ngIf="column!== 'price' && column!=='test_duration'">{{element[column]}} </span>
+            <span *ngIf="column === 'name'">
+              {{element.name}} <span *ngIf="element.name_nepali">({{element.name_nepali}})</span>
+            </span>
+            <span *ngIf="column!== 'price' && column!=='test_duration' && column !== 'name'">{{element[column]}} </span>
 
           </td>
         </ng-container>

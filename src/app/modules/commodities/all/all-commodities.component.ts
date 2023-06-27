@@ -18,7 +18,7 @@ import { AllCommoditiesService } from 'src/app/services/commodities/all-commodit
 })
 export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
-  columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration', 'download'];
+  columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   expandedElement: any | null;
   @ViewChild(MatPaginator) paginator: MatPaginator;

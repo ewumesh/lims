@@ -11,7 +11,7 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline" class="custom-select w-100">
           <mat-select placeholder="Category" formControlName="category">
-            <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+            <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}<span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -38,7 +38,7 @@
             <span *ngIf="element[column]">
               <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
               <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
-              <span *ngIf="column == 'name'">{{element[column] | titlecase}}</span>
+              <span *ngIf="column == 'name'">{{element[column] | titlecase}} <span *ngIf="element.name_nepali">({{element.name_nepali}})</span></span>
               <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
               <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
             </span>

@@ -96,7 +96,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
     let payload = {
       search: ' ',
       page: ' ',
-      size: ' '
+      size: '200'
     }
     this.sService.getAllCommodityCategories(payload).subscribe(res => {
       this.dataSource.data = res.results;
@@ -131,6 +131,7 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
   patchForm(data) {
     this.categoryForm.patchValue(
       { name: data.name,name_nepali:data.name_nepali })
+      window.scroll(0,0)
   }
 
   deleteCategory(id: number) {

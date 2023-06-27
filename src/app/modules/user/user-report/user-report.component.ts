@@ -78,6 +78,10 @@ export class UserReportComponent implements OnInit {
     })
   }
 
+  downloadReportNepali() {
+    
+  }
+
 
   getReportDetails() {
     let id = this.route.snapshot.paramMap.get('id');

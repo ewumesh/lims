@@ -78,11 +78,11 @@
               Assigned Sample</a>
           </li>
 
-          <!-- <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+          <li class="nav-item" *ngIf="userDetails.role === 1 ">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/track-sample'|| this.router.url.startsWith('/dashboard/track-sample-details/'))}" (click)="navigate('/dashboard/track-sample')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="track_changes"></mat-icon>
                Track Sample</a>
-          </li> -->
+          </li>
 
           <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': (this.router.url === '/dashboard/lab-report')}"
@@ -105,21 +105,21 @@
                 <li class="nav-item m-0">
                   <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/all-users'}"
                     (click)="navigate('/dashboard/all-users')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     All User</a>
                 </li>
 
                 <li class="nav-item">
                   <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-user'}"
                     (click)="navigate('/dashboard/create-user')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Create User</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="userDetails.role === 1">
                   <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-admin'}"
                     (click)="navigate('/dashboard/create-admin')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Create Admin</a>
                 </li>
               </ul>
@@ -141,7 +141,7 @@
                   <a (click)="navigate('/dashboard/commodities/all-commodities')" class="nav-link"
                     [ngClass]="{'active-route':this.router.url === '/dashboard/commodities/all-commodities'}"
                     href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     All</a>
                 </li>
 
@@ -149,14 +149,14 @@
                   <a (click)="navigate('/dashboard/settings/commodity-category')"
                     [ngClass]="{'active-route':this.router.url === '/dashboard/settings/commodity-category'}"
                     class="nav-link" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Category</a>
                 </li>
 
                 <li class="nav-item mt-2">
                   <a class="nav-link" href="Javascript:;" (click)="navigate('/dashboard/commodities')"
                     [ngClass]="{'active-route':this.router.url === '/dashboard/commodities'}">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Commodities</a>
                 </li>
 
@@ -164,7 +164,7 @@
                   <a class="nav-link"
                     [ngClass]="{'active-route':this.router.url === '/dashboard/commodities-parameter'}"
                     (click)="navigate('/dashboard/commodities-parameter')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Parameter</a>
                 </li>
 
@@ -186,21 +186,21 @@
                   <a class="nav-link"
                     [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category'}"
                     (click)="navigate('/dashboard/settings/client-category')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class=" child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Client Categories</a>
                 </li>
 
                 <li class="nav-item mt-2">
                   <a (click)="navigate('/dashboard/user-group')" class="nav-link"
                     [ngClass]="{'active-route': this.router.url === '/dashboard/user-group'}" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Group</a>
                 </li>
 
                 <li class="nav-item mt-2">
                   <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-permissions'}"
                     (click)="navigate('/dashboard/user-permissions')" href="Javascript:;">
-                    <mat-icon class="pt-3 child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                    <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
                     Permission</a>
                 </li>
               </ul>

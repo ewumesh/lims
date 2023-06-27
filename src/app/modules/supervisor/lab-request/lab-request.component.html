@@ -52,7 +52,7 @@
     <ng-container matColumnDef="sampleId">
       <th mat-header-cell *matHeaderCellDef> Sample ID </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.supervisor_encode_id">{{row.supervisor_encode_id}}</span>
+        <span *ngIf="row.supervisor_encode_id" class="text-uppercase">{{row.supervisor_encode_id}}</span>
         <span class="text-muted" *ngIf="!row.supervisor_encode_id">N/A</span>
       </td>
     </ng-container>

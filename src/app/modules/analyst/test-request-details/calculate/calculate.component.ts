@@ -151,7 +151,7 @@ export class CalculateComponent implements OnInit {
       sample_form: this.data.sample_form,
       result: this.finalResult,
       parameter: this.data.parameter,
-      commodity: this.data.commodity,
+      commodity: this.data.commodity.id,
       formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
       sample_form_has_parameter: this.data.details?.id
     }

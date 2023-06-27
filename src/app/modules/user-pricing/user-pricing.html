@@ -37,7 +37,7 @@
 </header>
 <div class="container justify-content-center align-items-center">
   <div class="main row" style="margin-bottom: 0 !important;">
-    <div class="px-2 p-3">
+    <div class="px-2 text-center p-3">
       खाद्य प्रविधि तथा गुण नियन्त्रण विभाग र विभाग मातहतका कार्यालयहरुले प्रदान गर्ने
       सेवा वापत लाग्ने गैरकर राजस्व दर (नेपाल राजपत्र, खण्ड ७१, संख्या १७ , भाग ५ , मिति २०७८/०४/२५ को सूचना अनुसार )
     </div>
@@ -46,7 +46,7 @@
 
 <div class="container justify-content-center align-items-center">
   <div class="main row pt-3 pb-3">
-    <div class="row">
+    <div class="row" style="margin: auto;">
       <div class="col-md-12">
 
         <form [formGroup]="filterForm" class="row">
@@ -59,7 +59,7 @@
           <div class="col-md-3">
             <mat-form-field appearance="outline" class="custom-select w-100">
               <mat-select placeholder="Category" formControlName="category">
-                <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+                <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}<span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -87,7 +87,7 @@
                 <span *ngIf="element[column]">
                   <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
                   <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
-                  <span *ngIf="column == 'name'">{{element[column] | titlecase}}</span>
+                  <span *ngIf="column == 'name'">{{element[column] | titlecase}} <span *ngIf="element.name_nepali">({{element.name_nepali}})</span></span>
                   <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
                   <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
                 </span>

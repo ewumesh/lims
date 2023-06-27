@@ -105,7 +105,7 @@
       <div class="col-md-6">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input matInput type="number" formControlName="phone" placeholder="Enter your Phone Number" />
+          <input matInput type="text" formControlName="phone" placeholder="Enter your Phone Number" />
           <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
             *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>

@@ -87,8 +87,8 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Category Name </th>
-          <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+          <th mat-header-cell *matHeaderCellDef> Category Name (नाम) </th>
+          <td mat-cell *matCellDef="let c"> {{c.name}} <span *ngIf="c.name_nepali">({{c.name_nepali}})</span> </td>
         </ng-container>
 
         <ng-container matColumnDef="action">

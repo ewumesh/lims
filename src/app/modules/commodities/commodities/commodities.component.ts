@@ -123,6 +123,11 @@ export class CommoditiesComponent implements OnInit {
     return category?.name
   }
 
+  getCommodityCategoryNameNepali(id) {
+    let category = this.commodityCategories?.find(a => a.id === id);
+    return category?.name_nepali
+  }
+
   filter() {
     this.isLoading = true;
     let payload = {
@@ -169,9 +174,11 @@ export class CommoditiesComponent implements OnInit {
         category: data.category,
         test_duration: data.test_duration,
         units: data.units,
-        price: data.price
+        price: data.price,
+        name_nepali: data.name_nepali
       }
     )
+    window.scroll(0,0);
   }
 
   deleteCategory(id: number) {
