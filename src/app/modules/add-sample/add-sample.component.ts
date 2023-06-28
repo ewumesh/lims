@@ -64,6 +64,16 @@ date: any;
 
   loggedUser:any;
 
+  purposeOfAnalysis:any[] = [
+    {id: 1, name: 'Requested'},
+    {id: 11, name: 'Export'},
+  ]
+
+  SampleTypes:any[] = [
+    {id: 1, name: 'A'},
+    {id: 11, name: 'B'},
+  ];
+
   /** list of banks */
   protected banks: any[] = [
     // {name: 'Bank A (Switzerland)', id: 'A'},
@@ -309,7 +319,10 @@ date: any;
       owner_user: '',
       isParameter: false,
       status: 'pending',
-      requested_export:['requested', Validators.required]
+      requested_export:[''],
+      sample_type:[''],
+      sample_units: '',
+      sample_measurement: ['']
     })
   }
 

@@ -11,10 +11,7 @@
             <p>Created By</p>
             <h4 >{{userDetails.first_name}} {{userDetails.last_name}}</h4>
           </div>
-          <div class="row mt-2">
-            <p>Created at</p>
-            <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
-          </div>
+          
         </div>
         <div class="col-md-3" >
           <div class="row" *ngIf="sampleDetails.status !== 'pending'">
@@ -25,9 +22,13 @@
 
         </div>
         <div class="col-md-3" >
-          <div class="row" *ngIf="sampleDetails.status !== 'pending'">
+          <!-- <div class="row" *ngIf="sampleDetails.status !== 'pending'">
             <p>Completed At</p>
             <h4>N/A</h4>
+          </div> -->
+          <div class="row mt-2">
+            <p>Created at</p>
+            <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
           </div>
           <!-- <div class="row mt-2">
                       <p>Rejected at</p>
@@ -102,7 +103,7 @@
               <th>Units</th>
               <!-- <th>Price</th> -->
               <!-- <th>Tested By</th> -->
-              <th>Result</th>
+              <!-- <th>Result</th> -->
               <!-- <th>Status</th> -->
             </tr>
             <tbody>
@@ -110,23 +111,21 @@
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
                 <!-- <td>{{r.formula}}</td> -->
-                <td>{{r.ref_test_method}}</td>
-                <td>{{r.units}}</td>
-                <!-- <td>Rs.{{r.price}}</td> -->
-                <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
-                <!-- <td>
-                  <span *ngIf="r.status">
-                    {{r?.results}}
+                <td>
+                  <span *ngIf="r.ref_test_method">
+                  <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
+                  <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
                   </span>
-                  <span *ngIf="!r.status" class="text-muted">
-                    N/A
-                  </span>
-                </td> -->
-                <td>{{r.results}}</td>
-                <!-- <td>
-                  <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
-                  <span  *ngIf="!r.status" class="text-muted">N/A</span>
-                </td> -->
+                  <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span></td>
+                <td>
+
+                  <span *ngIf="r.units">
+                    <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                    <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
+                    </span>
+                    <span *ngIf="!r.units" class="text-muted">N/A</span>
+                  
+                </td>
               </tr>
             </tbody>
           </table>

@@ -93,6 +93,34 @@
         </div>
       </div>
 
+
+      
+  <div class="row m-0">
+    <div class="col-md-12 bg-white p-3 mt-3" style="border-radius: 5px;">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="mb-0">Sample Report</h2>
+        </div>
+        <div class="col-md-6 text-end">
+          <button *ngIf="reportDetails?.language === 'en'" [disabled]="isLoadingDownloadBtn" (click)="downloadReport()" class="btn btn-primary btn-lims-primary btn-sm mx-1">
+            <span *ngIf="!isLoadingDownloadBtn">Download Report</span>
+                <span *ngIf="isLoadingDownloadBtn">
+                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                </span>
+          </button>
+
+          <button *ngIf="reportDetails?.language === 'np'" [disabled]="isLoadingDownloadBtnN" (click)="downloadReportNepali()" class="btn  btn-primary btn-lims-danger btn-sm mx-1">
+            <span *ngIf="!isLoadingDownloadBtnN">Download Report</span>
+                <span *ngIf="isLoadingDownloadBtnN">
+                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                </span>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
       <div class="view-page mt-3">
         <h3 class="view-page-heading">Parameter Details</h3>
         <div class="row">
@@ -123,13 +151,25 @@
                   <td>{{r.name | titlecase}}</td>
                   <td>
                     <span *ngIf="r.test_type">
-                    <span *ngIf="r.test_type === '1'">Chemical Test</span>
-                        <span *ngIf="r.test_type === '2'">Microbiological Test</span>
+                      {{r.test_type}}
+                    <!-- <span *ngIf="r.test_type === '1'">Chemical Test</span>
+                        <span *ngIf="r.test_type === '2'">Microbiological Test</span> -->
                         </span>
                         <span *ngIf="!r.test_type">N/A</span>
                   </td>
-                  <td>{{r.ref_test_method}}</td>
-                  <td>{{r.units}}</td>
+                  <td>
+                    <span *ngIf="r.ref_test_method">
+                      <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
+                      </span>
+                    <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span>
+
+                  </td>
+                  <td><span *ngIf="r.units">
+                    <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                    <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
+                    </span>
+                  <span *ngIf="!r.units" class="text-muted">N/A</span></td>
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <td>{{r.mandatory_standard}}</td>
                   <td>{{r?.result}}</td>
@@ -148,31 +188,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 bg-white p-3 mt-3">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Download Report</h2>
-        </div>
-        <div class="col-md-6 text-end">
-          <button [disabled]="isLoadingDownloadBtn" (click)="downloadReport()" class="btn btn-primary btn-lims-primary btn-sm mx-1">
-            <span *ngIf="!isLoadingDownloadBtn">English</span>
-                <span *ngIf="isLoadingDownloadBtn">
-                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                </span>
-          </button>
-
-          <button [disabled]="isLoadingDownloadBtnN" (click)="downloadReportNepali()" class="btn  btn-primary btn-lims-danger btn-sm mx-1">
-            <span *ngIf="!isLoadingDownloadBtnN">Nepali</span>
-                <span *ngIf="isLoadingDownloadBtnN">
-                  <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                </span>
-          </button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
 </div>
 
 <div class="row" *ngIf="isLoading">

@@ -2,16 +2,19 @@
 
   <!-- <div class="db-content"> -->
   <form [formGroup]="addSampleForm" (ngSubmit)="saveChanges()" class="sample-form">
+    <div style="    border: 1px solid #00000024;
+    padding: 20px;
+    border-radius: 5px;">
     <p class="sample-detail">Please enter your sample details</p>
     <hr class="divider">
 
     <div class="row">
-      <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+      <div *ngIf="message && message.messageBody" class="col-md-12 col-md-12 col-lg-12">
         <div class="alert alert-danger" role="alert">
           {{message?.messageBody}}
         </div>
       </div>
-      <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+      <div *ngIf="responseError" class="col-md-12 col-md-12 col-lg-12">
         <div class="alert alert-danger" role="alert">
           <li *ngFor="let item of responseError | keyvalue">
             <!-- {{item.key}}: -->
@@ -41,7 +44,7 @@
         <!-- {{bankCtrl.value | json}} -->
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="sampleName" class="col-form-label">Name of Sample (नमूनाको नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="name" placeholder="Enter Sample Name" />
@@ -49,7 +52,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Condition of sample while received (नमूना प्राप्त गर्दाको
           अवस्था)*</label>
         <mat-form-field appearance="outline" class="w-100">
@@ -60,7 +63,7 @@
     </div>
 
     <div class="row mb-3">
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput class="custom-input" [max]="maxDateMFD" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
@@ -70,7 +73,7 @@
           <mat-error class="text-danger" *ngIf="displayMessage?.mfd">{{displayMessage.mfd}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
 
         <mat-form-field appearance="outline" class="w-100">
@@ -83,14 +86,14 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Batch/Lot No. (ब्याच/ लट नं)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input type="number" class="custom-input" matInput formControlName="batch" placeholder="Enter batch or lot No." />
           <mat-error class="text-danger" *ngIf="displayMessage?.batch">{{displayMessage.batch}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Brand (ब्राण्ड)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input" matInput formControlName="brand" placeholder="Enter Brand Name" />
@@ -99,27 +102,50 @@
       </div>
     </div>
 
-    <div class="row" style="border:1px solid #00000029; margin: 0; border-radius: 5px;">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-md-12">
         <label for="email" class="col-form-label">Purpose of Analysis (प्रयोगशाला विश्लेषणको उदेश्य)*</label>
         <mat-form-field appearance="outline" class="w-100">
-          <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" />
+          <mat-select class="custom-select" formControlName="purpose" placeholder="Select Purpose of analysis">
+            <mat-option *ngFor="let a of purposeOfAnalysis" [value]="a.id">{{a.name}}</mat-option>
+          </mat-select>
+          <!-- <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" /> -->
           <mat-error class="text-danger" *ngIf="displayMessage?.purpose">{{displayMessage.purpose}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-6 pt-4">
-        <div class="mt-2">
-        <mat-radio-group formControlName="requested_export" aria-label="Select an option">
-          <mat-radio-button value="requested">Requested</mat-radio-button>
-          <mat-radio-button value="export">Export</mat-radio-button>
-          <mat-error class="text-danger" *ngIf="displayMessage?.requested_export">{{displayMessage.requested_export}}</mat-error>
-        </mat-radio-group>
+      <div class="col-md-12">
+        <div class="row m-0" style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px;">
+          <div class="col-md-4">
+            <label for="email" class="col-form-label">Sample Type*</label>
+            <mat-form-field class="w-100" appearance="outline">
+          <mat-select class="custom-select" placeholder="Sample Type">
+            <mat-option *ngFor="let a of SampleTypes" [value]="a.id">{{a.name}}</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <label class="col-form-label">Units *</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input class="custom-input" matInput formControlName="sample_units" placeholder="Enter Sample Uint" />
+          </mat-form-field>
+        </div>
+  
+        <div class="col-md-4">
+          <label for="email" class="col-form-label">Sample Measurement*</label>
+          <mat-form-field class="w-100" appearance="outline">
+        <mat-select class="custom-select" formControlName="sample_measurement" placeholder="Sample Measurement">
+          <mat-option *ngFor="let a of SampleTypes" [value]="a.id">{{a.name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
       </div>
+        </div>
       </div>
+      
     </div>
 
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Report Required by Date (विश्लेषण प्रतिवेदन प्राप्त हुने अनुमानित
           मिति)*</label>
         <mat-form-field appearance="outline" class="w-100">
@@ -129,7 +155,7 @@
           <mat-error class="text-danger" *ngIf="displayMessage?.report_date">{{displayMessage.report_date}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Amendments to Report (if any) (प्रतिवेदनमा संशोधन गर्नुपर्ने
           भएमा)</label>
         <mat-form-field appearance="outline" class="w-100">
@@ -140,7 +166,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Note (if any) (अन्य केही भएमा)</label>
         <mat-form-field appearance="outline" class="w-100">
           <input class="custom-input custom-textarea" matInput formControlName="note"
@@ -148,7 +174,7 @@
             <!-- <mat-error class="text-danger" *ngIf="displayMessage?.brand">{{displayMessage.brand}}</mat-error> -->
         </mat-form-field>
       </div>
-      <div class="col-sm-6">
+      <div class="col-md-6 pt-2">
         <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
           वस्तु)* </label>
         <mat-form-field appearance="outline" class="custom-select w-100">
@@ -162,7 +188,7 @@
         </mat-form-field>
       </div>
 
-      <!-- <div class="col-sm-6">
+      <!-- <div class="col-md-6">
         <label style="width:100%;" class="list-heading form-label">Parameters *</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select multiple formControlName="parameters" placeholder="Select Parameter">
@@ -171,7 +197,7 @@
           </mat-form-field>
       </div> -->
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
         <section class="example-section">
           <mat-radio-group formControlName="language">
@@ -248,7 +274,7 @@
     </div>
 
     <div class="my-4 row">
-      <div class="col-sm-12 text-end">
+      <div class="col-md-12 text-end">
         <button [disabled]="(addSampleForm.invalid || (this.addSampleForm.value.isParameter === true && selection.selected.length < 1) )" type="submit" class="btn btn-primary">
           <span *ngIf="!isSampleSent">Submit</span>
             <span *ngIf="isSampleSent">
@@ -256,6 +282,7 @@
             </span>
         </button>
       </div>
+    </div>
     </div>
   </form>
   <!-- <np-datepicker
