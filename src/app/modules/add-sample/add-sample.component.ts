@@ -325,7 +325,7 @@ date: any;
       owner_user: '',
       isParameter: false,
       status: 'pending',
-      requested_export:[''],
+      requested_export:['requested'],
       sample_type:[''],
       sample_units: '',
       sample_measurement: ['']
