@@ -32,10 +32,12 @@ export class VerifySampleReportomponent implements OnInit {
   }
 
   openRemarks() {
+    let id = this.route.snapshot.paramMap.get('id');
     let payload = {
       id: this.sampleStatus[0].id,
       // sample_form: id,
       is_verified: true,
+      sample_form:id 
       // is_sent: true
     }
     this.dialog.open(VerificationRemarksComponent, {

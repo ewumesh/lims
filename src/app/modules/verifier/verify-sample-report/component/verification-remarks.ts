@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
@@ -24,7 +24,8 @@ export class VerificationRemarksComponent implements OnInit {
     public data: any,
     private router: Router,
     private service: SampleReportService,
-    private toast: ToastService
+    private toast: ToastService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -61,9 +62,11 @@ export class VerificationRemarksComponent implements OnInit {
   }
 
   reject() {
+    console.log(this.data, 'date')
     this.isReject = true;
+    let id = this.route.snapshot.paramMap.get('id');
     let payload = {
-      sample_form: this.data.id,
+      sample_form: this.data.sample_form,
       // sample_form: id,
       // is_verified: false,
       remarks: this.remarksForm.value.remarks
