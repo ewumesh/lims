@@ -155,6 +155,33 @@
         </div> -->
       </div>
 
+      <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && loggedUserDetails.role === 6">
+        <table class="table">
+          <tbody>
+            <h3 class="text-bold mb-0 ms-2 mt-2">Raw Data Sheet</h3>
+            <tr *ngFor="let a of rawDataSheet">
+              <td style="width: 20%;">
+                <p class="text-muted mb-0 pb-0">Generated Date</p>
+                <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+              </td>
+              <td style="width: 30%;" class="pt-3">
+                <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
+                <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+              </td>
+  
+              <td style="width: 20%;" class="pt-3 text-end">
+                <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a.status">{{a.status}}</span>
+              </td>
+              <td style="width: 30%;" class="text-end pt-3">
+                <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+            <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+            <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="view-page mt-3">
         <h3 class="view-page-heading">Parameter Details</h3>
         <div class="row">

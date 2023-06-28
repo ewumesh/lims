@@ -18,6 +18,8 @@ export class FinalReportViewComponent implements OnInit {
 
   loggedUserDetails: any;
 
+  rawDataSheet:any[] = [];
+
   constructor(
     private service: FinalReportViewService,
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class FinalReportViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getReportDetails();
+    this.getRawData();
   }
 
 
@@ -49,6 +52,13 @@ export class FinalReportViewComponent implements OnInit {
       this.isSending = false;
     })
   }
+
+  getRawData() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getRawData(id).subscribe(res => {
+      this.rawDataSheet = res;
+    }  )
+   }
 
   dissmissMessage() {
     setTimeout(() => {

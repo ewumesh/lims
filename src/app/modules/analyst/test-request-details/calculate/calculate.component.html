@@ -54,7 +54,7 @@
           <div *ngIf="control.name !== 'nan'">
             <label [for]="control.name">{{ control.label }}</label>
             <mat-form-field class="w-100" appearance="outline">
-              <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
+              <input [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="text"
                 [formControlName]="control.name" required>
             </mat-form-field>
           </div>
@@ -82,7 +82,7 @@
       <div class="pt-2">
         <label> Result</label>
             <mat-form-field appearance="outline" class="w-100">
-              <input placeholder="Enter Value" [(ngModel)]="finalResult" class="custom-input" matInput type="number" required />
+              <input placeholder="Enter Value" [(ngModel)]="finalResult" class="custom-input" matInput type="text" required />
             </mat-form-field>
             </div>
 

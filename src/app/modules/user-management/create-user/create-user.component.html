@@ -55,7 +55,7 @@
         <div class="col-md-4">
           <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input type="number" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+            <input type="text" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
             <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
               *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
           </mat-form-field>
@@ -130,7 +130,7 @@
             <label for="exampleInputEmail1" class="form-label">Industry Name</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="department_name"
-                placeholder="Enter Department Name" />
+                placeholder="Enter Industry Name" />
             </mat-form-field>
           </div>
 
@@ -161,7 +161,7 @@
             <input  (change)="uploadDocument($event)" class="form-control" type="file" placeholder="Upload file" />
           </div>
 
-          <h2>User Renew Details</h2>
+          <!-- <h2>User Renew Document</h2> -->
 
           <!-- <div class="col-md-12">
             <label for="exampleInputEmail1" class="form-label">Renewed Date</label>

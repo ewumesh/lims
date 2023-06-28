@@ -22,6 +22,7 @@ export class UserReportComponent implements OnInit {
   sampleStatus:any;
 
   userDetails:any;
+  isLoadingDownloadBtnN= false;
 
   constructor(
     private service: UserReportService,
@@ -79,7 +80,7 @@ export class UserReportComponent implements OnInit {
   }
 
   downloadReportNepali() {
-    
+    // this.isLoadingDownloadBtnN = true;
   }
 
 

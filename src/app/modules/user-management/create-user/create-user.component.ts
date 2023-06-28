@@ -80,7 +80,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       //   'required': 'Password is required.'
       // },
       'phone': {
-        'required': 'Phone Number is required.'
+        'required': 'Phone Number is required.',
+        'pattern': 'Phone Number not valid(Numbers only).'
       },
       // 'confirm_password': {
       //   'required': 'Confirm Password is required.'
@@ -175,7 +176,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       username: ['', [Validators.required,Validators.pattern("^[a-z][a-z0-9]*$")]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password:[''],
       confirm_password: [''],
@@ -239,7 +240,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       this.cService.createUser(payload, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
-        'User Created Successfully!');
+        response.message);
         this.isLoading = false;
         this.dismissMessage();
         this.responseError = null;
@@ -268,7 +269,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     this.cService.updateUser(payload, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
-        'User Updated Successfully!');
+        response.message);
         this.isLoading = false;
         this.dismissMessage();
 

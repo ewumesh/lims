@@ -23,6 +23,10 @@ export class SampleReportService {
     return this.http.patch(`${this.url}/api/sample-form-has-verifier/${payload.id}/`, payload)
   }
 
+  rejectSample(payload) :Observable<any> {
+    return this.http.patch(`${this.url}/api/sample-form-reject/`, payload)
+  }
+
   isSentForVrification(payload):Observable<any> {
     return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id=${payload.id}`)
   }

@@ -28,4 +28,8 @@ export class FinalReportViewService {
     window.location.href = url;
     return this.http.get(url);
   }
+
+  getRawData(id):Observable<any> {
+    return this.http.get(`${this.url}/api/detail-raw-data-sheet/${id}/`)
+  }
 }

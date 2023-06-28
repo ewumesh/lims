@@ -162,9 +162,9 @@
                 </span>
           </button>
 
-          <button [disabled]="isLoadingDownloadBtn" (click)="downloadReportNepali()" class="btn  btn-primary btn-lims-danger btn-sm mx-1">
-            <span *ngIf="!isLoadingDownloadBtn">Nepali</span>
-                <span *ngIf="isLoadingDownloadBtn">
+          <button [disabled]="isLoadingDownloadBtnN" (click)="downloadReportNepali()" class="btn  btn-primary btn-lims-danger btn-sm mx-1">
+            <span *ngIf="!isLoadingDownloadBtnN">Nepali</span>
+                <span *ngIf="isLoadingDownloadBtnN">
                   <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
                 </span>
           </button>

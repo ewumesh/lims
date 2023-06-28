@@ -13,6 +13,7 @@ export class VerificationRemarksComponent implements OnInit {
   isLoading = false;
   message: any = {};
   responseError = null;
+  isReject = false;
 
   remarksForm:FormGroup;
 
@@ -56,6 +57,27 @@ export class VerificationRemarksComponent implements OnInit {
     this.router.navigate(['/dashboard/lab-report']);
    }, (error) => {
     this.responseError = error?.error;
+   })
+  }
+
+  reject() {
+    this.isReject = true;
+    let payload = {
+      sample_form: this.data.id,
+      // sample_form: id,
+      // is_verified: false,
+      remarks: this.remarksForm.value.remarks
+    }
+
+   this.service.rejectSample(payload).subscribe(res => {
+    this.toast.showToast(TOAST_STATE.success, res.message);
+    this.dismissToast();
+    this.dialogRef.close();
+    this.router.navigate(['/dashboard/lab-report']);
+    this.isReject = false;
+   }, (error) => {
+    this.responseError = error?.error;
+    this.isReject = false;
    })
   }
 

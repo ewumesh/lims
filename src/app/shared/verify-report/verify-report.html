@@ -4,37 +4,34 @@
       <div class="row log-details p-3">
         <div class="col-md-3">
           <div class="row">
-            <p>Supervise By</p>
-            <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
-            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+            <p>Sample ID</p>
+            <h4>{{reportDetails.verifier_encode_id}}</h4>
+            <!-- <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4> -->
           </div>
-          <div class="row mt-2">
-            <p>Created By</p>
-            <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
-            <h4 *ngIf="!reportDetails?.owner_user?.first_name" class="text-muted">N/A</h4>
-          </div>
+          <!-- <div class="row mt-2">
+            <p>Sample Name</p>
+            <h4>{{reportDetails.name}}</h4>
+            
+          </div> -->
         </div>
         <div class="col-md-3">
           <div class="row">
-            <p>Assigned Date</p>
-            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
-            <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
+            
+
+            <p>Sample Name</p>
+            <h4>{{reportDetails.name}}</h4>
           </div>
-          <div class="row mt-2">
+          <!-- <div class="row mt-2">
             <p>Created at</p>
             <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
             <h4 class="text-muted" *ngIf="!reportDetails?.created_date">N/A</h4>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-3">
-          <!-- <div class="row">
-            <p>Verified By</p>
-            <h4>N/A</h4>
-          </div> -->
-          <!-- <div class="row mt-2">
-                      <p>Rejected at</p>
-                      <h4>Lorem</h4>
-                  </div> -->
+          <p>Assigned Date</p>
+            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
+            <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
         </div>
         <div class="col-md-3 log-status">
           <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails.status">
@@ -42,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="view-page">
+    <!-- <div class="view-page">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
@@ -89,7 +86,7 @@
           <p>{{reportDetails.condition}}</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="view-page mt-3">
       <h3 class="view-page-heading">Parameter Details</h3>

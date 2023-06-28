@@ -86,7 +86,7 @@
                 <span *ngIf="column === 'sn'">{{element.id}} </span>
                 <span *ngIf="element[column]">
                   <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
-                  <span *ngIf="column == 'test_duration'">{{element[column]}} Days</span>
+                  <span *ngIf="column == 'test_duration'">{{element[column]}}</span>
                   <span *ngIf="column == 'name'">{{element[column] | titlecase}} <span *ngIf="element.name_nepali">({{element.name_nepali}})</span></span>
                   <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
                   <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
