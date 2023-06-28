@@ -3,22 +3,20 @@
     <div class="top-view-page p-2 mb-3">
       <div class="row log-details p-3">
         <div class="col-md-3">
-          <!-- <div class="row">
-            <p>Approved By</p>
-            <h4 class="text-muted">N/A</h4>
-          </div> -->
+         
           <div class="row mt-2">
             <p>Created By</p>
-            <h4 >{{userDetails.first_name}} {{userDetails.last_name}}</h4>
+            <h4 >{{userDetails.last_name}} {{userDetails.last_name}}</h4>
+          </div>
+
+           <div class="row" *ngIf="sampleDetails.approved_by">
+            <p>Approved By</p>
+            <h4>{{sampleDetails.approved_by.first_name}} {{sampleDetails.approved_by?.last_name}}</h4>
           </div>
           
         </div>
         <div class="col-md-3" >
-          <div class="row" *ngIf="sampleDetails.status !== 'pending'">
-            <p>Approved at</p>
-            <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'medium'}}</h4>
-            <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
-          </div>
+          
 
         </div>
         <div class="col-md-3" >
@@ -29,6 +27,12 @@
           <div class="row mt-2">
             <p>Created at</p>
             <h4>{{sampleDetails?.created_date | date: 'medium'}}</h4>
+          </div>
+
+          <div class="row" *ngIf="sampleDetails.approved_date">
+            <p>Approved at</p>
+            <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'medium'}}</h4>
+            <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
           </div>
           <!-- <div class="row mt-2">
                       <p>Rejected at</p>
@@ -41,7 +45,31 @@
         </div>
       </div>
     </div>
-    <div class="view-page">
+
+    <div class="view-page" *ngIf="sampleDetails?.payment?.voucher_number">
+      <h3 class="view-page-heading">Payment Details</h3>
+      <div class="row">
+        <div class="col-md-3">
+          <h4>Voucher Number</h4>
+          <p>{{sampleDetails?.payment?.voucher_number}}</p>
+        </div>
+        <div class="col-md-3">
+          <h4>Amount </h4>
+          <p>Rs.{{sampleDetails?.payment?.amount}}</p>
+        </div>
+        <div class="col-md-3">
+          <h4>Paid Date </h4>
+          <p>{{(sampleDetails?.payment?.created_date) | date: 'medium'}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <h4>Payment Receipt </h4>
+          <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" />
+        </div>
+      </div>
+      </div>
+
+    <div class="view-page mt-2">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
@@ -88,10 +116,28 @@
           <p>{{sampleDetails.condition}}</p>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Report Language</h4>
+          <p *ngIf="sampleDetails.language === 'en'">English</p>
+          <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
+        </div>
+
+        <div class="col-md-4">
+          <!-- <h4>Purpose of Analysis</h4>
+          <p>{{sampleDetails?.purpose}}</p> -->
+        </div>
+
+        <div class="col-md-4">
+          <!-- <h4>Condition</h4>
+          <p>{{sampleDetails.condition}}</p> -->
+        </div>
+      </div>
     </div>
 
     <div class="view-page mt-3">
-      <h3 class="view-page-heading">Parameter Details</h3>
+      <h3 class="view-page-heading">Parameters</h3>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered">
@@ -99,8 +145,8 @@
               <th>S.N.</th>
               <th>Parameter Name</th>
               <!-- <th>Formula</th> -->
-              <th>Method</th>
-              <th>Units</th>
+              <!-- <th>Method</th> -->
+              <!-- <th>Units</th> -->
               <!-- <th>Price</th> -->
               <!-- <th>Tested By</th> -->
               <!-- <th>Result</th> -->
@@ -111,13 +157,13 @@
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
                 <!-- <td>{{r.formula}}</td> -->
-                <td>
+                <!-- <td>
                   <span *ngIf="r.ref_test_method">
                   <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
                   <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
                   </span>
-                  <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span></td>
-                <td>
+                  <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span></td> -->
+                <!-- <td>
 
                   <span *ngIf="r.units">
                     <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
@@ -125,7 +171,7 @@
                     </span>
                     <span *ngIf="!r.units" class="text-muted">N/A</span>
                   
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

@@ -96,7 +96,14 @@ export class PricingComponent implements OnInit, AfterViewInit {
       category: ''
     }
     this.pricingService.getAllCommodities(payload).pipe(debounceTime(500)).subscribe(res=> {
-      this.dataSource.data = res.results;
+      let allDatas = [];
+      res.results.forEach((element, index) => {
+        element.number = index+1;
+        allDatas.push(element);
+        console.log(element, 'EL')
+      });
+      // console.log(allDatas, 'ADDD')
+      this.dataSource.data = allDatas;
       this.isLoading = false;
     })
   }

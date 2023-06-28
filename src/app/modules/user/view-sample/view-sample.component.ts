@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ViewSampleService } from 'src/app/services/user/view-sample/view-sample.service';
+import { ViewPaymentReceiptComponent } from './view-payment-receipt/view-payment-receipt';
 
 @Component({
   templateUrl: './view-sample.component.html',
@@ -17,7 +19,8 @@ export class ViewSampleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: ViewSampleService
+    private service: ViewSampleService,
+    private dialog: MatDialog
     ) {
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.sampleId = this.route.snapshot.paramMap.get('id');
@@ -26,6 +29,12 @@ export class ViewSampleComponent implements OnInit {
   ngOnInit(): void {
     this.getSampleDetails();
     this.getCommodities();
+   }
+
+   viewReceipt(url) {
+    this.dialog.open(ViewPaymentReceiptComponent, {
+      data: url
+    })
    }
 
   getSampleDetails() {

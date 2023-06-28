@@ -13,6 +13,8 @@ export class NavbarComponent implements OnInit {
 
   roles: any[] = [];
 
+  notifications:any[] = [];
+
   constructor(
     private router: Router,
     private layoutService: LayoutService
@@ -24,7 +26,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getRoles();
     this.getTokenStatus();
+    this.getNotificationList();
    }
+
+   getNotificationList() {
+    this.layoutService.getNotification().subscribe(res => {
+      this.notifications = res.results;
+    })
+  }
 
   getRoles() {
     this.layoutService.getRoles().subscribe(res => {

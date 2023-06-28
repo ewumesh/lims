@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LayoutService } from '../layout.service';
 import { Router } from '@angular/router';
 
@@ -10,32 +10,34 @@ import { Router } from '@angular/router';
 export class NotificationComponent implements OnInit {
   constructor(private layoutService: LayoutService, private router: Router) { }
 
+  @Input() notifications;
+
   // notifications:any[] = [];
 
-  notifications = [
-    // {
-    //   name: 'Sample Approved by Admin.',
-    //   updated: new Date('1/1/16'),
-    // },
-    // {
-    //   name: 'User Verified by Admin',
-    //   updated: new Date('1/17/16'),
-    // },
-    // {
-    //   name: 'Sample Tested Completed.',
-    //   updated: new Date('1/28/16'),
-    // },
-  ]
+  // notifications = [
+  //   // {
+  //   //   name: 'Sample Approved by Admin.',
+  //   //   updated: new Date('1/1/16'),
+  //   // },
+  //   // {
+  //   //   name: 'User Verified by Admin',
+  //   //   updated: new Date('1/17/16'),
+  //   // },
+  //   // {
+  //   //   name: 'Sample Tested Completed.',
+  //   //   updated: new Date('1/28/16'),
+  //   // },
+  // ]
 
   ngOnInit(): void {
-    this.getNotificationList();
+    // this.getNotificationList();
    }
 
-  getNotificationList() {
-    this.layoutService.getNotification().subscribe(res => {
-      this.notifications = res.results;
-    })
-  }
+  // getNotificationList() {
+  //   this.layoutService.getNotification().subscribe(res => {
+  //     this.notifications = res.results;
+  //   })
+  // }
 
   navigateTo(path) {
     let url = path;

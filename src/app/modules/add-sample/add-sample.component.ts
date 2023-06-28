@@ -271,10 +271,18 @@ date: any;
   getSampleDetails() {
     this.service.getSampleDetails(this.sampleId).subscribe(response => {
       let actualResponse = response;
-      this.dataSource.data = response.parameters;
-      let actCommodity =  response.commodity;
+      // this.dataSource.data = response.parameters;
 
       let reqCommodity = response.commodity.id;
+
+      // let/
+
+      let com = this.commodities.find(a => a.id = reqCommodity);
+      // console.log(com, 'PO:')
+      this.dataSource.data = com?.test_result;
+
+      this.getParametersOfCommodity();
+      console.log(com,response, 'TABLE DATA..')
 
       let parameters = response.parameters;
 
@@ -287,9 +295,7 @@ date: any;
       this.addSampleForm.patchValue(actualResponse);
       this.addSampleForm.value.isParameter = true
 
-      let selectedCommodities  = this.commodities.find(a => a.id === response.commodity.id);
-      console.log(selectedCommodities, 'popop')
-      // this.selection.
+      console.log(reqCommodity, 'popop')
     })
   }
 
@@ -491,7 +497,7 @@ date: any;
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.singleSelect.compareWith = (a: any, b: any) => a && b && a.first_name === b.first_name;
+        this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
       });
   }
 
