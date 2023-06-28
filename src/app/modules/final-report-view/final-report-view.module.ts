@@ -5,15 +5,25 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FinalReportViewService } from 'src/app/services/final-report-view/final-report-view.serivce';
 import { NgxBarcodeModule } from 'ngx-barcode';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReportRawDataComponent } from './raw-data/report-raw-data';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ViewReportRemarksComponent } from './view-remarks';
 
 @NgModule({
-  declarations: [FinalReportViewComponent],
+  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path: '', component: FinalReportViewComponent}
     ]),
     NgxBarcodeModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
 
     SharedModule
   ],

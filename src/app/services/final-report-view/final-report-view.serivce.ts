@@ -40,6 +40,19 @@ export class FinalReportViewService {
   }
 
   getRawData(id):Observable<any> {
-    return this.http.get(`${this.url}/api/detail-raw-data-sheet/${id}/`)
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet/${id}/`)
+  }
+
+  downloadRawData(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  printRawData(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
   }
 }
