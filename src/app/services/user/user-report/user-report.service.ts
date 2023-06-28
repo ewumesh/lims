@@ -31,4 +31,11 @@ export class UserReportService {
 
     return this.http.get(url)
   }
+
+  downloaReportNepali(payload):Observable<any> {
+    let link = `https://pdfmachine.kantipurinfotech.com.np/public/api/pdf-report/${payload.id}/`
+    // let url = `${link}/${payload.id}`
+    window.location.href = link;
+    return this.http.get(link);
+  }
 }

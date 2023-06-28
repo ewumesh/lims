@@ -80,7 +80,16 @@ export class UserReportComponent implements OnInit {
   }
 
   downloadReportNepali() {
-    // this.isLoadingDownloadBtnN = true;
+    this.isLoadingDownloadBtnN = true;
+    let payload = {
+      id: this.route.snapshot.paramMap.get('id')
+    }
+
+    this.service.downloaReportNepali(payload).subscribe(res => {
+      this.isLoadingDownloadBtnN = false;
+      this.toast.showToast(TOAST_STATE.success, 'Report Download Successfully!');
+      this.dissmissMessage();
+    })
   }
 
 

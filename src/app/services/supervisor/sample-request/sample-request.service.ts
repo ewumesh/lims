@@ -24,7 +24,7 @@ export class SampleReportService {
   }
 
   rejectSample(payload) :Observable<any> {
-    return this.http.patch(`${this.url}/api/sample-form-reject/`, payload)
+    return this.http.post(`${this.url}/api/sample-form-reject/`, payload)
   }
 
   isSentForVrification(payload):Observable<any> {
