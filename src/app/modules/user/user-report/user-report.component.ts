@@ -80,9 +80,11 @@ export class UserReportComponent implements OnInit {
   }
 
   downloadReportNepali() {
+    // console.log(this.reportDetails, 'ooio')
     this.isLoadingDownloadBtnN = true;
     let payload = {
-      id: this.route.snapshot.paramMap.get('id')
+      id: this.route.snapshot.paramMap.get('id'),
+      role: this.userDetails.role
     }
 
     this.service.downloaReportNepali(payload).subscribe(res => {

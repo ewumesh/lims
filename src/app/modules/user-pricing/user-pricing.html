@@ -83,7 +83,7 @@
             <ng-container *ngIf="column !== 'expand'; else action">
               <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
               <td mat-cell *matCellDef="let element">
-                <span *ngIf="column === 'sn'">{{element.id}} </span>
+                <span *ngIf="column === 'sn'">{{i+1}} </span>
                 <span *ngIf="element[column]">
                   <span *ngIf="column == 'price'">Rs.{{element[column]}}</span>
                   <span *ngIf="column == 'test_duration'">{{element[column]}}</span>

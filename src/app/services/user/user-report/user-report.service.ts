@@ -33,7 +33,7 @@ export class UserReportService {
   }
 
   downloaReportNepali(payload):Observable<any> {
-    let link = `https://pdfmachine.kantipurinfotech.com.np/public/api/pdf-report/${payload.id}/`
+    let link = `https://pdfmachine.kantipurinfotech.com.np/public/api/pdf-report/${payload.id}/${payload.role}/`
     // let url = `${link}/${payload.id}`
     window.location.href = link;
     return this.http.get(link);

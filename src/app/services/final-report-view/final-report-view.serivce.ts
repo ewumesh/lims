@@ -23,6 +23,8 @@ export class FinalReportViewService {
     return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id=${payload.id}`)
   }
 
+  
+  
   downloadReport(payload) :Observable<any> {
     let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/${payload.role}`;
     window.location.href = url;
