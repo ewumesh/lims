@@ -31,6 +31,14 @@ export class FinalReportViewService {
     return this.http.get(url);
   }
 
+  downloadReportNepali(payload) {
+    let base = 'https://pdfmachine.kantipurinfotech.com.np/public'
+    let url = `${base}/api/show-pdf-report/${payload.id}/${payload.role}/`;
+    // window.location.href = url;
+    window.open(url, "_blank");
+    return this.http.get(url);
+  }
+
   getRawData(id):Observable<any> {
     return this.http.get(`${this.url}/api/detail-raw-data-sheet/${id}/`)
   }

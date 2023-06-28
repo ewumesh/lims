@@ -87,7 +87,7 @@ export class UserReportComponent implements OnInit {
       role: this.userDetails.role
     }
 
-    this.service.downloaReportNepali(payload).subscribe(res => {
+    this.service.downloadReportNepali(payload).subscribe(res => {
       this.isLoadingDownloadBtnN = false;
       this.toast.showToast(TOAST_STATE.success, 'Report Download Successfully!');
       this.dissmissMessage();

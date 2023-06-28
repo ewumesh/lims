@@ -78,14 +78,16 @@ export class FinalReportViewComponent implements OnInit {
   }
 
   downloadReportNepali() {
-    // let payload = {
-    //   id: this.route.snapshot.paramMap.get('id'),
-    //   report_type: 'pdf',
-    //   report_name: 'final-report',
-    //   report_lang: 'en',
-    //   role: this.loggedUserDetails.role
-    // }
-    // this.service.downloadReport(payload);
+    let payload = {
+      id: this.route.snapshot.paramMap.get('id'),
+      // report_type: 'pdf',
+      // report_name: 'final-report',
+      // report_lang: 'en',
+      role: this.loggedUserDetails.role
+    }
+    this.service.downloadReportNepali(payload).subscribe(res => {
+      
+    });
   }
 
 

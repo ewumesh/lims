@@ -32,10 +32,11 @@ export class UserReportService {
     return this.http.get(url)
   }
 
-  downloaReportNepali(payload):Observable<any> {
-    let link = `https://pdfmachine.kantipurinfotech.com.np/public/api/pdf-report/${payload.id}/${payload.role}/`
-    // let url = `${link}/${payload.id}`
-    window.location.href = link;
-    return this.http.get(link);
+  downloadReportNepali(payload) {
+    let base = 'https://pdfmachine.kantipurinfotech.com.np/public'
+    let url = `${base}/api/show-pdf-report/${payload.id}/${payload.role}/`;
+    // window.location.href = url;
+    window.open(url, "_blank");
+    return this.http.get(url);
   }
 }
