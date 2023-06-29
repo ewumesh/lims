@@ -28,6 +28,7 @@
     "@nguniversal/express-engine": "^15.2.1",
     "angular-barcode": "^2.0.1",
     "angular-nepali-datepicker": "^0.1.4",
+    "apexcharts": "^3.41.0",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.3.0",
     "chartjs-plugin-datalabels": "^2.2.0",

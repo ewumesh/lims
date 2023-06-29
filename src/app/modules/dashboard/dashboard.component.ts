@@ -34,36 +34,4 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-
-  Pie
-  public pieChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'right',
-      },
-      datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
-      },
-    }
-  };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [
-      //  ['completed'], ['processing'], ['pending'],['recheck']
-      ],
-    datasets: [ {
-      data: [ 50, 280, 150, 20 ]
-    } ],
-
-  };
-  public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [ DatalabelsPlugin ];
-
-  colors = ['red', 'green', 'blue', 'yellow'];
 }

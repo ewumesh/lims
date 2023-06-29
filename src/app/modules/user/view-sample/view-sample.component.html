@@ -50,21 +50,22 @@
       <h3 class="view-page-heading">Payment Details</h3>
       <div class="row">
         <div class="col-md-3">
-          <h4>Voucher Number</h4>
+          <h4 class="m-0">Voucher Number</h4>
           <p>{{sampleDetails?.payment?.voucher_number}}</p>
         </div>
         <div class="col-md-3">
-          <h4>Amount </h4>
+          <h4 class="m-0">Amount </h4>
           <p>Rs.{{sampleDetails?.payment?.amount}}</p>
         </div>
         <div class="col-md-3">
-          <h4>Paid Date </h4>
+          <h4 class="m-0">Paid Date </h4>
           <p>{{(sampleDetails?.payment?.created_date) | date: 'medium'}}</p>
         </div>
 
         <div class="col-md-3">
-          <h4>Payment Receipt </h4>
-          <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" />
+          <h4 class="m-0">Payment Receipt </h4>
+          <button (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
+          <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
         </div>
       </div>
       </div>
@@ -73,53 +74,53 @@
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
-          <h4>Sample ID</h4>
-          <p>{{sampleDetails.user_encode_id}}</p>
+          <h4 class="m-0">Sample ID</h4>
+          <p class="text-uppercase">{{sampleDetails.user_encode_id}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Sample Name </h4>
+          <h4 class="m-0">Sample Name </h4>
           <p>{{sampleDetails.name}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Commodity </h4>
+          <h4 class="m-0">Commodity </h4>
           <p>{{(sampleDetails?.commodity.name) | titlecase}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>MFD</h4>
+          <h4 class="m-0">MFD</h4>
           <p>{{sampleDetails.mfd | date}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Best Before Date</h4>
+          <h4 class="m-0">Best Before Date</h4>
           <p>{{sampleDetails.dfb | date}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Batch</h4>
+          <h4 class="m-0">Batch</h4>
           <p>{{sampleDetails.batch}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>Brand</h4>
+          <h4 class="m-0">Brand</h4>
           <p>{{sampleDetails.brand}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Purpose of Analysis</h4>
+          <h4 class="m-0">Purpose of Analysis</h4>
           <p>{{sampleDetails?.purpose}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Condition</h4>
+          <h4 class="m-0">Condition</h4>
           <p>{{sampleDetails.condition}}</p>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4">
-          <h4>Report Language</h4>
+          <h4 class="m-0">Report Language</h4>
           <p *ngIf="sampleDetails.language === 'en'">English</p>
           <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
         </div>
