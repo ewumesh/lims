@@ -18,6 +18,13 @@
           </div>
           <!-- <div class="col-md-3"></div> -->
           <div class="col-md-3">
+
+            <div class="row">
+              <p>Approve By</p>
+              <h4 *ngIf="reportDetails.approved_by?.first_name">{{reportDetails.approved_by?.first_name}} {{reportDetails?.approved_by?.last_name}}</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_by?.first_name">N/A</h4>
+            </div>
+
             <div class="row">
               <p>Approve At</p>
               <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
@@ -45,49 +52,49 @@
         <h3 class="view-page-heading">Sample Details</h3>
         <div class="row">
           <div class="col-md-4">
-            <h4>Sample ID</h4>
+            <h4 class="mb-0">Sample ID</h4>
             <p>
               <span *ngIf="reportDetails?.user_encode_id">{{reportDetails.user_encode_id}}</span>
               <span *ngIf="!reportDetails?.user_encode_id" class="text-muted">N/A</span>
             </p>
           </div>
           <div class="col-md-4">
-            <h4>Sample Name </h4>
+            <h4 class="mb-0">Sample Name </h4>
             <p>{{reportDetails.name}}</p>
           </div>
           <div class="col-md-4">
-            <h4>Commodity </h4>
+            <h4 class="mb-0">Commodity </h4>
             <p>{{reportDetails?.commodity?.name}}</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <h4>MFD</h4>
+            <h4 class="mb-0">MFD</h4>
             <p>{{reportDetails.mfd | date}}</p>
           </div>
           <div class="col-md-4">
-            <h4>Best Before Date</h4>
+            <h4 class="mb-0">Best Before Date</h4>
             <p>{{reportDetails.dfb | date}}</p>
           </div>
 
           <div class="col-md-4">
-            <h4>Batch</h4>
+            <h4 class="mb-0">Batch</h4>
             <p>{{reportDetails.batch}}</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-            <h4>Brand</h4>
+            <h4 class="mb-0">Brand</h4>
             <p>{{reportDetails.brand}}</p>
           </div>
 
           <div class="col-md-4">
-            <h4>Purpose of Analysis</h4>
+            <h4 class="mb-0">Purpose of Analysis</h4>
             <p>{{reportDetails?.purpose}}</p>
           </div>
 
           <div class="col-md-4">
-            <h4>Condition</h4>
+            <h4 class="mb-0">Condition</h4>
             <p>{{reportDetails.condition}}</p>
           </div>
         </div>

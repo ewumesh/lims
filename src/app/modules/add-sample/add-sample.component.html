@@ -107,7 +107,7 @@
         <label for="email" class="col-form-label">Purpose of Analysis (प्रयोगशाला विश्लेषणको उदेश्य)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <mat-select class="custom-select" formControlName="purpose" placeholder="Select Purpose of analysis">
-            <mat-option *ngFor="let a of purposeOfAnalysis" [value]="a.id">{{a.name}}</mat-option>
+            <mat-option *ngFor="let a of purposeOfAnalysis" [value]="a.name">{{a.name}}</mat-option>
           </mat-select>
           <!-- <input class="custom-input" matInput formControlName="purpose" placeholder="Enter purpose of analysis" /> -->
           <mat-error class="text-danger" *ngIf="displayMessage?.purpose">{{displayMessage.purpose}}</mat-error>
@@ -115,30 +115,43 @@
       </div>
       <div class="col-md-12">
         <div class="row m-0" style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px;">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="email" class="col-form-label">Sample Type*</label>
             <mat-form-field class="w-100" appearance="outline">
-          <mat-select class="custom-select" placeholder="Sample Type">
-            <mat-option *ngFor="let a of SampleTypes" [value]="a.id">{{a.name}}</mat-option>
+          <mat-select formControlName="sample_type" class="custom-select" placeholder="Sample Type">
+            <mat-option *ngFor="let a of SampleTypes" [value]="a.name">{{a.name | titlecase}}</mat-option>
           </mat-select>
           </mat-form-field>
         </div>
 
-        <div class="col-md-4">
-          <label class="col-form-label">Units *</label>
-          <mat-form-field appearance="outline" class="w-100">
-            <input class="custom-input" matInput formControlName="sample_units" placeholder="Enter Sample Uint" />
+        <div class="col-md-3">
+          <label  class="col-form-label">Sample Quantity</label>
+          <mat-form-field class="w-100" appearance="outline">
+            <input class="custom-input" placeholder="Enter Quantity" matInput formControlName="sample_quantity" />
           </mat-form-field>
         </div>
-  
-        <div class="col-md-4">
-          <label for="email" class="col-form-label">Sample Measurement*</label>
+
+        <div class="col-md-3">
+          <label for="email" class="col-form-label">Sample Per*</label>
           <mat-form-field class="w-100" appearance="outline">
-        <mat-select class="custom-select" formControlName="sample_measurement" placeholder="Sample Measurement">
-          <mat-option *ngFor="let a of SampleTypes" [value]="a.id">{{a.name}}</mat-option>
-        </mat-select>
+        <input class="custom-input" formControlName="sample_perunit" matInput placeholder="Enter Sample per unit" />
         </mat-form-field>
       </div>
+
+      <div class="col-md-3">
+        <label class="col-form-label">Units *</label>
+        <mat-form-field  appearance="outline" class="w-100">
+          <input class="custom-input" matInput formControlName="sample_units" placeholder="Enter Sample Uint" [disabled]="true" />
+        </mat-form-field>
+      </div>
+        <!-- <div class="col-md-3" *ngIf="addSampleForm.get('sample_type').value === 'liquid'">
+          <label class="col-form-label">Units *</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input  class="custom-input" matInput formControlName="sample_units" placeholder="Enter Sample Uint" [disabled]="true" />
+          </mat-form-field>
+        </div> -->
+  
+        
         </div>
       </div>
       

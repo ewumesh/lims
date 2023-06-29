@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 import { ChartComponent } from "ng-apexcharts";
 
@@ -7,6 +7,7 @@ import {
     ApexResponsive,
     ApexChart
 } from "ng-apexcharts";
+import { DashboarService } from "src/app/services/dashboard/dashboard.service";
 
 export type ChartOptions = {
     series: ApexNonAxisChartSeries;
@@ -21,18 +22,73 @@ export type ChartOptions = {
     styleUrls: ['./analyst.scss']
 })
 
-export class AnalystDashboard {
+export class AnalystDashboard implements OnInit {
     @ViewChild("chart") chart: ChartComponent;
     public chartOptions: Partial<ChartOptions>;
 
-    constructor() {
+    isDashboardStatus = false;
+    dashboardStatus:any;
+    pieSeries:any[] =[];
+
+    loadingCompletedSample = false;
+    completedSamples:any[] = [];
+    isLoadingDownloadBtn = false;
+    loadingLatestSample = false;
+    latestSamples:any[] = [];
+    userDetails:any;
+    constructor(private service: DashboarService) {
+        this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
+
+    getDashboardStatus() {
+        this.isDashboardStatus = true;
+        this.service.getDashboardStatus().subscribe(a => {
+            // a.rejected = 0;
+            this.dashboardStatus = a;
+
+            let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request)];
+            this.pieSeries = chaartSeries;
+            this.initializeGraph();
+            this.isDashboardStatus = false;
+        },(error)=> {
+            this.isDashboardStatus = false;
+        })
+    }
+
+    getTestRequsest() {
+        // this.la = true;
+        let payload = {
+          page: '',
+          size: '',
+          search: '',
+          user: this.userDetails?.id,
+          from: '',
+          to: '',
+          status: ''
+        }
+        this.service.getTestRequests(payload).subscribe(res => {
+          this.latestSamples = res.results;
+        })
+      }
+
+    calculatePercentage(value, total) {
+        let percentage =( value/total)*100;
+        return percentage;
+    }
+
+    ngOnInit() {
+        this.getDashboardStatus();
+        this.getTestRequsest();
+    }
+
+    initializeGraph() {
         this.chartOptions = {
-            series: [44, 55, 13, 43, 22],
+            series: this.pieSeries,
             chart: {
                 width: 350,
                 type: "pie"
             },
-            labels: ["Completed", "Pending", "Tested", "Not Verified", "Recheck"],
+            labels: ["Completed", "Pending", "Not Verified", "Recheck"],
             responsive: [
                 {
                     breakpoint: 480,

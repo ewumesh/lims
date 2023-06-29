@@ -70,8 +70,8 @@ date: any;
   ]
 
   SampleTypes:any[] = [
-    {id: 1, name: 'A'},
-    {id: 11, name: 'B'},
+    {id: 1, name: 'liquid'},
+    {id: 11, name: 'solid'},
   ];
 
   /** list of banks */
@@ -215,6 +215,7 @@ date: any;
     this.initForm();
 
     this.getCommodities();
+    this.setUnits();
     this.getParametersOfCommodity();
     this.getBestDate();
     if (this.sampleId) {
@@ -265,6 +266,16 @@ date: any;
       this.dataSource.data = parameters?.test_result;
       this.isLoading = false;
 
+    })
+  }
+
+  setUnits(){
+    this.addSampleForm.get('sample_type').valueChanges.subscribe( a=> {
+      if(a === 'liquid') {
+        this.addSampleForm.get('sample_units').setValue('ml');
+      } else if(a === 'solid') {
+        this.addSampleForm.get('sample_units').setValue('gm');
+      }
     })
   }
 
@@ -327,6 +338,8 @@ date: any;
       status: 'pending',
       requested_export:['requested'],
       sample_type:[''],
+      sample_quantity: [''],
+      sample_perunit: [''],
       sample_units: '',
       sample_measurement: ['']
     })
