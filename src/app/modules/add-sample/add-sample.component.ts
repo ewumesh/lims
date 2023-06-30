@@ -117,6 +117,8 @@ date: any;
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
 
+    // console.log(this.selection.selected, 'daear')
+
     let totalPrice = 0;
     let selectedId = []
 
@@ -218,10 +220,7 @@ date: any;
     this.setUnits();
     this.getParametersOfCommodity();
     this.getBestDate();
-    if (this.sampleId) {
-      this.getSampleDetails();
-      // this.addSampleForm.value.isParameter = true;
-    }
+
 
     if(this.userDetails.role === 1 || this.userDetails.role === 2) {
       this.getUsers();
@@ -249,6 +248,9 @@ date: any;
     }
     this.service.getCommodities(payload).subscribe(response => {
       this.commodities = response.results;
+      if (this.sampleId) {
+        this.getSampleDetails();
+      }
     })
   }
 
@@ -287,18 +289,16 @@ date: any;
       let reqCommodity = response.commodity.id;
 
       // let/
-
-      let com = this.commodities.find(a => a.id = reqCommodity);
-      // console.log(com, 'PO:')
+      console.log(this.commodities, "ALL COMPODITIES")
+      let com = this.commodities.find(a => a.name =  response.commodity.name);
       this.dataSource.data = com?.test_result;
 
       this.getParametersOfCommodity();
-      console.log(com,response, 'TABLE DATA..')
 
       let parameters = response.parameters;
 
       let actParameter = [];
-      parameters.forEach(a => actParameter.push(a.id));
+      parameters.forEach(a => actParameter.push(a));
       actualResponse.parameters = actParameter;
 
       actualResponse.commodity = reqCommodity;
@@ -306,7 +306,9 @@ date: any;
       this.addSampleForm.patchValue(actualResponse);
       this.addSampleForm.value.isParameter = true
 
-      console.log(reqCommodity, 'popop')
+      this.selection =new SelectionModel<any>(true, [actParameter]);
+
+      console.log(this.selection.selected, 'okoko')
     })
   }
 

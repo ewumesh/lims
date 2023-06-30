@@ -54,7 +54,7 @@ export class VerifierDashboard {
     getDashboardStatus() {
         this.isDashboardStatus = true;
         this.service.getDashboardStatus().subscribe(a => {
-            // a.rejected = 0;
+            a.rejected = 0;
             this.dashboardStatus = a;
 
             let chaartSeries = [this.calculatePercentage(a?.verified, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.reckeck, a.total_request), this.calculatePercentage(a.rejected, a.total_request)];
