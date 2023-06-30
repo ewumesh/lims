@@ -15,9 +15,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PaymentReceiptComponent } from './receipt/receipt';
 
 @NgModule({
-  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent],
+  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -155,7 +155,8 @@
         </div> -->
       </div>
 
-      <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && loggedUserDetails.role === 6">
+
+      <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && (loggedUserDetails.role === 6 || loggedUserDetails.role === 4) ">
         <table class="table">
           <tbody>
             <h3 class="text-bold mb-0 ms-2 mt-2">Raw Data Sheet</h3>

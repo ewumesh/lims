@@ -10,10 +10,11 @@
   <user-dashboard *ngIf="loggedUserDetails?.role === 5"></user-dashboard>
   <supervisor-dashboard *ngIf="loggedUserDetails?.role === 3"></supervisor-dashboard>
 
-  <div *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2" class="col-md-12 p-4">
+  <smu-dashboard *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2"></smu-dashboard>
+
+  <!-- <div *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2" class="col-md-12 p-4">
     <div class="grid">
       <div class="card cursor-pointer">
-        <!-- <p class="text-lims-secondary">THU 20 Apr, 2022</p> -->
         <h1 class="text-bold">Sample Collected</h1>
         <div class="row">
           <div class="col-md-6">
@@ -36,7 +37,6 @@
         </div>
       </div>
       <div class="card cursor-pointer">
-        <!-- <p class="text-lims-secondary">THU 20 Apr, 2022</p> -->
         <h1 class="text-bold">Report Generated</h1>
         <div class="row">
           <div class="col-md-6">
@@ -48,15 +48,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
   
-
-  <div *ngIf="loggedUserDetails?.role === 6" class="col-md-12 p-4">
+<verifier-dashboard *ngIf="loggedUserDetails?.role === 6"></verifier-dashboard>
+  <!-- <div *ngIf="loggedUserDetails?.role === 6" class="col-md-12 p-4">
     <div class="grid">
       <div class="card cursor-pointer">
-        <!-- <p class="text-lims-secondary">THU 20 Apr, 2022</p> -->
         <h1 class="text-bold">Total Sample</h1>
         <div class="row">
           <div class="col-md-6">
@@ -67,19 +66,8 @@
           </div>
         </div>
       </div>
-      <!-- <div class="card cursor-pointer">
-        <h1 class="text-bold">Total Users</h1>
-        <div class="row">
-          <div class="col-md-6">
-            <mat-icon class="text-lims-primary" aria-hidden="false" aria-label="add" fontIcon="file_copy"></mat-icon>
-          </div>
-          <div class="col-md-6 text-right">
-            <h1 class="text-end text-lims-primary">{{dashboardStatus?.total_users || 'N/A'}}</h1>
-          </div>
-        </div>
-      </div> -->
+      
       <div class="card cursor-pointer">
-        <!-- <p class="text-lims-secondary">THU 20 Apr, 2022</p> -->
         <h1 class="text-bold">Report Generated</h1>
         <div class="row">
           <div class="col-md-6">
@@ -91,5 +79,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

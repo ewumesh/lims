@@ -72,8 +72,9 @@
                   <th mat-header-cell *matHeaderCellDef> Test Type </th>
                   <td mat-cell *matCellDef="let row">
                     <span *ngIf="row.test_type">
-                      <span *ngIf="row.test_type === '1'">Chemical Test</span>
-                      <span *ngIf="row.test_type === '2'">Microbiological Test</span>
+                      <!-- <span *ngIf="row.test_type === '1'">Chemical Test</span>
+                      <span *ngIf="row.test_type === '2'">Microbiological Test</span> -->
+                      {{row?.test_type}}
                     </span>
                     <span class="text-muted" *ngIf="!row.test_type">N/A</span>
                   </td>

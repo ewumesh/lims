@@ -8,6 +8,7 @@ import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/fo
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { MatStepper } from '@angular/material/stepper';
+import { PaymentReceiptComponent } from './receipt/receipt';
 
 @Component({
   templateUrl: './sample-request-details.html',
@@ -71,6 +72,12 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
     this.service.getUsersList(payload).subscribe(res => {
       this.users = res;
+    })
+  }
+
+  viewReceipt(url) {
+    this.dialog.open(PaymentReceiptComponent, {
+      data: url
     })
   }
 
@@ -174,10 +181,10 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     this.getUserList();
     this.initForm();
 
-    if(this.sampleDetails.payment?.id) {
+    // if(this.sampleDetails.payment?.id) {
       // this.stepper.next();
-      this.stepper.selectedIndex = 2;
-    }
+      // this.stepper.selectedIndex = 2;
+    // }
    }
 
   getSampleDetails() {

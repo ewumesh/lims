@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { ChartComponent } from "ng-apexcharts";
 
@@ -36,8 +37,19 @@ export class AnalystDashboard implements OnInit {
     loadingLatestSample = false;
     latestSamples:any[] = [];
     userDetails:any;
-    constructor(private service: DashboarService) {
+    constructor(
+        private service: DashboarService,
+        private router: Router
+        ) {
         this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    }
+
+    gotoReport() {
+        this.router.navigate(['/dashboard/lab-report']);
+    }
+
+    gotoRequest() {
+        this.router.navigate(['/dashboard/test-request']);
     }
 
     getDashboardStatus() {
@@ -57,6 +69,7 @@ export class AnalystDashboard implements OnInit {
 
     getTestRequsest() {
         // this.la = true;
+        this.loadingLatestSample = true;
         let payload = {
           page: '',
           size: '',
@@ -68,6 +81,28 @@ export class AnalystDashboard implements OnInit {
         }
         this.service.getTestRequests(payload).subscribe(res => {
           this.latestSamples = res.results;
+          this.loadingLatestSample = false;
+        },(error) => {
+            this.loadingLatestSample = false;
+        })
+      }
+
+      getSampleReport() {
+        this.loadingCompletedSample = true;
+        let payload = {
+            search:'',
+            from:' ',
+            to:'',
+            status: '',
+            page: '',
+            size:''
+        }
+        this.service.getSampleReportDetails(payload).subscribe(res => {
+            this.completedSamples = res;
+            this.loadingCompletedSample = false;
+            
+        },(error)=>{
+            this.loadingCompletedSample = false;
         })
       }
 
@@ -79,6 +114,7 @@ export class AnalystDashboard implements OnInit {
     ngOnInit() {
         this.getDashboardStatus();
         this.getTestRequsest();
+        this.getSampleReport();
     }
 
     initializeGraph() {

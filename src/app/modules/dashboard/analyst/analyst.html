@@ -4,7 +4,7 @@
           <div class="col-md-6">
               <h3 class="text-bold">Progress Chart</h3>
           </div>
-          <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details <i class="fa fa-external-link"></i></a></div>
+          <div class="col-md-6 text-end"><a (click)="gotoRequest()" style="text-decoration: none;" class="" href="Javascript:;">View Details <i class="fa fa-external-link"></i></a></div>
       </div>
       <div id="chart">
           <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
@@ -117,7 +117,7 @@
             <div class="col-md-6">
                 <h3 class="text-bold">Latest Test Request</h3>
             </div>
-            <div class="col-md-6 text-end"><a style="text-decoration: none;" class=""
+            <div class="col-md-6 text-end"><a (click)="gotoRequest()" style="text-decoration: none;" class=""
                     href="Javascript:;">View Details <i class="fa fa-external-link"></i></a></div>
         </div>
         <table class="table table-hover">
@@ -131,7 +131,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let a of latestSamples">
-                    <td>{{a.name | titlecase}}</td>
+                    <td>{{a?.sample_form?.name | titlecase}}</td>
                     <td><span class="text-uppercase">{{a.id}}</span></td>
                     <td>{{a.created_date | date}}</td>
                     <td>
@@ -171,7 +171,7 @@
                     <div class="col-md-6">
                         <h3 class="text-bold">Completed Tests</h3>
                     </div>
-                    <div class="col-md-6 text-end"><a  style="text-decoration: none;"
+                    <div class="col-md-6 text-end"><a (click)="gotoReport()" style="text-decoration: none;"
                             class="" href="Javascript:;">View Details <i class="fa fa-external-link"></i></a></div>
                 </div>
                 <table class="table table-hover">
@@ -180,26 +180,23 @@
                             <td>Sample ID</td>
                             <td>Sample Name</td>
                             <td>Date</td>
-                            <td>Report</td>
+                            <!-- <td>Report</td> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let a of completedSamples">
                             <td> <span class="text-uppercase">{{a.id}}</span></td>
                             <td>{{a.name | titlecase}}</td>
-                            <td>{{a.completed_date | date}}</td>
-                            <td>
+                            <td>{{a.created_date | date}}</td>
+                            <!-- <td>
                                 <button [disabled]="isLoadingDownloadBtn" (click)="downloadReport(a.id)" class="btn btn-outline-primary btn-sm">
                                     <span >Download Report <i
                                             class="fa fa-download"></i></span>
-                                    <!-- <span *ngIf="isLoadingDownloadBtn">
-                                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                                    </span> -->
+                                    
                                 </button>
 
 
-                                <!-- <span class="btn btn-outline-primary btn-sm">Download Report <i class="fa fa-download"></i></span> -->
-                            </td>
+                            </td> -->
                         </tr>
 
                         <tr *ngIf="!loadingCompletedSample && completedSamples.length <1">
