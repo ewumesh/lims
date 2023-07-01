@@ -27,7 +27,7 @@ export class LabRequestDetailsComponent implements OnInit {
   constructor(
     private service: LabRequestDetailsService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +77,7 @@ export class LabRequestDetailsComponent implements OnInit {
         sample_form: this.sampleDetails?.sample_form?.id,
         supervisor_user: [this.userDetails.id],
         form_available: 'analyst',
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id')
       }
       let instance: MatDialogRef<AssignComponent, any>;
 
@@ -98,11 +99,12 @@ export class LabRequestDetailsComponent implements OnInit {
       });
 
       let obj = {
-        commodity: this.sampleDetails.commodity.id,
+        commodity: this.sampleDetails?.sample_form?.commodity?.id,
         parameter:pm,
-        sample_form: this.sampleDetails.id,
+        sample_form: this.sampleDetails?.sample_form?.id,
         supervisor_user: [this.userDetails.id],
         form_available: 'analyst',
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id')
       }
 
     let instance: MatDialogRef<AssignComponent, any>;
@@ -124,7 +126,7 @@ export class LabRequestDetailsComponent implements OnInit {
       supervisor: this.userDetails.id,
       search: '',
       id: sampleId
-    }
+    } 
 
     this.service.getSamplesDetails(payload).subscribe(response => {
       this.sampleDetails = response;

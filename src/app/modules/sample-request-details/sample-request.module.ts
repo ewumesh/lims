@@ -16,9 +16,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PaymentReceiptComponent } from './receipt/receipt';
+import { RejectComponent } from './reject-sample';
 
 @NgModule({
-  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent],
+  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent, RejectComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -34,6 +35,7 @@ import { PaymentReceiptComponent } from './receipt/receipt';
     MatDatepickerModule,
     MatNativeDateModule,
     MatStepperModule,
+    MatIconModule,
 
     SharedModule
    ],

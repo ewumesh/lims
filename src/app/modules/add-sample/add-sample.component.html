@@ -226,10 +226,10 @@
 
         <mat-checkbox formControlName="isParameter">Select Parameters </mat-checkbox>
     </div>
-
     <div class="col-md-12 mt-4" *ngIf="dataSource.data.length > 0 && !isLoading && addSampleForm.value.isParameter === true">
       <mat-card style="box-shadow: none;">
-        <div *ngIf="selection.selected.length < 1" class="alert alert-warning">Please Select atleast one Parameter</div>
+        
+        <div *ngIf="selection.selected.length < 1" class="alert alert-warning">Please Select atleast one Parameter </div>
         <table mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length && addSampleForm.value.isParameter">
 
           <!-- Checkbox Column -->

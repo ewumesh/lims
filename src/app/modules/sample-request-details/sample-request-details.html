@@ -197,7 +197,24 @@
         <div class="col-md-4">
           <h4 class="mb-0">Condition</h4>
           <p>{{sampleDetails.condition}}</p>
-        </div>
+        </div> 
+
+        
+        <div class="col-md-4">
+          <h4 class="mb-0">Note</h4>
+          <p>{{sampleDetails.note}}</p>
+        </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Amendments</h4>
+          <p>{{sampleDetails.amendments}}</p>
+        </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Language</h4>
+          <p *ngIf="sampleDetails.language === 'en'">English</p>
+          <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
+        </div> 
       </div>
     </div>
 
@@ -267,6 +284,7 @@
               <th>Parameter Name</th>
               <th>Method</th>
               <th>Units</th>
+              <th>Price</th>
               <th>Result</th>
               <th>Status</th>
             </tr>
@@ -276,6 +294,7 @@
                 <td>{{r.name | titlecase}}</td>
                 <td>{{r.ref_test_method}}</td>
                 <td>{{r.units}}</td>
+                <td>Rs.{{r.price}}</td>
                 <td>
                   <span *ngIf="r.status">
                     {{r?.results}}
@@ -490,8 +509,16 @@
   </div>
 
   <div class="row m-0" *ngIf="!isProcceedForPayment">
-    <div class="col-md-12 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
-      <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
+    <div class="col-md-12 bg-white mt-3" style="border-radius: 5px;">
+      <div class="row">
+        <div class="col-md-6 mt-3 p-3">
+          <span class="text-bold">Total Price:</span><span>Rs.{{totalPrice}}</span>
+        </div>
+        <div class="col-md-6 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
+          <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
+          <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

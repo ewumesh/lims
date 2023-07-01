@@ -1,8 +1,5 @@
 ::ng-deep {
-.cdk-overlay-pane {
-  // top: 76px !important;
-  // right: 0 !important;
-}
+
 
 .mat-mdc-menu-content {
   padding: 5% !important;
@@ -13,8 +10,15 @@
   max-height: 70vh !important;
 }
 }
+.user-name-role{
+  line-height: 1.1;
+}
+.username{
+  font-size: 14px!important;
+}
 .user-role{
   color: #FB802C;
+  font-size: 12px!important;
 }
 .top-user-profile{
   display: flex;

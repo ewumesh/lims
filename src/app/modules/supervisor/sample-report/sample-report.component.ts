@@ -107,8 +107,8 @@ export class SampleReportComponent implements OnInit {
 
   reAssign(data) {
     console.log(data, this.reportDetails, 'ioas')
-    let obj = {
-      commodity: this.reportDetails.commodity.id,
+    let obj = { 
+      commodity: this.reportDetails?.sample_form?.commodity.id,
       parameter: [data.id],
       sample_form: this.reportDetails.id,
       supervisor_user: [this.loggedUserDetails.id],
@@ -164,7 +164,7 @@ export class SampleReportComponent implements OnInit {
     let payload = {
       id: id
     }
-    this.service.getAssignedSamples(payload).subscribe(res => {
+    this.service.getSamplesDetails(payload).subscribe(res => {
       this.reportDetails = res;
       this.isLoading = false;
     },

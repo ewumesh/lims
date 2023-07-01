@@ -8,25 +8,46 @@
 
     <div class="col-md-10 p-0">
       <div class="mt-100">
-        <div
-          style="padding: 14px; margin: 1% 1% 0px 1%; border-radius: 6px; background-color: #fff;z-index: 101;">
+        <div style="padding: 14px; margin: 1% 1% 0px 1%; border-radius: 6px; background-color: #fff;z-index: 101;">
           <div class="three">
             <h2 class="m-0 p-0 d-flex align-items-center">
-              <button (click)="backClicked()" class="btn btn-primary btn-sm btn-lims-primary breadcrumb-icon" style="height: 30px!important; width: 30px!important; margin-right: 14px; display: flex; justify-content: center; align-items: center; transition: none!important;">
+              <button (click)="backClicked()" class="btn btn-primary btn-sm btn-lims-primary breadcrumb-icon"
+                style="height: 30px!important; width: 30px!important; margin-right: 14px; display: flex; justify-content: center; align-items: center; transition: none!important;">
                 <!-- <mat-icon class="mt-1" aria-hidden="false" aria-label="back" fontIcon="keyboard_arrow_left"></mat-icon> -->
                 <i class="fa fa-chevron-left"></i>
               </button>
+              <!-- {{breadcrumbs | json}} -->
+
+              <!-- <span>
+                <span *ngIf="breadcrumbs[0]" class="breadcrumb-text">
+                  {{breadcrumbs[0] | titlecase}}
+                </span>
+                <span *ngIf="breadcrumbs[1]" class="breadcrumb-text-secondary"> > {{removeHyphen(breadcrumbs[1]) |
+                  titlecase}}</span>
+                <span *ngIf="breadcrumbs[2]" class="breadcrumb-text-third"> > {{breadcrumbs[2]}}</span>
+              </span> -->
+
+              <span>
+                <span *ngIf="breadcrumbs[1]" class="breadcrumb-text">
+                  {{removeHyphen(breadcrumbs[1]) | titlecase}}
+                </span>
+                <span *ngIf="breadcrumbs[2]" class="breadcrumb-text-secondary"> > {{removeHyphen(breadcrumbs[2]) |
+                  titlecase}}</span>
+                <span *ngIf="breadcrumbs[3]" class="breadcrumb-text-third"> > {{breadcrumbs[3]}}</span>
+              </span>
+
               <span *ngFor="let b of breadcrumbs; let i = index">
-                <!-- {{breadcrumbs[1] | json}} -->
+                <!-- {{b | json}} -->
+                <!-- <span classs="breadcrumb-text">{{removeHyphen(b) | titlecase}}</span> -->
                 <!-- <span *ngIf="breadcrumbs.length > 2 && breadcrumbs[1] === 'add-sample'">View Sample Details</span> -->
-                <span *ngIf="b === 'user-details'"> User Details</span>
+                <!-- <span *ngIf="b === 'user-details'"> User Details</span>
                 <span *ngIf="b === 'update-user'"> Update User</span>
                 <span *ngIf="b === 'test-request-details'"> Test Request Details</span>
                 <span *ngIf="i === breadcrumbs.length-1">
                 <span class="breadcrumb-text" *ngIf="breadcrumbs[1] !== 'user-details' && breadcrumbs[1] !== 'update-user' && breadcrumbs[1] !== 'test-request-details'">
                     &nbsp;{{removeHyphen(b) | titlecase}}
                 </span><span class="breadcrumb-text-secondary"> > Second Text</span><span class="breadcrumb-text-third"> > Third Text</span>
-                </span>
+                </span> -->
               </span>
             </h2>
           </div>

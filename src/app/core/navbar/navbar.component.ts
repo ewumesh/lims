@@ -17,6 +17,11 @@ export class NavbarComponent implements OnInit {
 
   url:string;
 
+  getRandomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
+  }
+
   constructor(
     private router: Router,
     private layoutService: LayoutService

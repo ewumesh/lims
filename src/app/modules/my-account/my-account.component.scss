@@ -20,16 +20,105 @@
   border-radius: 0;
 }
 .change-password{
-  background: #eef1f5;
-  padding: 20px;
+  background: #E7F0F7;
+  padding: 25px;
   font-weight: 500;
+  border-radius: 12px;
 }
 .change-password-btn{
   border-radius: 0;
   font-weight: 500;
+  background: #2460B9;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 16px;
+  border: none;
+}
+.change-password-btn:hover{
+  background: #003299;
 }
 /*end of my account*/
 
 .custom-input {
   padding-top: 10px !important;
+}
+
+.user-profile-detail .user-name{
+  font-size: 24px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.user-profile-detail .user-role{
+  height: 28px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0px 14px;
+  background: #ffffff;
+  border: 1px solid #dbdbdb;
+  border-radius: 10vw;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+.verified-icon{
+  font-size: 14px;
+  color: #1C93E3;
+}
+.client-cat{
+  color: rgba(0,0,0,0.5);
+}
+.tt{
+  margin: 0 4px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  color: #ffffff;
+}
+.chemical{
+  background: #36B37E;
+}
+.micro{
+  background: #FBBC05;
+}
+.instrumental{
+  background: #917BFF;
+}
+.avatar-content{
+  font-family: Poppins!important;
+  font-weight: 700!important;
+}
+.user-details-container{
+  display: flex;
+  align-items: center;
+}
+hr{
+  margin-top: 10px;
+}
+.section-title{
+  color: #2460B9;
+  font-size: 18px;
+  font-family: Poppins;
+  font-weight: 500;
+  line-height: normal;
+}
+.title{
+  color: #58667E;
+  font-size: 14px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.detail{
+  color: #000;
+  font-size: 16px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

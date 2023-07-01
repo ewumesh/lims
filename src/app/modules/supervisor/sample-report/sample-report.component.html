@@ -11,7 +11,7 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Name </h4>
-            <p class="mb-0">{{reportDetails.name}}</p>
+            <p class="mb-0">{{reportDetails?.sample_form?.name}}</p>
           </div>
           <div class="col-md-4">
             <h4 class="mb-0">Assigned Date</h4>
@@ -114,7 +114,9 @@
                 <ng-container matColumnDef="result">
                   <th mat-header-cell *matHeaderCellDef> Result </th>
                   <td mat-cell *matCellDef="let row">
-                    {{row.result}}
+                    <span *ngIf="row.result === null" class="text-muted">N/A</span>
+                    <span *ngIf="row.result !== null">{{row.result}}</span>
+                    
                   </td>
                 </ng-container>
 
@@ -133,7 +135,7 @@
                     <button (click)="reAssign(row)" class="btn btn-primary btn-sm mx-1">Re-Assign</button>
                     <button *ngIf="row.status ==='completed'" (click)="reCheck(row)" class="btn btn-primary btn-lims-primary btn-sm">Re-Check</button>
                   </td>
-                </ng-container>
+                </ng-container> 
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

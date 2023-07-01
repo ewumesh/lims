@@ -1,5 +1,5 @@
-<mat-card class="p-4">
-  <div class="db-content" *ngIf="accountDetails">
+<div>
+  <div class="db-content white-bg" *ngIf="accountDetails">
 
     <div *ngIf="!isLoading && !accountDetails?.is_verified"
       class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
@@ -9,29 +9,33 @@
 
     <!-- <img src="../../../assets/profile.jpg" alt="" class="user-img mb-4"> -->
 
-    <div class="change-password ">
-      <div class="row">
-        <div class="col-md-8 d-flex">
+    <div class="change-password white-bg">
+      <div class="row user-profile-detail">
+        <div class="col-md-8 d-flex user-details-container">
           <div class="mx-1">
-            <ngx-avatar [name]="userFullName"></ngx-avatar>
+            <ngx-avatar [name]="userFullName" [size]="100" ></ngx-avatar>
 
           </div>
           <div style="padding-left: 1%;">
-            <h1 style="margin-bottom: 0;">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
-              <mat-icon class="mt-2" *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
+            <h1 style="margin-bottom: 0;" class="user-name">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
+              <!-- <mat-icon class="mt-2" *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
                 style="color: #00d566;">check_circle</mat-icon>
               <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"
-                [matTooltip]="'Not Verified'" style="background-color:red; font-size: 10px;">Not Verified</span>
+                [matTooltip]="'Not Verified'" style="background-color:red; font-size: 10px;">Not Verified</span> -->
+              <span class="user-role" *ngIf="accountDetails && accountDetails?.role">{{getRoleName(accountDetails?.role) | titlecase}}<span class="material-icons ms-2 verified-icon">verified</span></span>
             </h1>
-            <div *ngIf="accountDetails && accountDetails?.role">
-              <mat-chip style="background-color: #2260bf;height: 20px;border-radius: 4px;"><span
-                  class="text-white">{{getRoleName(accountDetails?.role)}}</span></mat-chip>
-
-            </div>
+            <p class="mt-1 mb-0">Username: <span class="client-cat">{{accountDetails?.username}}</span></p>
+            <p class="mt-1 mb-0">Client Category: <span class="client-cat">
+              <span *ngIf="accountDetails?.client_category">
+              {{getClientCategoryName(accountDetails?.client_category)}}</span>
+              <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+              </span>
+            </p>
+            <p class="mt-2 mb-0">Test Type: <span class="chemical tt">Chemical Test</span> <span class="micro tt">Microbiological Test</span> <span class="instrumental tt">Instrumental Test</span></p>
           </div>
         </div>
-        <div class="col-md-4 text-end">
-          <button *ngIf="!isChangePassword" matTooltip="Change Password" (click)="changePassword()" type="button"
+        <div class="col-md-4 d-flex justify-content-end align-items-center">
+          <button *ngIf="!isChangePassword"  (click)="changePassword()" type="button"
             class="btn btn-primary change-password-btn">Change Password</button>
 
           <!-- <button *ngIf="isChangePassword" class="btn btn-primary mx-1"
@@ -108,83 +112,86 @@
       </div>
     </div>
 
-    <div class="row bg-white m-0 p-2" *ngIf="accountDetails && !isChangePassword">
+    <div class="row white-bg mt-4 p-2" *ngIf="accountDetails && !isChangePassword">
       <div class="col-md-12" *ngIf="!isAccountEdit">
         <div class="row">
           <div class="col-md-12">
-            <h2 class="text-lims-primary mb-0">Personal Details</h2>
+            <h2 class="text-lims-primary mb-0 section-title">Personal Details</h2>
             <hr class="" />
           </div>
 
           <div class="col-md-12">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <h3>
-                  <span class="text-bold">Full Name:</span> {{accountDetails?.first_name | titlecase}}
-                  {{accountDetails?.last_name | titlecase}}
+                  <span class="title">Full Name</span> 
+                  <p class="detail">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name | titlecase}}</p>
                 </h3>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <h3>
-                  <span class="text-bold">Email:</span> {{accountDetails?.email}}
+                  <span class="title">Email</span> 
+                  <p class="detail">{{accountDetails?.email}}</p>
                 </h3>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <h3>
-                  <span class="text-bold">Phone Number: </span>
-                  <span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
-                  <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
+                  <span class="title">Phone Number</span>
+                  <p class="detail"><span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
+                    <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span></p>
+                  
                 </h3>
               </div>
 
-              <div class="col-md-4">
-                <h3>
-                  <span class="text-bold">Username: </span>
-                  <span *ngIf="accountDetails?.username">{{accountDetails?.username}}</span>
-                  <span *ngIf="!accountDetails?.username" class="text-muted">N/A</span>
-                </h3>
-              </div>
+              
 
-              <div class="col-md-4" *ngIf="accountDetails?.role === 5">
+              <div class="col-md-3" *ngIf="accountDetails?.role === 5">
                 <h3>
-                  <span class="text-bold">Client Category: </span>
-                  <span
+                  <span class="title">Client Category</span>
+                  <p class="detail">
+                    <span
                     *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
-                  <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+                    <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+                  </p>
+                  
                 </h3>
               </div>
+
             </div>
           </div>
 
           <div class="col-md-12" *ngIf="accountDetails?.role === 5">
-            <h2 class="text-lims-primary mb-0">Industry Details</h2>
+            <h2 class="text-lims-primary mb-0 section-title">Industry Details</h2>
             <hr class="" />
 
             <div class="row">
               <div class="col-md-4">
                 <h3>
-                  <span class="text-bold">Industry Name:</span> {{accountDetails?.department_name | titlecase}}
+                  <span class="title">Industry Name</span> 
+                  <p class="detail">{{accountDetails?.department_name | titlecase}}</p>
                 </h3>
               </div>
 
               <div class="col-md-4">
                 <h3>
-                  <span class="text-bold">Industry Address:</span> {{getIndustryName(accountDetails?.department_address)}}
+                  <span class="title">Industry Address</span> 
+                  <p class="detail">{{getIndustryName(accountDetails?.department_address)}}</p>
                 </h3>
               </div>
 
               <div class="col-md-4">
                 <h3>
-                  <span class="text-bold">Registration Number:</span> {{accountDetails?.registration_number}}
+                  <span class="title">Registration Number</span> 
+                  <p class="detail">{{accountDetails?.registration_number}}</p>
                 </h3>
               </div>
             </div>
           </div>
 
           <div class="col-md-12" *ngIf="accountDetails?.role === 5">
-            <h2 class="text-lims-primary mb-0">Documents</h2>
+            <h2 class="text-lims-primary mb-0 section-title">Documents</h2>
             <hr class="" />
 
             <div class="row">
@@ -344,4 +351,4 @@
       </div>
     </div>
   </div>
-</mat-card>
+</div>

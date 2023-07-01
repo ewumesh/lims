@@ -9,6 +9,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { MatStepper } from '@angular/material/stepper';
 import { PaymentReceiptComponent } from './receipt/receipt';
+import { RejectComponent } from './reject-sample';
 
 @Component({
   templateUrl: './sample-request-details.html',
@@ -55,6 +56,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     bi:[],
     in:[]
   }
+
+  totalPrice = 0;
 
   constructor(
     private service: SampleRequestDetailsService,
@@ -126,6 +129,12 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       form_available: '',
       sample_form: '',
 
+    })
+  }
+
+  rejectSample(data) {
+    this.dialog.open(RejectComponent, {
+      data:data
     })
   }
 
@@ -261,6 +270,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       console.log(res, 'HAHAHAH')
 
       res.parameters.forEach(p => {
+        this.totalPrice = this.totalPrice+p.price;
         if(p.test_type === "Instrumental") {
           this.distributedSample.in.push(p);
         } else if(p.test_type === 'Microbiological') {

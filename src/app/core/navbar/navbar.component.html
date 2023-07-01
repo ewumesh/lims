@@ -26,7 +26,7 @@
       <!-- <img style="height: 50px;" [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt=""> -->
       <img style="height: 40px;" [matMenuTriggerFor]="menu" class="cursor-pointer" [src]="url" alt="">
       <!-- <ngx-avatar size="40" [name]="userDetails?.first_name + ' ' + userDetails?.last_name"></ngx-avatar> -->
-      <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">{{userDetails?.first_name + ' ' + userDetails?.last_name |
+      <p [matMenuTriggerFor]="menu" class="cursor-pointer user-name-role"><span class="username">{{userDetails?.first_name + ' ' + userDetails?.last_name |
           titlecase}}</span><br><span class="user-role">{{getRoleName(userDetails?.role) |
             titlecase}}</span></p>
     </div>

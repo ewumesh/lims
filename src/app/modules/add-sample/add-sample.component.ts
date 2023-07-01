@@ -307,8 +307,8 @@ date: any;
       this.addSampleForm.value.isParameter = true
 
       this.selection =new SelectionModel<any>(true, [actParameter]);
-
-      console.log(this.selection.selected, 'okoko')
+      this.isAllSelected();
+      console.log(this.addSampleForm.value,this.selection.selected, 'okoko')
     })
   }
 

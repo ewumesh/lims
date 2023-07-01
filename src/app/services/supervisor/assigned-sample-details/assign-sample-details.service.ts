@@ -15,6 +15,10 @@ export class AssignedSampleDetailsService {
     return this.http.get(`${this.url}/api/report/sample-form-has-parameter-has-assigned-analyst/${payload.sampleId}/`)
   }
 
+  getSamplesDetails(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/supervisors-have-parameter/${payload.sampleId}/`)
+  }
+
   getSampleDetails(id):Observable<any> {
     return this.http.get(`${this.url}/api/sample-form/${id}`)
   }

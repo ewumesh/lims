@@ -155,14 +155,17 @@ export class UserDashboard implements OnInit {
             series: this.pieSeries,
             chart: {
                 width: 350,
-                type: "pie"
+                type: "pie",
+                fontFamily: 'Poppins',
             },
             labels: ["Completed", "Pending", "Processing", "Recheck"],
             responsive: [
                 {
                   breakpoint: 2000,
+                  
                   options: {
                     colors: ['#00c853', '#ffc107', '#3f51b5', '#ffc0cb'],
+                    dataLabels:{enabled: false},
                     chart: {
                       width: 450
                     },
