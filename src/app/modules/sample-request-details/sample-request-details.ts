@@ -256,6 +256,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       })
     }
 
+    console.log(this.distributedSample, 'DOSPLKMN')
+
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
     let payload = {

@@ -38,34 +38,39 @@ export class VerificationComponent implements OnInit {
   }
   submit() {
     this.sendForVerification();
-    let payload = {
-      remarks:this.remarksForm.value.remarks
-    }
-    this.service.patchRemarks(payload, this.data.sample_form,).subscribe(res => {
-this.dialogRef.close();
-this.router.navigate(['/dashboard/lab-report']);
-    },(error) => {
-      this.responseError = error.error;
-    })
+//     let payload = {
+//       remarks:this.remarksForm.value.remarks
+//     }
+//     this.service.patchRemarks(payload, this.data.sample_form,).subscribe(res => {
+// this.dialogRef.close();
+// this.router.navigate(['/dashboard/lab-report']);
+//     },(error) => {
+//       this.responseError = error.error;
+//     })
   }
 
   sendForVerification() {
     this.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
-      sample_form: this.data.sample_form,
-      is_verified: false,
-      is_sent: true,
-      super_visor_sample_form: this.data.super_visor_sample_form
+      status: 'not_verified',
+      remarks: this.remarksForm.value.remarks,
+      // sample_form: this.data.sample_form,
+      // is_verified: false,
+      id: this.data.id,
+      is_supervisor_sent: true,
+      // super_visor_sample_form: this.data.super_visor_sample_form
     }
+    console.log(payload, 'OK CHAINA')
 
-    this.service.sendReportForVerification(payload).subscribe(res => {
+    this.service.sentForVerificationWithRemarks(payload).subscribe(res => {
       // console.log(res, "HAHAHAHAHAHHHHHHH")
       this.toast.showToast(TOAST_STATE.success, 'Sample Sent for Verification Successfully!');
       // this.toast.showToast(
       //   TOAST_STATE.danger,
       //   'All the field(s) are not valid.');
       // this.dissmissMessage();
+      this.dialogRef.close();
       this.dissmissMessage();
       this.isLoading = false;
     }, (error) => {

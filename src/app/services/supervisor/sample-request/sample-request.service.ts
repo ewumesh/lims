@@ -19,6 +19,7 @@ export class SampleReportService {
     return this.http.post(`${this.url}/api/sample-form-has-verifier/`, payload)
   }
 
+
   sendReportForVerificationFrom(payload):Observable<any> {
     return this.http.patch(`${this.url}/api/sample-form-has-verifier/${payload.id}/`, payload)
   }
@@ -41,6 +42,10 @@ export class SampleReportService {
 
   getSamplesDetails(payload):Observable<any> {
     return this.http.get(`${this.url}/api/supervisors-have-parameter/${payload.id}/`)
+  }
+
+  sentForVerificationWithRemarks(payload):Observable<any> {
+    return this.http.patch(`${this.url}/api/supervisors-have-parameter/${payload.id}/`, payload)
   }
 
   sendForRecheck(payload):Observable<any> {

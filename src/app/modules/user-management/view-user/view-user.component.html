@@ -142,13 +142,25 @@
         <div class="row">
           <div class="col-md-4">
             <h4>User Role</h4>
-            <span *ngIf="userDetails.role" >{{getRoleName(userDetails.role)}}</span>
+            <p *ngIf="userDetails.role" >{{getRoleName(userDetails.role)}}</p>
             <span *ngIf="!userDetails.role" class="text-muted">N/A</span>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" *ngIf="userDetails.role === 5">
             <h4>Client Category </h4>
             <span *ngIf="userDetails?.client_category">{{getClientName(userDetails?.client_category)}}</span>
             <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
+          </div>
+
+          <div class="col-md-4" *ngIf="userDetails.role === 3 || userDetails.role === 4">
+            <h4>Test Type </h4>
+            <!-- {{userDetails | json}} -->
+            <span *ngIf="userDetails?.test_type">
+              <span *ngIf="userDetails?.test_type.includes(1)">Chemical</span>
+              <span *ngIf="userDetails?.test_type.includes(2)">Microbiological</span>
+              <span *ngIf="userDetails?.test_type.includes(3)">Instrumental</span>
+              <!-- {{userDetails?.test_type}} -->
+            </span>
+            <span *ngIf="!userDetails?.test_type" class="text-muted">N/A</span>
           </div>
           <div class="col-md-4">
             <h4>Full Name </h4>

@@ -512,6 +512,9 @@ date: any;
     this.toDestroy$.complete();
   }
 
+  gotoDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
   /**
    * Sets the initial value after the filteredBanks are loaded initially
    */

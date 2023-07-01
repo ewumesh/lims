@@ -21,7 +21,7 @@
 }
 .change-password{
   background: #E7F0F7;
-  padding: 25px;
+  padding: 24px 48px 24px 24px;
   font-weight: 500;
   border-radius: 12px;
 }
@@ -121,4 +121,43 @@ hr{
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+.margin-right-24{
+  margin-right: 24px;
+}
+
+.sample-detail {
+  color: #2260bf;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: Poppins;
+  margin-bottom: 0;
+}
+.custom-input, .mat-mdc-form-field-type-mat-input{
+  height: 55px!important;
+  padding-top: 0!important;
+}
+label{
+  padding: 7px 0!important;
+}
+.submit-btn{
+  padding: 10px 30px;
+  border-radius: 3px;
+  border: none;
+  background: #2460B9;
+}
+.submit-btn:hover{
+  padding: 10px 30px;
+  border-radius: 3px;
+  border: none;
+  background: #003299;
+}
+.cancel-btn{
+  padding: 10px 30px;
+  border-radius: 3px;
+  background: #DC2626;
+  border: none;
+}
+.cancel-btn:hover{
+  background: #B91C1C;
 }

@@ -407,7 +407,7 @@
           <ng-template matStepLabel>Assign to Supervisor</ng-template>
           <div class="row">
             <div class="col-md-12">
-
+              {{distributedSample | json}}
               <div *ngIf="responseErrorForAssign" class="col-sm-12 col-md-12 col-lg-12">
                 <div class="alert alert-danger" role="alert">
                   <li *ngFor="let item of responseErrorForAssign | keyvalue">

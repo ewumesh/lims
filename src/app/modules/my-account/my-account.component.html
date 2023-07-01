@@ -7,11 +7,13 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div class="change-password white-bg">
+    <!-- <img src="../../../assets/profile.jpg" alt="" class="user-img mb-4"> -->
+
+    <div *ngIf="!isChangePassword" class="change-password white-bg">
       <div class="row user-profile-detail">
         <div class="col-md-8 d-flex user-details-container">
-          <div class="mx-1">
-            <ngx-avatar [name]="userFullName" [size]="100"></ngx-avatar>
+          <div class="margin-right-24">
+            <ngx-avatar [name]="userFullName" [size]="100" ></ngx-avatar>
 
           </div>
           <div style="padding-left: 1%;">
@@ -49,11 +51,11 @@
     </div>
 
     <div *ngIf="isChangePassword" class="row m-0 p-0">
-      <div class="col-md-12">
-        <h1>Change Password</h1>
+      <div class="col-md-12 p-0">
+        <h1 class="sample-detail">Change Password</h1>
         <hr />
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 p-0">
         <form class="row" autocomplete="off" [formGroup]="changePasswordForm">
           <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
             <div class="alert alert-danger" role="alert">
@@ -67,8 +69,8 @@
               </li>
             </div>
           </div>
-          <div class="col-md-4">
-            <label class="label">Old Password:</label>
+          <div class="col-md-12 mb-4">
+            <label class="title">Old Password</label>
             <mat-form-field class="w-100" appearance="outline">
 
               <input formControlName="old_password" type="password" matInput class="custom-input"
@@ -78,8 +80,8 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4">
-            <label class="label">New Password:</label>
+          <div class="col-md-6">
+            <label class="title">New Password</label>
             <mat-form-field class="w-100" appearance="outline">
               <input formControlName="password" type="password" matInput class="custom-input"
                 placeholder="Enter new password" />
@@ -87,8 +89,8 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-4">
-            <label class="label">Confirm Password:</label>
+          <div class="col-md-6">
+            <label class="title">Confirm Password</label>
             <mat-form-field class="w-100" appearance="outline">
               <input formControlName="confirm_password" type="password" matInput class="custom-input"
                 placeholder="Confirm password" />
@@ -101,15 +103,8 @@
           </div>
         </form>
 
-        <div class="text-end">
-          <button (click)="cancel()" class="btn btn-danger btn-sm mx-1">Cancel</button>
-          <button (click)="save()" class="btn btn-primary btn-sm mx-1">
-            <span *ngIf="!isSaveBtnLoading">Save</span>
-            <span *ngIf="isSaveBtnLoading">
-              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-            </span>
-          </button>
-        </div>
+        
+        
       </div>
     </div>
 
@@ -358,5 +353,17 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="isChangePassword" class="row white-bg mx-0 mt-3">
+  <div class="text-end">
+    <button (click)="cancel()" class="btn btn-danger btn-sm cancel-btn me-3">Cancel</button>
+    <button (click)="save()" class="btn btn-primary btn-sm submit-btn">
+      <span *ngIf="!isSaveBtnLoading">Update Password</span>
+      <span *ngIf="isSaveBtnLoading">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+      </span>
+    </button>
   </div>
 </div>

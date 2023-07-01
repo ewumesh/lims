@@ -39,6 +39,7 @@
 .top-user-profile:hover{
   background: #2260bf;
   color: #ffffff!important;
+  cursor: pointer;
 }
 .top-user-profile:hover .user-role{
   color: #ffffff!important;
@@ -49,4 +50,7 @@
 }
 .top-user-profile:hover .top-user-profile>.user-role{
   color: #ffffff!important;
+}
+.notification-div:hover{
+  cursor: pointer;
 }

@@ -63,11 +63,13 @@ export class SampleReportComponent implements OnInit {
 
   sentV() {
     let id = this.route.snapshot.paramMap.get('id');
+    console.log(id, 'kjhg')
     let payload = {
       sample_form: this.reportDetails?.sample_form?.id,
       is_verified: false,
       is_sent: true,
-      super_visor_sample_form: [id]
+      super_visor_sample_form: [id],
+      id: id
     }
 
     this.dialog.open(VerificationComponent, {
