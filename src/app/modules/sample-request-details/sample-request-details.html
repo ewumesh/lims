@@ -377,7 +377,7 @@
   
                   <div class="col-md-12">
                     <label for="formFile" class="form-label">Payment Receipt</label>
-                    <input (change)="uploadImage($event)" class="form-control" type="file" id="formFile">
+                    <input (change)="uploadImage($event)" formControlName="payment_receipt" class="form-control" type="file" id="formFile">
                     <!-- <mat-error *ngIf="!isPaymentReceipt" class="text-danger">Payment Receipt is Required.</mat-error> -->
                   </div>
                 </div>

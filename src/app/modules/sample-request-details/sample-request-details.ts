@@ -152,6 +152,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       register_date: new FormControl(''),
       amount: new FormControl(''),
       file: new FormControl(''),
+      payment_receipt: new FormControl('')
     })
   }
 
@@ -342,6 +343,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
   payNow() {
+    console.log(this.paymentForm.value, 'as3dhgh')
     this.isPaymentProcceed = true;
     if (this.paymentForm.pristine || !this.isPaymentReceipt) {
       this.message = {};

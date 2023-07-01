@@ -82,6 +82,8 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
           }
         });
         this.users = arr
+      } else {
+        arr = [];
       }
     })
   }

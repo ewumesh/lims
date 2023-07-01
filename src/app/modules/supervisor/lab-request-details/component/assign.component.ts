@@ -87,7 +87,35 @@ export class AssignComponent implements OnInit, AfterViewInit {
       client_category_id: ''
     }
     this.service.getUsersList(payload).subscribe(res => {
-      this.users = res;
+      // this.users = res;
+
+      let arr = [];
+      if(this.data.test_type === 'Instrumental') {
+        res.forEach(el => {
+          if(el.test_type.includes(3)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      } else if(this.data.test_type === 'Chemical') {
+        res.forEach(el => {
+          if(el.test_type.includes(1)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      } else if(this.data.test_type === 'Microbiological') {
+        res.forEach(el => {
+          if(el.test_type.includes(2)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      } else {
+        arr = [];
+      }
+
+      this.users = arr;
     })
   }
 

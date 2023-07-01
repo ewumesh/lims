@@ -67,7 +67,7 @@ export class LabRequestDetailsComponent implements OnInit {
     })
   }
 
-  assign(data, type) {
+  assign(data, type, testType) {
 
     console.log(data, 'DAATAS')
     if (type === 'i') {
@@ -77,7 +77,8 @@ export class LabRequestDetailsComponent implements OnInit {
         sample_form: this.sampleDetails?.sample_form?.id,
         supervisor_user: [this.userDetails.id],
         form_available: 'analyst',
-        super_visor_sample_form: this.route.snapshot.paramMap.get('id')
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
+        test_type: testType
       }
       let instance: MatDialogRef<AssignComponent, any>;
 
@@ -104,7 +105,8 @@ export class LabRequestDetailsComponent implements OnInit {
         sample_form: this.sampleDetails?.sample_form?.id,
         supervisor_user: [this.userDetails.id],
         form_available: 'analyst',
-        super_visor_sample_form: this.route.snapshot.paramMap.get('id')
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
+        test_type: testType
       }
 
     let instance: MatDialogRef<AssignComponent, any>;
