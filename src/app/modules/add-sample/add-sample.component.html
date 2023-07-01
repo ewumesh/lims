@@ -170,12 +170,18 @@
 
       <div class="col-md-4">
         <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
-        <section class="example-section">
+        <mat-form-field class="custom-select w-100" appearance="outline">
+        <mat-select  formControlName="language" placeholder="Select Language">
+          <mat-option [value]="'en'">English</mat-option>
+          <mat-option [value]="'np'">Nepali</mat-option>
+        </mat-select>
+      </mat-form-field>
+        <!-- <section class="example-section">
           <mat-radio-group formControlName="language">
             <mat-radio-button class="example-margin" value="en">English</mat-radio-button>
             <mat-radio-button class="example-margin" value="np">नेपाली</mat-radio-button>
           </mat-radio-group>
-        </section>
+        </section> -->
       </div>
 
     </div>
