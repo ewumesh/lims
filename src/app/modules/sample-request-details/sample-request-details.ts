@@ -204,6 +204,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
    }
 
    assign(parameter, testType) { 
+    console.log(testType, 'kJHHN OK')
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
     let payload = {
