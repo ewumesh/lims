@@ -66,7 +66,7 @@ input::placeholder{
 
 .main.row{
   margin-top: 2rem;
-  margin-bottom: 8rem;
+  margin-bottom: 2rem;
   border-radius: 10px;
   height: 100%;
 }
@@ -294,4 +294,66 @@ footer p {
   a {
     color: #fff;
   }
+}
+.login-side{
+  border-radius: 10px 0 0 10px;
+}
+
+.kit-footer{
+  border-radius: 12px;
+  border: 1px solid #DBDBDB;
+  background: #FFF;
+  padding: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.kit-logo-container{
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2260bf;
+  border-radius: 6px;
+}
+svg path{
+  fill: #ffffff;
+}
+.text-content{
+  margin-left: 10px;
+}
+.developed-by{
+  color: #EE5F32;
+  font-size: 10px;
+  font-weight: 500;
+}
+.kit-name{
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+}
+.kit-web{
+  color: #58667E;
+  font-size: 10px;
+  font-weight: 500;
+}
+.kit-footer:hover{
+  background: #2260bf;
+  box-shadow: 0px 11px 24px 0px rgba(3, 76, 198, 0.26);
+}
+.kit-footer:hover .kit-logo-container{
+  background: #ffffff;
+}
+.kit-footer:hover svg path{
+  fill: #2260bf;
+}
+.kit-footer:hover .developed-by{
+  color: #fff!important;
+}
+.kit-footer:hover .kit-name{
+  color: #fff!important;
+}
+.kit-footer:hover .kit-web{
+  color: #fff!important;
 }

@@ -144,3 +144,11 @@ body{
 .white-bg .mat-mdc-form-field-bottom-align{
   height: 0;
 }
+.content-box{
+  min-height: calc(100vh - 286px);
+}
+footer a{
+  text-decoration: none!important;
+  color: #ffffff!important;
+  font-weight: 600;
+}

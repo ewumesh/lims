@@ -156,6 +156,13 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
 
   patchForm(userDetails:any) {
     userDetails.password = '';
+    if(userDetails.test_type === null) {
+    userDetails.test_type = [];
+    } else {
+      // let a = [userDetails.test_type];
+      // userDetails.test_type = a;
+    }
+
     this.userForm.patchValue(userDetails);
   }
 
@@ -192,7 +199,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       date: [],
       role: ['', Validators.required],
       group: [''],
-      test_type: ''
+      test_type: [[]]
     },{ validators: passwordMatchValidator })
   }
 
@@ -230,10 +237,11 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       registration_number: this.userForm.value.registration_number,
       date: this.userForm.value.date,
       role: this.userForm.value.role,
-      is_verified: 1
+      is_verified: 1,
+      test_type:this.userForm.value.test_type
     }
 
-    // console.log(payload, 'PAYLOAD')
+    console.log(payload, 'PAYLOAD')
     if (this.userForm.pristine || this.userForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';

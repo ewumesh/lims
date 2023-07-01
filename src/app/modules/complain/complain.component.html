@@ -1,0 +1,105 @@
+<header>
+    <div class="custom-bg">
+      <div class="container ">
+        <div class="row">
+          <div class="mainheader-top">
+            <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
+            <div class="mainheader-top-text">
+                <h4 class="pb-0 mb-0">Government of Nepal</h4>
+                <span>Ministry of Agriculture and Livestock Development</span>
+                <div style="font-weight: 500;">Department of Food Technology and Quality Control</div>
+                <h3><span> Laboratory Information Management System</span></h3>
+  
+            </div>
+            <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+        </div>
+        </div>
+      </div>
+  
+      <nav class="mainheader-nav">
+        <div class="user-name">
+          <ul class="main-ul">
+            <a (click)="goToHome()" href="Javascript:;">
+              <li>Home</li>
+            </a>
+            <a (click)="gotoPricing()" href="Javascript:;">
+              <li>Commodity List</li>
+            </a>
+            <a href="https://dftqc.gov.np/" target="_blank">
+              <li>DFDQC Website</li>
+            </a>
+            <a (click)="gotoComplain()" href="Javascript:;">
+              <li>Complain</li>
+            </a>
+            <a (click)="gotoFeedback()" href="Javascript:;">
+              <li>Feedback</li>
+            </a>
+  
+            <div class="dropdown show">
+              <a class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manual
+              </a>
+  
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a (click)="gotoUserManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">User Manual</a>
+                <a (click)="gotoVideoManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">Video Manual</a>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+  
+    </div>
+  
+  </header>
+  <div class="container my-4 content-box">
+    <div class="white-bg">
+        <div class="row mb-4 form-header">
+            <h2>Complain Box</h2>
+            <div class="border-bottom"></div>
+        </div>
+        <form action="">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="mb-2">Full Name</label>
+                    <input class="form-control kit-form-control" type="text" placeholder="Enter full name">
+                </div>
+                <div class="col-md-6">
+                    <label class="mb-2">Address</label>
+                    <input class="form-control kit-form-control" type="text" placeholder="Enter your address">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label class="mb-2">Email Address</label>
+                    <input class="form-control kit-form-control" type="mail" placeholder="Enter mail address">
+                </div>
+                <div class="col-md-6">
+                    <label class="mb-2">Phone Number</label>
+                    <input class="form-control kit-form-control" type="text" placeholder="Enter your phone number">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <label class="mb-2">Complain Message</label>
+                    <textarea class="form-control kit-textarea" rows="5" placeholder="Enter your message"></textarea>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-end">
+                    <button class="submit-btn" type="submit">Send Complain</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+  
+
+  <footer>
+    <div class="container d-flex justify-content-between align-items-center h-100">
+      <p class="mb-0">© Laboratory Information Management System. All Right Reserved.</p>
+      <p class="mb-0">Developed by  &nbsp;<a href="https://kantipurinfotech.com/" > Kantipur Infotech</a></p>
+    </div>
+</footer>
+  

@@ -111,8 +111,8 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4" *ngIf="(userForm.get('role').value === 3)">
-          <label class="list-heading form-label">Select Test Type</label>
+        <div class="col-md-4" *ngIf="(userForm.get('role').value === 3 || userForm.get('role').value === 4)">
+          <label class="list-heading form-label">Select Test Type </label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select multiple formControlName="test_type" placeholder="Select Test type" multiple>
               <mat-option [disabled]="userForm.get('test_type').value.includes(2)"  [value]="1">Chemical</mat-option>
@@ -120,6 +120,8 @@
               <mat-option [value]="3" [disabled]="userForm.get('test_type').value.includes(2)">Instrumental</mat-option>
             </mat-select>
           </mat-form-field>
+
+          <!-- {{userForm.get('test_type').value | json}} -->
         </div>
 
         <div class="col-md-4" *ngIf="userForm.get('role').value === 5">

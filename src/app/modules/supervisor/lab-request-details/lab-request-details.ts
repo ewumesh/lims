@@ -68,11 +68,13 @@ export class LabRequestDetailsComponent implements OnInit {
   }
 
   assign(data, type) {
+
+    console.log(data, 'DAATAS')
     if (type === 'i') {
       let obj = {
-        commodity: this.sampleDetails.commodity.id,
+        commodity: data.commodity.id,
         parameter: [data.id],
-        sample_form: this.sampleDetails.id,
+        sample_form: this.sampleDetails?.sample_form?.id,
         supervisor_user: [this.userDetails.id],
         form_available: 'analyst',
       }
@@ -124,7 +126,7 @@ export class LabRequestDetailsComponent implements OnInit {
       id: sampleId
     }
 
-    this.service.getSamples(payload).subscribe(response => {
+    this.service.getSamplesDetails(payload).subscribe(response => {
       this.sampleDetails = response;
       this.reportDetails = response;
       this.isLoading = false;

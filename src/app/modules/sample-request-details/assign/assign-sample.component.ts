@@ -24,6 +24,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
   private formInputElements: ElementRef[];
 
   message: any
+  responseError = null;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,8 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
         'required': 'User is required.'
       }
     })
+
+    console.log(data, "ADSASRE")
   }
 
   ngOnInit(): void {
@@ -57,7 +60,29 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
     }
 
     this.service.getUsersList(payload).subscribe(res => {
-      this.users = res;
+      let arr = [];
+      if(this.data.test_type === 'Instrumental') {
+        res.forEach(el => {
+          if(el.test_type.includes(3)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      } else if(this.data.test_type === 'Chemical') {
+        res.forEach(el => {
+          if(el.test_type.includes(1)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      } else if(this.data.test_type === 'Microbiological') {
+        res.forEach(el => {
+          if(el.test_type.includes(2)) {
+            arr.push(el)
+          }
+        });
+        this.users = arr
+      }
     })
   }
 
@@ -75,10 +100,18 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
   }
 
   assignSampleToSupervisor() {
+    this.isLoading = true;
     let payload = this.data;
     payload.supervisor_user = this.form.value.supervisor_user;
     this.service.assignParameterToSupervisor(payload).subscribe(res => {
+      this.toast.showToast(TOAST_STATE.success, res?.message);
       console.log(res, 'Assigned..')
+      this.dialogRef.close();
+      this.isLoading = false;
+      this.dismissMessage();
+    },(error) => {
+      this.isLoading = false;
+      this.responseError = error.error;
     })
   }
 

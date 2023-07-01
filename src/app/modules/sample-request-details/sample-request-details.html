@@ -402,10 +402,11 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <!-- {{distributedSample.ch | json}} -->
                     <ng-container *ngFor="let r of distributedSample?.bi; let i = index;">
                       <tr>
                         <td class="text-center">{{i+1}}</td>
-                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <span>
                             {{r.test_type | titlecase}}
                           </span>
@@ -414,10 +415,11 @@
                           <span>{{r.name | titlecase}} </span>
                         </td>
                         <td class="text-center">
-                          <button (click)="assign(r.id)" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                          <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
                         </td>
-                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
-                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                          <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                         </td>
                       </tr>
                     </ng-container>
@@ -425,7 +427,7 @@
                     <ng-container *ngFor="let r of distributedSample?.in; let i = index;">
                       <tr>
                         <td class="text-center">{{i+1}}</td>
-                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length">
                           <span>
                             {{r.test_type | titlecase}}
                           </span>
@@ -434,10 +436,11 @@
                           <span>{{r.name | titlecase}} </span>
                         </td>
                         <td class="text-center">
-                          <button (click)="assign()" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                          <button (click)="assign(r.id,r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
+                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
                         </td>
-                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
-                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length" class="text-center">
+                          <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                         </td>
                       </tr>
                     </ng-container>
@@ -445,7 +448,7 @@
                     <ng-container *ngFor="let r of distributedSample?.ch; let i = index;">
                       <tr>
                         <td class="text-center">{{i+1}}</td>
-                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <span>
                             {{r.test_type | titlecase}}
                           </span>
@@ -454,13 +457,15 @@
                           <span>{{r.name | titlecase}} </span>
                         </td>
                         <td class="text-center">
-                          <button (click)="assign(r.id)" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                          <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
+                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
                         </td>
-                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
-                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                          <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                         </td>
                       </tr>
                     </ng-container>
+
                   </tbody>
                 </table>
 

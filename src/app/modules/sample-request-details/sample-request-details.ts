@@ -166,12 +166,64 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     })
    }
 
-   assign(parameter) {
+   assign(parameter, testType) { 
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
     let payload = {
       sample_form: this.sampleId,
-      parameters:[parameter]
+      parameters:[parameter],
+      test_type:testType
+    }
+
+    instance = this.dialog.open(AssignSampleComponent, {
+      data: payload,
+      width: '600px',
+      autoFocus: false,
+    })
+    instance.afterClosed().subscribe(res => {
+      this.getSampleDetails();
+      // this.router.navigate(['/dashboard/sample-requests'])
+    })
+   }
+
+   assignAll(test_type) {
+
+    let parameters:any[] = [];
+    if(test_type === 'Instrumental') {
+      console.log(this.distributedSample.in, 'kjhgfdghjkljcx')
+      let actP = this.distributedSample.in;
+      
+      actP.forEach(a => {
+        console.log(a.exists_supervisor_parameter, 'alask')
+        if(a.exists_supervisor_parameter === false) {
+          parameters.push(a.id);
+        }
+      })
+    } else if(test_type ==='Chemical') {
+      let actP = this.distributedSample.ch;
+      
+      actP.forEach(a => {
+        console.log(a.exists_supervisor_parameter, 'alask')
+        if(a.exists_supervisor_parameter === false) {
+          parameters.push(a.id);
+        }
+      })
+    } else if(test_type ==='Microbiological') {
+      let actP = this.distributedSample.bi;
+      
+      actP.forEach(a => {
+        console.log(a.exists_supervisor_parameter, 'alask')
+        if(a.exists_supervisor_parameter === false) {
+          parameters.push(a.id);
+        }
+      })
+    }
+
+    let instance: MatDialogRef<AssignSampleComponent, any>;
+
+    let payload = {
+      sample_form: this.sampleId,
+      parameters:parameters
     }
 
     instance = this.dialog.open(AssignSampleComponent, {
@@ -210,11 +262,13 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       res.parameters.forEach(p => {
         if(p.test_type === "Instrumental") {
           this.distributedSample.in.push(p);
-        } else if(p.test_type === 'Biochemical') {
+        } else if(p.test_type === 'Microbiological') {
           this.distributedSample.bi.push(p);
         } else if(p.test_type === 'Chemical') {
           this.distributedSample.ch.push(p);
         }
+
+        console.log(this.distributedSample, '()*^%')
       });
     })
   }

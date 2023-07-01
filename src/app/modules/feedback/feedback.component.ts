@@ -1,15 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
 })
-export class FeedbackComponent implements OnInit {
+export class FeedbackComponent{
+  constructor(
+    private router: Router,
+  ){}
+  goToHome() {
+    this.router.navigate(['/login']);
+  }
 
-  constructor() { }
+  gotoPricing() {
+    this.router.navigate(['/commodity-pricing']);
+  }
 
-  ngOnInit() {
+  gotoComplain() {
+    this.router.navigate(['/complain']);
+  }
+
+  gotoFeedback() {
+    this.router.navigate(['/feedback']);
+  }
+
+  gotoUserManual() {
+    this.router.navigate(['/user-manual']);
+  }
+
+  gotoVideoManual() {
+    this.router.navigate(['/video-manual']);
   }
 
 }

@@ -15,6 +15,10 @@ export class LabRequestDetailsService {
     return this.http.get(`${this.url}/api/sample-form/${payload.id}/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&supervisor_user=${payload.supervisor}`)
   }
 
+  getSamplesDetails(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/supervisors-have-parameter/${payload.id}/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&supervisor_user=${payload.supervisor}`)
+  }
+
   getCommodities(payload): Observable<any> {
     return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
   }

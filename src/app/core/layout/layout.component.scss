@@ -52,6 +52,9 @@
   position: fixed;
   width: 16.66666667%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .notification-div{
   height: 40px;

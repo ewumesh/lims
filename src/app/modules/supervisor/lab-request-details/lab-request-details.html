@@ -149,17 +149,17 @@
       <div class="row">
         <div class="col-md-3">
           <h4 class="mb-0">Sample ID</h4>
-          <p>{{reportDetails.supervisor_encode_id}}</p>
+          <p>{{reportDetails.sample_form.id}}</p>
         </div>
         <div class="col-md-3">
           <h4 class="mb-0">Sample Name </h4>
-          <p>{{reportDetails.name}}</p>
+          <p>{{reportDetails?.sample_form?.name}}</p>
         </div>
         
 
         <div class="col-md-3">
           <h4 class="mb-0">Assigned Date </h4>
-          <p>{{reportDetails.approved_date | date: 'medium'}}</p>
+          <p>{{reportDetails.created_date | date: 'medium'}}</p>
         </div>
 
         <div class="col-md-3 text-end pt-3">
@@ -217,8 +217,9 @@
                 <th mat-header-cell *matHeaderCellDef> Test Type </th>
                 <td mat-cell *matCellDef="let row">
                   <span *ngIf="row.test_type">
-                    <span *ngIf="row.test_type === '1'">Chemical Test</span>
-                    <span *ngIf="row.test_type === '2'">Microbiological Test</span>
+                    {{row.test_type}}
+                    <!-- <span *ngIf="row.test_type === '1'">Chemical Test</span>
+                    <span *ngIf="row.test_type === '2'">Microbiological Test</span> -->
                   </span>
                   <span class="text-muted" *ngIf="!row.test_type">N/A</span>
                 </td>
@@ -262,7 +263,7 @@
                 <td mat-cell *matCellDef="let row">
                   <button *ngIf="!row.exist" (click)="assign(row, 'i')" class="btn btn-primary btn-sm">Assign</button>
                   <button *ngIf="row.exist" (click)="assign(row, 'i')" class="btn btn-primary btn-lims-primary btn-sm">Re-Assign</button>
-                </td>
+                </td> 
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
