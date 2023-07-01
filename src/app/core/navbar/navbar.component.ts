@@ -15,12 +15,15 @@ export class NavbarComponent implements OnInit {
 
   notifications:any[] = [];
 
+  url:string;
+
   constructor(
     private router: Router,
     private layoutService: LayoutService
     ) {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userDetails = userDetails;
+    this.url = `https://ui-avatars.com/api/?name=${this.userDetails.first_name}+${this.userDetails.last_name}&rounded=true&background=FB802C&color=ffffff&size=28&bold=true`
    }
 
   ngOnInit(): void {

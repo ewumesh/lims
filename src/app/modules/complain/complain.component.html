@@ -35,17 +35,16 @@
               <li>Feedback</li>
             </a>
   
-            <div class="dropdown show">
-              <a class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
+            
+              <a [matMenuTriggerFor]="menu" class=" dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Manual
               </a>
   
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a (click)="gotoUserManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">User Manual</a>
-                <a (click)="gotoVideoManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">Video Manual</a>
-              </div>
-            </div>
+              <mat-menu #menu="matMenu">
+                <button (click)="gotoUserManual()" mat-menu-item>User Manual</button>
+                <button (click)="gotoVideoManual()" mat-menu-item>Video Manual</button>
+              </mat-menu>
           </ul>
         </div>
       </nav>

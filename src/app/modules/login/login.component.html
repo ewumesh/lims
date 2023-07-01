@@ -32,19 +32,19 @@
             <li>Complain</li>
           </a>
           <a (click)="gotoFeedback()" href="Javascript:;">
-            <li>Feedback</li>
+            <li>Feedback</li> 
           </a>
 
           <div class="dropdown show">
-            <a class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
+            <a [matMenuTriggerFor]="menu" class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Manual
             </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a (click)="gotoUserManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">User Manual</a>
-              <a (click)="gotoVideoManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">Video Manual</a>
-            </div>
+            <mat-menu #menu="matMenu">
+              <button (click)="gotoUserManual()" mat-menu-item>User Manual</button>
+              <button (click)="gotoVideoManual()" mat-menu-item>Video Manual</button>
+            </mat-menu>
           </div>
         </ul>
       </div>
@@ -60,7 +60,7 @@
       <div class="form-container">
         <div class="login-title">
           <h3>Login to your Account</h3>
-          <p>Please put your login credentials below.</p>
+          <p>Please enter your login credentials below.</p>
         </div>
         <!-- <div class="login-intro mb-3">
           <img src="../../../assets/nepal-government.png" alt="" class="np-logo">
@@ -147,7 +147,7 @@
 
   <div class="row">
     <div class="col-md-12 d-flex justify-content-end p-0">
-      <a href="https://kantipurinfotech.com/" style="text-decoration: none;">
+      <a href="https://kantipurinfotech.com/" target="_blank" style="text-decoration: none;">
         <div class="navbar navbar-expand-lg kit-footer">
           <div class="kit-logo">
             <div class="kit-logo-container">

@@ -5,12 +5,12 @@
     </div>
     <p>Laboratory Information<br>Management System-LIMS</p>
   </div>
-  <div class="db-user-profile" style="margin-right: 1%;">
+  <div class="profile" style="margin-right: 1%;">
     <div class="notification-div" style="margin-right: 1rem;">
       <a [matMenuTriggerFor]="not" href="Javascript:;" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
         data-bs-content="Bottom popover">
-        <mat-icon [matBadge]="notifications.length" matBadgeColor="warn" class="pt-1" aria-hidden="false" aria-label="Notification"
-          fontIcon="notifications"></mat-icon>
+        <mat-icon [matBadge]="notifications.length" matBadgeColor="warn" class="pt-1 bell-icon" aria-hidden="false" aria-label="Notification"
+          fontIcon="notifications_none"></mat-icon>
       </a>
 
       <!-- <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
@@ -21,10 +21,15 @@
         <app-notifications [notifications]="notifications"></app-notifications>
       </mat-menu>
     </div>
-    <img style="height: 50px;" [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt="">
-    <!-- <ngx-avatar size="40" [name]="userDetails?.first_name + ' ' + userDetails?.last_name"></ngx-avatar> -->
-    <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">{{userDetails?.first_name |
-        titlecase}}</span><br><span class="user-role">{{getRoleName(userDetails?.role)}}</span></p>
+
+    <div class="top-user-profile">
+      <!-- <img style="height: 50px;" [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt=""> -->
+      <img style="height: 40px;" [matMenuTriggerFor]="menu" class="cursor-pointer" [src]="url" alt="">
+      <!-- <ngx-avatar size="40" [name]="userDetails?.first_name + ' ' + userDetails?.last_name"></ngx-avatar> -->
+      <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">{{userDetails?.first_name + ' ' + userDetails?.last_name |
+          titlecase}}</span><br><span class="user-role">{{getRoleName(userDetails?.role) |
+            titlecase}}</span></p>
+    </div>
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="navigateToProfile()">My Account</button>

@@ -2,7 +2,7 @@
 
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 6px;">
                 <div class="row px-2">
                     <div class="col-md-6">
                         <h3 class="text-bold">Progress Chart</h3>
@@ -19,7 +19,7 @@
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6 white-bg p-2 user-db-card h-100" style="border-radius: 5px;">
+                    <div class="col-md-6 white-bg p-2 user-db-card h-100" style="border-radius: 6px;">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 class="text-bold">Task By Analyst</h3>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-6" style="padding-right: 0;">
                         <div class="row margin-left me-0">
-                            <div class="col-md-12 white-bg p-2 user-db-card h-100" style="border-radius: 5px;">
+                            <div class="col-md-12 white-bg p-2 user-db-card h-100" style="border-radius: 6px;">
                                 <div class="row ms-0">
                                     <div class="col-md-6">
                                         <h3 class="text-bold">Test Type</h3>
@@ -115,7 +115,7 @@
                     <div class="card-body">
                         <p>Total Request</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <!-- [style.height.%]="height"  -->
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -129,7 +129,7 @@
                     <div class="card-body">
                         <p>Completed</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.completed}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -142,7 +142,7 @@
                     <div class="card-body">
                         <p>Pending</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-warning" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)"
                                 style="background-color: #FF9020;" aria-valuenow="25" aria-valuemin="0"
@@ -157,7 +157,7 @@
                     <div class="card-body">
                         <p>Not Verified</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.not_verified,dashboardStatus?.total_request)"
                                 style="background-color: #cdb4db !important;" aria-valuenow="25"
@@ -172,7 +172,7 @@
                     <div class="card-body">
                         <p>Rejected</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.reject,dashboardStatus?.total_request)"
                                 style="background-color: #8E4CF7 !important;" aria-valuenow="25"
@@ -187,7 +187,7 @@
                     <div class="card-body">
                         <p>Recheck</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3>
-                        <div class="progress mt-3" style="height: 5.5px;">
+                        <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -200,7 +200,7 @@
                 <div class="row mt-4">
                     <div class="col-md-12 ">
                         <div class="row ms-0">
-                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 6px;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h3 class="text-bold">Verification Report</h3>
@@ -268,7 +268,7 @@
         
                     <div class="col-md-12 mt-4 ">
                         <div class="row ms-0">
-                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 6px;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h3 class="text-bold">Report Generated</h3>
@@ -303,7 +303,7 @@
 </div>
 
 <div class="row" *ngIf="isDashboardStatus">
-    <div class="col-md-12 bg-white text-center p-2 py-5 user-db-card" style="border-radius: 5px; height: 20vh;">
+    <div class="col-md-12 bg-white text-center p-2 py-5 user-db-card" style="border-radius: 6px; height: 20vh;">
         <div class="spinner-border text-dark" role="status">
             <span class="sr-only">Loading...</span>
         </div>

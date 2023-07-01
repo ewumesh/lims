@@ -21,7 +21,7 @@ export class StatusHandlerDirective implements OnChanges {
         this.el.nativeElement.style.background = '#36b37e';
         this.el.nativeElement.style.height = '28px';
         this.el.nativeElement.style.width = '50%';
-        this.el.nativeElement.style.padding = '0px 20px';
+        this.el.nativeElement.style.padding = '0px 20px!important';
         this.el.nativeElement.style.display = 'flex';
         this.el.nativeElement.style.justifyContent = 'center';
         this.el.nativeElement.style.alignItems = 'center';

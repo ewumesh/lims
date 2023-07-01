@@ -1,5 +1,5 @@
 <div class="bd-navbar bg-white">
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg pt-0">
     <div class="container-fluid" style="padding-right: 0 !important; padding-left: 0;">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
 
           <li
             *ngIf="(userDetails?.role === 2 || userDetails?.role === 5 || userDetails?.role === 1) && userDetails.is_verified"
-            class="nav-item add-sample-item m-0">
+            class="nav-item add-sample-item m-0" style="margin-bottom: 5px!important;">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/add-sample'}"
               aria-current="page" href="Javascript:;" (click)="navigate('/dashboard/add-sample')" id="add-sample">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="add"></mat-icon>
@@ -462,7 +462,7 @@
     </div>
   </nav>
 
-<a href="https://kantipurinfotech.com/" style="text-decoration: none;">
+<a href="https://kantipurinfotech.com/" target="_blank" style="text-decoration: none;">
   <div class="navbar navbar-expand-lg kit-footer">
     <div class="kit-logo">
       <div class="kit-logo-container">

@@ -1,0 +1,389 @@
+table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  /* // tr.example-element-row:not(.example-expanded-row):hover {
+  //   background: #777;
+  // }
+  
+  // tr.example-element-row:not(.example-expanded-row):active {
+  //   background: #efefef;
+  // } */
+  
+  th {
+    border: 1px solid #0000002d;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+  
+  mat-icon {
+    cursor: pointer;
+  }
+  
+  .mdc-data-table__cell {
+    border: 1px solid #e0e0e0 !important;
+  }
+  
+  
+  .custom-input {
+    padding-top: 10px !important;
+  }
+  
+  .mat-mdc-header-row {
+    background-color: #E7F0F7 !important;
+  }
+  
+  .custom-border {
+    border: 1px solid #0000002e !important;
+  }
+  
+  .paginator-border {
+    border: 1px solid #0000002e !important;
+  }
+  
+  .paginator {
+    ::ng-deep {
+      .mat-mdc-text-field-wrapper {
+        height: 30px !important;
+      }
+    }
+  }
+  
+  .expand-icon {
+    color: yellowgreen;
+  }
+  
+  .expanded-table {
+    th {
+      padding: 13px !important;
+    }
+  
+    td {
+      padding: 13px;
+    }
+  }
+  
+  
+  /* // additional css
+  // .form-container{
+  //   background: rgb(93 118 155 / 10%);
+  //   padding: 40px;
+  //   width: 30vw;
+  //   height: 100vh;
+  // }
+  ​ */
+  .login-intro{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .login-intro .lims{
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .divider{
+    color: rgba(0,0,0,0.4);
+    height: 1px;
+    width: 100%;
+  }
+  .login-intro>.login-detail{
+    font-size: 20px;
+    font-weight: 500;
+    color: #2260bf;
+  }
+  .np-logo{
+    width: 25%;
+    object-fit: cover;
+    padding: 10px;
+  }
+  input{
+    border-radius: 3px!important;
+    font-size: 16px!important;
+    padding: 12px!important;
+  }
+  input::placeholder{
+    font-size: 14px;
+  }
+  #login{
+    background: #2260bf!important;
+    color: #ffffff;
+  }
+  #login:focus{
+    box-shadow: none;
+    border: none;
+  }
+  .login-additional{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .login-additional>.fp{
+    color: #2260bf;
+    text-decoration: none;
+  }
+  .login-additional>.register{
+    color: #ffffff;
+    background: #2260bf;
+    padding: 8px 18px;
+    text-decoration: none;
+  }
+  /*End of Login*/
+  
+  .main.row{
+    margin-top: 2rem;
+    margin-bottom: 8rem;
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;
+    /* // max-height: 550px; */
+  }
+  
+  .form-container{
+    /* // max-width: 500px; */
+    /* // border-radius: 10px; */
+    padding: 40px;
+    /* // margin-top: 4rem; */
+  }
+  
+  .fp .mb-4 .ng-tns-c16-1{
+      color: #2260BF;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .register{
+  border-radius:4px;
+  }
+  .register:hover{
+  background-color:#1a4e9e;
+  }
+  .form-label{
+  margin-bottom:0;
+  }
+  .lims{
+  font-size:14px;
+  }
+  .login-detail{
+  font-size:16px;
+  }
+  .input#secfile2,
+  .subform[_ngcontent-serverApp-c19] input[type=file][_ngcontent-serverApp-c19]{
+  width:250px;
+  }
+  .subform[_ngcontent-serverApp-c19] button[type=button][_ngcontent-serverApp-c19]{
+  margin-left:13px;
+  border-radius:4px;
+  }
+  
+  .user-side-view {
+    background-color: #F1F5FF;
+    border-radius: 0 10px 10px 0;
+    padding: 40px;
+  
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #cccccc;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .user-side-view ul {
+    list-style-type: none;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 1rem 0;
+    padding: 0 10px;
+    overflow-y:scroll;
+    max-height: 390px;
+  }
+  
+  .user-side-view h4{
+    font-weight: 500;
+    font-family: poppins;
+  }
+  
+  .user-side-view ul li {
+    margin-top: 1rem;
+    font-size: 14px;
+  }
+  
+  .custom-bg{
+    background-color: #F8FAFF!important;
+  }
+  
+  .mainheader-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    align-items: center;
+  }
+  
+  .mainheader-top .GON-logo {
+    width: 117px;
+    height: 100px;
+  }
+  
+  .mainheader-top .flag {
+    width: 57px;
+    height: 80px;
+  }
+  
+  .mainheader-top-text {
+    text-align: center;
+  }
+  
+  .mainheader-top-text > *{
+    margin-bottom: 5px;
+  }
+  
+  .mainheader-top-text h4 {
+    color: #A40000;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25.5px;
+  }
+  
+  .mainheader-top-text h3 {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+    text-transform: capitalize;
+  }
+  
+  .mainheader-top-text h3 span {
+    font-weight: 700;
+    color: #1876D2;
+  }
+  
+  .mainheader-top-text p {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    text-transform: capitalize;
+  }
+  
+  .mainheader-nav {
+    background-color: #2460B9;
+  }
+  
+  .mainheader-nav .user-name {
+    display: flex;
+    max-width: 1300px;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .mainheader-nav .main-ul {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  
+  }
+  
+  .mainheader-nav .main-ul a {
+    text-decoration: none;
+    color: white;
+    padding: 20px 15px;
+  }
+  
+  .mainheader-nav .main-ul a:hover{
+    background-color:#133a75 ;
+  }
+  
+  .login-title{
+    margin-bottom: 1.3rem;
+  }
+  
+  .login-title h3 {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .login-title p {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+  
+  }
+  
+  footer {
+    height: 40px;
+    align-items: center;
+    background-color: red;
+    text-align: center;
+    color: white;
+  
+  }
+  
+  footer p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 12px;
+    a {
+      color: #fff;
+    }
+  }
+  
+  

@@ -223,7 +223,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
     let payload = {
       sample_form: this.sampleId,
-      parameters:parameters
+      parameters:parameters,
+      test_type: test_type
     }
 
     instance = this.dialog.open(AssignSampleComponent, {

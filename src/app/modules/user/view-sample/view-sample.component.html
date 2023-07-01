@@ -203,7 +203,7 @@
               <!-- <th>Formula</th> -->
               <!-- <th>Method</th> -->
               <!-- <th>Units</th> -->
-              <!-- <th>Price</th> -->
+              <th>Price</th>
               <!-- <th>Tested By</th> -->
               <!-- <th>Result</th> -->
               <!-- <th>Status</th> -->
@@ -212,6 +212,7 @@
               <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
+                <td>{{r.price}}</td>
                 <!-- <td>{{r.formula}}</td> -->
                 <!-- <td>
                   <span *ngIf="r.ref_test_method">

@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { ForgotPasswordService } from 'src/app/services/forgot-password/forgot-password.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [ForgotPasswordComponent],
@@ -17,7 +18,8 @@ import { ForgotPasswordService } from 'src/app/services/forgot-password/forgot-p
     MatInputModule,
     RouterModule.forChild([
       {path: '', component: ForgotPasswordComponent}
-    ])
+    ]),
+    MatMenuModule
    ],
   exports: [],
   providers: [ForgotPasswordService],

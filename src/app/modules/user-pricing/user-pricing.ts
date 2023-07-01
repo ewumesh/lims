@@ -106,9 +106,21 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
       category: c
     }
     this.pricingService.getAllCommodities(payload).subscribe(res=> {
-      this.dataSource.data = res.results;
+      // this.dataSource.data = res.results;
+      // this.isLoading = false;
+      // this.filterBtnLoading = false;
+
+      let allDatas = [];
+      res.results.forEach((element, index) => {
+        element.number = index+1;
+        allDatas.push(element);
+      });
+
+      this.dataSource.data = allDatas;
       this.isLoading = false;
       this.filterBtnLoading = false;
+
+      console.log(allDatas, "ASDASD")
     })
   }
 
@@ -121,8 +133,16 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
       category: ''
     }
     this.pricingService.getAllCommodities(payload).pipe(debounceTime(500)).subscribe(res=> {
-      this.dataSource.data = res.results;
+      
       this.isLoading = false;
+
+      let allDatas = [];
+      res.results.forEach((element, index) => {
+        element.number = index+1;
+        allDatas.push(element);
+      });
+
+      this.dataSource.data = allDatas;
     })
   }
 

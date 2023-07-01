@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [UserPricingComponent],
@@ -32,7 +33,8 @@ import { MatDividerModule } from '@angular/material/divider';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule
    ],
   exports: [],
   providers: [],

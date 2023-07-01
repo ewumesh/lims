@@ -14,5 +14,35 @@
 }
 }
 .user-role{
-  color: darkorange;
+  color: #FB802C;
+}
+.top-user-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 10px 10px;
+  border-radius: 12px;
+  background: #e7f0f7;
+  border-radius: 20vw;
+}
+.top-user-profile p{
+  font-family: Poppins!important;
+}
+.top-user-profile .user-role{
+  color: #FB802C;
+  text-transform: capitalize;
+}
+.top-user-profile:hover{
+  background: #2260bf;
+  color: #ffffff!important;
+}
+.top-user-profile:hover .user-role{
+  color: #ffffff!important;
+}
+
+.top-user-profile:hover .top-user-profile>p{
+  color: #ffffff!important;
+}
+.top-user-profile:hover .top-user-profile>.user-role{
+  color: #ffffff!important;
 }

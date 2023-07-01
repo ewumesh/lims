@@ -9,7 +9,7 @@
   position: fixed;
   z-index: 101;
 }
-.db-lims-logo, .db-user-profile{
+.db-lims-logo, .profile{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,16 +30,16 @@
   margin: 0;
 }
 
-.db-user-profile img{
+.profile img{
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
 }
-.db-user-profile p{
+.profile p{
   margin: 0;
   padding-left: 10px;
 }
-.db-user-profile p .username{
+.profile p .username{
   font-weight: 600;
   font-size: 16px;
 }
@@ -56,15 +56,26 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.bell-icon{
+  color: #2260bf!important;
+    font-size: 24px!important;
+}
 .notification-div{
   height: 40px;
   width: 40px;
-  background: #bed8ff;
+  background: #e7f0f7;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 14%;
 }
+.notification-div:hover{
+  background: #2260bf;
+}
+.notification-div:hover .bell-icon{
+  color: #ffffff!important;
+}
+
 .notification{
   font-size: 24px;
   color: #2260bf;
@@ -281,7 +292,7 @@ p.status{
 
 
 .mt-100 {
-  margin-top: 100px;
+  margin-top: 114px;
 }
 
 // breadcrumb
@@ -329,4 +340,21 @@ p.status{
 
 .child-icon {
   font-size: 10px !important;
+}
+.breadcrumb-text{
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0,0,0,1)
+}
+.breadcrumb-text-secondary{
+  color: rgba(0,0,0,0.8);
+  font-size: 14px;
+}
+.breadcrumb-text-third{
+  color: rgba(0,0,0,0.5);
+  font-size: 12px;
+}
+.breadcrumb-icon:hover{
+  background: #2260bf!important;
+  color: #ffffff!important;
 }
