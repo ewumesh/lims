@@ -24,6 +24,7 @@ export type ChartOptionsForBar = {
   xaxis: ApexXAxis;
   fill: ApexFill;
   title: ApexTitleSubtitle;
+  legend:any;
 };
 @Component({
   selector: 'supervisor-dashboard',
@@ -49,21 +50,29 @@ export class SupervisorDashboard implements OnInit {
 
 
     this.chartOptionsD = {
-      series: [44, 55, 13, 43, 22],
+      series: [44, 55, 13],
       chart: {
-        type: "donut"
+        type: "donut",
+        fontFamily: 'Poppins',
+        sparkline: {
+          enabled: true
+        }
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      labels: ["Chemical Test", "Microbiology Test", "Instrumental Test"],
+      
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 2000,
           options: {
+            colors: ['#3B82F6', '#F59E0B', '#14B8A6'],
             chart: {
-              width: 200
+              width: 300
             },
+            dataLabels:{enabled: false},
             legend: {
+              fontFamily: 'Poppins',
               position: "bottom"
-            }
+            },    
           }
         }
       ]
@@ -78,24 +87,27 @@ export class SupervisorDashboard implements OnInit {
       ],
       chart: {
         height: 300,
-        type: "bar"
+        type: "bar",
+        fontFamily: 'Poppins',
+        
       },
       plotOptions: {
         bar: {
+          borderRadius: 12,
           dataLabels: {
             position: "top" // top, center, bottom
           }
         }
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
         formatter: function (val) {
           return val + "%";
         },
         offsetY: -20,
         style: {
           fontSize: "12px",
-          colors: ["#304758"]
+          colors: ["#304758"],
         }
       },
 
@@ -107,16 +119,11 @@ export class SupervisorDashboard implements OnInit {
           "Wed",
           "Thu",
           "Fri",
-          "Sa",
-          // "Aug",
-          // "Sep",
-          // "Oct",
-          // "Nov",
-          // "Dec"
+          "Sat",
         ],
-        position: "top",
+        position: "bottom",
         labels: {
-          offsetY: -18
+          offsetY: 0,
         },
         axisBorder: {
           show: false
@@ -125,34 +132,16 @@ export class SupervisorDashboard implements OnInit {
           show: false
         },
         crosshairs: {
-          fill: {
-            type: "gradient",
-            gradient: {
-              colorFrom: "#D8E3F0",
-              colorTo: "#BED1E6",
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5
-            }
-          }
+          show: false,
         },
         tooltip: {
-          enabled: true,
+          enabled: false,
           offsetY: -35
         }
       },
       fill: {
-        type: "gradient",
-        gradient: {
-          shade: "light",
-          type: "horizontal",
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [50, 0, 100, 100]
-        }
+        type: "color",
+        
       },
       yaxis: {
         axisBorder: {
@@ -162,7 +151,8 @@ export class SupervisorDashboard implements OnInit {
           show: false
         },
         labels: {
-          show: false,
+          show: true,
+          
           formatter: function (val) {
             return val + "%";
           }
@@ -176,7 +166,9 @@ export class SupervisorDashboard implements OnInit {
         style: {
           color: "#444"
         }
-      }
+      },
+      
+      
     };
   }
 
@@ -205,18 +197,24 @@ export class SupervisorDashboard implements OnInit {
       series: this.pieSeries,
       chart: {
         width: 350,
-        type: "pie"
+        type: "pie",
+        fontFamily: 'Poppins',
       },
-      labels: ["Completed", "Pending", "Not Verified", "Recheck"],
+      labels: ["Completed", "Pending", "Not Verified", "Recheck", "Rejected"],
+      
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 2000,
+          
           options: {
+            colors: ['#00c853', '#ffc107', '#3f51b5', '#ff718b', '#f44336'],
             chart: {
-              width: 200
+              width: 450
             },
+            dataLabels:{enabled: false},
             legend: {
-              position: "top"
+              fontFamily: 'Poppins',
+              position: "bottom"
             }
           }
         }

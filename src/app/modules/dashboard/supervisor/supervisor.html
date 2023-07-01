@@ -1,25 +1,121 @@
 <div *ngIf="!isDashboardStatus" class="row">
-    <div class="col-md-6 bg-white p-2" style="border-radius: 5px;">
-        <div class="row px-2">
-            <div class="col-md-6">
-                <h3 class="text-bold">Progress Chart</h3>
-            </div>
-            <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details
-                    <i class="fa fa-external-link"></i></a></div>
-        </div>
-        <div id="chart">
-            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
-                [responsive]="chartOptions.responsive"></apx-chart>
-        </div>
-    </div>
+
     <div class="col-md-6">
         <div class="row">
+            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+                <div class="row px-2">
+                    <div class="col-md-6">
+                        <h3 class="text-bold">Progress Chart</h3>
+                    </div>
+        
+                </div>
+                <div id="chart">
+                    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+                        [responsive]="chartOptions.responsive"></apx-chart>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6 white-bg p-2 user-db-card h-100" style="border-radius: 5px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="text-bold">Task By Analyst</h3>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="db-table-heading">
+                                    <td>Analyst</td>
+                                    <td> Task</td>
+                                    <td class="text-center">Completed</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Subarna Bhandari</td>
+                                    <td>20</td>
+                                    <td class="text-center">
+                                        <span style="background-color: #8E4CF7;" class="badge badge-primary">20</span>
+                                    </td>
+        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6" style="padding-right: 0;">
+                        <div class="row margin-left me-0">
+                            <div class="col-md-12 white-bg p-2 user-db-card h-100" style="border-radius: 5px;">
+                                <div class="row ms-0">
+                                    <div class="col-md-6">
+                                        <h3 class="text-bold">Test Type</h3>
+                                    </div>
+                                    <div class="col-md-6 text-end"><a style="text-decoration: none;" class=""
+                                            href="Javascript:;">View
+                                            Details
+                                            <i class="fa fa-external-link"></i></a></div>
+        
+                                    <div class="col-md-12"> 
+                                        <div id="chartD">
+                                            <apx-chart [series]="chartOptionsD.series" [chart]="chartOptionsD.chart"
+                                                [labels]="chartOptionsD.labels"
+                                                [responsive]="chartOptionsD.responsive"></apx-chart>
+                                        </div>
+        
+                                        <table class="table  mt-4">
+                                            <thead>
+                                                <tr class="db-table-heading">
+                                                    <td>Test Type</td>
+                                                    <td class="text-center">Percentage(%)</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="test-type chemical"><span class="material-icons">
+                                                        circle
+                                                        </span>Chemical</td>
+                                                    <td class="text-center">20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="test-type micro"><span class="material-icons">
+                                                        circle
+                                                        </span>Microbiological</td>
+                                                    <td class="text-center">20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="test-type instrumental"><span class="material-icons">
+                                                        circle
+                                                        </span>Instrumental</td>
+                                                    <td class="text-center">20</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+        
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    
+    
+    <div class="col-md-6">
+        <div class="row ms-0">
             <div class="col-md-6">
-                <div class="card" style="height: auto !important;">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Total Request</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <!-- [style.height.%]="height"  -->
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%;" aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -28,12 +124,12 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card" style="height: auto !important;">
+            <div class="col-md-6 pe-0">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Completed</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.completed}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -42,11 +138,11 @@
             </div>
 
             <div class="col-md-6 mt-4">
-                <div class="card" style="height: auto !important;">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Pending</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <div class="progress-bar bg-warning" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)"
                                 style="background-color: #FF9020;" aria-valuenow="25" aria-valuemin="0"
@@ -56,12 +152,12 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mt-4">
-                <div class="card" style="height: auto !important;">
+            <div class="col-md-6 mt-4 pe-0">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Not Verified</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.not_verified,dashboardStatus?.total_request)"
                                 style="background-color: #cdb4db !important;" aria-valuenow="25"
@@ -72,11 +168,11 @@
             </div>
 
             <div class="col-md-6 mt-4">
-                <div class="card" style="height: auto !important;">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Rejected</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.reject,dashboardStatus?.total_request)"
                                 style="background-color: #8E4CF7 !important;" aria-valuenow="25"
@@ -86,12 +182,12 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mt-4">
-                <div class="card" style="height: auto !important;">
+            <div class="col-md-6 mt-4 pe-0">
+                <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Recheck</p>
                         <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3>
-                        <div class="progress" style="height: 5px;">
+                        <div class="progress mt-3" style="height: 5.5px;">
                             <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -99,144 +195,118 @@
                 </div>
             </div>
         </div>
+        <div class="row ms-0">
+            <div class="col-md-12">
+                <div class="row mt-4">
+                    <div class="col-md-12 ">
+                        <div class="row ms-0">
+                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="text-bold">Verification Report</h3>
+                                    </div>
+                                    <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details
+                                            <i class="fa fa-external-link"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                        <div style="background-color: #FF718B; height: 30px;border-radius: 10px; margin-right: 1%; width: 10%;"></div>
+                                        <div style="background-color: #FFEB3A; height: 30px; border-radius: 10px; margin-right: 1%; width: 30%;"></div>
+                                        <div style="background-color: #7FE47E ; height: 30px; border-radius: 10px; width: 60%;"></div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-12 pt-2">
+                                        <div class="d-flex justify-content-between" style="width: 40%;">
+                                            <div class="text-start">
+                                                Not Send
+                                                <div class="text-start">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                                    <g id="Negative Icon">
+                                                    <path id="Vector" d="M12.981 0.484619C19.8248 0.484619 25.4785 6.09733 25.4785 12.874C25.4692 20.048 20.0691 25.4872 12.9623 25.4686C5.85547 25.4499 0.464733 19.9566 0.500174 12.8087C0.531884 6.07122 6.19123 0.484619 12.981 0.484619ZM12.9623 22.3516C18.09 22.3666 22.2888 18.2685 22.3056 13.2396C22.3205 7.73694 18.4183 3.69855 13.0668 3.67989C7.71519 3.66124 3.6656 7.68844 3.65255 12.9952C3.64615 14.222 3.88232 15.4378 4.34745 16.573C4.81259 17.7081 5.49752 18.7401 6.36287 19.6096C7.22822 20.4791 8.25691 21.169 9.3898 21.6396C10.5227 22.1101 11.7374 22.3521 12.9642 22.3516H12.9623Z" fill="#FF718B"/>
+                                                    <path id="Vector_2" d="M15.8553 17.4888C14.9935 17.403 14.3891 17.2184 13.8314 17.3135C12.962 17.4372 12.117 17.6946 11.3263 18.0764C10.2724 18.6267 9.38825 18.636 8.86036 17.847C8.30077 17.0057 8.57497 16.0936 9.61768 15.4351C11.6322 14.1649 13.7904 13.7452 16.1052 14.4167C17.023 14.6816 17.437 15.3773 17.2766 16.2484C17.2293 16.5919 17.0594 16.9067 16.7982 17.1347C16.5369 17.3627 16.202 17.4885 15.8553 17.4888V17.4888Z" fill="#FF718B"/>
+                                                    <path id="Vector_3" d="M9.8289 8.3228C10.2507 8.31967 10.6569 8.48163 10.9609 8.77407C11.2648 9.0665 11.4423 9.46622 11.4554 9.88779C11.4292 10.2924 11.2588 10.6741 10.975 10.9637C10.6913 11.2532 10.3131 11.4314 9.9091 11.4658C9.50414 11.4611 9.11584 11.3039 8.82163 11.0256C8.52742 10.7473 8.34892 10.3683 8.32173 9.96427C8.30419 9.75559 8.33012 9.54554 8.39787 9.34739C8.46562 9.14924 8.57373 8.96729 8.71536 8.81304C8.85699 8.65878 9.02908 8.53557 9.22074 8.45119C9.4124 8.36681 9.61948 8.32309 9.8289 8.3228V8.3228Z" fill="#FF718B"/>
+                                                    <path id="Vector_4" d="M16.0664 11.4492C15.6442 11.4371 15.2433 11.2608 14.9489 10.9577C14.6546 10.6547 14.4901 10.2489 14.4902 9.82642C14.5252 9.42325 14.7069 9.04692 15.0008 8.76878C15.2948 8.49064 15.6806 8.33003 16.0851 8.31738C16.2948 8.31724 16.5024 8.35941 16.6955 8.44137C16.8886 8.52332 17.0631 8.64339 17.2087 8.79437C17.3543 8.94535 17.4679 9.12416 17.5428 9.32008C17.6177 9.516 17.6522 9.72501 17.6445 9.9346C17.6276 10.3419 17.454 10.7269 17.1599 11.0092C16.8658 11.2914 16.474 11.4491 16.0664 11.4492V11.4492Z" fill="#FF718B"/>
+                                                    </g>
+                                                    </svg> <span class="number">21</span> 
+                                                </div>
+                                            </div>
+                                            <div class="text-start">
+                                                Not Verified
+                                                <div class="text-start">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                                    <g id="Neutral Icon">
+                                                    <path id="Vector" d="M0.5 12.8423C0.5 6.07494 6.17425 0.475304 13.0255 0.484631C19.8115 0.484631 25.4652 6.10479 25.4764 12.8404C25.4895 19.992 20.067 25.4648 12.9789 25.4685C5.89073 25.4722 0.5 20.0237 0.5 12.8423ZM12.9509 22.3553C18.0133 22.3814 22.2961 18.261 22.324 13.3403C22.3539 7.81154 18.4181 3.70601 13.0647 3.68363C7.75043 3.66124 3.78293 7.6362 3.64677 12.9001C3.52179 17.7555 7.64411 22.4467 12.9509 22.3516V22.3553Z" fill="#FFEB3A"/>
+                                                    <path id="Vector_2" d="M12.9176 17.8356C11.5522 17.8356 10.1868 17.8505 8.8233 17.8356C7.76381 17.8207 7.14453 17.2219 7.14453 16.2688C7.14453 15.3156 7.7806 14.687 8.8233 14.6795C11.6138 14.6609 14.4049 14.6609 17.1966 14.6795C18.2356 14.6795 18.8213 15.3193 18.8064 16.3023C18.7933 17.2443 18.2282 17.8132 17.2078 17.8319C15.7697 17.8617 14.3427 17.8356 12.9176 17.8356Z" fill="#FFEB3A"/>
+                                                    <path id="Vector_3" d="M9.73631 11.4675C9.33054 11.4613 8.94195 11.3027 8.64783 11.0231C8.35371 10.7435 8.1756 10.3634 8.14894 9.95846C8.13303 9.74994 8.16031 9.54038 8.22908 9.34288C8.29785 9.14539 8.40663 8.96421 8.54862 8.81067C8.6906 8.65713 8.86274 8.53453 9.05426 8.45055C9.24578 8.36657 9.45257 8.32301 9.6617 8.32259C10.0676 8.31855 10.4599 8.46889 10.7591 8.74318C11.0583 9.01746 11.2421 9.3952 11.2733 9.79991C11.2773 10.2212 11.1205 10.6282 10.835 10.938C10.5494 11.2478 10.1565 11.4371 9.73631 11.4675V11.4675Z" fill="#FFEB3A"/>
+                                                    <path id="Vector_4" d="M15.8742 8.32267C16.0762 8.31266 16.2783 8.34294 16.4686 8.41175C16.6589 8.48056 16.8335 8.58653 16.9825 8.72349C17.1314 8.86045 17.2516 9.02566 17.3361 9.20951C17.4206 9.39336 17.4677 9.59218 17.4746 9.79439C17.4895 10.2179 17.3383 10.6306 17.0532 10.9442C16.7681 11.2578 16.3718 11.4476 15.9488 11.4732C15.128 11.4937 14.3129 10.6972 14.3204 9.87647C14.3403 9.4708 14.5103 9.08704 14.7975 8.79984C15.0847 8.51265 15.4685 8.34256 15.8742 8.32267V8.32267Z" fill="#FFEB3A"/>
+                                                    </g>
+                                                    </svg> <span class="number">31</span> 
+                                                </div>
+                                            </div>
+                                            <div class="text-start">
+                                                Verified
+                                                <div class="text-start">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                                    <g id="Positive Icon">
+                                                    <path id="Vector" d="M12.9546 25.4684C5.8273 25.4591 0.488826 20.0441 0.500018 12.8366C0.511209 6.12154 6.19104 0.484619 12.9658 0.484619C19.7704 0.484619 25.495 6.14579 25.4782 12.8926C25.4689 20.0796 20.0856 25.4796 12.9546 25.4684ZM3.67102 13.1407C3.53485 17.345 6.94275 22.4019 12.977 22.4112C18.6997 22.4112 22.3035 17.7778 22.3203 13.1556C22.337 7.76674 18.2427 3.64257 12.9434 3.67428C7.6441 3.70599 3.67102 7.75927 3.67102 13.1407Z" fill="#7FE47E"/>
+                                                    <path id="Vector_2" d="M12.9353 19.4957C10.6018 19.4957 8.59848 18.1247 7.82625 16.0132C7.45319 14.9966 7.78335 14.0472 8.61527 13.7394C9.51248 13.4074 10.3369 13.8121 10.7473 14.8418C11.1577 15.8714 11.915 16.334 12.967 16.3564C14.019 16.3788 14.7838 15.8211 15.2259 14.8642C15.7202 13.7916 16.5316 13.3719 17.4195 13.7636C18.2402 14.1236 18.5032 15.0302 18.091 16.0803C17.2591 18.2049 15.3117 19.5106 12.9353 19.4957Z" fill="#7FE47E"/>
+                                                    <path id="Vector_3" d="M11.2792 9.91745C11.2798 10.3215 11.1254 10.7104 10.8478 11.004C10.5701 11.2976 10.1905 11.4735 9.78698 11.4955C9.57835 11.5125 9.36847 11.4861 9.17053 11.418C8.9726 11.3499 8.79091 11.2416 8.6369 11.0998C8.48288 10.9581 8.35988 10.786 8.27563 10.5944C8.19139 10.4028 8.14772 10.1958 8.14738 9.98647C8.13486 9.78582 8.16369 9.58475 8.23207 9.3957C8.30045 9.20666 8.40694 9.03367 8.54492 8.88747C8.6829 8.74127 8.84944 8.62497 9.03422 8.54577C9.219 8.46658 9.41807 8.42618 9.6191 8.42708C10.5723 8.3935 11.255 9.01465 11.2792 9.91745Z" fill="#7FE47E"/>
+                                                    <path id="Vector_4" d="M17.4743 9.95469C17.477 10.1636 17.4365 10.3708 17.3555 10.5633C17.2745 10.7559 17.1545 10.9297 17.0033 11.0738C16.852 11.2178 16.6726 11.3292 16.4764 11.4008C16.2801 11.4724 16.0712 11.5027 15.8626 11.4898C15.4584 11.4712 15.0756 11.3024 14.7892 11.0164C14.5028 10.7304 14.3335 10.3478 14.3145 9.9435C14.3182 9.73447 14.364 9.52833 14.4491 9.3374C14.5343 9.14647 14.657 8.97466 14.8101 8.83224C14.9631 8.68982 15.1433 8.57971 15.3399 8.50848C15.5364 8.43725 15.7453 8.40637 15.954 8.41768C16.1566 8.41218 16.3582 8.4483 16.5462 8.52381C16.7342 8.59932 16.9048 8.71262 17.0473 8.85669C17.1898 9.00076 17.3012 9.17255 17.3746 9.36141C17.4481 9.55027 17.482 9.7522 17.4743 9.95469V9.95469Z" fill="#7FE47E"/>
+                                                    </g>
+                                                    </svg> <span class="number">61</span> 
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-12 mt-4 ">
+                        <div class="row ms-0">
+                            <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 5px;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="text-bold">Report Generated</h3>
+                                    </div>
+                                    <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details
+                                            <i class="fa fa-external-link"></i></a></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="chartB">
+                                            <apx-chart
+                                              [series]="chartOptionsB.series"
+                                              [chart]="chartOptionsB.chart"
+                                              [dataLabels]="chartOptionsB.dataLabels"
+                                              [plotOptions]="chartOptionsB.plotOptions"
+                                              [yaxis]="chartOptionsB.yaxis"
+                                              [xaxis]="chartOptionsB.xaxis"
+                                              [fill]="chartOptionsB.fill"
+                                              [title]="chartOptionsB.title"
+                                            ></apx-chart>
+                                          </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <div class="row" *ngIf="isDashboardStatus">
-    <div class="col-md-12 bg-white text-center p-2 py-5" style="border-radius: 5px; height: 20vh;">
+    <div class="col-md-12 bg-white text-center p-2 py-5 user-db-card" style="border-radius: 5px; height: 20vh;">
         <div class="spinner-border text-dark" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-md-6 bg-white p-2" style="border-radius: 5px;height: 599px;">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="text-bold">Task By Analyst</h3>
-                    </div>
-                    <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View
-                            Details
-                            <i class="fa fa-external-link"></i></a></div>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Analyst</td>
-                            <td> Task</td>
-                            <td class="text-center">Completed</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Subarna Bhandari</td>
-                            <td>20</td>
-                            <td class="text-center">
-                                <span style="background-color: #8E4CF7;" class="badge badge-primary">20</span>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-6" style="padding-right: 0;">
-                <div class="row m-0">
-                    <div class="col-md-12 bg-white p-2" style="border-radius: 5px; height: 599px">
-                        <div class="row ">
-                            <div class="col-md-6">
-                                <h3 class="text-bold">Test Type</h3>
-                            </div>
-                            <div class="col-md-6 text-end"><a style="text-decoration: none;" class=""
-                                    href="Javascript:;">View
-                                    Details
-                                    <i class="fa fa-external-link"></i></a></div>
-
-                            <div class="col-md-12"> 
-                                <div id="chartD">
-                                    <apx-chart [series]="chartOptionsD.series" [chart]="chartOptionsD.chart"
-                                        [labels]="chartOptionsD.labels"
-                                        [responsive]="chartOptionsD.responsive"></apx-chart>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="row m-0">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12 bg-white p-2" style="border-radius: 5px;">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 class="text-bold">Verification Report</h3>
-                            </div>
-                            <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details
-                                    <i class="fa fa-external-link"></i></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="d-flex">
-                                <div style="background-color: #FF718B; height: 30px;border-radius: 10px; margin-right: 1%; width: 10%;"></div>
-                                <div style="background-color: #FFEB3A; height: 30px; border-radius: 10px; margin-right: 1%; width: 30%;"></div>
-                                <div style="background-color: #7FE47E ; height: 30px; border-radius: 10px; width: 60%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 pt-2">
-                                <div class="d-flex">
-                                    <div class="text-left mx-1" style="width: 12%;">Not Send</div>
-                                    <div class="text-center mx-3" style="width: 20%;">Not Verified</div>
-                                    <div class="text-center mx-1" style="width: 20%;">Verified</div>
-                                </div>
-
-                                <div class="d-flex">
-                                    <div class="text-center mx-1" style="width: 12%;">😌</div>
-                                    <div class="text-center mx-3" style="width: 20%;">😓</div>
-                                    <div class="text-center mx-1" style="width: 20%;">😀</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 mt-3">
-                <div class="row">
-                    <div class="col-md-12 bg-white p-2" style="border-radius: 5px;">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3 class="text-bold">Report Generated</h3>
-                            </div>
-                            <div class="col-md-6 text-end"><a style="text-decoration: none;" class="" href="Javascript:;">View Details
-                                    <i class="fa fa-external-link"></i></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="chart">
-                                    <apx-chart
-                                      [series]="chartOptionsB.series"
-                                      [chart]="chartOptionsB.chart"
-                                      [dataLabels]="chartOptionsB.dataLabels"
-                                      [plotOptions]="chartOptionsB.plotOptions"
-                                      [yaxis]="chartOptionsB.yaxis"
-                                      [xaxis]="chartOptionsB.xaxis"
-                                      [fill]="chartOptionsB.fill"
-                                      [title]="chartOptionsB.title"
-                                    ></apx-chart>
-                                  </div>    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

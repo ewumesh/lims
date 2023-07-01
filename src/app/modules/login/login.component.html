@@ -1,43 +1,61 @@
 <header>
   <div class="custom-bg">
-  <div class="container ">
+    <div class="container ">
       <div class="row">
-          <div class="mainheader-top">
-              <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
-              <div class="mainheader-top-text">
-                  <h4 class="pb-0 mb-0">Government of Nepal</h4>
-                  <span>Ministry of Agriculture and Livestock Development</span>
-                  <div style="font-weight: 500;">Department of Food Technology and Quality Control</div>
-                  <h3><span> Laboratory Information Management System</span></h3>
+        <div class="mainheader-top">
+          <img class="GON-logo" src="../../../assets/nepal-government.png" alt="">
+          <div class="mainheader-top-text">
+            <h4 class="pb-0 mb-0">Government of Nepal</h4>
+            <span>Ministry of Agriculture and Livestock Development</span>
+            <div style="font-weight: 500;">Department of Food Technology and Quality Control</div>
+            <h3><span> Laboratory Information Management System</span></h3>
 
-              </div>
-              <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
           </div>
+          <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+        </div>
       </div>
-  </div>
+    </div>
 
-  <nav class="mainheader-nav">
+    <nav class="mainheader-nav">
       <div class="user-name">
-      <ul class="main-ul">
+        <ul class="main-ul">
           <a (click)="goToHome()" href="Javascript:;">
-              <li>Home</li>
+            <li>Home</li>
           </a>
           <a (click)="gotoPricing()" href="Javascript:;">
-              <li>Commodity List</li>
+            <li>Commodity List</li>
           </a>
-          <!-- <a href="">
-              <li>FAQ</li>
-          </a> -->
-      </ul>
-  </div>
-  </nav>
+          <a href="https://dftqc.gov.np/" target="_blank">
+            <li>DFDQC Website</li>
+          </a>
+          <a (click)="gotoComplain()" href="Javascript:;">
+            <li>Complain</li>
+          </a>
+          <a (click)="gotoFeedback()" href="Javascript:;">
+            <li>Feedback</li>
+          </a>
 
-</div>
+          <div class="dropdown show">
+            <a class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manual
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a (click)="gotoUserManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">User Manual</a>
+              <a (click)="gotoVideoManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">Video Manual</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
 
 </header>
 
 <div style="min-height: 85vh;" class="container d-flex justify-content-center">
-  <div class="main row " >
+  <div class="main row ">
     <div class="col-lg-6 login-side">
       <div class="form-container">
         <div class="login-title">
@@ -96,37 +114,39 @@
       </div>
     </div>
     <div class="col-lg-6 user-side-view">
-     <h4 style="color: red;">Web-enabled Laboratory Information Management System for Laboratory at
-      Department of Food Technology and Quality Control.</h4>
+      <h4 style="color: red;">Web-enabled Laboratory Information Management System for Laboratory at
+        Department of Food Technology and Quality Control.</h4>
       <ul>
-          <li>As mandated by the Government of Nepal, Department of Food Technology and Quality Control (DFTQC) is
-            the apex agency to ensure and enhance quality and safety of food and feed products in the country.
-          </li>
-          <li>This
-            includes functioning of food and feed safety and quality control, food and feed laboratories, food technology
-            development and nutrition, as well as SPS enquiry point and INFOSAN Emergency Contact Point. it is the
-            custodian of Food Act and Regulations as well as Feed Act and Regulations.
-          </li>
-          <li> DFTQC has been rendering its services through a network of offices with laboratories in the country where
-            food and feed products are inspected, sampled and tested. The mode of tracing tests samples through the
-            laboratory, dissemination and storing of test results so far have been manual.
-          </li>
-          <li>
-            However, considering the ever-
-            increasing number of samples to be tested and the need for faster dissemination of test results while
-            maintaining transparency and credibility of the process and confidentiality of the test results, the department
-            plans to replace the existing manual system by an automated Laboratory Information Management System
-            (LIMS).
-          </li>
-          <li>
-            In addition, the planned LIMS will also make it possible to analyze the test results collected over
-            time for resource planning and implementation of work under a risk management framework..
-          </li>
+        <li>As mandated by the Government of Nepal, Department of Food Technology and Quality Control (DFTQC) is
+          the apex agency to ensure and enhance quality and safety of food and feed products in the country.
+        </li>
+        <li>This
+          includes functioning of food and feed safety and quality control, food and feed laboratories, food technology
+          development and nutrition, as well as SPS enquiry point and INFOSAN Emergency Contact Point. it is the
+          custodian of Food Act and Regulations as well as Feed Act and Regulations.
+        </li>
+        <li> DFTQC has been rendering its services through a network of offices with laboratories in the country where
+          food and feed products are inspected, sampled and tested. The mode of tracing tests samples through the
+          laboratory, dissemination and storing of test results so far have been manual.
+        </li>
+        <li>
+          However, considering the ever-
+          increasing number of samples to be tested and the need for faster dissemination of test results while
+          maintaining transparency and credibility of the process and confidentiality of the test results, the
+          department
+          plans to replace the existing manual system by an automated Laboratory Information Management System
+          (LIMS).
+        </li>
+        <li>
+          In addition, the planned LIMS will also make it possible to analyze the test results collected over
+          time for resource planning and implementation of work under a risk management framework..
+        </li>
       </ul>
-  </div>
+    </div>
   </div>
 
 </div>
 <footer>
-  <p>© Laboratory Information Management System. All Right Reserved.Developed by  &nbsp;<a href="https://kantipurinfotech.com/"> Kantipur Infotech</a></p>
+  <p>© Laboratory Information Management System. All Right Reserved.Developed by &nbsp;<a
+      href="https://kantipurinfotech.com/"> Kantipur Infotech</a></p>
 </footer>

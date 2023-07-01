@@ -136,7 +136,7 @@
               {{sampleDetails?.created_date | date: 'medium'}}
             </h4>
             <h4 class="text-muted" *ngIf="!sampleDetails?.created_date">
-             N/A
+              N/A
             </h4>
           </div>
         </div>
@@ -222,7 +222,7 @@
           <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
           <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
         </div>
-        <hr class="m-0"/>
+        <hr class="m-0" />
       </div>
       <!-- <div class="row">
         <div class="col-md-4">
@@ -390,29 +390,91 @@
                     {{message?.messageBody}}
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <label for="user" class="form-label">Select User *</label>
-                  <mat-form-field class="w-100" appearance="outline">
-                    <mat-select placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
-                      <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
-                    </mat-select>
-                    <mat-error class="text-danger" *ngIf="displayMessage?.supervisor_user">{{displayMessage?.supervisor_user}}</mat-error>
-                  </mat-form-field>
-                </div>
+
+                <table class="table table-bordered" *ngIf="sampleDetails">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">S.N.</th>
+                      <th scope="col">Test Type</th>
+                      <th scope="col">Parameter</th>
+                      <th scope="col" class="text-center">Supervisor</th>
+                      <th class="text-center" scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let r of distributedSample?.bi; let i = index;">
+                      <tr>
+                        <td class="text-center">{{i+1}}</td>
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <span>
+                            {{r.test_type | titlecase}}
+                          </span>
+                        </td>
+                        <td>
+                          <span>{{r.name | titlecase}} </span>
+                        </td>
+                        <td class="text-center">
+                          <button (click)="assign(r.id)" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                        </td>
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        </td>
+                      </tr>
+                    </ng-container>
+
+                    <ng-container *ngFor="let r of distributedSample?.in; let i = index;">
+                      <tr>
+                        <td class="text-center">{{i+1}}</td>
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <span>
+                            {{r.test_type | titlecase}}
+                          </span>
+                        </td>
+                        <td>
+                          <span>{{r.name | titlecase}} </span>
+                        </td>
+                        <td class="text-center">
+                          <button (click)="assign()" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                        </td>
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        </td>
+                      </tr>
+                    </ng-container>
+
+                    <ng-container *ngFor="let r of distributedSample?.ch; let i = index;">
+                      <tr>
+                        <td class="text-center">{{i+1}}</td>
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <span>
+                            {{r.test_type | titlecase}}
+                          </span>
+                        </td>
+                        <td>
+                          <span>{{r.name | titlecase}} </span>
+                        </td>
+                        <td class="text-center">
+                          <button (click)="assign(r.id)" class="btn btn-primary btn-lims-primary btn-sm">Assign</button>
+                        </td>
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi.length">
+                          <button class="btn btn-primary btn-sm">Assign All</button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
 
                 <div class="col-md-12 text-end mt-4">
                   <button matStepperPrevious class="btn btn-secondary btn-sm mx-1">Back</button>
-
-
-                  <button (click)="assignToSupervisor()" class="btn btn-primary btn-sm">
-
+                  <!-- <button (click)="assignToSupervisor()" class="btn btn-primary btn-sm">
                     <span *ngIf="!isLoading">Submit</span>
-                      <span *ngIf="isLoading">
-                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                      </span>
-                  </button>
+                    <span *ngIf="isLoading">
+                      <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                    </span>
+                  </button> -->
 
-                  <button *ngIf="isProcceedForPayment" class="btn btn-danger btn-sm mx-1" (click)="back()">Cancel</button>
+                  <button *ngIf="isProcceedForPayment" class="btn btn-danger btn-sm mx-1"
+                    (click)="back()">Cancel</button>
                 </div>
               </form>
             </div>
@@ -422,8 +484,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 text-end mt-3">
+  <div class="row m-0" *ngIf="!isProcceedForPayment">
+    <div class="col-md-12 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
       <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
     </div>
   </div>

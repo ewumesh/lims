@@ -1,11 +1,70 @@
 #chart {
-    max-width: 380px;
-    margin: 35px auto;
+    max-width: 450px;
+    margin: 0px auto;
     padding: 0;
   }
   
-  #chartB {
-    max-width: 650px;
-    margin: 35px auto;
+  #chartD {
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
   }
-  
+  #chartB{
+    max-width: 900px;
+  }
+  .card-body{
+    padding: 0!important;
+  }
+  .card-body p{
+    font-weight: 500;
+  }
+  .card-body h3{
+    font-size: 24px;
+    font-weight: 500!important;
+  }
+ 
+
+  .user-db-card{
+    padding: 24px!important;
+    border: none;
+  }
+  .text-bold{
+    font-weight: 500;
+    font-family: Poppins;
+  }
+  .db-table-heading td{
+    font-family: Poppins;
+    text-decoration: capitalize!important;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+  td{
+    vertical-align: middle;
+  }
+  .badge-primary{
+    background: #0065ff!important;
+    color: #ffffff;
+    font-size: 12px!important;
+    padding: 10px 14px!important;
+    border-radius: 6px!important;
+  }
+  .margin-left{
+    margin-left: 0.8rem!important;
+  }
+  .test-type  span{
+    font-size: 12px;
+    margin-right: 10px;
+  }
+  .chemical span{
+    color: #3B82F6;
+  }
+  .micro span{
+    color: #F59E0B;
+  }
+  .instrumental span{
+    color: #14B8A6;
+  }
+  .number{
+    font-weight: 600;
+    margin-left: 10px;
+  }

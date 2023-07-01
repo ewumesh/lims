@@ -22,8 +22,9 @@
       </mat-menu>
     </div>
     <img style="height: 50px;" [matMenuTriggerFor]="menu" class="cursor-pointer" src="../../../assets/profile.jpg" alt="">
+    <!-- <ngx-avatar size="40" [name]="userDetails?.first_name + ' ' + userDetails?.last_name"></ngx-avatar> -->
     <p [matMenuTriggerFor]="menu" class="cursor-pointer"><span class="username">{{userDetails?.first_name |
-        titlecase}}</span><br>{{getRoleName(userDetails?.role)}}</p>
+        titlecase}}</span><br><span class="user-role">{{getRoleName(userDetails?.role)}}</span></p>
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="navigateToProfile()">My Account</button>

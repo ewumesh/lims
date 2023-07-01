@@ -17,13 +17,13 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
   users: any[] = [];
   isLoading: boolean = false;
 
-      // Used for form validation
-      genericValidator: GenericValidator;
-      displayMessage: any = {};
-      @ViewChildren(FormControlName, { read: ElementRef })
-      private formInputElements: ElementRef[];
+  // Used for form validation
+  genericValidator: GenericValidator;
+  displayMessage: any = {};
+  @ViewChildren(FormControlName, { read: ElementRef })
+  private formInputElements: ElementRef[];
 
-      message: any
+  message: any
 
   constructor(
     private fb: FormBuilder,
@@ -63,7 +63,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
 
   private initForm() {
     this.form = this.fb.group({
-      supervisor_user: ['',Validators.required],
+      supervisor_user: ['', Validators.required],
       form_available: '',
       sample_form: '',
 
@@ -72,6 +72,14 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  assignSampleToSupervisor() {
+    let payload = this.data;
+    payload.supervisor_user = this.form.value.supervisor_user;
+    this.service.assignParameterToSupervisor(payload).subscribe(res => {
+      console.log(res, 'Assigned..')
+    })
   }
 
   submit() {
@@ -97,39 +105,39 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       this.dismissMessage();
     },
-    (error) => {
-      this.isLoading = false;
-      if (error.status === 400) {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'All the field(s) are not valid.');
+      (error) => {
+        this.isLoading = false;
+        if (error.status === 400) {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'All the field(s) are not valid.');
 
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      } else if (error.status === 500 && error.status > 500) {
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        } else if (error.status === 500 && error.status > 500) {
 
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          'Internal Server Error');
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            'Internal Server Error');
 
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
 
 
-      } else {
-        this.toast.showToast(
-          TOAST_STATE.danger,
-          error?.error?.error);
+        } else {
+          this.toast.showToast(
+            TOAST_STATE.danger,
+            error?.error?.error);
 
-        setTimeout(() => {
-          this.dismissMessage();
-        }, 3000);
-      }
-      this.isLoading = false;
+          setTimeout(() => {
+            this.dismissMessage();
+          }, 3000);
+        }
+        this.isLoading = false;
 
-    })
+      })
   }
 
   private dismissMessage(): void {
@@ -145,6 +153,6 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-      this.validation();
+    this.validation();
   }
 }

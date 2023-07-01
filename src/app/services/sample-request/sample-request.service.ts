@@ -35,6 +35,10 @@ export class SampleRequestsService {
     return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
   }
 
+  assignParameterToSupervisor(payload): Observable<any> {
+    return this.http.post(`${this.url}/api/supervisors-have-parameter/`, payload)
+  }
+
   // #report_type:['pdf','excel','csv']
 // #report_name:['admin-list','users-list','user-with-sample-form','sample-form','commodity','parameter']
 

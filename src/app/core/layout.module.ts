@@ -19,6 +19,7 @@ import { LayoutRoutingModule } from './layout.routing';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ViewImageComponent } from '../modules/my-account/view-image/view-image';
 import {MatListModule} from '@angular/material/list';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import {MatListModule} from '@angular/material/list';
     MatBadgeModule,
     MatMenuModule,
     LayoutRoutingModule,
-    MatListModule
+    MatListModule,
+
+    AvatarModule
 
   ],
   exports: [],

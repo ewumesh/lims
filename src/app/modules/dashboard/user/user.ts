@@ -12,10 +12,13 @@ import { DashboarService } from "src/app/services/dashboard/dashboard.service";
 import { TOAST_STATE, ToastService } from "src/app/shared/toastr/toastr.service";
 
 export type ChartOptions = {
-    series: ApexNonAxisChartSeries;
-    chart: ApexChart;
-    responsive: ApexResponsive[];
-    labels: any;
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  ApexPlotOptions:any;
+  labels: any;
+  legend:any;
+  plotOptions: any;
 };
 
 @Component({
@@ -157,17 +160,20 @@ export class UserDashboard implements OnInit {
             labels: ["Completed", "Pending", "Processing", "Recheck"],
             responsive: [
                 {
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: "top"
-                        }
-                    }
+                  breakpoint: 2000,
+                  options: {
+                    colors: ['#00c853', '#ffc107', '#3f51b5', '#ffc0cb'],
+                    chart: {
+                      width: 450
+                    },
+                    legend: {
+                      fontFamily: 'Poppins',
+                      position: "bottom"
+                    },
+                      
+                  }
                 }
-            ]
+              ]
         };
     }
 

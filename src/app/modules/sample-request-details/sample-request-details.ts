@@ -50,6 +50,12 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
   users: any[] = [];
 
+  distributedSample = {
+    ch: [],
+    bi:[],
+    in:[]
+  }
+
   constructor(
     private service: SampleRequestDetailsService,
     private route: ActivatedRoute,
@@ -160,11 +166,16 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     })
    }
 
-   assign() {
+   assign(parameter) {
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
+    let payload = {
+      sample_form: this.sampleId,
+      parameters:[parameter]
+    }
+
     instance = this.dialog.open(AssignSampleComponent, {
-      data: this.sampleDetails ? this.sampleDetails : null,
+      data: payload,
       width: '600px',
       autoFocus: false,
     })
@@ -188,12 +199,23 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
    }
 
   getSampleDetails() {
+    this.distributedSample = {ch: [], bi: [], in:[]};
     let payload = {
       id: this.sampleId
     }
     this.service.getSampleDetails(payload).subscribe(res => {
       this.sampleDetails = res;
-      // console.log(res, 'HAHAHAH')
+      console.log(res, 'HAHAHAH')
+
+      res.parameters.forEach(p => {
+        if(p.test_type === "Instrumental") {
+          this.distributedSample.in.push(p);
+        } else if(p.test_type === 'Biochemical') {
+          this.distributedSample.bi.push(p);
+        } else if(p.test_type === 'Chemical') {
+          this.distributedSample.ch.push(p);
+        }
+      });
     })
   }
 

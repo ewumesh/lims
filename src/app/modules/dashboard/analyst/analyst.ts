@@ -11,10 +11,13 @@ import {
 import { DashboarService } from "src/app/services/dashboard/dashboard.service";
 
 export type ChartOptions = {
-    series: ApexNonAxisChartSeries;
-    chart: ApexChart;
-    responsive: ApexResponsive[];
-    labels: any;
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  ApexPlotOptions:any;
+  labels: any;
+  legend:any;
+  plotOptions: any;
 };
 
 @Component({
@@ -127,17 +130,18 @@ export class AnalystDashboard implements OnInit {
             labels: ["Completed", "Pending", "Not Verified", "Recheck"],
             responsive: [
                 {
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: "top"
-                        }
+                  breakpoint: 2000,
+                  options: {
+                    chart: {
+                      width: 450
+                    },
+                    legend: {
+                      fontFamily: 'Poppins',
+                      position: "bottom"
                     }
+                  }
                 }
-            ]
+              ]
         };
     }
 }

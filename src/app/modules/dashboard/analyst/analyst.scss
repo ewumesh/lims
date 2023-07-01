@@ -1,6 +1,32 @@
 #chart {
-    max-width: 380px;
-    margin: 35px auto;
-    padding: 0;
-  }
-  
+  width: 450px;
+  margin: 0px auto;
+  padding: 0;
+}
+.user-db-card{
+  padding: 24px!important;
+  border: none;
+}
+.text-bold{
+  font-weight: 500;
+  font-family: Poppins;
+}
+.db-table-heading td{
+  font-family: Poppins;
+  text-decoration: capitalize!important;
+  font-weight: 500;
+  vertical-align: middle;
+}
+td{
+  vertical-align: middle;
+}
+.margin-left{
+  margin-left: 12px!important;
+}
+.badge-primary{
+  background: #0065ff!important;
+  color: #ffffff;
+  font-size: 12px!important;
+  padding: 10px 14px!important;
+  border-radius: 6px!important;
+}

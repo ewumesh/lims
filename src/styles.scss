@@ -136,3 +136,11 @@ body{
 .text-white {
   color: #fff !important;
 }
+.white-bg{
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+}
+.white-bg .mat-mdc-form-field-bottom-align{
+  height: 0;
+}

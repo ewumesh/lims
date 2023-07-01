@@ -10,7 +10,7 @@
         <li *ngFor="let item of responseError | keyvalue">
           {{item.key}}:{{item.value}}
         </li>
-      </div>
+      </div> 
     </div>
   </div>
   <!-- <div class="col-md-12 bg-white p-4">
@@ -107,6 +107,17 @@
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="group" placeholder="Select Role" multiple>
               <mat-option [value]="item.id" *ngFor="let item of roles">{{item.name | titlecase}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4" *ngIf="(userForm.get('role').value === 3)">
+          <label class="list-heading form-label">Select Test Type</label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select multiple formControlName="test_type" placeholder="Select Test type" multiple>
+              <mat-option [disabled]="userForm.get('test_type').value.includes(2)"  [value]="1">Chemical</mat-option>
+              <mat-option [disabled]="userForm.get('test_type').value.includes(3) || userForm.get('test_type').value.includes(1)" [value]="2">Microbiological</mat-option>
+              <mat-option [value]="3" [disabled]="userForm.get('test_type').value.includes(2)">Instrumental</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

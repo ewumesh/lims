@@ -61,6 +61,22 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/commodity-pricing']);
   }
 
+  gotoComplain() {
+    this.router.navigate(['/complain']);
+  }
+
+  gotoFeedback() {
+    this.router.navigate(['/feedback']);
+  }
+
+  gotoUserManual() {
+    this.router.navigate(['/user-manual']);
+  }
+
+  gotoVideoManual() {
+    this.router.navigate(['/video-manual']);
+  }
+
   ngOnInit(): void {
     this.getAllCommodities();
     this.initFilterForm();

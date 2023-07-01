@@ -25,9 +25,27 @@
           <a (click)="gotoPricing()" href="Javascript:;">
             <li>Commodity List</li>
           </a>
-          <!-- <a href="">
-              <li>FAQ</li>
-          </a> -->
+          <a href="https://dftqc.gov.np/" target="_blank">
+            <li>DFDQC Website</li>
+          </a>
+          <a (click)="gotoComplain()" href="Javascript:;">
+            <li>Complain</li>
+          </a>
+          <a (click)="gotoFeedback()" href="Javascript:;">
+            <li>Feedback</li>
+          </a>
+
+          <div class="dropdown show">
+            <a class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manual
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a (click)="gotoUserManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">User Manual</a>
+              <a (click)="gotoVideoManual()" href="Javascript:;" class="dropdown-item" href="Javascript:;">Video Manual</a>
+            </div>
+          </div>
         </ul>
       </div>
     </nav>

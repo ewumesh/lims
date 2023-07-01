@@ -5,6 +5,11 @@ import { AuthGuard } from './services/auth.guard';
 import { NotFoundComponent } from './components/not-found/404.component'
 
 const routes: Routes = [
+  { path: 'complain', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/complain/complain.module').then(b => b.ComplainModule) },
+  { path: 'feedback', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/feedback/feedback.module').then(b => b.FeedbackModule) },
+  { path: 'user-manual', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/manual/user-manual/user-manual.module').then(b => b.UserManualModule) },
+  { path: 'video-manual', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/manual/video-manual/video-manual.module').then(b => b.VideoManualModule) },
+
   { path: 'commodity-pricing', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/user-pricing/user-pricing.module').then(b => b.UserPricingModule) },
   { path: 'login', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/login/login.module').then(b => b.LoginModule) },
   { path: 'register', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/register/register.module').then(b => b.RegisterModule) },
