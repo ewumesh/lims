@@ -106,7 +106,7 @@
 
     <div class="row margin-bottom-24">
       <div class="col-md-12">
-        <div class="row padding-24 mx-0" style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px;">
+        <div class="row  mx-0" style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px; padding: 24px 0px;">
           <div class="col-md-3">
             <label for="email" class="col-form-label">Sample Type (नमुनाको प्रकार)*</label>
             <mat-form-field class="w-100" appearance="outline">
@@ -329,7 +329,7 @@
     <button type="button" class="btn btn-primary cancel-btn me-3" (click)="gotoDashboard()">
       <span>Cancel</span>
     </button>
-    <button [disabled]="(addSampleForm.invalid || (this.addSampleForm.value.isParameter === true && selection.selected.length < 1) )" type="submit" class="btn btn-primary submit-btn">
+    <button [disabled]="(addSampleForm.invalid || (this.addSampleForm.value.isParameter === true && selection.selected.length < 1) )" type="submit" class="btn btn-primary submit-btn" (click)="saveChanges()">
       <span *ngIf="!isSampleSent">Submit Sample</span>
         <span *ngIf="isSampleSent">
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

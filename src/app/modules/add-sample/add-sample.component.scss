@@ -61,13 +61,13 @@
 
 // Customized the material input
 .custom-input, .custom-select {
-  height: 55px!important;
+  height: 50px!important;
 }
 .mat-mdc-form-field-type-mat-input, .mat-mdc-form-field-type-mat-select, .mat-mdc-select-trigger{
-  height: 55px!important;
+  height: 50px!important;
 }
 .mat-mdc-text-field-wrapper {
-  height: 55px !important;
+  height: 50px !important;
 }
 .margin-bottom-24{
   margin-bottom: 24px!important;
@@ -86,10 +86,10 @@
   padding-top: 16px!important;
 }
 .mat-mdc-select-trigger{
-  height: 55px!important;
+  height: 50px!important;
 }
 .custom-select .mat-mdc-select-value{
-  height: 55px!important;
+  height: 50px!important;
 }
 
 .price-box{
@@ -148,4 +148,7 @@ label.mat-mdc-checkbox-1-input{
 }
 .mat-mdc-cell,.mat-mdc-header-cell {
   font-family: Poppins!important;
+}
+.col-form-label{
+  font-size: 12px!important;
 }
