@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SampleRequestDetailsService } from 'src/app/services/sample-request-details/sample-request-details.service';
 import { AssignSampleDialogComponent } from './payment/assign-sample-dialog.component';
 import { AssignSampleComponent } from './assign/assign-sample.component';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { MatStepper } from '@angular/material/stepper';
@@ -127,8 +127,31 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     this.assignSampleForm = this.fb.group({
       supervisor_user: ['',Validators.required],
       form_available: '',
-      sample_form: '',
+      sample_form: ''
+    })
+  }
 
+  get samplePaymentDetails(): FormArray {
+    return this.paymentForm.get('samplePayment') as FormArray;
+  }
+
+  addDocList() {
+    
+    // if (this.editPage) {
+    //   this.propertyDetail.push(this.createEditPageDocListArray());
+    // } else {
+      this.samplePaymentDetails.push(this.createPaymentDocList());
+    // }
+  }
+
+  createPaymentDocList() {
+    return this.fb.group({
+      voucher_number: new FormControl(''),
+      owner_email: new FormControl(''),
+      sample_form: new FormControl(''),
+      register_date: new FormControl(''),
+      amount: new FormControl(''),
+      file: new FormControl(''),
     })
   }
 
@@ -152,13 +175,17 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
    initPaymentForm() {
+    
     this.paymentForm = this.fb.group({
-      voucher_number: ['', Validators.required],
-      owner_email: [this.sampleDetails?.owner_user],
-      sample_form: [this.sampleDetails?.id],
-      register_date: ['', Validators.required],
-      amount: ['', Validators.required]
+      // voucher_number: ['', Validators.required],
+      // owner_email: [this.sampleDetails?.owner_user],
+      // sample_form: [this.sampleDetails?.id],
+      // register_date: ['', Validators.required],
+      // amount: ['', Validators.required],
+      samplePayment: new FormArray([]),
     })
+
+    this.addDocList();
   }
 
    pay() {
@@ -248,9 +275,10 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
    }
 
   ngOnInit(): void {
+    this.initPaymentForm();
     this.getSampleDetails();
     this.getCommodities();
-    this.initPaymentForm();
+    
     this.getUserList();
     this.initForm();
 

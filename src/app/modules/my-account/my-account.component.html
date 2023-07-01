@@ -7,35 +7,36 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <!-- <img src="../../../assets/profile.jpg" alt="" class="user-img mb-4"> -->
-
     <div class="change-password white-bg">
       <div class="row user-profile-detail">
         <div class="col-md-8 d-flex user-details-container">
           <div class="mx-1">
-            <ngx-avatar [name]="userFullName" [size]="100" ></ngx-avatar>
+            <ngx-avatar [name]="userFullName" [size]="100"></ngx-avatar>
 
           </div>
           <div style="padding-left: 1%;">
-            <h1 style="margin-bottom: 0;" class="user-name">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name}}
-              <!-- <mat-icon class="mt-2" *ngIf="accountDetails?.is_verified" [matTooltip]="'Verified'"
-                style="color: #00d566;">check_circle</mat-icon>
-              <span *ngIf="!accountDetails?.is_verified" class="badge badge-primary badge-sm p-1"
-                [matTooltip]="'Not Verified'" style="background-color:red; font-size: 10px;">Not Verified</span> -->
-              <span class="user-role" *ngIf="accountDetails && accountDetails?.role">{{getRoleName(accountDetails?.role) | titlecase}}<span class="material-icons ms-2 verified-icon">verified</span></span>
+            <h1 style="margin-bottom: 0;" class="user-name">{{accountDetails?.first_name | titlecase}}
+              {{accountDetails?.last_name}}
+              <span class="user-role" *ngIf="accountDetails && accountDetails?.role">{{getRoleName(accountDetails?.role)
+                | titlecase}}
+                <span *ngIf="accountDetails?.is_verified" class="material-icons ms-2 verified-icon">verified</span>
+              </span>
             </h1>
             <p class="mt-1 mb-0">Username: <span class="client-cat">{{accountDetails?.username}}</span></p>
-            <p class="mt-1 mb-0">Client Category: <span class="client-cat">
-              <span *ngIf="accountDetails?.client_category">
-              {{getClientCategoryName(accountDetails?.client_category)}}</span>
-              <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+            <p *ngIf="accountDetails.role === 5" class="mt-1 mb-0">Client Category: <span class="client-cat">
+                <span *ngIf="accountDetails?.client_category">
+                  {{getClientCategoryName(accountDetails?.client_category)}}</span>
+                <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
               </span>
             </p>
-            <p class="mt-2 mb-0">Test Type: <span class="chemical tt">Chemical Test</span> <span class="micro tt">Microbiological Test</span> <span class="instrumental tt">Instrumental Test</span></p>
+            <p *ngIf="userDetails.role === 4 || userDetails.role === 3" class="mt-2 mb-0">Test Type: 
+              <span *ngIf="userDetails.test_type.includes(1)" class="chemical tt">Chemical Test</span> 
+              <span *ngIf="userDetails.test_type.includes(2)" class="micro tt">Microbiological Test</span> 
+              <span *ngIf="userDetails.test_type.includes(3)" class="instrumental tt">Instrumental Test</span></p>
           </div>
         </div>
         <div class="col-md-4 d-flex justify-content-end align-items-center">
-          <button *ngIf="!isChangePassword"  (click)="changePassword()" type="button"
+          <button *ngIf="!isChangePassword" (click)="changePassword()" type="button"
             class="btn btn-primary change-password-btn">Change Password</button>
 
           <!-- <button *ngIf="isChangePassword" class="btn btn-primary mx-1"
@@ -124,14 +125,15 @@
             <div class="row">
               <div class="col-md-3">
                 <h3>
-                  <span class="title">Full Name</span> 
-                  <p class="detail">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name | titlecase}}</p>
+                  <span class="title">Full Name</span>
+                  <p class="detail">{{accountDetails?.first_name | titlecase}} {{accountDetails?.last_name | titlecase}}
+                  </p>
                 </h3>
               </div>
 
               <div class="col-md-3">
                 <h3>
-                  <span class="title">Email</span> 
+                  <span class="title">Email</span>
                   <p class="detail">{{accountDetails?.email}}</p>
                 </h3>
               </div>
@@ -140,22 +142,23 @@
                 <h3>
                   <span class="title">Phone Number</span>
                   <p class="detail"><span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
-                    <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span></p>
-                  
+                    <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
+                  </p>
+
                 </h3>
               </div>
 
-              
+
 
               <div class="col-md-3" *ngIf="accountDetails?.role === 5">
                 <h3>
                   <span class="title">Client Category</span>
                   <p class="detail">
                     <span
-                    *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
+                      *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
                     <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
                   </p>
-                  
+
                 </h3>
               </div>
 
@@ -169,21 +172,21 @@
             <div class="row">
               <div class="col-md-4">
                 <h3>
-                  <span class="title">Industry Name</span> 
+                  <span class="title">Industry Name</span>
                   <p class="detail">{{accountDetails?.department_name | titlecase}}</p>
                 </h3>
               </div>
 
               <div class="col-md-4">
                 <h3>
-                  <span class="title">Industry Address</span> 
+                  <span class="title">Industry Address</span>
                   <p class="detail">{{getIndustryName(accountDetails?.department_address)}}</p>
                 </h3>
               </div>
 
               <div class="col-md-4">
                 <h3>
-                  <span class="title">Registration Number</span> 
+                  <span class="title">Registration Number</span>
                   <p class="detail">{{accountDetails?.registration_number}}</p>
                 </h3>
               </div>
@@ -262,7 +265,8 @@
             <div class="col-md-4">
               <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
               <mat-form-field appearance="outline" class="w-100">
-                <input type="number" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+                <input type="number" class="custom-input" matInput formControlName="phone"
+                  placeholder="Enter your Full Name" />
                 <!-- <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
                   *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error> -->
               </mat-form-field>
@@ -271,7 +275,8 @@
             <div class="col-md-4">
               <label for="password" class="form-label">Username*</label>
               <mat-form-field appearance="outline" class="w-100">
-                <input class="custom-input" type="text" matInput formControlName="username" placeholder="Enter username" />
+                <input class="custom-input" type="text" matInput formControlName="username"
+                  placeholder="Enter username" />
                 <!-- <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
                   *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error> -->
               </mat-form-field>
@@ -281,7 +286,8 @@
               <label class="list-heading form-label">Client Category</label>
               <mat-form-field appearance="outline" class="custom-select w-100">
                 <mat-select formControlName="client_category" placeholder="Select Category">
-                  <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name | titlecase}}</mat-option>
+                  <mat-option [value]="item.id" *ngFor="let item of clientCategories">{{item.name |
+                    titlecase}}</mat-option>
                 </mat-select>
                 <!-- <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
                   *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error> -->
@@ -311,13 +317,14 @@
               <label for="exampleInputEmail1" class="form-label">Registration Number</label>
               <mat-form-field appearance="outline" class="w-100">
                 <input class="custom-input" matInput formControlName="registration_number"
-                  placeholder="Enter Registration Number"/>
+                  placeholder="Enter Registration Number" />
               </mat-form-field>
             </div>
 
             <div class="col-md-12 mb-1">
               <div *ngIf="userDetails?.role ===5">
-                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="accountDetails?.rew_document" />
+                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer"
+                  style="height: 60px;" [src]="accountDetails?.rew_document" />
               </div>
               <label for="file2">Registration Document*</label>
               <input (change)="uploadDocument($event)" class="form-control" type="file" />
@@ -325,8 +332,9 @@
             <div class=" col-md-12 mb-1">
 
               <div *ngIf="userDetails?.role ===5">
-                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="accountDetails?.registration_document" />
-                </div>
+                <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer"
+                  style="height: 60px;" [src]="accountDetails?.registration_document" />
+              </div>
               <label for="secfile2"> Renew Document*</label>
               <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
 
@@ -335,8 +343,8 @@
           </div>
           <div class="row">
             <div class="col-md-12 text-end">
-              <hr/>
-            <button class="btn btn-primary btn-sm" (click)="saveUserDetails()">Save</button>
+              <hr />
+              <button class="btn btn-primary btn-sm" (click)="saveUserDetails()">Save</button>
             </div>
           </div>
         </form>

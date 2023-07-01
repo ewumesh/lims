@@ -55,7 +55,8 @@ this.router.navigate(['/dashboard/lab-report']);
     let payload = {
       sample_form: this.data.sample_form,
       is_verified: false,
-      is_sent: true
+      is_sent: true,
+      super_visor_sample_form: this.data.super_visor_sample_form
     }
 
     this.service.sendReportForVerification(payload).subscribe(res => {

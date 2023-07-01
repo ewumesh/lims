@@ -298,7 +298,9 @@ date: any;
       let parameters = response.parameters;
 
       let actParameter = [];
-      parameters.forEach(a => actParameter.push(a));
+      parameters.forEach(a => {
+        actParameter.push(a);
+      });
       actualResponse.parameters = actParameter;
 
       actualResponse.commodity = reqCommodity;
@@ -307,7 +309,17 @@ date: any;
       this.addSampleForm.value.isParameter = true
 
       this.selection =new SelectionModel<any>(true, [actParameter]);
-      this.isAllSelected();
+      // this.isAllSelected();
+
+      // this.selection.clear();
+    // if(e==1){
+      // const CheckThisRow = this.dataSource.data.filter(x=>x.position==1)
+      // this.selection.select(...CheckThisRow);
+    // }
+    // if(e==2){
+    //   const CheckThisRow = this.dataSource.data.filter(x=>x.position==4)
+    //    this.selection.select(...CheckThisRow);
+    // }
       console.log(this.addSampleForm.value,this.selection.selected, 'okoko')
     })
   }
@@ -512,7 +524,7 @@ date: any;
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
+        // this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
       });
   }
 

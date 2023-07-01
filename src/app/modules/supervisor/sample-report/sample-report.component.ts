@@ -64,9 +64,10 @@ export class SampleReportComponent implements OnInit {
   sentV() {
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
-      sample_form: id,
+      sample_form: this.reportDetails?.sample_form?.id,
       is_verified: false,
-      is_sent: true
+      is_sent: true,
+      super_visor_sample_form: [id]
     }
 
     this.dialog.open(VerificationComponent, {
@@ -110,9 +111,10 @@ export class SampleReportComponent implements OnInit {
     let obj = { 
       commodity: this.reportDetails?.sample_form?.commodity.id,
       parameter: [data.id],
-      sample_form: this.reportDetails.id,
+      sample_form: this.reportDetails.sample_form?.id,
       supervisor_user: [this.loggedUserDetails.id],
       form_available: 'analyst',
+      super_visor_sample_form: this.route.snapshot.paramMap.get('id')
     }
     let instance: MatDialogRef<ReAssignComponent, any>;
 

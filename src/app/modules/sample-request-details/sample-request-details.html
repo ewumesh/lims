@@ -316,7 +316,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="isProcceedForPayment">
+  <div class="row m-0" *ngIf="isProcceedForPayment">
     <div class="col-md-12 bg-white p-4">
       <mat-stepper #stepper>
         <mat-step *ngIf="!sampleDetails.payment?.id">
@@ -339,40 +339,53 @@
                     </li>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label">Tax Voucher No.</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class="custom-input" formControlName="voucher_number" matInput
-                      placeholder="Tax Voucher No." />
-                    <mat-error class="text-danger"
-                      *ngIf="displayMessage?.voucher_number">{{displayMessage?.voucher_number}}</mat-error>
-                  </mat-form-field>
+
+                <div formArrayName="samplePayment">
+                <div class="row mt-2" style="border: 1px solid #0000001a;
+                border-radius: 5px;
+                padding: 1%;" *ngFor="let list of samplePaymentDetails.controls; let i = index" [formGroupName]="i">
+                <!-- *ngFor="let list of propertyDetail.controls; let i = index" [formGroupName]="i" -->
+                  <div class="col-md-4">
+                    <label class="form-label">Tax Voucher No.</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <input class="custom-input" formControlName="voucher_number" matInput
+                        placeholder="Tax Voucher No." />
+                      <mat-error class="text-danger"
+                        *ngIf="displayMessage?.voucher_number">{{displayMessage?.voucher_number}}</mat-error>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <label class="form-label">Tax Register Date</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <input formControlName="register_date" class="custom-input" [matDatepicker]="toPicker"
+                        (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date" />
+                      <mat-datepicker #toPicker></mat-datepicker>
+                      <mat-error class="text-danger"
+                        *ngIf="displayMessage?.register_date">{{displayMessage?.register_date}}</mat-error>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <label class="form-label">Amount</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <input type="number" formControlName="amount" class="custom-input" matInput
+                        placeholder="Rs. 39000" />
+                      <mat-error class="text-danger" *ngIf="displayMessage?.amount">{{displayMessage?.amount}}</mat-error>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-12">
+                    <label for="formFile" class="form-label">Payment Receipt</label>
+                    <input (change)="uploadImage($event)" class="form-control" type="file" id="formFile">
+                    <!-- <mat-error *ngIf="!isPaymentReceipt" class="text-danger">Payment Receipt is Required.</mat-error> -->
+                  </div>
+                </div>
                 </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">Tax Register Date</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input formControlName="register_date" class="custom-input" [matDatepicker]="toPicker"
-                      (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="Select Date" />
-                    <mat-datepicker #toPicker></mat-datepicker>
-                    <mat-error class="text-danger"
-                      *ngIf="displayMessage?.register_date">{{displayMessage?.register_date}}</mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-md-12">
-                  <label class="form-label">Amount</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input type="number" formControlName="amount" class="custom-input" matInput
-                      placeholder="Rs. 39000" />
-                    <mat-error class="text-danger" *ngIf="displayMessage?.amount">{{displayMessage?.amount}}</mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-md-12">
-                  <label for="formFile" class="form-label">Payment Receipt</label>
-                  <input (change)="uploadImage($event)" class="form-control" type="file" id="formFile">
-                  <mat-error *ngIf="!isPaymentReceipt" class="text-danger">Payment Receipt is Required.</mat-error>
+                <div class="col-md-12 py-2">
+                  <button (click)="addDocList()" type="button" class="btn btn-primary btn-lims-primary btn-sm mx-1">Add New</button>
+                  <button type="button" class="btn btn-primary btn-lims-danger btn-sm mx-1">Remove</button>
                 </div>
 
                 <div class="col-md-12 text-end mt-4">
