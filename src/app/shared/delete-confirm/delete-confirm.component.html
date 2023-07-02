@@ -10,7 +10,7 @@
           <!-- <i *ngIf="!isWorking" class="fa fa-trash"></i> -->
           <i class="fa fa-trash"></i>
       </button>
-      <button [disabled]="isWorking" matTooltip="Cancel" matTooltipPosition="right" class="btn btn-secondary">
+      <button (click)="closeDialog()" [disabled]="isWorking" matTooltip="Cancel" matTooltipPosition="right" class="btn btn-secondary">
           <i class="fa fa-times"></i>
       </button>
   </div>

@@ -150,18 +150,21 @@ export class SmuDashboard {
             series: this.pieSeries,
             chart: {
                 width: 350,
-                type: "pie"
+                type: "pie",
+                fontFamily: 'Poppins',
             },
             labels: ["Completed", "Processing", "Pending", "Rejected"],
             responsive: [
                 {
-                    breakpoint: 480,
+                    breakpoint: 2000,
                     options: {
+                        dataLabels:{enabled: false},
                         chart: {
-                            width: 200
+                            width: 450
                         },
                         legend: {
-                            position: "top"
+                            fontFamily: 'Poppins',
+                            position: "bottom"
                         }
                     }
                 }

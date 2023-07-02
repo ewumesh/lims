@@ -131,7 +131,7 @@
               </thead>
               <tbody>
                   <tr *ngFor="let a of latestSamples">
-                      <td>{{a?.sample_form?.name | titlecase}}</td>
+                      <td>{{a?.name | titlecase}}</td>
                       <td><span class="text-uppercase">{{a.id}}</span></td>
                       <td>{{a.created_date | date}}</td>
                       <td>

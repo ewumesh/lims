@@ -158,6 +158,8 @@ date: any;
   }
   //
 
+  selectedParameters:any[] =[];
+
   constructor(
     private fb: FormBuilder,
     private title: Title,
@@ -302,6 +304,7 @@ date: any;
         actParameter.push(a);
       });
       actualResponse.parameters = actParameter;
+      this.selectedParameters = actParameter;
 
       actualResponse.commodity = reqCommodity;
       actualResponse.isParameter = true;

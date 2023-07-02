@@ -111,7 +111,7 @@ export class UserDashboard implements OnInit {
         this.getCompletedSamples();
         setTimeout(() => {
             
-        }, 2000);
+        }, 2000); 
     }
 
     getMySamples() {

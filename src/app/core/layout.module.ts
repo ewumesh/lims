@@ -20,6 +20,13 @@ import { NgxBarcodeModule } from 'ngx-barcode';
 import { ViewImageComponent } from '../modules/my-account/view-image/view-image';
 import {MatListModule} from '@angular/material/list';
 import { AvatarModule } from 'ngx-avatar';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -40,7 +47,15 @@ import { AvatarModule } from 'ngx-avatar';
     LayoutRoutingModule,
     MatListModule,
 
-    AvatarModule
+    AvatarModule,
+
+    TranslateModule.forChild({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
 
   ],
   exports: [],

@@ -130,7 +130,7 @@
                   <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                 </td>
                 <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
-                <td [attr.rowspan]="reportDetails.parameters.length">{{reportDetails.remarks | json}}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">{{reportDetails.remarks | json}}</td>
               </tr>
             </tbody>
           </table>

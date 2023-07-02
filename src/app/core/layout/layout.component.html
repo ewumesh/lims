@@ -28,6 +28,7 @@
               </span> -->
 
               <span>
+                <span *ngIf="breadcrumbs.length === 1">Dashboard</span>
                 <span *ngIf="breadcrumbs[1]" class="breadcrumb-text">
                   {{removeHyphen(breadcrumbs[1]) | titlecase}}
                 </span>

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ViewReportRemarksComponent } from './view-remarks';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent],
@@ -24,7 +25,7 @@ import { ViewReportRemarksComponent } from './view-remarks';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-
+    AvatarModule,
     SharedModule
   ],
   exports: [],

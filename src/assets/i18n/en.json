@@ -1,0 +1,23 @@
+{
+    "Sidebar.AddSample":"Add Sample",
+    "Sidebar.Dashboard":"Dashboard",
+    "Sidebar.UserRequest":"User Request",
+    "Sidebar.SampleRequest":"Sample Request",
+    "Sidebar.AssignedSample": "Assigned Sample",
+    "Sidebar.TrackSample": "Track Sample",
+    "Sidebar.SampleReport":"Sample Report",
+
+    "Sidebar.UserManagement":"User Management",
+    "Sidebar.AllUser":"All User",
+    "Sidebar.CreateUser": "Create User",
+    "Sidebar.CreateAdmin":"Create Admin",
+
+    "Sidebar.Commodities":"Commodities",
+    "Sidebar.All":"All",
+    "Sidebar.Category":"Category",
+    "Sidebar.Commodities.All":"Commodities",
+    "Sidebar.Parameter":"Parameter",
+
+    "Sidebar.Settings":"Settings",
+    "Sidebar.ClientCategories":"Client Categories"
+}

@@ -55,7 +55,7 @@
         <div class="col-md-4">
           <label for="exampleInputPassword1" class="form-label">Phone Number *</label>
           <mat-form-field appearance="outline" class="w-100">
-            <input type="text" class="custom-input" matInput formControlName="phone" placeholder="Enter your Full Name" />
+            <input type="text" class="custom-input" matInput formControlName="phone" placeholder="Enter Phone Number" />
             <mat-error [@rowsAnimation]="displayMessage?.phone" class="text-danger"
               *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
           </mat-form-field>
@@ -127,7 +127,7 @@
           <h2>Industry Details</h2>
 
           <div class="col-md-6">
-            <label for="exampleInputEmail1" class="form-label">Industry Name</label>
+            <label for="exampleInputEmail1" class="form-label">Industry Name *</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="department_name"
                 placeholder="Enter Industry Name" />
@@ -135,7 +135,7 @@
           </div>
 
           <div class="col-md-6">
-            <label for="exampleInputEmail1" class="form-label">Industry Address</label>
+            <label for="exampleInputEmail1" class="form-label">Industry Address *</label>
             <mat-form-field appearance="outline" class="w-100">
               <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
                 <mat-option *ngFor="let a of departmentTypes" [value]="a.code">{{a.name}}</mat-option>
@@ -146,7 +146,7 @@
           </div>
 
           <div class="col-md-12">
-            <label for="exampleInputEmail1" class="form-label">Registration Number</label>
+            <label for="exampleInputEmail1" class="form-label">Registration Number *</label>
             <mat-form-field appearance="outline" class="w-100">
               <input class="custom-input" matInput formControlName="registration_number"
                 placeholder="Enter Registration Number"/>
@@ -157,7 +157,7 @@
             <div *ngIf="userId && userDetails?.role ===5">
             <img (click)="viewImage(userDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.registration_document" />
             </div>
-            <label for="exampleInputEmail1" class="form-label">Documents</label>
+            <label for="exampleInputEmail1" class="form-label">Documents *</label>
             <input  (change)="uploadDocument($event)" class="form-control" type="file" placeholder="Upload file" />
           </div>
 
@@ -174,7 +174,7 @@
             <div *ngIf="userId && userDetails?.role ===5">
               <img (click)="viewImage(userDetails?.renew_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.renew_document" />
             </div>
-            <label for="exampleInputEmail1" class="form-label">Renew Documents</label>
+            <label for="exampleInputEmail1" class="form-label">Renew Documents *</label>
             <input (change)="uploadRenewDoc($event)" class="form-control" type="file" placeholder="Upload file" />
           </div>
 

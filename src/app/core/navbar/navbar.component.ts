@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../layout.service';
+import { LanguageService } from 'src/app/services/language-service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,9 +23,14 @@ export class NavbarComponent implements OnInit {
     return '#' + ('000000' + color).slice(-6);
   }
 
+  switchLanguage(lang) {
+    this.langService.changeLanguage(lang);
+  }
+
   constructor(
     private router: Router,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private langService: LanguageService
     ) {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userDetails = userDetails;

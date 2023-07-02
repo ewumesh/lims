@@ -194,7 +194,7 @@ export class SupervisorDashboard implements OnInit {
 
   initPieChart() {
     this.chartOptions = {
-      series: this.pieSeries,
+      series: [12, 32,2,23,8],
       chart: {
         width: 350,
         type: "pie",

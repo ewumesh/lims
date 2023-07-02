@@ -22,6 +22,10 @@ export class DeleteConfirmComponent implements OnDestroy {
         this.toDestroy$.complete();
     }
 
+    closeDialog() {
+        this.dialogRef.close();
+    }
+
     deleted() {
         this.isWorking = true;
 

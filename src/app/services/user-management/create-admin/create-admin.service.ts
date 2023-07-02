@@ -62,6 +62,17 @@ export class CreateAdminService {
     return this.http.put(`${this.url}/api/account/users/${payload.id}/`, formData)
   }
 
+  updateAdmin(payload, doc?,renewDoc?):Observable<any> {
+    const formData:FormData = this.objectToFormData(payload);
+    if(doc) {
+    formData.append('registration_document', doc, doc?.name);
+    }
+    if(renewDoc) {
+    formData.append('renew_document', renewDoc, renewDoc?.name);
+    }
+    return this.http.put(`${this.url}/api/account/users/${payload.id}/`, payload)
+  }
+
   getUserRole():Observable<any> {
     return this.http.get(`${this.url}/api/account/groups`);
   }

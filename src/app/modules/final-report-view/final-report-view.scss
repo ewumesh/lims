@@ -110,3 +110,27 @@
     }
   }
 }
+#myTab li button{
+  font-weight: 500;
+}
+#myTab li .nav-link{
+  color: #808080;
+}
+#myTab li .nav-link.active{
+  color: #2460B9;
+}
+.rawdata-heading{
+  font-family: Poppins;
+  font-weight: 600;
+}
+.bold-text{
+  font-weight: 600;
+  color: #141414;
+  padding-bottom: 4px;
+}
+.analyst-avatar{
+  padding: 2px 0;
+}
+tr{
+  vertical-align: middle;
+}

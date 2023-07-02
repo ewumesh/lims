@@ -220,6 +220,16 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
     }
     let group = [];
     group.push(this.userForm.value.group);
+
+    let testTypes = [];
+    // testTypes.push(this.userForm.value.test_type);
+
+    this.userForm.value.test_type.forEach(element => {
+      testTypes.push(element);
+    });
+
+
+    console.log(testTypes, 'jhgf')
     let payload = {
       id: this.userId,
       userCategory: this.userCategory,
@@ -238,7 +248,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       date: this.userForm.value.date,
       role: this.userForm.value.role,
       is_verified: 1,
-      test_type:this.userForm.value.test_type
+      test_type:[1,3]
     }
 
     console.log(payload, 'PAYLOAD')
