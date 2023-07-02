@@ -108,6 +108,7 @@ export class LabRequestDetailsComponent implements OnInit {
         super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
         test_type: testType
       }
+      console.log(obj, "OBJECT")
 
     let instance: MatDialogRef<AssignComponent, any>;
 

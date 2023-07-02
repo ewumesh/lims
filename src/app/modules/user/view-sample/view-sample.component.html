@@ -181,13 +181,13 @@
         </div>
 
         <div class="col-md-4">
-          <!-- <h4>Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose}}</p> -->
+          <h4>Amendments</h4>
+          <p>{{sampleDetails?.amendments}}</p>
         </div>
 
         <div class="col-md-4">
-          <!-- <h4>Condition</h4>
-          <p>{{sampleDetails.condition}}</p> -->
+          <h4>Note</h4>
+          <p>{{sampleDetails.note}}</p>
         </div>
       </div>
     </div>
@@ -204,6 +204,7 @@
               <!-- <th>Method</th> -->
               <!-- <th>Units</th> -->
               <th>Price</th>
+              <th>Test Type</th>
               <!-- <th>Tested By</th> -->
               <!-- <th>Result</th> -->
               <!-- <th>Status</th> -->
@@ -212,7 +213,8 @@
               <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>{{r.price}}</td>
+                <td>Rs.{{r.price}}</td>
+                <td>{{r.test_type}}</td>
                 <!-- <td>{{r.formula}}</td> -->
                 <!-- <td>
                   <span *ngIf="r.ref_test_method">

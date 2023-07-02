@@ -159,7 +159,8 @@
     </div>
   </div>
 
-  <div class="row m-0" *ngIf="reportDetails.is_analyst_test &&  reportDetails.is_supervisor_sent">
+  <!-- {{reportDetails}} -->
+  <div class="row m-0" *ngIf="reportDetails.is_analyst_test &&  !reportDetails.is_supervisor_sent">
     <div class="col-md-12 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
       <button  (click)="sentV()"
         class="btn btn-secondary btn-sm mx-1">
