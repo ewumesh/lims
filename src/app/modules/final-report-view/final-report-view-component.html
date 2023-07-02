@@ -169,7 +169,7 @@
                 <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
                 <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
               </td>
-  
+              
               <td style="width: 20%;" class="pt-3 text-end">
                 <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a.status">{{a.status}}</span>
               </td>
