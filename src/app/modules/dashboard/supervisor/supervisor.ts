@@ -81,14 +81,17 @@ export class SupervisorDashboard implements OnInit {
     this.chartOptionsB = {
       series: [
         {
-          name: "Inflation",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2]
+          name: "Report Generation",
+          data: [10, 12, 4, 7, 17, 36, 22]
         }
       ],
       chart: {
         height: 300,
         type: "bar",
         fontFamily: 'Poppins',
+        toolbar: {
+          show: false
+        }
         
       },
       plotOptions: {
@@ -101,9 +104,9 @@ export class SupervisorDashboard implements OnInit {
       },
       dataLabels: {
         enabled: false,
-        formatter: function (val) {
-          return val + "%";
-        },
+        // formatter: function (val) {
+        //   return val + "%";
+        // },
         offsetY: -20,
         style: {
           fontSize: "12px",
@@ -153,9 +156,9 @@ export class SupervisorDashboard implements OnInit {
         labels: {
           show: true,
           
-          formatter: function (val) {
-            return val + "%";
-          }
+          // formatter: function (val) {
+          //   return val + "%";
+          // }
         }
       },
       title: {
@@ -194,7 +197,8 @@ export class SupervisorDashboard implements OnInit {
 
   initPieChart() {
     this.chartOptions = {
-      series: [12, 32,2,23,8],
+      series: [50, 20, 10, 7, 3],
+      // series: this.pieSeries,
       chart: {
         width: 350,
         type: "pie",
@@ -207,7 +211,7 @@ export class SupervisorDashboard implements OnInit {
           breakpoint: 2000,
           
           options: {
-            colors: ['#00c853', '#ffc107', '#3f51b5', '#ff718b', '#f44336'],
+            colors: ['#00C852', '#FFC007', '#364152', '#D600C0', '#C62828'],
             chart: {
               width: 450
             },

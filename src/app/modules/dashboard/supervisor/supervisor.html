@@ -51,11 +51,7 @@
                                 <div class="row ms-0">
                                     <div class="col-md-6">
                                         <h3 class="text-bold">Test Type</h3>
-                                    </div>
-                                    <div class="col-md-6 text-end"><a style="text-decoration: none;" class=""
-                                            href="Javascript:;">View
-                                            Details
-                                            <i class="fa fa-external-link"></i></a></div>
+                                    </div>  
         
                                     <div class="col-md-12"> 
                                         <div id="chartD">
@@ -105,8 +101,7 @@
 
         
     </div>
-    
-    
+
     
     <div class="col-md-6">
         <div class="row ms-0">
@@ -114,7 +109,8 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Total Request</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3>
+                        <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3> -->
+                        <h3 class="text-bold mb-0">90</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- [style.height.%]="height"  -->
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%;" aria-valuenow="25"
@@ -128,9 +124,12 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Completed</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.completed}}</h3>
+                        <!-- <h3 class="text-bold mb-0"> {{dashboardStatus?.completed}} </h3> -->
+                        <h3 class="text-bold mb-0"> 50 </h3>
                         <div class="progress mt-4" style="height: 5.5px;">
-                            <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
+                            <!-- <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 55%;"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -141,11 +140,13 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Pending</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3>
+                        <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3> -->
+                        <h3 class="text-bold mb-0">20</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
-                            <div class="progress-bar bg-warning" role="progressbar"
-                            [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)"
-                                style="background-color: #FF9020;" aria-valuenow="25" aria-valuemin="0"
+                            <!-- <div class="progress-bar bg-warning" role="progressbar"
+                            [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)" aria-valuenow="25" aria-valuemin="0"
+                                aria-valuemax="100"></div> -->
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 22%;" aria-valuenow="25" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -156,11 +157,17 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Not Verified</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3>
-                        <div class="progress mt-4" style="height: 5.5px;">
-                            <div class="progress-bar bg-danger" role="progressbar"
+                        <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3> -->
+                        <h3 class="text-bold mb-0">10</h3>
+                        <!-- <div class="progress mt-4" style="height: 5.5px;">
+                            <div class="progress-bar bg-noverified" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.not_verified,dashboardStatus?.total_request)"
-                                style="background-color: #cdb4db !important;" aria-valuenow="25"
+                                aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100"></div> -->
+                        <div class="progress mt-4" style="height: 5.5px;">
+                            <div class="progress-bar bg-noverified" role="progressbar"
+                            [style.width.%]="11"
+                                aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -171,11 +178,16 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Rejected</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3>
+                        <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3> -->
+                        <h3 class="text-bold mb-0">3</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
-                            <div class="progress-bar bg-danger" role="progressbar"
+                            <!-- <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.reject,dashboardStatus?.total_request)"
-                                style="background-color: #8E4CF7 !important;" aria-valuenow="25"
+                                 aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100"></div> -->
+                            <div class="progress-bar bg-danger" role="progressbar"
+                            [style.width.%]="3.33"
+                                 aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -186,9 +198,12 @@
                 <div class="card user-db-card" style="height: auto !important;">
                     <div class="card-body">
                         <p>Recheck</p>
-                        <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3>
+                        <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3> -->
+                        <h3 class="text-bold mb-0">7</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
-                            <div class="progress-bar bg-danger" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
+                            <!-- <div class="progress-bar bg-danger1" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+                            <div class="progress-bar bg-danger1" role="progressbar" [style.width.%]="7.78"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -209,17 +224,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-flex">
-                                        <div style="background-color: #FF718B; height: 30px;border-radius: 10px; margin-right: 1%; width: 10%;"></div>
-                                        <div style="background-color: #FFEB3A; height: 30px; border-radius: 10px; margin-right: 1%; width: 30%;"></div>
-                                        <div style="background-color: #7FE47E ; height: 30px; border-radius: 10px; width: 60%;"></div>
+                                        <div style="background-color: #FFC007; height: 30px;border-radius: 10px; margin-right: 1%; width: 10%;"></div>
+                                        <div style="background-color: #364152; height: 30px; border-radius: 10px; margin-right: 1%; width: 30%;"></div>
+                                        <div style="background-color: #0065FF ; height: 30px; border-radius: 10px; width: 60%;"></div>
                                         </div>
                                     </div>
         
                                     <div class="col-md-12 pt-2 padding-left-6">
-                                        <div class="d-flex justify-content-between" style="width: 40%;">
+                                        <div class="d-flex justify-content-between" style="width: 40%; padding: 10px;">
                                             <div class="text-start">
                                                 Not Send
-                                                <div class="text-start">
+                                                <div class="text-start not-send">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
                                                     <g id="Negative Icon">
                                                     <path id="Vector" d="M12.981 0.484619C19.8248 0.484619 25.4785 6.09733 25.4785 12.874C25.4692 20.048 20.0691 25.4872 12.9623 25.4686C5.85547 25.4499 0.464733 19.9566 0.500174 12.8087C0.531884 6.07122 6.19123 0.484619 12.981 0.484619ZM12.9623 22.3516C18.09 22.3666 22.2888 18.2685 22.3056 13.2396C22.3205 7.73694 18.4183 3.69855 13.0668 3.67989C7.71519 3.66124 3.6656 7.68844 3.65255 12.9952C3.64615 14.222 3.88232 15.4378 4.34745 16.573C4.81259 17.7081 5.49752 18.7401 6.36287 19.6096C7.22822 20.4791 8.25691 21.169 9.3898 21.6396C10.5227 22.1101 11.7374 22.3521 12.9642 22.3516H12.9623Z" fill="#FF718B"/>
@@ -232,7 +247,7 @@
                                             </div>
                                             <div class="text-start">
                                                 Not Verified
-                                                <div class="text-start">
+                                                <div class="text-start not-verified">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
                                                     <g id="Neutral Icon">
                                                     <path id="Vector" d="M0.5 12.8423C0.5 6.07494 6.17425 0.475304 13.0255 0.484631C19.8115 0.484631 25.4652 6.10479 25.4764 12.8404C25.4895 19.992 20.067 25.4648 12.9789 25.4685C5.89073 25.4722 0.5 20.0237 0.5 12.8423ZM12.9509 22.3553C18.0133 22.3814 22.2961 18.261 22.324 13.3403C22.3539 7.81154 18.4181 3.70601 13.0647 3.68363C7.75043 3.66124 3.78293 7.6362 3.64677 12.9001C3.52179 17.7555 7.64411 22.4467 12.9509 22.3516V22.3553Z" fill="#FFEB3A"/>
@@ -245,7 +260,7 @@
                                             </div>
                                             <div class="text-start">
                                                 Verified
-                                                <div class="text-start">
+                                                <div class="text-start verified">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
                                                     <g id="Positive Icon">
                                                     <path id="Vector" d="M12.9546 25.4684C5.8273 25.4591 0.488826 20.0441 0.500018 12.8366C0.511209 6.12154 6.19104 0.484619 12.9658 0.484619C19.7704 0.484619 25.495 6.14579 25.4782 12.8926C25.4689 20.0796 20.0856 25.4796 12.9546 25.4684ZM3.67102 13.1407C3.53485 17.345 6.94275 22.4019 12.977 22.4112C18.6997 22.4112 22.3035 17.7778 22.3203 13.1556C22.337 7.76674 18.2427 3.64257 12.9434 3.67428C7.6441 3.70599 3.67102 7.75927 3.67102 13.1407Z" fill="#7FE47E"/>

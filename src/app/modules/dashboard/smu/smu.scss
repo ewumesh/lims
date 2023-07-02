@@ -1,6 +1,109 @@
 #chart {
+<<<<<<< HEAD
+  max-width: 450px;
+  margin: 0px auto;
+  padding: 0;
+}
+
+#chartB{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#chartB table{
+  margin: 0;
+  width: 50%;
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 12px;
+}
+.chartB tr{
+  border: none!important;
+}
+.chartB td{
+  border: none!important;
+}
+.chartB tr{
+  margin: 12px;
+}
+.card-body{
+  padding: 0!important;
+}
+.card-body p{
+  font-weight: 500;
+}
+.card-body h3{
+  font-size: 24px;
+  font-weight: 500!important;
+}
+
+
+.user-db-card{
+  padding: 24px!important;
+  border: none;
+}
+.text-bold{
+  font-weight: 500;
+  font-family: Poppins;
+}
+.db-table-heading td{
+  font-family: Poppins;
+  text-decoration: capitalize!important;
+  font-weight: 500;
+  vertical-align: middle;
+}
+td{
+  vertical-align: middle;
+}
+.badge-primary{
+  background: #0065ff!important;
+  color: #ffffff;
+  font-size: 12px!important;
+  padding: 10px 14px!important;
+  border-radius: 6px!important;
+}
+.margin-left{
+  margin-left: 0.8rem!important;
+}
+
+.number{
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.padding-left-6{
+  padding-left: 6px!important;
+}
+.not-send svg path{
+  fill: #FFC007;
+}
+.not-verified svg path{
+  fill: #364152;
+}
+.verified svg path{
+  fill: #0065FF;
+}
+
+.user-type  span{
+  font-size: 12px;
+  margin-right: 10px;
+}
+.industry span{
+  color: #010080;
+}
+.import span{
+  color: #4682b4;
+}
+.gov span{
+  color: #476ee2;
+}
+.dftqc span{
+  color: #0000fe;
+}
+=======
     max-width: 450px;
     margin: 35px auto;
     padding: 0;
   }
   
+>>>>>>> 77a3af35e17ebd4d61cba6db8db2d481a5940a98

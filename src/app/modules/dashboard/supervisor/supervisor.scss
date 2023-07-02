@@ -75,3 +75,12 @@
   .padding-left-6{
     padding-left: 6px!important;
   }
+  .not-send svg path{
+    fill: #FFC007;
+  }
+  .not-verified svg path{
+    fill: #364152;
+  }
+  .verified svg path{
+    fill: #0065FF;
+  }

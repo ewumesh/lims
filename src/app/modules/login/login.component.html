@@ -37,7 +37,7 @@
 
           <div class="dropdown show">
             <a [matMenuTriggerFor]="menu" class="btn btn-link dropdown-toggle" href="Javascript:;" role="button" id="dropdownMenuLink"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 14px;">
               Manual
             </a>
 
@@ -68,7 +68,7 @@
           <hr class="divider">
           <p class="login-detail">Enter your login details</p>
         </div> -->
-        <form [formGroup]="loginForm" (ngSubmit)="saveChanges()">
+        <form [formGroup]="loginForm" class="login-form" (ngSubmit)="saveChanges()">
           <div class="row">
             <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
               <div class="alert alert-info" role="alert">

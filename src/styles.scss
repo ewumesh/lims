@@ -162,3 +162,26 @@ footer a{
 .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
   color: #2460B9 !important;
 }
+
+.bg-info{
+  background: #2460B9!important;
+}
+.bg-success{
+  background: #00C852!important;
+}
+.bg-warning{
+  background: #FFC007!important;
+}
+.bg-noverified{
+  background: #364152!important;
+}
+.bg-danger{
+  background: #C62828!important;
+}
+.bg-danger1{
+  background: #D600C0!important;
+}
+
+footer p a:hover{
+  text-decoration: underline!important;
+}

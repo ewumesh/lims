@@ -26,6 +26,9 @@ export class SmuDashboard {
     @ViewChild("chart") chart: ChartComponent;
     public chartOptions: Partial<ChartOptions>;
 
+    @ViewChild("chartV") chartB: ChartComponent;
+    public chartOptionsB: Partial<ChartOptions>;
+
     isDashboardStatus = false;
     dashboardStatus:any;
     pieSeries:any[] =[];
@@ -45,6 +48,35 @@ export class SmuDashboard {
         private router: Router
         ) {
         this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+        this.chartOptionsB = {
+            series: [44, 15, 13, 40],
+            chart: {
+              type: "donut",
+              fontFamily: 'Poppins',
+              sparkline: {
+                enabled: true
+              }
+            },
+            labels: ["Industry", "Importer/Expoter", "Government Agency", "DFTQC Office"],
+            
+            responsive: [
+              {
+                breakpoint: 2000,
+                options: {
+                  colors: ['#010080', '#4682b4', '#476ee2', '#0000fe'],
+                  chart: {
+                    width: 300
+                  },
+                  dataLabels:{enabled: false},
+                  legend: {
+                    fontFamily: 'Poppins',
+                    position: "middle"
+                  },    
+                }
+              }
+            ]
+          };
     }
 
     getUserRequests() {
@@ -147,16 +179,30 @@ export class SmuDashboard {
 
     initializeGraph() {
         this.chartOptions = {
-            series: this.pieSeries,
+            // series: this.pieSeries,
+            series: [50, 20, 10, 7, 3],
             chart: {
                 width: 350,
                 type: "pie",
                 fontFamily: 'Poppins',
             },
-            labels: ["Completed", "Processing", "Pending", "Rejected"],
+            labels: ["Completed", "Pending", "Not Verified", "Recheck", "Rejected"],
             responsive: [
                 {
                     breakpoint: 2000,
+<<<<<<< HEAD
+                    
+                    options: {
+                      colors: ['#00C852', '#FFC007', '#364152', '#D600C0', '#C62828'],
+                      chart: {
+                        width: 450
+                      },
+                      dataLabels:{enabled: false},
+                      legend: {
+                        fontFamily: 'Poppins',
+                        position: "bottom"
+                      }
+=======
                     options: {
                         dataLabels:{enabled: false},
                         chart: {
@@ -166,8 +212,9 @@ export class SmuDashboard {
                             fontFamily: 'Poppins',
                             position: "bottom"
                         }
+>>>>>>> 77a3af35e17ebd4d61cba6db8db2d481a5940a98
                     }
-                }
+                  }
             ]
         };
     }

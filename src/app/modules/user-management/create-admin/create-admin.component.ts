@@ -212,21 +212,27 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
   saveChanges() {
     this.isLoading = true;
 
-    if (this.userForm.pristine) {
-      this.message = {};
-      this.message.messageBody = 'All the fileds with (*) are required.';
-      this.isLoading = false;
-      return;
-    }
+    // if (this.userForm.pristine) {
+    //   this.message = {};
+    //   this.message.messageBody = 'All the fileds with (*) are required.';
+    //   this.isLoading = false;
+    //   return;
+    // }
     let group = [];
     group.push(this.userForm.value.group);
 
-    let testTypes = [];
+    let testTypes:any;
     // testTypes.push(this.userForm.value.test_type);
 
+    if(this.loggedUserdetails.role === 3) {
     this.userForm.value.test_type.forEach(element => {
       testTypes.push(element);
     });
+  } else if(this.loggedUserdetails.role === 4) {
+    testTypes = this.userForm.value.test_type;
+  } else {
+    testTypes = [];
+  }
 
 
     console.log(testTypes, 'jhgf')
@@ -248,11 +254,11 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       date: this.userForm.value.date,
       role: this.userForm.value.role,
       is_verified: 1,
-      test_type:[1,3]
+      test_types:[this.userForm.value.test_type]
     }
 
-    console.log(payload, 'PAYLOAD')
-    if (this.userForm.pristine || this.userForm.invalid) {
+    // console.log(payload, 'PAYLOAD')
+    if (this.userForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isLoading = false;
