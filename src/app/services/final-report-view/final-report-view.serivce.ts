@@ -40,8 +40,8 @@ export class FinalReportViewService {
   }
 
   getRawData(id):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet/${id}/`)
-  }
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+  } 
 
   downloadRawData(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;

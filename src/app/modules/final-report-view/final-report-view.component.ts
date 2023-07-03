@@ -21,8 +21,7 @@ export class FinalReportViewComponent implements OnInit {
 
   loggedUserDetails: any;
 
-  rawDataSheet:any[] = [];
-
+  rawDataSheet:any;
   constructor(
     private service: FinalReportViewService,
     private route: ActivatedRoute,
@@ -138,6 +137,7 @@ export class FinalReportViewComponent implements OnInit {
     this.service.getAssignedSamples(payload).subscribe(res => {
       this.reportDetails = res;
       this.isLoading = false;
+      this.getRawData();
     },
      (error) => {
       this.isLoading = false;

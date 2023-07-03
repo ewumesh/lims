@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { AssignedSampleAdminService } from 'src/app/services/assigned-sample-admin/assigend-sample-admin.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 
-@Component({
+@Component({ 
   templateUrl: './assigend-sample-admin.component.html',
   styleUrls: ['./assigend-sample-admin.scss'],
   animations: [collectionInOut]
@@ -22,7 +22,7 @@ export class AssignedSampleAdminComponent implements OnInit {
 
   isFilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode', 'sampleName', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

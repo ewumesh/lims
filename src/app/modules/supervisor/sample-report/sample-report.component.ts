@@ -54,6 +54,20 @@ export class SampleReportComponent implements OnInit {
     
   }
 
+  downloadRawDatasheet(id) {
+    let payload = {
+      id:id
+    }
+    this.service.downloadRawData(id);
+  }
+
+  printRawData(id) {
+    let payload = {
+      id:id
+    }
+    this.service.printRawData(id);
+  }
+
   getRawDataSheetDetails() {
     console.log(this.reportDetails, "REPORT")
     let id = this.reportDetails?.sample_form?.id

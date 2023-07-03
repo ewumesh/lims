@@ -363,4 +363,35 @@
 .account-product-owner .account-type {
   background-color: #ffcd02
 }
+.assign-supervisor-avatar{
+  padding: 6px 12px 6px 6px;
+  border: 1px solid #e7f0f7;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.cross-icon{
+  opacity: 0;
+  color: #fd8181;
+}
+.assign-supervisor-avatar:hover{
+  background: #e7f0f7;
+  border-radius: 20px; 
+}
+.assign-supervisor-avatar:hover .cross-icon{
+  opacity: 1;
+  cursor: pointer;
+}
+.cross-icon:hover{
+  color: #ff0000;
+}
 
+.price-box{
+  background: #e7f0f7;
+  border-left: 10px solid #2260bf;
+  padding: 20px;
+  font-size: 18px;
+}
+.price-box b{
+  font-size: 28px;
+  font-weight: 500;
+}

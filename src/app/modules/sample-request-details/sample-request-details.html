@@ -227,7 +227,7 @@
       </div>
     </div>
 
-    <div class="view-page mt-4 " *ngIf="sampleDetails?.payment.length > 0">
+    <div class="view-page mt-4 p-0" *ngIf="sampleDetails?.payment.length > 0">
       <h3 class="view-page-heading pb-0 mb-0">Payment Details</h3>
       <div class="row m-0 py-1" *ngFor="let p of sampleDetails.payment">
         <div class="col-md-3">
@@ -304,7 +304,7 @@
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td *ngIf="i===0" [attr.rowspan]="sampleDetails.parameters.length">Rs.{{totalPrice}}</td>
+                <td *ngIf="i===0" [attr.rowspan]="sampleDetails.parameters.length" style="vertical-align: middle; text-align: center;">Rs.{{totalPrice}}</td>
                 
                 <!-- <td>{{r.units}}</td> -->
                 <!-- <td>Rs.{{r.price}}</td>
@@ -330,7 +330,7 @@
   </div>
 
   <div class="row m-0" *ngIf="isProcceedForPayment">
-    <div class="col-md-12 bg-white p-4">
+    <div class="col-md-12 white-bg p-4">
       <mat-stepper #stepper>
         <mat-step *ngIf="!sampleDetails.payment?.id">
           <ng-template matStepLabel>Payment</ng-template>
@@ -338,8 +338,9 @@
             <mat-icon>dollar</mat-icon>
           </ng-template> -->
           <div class="row">
-            <div class="col-md-12 py-2">
-              <span class="text-bold">Total Amount:</span>Rs. {{totalPrice}}
+            <div class="col-md-12 p-0">
+              <!-- <span class="text-bold">Total Amount:</span> Rs.{{totalPrice}} -->
+              <p class="price-box">Total Amount:<b> Rs.{{totalPrice}}</b></p>
             </div>
             <div class="col-md-12">
               <form [formGroup]="paymentForm" class="row">
@@ -439,7 +440,7 @@
                   </div>
                 </div>
 
-                <div class="py-2"><span class="text-bold">Commodity:</span>{{(sampleDetails?.commodity?.name)}}</div>
+                <div class="py-2"><span class="text-bold">Commodity:</span> {{(sampleDetails?.commodity?.name)}}</div>
 
                 <table class="table table-bordered" *ngIf="sampleDetails">
                   <thead>
@@ -448,7 +449,7 @@
                       <th scope="col">Test Type</th>
                       <th scope="col">Parameter</th>
                       <!-- <th scope="col" class="text-center">Status</th> -->
-                      <th>Assigned</th>
+                      <th style="text-align: center!important;">Assigned</th>
                       <th class="text-center" scope="col">Action</th>
                     </tr>
                   </thead>
@@ -465,17 +466,21 @@
                         <td>
                           <span>{{r.name | titlecase}} </span>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" style="text-align: center!important;">
                           <div *ngIf="!r.supervisor_user">
                             <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
                           <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
                           </div>
                           
-                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
-                            <div class="author">
-                              <div class="mask cursor-pointer">
-                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
+                          <div *ngIf="r.supervisor_user" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                            <div class="author assign-supervisor-avatar">
+                              <div class="mask cursor-pointer d-flex align-items-center">
+                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                    </span>
+                                    <span class="material-icons ms-2 cross-icon">
+                                      highlight_off
+                                      </span>
                               </div>
                             </div>
                           </div>
@@ -516,12 +521,17 @@
                           <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
                           </div>
                           
-                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
-                            <div class="author">
-                              <div class="mask cursor-pointer">
-                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
+                          <div *ngIf="r.supervisor_user" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                            <div class="author assign-supervisor-avatar">
+                              <div class="mask cursor-pointer d-flex align-items-center">
+                                  <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                    </span>
+                                    <span class="material-icons ms-2 cross-icon">
+                                      highlight_off
+                                      </span>
                               </div>
+                              
                             </div>
                           </div>
 
@@ -544,18 +554,22 @@
                         <td>
                           <span>{{r.name | titlecase}} </span>
                         </td>
-                        <td class="text-left">
+                        <td class="text-center">
                           <div *ngIf="!r.supervisor_user">
                             <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
                           <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
                           </div>
                           
-                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
-                            <div class="author">
-                              <div class="mask cursor-pointer">
-                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
-                              </div>
+                          <div *ngIf="r.supervisor_user" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                            <div class="author assign-supervisor-avatar">
+                              <div class="mask cursor-pointer d-flex align-items-center">
+                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                    </span>
+                                    <span class="material-icons ms-2 cross-icon">
+                                      highlight_off
+                                      </span>
+                              </div> 
                             </div>
                           </div>
 
@@ -596,7 +610,7 @@
         <div class="col-md-6 mt-3 p-3">
           <!-- <span class="text-bold">Total Price:</span><span>Rs.{{totalPrice}}</span> -->
         </div>
-        <div class="col-md-6 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
+        <div class="col-md-6 white-bg text-end" style="border-radius: 8px;">
           <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
           <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
           <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>

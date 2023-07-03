@@ -18,6 +18,8 @@ export class VerifySampleReportomponent implements OnInit {
 
   sampleStatus:any;
 
+  rawDataSheet:any;
+
   constructor(
     private service: SampleReportService,
     private route: ActivatedRoute,
@@ -30,6 +32,13 @@ export class VerifySampleReportomponent implements OnInit {
     this.getReportDetails();
     this.isSampleSentForSupervisor();
   }
+
+  getRawData() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getRawData(id).subscribe(res => {
+      this.rawDataSheet = res;
+    }  )
+   }
 
   openRemarks() {
     let id = this.route.snapshot.paramMap.get('id');
@@ -96,6 +105,8 @@ export class VerifySampleReportomponent implements OnInit {
     this.service.getAssignedSamples(payload).subscribe(res => {
       this.reportDetails = res;
       this.isLoading = false;
+
+      this.getRawData();
     },
      (error) => {
       this.isLoading = false;

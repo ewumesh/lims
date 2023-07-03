@@ -2,6 +2,7 @@
   <div class="db-content">
     <div class="top-view-page p-2 mb-3">
       <div class="row log-details p-3">
+        <!-- {{reportDetails | json}} -->
         <div class="col-md-3">
           <!-- <div class="row">
             <p>Supervise By</p>
@@ -22,7 +23,7 @@
         <div class="col-md-3">
           <div class="row">
             <p>Assigned Date</p>
-            <h4>{{reportDetails.approved_date | date: 'medium'}}</h4>
+            <h4>{{reportDetails.updated_date | date: 'medium'}}</h4>
           </div>
 
         </div>
@@ -50,6 +51,16 @@
         <div class="col-md-4">
           <h4>Sample ID</h4>
           <p>{{reportDetails.id}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Sample Lab Code</h4>
+          <p class="text-uppercase">{{reportDetails.supervisor_encode_id}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Reference Number</h4>
+          <p class="text-uppercase">{{reportDetails.user_encode_id}}</p>
         </div>
         <div class="col-md-4">
           <h4>Sample Name </h4>

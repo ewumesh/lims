@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class VerifyReportComponent implements OnInit {
   status = 'pending';
   @Input() reportDetails;
+
+  @Input()rawDataSheet;
   constructor() { }
 
   ngOnInit(): void {

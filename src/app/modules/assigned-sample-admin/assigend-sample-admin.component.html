@@ -3,7 +3,7 @@
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
-  </div>
+  </div> 
   <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
       <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="From" />
@@ -51,6 +51,11 @@
     <ng-container matColumnDef="sampleId">
       <th mat-header-cell *matHeaderCellDef> Sample ID </th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sampleLabCode">
+      <th mat-header-cell *matHeaderCellDef> Sample Lab Code </th>
+      <td mat-cell *matCellDef="let row">N/A</td>
     </ng-container>
 
     <ng-container matColumnDef="sampleName">

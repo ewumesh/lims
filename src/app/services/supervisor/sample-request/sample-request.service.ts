@@ -19,6 +19,22 @@ export class SampleReportService {
     return this.http.post(`${this.url}/api/sample-form-has-verifier/`, payload)
   }
 
+  getRawData(id):Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+  } 
+  downloadRawData(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  printRawData(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
+  }
+
 
   sendReportForVerificationFrom(payload):Observable<any> {
     return this.http.patch(`${this.url}/api/sample-form-has-verifier/${payload.id}/`, payload)
