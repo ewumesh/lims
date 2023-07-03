@@ -118,7 +118,7 @@ export class VerifierDashboard {
 
     initializeGraph() {
         this.chartOptions = {
-            series: this.pieSeries,
+            series: [10, 1, 3, 1],
             chart: {
                 width: 350,
                 type: "pie"
