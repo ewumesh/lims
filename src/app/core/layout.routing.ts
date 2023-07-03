@@ -160,7 +160,7 @@ const routes: Routes = [
     path: 'update-sample/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 5]
+      requiredRole: [1,2, 5]
     },
     loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
       .then(m => m.AddSampleModule)

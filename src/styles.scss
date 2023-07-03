@@ -27,6 +27,13 @@ body{
   padding: 0 !important;
 }
 
+.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography{
+  font-family: 'Poppins'!important;
+}
+span.mdc-list-item__primary-text {
+  font-family: 'Poppins'!important;
+}
+
 .mat-mdc-text-field-wrapper {
   background-color: #fff;
 }
@@ -181,7 +188,9 @@ footer a{
 .bg-danger1{
   background: #D600C0!important;
 }
-
+.bg-process{
+  background: #9747FF!important;
+}
 footer p a:hover{
   text-decoration: underline!important;
 }

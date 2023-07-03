@@ -224,6 +224,10 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     })
    }
 
+   eidtSample() {
+    this.router.navigate(['/dashboard/update-sample',this.sampleId])
+   }
+
    assignAll(test_type) {
 
     let parameters:any[] = [];

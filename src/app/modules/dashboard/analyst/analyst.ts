@@ -122,19 +122,23 @@ export class AnalystDashboard implements OnInit {
 
     initializeGraph() {
         this.chartOptions = {
-            series: this.pieSeries,
+            // series: this.pieSeries,
+            series: [50, 20, 7, 10, 3],
             chart: {
                 width: 350,
-                type: "pie"
+                type: "pie",
+                fontFamily: 'Poppins',
             },
-            labels: ["Completed", "Pending", "Not Verified", "Recheck"],
+            labels: ["Completed", "Pending", "Processing", "Not Verified", "Recheck"],
             responsive: [
                 {
                   breakpoint: 2000,
                   options: {
+                    colors: ['#00C852', '#FFC007', '#9747FF', '#364152', '#D600C0'],
                     chart: {
-                      width: 450
+                      width: 500
                     },
+                    dataLabels:{enabled: false},
                     legend: {
                       fontFamily: 'Poppins',
                       position: "bottom"

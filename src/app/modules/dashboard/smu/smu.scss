@@ -1,10 +1,11 @@
 #chart {
-  max-width: 450px;
+  max-width: 500px;
   margin: 0px auto;
   padding: 0;
 }
 
 #chartB{
+  width: 400;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +13,7 @@
 #chartB table{
   margin: 0;
   width: 50%;
-  background: whitesmoke;
+  // background: whitesmoke;
   border-radius: 6px;
   padding: 12px;
 }

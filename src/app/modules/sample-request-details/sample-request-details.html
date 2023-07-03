@@ -160,6 +160,15 @@
           <p>{{sampleDetails.id}}</p>
         </div>
         <div class="col-md-4">
+          <h4 class="mb-0">Sample Lab Code</h4>
+          <p class="text-uppercase">{{sampleDetails.supervisor_encode_id}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Refrence Number</h4>
+          <p class="text-uppercase">{{sampleDetails.user_encode_id}}</p>
+        </div>
+        <div class="col-md-4">
           <h4 class="mb-0">Sample Name </h4>
           <p>{{sampleDetails.name}}</p>
         </div>
@@ -281,20 +290,24 @@
           <table class="table table-bordered">
             <tr>
               <th>S.N.</th>
+              <th>Test Type</th>
               <th>Parameter Name</th>
-              <th>Method</th>
-              <th>Units</th>
               <th>Price</th>
+              
+              <!-- <th>Units</th> -->
+              <!-- <th>Price</th>
               <th>Result</th>
-              <th>Status</th>
+              <th>Status</th> -->
             </tr>
             <tbody>
               <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
+                <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>{{r.ref_test_method}}</td>
-                <td>{{r.units}}</td>
-                <td>Rs.{{r.price}}</td>
+                <td *ngIf="i===0" [attr.rowspan]="sampleDetails.parameters.length">Rs.{{totalPrice}}</td>
+                
+                <!-- <td>{{r.units}}</td> -->
+                <!-- <td>Rs.{{r.price}}</td>
                 <td>
                   <span *ngIf="r.status">
                     {{r?.results}}
@@ -307,7 +320,7 @@
                   <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status |
                     titlecase}}</span>
                   <span *ngIf="!r.status" class="text-muted">N/A</span>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
@@ -325,6 +338,9 @@
             <mat-icon>dollar</mat-icon>
           </ng-template> -->
           <div class="row">
+            <div class="col-md-12 py-2">
+              <span class="text-bold">Total Amount:</span>Rs. {{totalPrice}}
+            </div>
             <div class="col-md-12">
               <form [formGroup]="paymentForm" class="row">
                 <div *ngIf="message && message.messageBody" class="col-sm-12 col-md-12 col-lg-12">
@@ -423,13 +439,16 @@
                   </div>
                 </div>
 
+                <div class="py-2"><span class="text-bold">Commodity:</span>{{(sampleDetails?.commodity?.name)}}</div>
+
                 <table class="table table-bordered" *ngIf="sampleDetails">
                   <thead>
                     <tr>
                       <th scope="col" class="text-center">S.N.</th>
                       <th scope="col">Test Type</th>
                       <th scope="col">Parameter</th>
-                      <th scope="col" class="text-center">Supervisor</th>
+                      <!-- <th scope="col" class="text-center">Status</th> -->
+                      <th>Assigned</th>
                       <th class="text-center" scope="col">Action</th>
                     </tr>
                   </thead>
@@ -447,21 +466,33 @@
                           <span>{{r.name | titlecase}} </span>
                         </td>
                         <td class="text-center">
-                          <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
-                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
-                          <!-- <div class="text-center">
-                            <ngx-avatar *ngIf="r.supervisor_user" [name]="r.supervisor_user"></ngx-avatar>
-                            </div> -->
-
-                            <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
-                              <div class="author">
-                                <div class="mask cursor-pointer">
-                                  <ngx-avatar size="40" [name]="r.supervisor_user"
-                                    [matTooltip]="r.supervisor_user"></ngx-avatar>
-                                </div>
+                          <div *ngIf="!r.supervisor_user">
+                            <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                          <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                          </div>
+                          
+                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                            <div class="author">
+                              <div class="mask cursor-pointer">
+                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
                               </div>
                             </div>
+                          </div>
+
+    
                         </td>
+                        <!-- <td>
+                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                            <div class="author">
+                              <div class="mask cursor-pointer">
+                                <ngx-avatar size="40" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
+                              </div>
+                            </div>
+                          </div>
+                          <span *ngIf="!r.supervisor_user" class="text-muted">N/A</span>
+                        </td> -->
                         <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                         </td>
@@ -480,16 +511,21 @@
                           <span>{{r.name | titlecase}} </span>
                         </td>
                         <td class="text-center">
-                          <button (click)="assign(r.id,r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
-                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
+                          <div *ngIf="!r.supervisor_user">
+                            <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                          <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                          </div>
+                          
                           <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
                             <div class="author">
                               <div class="mask cursor-pointer">
-                                <ngx-avatar size="40" [name]="r.supervisor_user"
+                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
                                   [matTooltip]="r.supervisor_user"></ngx-avatar>
                               </div>
                             </div>
                           </div>
+
+    
                         </td>
                         <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length" class="text-center">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
@@ -508,17 +544,22 @@
                         <td>
                           <span>{{r.name | titlecase}} </span>
                         </td>
-                        <td class="text-center">
-                          <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
-                          <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
+                        <td class="text-left">
+                          <div *ngIf="!r.supervisor_user">
+                            <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                          <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                          </div>
+                          
                           <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
                             <div class="author">
                               <div class="mask cursor-pointer">
-                                <ngx-avatar size="40" [name]="r.supervisor_user"
+                                <ngx-avatar (click)="assign(r.id, r.test_type)" size="40" [name]="r.supervisor_user"
                                   [matTooltip]="r.supervisor_user"></ngx-avatar>
                               </div>
                             </div>
                           </div>
+
+    
                         </td>
                         <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
@@ -553,11 +594,13 @@
     <div class="col-md-12 bg-white mt-3" style="border-radius: 5px;">
       <div class="row">
         <div class="col-md-6 mt-3 p-3">
-          <span class="text-bold">Total Price:</span><span>Rs.{{totalPrice}}</span>
+          <!-- <span class="text-bold">Total Price:</span><span>Rs.{{totalPrice}}</span> -->
         </div>
         <div class="col-md-6 bg-white text-end mt-3 p-3" style="border-radius: 5px;">
-          <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
           <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
+          <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
+          <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
+          
         </div>
       </div>
     </div>

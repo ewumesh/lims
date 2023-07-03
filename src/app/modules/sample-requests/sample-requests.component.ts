@@ -21,7 +21,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   filterForm: FormGroup;
   isfilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode','refrenceNumber', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

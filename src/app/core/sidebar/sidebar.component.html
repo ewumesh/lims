@@ -55,6 +55,23 @@
           <!-- End User Navs -->
 
           <!-- SMU/Admin Navs -->
+          
+
+          
+          
+          
+
+
+
+
+
+
+
+
+
+
+
+
           <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-requests'}"
               (click)="navigate('/dashboard/user-requests')" href="Javascript:;">
@@ -90,6 +107,8 @@
               <mat-icon aria-hidden="false" aria-label="track" fontIcon="library_books"></mat-icon>
               Sample Report</a>
           </li>
+
+          <!-- <dropdown-menu></dropdown-menu> -->
 
           <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link dropdown-toggle"

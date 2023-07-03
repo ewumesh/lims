@@ -106,10 +106,10 @@
         <button [matTooltip]="'View User Details'" (click)="viewUserDetails(row.id)"
           class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view"
             fontIcon="remove_red_eye"></mat-icon></button>
-        <button [matTooltip]="'Download User Details'"
+        <!-- <button [matTooltip]="'Download User Details'"
           class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download"
-            fontIcon="save_alt"></mat-icon></button>
-        <button [matTooltip]="'Edit User Details'" (click)="updateUser(row)"
+            fontIcon="save_alt"></mat-icon></button> -->
+        <button *ngIf="loggedUserDetails.role === 1 || row.role ===5" [matTooltip]="'Edit User Details'" (click)="updateUser(row)"
           class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit"
             fontIcon="edit"></mat-icon></button>
         <button *ngIf="loggedUserDetails.role === 1" [matTooltip]="'Delete User'" (click)="deleteUser(row.id)"

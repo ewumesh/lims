@@ -64,7 +64,7 @@ export class SupervisorDashboard implements OnInit {
         {
           breakpoint: 2000,
           options: {
-            colors: ['#3B82F6', '#F59E0B', '#14B8A6'],
+            colors: ['#36B37E', '#FBBC05', '#917BFF'],
             chart: {
               width: 300
             },

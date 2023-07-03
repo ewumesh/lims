@@ -119,7 +119,7 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         search: '',
         page: '',
         size: '',
-        role: 5,
+        role: '',
         client_category_id: ''
       }
     } else {

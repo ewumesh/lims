@@ -3,16 +3,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
+
+
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['../layout/layout.component.scss', './sidebar.scss']
+  styleUrls: ['../layout/layout.component.scss', './sidebar.scss'],
 })
 export class SidebarComponent implements OnInit {
 
   userDetails: any = {};
 
   activatedRoute: string = '';
+  
 
   constructor(
     public router: Router,

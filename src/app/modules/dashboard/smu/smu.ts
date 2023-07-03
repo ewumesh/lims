@@ -66,7 +66,7 @@ export class SmuDashboard {
                 options: {
                   colors: ['#010080', '#4682b4', '#476ee2', '#0000fe'],
                   chart: {
-                    width: 300
+                    width: 400
                   },
                   dataLabels:{enabled: false},
                   legend: {
@@ -191,7 +191,7 @@ export class SmuDashboard {
             // series: this.pieSeries,
             series: [50, 20, 10, 7, 3],
             chart: {
-                width: 350,
+                width: 400,
                 type: "pie",
                 fontFamily: 'Poppins',
             },
@@ -203,7 +203,7 @@ export class SmuDashboard {
                     options: {
                       colors: ['#00C852', '#FFC007', '#364152', '#D600C0', '#C62828'],
                       chart: {
-                        width: 450
+                        width: 500
                       },
                       dataLabels:{enabled: false},
                       legend: {

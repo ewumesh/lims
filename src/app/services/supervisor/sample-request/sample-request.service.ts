@@ -37,7 +37,8 @@ export class SampleReportService {
   }
 
   getRawDataSheet(id): Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet/${id}/`)
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+    // /api/sample-form-raw-data-sheet-test-type/345/
   }
 
   getSamplesDetails(payload):Observable<any> {

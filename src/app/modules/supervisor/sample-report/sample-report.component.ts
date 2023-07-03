@@ -51,11 +51,12 @@ export class SampleReportComponent implements OnInit {
   ngOnInit(): void {
     this.getReportDetails();
     this.isSampleSentForSupervisor();
-    this.getRawDataSheetDetails();
+    
   }
 
   getRawDataSheetDetails() {
-    let id = this.route.snapshot.paramMap.get('id');
+    console.log(this.reportDetails, "REPORT")
+    let id = this.reportDetails?.sample_form?.id
     this.service.getRawDataSheet(id).subscribe(res => {
       this.rawDataSheet = res;
     })
@@ -171,6 +172,7 @@ export class SampleReportComponent implements OnInit {
     this.service.getSamplesDetails(payload).subscribe(res => {
       this.reportDetails = res;
       this.isLoading = false;
+      this.getRawDataSheetDetails();
     },
      (error) => {
       this.isLoading = false;

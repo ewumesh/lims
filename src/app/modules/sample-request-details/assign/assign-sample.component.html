@@ -18,7 +18,12 @@
         <label for="user" class="form-label">Select Supervisor *</label>
         <mat-form-field class="w-100" appearance="outline">
           <mat-select placeholder="Select Supervisor" formControlName="supervisor_user" class="custom-select">
-            <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
+            <mat-option *ngFor="let user of users" [value]="user.id">
+              {{user?.first_name}} {{user?.last_name}} 
+              <span *ngIf="user.test_type.includes(1)" class="badge badge-primary" style="background-color: bisque;">Chemical</span>
+              <span *ngIf="user.test_type.includes(2)" class="badge badge-primary" style="background-color: rgb(229, 128, 5);">Microbiological</span>
+              <span *ngIf="user.test_type.includes(3)" class="badge badge-primary" style="background-color: rgb(64, 51, 207);">Instrumental</span>
+            </mat-option>
           </mat-select>
           <mat-error class="text-danger" *ngIf="displayMessage?.supervisor_user">{{displayMessage?.supervisor_user}}</mat-error>
         </mat-form-field>

@@ -23,6 +23,10 @@ import { AvatarModule } from 'ngx-avatar';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { CdkAccordionOverviewExample } from './sidebar/dropdown.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+
+
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient){
     NotificationComponent,
     PageNotFoundComponent,
     ForbiddenComponent,
-    ViewImageComponent
+    ViewImageComponent,CdkAccordionOverviewExample
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient){
     MatMenuModule,
     LayoutRoutingModule,
     MatListModule,
-
+    CdkAccordionModule,
     AvatarModule,
 
     TranslateModule.forChild({
