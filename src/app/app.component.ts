@@ -12,17 +12,17 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private languageService: LanguageService
+    // private languageService: LanguageService
     ) {
 
         /* 
     Retrieve the selected language if selected otherwise select the default language
     */
-    let currentLang = localStorage.getItem('lang');
-    if (currentLang) {
-      this.languageService.changeLanguage(currentLang.toString());
-    } else {
-      this.languageService.initLanguage();
-    }
+    // let currentLang = localStorage.getItem('lang');
+    // if (currentLang) {
+    //   this.languageService.changeLanguage(currentLang.toString());
+    // } else {
+    //   this.languageService.initLanguage();
+    // }
   }
 }

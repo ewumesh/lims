@@ -111,6 +111,15 @@ export class SmuDashboard {
         this.router.navigate(['/dashboard/user-requests']);
     }
 
+    gotoSampleReportDetails(id) {
+      // /212
+      this.router.navigate(['/dashboard/sample-request-details', id]);
+    }
+
+    gotoSampleReport(id) {
+      this.router.navigate(['/dashboard/report', id]);
+    }
+
     getDashboardStatus() {
         this.isDashboardStatus = true;
         this.service.getDashboardStatus().subscribe(a => {
