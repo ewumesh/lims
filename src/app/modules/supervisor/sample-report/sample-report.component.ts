@@ -135,7 +135,7 @@ export class SampleReportComponent implements OnInit {
     console.log(value, 'VAAAL')
     let id = this.route.snapshot.paramMap.get('id');
     let data = {
-      sample_form: id,
+      sample_form: this.reportDetails.sample_form?.id,
       parameter: value.id,
       sample_form_has_parameter: value.sample_form_has_parameter
     }

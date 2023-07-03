@@ -190,7 +190,6 @@ export class SmuDashboard {
             responsive: [
                 {
                     breakpoint: 2000,
-<<<<<<< HEAD
                     
                     options: {
                       colors: ['#00C852', '#FFC007', '#364152', '#D600C0', '#C62828'],
@@ -202,17 +201,6 @@ export class SmuDashboard {
                         fontFamily: 'Poppins',
                         position: "bottom"
                       }
-=======
-                    options: {
-                        dataLabels:{enabled: false},
-                        chart: {
-                            width: 450
-                        },
-                        legend: {
-                            fontFamily: 'Poppins',
-                            position: "bottom"
-                        }
->>>>>>> 77a3af35e17ebd4d61cba6db8db2d481a5940a98
                     }
                   }
             ]

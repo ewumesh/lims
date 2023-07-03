@@ -17,6 +17,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PaymentReceiptComponent } from './receipt/receipt';
 import { RejectComponent } from './reject-sample';
+import { AvatarModule } from 'ngx-avatar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent, RejectComponent],
@@ -36,6 +38,9 @@ import { RejectComponent } from './reject-sample';
     MatNativeDateModule,
     MatStepperModule,
     MatIconModule,
+    MatTooltipModule,
+
+    AvatarModule,
 
     SharedModule
    ],

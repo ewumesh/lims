@@ -449,6 +449,18 @@
                         <td class="text-center">
                           <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
                           <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
+                          <!-- <div class="text-center">
+                            <ngx-avatar *ngIf="r.supervisor_user" [name]="r.supervisor_user"></ngx-avatar>
+                            </div> -->
+
+                            <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                              <div class="author">
+                                <div class="mask cursor-pointer">
+                                  <ngx-avatar size="40" [name]="r.supervisor_user"
+                                    [matTooltip]="r.supervisor_user"></ngx-avatar>
+                                </div>
+                              </div>
+                            </div>
                         </td>
                         <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
@@ -470,6 +482,14 @@
                         <td class="text-center">
                           <button (click)="assign(r.id,r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
                           <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
+                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                            <div class="author">
+                              <div class="mask cursor-pointer">
+                                <ngx-avatar size="40" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length" class="text-center">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
@@ -491,6 +511,14 @@
                         <td class="text-center">
                           <button (click)="assign(r.id, r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Assign</button>
                           <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span>
+                          <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                            <div class="author">
+                              <div class="mask cursor-pointer">
+                                <ngx-avatar size="40" [name]="r.supervisor_user"
+                                  [matTooltip]="r.supervisor_user"></ngx-avatar>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
