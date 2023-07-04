@@ -26,7 +26,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CdkAccordionOverviewExample } from './sidebar/dropdown.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient){
     MatListModule,
     CdkAccordionModule,
     AvatarModule,
-
+    MatExpansionModule,
+    MatSlideToggleModule,
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,

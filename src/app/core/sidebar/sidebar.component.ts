@@ -3,9 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
-
-
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -16,7 +13,8 @@ export class SidebarComponent implements OnInit {
   userDetails: any = {};
 
   activatedRoute: string = '';
-  
+
+  panelOpenState = false;  
 
   constructor(
     public router: Router,

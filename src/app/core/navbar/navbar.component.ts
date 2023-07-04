@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from '../layout.service';
 import { LanguageService } from 'src/app/services/language-service';
@@ -8,7 +8,7 @@ import { LanguageService } from 'src/app/services/language-service';
   templateUrl: './navbar.component.html',
   styleUrls: ['../layout/layout.component.scss', './navbar.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
   userDetails: any = {};
 
@@ -17,6 +17,11 @@ export class NavbarComponent implements OnInit {
   notifications:any[] = [];
 
   url:string;
+
+  checked:boolean = false;
+  disabled:boolean = false;
+
+  @ViewChild('darkModeSwitch', { read: ElementRef }) element: ElementRef | undefined;
 
   getRandomColor() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
@@ -30,7 +35,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private layoutService: LayoutService,
-    private langService: LanguageService
+    private langService: LanguageService,
+    private renderer: Renderer2
     ) {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userDetails = userDetails;
@@ -86,5 +92,30 @@ export class NavbarComponent implements OnInit {
         this.logout();
       }
     })
+  }
+
+
+  ngAfterViewInit() {
+    this.setIcon();
+  }
+
+  setIcon() {
+    if (this.element) {
+      const targetSpan: HTMLElement = this.element.nativeElement.querySelector('.mat-slide-toggle-thumb');
+      while (targetSpan.firstChild) {
+        targetSpan.firstChild.remove();
+      }
+      const elem = this.renderer.createElement('mat-icon');
+      const icon = this.checked ? 'dark_mode' : 'light_mode';
+      elem.setAttribute('class', 'mat-icon notranslate material-icons mat-icon-no-color light-mode-switch-icon');
+      elem.textContent = icon
+      targetSpan.appendChild(elem);
+    }
+  }
+
+  changeTheme() {
+    this.checked = !this.checked;
+    console.log('I am now ', this.checked);
+    this.setIcon();
   }
 }

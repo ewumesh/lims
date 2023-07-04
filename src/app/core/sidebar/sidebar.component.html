@@ -110,7 +110,44 @@
 
           <!-- <dropdown-menu></dropdown-menu> -->
 
-          <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+          <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <mat-expansion-panel hideToggle style="box-shadow: none;">
+              <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
+                <mat-panel-title>
+                  <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon>
+                  <span class="dropdown-toggle" style="color: #0000008C;">User Management</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div >
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+  
+                  <li class="nav-item m-0">
+                    <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/all-users'}"
+                      (click)="navigate('/dashboard/all-users')" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      All User</a>
+                  </li>
+  
+                  <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-user'}"
+                      (click)="navigate('/dashboard/create-user')" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Create User</a>
+                  </li>
+  
+                  <li class="nav-item" *ngIf="userDetails.role === 1">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/create-admin'}"
+                      (click)="navigate('/dashboard/create-admin')" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Create Admin</a>
+                  </li>
+                </ul>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          
+
+          <!-- <li class="nav-item" id="accordionExample" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link dropdown-toggle"
               [ngClass]="{'active-route': this.router.url === '/dashboard/create-user' || this.router.url === '/dashboard/all-users' || this.router.url === '/dashboard/create-admin'}"
               href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
@@ -143,9 +180,56 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+          <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1 || userDetails.role === 2">
+            <mat-expansion-panel hideToggle style="box-shadow: none;">
+              <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
+                <mat-panel-title>
+                  <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon>
+                  <!-- <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon> -->
+                  <span class="dropdown-toggle" style="color: #0000008C;">Commodities</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div >
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+                  <li class="nav-item mt-2" style="margin:0 !important;">
+                    <a (click)="navigate('/dashboard/commodities/all-commodities')" class="nav-link"
+                      [ngClass]="{'active-route':this.router.url === '/dashboard/commodities/all-commodities'}"
+                      href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      All</a>
+                  </li>
+  
+                  <li class="nav-item mt-2">
+                    <a (click)="navigate('/dashboard/settings/commodity-category')"
+                      [ngClass]="{'active-route':this.router.url === '/dashboard/settings/commodity-category'}"
+                      class="nav-link" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Category</a>
+                  </li>
+  
+                  <li class="nav-item mt-2">
+                    <a class="nav-link" href="Javascript:;" (click)="navigate('/dashboard/commodities')"
+                      [ngClass]="{'active-route':this.router.url === '/dashboard/commodities'}">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Commodities</a>
+                  </li>
+  
+                  <li class="nav-item mt-2">
+                    <a class="nav-link"
+                      [ngClass]="{'active-route':this.router.url === '/dashboard/commodities-parameter'}"
+                      (click)="navigate('/dashboard/commodities-parameter')" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Parameter</a>
+                  </li>
+  
+                </ul>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <!-- <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link"
               [ngClass]="{'active-route': this.router.url === '/dashboard/commodities/all-commodities' || this.router.url === '/dashboard/settings/commodity-category' || this.router.url === '/dashboard/commodities' || this.router.url === '/dashboard/commodities-parameter'}"
               href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseT" aria-expanded="false"
@@ -189,9 +273,46 @@
 
               </ul>
             </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item" *ngIf="userDetails.role === 1">
+          <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1">
+            <mat-expansion-panel hideToggle style="box-shadow: none;">
+              <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
+                <mat-panel-title>
+                  <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="settings" style="margin-top: -2px;color: #0000008C; font-size: 15px;"></mat-icon>
+                  <!-- <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon> -->
+                  <span class="dropdown-toggle" style="color: #0000008C;">Settings</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div >
+                <ul class="navbar-nav me-auto mb-lg-0 flex-column db-navbar px-2 mt-2">
+                  <li class="nav-item mt-2">
+                    <a class="nav-link"
+                      [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category'}"
+                      (click)="navigate('/dashboard/settings/client-category')" href="Javascript:;">
+                      <mat-icon class=" child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Client Categories</a>
+                  </li>
+  
+                  <li class="nav-item mt-2">
+                    <a (click)="navigate('/dashboard/user-group')" class="nav-link"
+                      [ngClass]="{'active-route': this.router.url === '/dashboard/user-group'}" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Group</a>
+                  </li>
+  
+                  <li class="nav-item mt-2">
+                    <a class="nav-link" [ngClass]="{'active-route': this.router.url === '/dashboard/user-permissions'}"
+                      (click)="navigate('/dashboard/user-permissions')" href="Javascript:;">
+                      <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="lens"></mat-icon>
+                      Permission</a>
+                  </li>
+                </ul>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <!-- <li class="nav-item" *ngIf="userDetails.role === 1">
             <a class="nav-link" href="Javascript:;" data-bs-toggle="collapse" data-bs-target="#collapseSetting"
               aria-expanded="false" aria-controls="collapseSetting"
               [ngClass]="{'active-route': this.router.url === '/dashboard/settings/client-category' || this.router.url === '/dashboard/user-group' || this.router.url === '/dashboard/user-permissions'}">
@@ -224,7 +345,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <!-- End SMU/Admin Navs -->
 
           <!-- Supervisor Navs -->
