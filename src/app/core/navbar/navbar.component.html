@@ -4,8 +4,17 @@
       <img src="../../../assets/nepal-government.png" alt="">
     </div>
     <p>Laboratory Information<br>Management System-LIMS</p>
+
+    <div class="search-container ms-4">
+      <form action="" class="search-form-container">
+        <input type="search" name="" id="" class="sample-search" placeholder="Search sample">
+        <div class="search-icon"><mat-icon>search</mat-icon></div>
+      </form>
+    </div>
+
   </div>
   <div class="profile" style="margin-right: 1%;">
+
     <div class="notification-div" [matMenuTriggerFor]="not" style="margin-right: 1rem;">
       <a  href="Javascript:;" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom"
         data-bs-content="Bottom popover">
@@ -24,6 +33,12 @@
       [checked]="checked"
       >
     </mat-slide-toggle> -->
+
+      
+
+
+
+
       <mat-menu #not="matMenu" class="notification-menu">
         <app-notifications [notifications]="notifications"></app-notifications>
       </mat-menu>

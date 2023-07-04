@@ -57,3 +57,27 @@
 .mat-mdc-menu-item span{
   font-family: Poppins!important;
 }
+
+.search-form-container{
+  position: relative;
+}
+.sample-search{
+  height: 55px;
+  background: rgb(248, 250, 252);
+  border-radius: 6px;
+  width: 350px;
+  border: 1px solid #cbcbcb;
+  padding: 16px 16px 16px 50px;
+}
+
+.sample-search:focus, .sample-search:focus-visible{
+  outline: none!important;
+  box-shadow: none!important;
+}
+.search-icon{
+  width: max-content;
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  margin-left: 5%;
+}
