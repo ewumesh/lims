@@ -3,6 +3,10 @@
   width: 5px;
 }
 
+::-webkit-scrollbar-button {
+  height: 130px;
+}
+
 ::-webkit-scrollbar-track {
   // background-color: #fff;
   -webkit-border-radius: 10px;
