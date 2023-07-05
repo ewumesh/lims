@@ -607,9 +607,9 @@
   </div>
 
   <div class="date-content">
-    <p class="time mb-3"><span><mat-icon>access_time</mat-icon></span> <span>5:57:13 AM</span></p>
-    <p class="np-date mb-">19 असार २०८०, मंगलबार</p>
-    <p class="en-date mb-0"><mat-icon>calendar_today</mat-icon> JUL 04, 2023 Monday</p>
+    <p class="time mb-3"><span><mat-icon>access_time</mat-icon></span> <span>{{date | date:'mediumTime'}}</span></p>
+    <p class="np-date mb-">{{con(d1)}}</p> 
+    <p class="en-date mb-0"><mat-icon>calendar_today</mat-icon> {{date | date:'fullDate'}}</p> 
   </div>
 
 </a>

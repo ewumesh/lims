@@ -4,6 +4,8 @@ import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
 
+// const NepaliDate = require('nepali-date-converter');
+const NepaliDate = require('nepali-date');
 
 
 @Component({
@@ -16,9 +18,16 @@ export class SidebarComponent implements OnInit {
   userDetails: any = {};
 
   activatedRoute: string = '';
-  
+
+  date = new Date();
+  d1 = new NepaliDate(new Date());
+// dateNepali = new NepaliDate(2055, 10, 11);
 
   panelOpenState = false;  
+
+  con(d) {
+    return d.format('mmmm d, yyyy ddd');
+  }
 
   constructor(
     public router: Router,
