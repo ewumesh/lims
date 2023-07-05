@@ -1,12 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
-
-// const NepaliDate = require('nepali-date-converter');
 const NepaliDate = require('nepali-date');
-
 
 @Component({
   selector: 'app-sidebar',
@@ -20,8 +18,8 @@ export class SidebarComponent implements OnInit {
   activatedRoute: string = '';
 
   date = new Date();
+
   d1 = new NepaliDate(new Date());
-// dateNepali = new NepaliDate(2055, 10, 11);
 
   panelOpenState = false;  
 
@@ -33,8 +31,12 @@ export class SidebarComponent implements OnInit {
     public router: Router,
     private toast: ToastService,
     private sharedService: SharedService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    // public datepipe: DatePipe
   ) {
+    setInterval(() => {
+      this.date = new Date();
+    }, 1);
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.router.events.subscribe(a => {
       this.activatedRoute = this.router.url.split('?')[0];
