@@ -55,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient){
     AvatarModule,
     MatExpansionModule,
     MatSlideToggleModule,
+
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,

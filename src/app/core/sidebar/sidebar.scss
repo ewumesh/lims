@@ -73,6 +73,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  z-index: 1;
 }
 
 .kit-logo-container {
@@ -111,9 +112,102 @@ svg path {
   font-weight: 500;
 }
 
+
+.db-navbar mat-icon {
+  margin-right: 8px !important;
+}
+
+.nav-item:first-child {
+  margin-top: 0 !important;
+}
+
+.date-content{
+  border: 1px solid #dcdcdc;
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: #fff;
+  margin: 0% 4%;
+  text-align: center;
+  padding: 24px;
+  display: none;
+  transition: 0.5s all ease-in-out;
+  transform: translateY(-183px);
+  opacity: 0;
+}
+.date-content .time{
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #E7F0F7;
+  width: 60%;
+  padding: 4px 10px 4px 4px;
+  border-radius: 3px;
+  color: #58667E;
+}
+.date-content .np-date{
+  color: #58667E;
+  font-weight: 600;
+  font-size: 14px;
+}
+.date-content .time mat-icon{
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2260bf;
+}
+.date-content .en-date{
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #EE5F32;
+}
+.date-content .en-date  mat-icon{
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background: rgba(238, 95, 50, 0.10);
+  margin-right: 8px;
+}
+.footer-link{
+  height: 82px;
+}
+.kit-footer:hover ~.date-content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transform: translateY(-230px);
+  z-index: -1;
+}
+
 .kit-footer:hover {
   background: #2260bf;
   box-shadow: 0px 11px 24px 0px rgba(3, 76, 198, 0.26);
+  border: 1px solid #2260bf;
+}
+
+.kit-footer:hover .kit-logo-container{
+  background: #ffffff;
+}
+.kit-footer:hover svg path{
+  fill: #2260bf;
+}
+.kit-footer:hover .developed-by{
+  color: #fff!important;
+}
+.kit-footer:hover .kit-name{
+  color: #fff!important;
+}
+.kit-footer:hover .kit-web{
+  color: #fff!important;
 }
 
 .kit-footer:hover .kit-logo-container {
@@ -135,16 +229,6 @@ svg path {
 .kit-footer:hover .kit-web {
   color: #fff !important;
 }
-
-.db-navbar mat-icon {
-  margin-right: 8px !important;
-}
-
-.nav-item:first-child {
-  margin-top: 0 !important;
-}
-
-
 
 
 
