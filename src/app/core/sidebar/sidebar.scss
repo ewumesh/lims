@@ -82,7 +82,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #2260bf;
+  background: #034CC6;
   border-radius: 6px;
 }
 
@@ -130,7 +130,7 @@ svg path {
   text-align: center;
   padding: 24px;
   display: none;
-  transition: 0.5s all ease-in-out;
+  transition: 0.5s all  cubic-bezier(0.25, 0.1, 0.25, 1);
   transform: translateY(-183px);
   opacity: 0;
 }
@@ -156,10 +156,10 @@ svg path {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #2260bf;
+  color: #034CC6;
 }
 .date-content .en-date{
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -188,17 +188,35 @@ svg path {
   z-index: -1;
 }
 
+@keyframes slideup {
+  0%{
+    transform: translateY(-180px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(-230px);
+    opacity: 1;
+  }
+  
+}
+.kit-footer:hover ~.date-content{
+  -webkit-animation-name: slideup;
+  -webkit-animation-duration: 800ms;
+  -webkit-animation-timing-function:  cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0px -2px 31px 0px rgba(3, 76, 198, 0.15);
+}
+
 .kit-footer:hover {
-  background: #2260bf;
+  background: #034CC6;
   box-shadow: 0px 11px 24px 0px rgba(3, 76, 198, 0.26);
-  border: 1px solid #2260bf;
+  border: 1px solid #034CC6;
 }
 
 .kit-footer:hover .kit-logo-container{
   background: #ffffff;
 }
 .kit-footer:hover svg path{
-  fill: #2260bf;
+  fill: #034CC6;
 }
 .kit-footer:hover .developed-by{
   color: #fff!important;
@@ -215,7 +233,7 @@ svg path {
 }
 
 .kit-footer:hover svg path {
-  fill: #2260bf;
+  fill: #034CC6;
 }
 
 .kit-footer:hover .developed-by {

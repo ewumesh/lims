@@ -158,13 +158,13 @@ export class UserDashboard implements OnInit {
                 type: "pie",
                 fontFamily: 'Poppins',
             },
-            labels: ["Completed", "Pending", "Processing", "Recheck"],
+            labels: ["Completed", "Pending", "Processing", "Rejected"],
             responsive: [
                 {
                   breakpoint: 2000,
                   
                   options: {
-                    colors: ['#00c853', '#ffc107', '#3f51b5', '#ffc0cb'],
+                    colors: ['#00c853', '#ffc107', '#3f51b5', '#C62828'],
                     dataLabels:{enabled: false},
                     chart: {
                       width: 450
