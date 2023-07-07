@@ -1,9 +1,9 @@
 ::ng-deep {
 
 
-.mat-mdc-menu-content {
-  padding: 5% !important;
-}
+// .mat-mdc-menu-content {
+//   padding: 5% !important;
+// }
 
 .mat-mdc-menu-panel {
   width: 400px !important;
@@ -77,10 +77,24 @@
 .search-icon{
   width: max-content;
   position: absolute;
-  top: 55%;
+  top: 50%;
   transform: translateY(-50%);
   margin-left: 3%;
 }
-.search-icon mat-icon{
+.search-icon .fa-search{
+  font-size: 16px;
   color: #2260bf;
+}
+
+.search-result-item:hover {
+  background-color: #2260bf;
+  cursor: pointer;
+
+  .mdc-list-item__primary-text{
+  color: #fff !important;
+  }
+
+  .mdc-list-item__secondary-text {
+    color: #fff !important;
+  }
 }

@@ -28,6 +28,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -55,6 +56,8 @@ export function HttpLoaderFactory(http: HttpClient){
     AvatarModule,
     MatExpansionModule,
     MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     TranslateModule.forChild({
       loader: {

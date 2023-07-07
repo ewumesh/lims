@@ -95,11 +95,12 @@
           <!-- <dropdown-menu></dropdown-menu> -->
 
           <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1 || userDetails.role === 2">
-            <mat-expansion-panel hideToggle style="box-shadow: none;">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false" style="box-shadow: none;">
               <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
                 <mat-panel-title>
                   <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon>
-                  <span class="dropdown-toggle" style="color: #0000008C;">User Management</span>
+                  <span  style="color: #0000008C;">User Management</span>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div >
@@ -167,12 +168,13 @@
           </li> -->
 
           <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1 || userDetails.role === 2">
-            <mat-expansion-panel hideToggle style="box-shadow: none;">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false" style="box-shadow: none;">
               <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
                 <mat-panel-title>
                   <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="group_work" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon>
                   <!-- <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon> -->
-                  <span class="dropdown-toggle" style="color: #0000008C;">Commodities</span>
+                  <span style="color: #0000008C;">Commodities</span>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div >
@@ -260,12 +262,13 @@
           </li> -->
 
           <mat-accordion class="exp-panel" *ngIf="userDetails.role === 1">
-            <mat-expansion-panel hideToggle style="box-shadow: none;">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false" style="box-shadow: none;">
               <mat-expansion-panel-header  class="sidebar-link-expansion" style="padding: 0 10px;height: 40px;">
                 <mat-panel-title>
                   <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="settings" style="margin-top: -2px;color: #0000008C; font-size: 15px;"></mat-icon>
                   <!-- <mat-icon class="pt-1" aria-hidden="false" aria-label="add" fontIcon="supervised_user_circle" style="margin-top: -3px;color: #0000008C; font-size: 16px;"></mat-icon> -->
-                  <span class="dropdown-toggle" style="color: #0000008C;">Settings</span>
+                  <span style="color: #0000008C;">Settings</span>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div >
@@ -575,12 +578,13 @@
           </li>
           -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" [ngClass]="{'active-route':this.router.url === '/dashboard/my-account'}"
               (click)="navigate('/dashboard/my-account')" href="Javascript:;">
               <mat-icon aria-hidden="false" aria-label="add" fontIcon="account_box"></mat-icon>
               My Account</a>
-          </li>
+          </li> -->
+
         </ul>
       </div>
     </div>
