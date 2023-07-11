@@ -21,6 +21,7 @@ import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
 import { FinalRawDataRemarksComponent } from './raw-data-remarks/component/final-remarks';
 import { ViewRawDataComponent } from './view-raw-data/view-raw-data';
 import { ViewRemarksComponent } from './view-remarks/view-remarks';
+import { MicroParameterDetailsComponent } from './parameter-details/micro-parameter-details';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ViewRemarksComponent } from './view-remarks/view-remarks';
     RawDataRemarksComponent,
     FinalRawDataRemarksComponent,
     ViewRawDataComponent,
-    ViewRemarksComponent
+    ViewRemarksComponent,
+    MicroParameterDetailsComponent
   ],
   imports: [
     CommonModule,

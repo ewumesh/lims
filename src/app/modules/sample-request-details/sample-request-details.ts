@@ -59,6 +59,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
   totalPrice = 0;
 
+  paymentReceipts:any[] =[];
+
   constructor(
     private service: SampleRequestDetailsService,
     private route: ActivatedRoute,
@@ -147,12 +149,13 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   createPaymentDocList() {
     return this.fb.group({
       voucher_number: new FormControl(''),
-      owner_email: new FormControl(''),
-      sample_form: new FormControl(''),
+      owner_email: new FormControl('user@gmail.com'),
+      sample_form: new FormControl(this.sampleDetails?.id),
       register_date: new FormControl(''),
       amount: new FormControl(''),
       file: new FormControl(''),
-      payment_receipt: new FormControl('')
+      payment_receipt: new FormControl(''),
+      owner_user: new FormControl('')
     })
   }
 
@@ -209,7 +212,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
     let payload = {
       sample_form: this.sampleId,
-      parameters:[parameter],
+      parameters:[parameter], 
       test_type:testType
     }
 
@@ -344,13 +347,16 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
   uploadImage(event) {
+    console.log(this.paymentForm.value, 'PAYMENT DATEI')
     let file = event.target.files[0];
     this.paymentReceipt = file;
     this.isPaymentReceipt = true;
+
+    this.paymentReceipts.push(event.target.files[0]);
   }
 
   payNow() {
-    console.log(this.paymentForm.value, 'as3dhgh')
+    
     this.isPaymentProcceed = true;
     if (this.paymentForm.pristine || !this.isPaymentReceipt) {
       this.message = {};
@@ -359,14 +365,37 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    let payload = {
-      voucher_number: this.paymentForm.value.voucher_number,
-      owner_email: this.sampleDetails?.owner_user?.email,
-      sample_form: this.sampleDetails?.id,
-      register_date: this.paymentForm.value.register_date,
-      amount: this.paymentForm.value.amount
-    }
-    this.service.sampleRequestPayment(payload, this.paymentReceipt).subscribe(res => {
+    // let payload = {
+    //   voucher_number: this.paymentForm.value.voucher_number,
+    //   owner_email: this.sampleDetails?.owner_user?.email,
+    //   sample_form: this.sampleDetails?.id,
+    //   register_date: this.paymentForm.value.register_date,
+    //   amount: this.paymentForm.value.amount
+    // }
+
+    let ok:any[] =[];
+    this.paymentForm.value.samplePayment.forEach((a, index) => {
+      a.owner_email = this.sampleDetails?.owner_user?.email;
+      a.owner_user = this.sampleDetails?.owner_user?.id;
+      a.sample_form = this.sampleDetails?.id;
+      a.payment_receipt = this.paymentReceipts[index];
+      ok.push(a);
+    })
+
+    const formData = new FormData();
+  for (let i = 0; i < ok.length; i++) {
+    const payment = ok[i];
+    formData.append(`payments[${i}][voucher_number]`, payment.voucher_number);
+    formData.append(`payments[${i}][owner_email]`, payment.owner_email);
+    formData.append(`payments[${i}][owner_user]`, payment.owner_user);
+    formData.append(`payments[${i}][sample_form]`, payment.sample_form);
+    formData.append(`payments[${i}][register_date]`, payment.register_date);
+    formData.append(`payments[${i}][amount]`, payment.amount.toString());
+    formData.append(`payments[${i}][payment_receipt]`, payment.payment_receipt);
+  }
+
+
+    this.service.sampleRequestPayment(formData).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, res.message);
       this.dismissMessage();
       this.isPaymentProcceed = false;
@@ -380,6 +409,18 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       this.responseError = error?.error;
       this.isPaymentProcceed = false;
     })
+  }
+
+  objectToFormData(obj: any): FormData {
+    const formData = new FormData();
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        formData.append(key, obj[key]);
+      }
+    }
+
+    return formData;
   }
 
   ngAfterViewInit(): void {

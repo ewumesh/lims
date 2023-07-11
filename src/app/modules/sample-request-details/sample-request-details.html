@@ -161,12 +161,12 @@
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Sample Lab Code</h4>
-          <p class="text-uppercase">{{sampleDetails.supervisor_encode_id}}</p>
+          <p class="text-uppercase">{{sampleDetails.sample_lab_id}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Refrence Number</h4>
-          <p class="text-uppercase">{{sampleDetails.user_encode_id}}</p>
+          <p class="text-uppercase">{{sampleDetails.refrence_number}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Sample Name </h4>
@@ -184,7 +184,9 @@
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Best Before Date</h4>
-          <p>{{sampleDetails.dfb | date}}</p>
+
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
         </div>
 
         <div class="col-md-4">
@@ -227,7 +229,7 @@
       </div>
     </div>
 
-    <div class="view-page mt-4 p-0" *ngIf="sampleDetails?.payment.length > 0">
+    <div class="view-page mt-4 p-4" *ngIf="sampleDetails?.payment?.length > 0">
       <h3 class="view-page-heading pb-0 mb-0">Payment Details</h3>
       <div class="row m-0 py-1" *ngFor="let p of sampleDetails.payment">
         <div class="col-md-3">
@@ -244,7 +246,7 @@
         </div>
 
         <div class="col-md-3">
-          <h4 class="m-0">Payment Receipt </h4>
+          <!-- <h4 class="m-0">Payment Receipt </h4> -->
           <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
           <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
         </div>
@@ -304,7 +306,7 @@
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td *ngIf="i===0" [attr.rowspan]="sampleDetails.parameters.length" style="vertical-align: middle; text-align: center;">Rs.{{totalPrice}}</td>
+                <td *ngIf="i===0" [attr.rowspan]="sampleDetails?.parameters?.length" style="vertical-align: middle; text-align: center;">Rs.{{totalPrice}}</td>
                 
                 <!-- <td>{{r.units}}</td> -->
                 <!-- <td>Rs.{{r.price}}</td>
@@ -402,7 +404,7 @@
 
                 <div class="col-md-12 py-2">
                   <button (click)="addDocList()" type="button" class="btn btn-primary btn-lims-primary btn-sm mx-1">Add New</button>
-                  <button type="button" class="btn btn-primary btn-lims-danger btn-sm mx-1">Remove</button>
+                  <!-- <button type="button" class="btn btn-primary btn-lims-danger btn-sm mx-1">Remove</button> -->
                 </div>
 
                 <div class="col-md-12 text-end mt-4">
@@ -612,7 +614,7 @@
         </div>
         <div class="col-md-6 white-bg text-end" style="border-radius: 8px;">
           <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
-          <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
+          <!-- <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button> -->
           <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
           
         </div>

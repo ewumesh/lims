@@ -169,6 +169,8 @@
                     <span>{{item.key}}</span> = <span>{{item.value}}</span>
                   </div>
                   <div>Result: {{p.result}}</div>
+                  <div *ngIf="p?.converted_result">Converted Result: {{p.converted_result}}</div>
+                  <div *ngIf="p?.analyst_remarks">Remarks: {{p?.analyst_remarks}}</div>
                 </div>
               </div>
 

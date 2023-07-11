@@ -77,24 +77,76 @@
 .search-icon{
   width: max-content;
   position: absolute;
+  top: 55%;
   top: 50%;
   transform: translateY(-50%);
   margin-left: 3%;
 }
-.search-icon .fa-search{
-  font-size: 16px;
-  color: #2260bf;
-}
 
-.search-result-item:hover {
-  background-color: #2260bf;
-  cursor: pointer;
 
-  .mdc-list-item__primary-text{
-  color: #fff !important;
+  .search-icon .fa-search{
+    font-size: 16px;
+    color: #2260bf;
   }
-
-  .mdc-list-item__secondary-text {
-    color: #fff !important;
+  .profile-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-}
+  .user-namee{
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .useremail{
+    font-size: 14px;
+    color: #FB802C;
+    text-transform: lowercase;
+  }
+  .user-rolee{
+    height: 28px;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0px 14px;
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 10vw;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .verified-icon{
+    font-size: 14px;
+    color: #1C93E3;
+  }
+  
+  .list-content{
+    border-top: 1px solid #dbdbdb;
+  }
+  .my-account-link{
+    border-bottom: 0.8px solid #dbdbdbc2;
+  }
+  .my-account-link, .logout-link{
+    display: flex;
+    align-items: center;
+    color: #58667E;
+    padding: 14px;
+  }
+  .my-account-link:hover, .logout-link:hover{
+    color: #2260bf;
+    cursor: pointer;
+    background: #e7f0f7;
+  }
+  .my-account-link mat-icon, .logout-link mat-icon{
+    margin-right: 10px;
+  }
+  .profile-card-detail.mat-mdc-menu-content{
+    padding-top: 10px!important;
+    padding-bottom: 0px!important;
+  }
+  .profile-card-detail.mdc-list{
+    padding-top: 10px!important;
+    padding-bottom: 0px!important;
+  }
+ 

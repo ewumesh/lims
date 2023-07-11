@@ -2,7 +2,7 @@
   <div class="col-md-12 m-0 p-0">
     <div class="row m-0">
       <div class="col-md-10">
-        <h1 class="mb-0" mat-dialog-title>Calculation</h1>
+        <h1 class="mb-0" mat-dialog-title style="font-family: Poppins!important; font-weight: 600;">Calculation</h1>
       </div>
       <div class="col-md-2 text-end pt-2">
         <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false"
@@ -12,79 +12,100 @@
 
     <hr class="mt-0" />
 
-    <mat-dialog-content>
-      <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm" style="border: 1px solid #00000042;
-      padding: 18px;">
-        <div class="row">
-          <div class="col-md-12"><label style="font-weight:bold">Parameter:{{requestDetails?.parameters?.name}}</label>
-          </div>
+    <div class="row p-0 m-0">
+      <div class="col-md-12 text-center"><label style="font-weight:600; font-family: Poppins; font-size: 16px;">{{requestDetails?.parameters?.name}}</label>
+        <p style="color: #58667E; font-size: 12px; font-weight: 400;">Enter the value in the following fields</p>
+      </div>
+    </div>
+
+
+    <div class="row p-3 mx-4" style="font-family: Poppins; border: 1px solid #DBDBDB; border-radius: 6px;" *ngIf="formControls[0].name !== 'nan'">
+
+      <div class="col-md-4 d-flex align-items-center" style="border-right: 1px solid #dbdbdb;" *ngIf="requestDetails?.parameters?.formula">  
+        <div><label style="font-weight:bold">Formula</label><br>{{requestDetails?.parameters?.formula}}</div>
+      </div>
+
+      <div class="col-md-8 ps-3">
+        <label style="font-weight:bold">Notations</label>
+        <div *ngIf="requestDetails.parameters?.formula_notation">
+          <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)">{{n | titlecase}}</div>
         </div>
+        <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
 
-        <div class="row" *ngIf="formControls[0].name !== 'nan'">
+      </div>
+    </div>
 
-          <div class="col-md-6">
-            <label style="font-weight:bold">Notations</label>
-            <div *ngIf="requestDetails.parameters?.formula_notation">
-              <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)"><span
-                  class="text-danger">*</span>{{n | titlecase}}</div>
+    <div class="text-center text-muted" *ngIf="formControls[0].name === 'nan'">
+      Formula Not Available.
+    </div>
+
+
+
+    <mat-dialog-content style="max-height: 100%!important; overflow-x: hidden;">
+      <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm">
+
+        <div class="form-data-container" class="p-3" style="border: 1px solid #DBDBDB; border-radius: 6px;">
+          <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-danger" role="alert">
+              <li *ngFor="let item of responseError | keyvalue">
+                <!-- {{item.key}}: -->
+                {{item.value}}
+              </li>
             </div>
-            <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
+          </div>
+        
+          <ng-container *ngFor="let control of formControls">
+            <div *ngIf="control.name !== 'nan'" class="d-flex align-items-center">
+              <label [for]="control.name" style="font-size: 14px; font-weight: 600; padding-right: 10px; margin-top: -15px!important  ;">{{ control.label }}</label>
+              <mat-form-field class="w-100" appearance="outline">
+                <input (keyup.enter)="generate()" [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
+                  [formControlName]="control.name" required style="height: 55px!important; padding-bottom: 24px;">
+              </mat-form-field>
+            </div>
+            <!-- <div *ngIf="control.name === 'nan'">
 
-          </div>
-          <div class="col-md-6" *ngIf="requestDetails?.parameters?.formula">
-            <label style="font-weight:bold">Formula</label>
-            <div>{{requestDetails?.parameters?.formula}}</div>
-          </div>
+              <div class="text-center text-muted py-4" >Formula Not Available.</div>
+            </div> -->
+          </ng-container>
         </div>
 
-        <div class="text-center text-muted" *ngIf="formControls[0].name === 'nan'">
-          Formula Not Available.
-        </div>
-
-        <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
-          <div class="alert alert-danger" role="alert">
-            <li *ngFor="let item of responseError | keyvalue">
-              <!-- {{item.key}}: -->
-              {{item.value}}
-            </li>
-          </div>
-        </div>
-        <hr>
-        <ng-container *ngFor="let control of formControls">
-          <div *ngIf="control.name !== 'nan'">
-            <label [for]="control.name">{{ control.label }}</label>
-            <mat-form-field class="w-100" appearance="outline">
-              <input (keyup.enter)="generate()" [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
-                [formControlName]="control.name" required>
-            </mat-form-field>
-          </div>
-          <!-- <div *ngIf="control.name === 'nan'">
-
-            <div class="text-center text-muted py-4" >Formula Not Available.</div>
-          </div> -->
-        </ng-container>
-
-        <div class="row" *ngIf="formControls[0].name !== 'nan'">
+        <div class="row mt-3" *ngIf="formControls[0].name !== 'nan'">
           <div class="col-md-12 text-end">
-            <button class="btn btn-primary btn-sm mx-2" (click)="generate()">
-              <span *ngIf="!isGenerating">Generate</span>
+            <button class="btn reset-btn" (click)="resetForm()">Reset</button>
+
+            <button class="btn mx-2 calculate-btn" (click)="generate()">
+              <span *ngIf="!isGenerating">Calculate</span>
         <span *ngIf="isGenerating">
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
         </span>
             </button>
-            <button class="btn btn-danger btn-sm" (click)="resetForm()">Reset</button>
+            
           </div>
         </div>
 
 
 
       </form>
-      <div class="pt-2">
-        <label> Result</label>
+
+      <div class="pt-2" *ngIf="!requestDetails?.parameters?.formula || requestDetails?.parameters?.formula === 'nan'">
+        <label style="font-size: 14px; font-weight: 600;"> Result</label>
             <mat-form-field appearance="outline" class="w-100">
               <input placeholder="Enter Value" [(ngModel)]="finalResult" class="custom-input" matInput type="text" required />
             </mat-form-field>
-            </div>
+      </div>
+      <!-- <div class="pt-2">
+        <label style="font-size: 14px; font-weight: 600;"> Result</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input placeholder="Enter Value" [(ngModel)]="finalResult" class="custom-input" matInput type="text" required />
+            </mat-form-field>
+      </div> -->
+
+      <div class="row m-0 mt-3 result">
+        <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
+          <label for="" >Result: </label>
+          <p class="final-result-value mb-0 ms-2">{{ finalResult || 'N/A'}} Unit</p>
+        </div>
+      </div>
 
 
       <div class="row" *ngIf="!isControlGenerated">
@@ -94,11 +115,42 @@
           </div>
         </div>
       </div>
+
+
+      <div class="row mt-3">
+        <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
+          <label for="" style="font-size: 14px; font-weight: 400; color: #000; margin-right: 10px;">Convert Decimal Place</label>
+          <p class="decimal-places">
+            <span >0.0</span> 
+            <span class="active">0.00</span> 
+            <span>0.000</span> 
+            <span>0.0000</span>
+            <span>0.00000</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="row m-0 mt-3 final-result">
+        <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
+          <label for="" >Final Result: </label>
+          <p class="final-result-value mb-0 ms-2">{{finalResult}} Unit</p>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <label style="font-size: 14px; font-weight: 600;"> Remarks</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input [(ngModel)]="analyst_remarks" placeholder="Remarks (eg. Absent, Not applicable etc.)" class="custom-input" matInput type="text" />
+            </mat-form-field>
+      </div>
+
+
+
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Cancel</button>
-      <button (click)="setResult()" class="btn btn-primary btn-sm mx-1">
+      <button (click)="closeDialog()" class="btn cancel-btn mx-1">Cancel</button>
+      <button (click)="setResult()" class="btn calculate-btn mx-1">
         <span *ngIf="!isCalculating">Submit</span>
         <span *ngIf="isCalculating">
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...

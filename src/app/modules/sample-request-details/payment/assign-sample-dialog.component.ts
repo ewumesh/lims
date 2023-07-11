@@ -40,6 +40,8 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
     private toast: ToastService
   ) {
 
+    console.log(data, "DATE")
+
     this.genericValidator = new GenericValidator({
       'voucher_number': {
         'required': 'Voucher Number is required.'
@@ -110,43 +112,43 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
     }
 
     // console.log(payload, this.data, 'ok')
-    this.service.sampleRequestPayment(payload, this.paymentReceipt).subscribe(res => {
-      this.dialogRef.close();
-      this.toast.showToast(TOAST_STATE.success, res.message);
-      this.dismissMessage();
-    },
-      (error) => {
-        if (error.status === 400) {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'All the field(s) are not valid.');
+    // this.service.sampleRequestPayment(payload).subscribe(res => {
+    //   this.dialogRef.close();
+    //   this.toast.showToast(TOAST_STATE.success, res.message);
+    //   this.dismissMessage();
+    // },
+    //   (error) => {
+    //     if (error.status === 400) {
+    //       this.toast.showToast(
+    //         TOAST_STATE.danger,
+    //         'All the field(s) are not valid.');
 
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        } else if (error.status === 500 && error.status > 500) {
+    //       setTimeout(() => {
+    //         this.dismissMessage();
+    //       }, 3000);
+    //     } else if (error.status === 500 && error.status > 500) {
 
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            'Internal Server Error');
+    //       this.toast.showToast(
+    //         TOAST_STATE.danger,
+    //         'Internal Server Error');
 
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
+    //       setTimeout(() => {
+    //         this.dismissMessage();
+    //       }, 3000);
 
 
-        } else {
-          this.toast.showToast(
-            TOAST_STATE.danger,
-            error?.error?.error);
+    //     } else {
+    //       this.toast.showToast(
+    //         TOAST_STATE.danger,
+    //         error?.error?.error);
 
-          setTimeout(() => {
-            this.dismissMessage();
-          }, 3000);
-        }
-        this.isLoading = false;
+    //       setTimeout(() => {
+    //         this.dismissMessage();
+    //       }, 3000);
+    //     }
+    //     this.isLoading = false;
 
-      })
+    //   })
   }
 
   private dismissMessage(): void {

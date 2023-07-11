@@ -4,12 +4,28 @@ import { AssignedSampleAdminDetailsComponent } from './assigned-sample-admin-det
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AssignedSampleAdminDetailsService } from 'src/app/services/assigned-sample-admin-details/assigned-sample-admin-details.service';
+import { ReAssignSupervisorComponent } from './re-assign-supervisor/re-assign-supervisor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  declarations: [AssignedSampleAdminDetailsComponent],
+  declarations: [AssignedSampleAdminDetailsComponent, ReAssignSupervisorComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{path: '', component: AssignedSampleAdminDetailsComponent}]),
+
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
 
     SharedModule
   ],

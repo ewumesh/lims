@@ -12,6 +12,7 @@ import { AnalystRemarksComponent } from './remarks/analyst-remarks';
 import { RawDataRemarksComponent } from './raw-data-remarks/raw-data-remarks';
 import { ViewRawDataComponent } from './view-raw-data/view-raw-data';
 import { ViewRemarksComponent } from './view-remarks/view-remarks';
+import { MicroParameterDetailsComponent } from './parameter-details/micro-parameter-details';
 
 @Component({
   templateUrl: './test-request-details.component.html',
@@ -108,7 +109,8 @@ export class TestRequestDetailsComponent implements OnInit {
 
     instance = this.dialog.open(CalculateComponent, {
       data: allValue ? allValue : null,
-      width: '600px',
+      width: '800px',
+      height: '900px',
       autoFocus: false,
     })
 
@@ -144,6 +146,12 @@ export class TestRequestDetailsComponent implements OnInit {
    viewRemarks(data) {
     this.dialog.open(ViewRemarksComponent, {
       data:data
+    })
+   }
+
+   microParameterDetails() {
+    this.dialog.open(MicroParameterDetailsComponent, {
+      width: '1200px'
     })
    }
 

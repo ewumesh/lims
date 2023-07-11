@@ -86,3 +86,54 @@
   background-color: rgb(0, 200, 83);
   color: #FFFFFF;
 }
+
+.account-photo.account-early-adopter {
+  border-color: rgba(23, 152, 30, 0.55)
+}
+
+.account-photo.account-admin,
+.account-photo.account-product-owner {
+  border-color: rgba(255, 149, 0, 0.55)
+}
+
+.account-early-adopter .account-type {
+  background-color: #05ae0e
+}
+
+.account-admin .account-type,
+.account-product-owner .account-type {
+  background-color: #ffcd02
+}
+.assign-supervisor-avatar{
+  padding: 6px 12px 6px 6px;
+  border: 1px solid #e7f0f7;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.cross-icon{
+  opacity: 0;
+  color: #fd8181;
+}
+.assign-supervisor-avatar:hover{
+  background: #e7f0f7;
+  border-radius: 20px; 
+}
+.assign-supervisor-avatar:hover .cross-icon{
+  opacity: 1;
+  cursor: pointer;
+}
+.cross-icon:hover{
+  color: #ff0000;
+}
+
+.price-box{
+  background: #e7f0f7;
+  border-left: 10px solid #2260bf;
+  padding: 20px;
+  font-size: 18px;
+}
+.price-box b{
+  font-size: 28px;
+  font-weight: 500;
+}

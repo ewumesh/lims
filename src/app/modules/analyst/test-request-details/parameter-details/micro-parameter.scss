@@ -1,0 +1,60 @@
+.custom-input {
+    padding-top: 10px !important;
+  }
+  
+  .mat-mdc-header-row {
+    background-color: #E7F0F7 !important;
+  }
+  
+  .custom-border {
+    border: 1px solid #0000002e;
+  }
+  
+  .custom-input {
+    padding-top: 10px !important;
+  }
+  
+  .paginator-border {
+    border: 1px solid #0000002e !important;
+  }
+  
+  .paginator {
+    ::ng-deep {
+      .mat-mdc-text-field-wrapper {
+        height: 30px !important;
+      }
+    }
+  }
+  
+  div.mat-mdc-form-field-bottom-align{
+    display: none!important;
+  }
+
+  //
+  
+  tr,td{
+    border: 1px solid black;
+    text-align: center;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+input{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 3px ;
+    border: none;
+    border-radius: 0;
+}
+
+.input:focus-visible {
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.text-bold{
+    font-weight: 500;
+}

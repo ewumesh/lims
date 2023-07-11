@@ -1,0 +1,197 @@
+<div class="row m-0 p-0">
+    <div class="col-md-12 m-0 p-0">
+      <div class="row m-0">
+        <div class="col-md-10">
+          <h1 class="mb-0" mat-dialog-title style="font-family: Poppins!important; font-weight: 600;">Parameter Details</h1>
+        </div>
+        <div class="col-md-2 text-end pt-2">
+          <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false"
+              aria-label="edit" fontIcon="close"></mat-icon></button>
+        </div>
+      </div>
+  
+      <hr class="mt-0" />
+  
+      <mat-dialog-content >
+        <form [formGroup]="parameterDetailsForm" style="    border: 1px solid #00000052;
+        padding: 25px;
+    ">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Physical condition of sample</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Physical condition of sample" formControlName="physical_condition_of_sample" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Media Used</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Media used" formControlName="media_used" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Prepared Dilution</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Prepared Dilution" formControlName="prepared_dilution" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Diluent Used</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Diluent Used" formControlName="diluent_used" />
+                    </mat-form-field>
+                </div>               
+                
+                <div class="col-md-6">
+                    <label>Positive Control Used</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Positive Control Used" formControlName="positive_control_used" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Negative Control Used</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Negative Control Used" formControlName="negative_control_used" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Date And Time</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Date and time" formControlName="date_and_time" />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Required Temprature</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput class="custom-input" placeholder="Temprature" formControlName="temprature" />
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+  
+        </form>
+
+        <form action="">
+            <table style=" margin: auto;" class="child-table">
+                <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
+                <tr>
+                    <td colspan="2" rowspan="3" class="p-1 text-bold">Observation</td>
+                    <td rowspan="3" class="text-bold">Temp <br> C</td>
+                    <td rowspan="3" class="text-bold">Time</td>
+                    <td colspan="6" style="height: 20px;"><p style="margin: 0;" class="text-bold"> Reading of samples (per dilution)</p></td>
+                    <td rowspan="3" class="text-bold">Reading <br>
+                        of <br>
+                        Negative <br>
+                        control
+                    </td>
+                    <td rowspan="3" class="text-bold">Reading <br>
+                        of <br>
+                        Positive <br>
+                        control
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="text"></td>
+                    <td colspan="2"><input type="text"></td>
+                    <td colspan="2"><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-bold">1 (24hrs)</td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-bold">2 (48hrs)</td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-bold">3 (72hrs)</td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-bold">4 (96hrs)</td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-bold">5 (120hrs)</td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                    <td><input type="text"></td>
+                </tr>
+            </table>
+            <div class="row me-1 mt-3">
+                <div class="col-md-11"></div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary" style="margin-left: auto;">Calculate</button>
+    
+                </div>
+            </div>
+        </form>
+  
+  
+      </mat-dialog-content>
+  
+      <mat-dialog-actions align="end">
+        <button class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
+        <button class="btn btn-primary btn-sm cancel-btn mx-1">Next</button>
+      </mat-dialog-actions>
+    </div>
+  </div>
+  

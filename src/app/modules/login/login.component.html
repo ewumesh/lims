@@ -78,9 +78,9 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-12">
-              <label for="email" class="col-form-label">Email/Username (इमेल ठेगाना)*</label>
+              <label for="email" class="col-form-label">Email/Username/Phone (इमेल/युजरनेम/फोन नम्बर)*</label>
               <mat-form-field appearance="outline" class="w-100">
-                <input matInput formControlName="email" placeholder="Enter your Email" />
+                <input matInput formControlName="email" placeholder="Enter your Email/username/phone number" />
                 <mat-error [@rowsAnimation]="displayMessage?.email" class="text-danger"
                   *ngIf="displayMessage?.email">{{displayMessage?.email}}</mat-error>
               </mat-form-field>
@@ -171,7 +171,4 @@
   </div>
 
 </div>
-<<<<<<< HEAD
 </div>
-=======
->>>>>>> 21d18edc982535bb47b7ddccdb604bfe50acb59d

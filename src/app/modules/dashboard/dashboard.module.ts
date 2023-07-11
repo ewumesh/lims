@@ -14,6 +14,7 @@ import { VerifierDashboard } from './verifier/verifier';
 import { UserDashboard } from './user/user';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NormalAdminComponent } from './normal-admin/normal-admin';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SupervisorDashboard,
     AnalystDashboard,
     VerifierDashboard,
-    UserDashboard
+    UserDashboard,
+    NormalAdminComponent
   ],
   imports: [
     CommonModule,

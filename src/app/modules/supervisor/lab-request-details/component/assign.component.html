@@ -13,7 +13,7 @@
         <div class="alert alert-info" role="alert">
           {{message?.messageBody}}
         </div>
-      </div>
+      </div> 
 
       <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
         <div class="alert alert-danger" role="alert">
@@ -26,7 +26,13 @@
         <label for="user" class="form-label">Select Analyst *</label>
         <mat-form-field class="w-100" appearance="outline">
           <mat-select placeholder="Select Analyst" formControlName="analyst_user" class="custom-select">
-            <mat-option *ngFor="let user of users" [value]="user.id">{{user?.first_name}} {{user?.last_name}}</mat-option>
+            <mat-option *ngFor="let user of users" [value]="user.id">
+              {{user?.first_name}} {{user?.last_name}}
+              <span *ngIf="user.test_type.includes(1)" class="badge badge-primary me-2" style="background-color: #36B37E; font-family: Poppins!important; padding: 4px 10px; font-weight: 500; border-radius: 3px!important;">(Chemical)</span>
+              <span *ngIf="user.test_type.includes(2)" class="badge badge-primary me-2" style="background-color: #FBBC05; font-family: Poppins!important; padding: 4px 10px; font-weight: 500; border-radius: 3px!important;">(Microbiological)</span>
+              <span *ngIf="user.test_type.includes(3)" class="badge badge-primary me-2" style="background-color: #917BFF; font-family: Poppins!important; padding: 4px 10px; font-weight: 500; border-radius: 3px!important;">(Instrumental)</span>
+
+            </mat-option> 
           </mat-select>
           <mat-error class="text-danger" *ngIf="displayMessage?.analyst_user">{{displayMessage?.analyst_user}}</mat-error>
         </mat-form-field>

@@ -18,9 +18,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReCheckComponent } from './re-check/re-check';
 import { MatTableModule } from '@angular/material/table';
 import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
+import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
 
 @NgModule({
-  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent],
+  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

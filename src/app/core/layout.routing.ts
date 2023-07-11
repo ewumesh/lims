@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2,3,4,5,6]
+      requiredRole: [1,2,3,4,5,6,7]
     },
     loadChildren: () => import('src/app/modules/dashboard/dashboard.module')
     .then(b => b.DashboardModule)
@@ -150,7 +150,7 @@ const routes: Routes = [
     path: 'add-sample',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2, 5]
+      requiredRole: [1, 2, 5, 7]
     },
     loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
       .then(m => m.AddSampleModule)
@@ -160,7 +160,7 @@ const routes: Routes = [
     path: 'update-sample/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2, 5]
+      requiredRole: [1,2, 5,7]
     },
     loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
       .then(m => m.AddSampleModule)
@@ -170,7 +170,7 @@ const routes: Routes = [
     path: 'add-sample/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 5]
+      requiredRole: [1, 5,7]
     },
     loadChildren: () => import('src/app/modules/add-sample/add-sample.module')
       .then(m => m.AddSampleModule)
@@ -182,7 +182,7 @@ const routes: Routes = [
     path: 'my-account',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2,3,4,5,6]
+      requiredRole: [1,2,3,4,5,6,7]
     },
     loadChildren: () => import('src/app/modules/my-account/my-account.module').then(m => m.MyAccountModule)
   },
@@ -192,7 +192,7 @@ const routes: Routes = [
     path: 'user-requests',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/user-requests/user-request.module')
     .then(m => m.UserRequestsModule)
@@ -202,7 +202,7 @@ const routes: Routes = [
     path: 'sample-requests',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2]
+      requiredRole: [1, 2,7]
     },
     loadChildren: () => import('src/app/modules/sample-requests/sample-requests.module')
     .then(m => m.SampleRequestsModule)
@@ -212,7 +212,7 @@ const routes: Routes = [
     path: 'sample-request-details/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/sample-request-details/sample-request.module')
     .then(m => m.SampleRequestDetailsModule)
@@ -222,7 +222,7 @@ const routes: Routes = [
     path: 'create-user',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2]
+      requiredRole: [1, 2,7]
     },
     loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
     .then(m => m.CreateUserModule)
@@ -232,7 +232,7 @@ const routes: Routes = [
     path: 'update-user/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/user-management/create-user/create-user.module')
     .then(m => m.CreateUserModule)
@@ -242,7 +242,7 @@ const routes: Routes = [
     path: 'update-admin/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module')
     .then(m => m.CreateAdminModule)
@@ -252,7 +252,7 @@ const routes: Routes = [
     path: 'create-admin',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,7]
     },
     loadChildren: () => import('src/app/modules/user-management/create-admin/create-admin.module')
     .then(m => m.CreateAdminModule)
@@ -262,7 +262,7 @@ const routes: Routes = [
     path: 'all-users',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/user-management/all-user/all-user.module')
       .then(m => m.AllUsersModule)
@@ -272,7 +272,7 @@ const routes: Routes = [
     path: 'user-group',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,7]
     },
     loadChildren: () => import('src/app/modules/user-management/role/role.module')
     .then(m => m.RoleModule)
@@ -282,7 +282,7 @@ const routes: Routes = [
     path: 'user-permissions',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,7]
     },
     loadChildren: () => import('src/app/modules/user-management/permisssion/permission.module').
     then(m => m.PermissionModule)
@@ -292,7 +292,7 @@ const routes: Routes = [
     path: 'search-sample',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1]
+      requiredRole: [1,7]
     },
     loadChildren: () => import('src/app/modules/search-sample/search-sampole.module')
     .then(m => m.SearchSampleModule)
@@ -302,17 +302,37 @@ const routes: Routes = [
     path: 'lab-report',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2,3,4,5,6]
+      requiredRole: [1,2,3,4,5,6,7]
     },
     loadChildren: () => import('src/app/modules/lab-report/lab-report.module')
     .then(m => m.LabReportModule)
+  },  
+  
+  {
+    path: 'supervisor-lab-report',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [3]
+    },
+    loadChildren: () => import('src/app/modules/supervisor/supervisor-report/supervisor-report.module')
+    .then(m => m.SupervisorReportModule)
+  },
+
+  {
+    path: 'supervisor-lab-report-details/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [3]
+    },
+    loadChildren: () => import('src/app/modules/supervisor/supervisor-report-view/supervisor-report-view.module')
+    .then(m => m.SupervisorSampleReportViewModule)
   },
 
   {
     path: 'settings/client-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/setting/category/client-category.module')
     .then(m => m.ClientCategoryModule)
@@ -322,7 +342,7 @@ const routes: Routes = [
     path: 'settings/commodity-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2]
+      requiredRole: [1, 2,7]
     },
     loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
     .then(m => m.CommodityCategoriesModule)
@@ -332,7 +352,7 @@ const routes: Routes = [
     path: 'user-details/:id',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2,3]
+      requiredRole: [1,2,3,7]
     },
     loadChildren: () => import('src/app/modules/user-management/view-user/view-user.module')
     .then(m => m.ViewUserDetailsModule)
@@ -342,7 +362,7 @@ const routes: Routes = [
     path: 'commodities-parameter',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/commodities/parameter/parameter.module')
     .then(m => m.ParameterModule)
@@ -352,7 +372,7 @@ const routes: Routes = [
     path: 'commodities-category',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/setting/commodity-category/commodity-category.module')
     .then(m => m.CommodityCategoriesModule)
@@ -362,7 +382,7 @@ const routes: Routes = [
     path: 'commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2]
+      requiredRole: [1,2,7]
     },
     loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module')
     .then(m => m.CommoditiesModule)
@@ -372,7 +392,7 @@ const routes: Routes = [
     path: 'commodities/all-commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2]
+      requiredRole: [1, 2,7]
     },
     loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module')
     .then(m => m.AllCommoditiesModule)
@@ -471,6 +491,18 @@ const routes: Routes = [
     path: 'track-sample',
     loadChildren: () => import('src/app/modules/track-sample/track-sample.module')
       .then(m => m.TrackSampleModule)
+  },  
+
+  {
+    path: 'admin-sample-request',
+    loadChildren: () => import('src/app/modules/admin-sample-request/admin-sample-request.module')
+      .then(m => m.AdminSampleRequestModule)
+  },
+
+  {
+    path: 'admin-sample-request-details/:id',
+    loadChildren: () => import('src/app/modules/admin-sample-request-details/admin-sample-request-details.module')
+      .then(m => m.AdminSampleRequestDetailModule)
   },
 
   {

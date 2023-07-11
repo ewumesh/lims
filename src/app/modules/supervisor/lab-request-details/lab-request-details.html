@@ -205,7 +205,7 @@
       <div class="row">
         <div class="col-md-12">
           <div>
-            <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="reportDetails.parameters" matSort
+            <!-- <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="reportDetails.parameters" matSort
               [@collectionInOut]="dataSource.data?.length">
           
               <ng-container matColumnDef="sn">
@@ -218,8 +218,7 @@
                 <td mat-cell *matCellDef="let row">
                   <span *ngIf="row.test_type">
                     {{row.test_type}}
-                    <!-- <span *ngIf="row.test_type === '1'">Chemical Test</span>
-                    <span *ngIf="row.test_type === '2'">Microbiological Test</span> -->
+                    
                   </span>
                   <span class="text-muted" *ngIf="!row.test_type">N/A</span>
                 </td>
@@ -268,7 +267,152 @@
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+
+            <table class="table table-bordered" *ngIf="sampleDetails">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">S.N.</th>
+                  <th scope="col">Test Type</th>
+                  <th scope="col">Parameter</th>
+                  <!-- <th scope="col" class="text-center">Status</th> -->
+                  <th style="text-align: center!important;">Assigned</th>
+                  <th class="text-center" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- {{distributedSample.ch | json}} -->
+                <ng-container *ngFor="let r of distributedSample?.bi; let i = index;">
+                  <tr>
+                    <td class="text-center">{{i+1}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                      <span>
+                        {{r.test_type | titlecase}}
+                      </span>
+                    </td>
+                    <td>
+                      <span>{{r.name | titlecase}} </span>
+                    </td>
+                    <td class="text-center" style="text-align: center!important;">
+                      <div *ngIf="!r.exist">
+                        <button (click)="assign(r, 'i', r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                      <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                      </div>
+                      
+                      <div *ngIf="r.exist" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                        <div class="author assign-supervisor-avatar">
+                          <div class="mask cursor-pointer d-flex align-items-center">
+                            <ngx-avatar (click)="assign(r, 'i', r.test_type)" size="30" [name]="r.first_name + '' + r.last_name"
+                              [matTooltip]="r.first_name + '' + r.last_name" class="me-2"></ngx-avatar> <span>{{r.first_name | titlecase}}  {{r.last_name | titlecase}}
+                                </span>
+                                <span class="material-icons ms-2 cross-icon">
+                                  highlight_off
+                                  </span>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </td>
+                    <!-- <td>
+                      <div *ngIf="r.supervisor_user" class="authors-container" data-collaborators="10">
+                        <div class="author">
+                          <div class="mask cursor-pointer">
+                            <ngx-avatar size="40" [name]="r.supervisor_user"
+                              [matTooltip]="r.supervisor_user"></ngx-avatar>
+                          </div>
+                        </div>
+                      </div>
+                      <span *ngIf="!r.supervisor_user" class="text-muted">N/A</span>
+                    </td> -->
+                    <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                      <button (click)="assignAllType(r,'bi',r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngFor="let r of distributedSample?.in; let i = index;">
+                  <tr>
+                    <td class="text-center">{{i+1}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length">
+                      <span>
+                        {{r.test_type | titlecase}}
+                      </span>
+                    </td>
+                    <td>
+                      <span>{{r.name | titlecase}} </span>
+                    </td>
+                    <td class="text-center">
+                      <div *ngIf="!r.exist">
+
+                        <button (click)="assign(r, 'i', r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                      <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                      </div>
+                      
+                      <div *ngIf="r.exist" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                        <div class="author assign-supervisor-avatar">
+                          <div class="mask cursor-pointer d-flex align-items-center">
+                              <ngx-avatar (click)="assign(r, 'i', r.test_type)" size="30" [name]="r.first_name + '' + r.last_name"
+                              [matTooltip]="r.first_name + '' + r.last_name" class="me-2"></ngx-avatar> <span>{{r.first_name | titlecase}}  {{r.last_name | titlecase}}
+                                </span>
+                                <span class="material-icons ms-2 cross-icon">
+                                  highlight_off
+                                  </span>
+                          </div>
+                          
+                        </div>
+                      </div>
+
+
+                    </td>
+                    <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.in?.length" class="text-center">
+                      <button (click)="assignAllType(r,'in',r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngFor="let r of distributedSample?.ch; let i = index;">
+                  <tr>
+                    <td class="text-center">{{i+1}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                      <span>
+                        {{r.test_type | titlecase}}
+                      </span>
+                    </td>
+                    <td>
+                      <span>{{r.name | titlecase}} </span>
+                    </td>
+                    <td class="text-center">
+                      <div *ngIf="!r?.exist">
+                        <button (click)="assign(r, 'i', r.test_type)" class="btn btn-primary btn-lims-primary btn-sm mx-2">Assign</button>
+                      <!-- <span class="badge badge-primary" *ngIf="r.exists_supervisor_parameter === true" style="background-color: #212529; color: #fff;">Assigned</span> -->
+                      </div>
+                      
+                      <div *ngIf="r?.exist" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                        <div class="author assign-supervisor-avatar">
+                          <div class="mask cursor-pointer d-flex align-items-center">
+                            <ngx-avatar (click)="assign(r, 'i', r.test_type)" size="30" [name]="r.fist_name + ' ' + r.last_name"
+                              [matTooltip]="r.first_name + '' + r.last_name" class="me-2"></ngx-avatar> <span>{{r.first_name | titlecase}} {{r.last_name | titlecase}} 
+                                </span>
+                                <span class="material-icons ms-2 cross-icon">
+                                  highlight_off
+                                  </span> 
+                          </div> 
+                        </div>
+                      </div>
+
+
+                    </td>
+                    <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                      <button (click)="assignAllType(r,'ch',r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
             </table>
+
+            
             <div class="row" *ngIf="isLoading">
               <div class="col-md-12 text-center py-3">
                 <div class="spinner-border text-dark" role="status">

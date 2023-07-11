@@ -20,7 +20,7 @@ export class SampleReportService {
   }
 
   getRawData(id):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-global/${id}/`)
   } 
   downloadRawData(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;

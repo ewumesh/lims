@@ -13,7 +13,7 @@
     </div>
 
     
-    <div *ngIf="search"  style="
+    <!-- <div *ngIf="search"  style="
     left: 332px;
     top: 78px;
     width: 348px;
@@ -23,25 +23,16 @@
       <div mat-subheader>Results</div>
       <mat-divider></mat-divider>
       <mat-list-item class="search-result-item" *ngFor="let folder of folders">
-        <!-- <mat-icon matListItemIcon>local_drink</mat-icon> -->
         <div matListItemTitle>Test Sample 001</div>
         <div matListItemLine>
           <div class="text-left">
             {{folder.updated | date}}
           </div>
-          <!-- <div class="col-sm-6 text-right">status</div> -->
           
         </div>
       </mat-list-item>
-      <!-- <mat-divider></mat-divider> -->
-      <!-- <div mat-subheader>Notes</div>
-      <mat-list-item *ngFor="let note of notes">
-        <mat-icon matListItemIcon>note</mat-icon>
-        <div matListItemTitle>{{note.name}}</div>
-        <div matListItemLine>{{note.updated | date}}</div>
-      </mat-list-item> -->
     </mat-list>
-    </div>
+    </div> -->
 
   </div>
   <div class="profile" style="margin-right: 1%;">
@@ -88,7 +79,7 @@
         <img style="height: 80px;"  class="cursor-pointer mb-3" [src]="url" alt="">
         <p class="user-namee mb-0">{{userDetails?.first_name + ' ' + userDetails?.last_name | titlecase}}</p>
         <span class="useremail mb-2">{{userDetails?.email | titlecase}}</span>
-        <span class="user-rolee">User <span class="material-icons ms-2 verified-icon">verified</span>
+        <span class="user-rolee">{{getRoleName(userDetails?.role)}} <span class="material-icons ms-2 verified-icon">verified</span>
         </span>
       </div>
       <div class="list-content mt-3">

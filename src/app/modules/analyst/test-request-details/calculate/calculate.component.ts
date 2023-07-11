@@ -30,6 +30,8 @@ export class CalculateComponent implements OnInit {
   finalResult = 0;
   formulaField = ''
 
+  analyst_remarks = '';
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
@@ -84,6 +86,7 @@ export class CalculateComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.data, "OK..")
     this.isCalculating = true;
     let requestPayload = {
       formula_variable_fields_value: this.formulaField,
@@ -148,12 +151,15 @@ export class CalculateComponent implements OnInit {
   setResult() {
     this.isCalculating = true;
     let payload = {
-      sample_form: this.data.sample_form,
+      sample_form: this.data?.details?.sample_form?.id,
       result: this.finalResult,
       parameter: this.data.parameter,
       commodity: this.data.commodity.id,
       formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
-      sample_form_has_parameter: this.data.details?.id
+      sample_form_has_parameter: this.data.details?.id,
+      analyst_remarks:this.analyst_remarks,
+      converted_result:this.finalResult,
+      decimal_place: 2
     }
 
     this.service.setResult(payload).subscribe(res => {

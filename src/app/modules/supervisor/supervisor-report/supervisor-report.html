@@ -1,0 +1,137 @@
+<div class="white-bg mb-3">
+    <form [formGroup]="filterForm" class="row">
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" class="w-100">
+          <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="outline" class="custom-select w-100">
+          <!-- <mat-label>From</mat-label> -->
+          <input formControlName="from" class="custom-input" [matDatepicker]="fromPicker" (focus)="fromPicker.open()" (click)="fromPicker.open()" matInput placeholder="From" />
+          <mat-datepicker #fromPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="outline" class="custom-select w-100">
+          <input formControlName="to" class="custom-input" [matDatepicker]="toPicker" (focus)="toPicker.open()" (click)="toPicker.open()" matInput placeholder="To" />
+          <mat-datepicker #toPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="outline" class="custom-select w-100">
+          <mat-select placeholder="Status" formControlName="status">
+            <mat-option *ngFor="let s of statusList; let i = index" [value]="s.value">{{s.name | titlecase}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1 text-end">
+        <button (click)="filter()" class="btn btn-primary w-100 h-45">
+          <span *ngIf="!isFilterBtnLoading">Filter</span>
+                <span *ngIf="isFilterBtnLoading">
+                  <i class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
+        </button>
+      </div>
+    
+      <div class="col-md-1 text-end">
+        <button (click)="reset()" class="btn btn-danger w-100 h-45">
+          Reset
+        </button>
+      </div>
+    </form>
+    </div>
+    
+    <div class="white-bg">
+      <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
+        [@collectionInOut]="dataSource.data?.length">
+    
+        <ng-container matColumnDef="sn">
+          <th mat-header-cell *matHeaderCellDef> S.N. </th>
+          <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="sampleId">
+          <th mat-header-cell *matHeaderCellDef> Sample ID </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.sample_form?.id" class="text-uppercase">{{row.sample_form?.id}}</span>
+            <span class="text-muted" *ngIf="!row.sample_form?.id">N/A</span>
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="sampleName">
+          <th mat-header-cell *matHeaderCellDef> Sample Name </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row?.sample_form?.name">{{row?.sample_form?.name | titlecase}} </span>
+            <span *ngIf="!row?.sample_form?.name" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="commodity">
+          <th mat-header-cell *matHeaderCellDef> Commodity </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.commodity">{{row.commodity?.name}}</span>
+            <span *ngIf="!row.commodity" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+    
+        <!-- <ng-container matColumnDef="assignedDate">
+          <th mat-header-cell *matHeaderCellDef> Assigned Date </th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.created_date">{{row.created_date | date}}</span>
+            <span *ngIf="!row.created_date" class="text-muted">N/A</span>
+          </td>
+        </ng-container> -->
+    
+        <!-- <ng-container matColumnDef="assigned">
+          <th mat-header-cell *matHeaderCellDef> Assigned </th>
+          <td mat-cell *matCellDef="let row">
+            <div *ngIf="row && row.sample_has_parameter_analyst.length > 0" class="authors-container" data-collaborators="10">
+              <div class="author" *ngFor="let user of row?.sample_has_parameter_analyst">
+                <div class="mask cursor-pointer">
+                  <ngx-avatar size="40" [name]="user.analyst_user.first_name" [matTooltip]="user.analyst_user.first_name"></ngx-avatar>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="row.sample_has_parameter_analyst.length < 1" class="text-muted">N/A</div>
+          </td>
+        </ng-container> -->
+    
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status</th>
+          <td mat-cell *matCellDef="let row">
+            <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{ row.status | titlecase }}</span>
+            <span *ngIf="!row.status" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button (click)="viewAssignedSampleDetails(row.id)" [matTooltip]="'View Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center py-5" colspan="8">
+            <img src="../../../../assets/no-data.svg" />
+            <div class="text-muted">Data Not Available.</div>
+    
+          </td>
+        </tr>
+      </table>
+      <div class="row" *ngIf="isLoading">
+        <div class="col-md-12 text-center py-3">
+          <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    
+      <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]"
+        aria-label="Select page of users"></mat-paginator>
+    </div>
+    

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssignedSampleAdminDetailsService } from 'src/app/services/assigned-sample-admin-details/assigned-sample-admin-details.service';
+import { ReAssignSupervisorComponent } from './re-assign-supervisor/re-assign-supervisor';
 
 @Component({
   templateUrl: './assigned-sample-admin-details.component.html',
@@ -17,7 +19,8 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
   sampleStatus:any;
   constructor(
     private service: AssignedSampleAdminDetailsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog:MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -30,6 +33,36 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
     }
     this.service.getAssignedSampleDetails(payload).subscribe(res => {
       this.reportDetails = res;
+    })
+  }
+
+  reAssign(parameter, testType) {
+    // let payload = {
+    //   sample_form: this.reportDetails.sampleId,
+    //   parameters:[parameter],
+    //   test_type:testType
+    // }
+
+    // this.dialog.open(ReAssignSupervisorComponent, {
+    //   data: payload,
+    //   width: '600px'
+    // })
+
+    let instance: MatDialogRef<ReAssignSupervisorComponent, any>;
+    let payload = {
+      sample_form: this.reportDetails.id,
+      parameters:[parameter],
+      test_type:testType
+    }
+
+    instance = this.dialog.open(ReAssignSupervisorComponent, {
+      data: payload,
+      width: '600px',
+      autoFocus: false,
+    })
+    instance.afterClosed().subscribe(res => {
+      this.getAssigendSampleDetails();
+      // this.router.navigate(['/dashboard/sample-requests'])
     })
   }
 }

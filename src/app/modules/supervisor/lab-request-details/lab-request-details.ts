@@ -24,6 +24,12 @@ export class LabRequestDetailsComponent implements OnInit {
   isLoading = true;
   commodities: any[] = [];
 
+  distributedSample: any = {
+    ch:[],
+    bi:[],
+    in:[]
+  }
+
   constructor(
     private service: LabRequestDetailsService,
     private route: ActivatedRoute,
@@ -67,6 +73,96 @@ export class LabRequestDetailsComponent implements OnInit {
     })
   }
 
+  assignAllType(data, type, testType) {
+    if(type === 'ch') {
+
+      let pm = [];
+      this.distributedSample.ch.forEach(e => {
+        if(!e.exist) {
+          pm.push(e.id)
+        }
+      });
+
+      let obj = {
+        commodity: this.sampleDetails?.sample_form?.commodity?.id,
+        parameter:pm,
+        sample_form: this.sampleDetails?.sample_form?.id,
+        supervisor_user: [this.userDetails.id],
+        form_available: 'analyst',
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
+        test_type: testType
+      }
+
+      let instance: MatDialogRef<AssignComponent, any>;
+
+      instance = this.dialog.open(AssignComponent, {
+        data: obj ? obj : null,
+        width: '600px',
+        autoFocus: false,
+      })
+      
+    } else if(type === 'in') {
+      let pm = [];
+      this.distributedSample.in.forEach(e => {
+        if(!e.exist) {
+          pm.push(e.id)
+        }
+      });
+
+      let obj = {
+        commodity: this.sampleDetails?.sample_form?.commodity?.id,
+        parameter:pm,
+        sample_form: this.sampleDetails?.sample_form?.id,
+        supervisor_user: [this.userDetails.id],
+        form_available: 'analyst',
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
+        test_type: testType
+      }
+
+      let instance: MatDialogRef<AssignComponent, any>;
+
+      instance = this.dialog.open(AssignComponent, {
+        data: obj ? obj : null,
+        width: '600px',
+        autoFocus: false,
+      })
+    } else if(type === 'mi') {
+      let pm = [];
+      this.distributedSample.bi.forEach(e => {
+        if(!e.exist) {
+          pm.push(e.id)
+        }
+      });
+
+      let obj = {
+        commodity: this.sampleDetails?.sample_form?.commodity?.id,
+        parameter:pm,
+        sample_form: this.sampleDetails?.sample_form?.id,
+        supervisor_user: [this.userDetails.id],
+        form_available: 'analyst',
+        super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
+        test_type: testType
+      }
+
+      let instance: MatDialogRef<AssignComponent, any>;
+
+      instance = this.dialog.open(AssignComponent, {
+        data: obj ? obj : null,
+        width: '600px',
+        autoFocus: false,
+      })
+
+      instance.afterClosed().subscribe(a => {
+        this.distributedSample = {
+          ch:[],
+          bi:[],
+          in:[]
+        };
+        this.getSampleDetails();
+      })
+    }
+  }
+
   assign(data, type, testType) {
 
     console.log(data, 'DAATAS')
@@ -88,7 +184,12 @@ export class LabRequestDetailsComponent implements OnInit {
         autoFocus: false,
       })
 
-      instance.afterClosed().subscribe(res => {
+      instance.afterClosed().subscribe(a => {
+        this.distributedSample = {
+          ch:[],
+          bi:[],
+          in:[]
+        };
         this.getSampleDetails();
       })
     } else {
@@ -117,6 +218,15 @@ export class LabRequestDetailsComponent implements OnInit {
         width: '600px',
         autoFocus: false,
       })
+
+      instance.afterClosed().subscribe(a => {
+        this.distributedSample = {
+          ch:[],
+          bi:[],
+          in:[]
+        };
+        this.getSampleDetails();
+      })
     }
   }
 
@@ -131,9 +241,21 @@ export class LabRequestDetailsComponent implements OnInit {
       id: sampleId
     } 
 
-    this.service.getSamplesDetails(payload).subscribe(response => {
-      this.sampleDetails = response;
-      this.reportDetails = response;
+    this.service.getSamplesDetails(payload).subscribe(res => {
+      this.sampleDetails = res;
+      this.reportDetails = res;
+
+      res.parameters.forEach(p => {
+        if(p.test_type === "Instrumental") {
+          this.distributedSample.in.push(p);
+        } else if(p.test_type === 'Microbiological') {
+          this.distributedSample.bi.push(p);
+        } else if(p.test_type === 'Chemical') {
+          this.distributedSample.ch.push(p);
+        }
+
+        console.log(this.distributedSample, '()*^%')
+      });
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;

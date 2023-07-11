@@ -10,7 +10,7 @@
   <user-dashboard *ngIf="loggedUserDetails?.role === 5"></user-dashboard>
   <supervisor-dashboard *ngIf="loggedUserDetails?.role === 3"></supervisor-dashboard>
 
-  <smu-dashboard *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2"></smu-dashboard>
+  <smu-dashboard *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2 || loggedUserDetails?.role === 7"></smu-dashboard>
 
   <!-- <div *ngIf="loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2" class="col-md-12 p-4">
     <div class="grid">

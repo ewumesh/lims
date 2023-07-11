@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-md-2">
         <div class="text-muted">Sample lab ID</div>
-        <div class="font-bold">{{testRequestDetails?.sample_form?.analyst_encode_id}}</div>
+        <div class="font-bold">{{testRequestDetails?.sample_form?.id}}</div>
       </div>
 
       <div class="col-md-3">
@@ -165,13 +165,14 @@
     <ng-container matColumnDef="action" >
       <th mat-header-cell *matHeaderCellDef class="text-center" [width] ="200"> Action </th>
       <td mat-cell *matCellDef="let row" class="text-center">
+        <button *ngIf="row.test_type === 'Microbiological'" (click)="microParameterDetails()" class="btn btn-primary btn-lims-primary btn-sm">Micro</button>
         <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="!row.result " (click)="calculate(row)" [matTooltip]="'Calculate Result'"
           class="btn btn-primary after-disabled btn-sm mx-1 pt-2">Calculate</button>
 
           <div *ngIf="row.status !== 'recheck'">
             
-        <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
-          class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate</button>
+        <button [disabled]="testRequestDetails?.is_supervisor_sent === true || row.is_locked === false" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+          class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate </button>
           </div>
           <div *ngIf="row.status === 'recheck'">
             <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"

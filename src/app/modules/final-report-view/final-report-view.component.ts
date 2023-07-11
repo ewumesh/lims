@@ -22,6 +22,10 @@ export class FinalReportViewComponent implements OnInit {
   loggedUserDetails: any;
 
   rawDataSheet:any;
+
+  analystRawData:any;
+  supervisorRawData:any;
+
   constructor(
     private service: FinalReportViewService,
     private route: ActivatedRoute,
@@ -33,7 +37,33 @@ export class FinalReportViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getReportDetails();
-    this.getRawData();
+  }
+
+  downloadRawDatasheetAnalyst(id) {
+    // let id = this.route.snapshot.paramMap.get('id');
+    this.service.downloadRawDataAnalyst(id).subscribe(res => {
+    })
+   }
+
+   printRawDataAnalyst(id) {
+    // let id = this.route.snapshot.paramMap.get('id');
+    this.service.printRawDataAnalyst(id).subscribe(res => {
+
+    })
+   }
+
+  getAnalystRawData() {
+    let id = this.reportDetails?.sample_form_has_param_id
+    this.service.getAnalystRawData(id).subscribe(res => {
+      this.analystRawData = res;
+    }  )
+  }
+
+  getSupervisorRawData() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getSupervisorRawData(id).subscribe(res => {
+      this.supervisorRawData = res;
+    }  )
   }
 
 
@@ -137,10 +167,27 @@ export class FinalReportViewComponent implements OnInit {
     this.service.getAssignedSamples(payload).subscribe(res => {
       this.reportDetails = res;
       this.isLoading = false;
-      this.getRawData();
+      // this.getRawData();
+
+      if(this.loggedUserDetails.role ===4) {
+        this.getAnalystRawData();
+      } else if(this.loggedUserDetails.role === 3) {
+        this.getSupervisorRawData();
+      } else if(this.loggedUserDetails.role ===6) {
+        this.getRawData();
+      }
     },
      (error) => {
       this.isLoading = false;
      })
+  }
+
+  downloadSupervisorRawData(id) {
+    this.service.downloadRawDataSupervisor(id).subscribe(res => {
+    })
+  }
+
+  printSupervisorRawData(id) {
+    
   }
 }

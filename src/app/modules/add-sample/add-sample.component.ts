@@ -301,7 +301,9 @@ date: any;
 
       let actParameter = [];
       parameters.forEach(a => {
-        actParameter.push(a);
+        if(a.id) {
+        actParameter.push(a.id);
+        }
       });
       actualResponse.parameters = actParameter;
       this.selectedParameters = actParameter;
@@ -311,7 +313,7 @@ date: any;
       this.addSampleForm.patchValue(actualResponse);
       this.addSampleForm.value.isParameter = true
 
-      this.selection =new SelectionModel<any>(true, [actParameter]);
+      // this.selection =new SelectionModel<any>(true, [actParameter]);
       // this.isAllSelected();
 
       // this.selection.clear();
@@ -340,11 +342,11 @@ date: any;
       name: ['', Validators.required],
       condition: ['', Validators.required],
       mfd: [null, [Validators.required]],
-      dfb: ['', Validators.required],
+      dfb: [''],
       batch: ['', Validators.required],
       brand: ['', Validators.required],
       purpose: ['', Validators.required],
-      report_date: ['', Validators.required],
+      report_date: [''],
       amendments: [''],
       note: [''],
       commodity: ['', Validators.required],
@@ -356,9 +358,13 @@ date: any;
       requested_export:['requested'],
       sample_type:[''],
       sample_quantity: [''],
-      sample_perunit: [''],
+      sample_per_unit: [''],
       sample_units: '',
-      sample_measurement: ['']
+      sample_measurement: [''],
+      number_of_sample:'',
+      dfb_type:'date',
+      dfb_duration:'',
+      days_dfb:''
     })
   }
 
@@ -375,7 +381,7 @@ date: any;
 
   saveChanges() {
     this.isSampleSent = true;
-    if (this.addSampleForm.pristine) {
+    if (this.addSampleForm.invalid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       this.isSampleSent = false;
@@ -423,33 +429,41 @@ date: any;
       form_available: 'smu',
       status: 'pending',
       requested_export: this.addSampleForm.value.requested_export,
-      owner: cOwner
+      owner: cOwner,
+      sample_type: this.addSampleForm.value.sample_type,
+      sample_quantity: this.addSampleForm.value.sample_quantity,
+      sample_units: this.addSampleForm.value.sample_units,
+      number_of_sample: this.addSampleForm.value.sample_per_unit,
+      dfb_type:this.addSampleForm.value.dfb_type,
+      dfb_duration:this.addSampleForm.value.dfb_duration,
+      days_dfb:this.addSampleForm.value.days_dfb
+
     }
 
     console.log(payload, 'PAYLOAD', this.addSampleForm.value)
     if(this.sampleId) {
 
-      // this.service.updateSample(payload).subscribe(res => {
-      //   this.isSampleSent = false;
-      //   if(this.userDetails.role === 5) {
-      //     this.router.navigate(['/dashboard/my-sample'])
-      //   } else {
-      //     this.router.navigate(['/dashboard/sample-requests']);
-      //   }
-      //   this.toast.showToast(
-      //     TOAST_STATE.success,
-      //     res?.message);
-      //     this.dismissMessage();
-      //     this.isLoading = true;
-      //     this.message = {};
-      //     this.responseError = null;
-      // },(error) => {
-      //   window.scroll(0, 0)
-      //   this.message = {};
-      //   this.responseError = error?.error;
-      //   this.isLoading = false;
-      //   this.isSampleSent = false;
-      // })
+      this.service.updateSample(payload).subscribe(res => {
+        this.isSampleSent = false;
+        if(this.userDetails.role === 5) {
+          this.router.navigate(['/dashboard/my-sample'])
+        } else {
+          this.router.navigate(['/dashboard/sample-requests']);
+        }
+        this.toast.showToast(
+          TOAST_STATE.success,
+          res?.message);
+          this.dismissMessage();
+          this.isLoading = true;
+          this.message = {};
+          this.responseError = null;
+      },(error) => {
+        window.scroll(0, 0)
+        this.message = {};
+        this.responseError = error?.error;
+        this.isLoading = false;
+        this.isSampleSent = false;
+      })
     } else {
     this.service.addSample(payload).subscribe(response => {
       this.isSampleSent = false;

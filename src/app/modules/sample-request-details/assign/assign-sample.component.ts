@@ -106,11 +106,16 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
     let payload = this.data;
     payload.supervisor_user = this.form.value.supervisor_user;
     this.service.assignParameterToSupervisor(payload).subscribe(res => {
+      
       this.toast.showToast(TOAST_STATE.success, res?.message);
       console.log(res, 'Assigned..')
       this.dialogRef.close();
       this.isLoading = false;
       this.dismissMessage();
+
+      if(res.total_assiged) {
+        this.router.navigate(['/dashboard/sample-assigned'])
+      }
     },(error) => {
       this.isLoading = false;
       this.responseError = error.error;

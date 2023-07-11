@@ -20,10 +20,10 @@ export class FinalReportViewService {
   }
 
   isSentForVrification(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id=${payload.id}`)
+    return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id${payload.id}`)
   }
 
-  
+
   
   downloadReport(payload) :Observable<any> {
     let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/${payload.role}`;
@@ -39,9 +39,18 @@ export class FinalReportViewService {
     return this.http.get(url);
   }
 
-  getRawData(id):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+  getRawData(id):Observable<any> { 
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-global/${id}/`)
   } 
+
+  getAnalystRawData(id):Observable<any> {
+    return this.http.get(`${this.url}/api/detail-raw-data-sheet/${id}/`)
+  }
+
+  getSupervisorRawData(id): Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-test-type/${id}/`)
+    // /api/sample-form-raw-data-sheet-test-type/345/
+  }
 
   downloadRawData(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
@@ -50,6 +59,32 @@ export class FinalReportViewService {
   }
 
   printRawData(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
+  }
+
+  downloadRawDataAnalyst(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  printRawDataAnalyst(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
+  }
+
+  downloadRawDataSupervisor(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  printRawDataAnalystSupervisor(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
 
     window.open(url, "_blank");

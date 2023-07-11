@@ -54,8 +54,8 @@
           <div class="col-md-4">
             <h4 class="mb-0">Sample ID</h4>
             <p>
-              <span *ngIf="reportDetails?.user_encode_id">{{reportDetails.user_encode_id}}</span>
-              <span *ngIf="!reportDetails?.user_encode_id" class="text-muted">N/A</span>
+              <span *ngIf="reportDetails?.id">{{reportDetails.id}}</span>
+              <span *ngIf="!reportDetails?.id" class="text-muted">N/A</span>
             </p>
           </div>
           <div class="col-md-4">
@@ -96,6 +96,36 @@
           <div class="col-md-4">
             <h4 class="mb-0">Condition</h4>
             <p>{{reportDetails.condition}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Type</h4>
+            <p>{{reportDetails?.sample_type || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Quantity</h4>
+            <p>{{reportDetails?.sample_quantity || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Number of Sample</h4>
+            <p>{{reportDetails?.number_of_sample || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample units</h4>
+            <p>{{reportDetails?.sample_units || 'N/A'}}</p>
+          </div>
+          
+          <div class="col-md-4">
+            <h4 class="mb-0">Amendments</h4>
+            <p>{{reportDetails?.amendments || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Note</h4>
+            <p>{{reportDetails?.note || 'N/A'}}</p>
           </div>
         </div>
       </div>

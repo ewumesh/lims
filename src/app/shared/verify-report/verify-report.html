@@ -5,7 +5,7 @@
         <div class="col-md-3">
           <div class="row">
             <p>Sample ID</p>
-            <h4>{{reportDetails.verifier_encode_id}}</h4>
+            <h4>{{reportDetails.id}}</h4>
             <!-- <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
             <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4> -->
           </div>
@@ -92,23 +92,23 @@
       <h3 class="rawdata-heading">Raw Data Sheet</h3>
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li *ngIf="rawDataSheet?.Microbiological" class="nav-item" role="presentation">
-          <button class="nav-link active" id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
+          <button class="nav-link " id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
         </li>
         <li *ngIf="rawDataSheet?.Chemical" class="nav-item" role="presentation">
-          <button class="nav-link" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane" type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
+          <button class="nav-link active" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane" type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
         </li>
         <li *ngIf="rawDataSheet?.Instrumental" class="nav-item" role="presentation">
-          <button class="nav-link" id="Instrumental-tab" data-bs-toggle="tab" data-bs-target="#Instrumental-tab-pane" type="button" role="tab" aria-controls="Instrumental-tab-pane" aria-selected="false">Instrumental Test</button>
+          <button class="nav-link " id="Instrumental-tab" data-bs-toggle="tab" data-bs-target="#Instrumental-tab-pane" type="button" role="tab" aria-controls="Instrumental-tab-pane" aria-selected="false">Instrumental Test</button>
         </li>
       </ul>
       <div  class="tab-content mt-3" id="myTabContent">
-        <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade show active" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+        <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
           <table class="table mb-0">
             <tbody>
-              <tr *ngFor="let a of rawDataSheet?.Microbiological[0]?.raw_data">
+              <tr *ngFor="let a of rawDataSheet?.Microbiological">
                 <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Microbiological[0]?.analyst_user.first_name +' '+ Microbiological?.Chemical[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Microbiological[0]?.analyst_user.first_name}} {{rawDataSheet?.Microbiological[0]?.analyst_user.last_name}}</p>
+                  <ngx-avatar [name]="rawDataSheet?.Microbiological[0]?.supervisor_by.first_name +' '+ Microbiological?.Chemical[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Microbiological[0]?.supervisor_by.first_name}} {{rawDataSheet?.Microbiological[0]?.supervisor_by.last_name}}</p>
                 </td>
                 <td style="width: 16%;">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
@@ -116,10 +116,10 @@
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
-                  <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                  <button (click)="viewRemarks(rawDataSheet?.Microbiological[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                  <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
-                </td>
+                  <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
+                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                  <!-- <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button> -->
+                </td> 
                 
                 <td style="width: 15%;" class="text-start">
                   <p class="bold-text mb-0 pb-0">Status</p>
@@ -128,21 +128,22 @@
                 <td style="width: 20%;" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
                   <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-              <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div *ngIf="rawDataSheet?.Chemical" class="tab-pane fade" id="Chemical-tab-pane" role="tabpanel" aria-labelledby="Chemical-tab" tabindex="0">
+        
+        <div *ngIf="rawDataSheet?.Chemical" class="tab-pane fade show active" id="Chemical-tab-pane" role="tabpanel" aria-labelledby="Chemical-tab" tabindex="0">
           <table class="table mb-0">
             <tbody>
-              <tr *ngFor="let a of rawDataSheet?.Chemical[0]?.raw_data">
+              <tr *ngFor="let a of rawDataSheet?.Chemical">
                 <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Chemical[0]?.analyst_user.first_name +' '+ rawDataSheet?.Chemical[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Chemical[0]?.analyst_user.first_name}} {{rawDataSheet?.Chemical[0]?.analyst_user.last_name}}</p>
+                  <ngx-avatar [name]="rawDataSheet?.Chemical[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Chemical[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Chemical[0]?.supervisor_by.first_name}} {{rawDataSheet?.Chemical[0]?.supervisor_by.last_name}}</p>
                 </td>
                 <td style="width: 16%;">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
@@ -150,9 +151,8 @@
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
-                  <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                  <button (click)="viewRemarks(rawDataSheet?.Chemical[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                  <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+                  <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
+                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
                 </td>
                 
                 <td style="width: 15%;" class="text-start">
@@ -161,22 +161,23 @@
                 </td>
                 <td style="width: 20%;" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
+                  <!-- {{rawDataSheet?.Chemical | json}} -->
                   <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-              <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div *ngIf="rawDataSheet?.Instrumental" class="tab-pane fade show active" id="Instrumental-tab-pane" role="tabpanel" aria-labelledby="Instrumental-tab" tabindex="0">
+        <div *ngIf="rawDataSheet?.Instrumental" class="tab-pane fade " id="Instrumental-tab-pane" role="tabpanel" aria-labelledby="Instrumental-tab" tabindex="0">
           <table class="table mb-0">
             <tbody>
-              <tr *ngFor="let a of rawDataSheet?.Instrumental[0]?.raw_data">
+              <tr *ngFor="let a of rawDataSheet?.Instrumental">
                 <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Instrumental[0]?.analyst_user.first_name +' '+ rawDataSheet?.Instrumental[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Instrumental[0]?.analyst_user.first_name}} {{rawDataSheet?.Instrumental[0]?.analyst_user.last_name}}</p>
+                  <ngx-avatar [name]="rawDataSheet?.Instrumental[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Instrumental[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Instrumental[0]?.supervisor_by.first_name}} {{rawDataSheet?.Instrumental[0]?.supervisor_by.last_name}}</p>
                 </td>
                 <td style="width: 16%;">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
@@ -184,9 +185,8 @@
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
-                  <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                  <button (click)="viewRemarks(rawDataSheet?.Instrumental[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                  <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+                  <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
+                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
                 </td>
                 
                 <td style="width: 15%;" class="text-start">
@@ -196,8 +196,8 @@
                 <td style="width: 20%;" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
                   <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-              <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                 </td>
               </tr>
             </tbody>
@@ -248,7 +248,7 @@
                   <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                 </td>
                 <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
-                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">{{reportDetails.remarks | json}}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">{{reportDetails.remarks}}</td>
               </tr>
             </tbody>
           </table>

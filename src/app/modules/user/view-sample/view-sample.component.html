@@ -130,7 +130,7 @@
       <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">Sample ID</h4>
-          <p class="text-uppercase">{{sampleDetails.user_encode_id}}</p>
+          <p class="text-uppercase">{{sampleDetails.id}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Sample Name </h4>
@@ -148,7 +148,9 @@
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Best Before Date</h4>
-          <p>{{sampleDetails.dfb | date}}</p>
+          <!-- <p>{{sampleDetails.dfb | date}}</p> -->
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
         </div>
 
         <div class="col-md-4">
@@ -189,6 +191,26 @@
           <h4>Note</h4>
           <p>{{sampleDetails.note}}</p>
         </div>
+
+        <div class="col-md-4">
+          <h4>Sample Type</h4>
+          <p>{{sampleDetails?.sample_type || 'N/A'}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Sample Quantity</h4>
+          <p>{{sampleDetails?.sample_quantity || 'N/A'}}</p>
+        </div>
+ 
+        <div class="col-md-4">
+          <h4>Number of Sample</h4>
+          <p>{{sampleDetails?.number_of_sample || 'N/A'}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4>Sample Units</h4>
+          <p>{{sampleDetails?.sample_units || 'N/A'}}</p>
+        </div>
       </div>
     </div>
 
@@ -200,46 +222,17 @@
             <tr>
               <th>S.N.</th>
               <th>Parameter Name</th>
-              <!-- <th>Formula</th> -->
-              <!-- <th>Method</th> -->
-              <!-- <th>Units</th> -->
               <th>Price</th>
-              <!-- <th>Test Type</th> -->
-              <!-- <th>Tested By</th> -->
-              <!-- <th>Result</th> -->
-              <!-- <th>Status</th> -->
             </tr>
             <tbody>
               <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>Rs.{{r.price}}</td>
-                <!-- <td>{{r.test_type}}</td> -->
-                <!-- <td>{{r.formula}}</td> -->
-                <!-- <td>
-                  <span *ngIf="r.ref_test_method">
-                  <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
-                  <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
-                  </span>
-                  <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span></td> -->
-                <!-- <td>
-
-                  <span *ngIf="r.units">
-                    <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
-                    <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
-                    </span>
-                    <span *ngIf="!r.units" class="text-muted">N/A</span>
-                  
-                </td> -->
+                <td *ngIf="i ===0" [attr.rowspan]="sampleDetails.parameters.length">Rs.{{sampleDetails.price}}</td>
               </tr>
             </tbody>
           </table>
         </div>
-
-       <!-- <div class="col-md-12 text-end">
-        <button class="btn btn-primary btn-sm mx-1">Download Report</button>
-        <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
-       </div> -->
       </div>
     </div>
   </div>

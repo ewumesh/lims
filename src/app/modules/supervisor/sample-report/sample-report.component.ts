@@ -10,6 +10,7 @@ import { ReAssignComponent } from './re-assign/re-assign';
 import { ReCheckComponent } from './re-check/re-check';
 import { VerificationComponent } from './verify/s-verify';
 import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
+import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
 
 @Component({
   templateUrl: './sample-report.component.html',
@@ -33,7 +34,12 @@ export class SampleReportComponent implements OnInit {
 
   rawDataSheet:any;
 
-  viewRemarks(data) {
+  viewRemarks(data, user) {
+    if(user === 'analyst') {
+
+    }else {
+      data.remarks = data.supervisor_remarks;
+    }
     this.dialog.open(SupervisorViewRemarksComponent, {
       data: data ? data : null
     })
@@ -191,5 +197,14 @@ export class SampleReportComponent implements OnInit {
      (error) => {
       this.isLoading = false;
      })
+  }
+
+  viewRawData(a) {
+    this.dialog.open(SupervisorViewRawDataComponent, {
+      data: a? a : null,
+      // width: '600px',
+      maxHeight:'90vh',
+      autoFocus: false,
+    })
   }
 }

@@ -49,56 +49,60 @@
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
-          <h4>Sample ID</h4>
+          <h4 class="mb-0">Sample ID</h4>
           <p>{{reportDetails.id}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Sample Lab Code</h4>
-          <p class="text-uppercase">{{reportDetails.supervisor_encode_id}}</p>
+          <h4 class="mb-0">Sample Lab Code</h4>
+          <p class="text-uppercase">{{reportDetails.sample_lab_id}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Reference Number</h4>
-          <p class="text-uppercase">{{reportDetails.user_encode_id}}</p>
+          <h4 class="mb-0">Reference Number</h4>
+          <p class="text-uppercase">
+            <span>
+            {{reportDetails.refrence_number}}
+            </span>
+          </p>
         </div>
         <div class="col-md-4">
-          <h4>Sample Name </h4>
+          <h4 class="mb-0">Sample Name </h4>
           <p>{{reportDetails.name}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Commodity </h4>
+          <h4 class="mb-0">Commodity </h4>
           <p>{{reportDetails?.commodity?.name}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>MFD</h4>
+          <h4 class="mb-0">MFD</h4>
           <p>{{reportDetails.mfd | date}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Best Before Date</h4>
+          <h4 class="mb-0">Best Before Date</h4>
           <p>{{reportDetails.dfb | date}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Batch</h4>
+          <h4 class="mb-0">Batch</h4>
           <p>{{reportDetails.batch}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>Brand</h4>
+          <h4 class="mb-0">Brand</h4>
           <p>{{reportDetails.brand}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Purpose of Analysis</h4>
+          <h4 class="mb-0">Purpose of Analysis</h4>
           <p>{{reportDetails?.purpose}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Condition</h4>
+          <h4 class="mb-0">Condition</h4>
           <p>{{reportDetails.condition}}</p>
         </div>
       </div>
@@ -111,33 +115,43 @@
           <table class="table table-bordered">
             <tr>
               <th>S.N</th>
+              <th>Test Type</th>
               <th>Parameter Name</th>
-              <!-- <th>Formula</th> -->
               <th>Method</th>
-              <!-- <th>Units</th> -->
               <th>Price</th>
-              <!-- <th>Tested By</th> -->
               <th>Result</th>
               <th>Status</th>
+              <th class="text-center">Assigned Supervisor</th>
             </tr>
             <tbody>
               <tr *ngFor="let r of reportDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
+                <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <!-- <td>{{r.formula}}</td> -->
                 <td>{{r.ref_test_method}}</td>
-                <!-- <td>{{r.units}}</td> -->
                 <td>Rs.{{r.price}}</td>
-                <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
                 <td>
                   <span *ngIf="r?.result || r?.result === 0">{{r.result}}</span>
-                    <!-- <span *ngIf="r?.result === 0">0</span> -->
                     <span *ngIf="!r?.result && r?.result !== 0" class="text-muted">N/A</span>
 
                 </td>
                 <td>
                   <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
                   <span *ngIf="!r.status" class="text-muted">N/A</span>
+                </td>
+                <td>
+                  <div *ngIf="r.sup_full_name" class="authors-container d-flex justify-content-center" data-collaborators="10">
+                    <div class="author assign-supervisor-avatar">
+                      <div (click)="reAssign(r.id, r.test_type)" class="mask cursor-pointer d-flex align-items-center">
+                        <ngx-avatar  size="30" [name]="r.sup_full_name"
+                          [matTooltip]="r.sup_full_name" class="me-2"></ngx-avatar> <span>{{r.sup_full_name | titlecase}} 
+                            </span>
+                            <span class="material-icons ms-2 cross-icon">
+                              highlight_off
+                              </span>
+                      </div> 
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>

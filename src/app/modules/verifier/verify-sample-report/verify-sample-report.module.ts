@@ -11,9 +11,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { VerificationRemarksComponent } from './component/verification-remarks';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ViewVieriferRemarks } from 'src/app/shared/verify-report/view-remarks/view-remarks';
 
 @NgModule({
-  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent],
+  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks],
   imports: [
     CommonModule,
     RouterModule.forChild([
