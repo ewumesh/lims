@@ -5,6 +5,7 @@ import { TestRequestDetailsService } from "src/app/services/analyst/test-request
 import { ToastService, TOAST_STATE } from "src/app/shared/toastr/toastr.service";
 import { FinalRawDataRemarksComponent } from "../analyst/test-request-details/raw-data-remarks/component/final-remarks";
 import { Router } from "@angular/router";
+import { SampleRequestDetailsService } from "src/app/services/sample-request-details/sample-request-details.service";
 
 
 @Component({
@@ -75,8 +76,10 @@ export class RejectComponent {
       @Inject(MAT_DIALOG_DATA)
       public data: any,
       private router: Router,
-      private service: TestRequestDetailsService,
-      ) { }
+      private service: SampleRequestDetailsService,
+      ) {
+        console.log(data, 'dajiw')
+       }
   
     ngOnInit(): void {
       this.initForm();
@@ -95,17 +98,11 @@ export class RejectComponent {
     submit() {
       this.isLoading = true;
       let payload = {
-        status: 'completed',
-        is_supervisor_sent: true,
-        remarks: this.remarksForm.value.remarks
+        remarks: this.remarksForm.value.remarks,
+        sample_form: this.data.id
       }
-      this.service.sendForVarification(payload, this.data?.id).subscribe(res => {
-        this.isLoading = false;
-        this.toast.showToast(TOAST_STATE.success, 'Test Result Sent.');
-        this.dismissMessage();
-        this.dialogRef.close();
-        this.router.navigate(['/dashboard/lab-report']);
-        window.location.reload();
+      this.service.rejectSample(payload).subscribe(res => {
+        this.toast.showToast(TOAST_STATE.success, res.message)
       },(error) => {
         this.isLoading = false;
         this.responseError = error?.error;

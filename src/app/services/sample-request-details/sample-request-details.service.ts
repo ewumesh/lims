@@ -56,4 +56,8 @@ export class SampleRequestDetailsService {
     // return this.http.post(`${this.url}/api/sample-form-has-parameter-assign-users/`, payload)
     return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
   }
+
+  rejectSample(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/sample-form-reject/`,payload)
+  }
 }

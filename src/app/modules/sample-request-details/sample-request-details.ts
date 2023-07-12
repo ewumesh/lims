@@ -160,8 +160,9 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
   rejectSample(data) {
+   
     this.dialog.open(RejectComponent, {
-      data:data
+      data:this.sampleDetails
     })
   }
 
