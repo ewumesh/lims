@@ -32,6 +32,8 @@ export class CalculateComponent implements OnInit {
 
   analyst_remarks = '';
 
+  microParametersDetails: any;
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
@@ -41,6 +43,7 @@ export class CalculateComponent implements OnInit {
     private toast: ToastService
     ) {
       this.requestDetails = this.data;
+      console.log('MY DATA', data)
     }
 
    splitStringByComma(input: string): string[] {
@@ -48,11 +51,26 @@ export class CalculateComponent implements OnInit {
       return result;
     }
 
+    getMicroParameterDetails() {
+      console.log(this.data.selectedParameter.micro_table, "MY PARAMETER...")
+      let payload = {
+        id: this.data.selectedParameter.micro_table
+      }
+      // let id = this.data.selectedParameter.micro_table
+      this.service.getMicroParameterDetails(payload).subscribe(res => {
+        this.microParametersDetails = res;
+      })
+    }
+
   ngOnInit(): void {
     this.getFormParameters();
     setTimeout(() => {
       this.generateForm();
     }, 1500);
+
+    if(this.data?.selectedParameter?.micro_table) {
+      this.getMicroParameterDetails();
+    }
 
   }
 
@@ -121,7 +139,7 @@ export class CalculateComponent implements OnInit {
   getFormParameters() {
     this.isLoading = true;
     let payload = {
-      commodity_id: this.data?.details?.sample_form?.commodity.id,
+      commodity_id: this.data?.details?.sample_form?.commodity?.id,
       parameter_id: this.data.parameters.id,
       sample_form_id: this.data?.details?.sample_form?.id
     };

@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="row p-3 mx-4" style="font-family: Poppins; border: 1px solid #DBDBDB; border-radius: 6px;" *ngIf="formControls[0].name !== 'nan'">
+    <div class="row p-3 mx-4" style="font-family: Poppins; border: 1px solid #DBDBDB; border-radius: 6px;" *ngIf="formControls && formControls[0]?.name !== 'nan'">
 
       <div class="col-md-4 d-flex align-items-center" style="border-right: 1px solid #dbdbdb;" *ngIf="requestDetails?.parameters?.formula">  
         <div><label style="font-weight:bold">Formula</label><br>{{requestDetails?.parameters?.formula}}</div>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="text-center text-muted" *ngIf="formControls[0].name === 'nan'">
+    <div class="text-center text-muted" *ngIf="formControls && formControls[0]?.name === 'nan'">
       Formula Not Available.
     </div>
 
@@ -53,13 +53,65 @@
               </li>
             </div>
           </div>
+
+          <table style=" margin: auto;" class="child-table">
+            <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
+            <tr>
+                <td colspan="2" rowspan="3" class="p-1 text-bold">Observation</td>
+                <td rowspan="3" class="text-bold">Temp <br> C</td>
+                <td rowspan="3" class="text-bold">Time</td>
+                <td colspan="6" style="height: 20px;">
+                    <p style="margin: 0;" class="text-bold"> Reading of samples (per dilution)</p>
+                </td>
+                <td rowspan="3" class="text-bold">Reading <br>
+                    of <br>
+                    Negative <br>
+                    control
+                </td>
+                <td rowspan="3" class="text-bold">Reading <br>
+                    of <br>
+                    Positive <br>
+                    control
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">First Exponent</td>
+                <td colspan="2">Second Exponent</td>
+                <td colspan="2">Third Exponent</td>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>A</td>
+                <td>B</td>
+                <td>A</td>
+                <td>B</td>
+            </tr>
+            <!-- {{microParametersDetails | json}} -->
+            <ng-container *ngFor="let data of microParametersDetails?.micro_observation_table">
+                <tr >
+                    <td colspan="2" class="text-bold">
+                    {{data?.observation_number}}</td>
+                    <td>{{data.temperature}}</td>
+                    <td>{{data.time}}</td>
+                    <td>{{data?.first_exponent_a}}</td>
+                    <td>{{data?.first_exponent_b}}</td>
+                    <td>{{data?.second_exponent_a}}</td>
+                    <td>{{data?.second_exponent_b}}</td>
+                    <td>{{data?.third_exponent_a}}</td>
+                    <td>{{data?.third_exponent_b}}</td>
+                    <td>{{data?.negative_control}}</td>
+                    <td>{{data?.positive_control}}</td>
+                </tr>
+            </ng-container>
+        </table>
         
           <ng-container *ngFor="let control of formControls">
-            <div *ngIf="control.name !== 'nan'" class="d-flex align-items-center">
-              <label [for]="control.name" style="font-size: 14px; font-weight: 600; padding-right: 10px; margin-top: -15px!important  ;">{{ control.label }}</label>
+            <div *ngIf="control?.name !== 'nan'" class="d-flex align-items-center">
+              <label [for]="control?.name" style="font-size: 14px; font-weight: 600; padding-right: 10px; margin-top: -15px!important  ;">{{ control?.label }}</label>
               <mat-form-field class="w-100" appearance="outline">
                 <input (keyup.enter)="generate()" [placeholder]="'Enter' + ' ' + control.label" class="custom-input" matInput type="number"
-                  [formControlName]="control.name" required style="height: 55px!important; padding-bottom: 24px;">
+                  [formControlName]="control?.name" required style="height: 55px!important; padding-bottom: 24px;">
               </mat-form-field>
             </div>
             <!-- <div *ngIf="control.name === 'nan'">
@@ -69,7 +121,7 @@
           </ng-container>
         </div>
 
-        <div class="row mt-3" *ngIf="formControls[0].name !== 'nan'">
+        <div class="row mt-3" *ngIf="formControls && formControls[0]?.name !== 'nan'">
           <div class="col-md-12 text-end">
             <button class="btn reset-btn" (click)="resetForm()">Reset</button>
 

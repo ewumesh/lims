@@ -56,4 +56,24 @@ export class TestRequestDetailsService {
     window.open(url, "_blank");
     return this.http.get(`${url}`)
   }
+
+  setMicorParameters(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/microparameter/`,payload)
+  }
+
+  updateMicorParameters(payload):Observable<any> {
+    return this.http.put(`${this.url}/api/microparameter/${payload.id}/`,payload)
+  }
+
+  saveObservationTable(payload): Observable<any> {
+    return this.http.post(`${this.url}/api/micro-observation-table/`, payload)
+  }
+
+  updateObservationTable(payload): Observable<any> {
+    return this.http.put(`${this.url}/api/micro-observation-table/${payload.id}`, payload)
+  }
+
+  getMicroParameterDetails(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/microparameter/${payload.id}/`)
+  }
 }

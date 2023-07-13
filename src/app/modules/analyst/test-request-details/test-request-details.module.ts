@@ -22,6 +22,8 @@ import { FinalRawDataRemarksComponent } from './raw-data-remarks/component/final
 import { ViewRawDataComponent } from './view-raw-data/view-raw-data';
 import { ViewRemarksComponent } from './view-remarks/view-remarks';
 import { MicroParameterDetailsComponent } from './parameter-details/micro-parameter-details';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { MicroParameterDetailsComponent } from './parameter-details/micro-parame
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     DeleteConfirmModule,
     SharedModule

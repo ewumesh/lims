@@ -102,7 +102,10 @@ export class RejectComponent {
         sample_form: this.data.id
       }
       this.service.rejectSample(payload).subscribe(res => {
-        this.toast.showToast(TOAST_STATE.success, res.message)
+        this.toast.showToast(TOAST_STATE.success, res.message);
+        this.dialogRef.close();
+        this.isLoading = false;
+        this.router.navigate(['/dashboard/lab-report']);
       },(error) => {
         this.isLoading = false;
         this.responseError = error?.error;

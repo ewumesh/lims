@@ -149,9 +149,55 @@ export class TestRequestDetailsComponent implements OnInit {
     })
    }
 
-   microParameterDetails() {
-    this.dialog.open(MicroParameterDetailsComponent, {
-      width: '1200px'
+  //  parameters: data,
+  //     details: this.testRequestDetails,
+  //     sample_form: this.testRequestDetails?.sample_form?.analyst_encode_id,
+  //     // result: result,
+  //     parameter: data.id,
+  //     commodity: data.commodity,
+
+   microParameterDetails(parameter) {
+    let requiredList = this.testRequestDetails;
+    requiredList.selectedParameter = parameter;
+    requiredList.parameter = parameter;
+    requiredList.sample_form = this.testRequestDetails?.sample_form?.id;
+    requiredList.commodity = parameter.commodity;
+    requiredList.details = this.testRequestDetails;
+
+    console.log(requiredList, "REQUIRED..")
+    let instance: MatDialogRef<MicroParameterDetailsComponent, any>
+    instance = this.dialog.open(MicroParameterDetailsComponent, {
+      width: '1200px',
+      data:requiredList
+    })
+
+    instance.afterClosed().subscribe(res => {
+      console.log(requiredList, "REQUIRED AFTER CLOSED....")
+      if(res) {
+
+        let allValue = {
+          selectedParameter:parameter,
+          parameters: parameter,
+          details: this.testRequestDetails,
+          sample_form: this.testRequestDetails?.sample_form?.analyst_encode_id,
+          // result: result,
+          parameter: parameter.id,
+          commodity: parameter.commodity,
+          // formula_variable_fields_value:'awds'
+        }
+        let instance: MatDialogRef<CalculateComponent, any>;
+
+    instance = this.dialog.open(CalculateComponent, {
+      data: allValue ? allValue : null,
+      width: '800px',
+      height: '900px',
+      autoFocus: false,
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getTestResultDetails();
+    })
+      }
     })
    }
 

@@ -1,129 +1,175 @@
 <div class="row m-0 p-0">
     <div class="col-md-12 m-0 p-0">
-      <div class="row m-0">
-        <div class="col-md-10">
-          <h1 class="mb-0" mat-dialog-title style="font-family: Poppins!important; font-weight: 600;">Parameter Details</h1>
+        <div class="row m-0">
+            <div class="col-md-10">
+                <h1 class="mb-0" mat-dialog-title style="font-family: Poppins!important; font-weight: 600;">Parameter
+                    Details</h1>
+            </div>
+            <div class="col-md-2 text-end pt-2">
+                <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false"
+                        aria-label="edit" fontIcon="close"></mat-icon></button>
+            </div>
         </div>
-        <div class="col-md-2 text-end pt-2">
-          <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false"
-              aria-label="edit" fontIcon="close"></mat-icon></button>
-        </div>
-      </div>
-  
-      <hr class="mt-0" />
-  
-      <mat-dialog-content >
-        <form [formGroup]="parameterDetailsForm" style="    border: 1px solid #00000052;
+
+        <hr class="mt-0" />
+
+        <mat-dialog-content>
+            <div class="row">
+                <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        <li *ngFor="let item of responseError | keyvalue">
+                            <!-- {{item.key}}: -->
+                            {{item.value}}
+                        </li>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="parameterDetailsForm" style="    border: 1px solid #00000052;
         padding: 25px;
     ">
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Physical condition of sample</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Physical condition of sample" formControlName="physical_condition_of_sample" />
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Physical condition of sample</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Physical condition of sample"
+                                formControlName="physical_condition_of_sample" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Media Used</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Media used"
+                                formControlName="media_used" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Prepared Dilution</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Prepared Dilution"
+                                formControlName="prepared_dilution" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Diluent Used</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Diluent Used"
+                                formControlName="diluent_used" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Positive Control Used</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Positive Control Used"
+                                formControlName="positive_control_used" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Negative Control Used</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Negative Control Used"
+                                formControlName="negative_control_used" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Date And Time</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <!-- <input matInput class="custom-input" placeholder="Date and time" formControlName="date_and_time" /> -->
+
+                            <input matInput class="custom-input" [matDatepicker]="date" (focus)="date.open()"
+                                (click)="date.open()" placeholder="Enter Manufactured Date"
+                                formControlName="date_of_incubation" />
+
+                            <mat-datepicker #date></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Required Temprature</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <input matInput class="custom-input" placeholder="Temprature"
+                                formControlName="required_temperature" />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-12 text-right text-end">
+                        <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="setMicroParameter()"
+                            class="btn btn-primary  btn-lims-primary btn-sm">
+                            <span *ngIf="!isSetParameterDetails">Submit</span>
+                            <span *ngIf="isSetParameterDetails">
+                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                            </span>
+                        </button>
+
+                        <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateMicroParameter()"
+                            class="btn btn-primary  btn-lims-primary btn-sm">
+                            <span *ngIf="!isSetParameterDetails">Update</span>
+                            <span *ngIf="isSetParameterDetails">
+                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                            </span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="col-md-6">
-                    <label>Media Used</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Media used" formControlName="media_used" />
-                    </mat-form-field>
-                </div>
+            </form>
 
-                <div class="col-md-6">
-                    <label>Prepared Dilution</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Prepared Dilution" formControlName="prepared_dilution" />
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Diluent Used</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Diluent Used" formControlName="diluent_used" />
-                    </mat-form-field>
-                </div>               
-                
-                <div class="col-md-6">
-                    <label>Positive Control Used</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Positive Control Used" formControlName="positive_control_used" />
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Negative Control Used</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Negative Control Used" formControlName="negative_control_used" />
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Date And Time</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Date and time" formControlName="date_and_time" />
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Required Temprature</label>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <input matInput class="custom-input" placeholder="Temprature" formControlName="temprature" />
-                    </mat-form-field>
-                </div>
-
-
-            </div>
-  
-        </form>
-
-        <form action="">
-            <table style=" margin: auto;" class="child-table">
-                <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
-                <tr>
-                    <td colspan="2" rowspan="3" class="p-1 text-bold">Observation</td>
-                    <td rowspan="3" class="text-bold">Temp <br> C</td>
-                    <td rowspan="3" class="text-bold">Time</td>
-                    <td colspan="6" style="height: 20px;"><p style="margin: 0;" class="text-bold"> Reading of samples (per dilution)</p></td>
-                    <td rowspan="3" class="text-bold">Reading <br>
-                        of <br>
-                        Negative <br>
-                        control
-                    </td>
-                    <td rowspan="3" class="text-bold">Reading <br>
-                        of <br>
-                        Positive <br>
-                        control
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="text"></td>
-                    <td colspan="2"><input type="text"></td>
-                    <td colspan="2"><input type="text"></td>
-                </tr>
-                <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-bold">1 (24hrs)</td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
+            <form action="" [formGroup]="observationForm"
+                *ngIf="addedParameterDetails || data.selectedParameter?.micro_table">
+                <table style=" margin: auto;" class="child-table">
+                    <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
+                    <tr>
+                        <td colspan="2" rowspan="3" class="p-1 text-bold">Observation</td>
+                        <td rowspan="3" class="text-bold">Temp <br> C</td>
+                        <td rowspan="3" class="text-bold">Time</td>
+                        <td colspan="6" style="height: 20px;">
+                            <p style="margin: 0;" class="text-bold"> Reading of samples (per dilution)</p>
+                        </td>
+                        <td rowspan="3" class="text-bold">Reading <br>
+                            of <br>
+                            Negative <br>
+                            control
+                        </td>
+                        <td rowspan="3" class="text-bold">Reading <br>
+                            of <br>
+                            Positive <br>
+                            control
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">First Exponent</td>
+                        <td colspan="2">Second Exponent</td>
+                        <td colspan="2">Third Exponent</td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>B</td>
+                        <td>A</td>
+                        <td>B</td>
+                        <td>A</td>
+                        <td>B</td>
+                    </tr>
+                    <ng-container formArrayName="observation">
+                        <tr *ngFor="let list of form.controls; let i = index" [formGroupName]="i">
+                            <td colspan="2" class="text-bold"><input formControlName="observation_number" type="text" />
+                            </td>
+                            <td><input formControlName="temperature" type="text"></td>
+                            <td><input formControlName="time" type="text"></td>
+                            <td><input formControlName="first_exponent_a" type="text"></td>
+                            <td><input formControlNmae="first_exponent_b" type="text"></td>
+                            <td><input formControlName="second_exponent_a" type="text"></td>
+                            <td><input formControlName="second_exponent_b" type="text"></td>
+                            <td><input formControlNmae="third_exponent_a" type="text"></td>
+                            <td><input formControlNmae="third_exponent_b" type="text"></td>
+                            <td><input formControlName="negative_control" type="text"></td>
+                            <td><input formControlName="positive_control" type="text"></td>
+                        </tr>
+                    </ng-container>
+                    <!-- <tr>
                     <td colspan="2" class="text-bold">2 (48hrs)</td>
                     <td><input type="text"></td>
                     <td><input type="text"></td>
@@ -174,24 +220,26 @@
                     <td><input type="text"></td>
                     <td><input type="text"></td>
                     <td><input type="text"></td>
-                </tr>
-            </table>
-            <div class="row me-1 mt-3">
-                <div class="col-md-11"></div>
-                <div class="col-md-1">
-                    <button type="submit" class="btn btn-primary" style="margin-left: auto;">Calculate</button>
-    
+                </tr> -->
+                </table>
+                <div class="row me-1 mt-3">
+                    <div class="col-md-11"></div>
+                    <div class="col-md-1">
+                        <!-- <button (click)="saveObservationTable()" type="submit" class="btn btn-primary" style="margin-left: auto;">Calculate</button> -->
+
+                    </div>
                 </div>
-            </div>
-        </form>
-  
-  
-      </mat-dialog-content>
-  
-      <mat-dialog-actions align="end">
-        <button class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
-        <button class="btn btn-primary btn-sm cancel-btn mx-1">Next</button>
-      </mat-dialog-actions>
+            </form>
+
+
+        </mat-dialog-content>
+
+        <mat-dialog-actions align="end">
+            <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
+            <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
+                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+            <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
+                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+        </mat-dialog-actions>
     </div>
-  </div>
-  
+</div>

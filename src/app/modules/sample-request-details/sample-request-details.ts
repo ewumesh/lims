@@ -160,7 +160,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
   rejectSample(data) {
-   
+    // let instance: MatDialogRef<RejectComponent, any>;
     this.dialog.open(RejectComponent, {
       data:this.sampleDetails
     })
