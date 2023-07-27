@@ -4,6 +4,9 @@
     <div class="db-content">
       <div class="top-view-page p-2 mb-3">
         <div class="row log-details p-3">
+          <div class="col-md-12" *ngIf="reportDetails?.status === 'rejected'">
+            <div class="alert alert-danger"> Sample rejected. Remarks: {{reportDetails?.remarks}}</div>
+          </div>
           <div class="col-md-3">
             <div class="row mt-2">
               <p>Created By</p>
@@ -131,8 +134,65 @@
       </div>
 
 
+      <!-- {{reportDetails?.payment | json}} -->
+
+      <div class="view-page mt-4 " *ngIf="reportDetails?.payment.length > 0">
+        <h3 class="view-page-heading pb-0 mb-0">Payment Details</h3>
+        <div class="row m-0 py-1" *ngFor="let p of reportDetails.payment">
+          <div class="col-md-3">
+            <h4 class="mb-0">Voucher No</h4>
+            <p>{{p.voucher_number}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="mb-0">Amount </h4>
+            <p>{{p.amount || ''}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="mb-0">Paid Date </h4>
+            <p>{{p.created_date | date: 'medium'}}</p>
+          </div>
+  
+          <div class="col-md-3">
+            <h4 class="m-0">Payment Receipt </h4>
+            <button  class="btn btn-primary btn-sm">View Receipt</button>
+            <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
+          </div>
+          <hr class="m-0"/>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <h4>MFD</h4>
+            <p>{{sampleDetails.mfd | date}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4>Best Before Date</h4>
+            <p>{{sampleDetails.dfb | date}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Batch</h4>
+            <p>{{sampleDetails.batch}}</p>
+          </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <h4>Brand</h4>
+            <p>{{sampleDetails.brand}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Purpose of Analysis</h4>
+            <p>{{sampleDetails?.purpose}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Condition</h4>
+            <p>{{sampleDetails.condition}}</p>
+          </div>
+        </div> -->
+      </div>
       
-  <div class="row m-0">
+  <div class="row m-0" *ngIf="reportDetails?.status !== 'rejected'">
     <div class="col-md-12 bg-white p-3 mt-3" style="border-radius: 5px;">
       <div class="row">
         <div class="col-md-6">

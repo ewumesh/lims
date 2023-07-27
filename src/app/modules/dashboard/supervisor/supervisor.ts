@@ -181,9 +181,10 @@ export class SupervisorDashboard implements OnInit {
     this.service.getDashboardStatus().subscribe(a => {
       this.dashboardStatus = a;
 
-      let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request)];
+      let chaartSeries = [this.calculatePercentage(a.processing, a.total_request),this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request),this.calculatePercentage(a.reject, a.total_request)];
       this.pieSeries = chaartSeries;
       this.isDashboardStatus = false;
+      console.log(this.pieSeries, 'asdasd')
       this.initPieChart();
     },(error) => {
       this.isDashboardStatus = false;
@@ -197,14 +198,14 @@ export class SupervisorDashboard implements OnInit {
 
   initPieChart() {
     this.chartOptions = {
-      series: [50, 20, 10, 7, 3],
-      // series: this.pieSeries,
+      // series: [50, 20, 10, 7, 3],
+      series: this.pieSeries,
       chart: {
         width: 350,
         type: "pie",
         fontFamily: 'Poppins',
       },
-      labels: ["Completed", "Pending", "Not Verified", "Recheck", "Rejected"],
+      labels: ["Processing","Completed", "Pending", "Not Verified", "Recheck", "Rejected"],
       
       responsive: [
         {

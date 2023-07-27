@@ -100,7 +100,7 @@ export class PricingComponent implements OnInit, AfterViewInit {
       res.results.forEach((element, index) => {
         element.number = index+1;
         allDatas.push(element);
-        console.log(element, 'EL')
+        // console.log(element, 'EL')
       });
       // console.log(allDatas, 'ADDD')
       this.dataSource.data = allDatas;

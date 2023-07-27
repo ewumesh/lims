@@ -208,10 +208,10 @@
                     </td>
                     <td style="width: 20%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Actions</p>
-                      <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                      <button (click)="downloadRawDatasheet(a.raw_data)"
+                      <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                      <button (click)="downloadRawDatasheet(a.id)"
                         class="btn btn-secondary mx-2 btn-sm">Download</button>
-                      <button (click)="printRawData(a.raw_data)"
+                      <button (click)="printRawData(a.id)"
                         class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                     </td>
                   </tr>
@@ -322,7 +322,7 @@
                   <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a.status">{{a.status}}</span>
                 </td>
                 <td style="width: 30%;" class="text-end pt-3">
-                  <!-- <button  class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
+                  <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
               <button (click)="downloadRawDatasheetAnalyst(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
               <button (click)="printRawDataAnalyst(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                 </td>
@@ -347,7 +347,7 @@
           </li>
         </ul>
         <div  class="tab-content mt-3" id="myTabContent">
-          <div *ngIf="supervisorRawData?.Microbiological" class="tab-pane fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+          <div *ngIf="supervisorRawData?.Microbiological" class="tab-pane show active fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
             <table class="table mb-0">
               <tbody>
                 <tr *ngFor="let a of supervisorRawData?.Microbiological">
@@ -362,7 +362,7 @@
                   <td>
                     <p class="bold-text mb-0 pb-0">Remarks</p>
                     <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                    <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                    <button *ngIf="a.supervisor_remarks" (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
                     <!-- <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button> -->
                   </td>
                   
@@ -374,8 +374,8 @@
                     <p class="bold-text mb-0 pb-0">Actions</p>
                     <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button  class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button  class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                <button (click)="downloadRawDatasheet(a.id)"  class="btn btn-secondary mx-2 btn-sm">Download</button>
+                <button (Click)="printRawData(a.id)"  class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                   </td>
                 </tr>
               </tbody>
@@ -408,8 +408,8 @@
                     <p class="bold-text mb-0 pb-0">Actions</p>
                     
                     <button  class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
-                <button  class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                <button (click)="downloadRawDatasheet(a.id)"  class="btn btn-secondary mx-2 btn-sm">Download</button>
+                <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                   </td>
                 </tr>
               </tbody>
@@ -445,8 +445,8 @@
                     <!-- {{a | json}} -->
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button  class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button  class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                <button (click)="downloadRawDatasheet(a.id)"  class="btn btn-secondary mx-2 btn-sm">Download</button>
+                <button (click)="printRawData(a.id)"  class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                   </td>
                 </tr>
               </tbody>

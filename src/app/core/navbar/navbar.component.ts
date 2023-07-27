@@ -119,7 +119,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         this.logout();
       }
     },(error) => {
-      console.log(error?.error, 'roo')
+      // console.log(error?.error, 'roo')
 
       if(error?.error?.valid === false) {
         this.logout();
@@ -148,7 +148,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   changeTheme() {
     this.checked = !this.checked;
-    console.log('I am now ', this.checked);
+    // console.log('I am now ', this.checked);
     this.setIcon();
   }
 }

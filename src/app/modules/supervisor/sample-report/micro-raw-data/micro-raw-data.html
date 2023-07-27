@@ -1,0 +1,274 @@
+<div class="row m-0" style="padding: 1%;">
+    <div class="col-md-10">
+      <h2>Raw Data Sheet</h2>
+    </div>
+    <div class="col-md-2 text-end">
+      <button (click)="closeDialog()" class="btn btn-lims-danger btn-sm"><mat-icon aria-hidden="false" aria-label="edit"
+          fontIcon="close"></mat-icon></button>
+    </div>
+    <hr />
+    <mat-dialog-content> 
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab  *ngFor="let p of data.raw_data" [label]="p.parameter.name">
+                
+                <table  class="top-table">
+                    <tr >
+                        <td style="width:11%; padding: 6px; position: relative;">
+                            <img src="https://logos-download.com/wp-content/uploads/2021/07/Emblem_of_Nepal.png" alt="logo" style="width: 60px;">
+                        </td>
+                        <td style="width: 70%;  border-right: 0;">
+                            <h2 >National Food and Feed Reference Laboratory  </h2>
+                            <p>DFTQC, Kathmandu, Nepal</p>
+                        </td>
+                        <td style=" border-left: 0;">
+                            <p >{{p?.id}}</p>
+                        </td>
+                    </tr>
+            </table>
+            <h2 class="heading" >NFFRL/SR/7.5/03: RAW DATA WORKSHEET (Microbiology)</h2>
+            <table style="width: 100%;" class="bottom-table">
+                <tr>
+                    <th class="text-center" >S.N.</th>
+                    <th colspan="9"> Name of Laboratory: <span class="detail"> N/A </span></th>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name | json}} </span></td>
+                    <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id}} </span></td>
+                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td colspan="10">Parameters to be analyzed:<span class="detail"> {{p?.parameter?.name}} </span></td>
+                </tr>
+                <tr>
+                    <td class="text-center">4</td>
+                    <td colspan="10">Method of Analysis/Testing: <span class="detail"> {{p?.parameter?.ref_test_method}} </span></td>
+                </tr>
+                <tr>
+                    <td class="text-center">5</td>
+                    <td colspan="10">RAW DATA (Observations, Readings, calculations etc.):</td>
+                </tr>
+                <tr style="border-bottom: none;">
+                    <td  class="text-center"> </td>
+                    <td colspan="4" style="border-right: none;" >Parameters:
+                        <p>
+                            a) Physical Condition Of Sample: {{p?.micro_table?.physical_condition_of_sample}}<br>
+                            c) Prepared Dilution: {{p?.micro_table?.prepared_dilution}}<br>
+                            e) Positive control used: {{p?.micro_table?.positive_control_used}}<br>
+                            g) Date and time of Incubation: {{p?.micro_table?.date_of_incubation | date}}
+                        </p>
+                    </td>
+                    <td colspan="5" style="border-left: none;" >
+                        <p>
+                            b) Media Used:{{p?.micro_table?.media_used}} <br>
+                            d) Diluent used: {{p?.micro_table?.diluent_used}}<br>
+                            f) Negative Control used: {{p?.micro_table?.negative_control_used}}<br>
+                            h) Requierd temperature/time of Incubation:{{p?.micro_table?.required_temperature}}
+                        </p>
+                    </td>
+                </tr>
+                <tr style="border-bottom: none;">
+                    <td  class="text-center" style="border-bottom: none;">5.a. </td>
+                    <td colspan="9" style="border-bottom: none;" >
+                       <table style="width: 98%; margin: 1rem auto;" class="child-table">
+                        <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
+                        <tr>
+                            <td colspan="2" rowspan="3">Observation</td>
+                            <td rowspan="3">Temp <br> C</td>
+                            <td rowspan="3">Time</td>
+                            <td colspan="6" style="height: 20px;"><p style="margin: 0;"> Reading of samples (per dilution)</p></td>
+                            <td rowspan="3">Reading <br>
+                                of <br>
+                                Negative <br>
+                                control
+                            </td>
+                            <td rowspan="3">Reading <br>
+                                of <br>
+                                Positive <br>
+                                control
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">First Exponent</td>
+                            <td colspan="2">Second Exponent</td>
+                            <td colspan="2">Third Exponent</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>B</td>
+                            <td>A</td>
+                            <td>B</td>
+                            <td>A</td>
+                            <td>B</td>
+                        </tr>
+                        <tr *ngFor="let o of p?.micro_table?.micro_observation_table">
+                            <td colspan="2">{{o.observation_number}}</td>
+                            <td>{{o.temperature}}</td>
+                            <td>{{o.time}}</td>
+                            <td>{{o.first_exponent_a}}</td>
+                            <td>{{o.first_exponent_b}}</td>
+                            <td>{{o.second_exponent_a}}</td>
+                            <td>{{o.second_exponent_b}}</td>
+                            <td>{{o.third_exponent_a}}</td>
+                            <td>{{o.third_exponent_b}}</td>
+                            <td>{{o.negative_control}}</td>
+                            <td>{{o.positive_control}}</td>
+                        </tr>
+                        <!-- <tr>
+                            <td colspan="2">2 (48hrs)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">3 (72hrs)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">4 (96hrs)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">5 (120hrs)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr> -->
+                       </table>
+                    </td>
+                </tr>
+                <tr style="border-top: none; border-bottom: none;">
+                    <td style="border-top: none; border-bottom:none;"></td>
+                    <td colspan="10" style="border-top: none; border-bottom:none;">
+                        <h2 style="font-size: 1.1rem; margin-left: 1rem;">Calculations/Biochemical Observation:</h2>
+                        <div class="row m-2">
+                            <div class="col-md-6">
+                                <div class="formula">
+                                    <h2>{{p.parameter?.name}}</h2>
+                                    <div *ngIf="p?.parameter?.formula_notation">
+                                      <div *ngFor="let n of splitStringByComma(p?.parameter?.formula_notation)">
+                                        <span class="text-danger">*</span>{{n | titlecase}}
+                                      </div>
+                                      <h2>Formula = {{p?.parameter?.formula}}</h2>
+                                    </div>
+                                    <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+                                  </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="formula">
+                                    <h2>Parameter Name</h2>
+                                    <p> <span>w =</span> Weight = <span>120</span></p>
+                                    <p><span>b =</span>Height = <span>30</span></p>
+                                    <h2>Formula = <span>(W*B) / 100</span> = 36 unit</h2>
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- <div class="row m-2">
+                            <div class="col-md-6">
+                                <div class="formula">
+                                    <h2>Parameter Name</h2>
+                                    <p> <span>w =</span> Weight = <span>120</span></p>
+                                    <p><span>b =</span>Height = <span>30</span></p>
+                                    <h2>Formula = <span>(W*B) / 100</span> = 36 unit</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="formula">
+                                    <h2>Parameter Name</h2>
+                                    <p> <span>w =</span> Weight = <span>120</span></p>
+                                    <p><span>b =</span>Height = <span>30</span></p>
+                                    <h2>Formula = <span>(W*B) / 100</span> = 36 unit</h2>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row m-2">
+                            <!-- <div class="col-md-9">
+                                <div class="formula">
+                                    <h2>Parameter Name</h2>
+                                    <p> <span>w =</span> Weight = <span>120</span></p>
+                                    <p><span>b =</span>Height = <span>30</span></p>
+                                    <h2>Formula = <span>(W*B) / 100</span> = 36 unit</h2>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="details">
+                                    TNTC: Too numerious to count <br>
+                                    abs: absent <br>
+                                    GF = Gas formation <br>
+                                    NGF = No gas formation
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">6</td>
+                    <td colspan="10">
+                        <div class="row">
+                            <div class="col-md-6"> Name and Signature of analyst:  <span class="detail"> {{data?.analyst_user?.first_name}} {{data?.analyst_user?.last_name}} </span></div>
+                            <!-- <div class="col-md-6">Verified by: <span class="detail"> Lorem </span></div> -->
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">7</td>
+                    <td colspan="10">Remarks (If any):<span class="detail"> {{data?.remarks}} </span> </td>
+                </tr>
+            </table>
+
+            </mat-tab>
+          </mat-tab-group>
+   
+
+</mat-dialog-content>
+<hr />
+
+<mat-dialog-actions align="end">
+  <button (click)="closeDialog()" class="btn btn-danger btn-sm mx-1">Close</button>
+  <!-- <button (click)="download()" class="btn btn-secondary btn-sm mx-1">Download</button> -->
+  <!-- <button class="btn btn-primary btn-sm mx-1">
+    <span *ngIf="!isLoading">Save</span>
+    <span *ngIf="isLoading">
+      <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+    </span>
+  </button> -->
+</mat-dialog-actions>
+</div>

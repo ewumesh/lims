@@ -160,7 +160,7 @@
         <div class="col-md-3">
           <h4 class="mb-0">Assigned Date </h4>
           <p>{{reportDetails.created_date | date: 'medium'}}</p>
-        </div>
+        </div>  
 
         <div class="col-md-3 text-end pt-3">
           <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
@@ -326,7 +326,7 @@
                       <span *ngIf="!r.supervisor_user" class="text-muted">N/A</span>
                     </td> -->
                     <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
-                      <button (click)="assignAllType(r,'bi',r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
+                      <button (click)="assignAllType(r,'mi',r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                     </td>
                   </tr>
                 </ng-container>

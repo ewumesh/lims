@@ -33,7 +33,7 @@ export class AccountService {
     return this.http.patch(`${this.url}/api/account/users/${payload.id}/`, payload)
   }
 
-  updateUser(payload, doc?,renewDoc?):Observable<any> {
+  updateUser(payload, doc?,renewDoc?, additionalDoc?):Observable<any> {
     const formData:FormData = this.objectToFormData(payload);
     if(doc) {
     formData.append('registration_document', doc, doc?.name);
@@ -41,6 +41,13 @@ export class AccountService {
     if(renewDoc) {
     formData.append('renew_document', renewDoc, renewDoc?.name);
     }
+
+    delete payload['additionalDocs'];
+
+    additionalDoc.forEach((image,index) => {
+      formData.append(`images[file]`, image.file);
+      formData.append(`images[name]`, image.document_name);
+    })
     return this.http.put(`${this.url}/api/account/users/${payload.id}/`, formData)
   }
 

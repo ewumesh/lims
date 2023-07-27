@@ -17,9 +17,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewUserRemarksComponent } from './view-user-remarks';
 
 @NgModule({
-  declarations: [UserRequestsComponent],
+  declarations: [UserRequestsComponent, ViewUserRemarksComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -38,6 +40,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    MatIconModule,
 
     DeleteConfirmModule,
     SharedModule

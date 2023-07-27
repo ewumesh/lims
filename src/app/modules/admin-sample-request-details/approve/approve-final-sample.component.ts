@@ -46,7 +46,7 @@ export class ApproveFinalSampleComponent implements OnInit {
     }
   
     submit() {
-        console.log(this.data, "DORM")
+        // console.log(this.data, "DORM")
       this.isLoading = true;
       let payload = {
         id: this.data.sample_form,

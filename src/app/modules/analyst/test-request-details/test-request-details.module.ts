@@ -24,6 +24,9 @@ import { ViewRemarksComponent } from './view-remarks/view-remarks';
 import { MicroParameterDetailsComponent } from './parameter-details/micro-parameter-details';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewMicroRawDataComponent } from './view-micro-raw-data/view-micro-raw-data';
+import {MatTabsModule} from '@angular/material/tabs';
+import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generate-micro-raw-data';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     FinalRawDataRemarksComponent,
     ViewRawDataComponent,
     ViewRemarksComponent,
-    MicroParameterDetailsComponent
+    MicroParameterDetailsComponent,
+    ViewMicroRawDataComponent,
+    GenerateMicroRawDataComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +59,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
 
     DeleteConfirmModule,
     SharedModule

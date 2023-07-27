@@ -19,9 +19,10 @@ import { PaymentReceiptComponent } from './receipt/receipt';
 import { RejectComponent } from './reject-sample';
 import { AvatarModule } from 'ngx-avatar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RecheckComponent } from './recheck-sample';
 
 @NgModule({
-  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent, RejectComponent],
+  declarations: [SampleRequestDetailsComponent, AssignSampleDialogComponent, AssignSampleComponent,PaymentReceiptComponent, RejectComponent,RecheckComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

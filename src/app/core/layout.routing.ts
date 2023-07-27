@@ -382,7 +382,7 @@ const routes: Routes = [
     path: 'commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1,2,7]
+      requiredRole: [1,2,3,4,7]
     },
     loadChildren: () => import('src/app/modules/commodities/commodities/commodities.module')
     .then(m => m.CommoditiesModule)
@@ -392,7 +392,7 @@ const routes: Routes = [
     path: 'commodities/all-commodities',
     canActivate: [RoleGuard],
     data: {
-      requiredRole: [1, 2,7]
+      requiredRole: [1, 2,3,4,7]
     },
     loadChildren: () => import('src/app/modules/commodities/all/all-commodities.module')
     .then(m => m.AllCommoditiesModule)

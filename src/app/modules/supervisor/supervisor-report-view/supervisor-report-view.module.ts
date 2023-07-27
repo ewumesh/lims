@@ -9,11 +9,13 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { SupervisorReportViewRemarksComponent } from "./remarks/remakrs";
 import { MatIconModule } from "@angular/material/icon";
 import { SupervisorReportViewRawDataComponent } from "./raw-data/supervisor-report-raw-data";
+import { MicroSupervisorRawDataComponent } from "./micro-supervisor-raw-data/micro-supervisor-raw-data";
+import { MatTabsModule } from "@angular/material/tabs";
 
 
 
 @NgModule({
-    declarations:[SupervisorReportViewComponent, SupervisorReportViewRemarksComponent, SupervisorReportViewRawDataComponent],
+    declarations:[SupervisorReportViewComponent, SupervisorReportViewRemarksComponent, SupervisorReportViewRawDataComponent, MicroSupervisorRawDataComponent],
     imports: [
         CommonModule,
 
@@ -24,6 +26,7 @@ import { SupervisorReportViewRawDataComponent } from "./raw-data/supervisor-repo
         MatDialogModule,
         MatIconModule,
         AvatarModule,
+        MatTabsModule,
         SharedModule
     ],
     exports:[],

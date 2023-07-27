@@ -105,9 +105,11 @@
       </tr>
 </table>
 
-<h2 class="heading" >NFFRL/SR/7.5/03: RAW DATA WORKSHEET (Chemical)</h2>
+<h2 class="heading" >NFFRL/SR/7.5/03: RAW DATA WORKSHEET 
+  <!-- (Chemical) -->
+</h2>
 
-<table style="width: 100%;" class="bottom-table">
+<table style="width: 100%;" class="bottom-table"> 
   <tr>
       <th class="text-center" >S.N.</th>
       <th colspan="5"> Name of Laboratory: <span class="detail"> N/A </span></th>
@@ -122,9 +124,9 @@
 
   <tr>
       <td class="text-center">2</td>
-      <td colspan="3">Due Date:<span class="detail"> {{data?.sample[0].created_date | date: 'medium'}} </span></td>
-      <td colspan="3">Started on:<span class="detail"> {{data?.sample[0].created_date | date: 'medium'}} </span></td>
-      <td colspan="3">Completed on:<span class="detail"> {{data?.sample[0].created_date | date: 'medium'}} </span></td>
+      <!-- <td colspan="3">Due Date:<span class="detail"> {{data?.sample[0].created_date | date: 'medium'}} </span></td> -->
+      <td colspan="5">Started on:<span class="detail"> {{data?.started_date | date: 'medium'}} </span></td>
+      <td colspan="4">Completed on:<span class="detail"> {{data?.completed_date | date: 'medium'}} </span></td>
   </tr>
 
   <tr>

@@ -37,7 +37,7 @@ export class ViewReportRemarksComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     ) { 
-      console.log(data, 'po')
+      // console.log(data, 'po')
     }
 
   ngOnInit(): void { }

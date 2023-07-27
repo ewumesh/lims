@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,13 +28,18 @@ export class UserReportComponent implements OnInit {
   constructor(
     private service: UserReportService,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private dialog: MatDialog
     ) {
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
     }
 
   ngOnInit(): void {
     this.getReportDetails();
+  }
+
+  viewReceipt() {
+    // this.dialog.
   }
 
 

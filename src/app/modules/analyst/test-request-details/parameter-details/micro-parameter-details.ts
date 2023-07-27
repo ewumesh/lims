@@ -22,15 +22,19 @@ export class MicroParameterDetailsComponent implements OnInit {
     responseError = null;
     message: any = {};
 
-    existingParameterDetails:any;
-    
+    existingParameterDetails: any;
+
+    microId:number;
+
     constructor(
         private fb: FormBuilder,
-        private service:TestRequestDetailsService,
+        private service: TestRequestDetailsService,
         private toast: ToastService,
-        private dialogRef:MatDialogRef<MicroParameterDetailsComponent>,
+        private dialogRef: MatDialogRef<MicroParameterDetailsComponent>,
         @Inject(MAT_DIALOG_DATA)
-    public data: any,) {console.log(data, 'MY OB DATAE') }
+        public data: any,) { 
+            // console.log(data, 'MY OB DATAE') 
+        }
 
 
     getExistingParameter() {
@@ -41,15 +45,52 @@ export class MicroParameterDetailsComponent implements OnInit {
             this.existingParameterDetails = res;
             this.parameterDetailsForm.patchValue(res);
             this.addedParameterDetails = res;
-            this.addObservation();
 
-            this.observationForm.value.observation = res.micro_observation_table;
+
+            // this.observationForm.value.observation = res.micro_observation_table;
+
+            // console.log(this.observationForm.value, "AFTER PATCHED..")
+            let observation = this.existingParameterDetails.micro_observation_table;
+            // this.addObservation();
+            // this.observationForm.value.observation = observation;    
+            if (observation.length > 0) {
+                for (let j = 0; j < observation.length; j++) {
+                    let firstColumn = this.fb.group({
+                        id: observation[j]?.id,
+
+                        observation_number: observation[j]?.observation_number,
+                        observation_time: observation[j]?.observation_time,
+                        temperature: observation[j]?.temperature,
+                        time: observation[j]?.time,
+                        first_exponent: '',
+                        first_exponent_a: observation[j]?.first_exponent_a,
+                        first_exponent_b: observation[j]?.first_exponent_b,
+                        second_exponent: '',
+                        second_exponent_a: observation[j]?.second_exponent_a,
+                        second_exponent_b: observation[j]?.second_exponent_b,
+                        third_exponent: '',
+                        third_exponent_a: observation[j]?.third_exponent_a,
+                        third_exponent_b: observation[j]?.third_exponent_b,
+                        negative_control: observation[j]?.negative_control,
+                        positive_control: observation[j]?.positive_control,
+                        micro_parameter_table: observation[j]?.micro_parameter_table,
+                        parameter: observation[j]?.parameter,
+                        sample_form: observation[j]?.sample_form
+                    })
+
+                    this.form.push(firstColumn);
+
+                    // }
+                }
+            } else {
+                this.addObservation();
+            }
         })
     }
 
     initForm() {
         this.parameterDetailsForm = this.fb.group({
-            id:null,
+            id: null,
             physical_condition_of_sample: '',
             media_used: '',
             prepared_dilution: '',
@@ -58,12 +99,12 @@ export class MicroParameterDetailsComponent implements OnInit {
             negative_control_used: '',
             date_of_incubation: '',
             required_temperature: '',
-            sample_form: this.data?.sample_form?.id,
-            parameter:this.data?.selectedParameter?.id,
-            sample_form_has_parameter:this.data?.id
+            sample_form: this.data?.sample_form,
+            parameter: this.data?.selectedParameter?.id,
+            sample_form_has_parameter: this.data?.id
         })
 
-        if(this.data?.selectedParameter?.micro_table && this.data?.selectedParameter?.micro_table !== null) {
+        if (this.data?.selectedParameter?.micro_table && this.data?.selectedParameter?.micro_table !== null) {
             this.getExistingParameter();
         }
     }
@@ -83,7 +124,7 @@ export class MicroParameterDetailsComponent implements OnInit {
             first_exponent: '',
             first_exponent_a: '',
             first_exponent_b: '',
-            second_exponent: '',
+            second_exponent: '', 
             second_exponent_a: '',
             second_exponent_b: '',
             third_exponent: '',
@@ -98,7 +139,7 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     addObservation() {
-        this.form.clear();
+        // this.form.clear();
         for (let a = 1; a <= 5; a++) {
             if (a === 1) {
                 let firstColumn = this.fb.group({
@@ -119,7 +160,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     positive_control: '',
                     micro_parameter_table: this.addedParameterDetails?.id,
                     parameter: this.data?.selectedParameter?.id,
-                    sample_form: this.data?.sample_form?.id
+                    sample_form: this.data?.sample_form
                 })
 
                 this.form.push(firstColumn);
@@ -142,10 +183,10 @@ export class MicroParameterDetailsComponent implements OnInit {
                     positive_control: '',
                     micro_parameter_table: this.addedParameterDetails?.id,
                     parameter: this.data.selectedParameter?.id,
-                    sample_form: this.data?.sample_form?.id
+                    sample_form: this.data?.sample_form
                 })
                 this.form.push(secondColumn);
-            } else if(a==3) {
+            } else if (a == 3) {
                 let thirdColumn = this.fb.group({
                     observation_number: '3 (72hrs)',
                     observation_time: '',
@@ -164,10 +205,10 @@ export class MicroParameterDetailsComponent implements OnInit {
                     positive_control: '',
                     micro_parameter_table: this.addedParameterDetails?.id,
                     parameter: this.data?.selectedParameter?.id,
-                    sample_form: this.data?.sample_form?.id
+                    sample_form: this.data?.sample_form
                 })
                 this.form.push(thirdColumn);
-            } else if(a==4) {
+            } else if (a == 4) {
                 let fourthColumn = this.fb.group({
                     observation_number: '4 (96hrs)',
                     observation_time: '',
@@ -186,10 +227,10 @@ export class MicroParameterDetailsComponent implements OnInit {
                     positive_control: '',
                     micro_parameter_table: this.addedParameterDetails?.id,
                     parameter: this.data?.selectedParameter?.id,
-                    sample_form: this.data?.sample_form?.id
+                    sample_form: this.data?.sample_form
                 })
                 this.form.push(fourthColumn);
-            } else if(a==5) {
+            } else if (a == 5) {
                 let fifthColumn = this.fb.group({
                     observation_number: '5 (120hrs)',
                     observation_time: '',
@@ -208,7 +249,8 @@ export class MicroParameterDetailsComponent implements OnInit {
                     positive_control: '',
                     micro_parameter_table: this.addedParameterDetails?.id,
                     parameter: this.data.selectedParameter?.id,
-                    sample_form: this.data?.sample_form?.id
+                    sample_form: this.data?.sample_form
+
                 })
 
                 this.form.push(fifthColumn);
@@ -225,7 +267,7 @@ export class MicroParameterDetailsComponent implements OnInit {
         this.initObservationForm();
         // this.addObservation();
 
-        console.log(this.observationForm.value);
+        // console.log(this.observationForm.value);
     }
 
     closeDialog() {
@@ -233,7 +275,7 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     calculate() {
-        console.log(this.observationForm.value, "ok observation ...");
+        // console.log(this.observationForm.value, "ok observation ...");
     }
 
     setMicroParameter() {
@@ -243,24 +285,32 @@ export class MicroParameterDetailsComponent implements OnInit {
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
             this.addObservation();
+            this.microId = res.data.id
+            // if(this.existingParameterDetails?.micro_observation_table) {
+            //     let observation = this.existingParameterDetails.micro_observation_table;
+            //     // this.addObservation();
+            //     this.observationForm.patchValue(observation);
+            // }
             this.isSetParameterDetails = false;
-        },(error)=> {
-            window.scroll(0,0);
+        }, (error) => {
+            window.scroll(0, 0);
             this.responseError = error?.error;
             this.isSetParameterDetails = false;
         })
     }
 
     updateMicroParameter() {
+        
         this.isSetParameterDetails = true;
         this.service.updateMicorParameters(this.parameterDetailsForm.value).subscribe(res => {
             this.addedParameterDetails = res.data;
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
-            this.addObservation();
+            // this.addObservation();
+            this.microId = res.data.id
             this.isSetParameterDetails = false;
-        },(error)=> {
-            window.scroll(0,0);
+        }, (error) => {
+            window.scroll(0, 0);
             this.responseError = error?.error;
             this.isSetParameterDetails = false;
         })
@@ -270,28 +320,49 @@ export class MicroParameterDetailsComponent implements OnInit {
         this.service.saveObservationTable(this.observationForm.value.observation).subscribe(res => {
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
-            this.dialogRef.close(true);
-        }, (error)=> {
-            window.scroll(0,0);
+            let closingPayload = {
+                status: true,
+                id: this.microId
+            }
+            this.dialogRef.close(closingPayload);
+        }, (error) => {
+            window.scroll(0, 0);
             this.responseError = error?.error;
         })
     }
 
     updateObservationTable() {
-        // this.service.updateObservationTable(this.observationForm.value.observation).subscribe(res => {
-        //     this.toast.showToast(TOAST_STATE.success, res.message);
-        //     this.dissmissToast();
+        // console.log(this.existingParameterDetails.micro_observation_table, "MY DATA FOR OBSERVATION")
+        if(this.existingParameterDetails.micro_observation_table.length > 0) {
+        let payload = this.parameterDetailsForm.value;
+        this.service.updateObservationTable(payload, this.observationForm.value.observation).subscribe(res => {
+            this.toast.showToast(TOAST_STATE.success, res.message);
+            this.dissmissToast();
+            let closingPayload = {
+                status: true,
+                id: this.microId
+            }
+            this.dialogRef.close(closingPayload);
+        }, (error) => {
+            window.scroll(0, 0);
+            this.responseError = error?.error;
+        })
+    } else {
+        this.service.saveObservationTable(this.observationForm.value.observation).subscribe(res => {
+            this.toast.showToast(TOAST_STATE.success, res.message);
+            this.dissmissToast();
             this.dialogRef.close(true);
-        // }, (error)=> {
-        //     window.scroll(0,0);
-        //     this.responseError = error?.error;
-        // })
+        }, (error) => {
+            window.scroll(0, 0);
+            this.responseError = error?.error;
+        })
+    }
     }
 
     dissmissToast() {
         setTimeout(() => {
             this.toast.dismissToast();
         }, 1200);
-        
+
     }
 }

@@ -318,7 +318,7 @@ export class SupervisorReportViewRawDataComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA)
         public data: any,
     ) { 
-        console.log(this.data, 'MY DATA...')
+        // console.log(this.data, 'MY DATA...')
     }
 
     ngOnInit(): void {
@@ -331,7 +331,7 @@ export class SupervisorReportViewRawDataComponent implements OnInit {
     }
 
     parseJSON(data) {
-        console.log(JSON.parse(data), 'oi')
+        // console.log(JSON.parse(data), 'oi')
         return JSON.parse(data);
     }
 

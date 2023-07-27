@@ -77,7 +77,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
         'pattern': 'Email is not valid.'
       },
       'password': {
-        'required': 'Password is required.'
+        'pattern':'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long.'
       },
       'phone': {
         'required': 'Phone Number is required.'
@@ -190,7 +190,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       username: ['', [Validators.required,Validators.pattern("^[a-z][a-z0-9]*$")]],
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password:[''],
+      password:['',[Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}')]],
       confirm_password: [''],
       client_category: [1, Validators.required],
       department_name: [],
@@ -235,7 +235,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
   }
 
 
-    console.log(testTypes, 'jhgf')
+    // console.log(testTypes, 'jhgf')
     let payload = {
       id: this.userId,
       userCategory: this.userCategory,

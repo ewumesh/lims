@@ -26,10 +26,10 @@
             <li>Commodity List</li>
           </a>
           <a href="https://dftqc.gov.np/" target="_blank">
-            <li>DFDQC Website</li>
+            <li>DFTQC Website</li>
           </a>
           <a (click)="gotoComplain()" href="Javascript:;">
-            <li>Complain</li>
+            <li>Complain</li> 
           </a>
           <a (click)="gotoFeedback()" href="Javascript:;">
             <li>Feedback</li>
@@ -113,7 +113,7 @@
             *ngIf="displayMessage?.username">{{displayMessage?.username}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-12">
         <label for="password" class="form-label">Password*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input type="password" matInput formControlName="password" placeholder="Enter Password" />
@@ -121,7 +121,7 @@
             *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-12 mt-3">
         <label for="exampleInputPassword1" class="form-label">Phone Number (फोन नम्बर)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput type="text" formControlName="phone" placeholder="Enter your Phone Number" />
@@ -129,20 +129,20 @@
             *ngIf="displayMessage?.phone">{{displayMessage?.phone}}</mat-error>
         </mat-form-field>
       </div>
-      <div>
+      <div >
         <div>
           <label class="list-heading form-label">Client Category (
             ग्राहक वर्ग)*</label>
           <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="client_category" placeholder="Select Category">
-              <mat-option *ngFor="let c of clientCategories; let i = index" [value]="c.id">{{c.name |
+              <mat-option  *ngFor="let c of clientCategories; let i = index" [value]="c.id">{{c.name |
                 titlecase}}</mat-option>
             </mat-select>
             <mat-error [@rowsAnimation]="displayMessage?.client_category" class="text-danger"
               *ngIf="displayMessage?.client_category">{{displayMessage?.client_category}}</mat-error>
           </mat-form-field>
 
-          <div class="hide" *ngIf="registerForm.value.client_category"
+          <div class="hide" *ngIf="registerForm.value.client_category === 1"
             [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
@@ -182,21 +182,15 @@
                     *ngIf="displayMessage?.registration_number">{{displayMessage?.registration_number}}</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col-md-12 mb-1">
+              <!-- <div class="col-md-12 mb-1">
                 <label for="file2">Registration Document*</label>
                 <input (change)="uploadFile($event)" class="form-control" type="file" />
-                <!-- <span *ngIf="!img" class="text-danger">Registration Document is Required</span> -->
-                <!-- <input class="re-img" type="file" name="file2" id="file2" /> -->
-                <!-- <button type="button" onclick="deleteFile('file2')">Remove File</button> -->
               </div>
               <div class=" col-md-12 mb-1">
                 <label for="secfile2">AP Renew Document*</label>
                 <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
-                <!-- <span *ngIf="!renewDoc" class="text-danger">Renew Document is Required</span> -->
-                <!-- <input class="re-img" type="file" name="secfile2" id="secfile2" />
-                <button type="button" onclick="deleteFile('secfile2')">Remove File</button> -->
 
-              </div>
+              </div> -->
               <!-- <div class="mb-1">
                 <label class="form-label">Date</label>
                 <np-datepicker
@@ -210,6 +204,29 @@
               </div> -->
             </fieldset>
           </div>
+
+            <div class="row py-2" style="border: 1px solid #00000061;
+            margin: 10px 0;" *ngIf="registerForm.value.client_category">
+            <div class="col-md-12" formArrayName="additionalDocs">
+              <div class="row" *ngFor="let list of additionalDocuments.controls; let i = index" [formGroupName]="i">
+                <div class="col-md-6">
+                  <label>Document Name</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input formControlName="document_name" matInput placeholder="Enter Document Name" />
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-md-6">
+                  <label>Document</label>
+                    <input (change)="uploadAdditionalDocs($event)" type="file" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-end">
+              <button class="btn btn-primary btn-sm" type="button" (click)="addDocList()">Add more</button>
+            </div>
+            </div>
         </div>
       </div>
 

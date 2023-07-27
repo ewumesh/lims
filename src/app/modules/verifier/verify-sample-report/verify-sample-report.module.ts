@@ -12,9 +12,11 @@ import { VerificationRemarksComponent } from './component/verification-remarks';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewVieriferRemarks } from 'src/app/shared/verify-report/view-remarks/view-remarks';
+import { MicroRawDataVerifierComponent } from 'src/app/shared/verify-report/view-micro-raw/micro-raw-data-verifier';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks],
+  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks,MicroRawDataVerifierComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,6 +28,7 @@ import { ViewVieriferRemarks } from 'src/app/shared/verify-report/view-remarks/v
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
+    MatTabsModule,
     SharedModule
    ],
   exports: [],

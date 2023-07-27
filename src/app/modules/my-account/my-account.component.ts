@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 
@@ -70,6 +70,23 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'))
   }
 
+  additionalImages: any[] = [];
+
+  get additionalDocuments(): FormArray {
+    return this.userForm.get('additionalDocs') as FormArray;
+  }
+
+  addDocList() {
+      this.additionalDocuments.push(this.createDocList());
+  }
+
+  createDocList() {
+    return this.fb.group({
+      document_name: new FormControl(''),
+      file: new FormControl('')
+    })
+  }
+
   ngOnInit() {
     this.getAccountDetails();
     this.initForm();
@@ -96,6 +113,10 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
   uploadRenewDoc(event) {
     let file = event.target.files[0];
     this.renewDoc = file;
+  }
+
+  updateDetails() {
+    this.isAccountEdit = true;
   }
 
   viewImage(url) {
@@ -128,13 +149,19 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
       client_category: [, Validators.required],
       department_name: ['', Validators.required],
       department_address:['', Validators.required],
-      registration_number: ['', Validators.required]
+      registration_number: ['', Validators.required],
+      additionalDocs: new FormArray([])
     })
+    this.addDocList();
+  }
+
+  uploadAdditionalDocs(event) {
+    this.additionalImages.push(event.target.files[0]);
   }
 
   getIndustryName(code) {
     let c = this.departmentTypes.find(a => a.code === code);
-    console.log(c, 'ok')
+    // console.log(c, 'ok')
     return c.name
   }
 
@@ -327,10 +354,16 @@ export class MyAccountComponent implements OnInit, AfterViewInit {
       registration_number: this.userForm.value.registration_number,
       date: this.userForm.value.date,
       role: 5,
-      is_verified: 1
+      is_verified: 0
     }
 
-    this.accountService.updateUser(payload, this.doc, this.renewDoc).subscribe(res => {
+    let images:any[] =[];
+    this.userForm.value.additionalDocs.forEach((a, index) => {
+      let obj = {document_name: a.document_name, file:this.additionalImages[index]}
+      images.push(obj);
+    })
+
+    this.accountService.updateUser(payload, this.doc, this.renewDoc, images).subscribe(res => {
       this.toast.showToast(
         TOAST_STATE.success,
         'User Updated Successfully!');

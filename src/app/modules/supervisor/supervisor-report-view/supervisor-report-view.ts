@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { SupervisorReportViewService } from "src/app/services/supervisor/supervisor-report-view/service";
 import { SupervisorReportViewRemarksComponent } from "./remarks/remakrs";
 import { SupervisorReportViewRawDataComponent } from "./raw-data/supervisor-report-raw-data";
+import { MicroSupervisorRawDataComponent } from "./micro-supervisor-raw-data/micro-supervisor-raw-data";
 
 
 @Component({
@@ -46,6 +47,14 @@ export class SupervisorReportViewComponent implements OnInit {
 
     viewRemarks(data, type){
       this.dialog.open(SupervisorReportViewRemarksComponent, {
+        data: data.remarks
+      })
+    }
+
+    viewMicroRawData(data) {
+      let instance: MatDialogRef<MicroSupervisorRawDataComponent,any>;
+
+      instance = this.dialog.open(MicroSupervisorRawDataComponent, {
         data: data
       })
     }

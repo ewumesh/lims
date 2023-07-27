@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [ParameterComponent],
@@ -34,6 +35,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatIconModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatChipsModule,
 
     DeleteConfirmModule
    ],

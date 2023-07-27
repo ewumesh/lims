@@ -43,13 +43,16 @@ export class UserDashboard implements OnInit {
     dashboardStatus:any;
     isDashboardStatus = false;
 
-    pieSeries:any[] = []
+    pieSeries:any[] = [];
+
+    loggedUserDetails:any;
 
     constructor(
         private service: DashboarService,
         private router: Router,
         private toast: ToastService
         ) {
+            this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     }
 
     getDashboardStatus() {
@@ -58,10 +61,10 @@ export class UserDashboard implements OnInit {
             // a.rejected = 0;
             this.dashboardStatus = a;
 
-            let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.recheck, a.total_request)];
+            let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.rejected, a.total_request)];
             this.pieSeries = chaartSeries;
             this.initializeGraph();
-            console.log(chaartSeries, 'ser')
+            // console.log(chaartSeries, 'ser')
             this.isDashboardStatus = false;
         },(error)=> {
             this.isDashboardStatus = false;
@@ -80,6 +83,14 @@ export class UserDashboard implements OnInit {
     gotoSampleReport() {
         this.router.navigate(['/dashboard/report-view']);
     }
+
+    viewSampleDetails(id) {
+        this.router.navigate(['/dashboard/sample-details', id]);
+      }
+
+      viewReport(id) {
+        this.router.navigate(['/dashboard/sample-test-report', id]);
+      }
 
     downloadReport(id) {
         this.isLoadingDownloadBtn = true;

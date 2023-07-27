@@ -61,7 +61,7 @@ export class AnalystDashboard implements OnInit {
             // a.rejected = 0;
             this.dashboardStatus = a;
 
-            let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request)];
+            let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request)];
             this.pieSeries = chaartSeries;
             this.initializeGraph();
             this.isDashboardStatus = false;
@@ -123,7 +123,7 @@ export class AnalystDashboard implements OnInit {
     initializeGraph() {
         this.chartOptions = {
             // series: this.pieSeries,
-            series: [50, 20, 7, 10, 3],
+            series:this.pieSeries,
             chart: {
                 width: 350,
                 type: "pie",

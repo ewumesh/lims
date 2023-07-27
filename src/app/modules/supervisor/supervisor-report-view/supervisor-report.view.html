@@ -63,7 +63,7 @@
             </li>
           </ul>
           <div  class="tab-content mt-3" id="myTabContent">
-            <div *ngIf="supervisorRawData?.Microbiological" class="tab-pane fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+            <div *ngIf="supervisorRawData?.Microbiological" class="tab-pane show active fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
               <table class="table mb-0">
                 <tbody>
                   <tr *ngFor="let a of supervisorRawData?.Microbiological">
@@ -84,11 +84,11 @@
                     
                     <td style="width: 15%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Status</p>
-                      <span style="padding: 8px;" class="badge badge-primary" [statusColor]="supervisorRawData?.Microbiological[0]?.status">{{rawDataSheet?.Microbiological[0]?.status}}</span>
+                      <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a?.status">{{a.status}}</span>
                     </td>
                     <td style="width: 20%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Actions</p>
-                      <button (click)="viewRawData(a.remarks)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                      <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
                       <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                   <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
                   <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>

@@ -110,6 +110,8 @@
   </div>
 </div> -->
 
+
+
 <div class="row" *ngIf="sampleDetails">
   <div *ngIf="!isProcceedForPayment" class="db-content">
     <div class="top-view-page p-2 mb-3">
@@ -152,7 +154,62 @@
         </div>
       </div>
     </div>
-    <div class="view-page">
+
+    <div class="row m-0 mt-4">
+      <div class="col-md-12 white-bg p-4">
+        <h3 class="view-page-heading">User Details</h3>
+  
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Name</h4>
+            <p>{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name}}</p>
+          </div> 
+  
+          <div class="col-md-4">
+            <h4 class="mb-0">Email</h4>
+            <p>{{sampleUserDetails?.email || 'N/A'}}</p>
+          </div> 
+  
+          <div class="col-md-4">
+            <h4 class="mb-0">Phone</h4>
+            <p>{{sampleUserDetails?.phone || 'N/A'}}</p>
+          </div> 
+          
+          <div class="col-md-4">
+            <h4 class="mb-0">Username</h4>
+            <p>{{sampleUserDetails?.username || 'N/A'}}</p>
+          </div>
+          
+          
+          <div class="col-md-4">
+            <h4 class="mb-0">Joined Date</h4>
+            <p>{{sampleUserDetails?.date_joined | date:'medium'}}</p>
+          </div>
+        </div>
+  
+        <div class="row" *ngIf="sampleUserDetails?.custom_user_image?.length > 0">
+  
+          <div class="col-md-12">
+            <h2 class="text-lims-primary mb-0 section-title"> Documents</h2>
+            <hr class="" />
+  
+            <div class="row">
+              <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
+                <h3>
+                  <span class="title">Document Name</span>
+                  <p class="detail">{{a?.name | titlecase}}</p>
+                </h3>
+                <img matTooltip="View Image" alt="Document" style="height: 100px"
+                class="img-thumbnail cursor-pointer" (click)="viewReceipt(a?.file)"
+                [src]="a.file" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <div class="view-page mt-4">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
@@ -226,6 +283,26 @@
           <p *ngIf="sampleDetails.language === 'en'">English</p>
           <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
         </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Units</h4>
+          <p>{{sampleDetails.sample_units || 'N/A'}}</p>
+        </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Type</h4>
+          <p>{{sampleDetails.sample_type || 'N/A'}}</p>
+        </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Quantity</h4>
+          <p>{{sampleDetails.sample_quantity || 'N/A'}}</p>
+        </div> 
+        
+        <div class="col-md-4">
+          <h4 class="mb-0">Number of Sample</h4>
+          <p>{{sampleDetails.number_of_sample || 'N/A'}}</p>
+        </div> 
       </div>
     </div>
 
@@ -283,6 +360,22 @@
           <p>{{sampleDetails.condition}}</p>
         </div>
       </div> -->
+    </div>
+
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.id">
+      <h3 class="view-page-heading pb-0 mb-0">Additional Details</h3>
+      <div class="row m-0 py-1" *ngFor="let p of sampleDetails?.client_category_detail?.ClientCategoryDetail">
+        <div class="col-md-4">
+          <h4 class="mb-0">Document Name</h4>
+          <p>{{p?.name}}</p>
+        </div>
+
+        <div class="col-md-8 pt-2">
+          <!-- <h4 class="m-0">Document </h4> -->
+          <button (click)="viewReceipt(p.file)" class="btn btn-primary btn-sm">View</button>
+        </div>
+        <hr class="m-0"/>
+      </div>
     </div>
 
     <div class="view-page mt-3">
@@ -478,9 +571,10 @@
                             <div class="author assign-supervisor-avatar">
                               <div class="mask cursor-pointer d-flex align-items-center">
                                 <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> 
+                                  <span (click)="assign(r.id, r.test_type)">{{r.supervisor_user | titlecase}} 
                                     </span>
-                                    <span class="material-icons ms-2 cross-icon">
+                                    <span (click)="assign(r.id, r.test_type)" class="material-icons ms-2 cross-icon">
                                       highlight_off
                                       </span>
                               </div>
@@ -527,9 +621,10 @@
                             <div class="author assign-supervisor-avatar">
                               <div class="mask cursor-pointer d-flex align-items-center">
                                   <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> 
+                                  <span (click)="assign(r.id, r.test_type)">{{r.supervisor_user | titlecase}} 
                                     </span>
-                                    <span class="material-icons ms-2 cross-icon">
+                                    <span (click)="assign(r.id, r.test_type)" class="material-icons ms-2 cross-icon">
                                       highlight_off
                                       </span>
                               </div>
@@ -548,7 +643,7 @@
                     <ng-container *ngFor="let r of distributedSample?.ch; let i = index;">
                       <tr>
                         <td class="text-center">{{i+1}}</td>
-                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                        <td *ngIf="i === 0" [attr.rowspan]="distributedSample?.ch?.length">
                           <span>
                             {{r.test_type | titlecase}}
                           </span>
@@ -566,9 +661,10 @@
                             <div class="author assign-supervisor-avatar">
                               <div class="mask cursor-pointer d-flex align-items-center">
                                 <ngx-avatar (click)="assign(r.id, r.test_type)" size="30" [name]="r.supervisor_user"
-                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> <span>{{r.supervisor_user | titlecase}} 
+                                  [matTooltip]="r.supervisor_user" class="me-2"></ngx-avatar> 
+                                  <span (click)="assign(r.id, r.test_type)">{{r.supervisor_user | titlecase}} 
                                     </span>
-                                    <span class="material-icons ms-2 cross-icon">
+                                    <span (click)="assign(r.id, r.test_type)" class="material-icons ms-2 cross-icon">
                                       highlight_off
                                       </span>
                               </div> 
@@ -577,7 +673,7 @@
 
     
                         </td>
-                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.bi?.length">
+                        <td class="text-center" *ngIf="i === 0" [attr.rowspan]="distributedSample?.ch?.length">
                           <button (click)="assignAll(r.test_type)" class="btn btn-primary btn-sm">Assign All</button>
                         </td>
                       </tr>
@@ -613,10 +709,10 @@
           <!-- <span class="text-bold">Total Price:</span><span>Rs.{{totalPrice}}</span> -->
         </div>
         <div class="col-md-6 white-bg text-end" style="border-radius: 8px;">
+          <button  (click)="recheckSample()" class="btn btn-danger btn-lims-danger mx-1">Recheck</button>
           <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
-          <!-- <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button> -->
+          <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
           <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
-          
         </div>
       </div>
     </div>

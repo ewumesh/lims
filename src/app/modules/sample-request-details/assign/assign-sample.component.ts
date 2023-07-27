@@ -42,7 +42,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
       }
     })
 
-    console.log(data, "ADSASRE")
+    // console.log(data, "ADSASRE")
   }
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class AssignSampleComponent implements OnInit, AfterViewInit {
     this.service.assignParameterToSupervisor(payload).subscribe(res => {
       
       this.toast.showToast(TOAST_STATE.success, res?.message);
-      console.log(res, 'Assigned..')
+      // console.log(res, 'Assigned..')
       this.dialogRef.close();
       this.isLoading = false;
       this.dismissMessage();

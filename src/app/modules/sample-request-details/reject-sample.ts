@@ -78,7 +78,7 @@ export class RejectComponent {
       private router: Router,
       private service: SampleRequestDetailsService,
       ) {
-        console.log(data, 'dajiw')
+        // console.log(data, 'dajiw')
        }
   
     ngOnInit(): void {

@@ -1,10 +1,18 @@
 <div>
   <div class="db-content white-bg" *ngIf="accountDetails">
 
-    <div *ngIf="!isLoading && !accountDetails?.is_verified"
+    <div *ngIf="!isLoading && !accountDetails?.is_verified && !accountDetails.is_reject && !accountDetails.is_recheck "
       class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
       <strong>Hello {{accountDetails?.first_name}}!</strong> Your account is not verified yet.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div *ngIf="accountDetails.is_reject"  class="alert alert-danger">
+      Your account is rejected. Remarks:{{accountDetails?.remarks}}
+    </div>
+
+    <div *ngIf="accountDetails.is_recheck"  class="alert alert-danger">
+      Please Recheck your profile details.After updating your details you can submit for verification again. Remarks:{{accountDetails?.remarks}}
     </div>
 
     <!-- <img src="../../../assets/profile.jpg" alt="" class="user-img mb-4"> -->
@@ -45,8 +53,10 @@
         </div>
         <div class="col-md-4 d-flex justify-content-end align-items-center">
           <button *ngIf="!isChangePassword" (click)="changePassword()" type="button"
-            class="btn btn-primary change-password-btn">Change Password</button>
+            class="btn btn-primary change-password-btn" style="margin-right: 5px;">Change Password</button>
 
+            <button *ngIf="userDetails?.is_recheck" (click)="updateDetails()" class="btn btn-primary change-password-btn btn-lims-secondary">Update Details</button>
+ 
           <!-- <button *ngIf="isChangePassword" class="btn btn-primary mx-1"
             (click)="changePassword()">Save</button> -->
           <button *ngIf="isChangePassword" class="btn btn-danger mx-1" (click)="cancel()">Back</button>
@@ -166,7 +176,7 @@
             </div>
           </div>
 
-          <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+          <div class="col-md-12" *ngIf="accountDetails?.role === 5 && accountDetails?.client_category === 1">
             <h2 class="text-lims-primary mb-0 section-title">Industry Details</h2>
             <hr class="" />
 
@@ -194,7 +204,7 @@
             </div>
           </div>
 
-          <div class="col-md-12" *ngIf="accountDetails?.role === 5">
+          <!-- <div class="col-md-12" *ngIf="accountDetails?.role === 5 && accountDetails?.client_category === 1">
             <h2 class="text-lims-primary mb-0 section-title">Documents</h2>
             <hr class="" />
 
@@ -224,6 +234,59 @@
                     class="btn btn-primary btn-sm">Download</button>
                 </div>
               </div>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="row" *ngIf="accountDetails?.custom_user_image?.length > 0">
+
+          <div class="col-md-12">
+            <h2 class="text-lims-primary mb-0 section-title">Additional Documents</h2>
+            <hr class="" />
+
+            <div class="row">
+              <div class="col-md-4" *ngFor="let a of accountDetails?.custom_user_image">
+                <h3>
+                  <span class="title">Document Name</span>
+                  <p class="detail">{{a?.name | titlecase}}</p>
+                </h3>
+                <img matTooltip="View Image" alt="Document" style="height: 100px"
+                class="img-thumbnail cursor-pointer" (click)="viewImage(a?.file)"
+                [src]="a.file" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12" *ngIf="accountDetails?.role === 5 && accountDetails?.client_category === 1">
+            <!-- <h2 class="text-lims-primary mb-0 section-title">Documents</h2> -->
+            <hr class="" />
+
+            <div class="row">
+              <!-- <div class="col-md-6">
+                <h3>
+                  <span class="text-bold">Registration Documents</span>
+                </h3>
+                <img matTooltip="View Image" alt="Registration Document" style="height: 200px"
+                  class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.registration_document)"
+                  [src]="accountDetails?.registration_document" />
+                <div>
+                  <button (click)="downloadImage(accountDetails?.registration_document)"
+                    class="btn btn-primary btn-sm">Download</button>
+                </div>
+              </div> -->
+
+              <!-- <div class="col-md-6">
+                <h3>
+                  <span class="text-bold">Renew Documents</span>
+                </h3>
+                <img matTooltip="View Image" alt="Renew Document" style="height: 200px"
+                  class="img-thumbnail cursor-pointer" (click)="viewImage(accountDetails?.renew_document)"
+                  [src]="accountDetails?.renew_document" />
+                <div>
+                  <button (click)="downloadImage(accountDetails?.renew_document)"
+                    class="btn btn-primary btn-sm">Download</button>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -295,7 +358,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="userForm.value.client_category === 1">
               <label for="exampleInputEmail1" class="form-label">Department Name</label>
               <mat-form-field appearance="outline" class="w-100">
                 <input class="custom-input" matInput formControlName="department_name"
@@ -303,7 +366,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="userForm.value.client_category === 1">
               <label for="exampleInputEmail1" class="form-label">Department Address</label>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-select class="custom-select" formControlName="department_address" placeholder="Select Address">
@@ -314,7 +377,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="userForm.value.client_category === 1">
               <label for="exampleInputEmail1" class="form-label">Registration Number</label>
               <mat-form-field appearance="outline" class="w-100">
                 <input class="custom-input" matInput formControlName="registration_number"
@@ -322,7 +385,30 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-12 mb-1">
+            <div class=" py-2" style="border: 1px solid #00000061;
+            margin: 10px 0;">
+            <div class="col-md-12" formArrayName="additionalDocs">
+              <div class="row" *ngFor="let list of additionalDocuments.controls; let i = index" [formGroupName]="i">
+                <div class="col-md-6">
+                  <label>Document Name</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input formControlName="document_name" class="custom-input"  matInput placeholder="Enter Document Name" />
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-md-6">
+                  <label>Document</label>
+                    <input (change)="uploadAdditionalDocs($event)"  type="file" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-end">
+              <button class="btn btn-primary btn-sm" type="button" (click)="addDocList()">Add more</button>
+            </div>
+            </div>
+
+            <!-- <div class="col-md-12 mb-1">
               <div *ngIf="userDetails?.role ===5">
                 <img (click)="viewImage(accountDetails?.registration_document)" class="img-thumbnail cursor-pointer"
                   style="height: 60px;" [src]="accountDetails?.rew_document" />
@@ -339,7 +425,7 @@
               <label for="secfile2"> Renew Document*</label>
               <input (change)="uploadRenewDoc($event)" type="file" class="form-control">
 
-            </div>
+            </div> -->
 
           </div>
           <div class="row">

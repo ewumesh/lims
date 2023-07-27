@@ -1,7 +1,17 @@
 <div class="row  m-0">
-  <div *ngIf="!accountDetails?.is_verified" class="alert alert-danger alert-dismissible fade show mb-4 user-alert"
+  <div *ngIf="!accountDetails?.is_verified && !accountDetails.is_recheck && !accountDetails?.is_reject" class="alert alert-danger alert-dismissible fade show mb-4 user-alert"
     role="alert">
     <strong>Hello {{accountDetails?.first_name}}!</strong> Your account is not verified yet.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="accountDetails?.is_reject" class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
+    <strong>Hello {{accountDetails?.first_name}}!</strong> Your account is rejected.<a (click)="gotoProfile()" href="Javascript:;">Go to your profile</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="accountDetails?.is_recheck" class="alert alert-danger alert-dismissible fade show mb-4 user-alert" role="alert">
+    <strong>Hello {{accountDetails?.first_name}}!</strong> Your account is on hold please check your profile details. <a (click)="gotoProfile()" href="Javascript:;">Go to your profile</a>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 

@@ -25,6 +25,10 @@ export class ParameterService {
     return this.http.post(`${this.url}/api/test-result/`, payload);
   }
 
+  getIndividualParameter(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/test-result/${payload.id}/`)
+  }
+
   updateParameter(payload: any, id:number):Observable<any> {
     return this.http.put(`${this.url}/api/test-result/${id}/`, payload);
   }

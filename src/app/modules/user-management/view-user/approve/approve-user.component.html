@@ -44,6 +44,13 @@
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
         </span>
       </button>
+
+      <button (click)="recheckuser()" class="btn btn-secondary btn-sm mx-1">
+        <span *ngIf="!isRecheck">Recheck</span>
+        <span *ngIf="isRecheck">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+      </button>
     </mat-dialog-actions>
   </div>
 </div>

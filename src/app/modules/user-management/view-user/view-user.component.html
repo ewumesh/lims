@@ -194,7 +194,22 @@
         </div>
       </div>
 
-      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5">
+      <!-- {{userDetails?.custom_user_image | json}} -->
+      <div class="view-page mt-3" *ngIf="userDetails?.custom_user_image?.length > 0">
+        <h3 class="view-page-heading">Additional Documents</h3>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let a of userDetails?.custom_user_image">
+            <h4>Document Name</h4>
+            <p>{{a.name | titlecase}}</p>
+            <img matTooltip="View Image" alt="Document" style="height: 100px"
+                class="img-thumbnail cursor-pointer" (click)="viewImage(a.file)"
+                [src]="a.file" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5 && userDetails?.client_category ===1">
         <div class="row log-details p-3">
           <h3 class="view-page-heading">Industry Details</h3>
           <div class="col-md-6">
@@ -220,7 +235,7 @@
         </div>
       </div>
 
-      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5">
+      <div class="top-view-page p-2 mb-3 mt-4" *ngIf="userDetails?.role === 5 && userDetails?.client_category ===1">
         <div class="row log-details p-3">
           <h3 class="view-page-heading">Documents</h3>
           <div class="col-md-6">
@@ -239,7 +254,7 @@
         </div>
       </div>
 
-      <div class="col-md-12 text-end mt-2">
+      <div class="col-md-12 text-end mt-2" *ngIf="!userDetails?.is_reject && !userDetails?.is_recheck">
         <button (click)="procceed()" *ngIf="(loggedUser?.role === 1 || loggedUser?.role === 2) && userDetails.is_verified === 0" class="btn btn-success btn-sm">
           <span *ngIf="!isApprove">Procceed</span>
             <span *ngIf="isApprove">

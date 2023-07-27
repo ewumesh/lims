@@ -62,6 +62,7 @@ export class TestRequestDetailsService {
   }
 
   updateMicorParameters(payload):Observable<any> {
+    
     return this.http.put(`${this.url}/api/microparameter/${payload.id}/`,payload)
   }
 
@@ -69,11 +70,15 @@ export class TestRequestDetailsService {
     return this.http.post(`${this.url}/api/micro-observation-table/`, payload)
   }
 
-  updateObservationTable(payload): Observable<any> {
-    return this.http.put(`${this.url}/api/micro-observation-table/${payload.id}`, payload)
+  updateObservationTable(payload, data): Observable<any> {
+    return this.http.put(`${this.url}/api/micro-observation-table/${payload.id}/`, data)
   }
 
   getMicroParameterDetails(payload):Observable<any> {
     return this.http.get(`${this.url}/api/microparameter/${payload.id}/`)
+  }
+
+  getRawSampleTracking(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/report/sample-form-track-by-analyst/${payload.id}/`)
   }
 }

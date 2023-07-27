@@ -119,7 +119,7 @@ export class ReAssignComponent {
     let payload = this.data;
     payload.analyst_user = this.assignToAnalystform.value.analyst_user,
 
-    console.log(payload ,' PAU')
+    // console.log(payload ,' PAU')
 
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {
       this.dialogRef.close();

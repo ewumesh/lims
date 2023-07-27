@@ -7,6 +7,7 @@ import { ReportRawDataComponent } from "../final-report-view/raw-data/report-raw
 import { ViewReportRemarksComponent } from "../final-report-view/view-remarks";
 import { AdminSampleRequestDetailsService } from "src/app/services/admin-sample-request-details/service";
 import { ApproveFinalSampleComponent } from "./approve/approve-final-sample.component";
+import { AdminReportComponent } from "./view-sample/admin-view-sample";
 
 
 @Component({
@@ -38,6 +39,14 @@ export class AdminSampleRequestDetailComponent{
     ngOnInit(): void {
       this.getReportDetails();
       this.getRawData();
+    }
+
+    viewReport() {
+      this.dialog.open(AdminReportComponent, {
+        // width:'1000px',
+        height:'100vh',
+        data:this.reportDetails
+      })
     }
   
   
@@ -85,7 +94,7 @@ export class AdminSampleRequestDetailComponent{
      }
   
      supervisorRemarks(d) {
-      console.log(d, 'REMARKSW')
+      // console.log(d, 'REMARKSW')
       let data = {
         remarks: d?.sample_form?.remarks
       }

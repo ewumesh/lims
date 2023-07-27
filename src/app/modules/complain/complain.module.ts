@@ -3,6 +3,7 @@ import { ComplainComponent } from "./complain.component";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { MatMenuModule } from "@angular/material/menu";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { MatMenuModule } from "@angular/material/menu";
         RouterModule.forChild([
             {path: '', component: ComplainComponent}
         ]),
+        FormsModule,
+        ReactiveFormsModule,
         MatMenuModule
     ],
     exports: [],

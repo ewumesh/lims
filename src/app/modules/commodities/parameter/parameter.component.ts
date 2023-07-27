@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren, inject } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, delay } from 'rxjs';
 import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
@@ -14,7 +15,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
 @Component({
   templateUrl: './parameter.component.html',
   styleUrls: ['./parameter.scss'],
-  animations: [collectionInOut, rowsAnimation ]
+  animations: [collectionInOut, rowsAnimation ],
 })
 export class ParameterComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price','testMethod','mandatoryStandards','formula', 'action'];
@@ -48,14 +49,77 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
   loggedUserDetails:any;
 
+  existingId: any;
+
+  parameterContains:any[] = [];
+
+  //  for units fields
+  get multipleUnits(): FormArray {
+    return this.parameterForm.get('units') as FormArray;
+  }
+
+  addUnits() {
+      this.multipleUnits.push(this.createUnits());
+  }
+
+  createUnits() {
+    return this.fb.group({
+      units_english: new FormControl(''),
+      units_nepali: new FormControl('')
+    })
+  }
+
+// units
+
+// for mandatory standards
+get multipleStandards(): FormArray {
+  return this.parameterForm.get('mandatory_standards') as FormArray;
+}
+
+addStandards() {
+    this.multipleStandards.push(this.createStandards());
+}
+
+createStandards() {
+  return this.fb.group({
+    mandatory_standard: new FormControl(''),
+    mandatory_standard_nepali: new FormControl('')
+  })
+}
+// mandatory standards
+
+// test methodstest method
+get multipleTestMethods(): FormArray {
+  return this.parameterForm.get('testMethods') as FormArray;
+}
+
+addTestMethod() {
+    this.multipleStandards.push(this.createTestMethod());
+}
+
+createTestMethod() {
+  return this.fb.group({
+    ref_test_method: new FormControl(''),
+    ref_test_method_nepali: new FormControl('')
+  })
+}
+
   constructor(
     public dialog: MatDialog,
     private sService: ParameterService,
     private cService: CommodityCategoryService,
     private fb: FormBuilder,
-    private toast: ToastService
+    private toast: ToastService,
+    private route: ActivatedRoute
   ) {
     this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+    this.route.queryParams
+      .subscribe(params => {
+        this.existingId = params['id'];
+      });
+
+    // console.log(this.route.snapshot.params['id'], 'pooooooooo')
     this.genericValidator = new GenericValidator({
       'name': {
         'required': 'Category Name is required.'
@@ -87,20 +151,11 @@ export class ParameterComponent implements OnInit, AfterViewInit {
     })
    }
 
+
+
   private initForm() {
     this.parameterForm = this.fb.group({
-      // name: ['', Validators.required],
-      // test_type: ['', Validators.required],
-      // commodity_category: ['', Validators.required],
-      // ref_test_method: ['', Validators.required],
-      // units: ['', Validators.required],
-      // mandatory_standard: ['', Validators.required],
-      // price: ['', Validators.required],
-      // remarks: '.',
-      // formula: ['', Validators.required]
-
       id: '',
-
       name: [''],
       test_type: [''],
       commodity: [''],
@@ -112,16 +167,35 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       price: [''],
       remarks: '.',
       formula: [''],
-      formula_notation: ['']
+      formula_notation: [''],
+      // units:new FormArray([]),
+      mandatory_standards: new FormArray([]),
+      testMethods: new FormArray([])
     })
   }
 
   ngOnInit(): void {
     this.initForm();
+    // this.addUnits();
+    // this.addStandards();
+    // this.addTestMethod();
     this.getParameters();
     this.getCommodityCategories();
     this.getCommodities();
     this.initFilterForm();
+
+    // setTimeout(() => {
+      if(this.existingId) {
+        let payload = {
+          id:this.existingId
+        }
+        // let pm
+        this.sService.getIndividualParameter(payload).subscribe(res => {
+          this.patchForm(res);
+        })
+        
+      }
+    // }, 5000);
   }
 
   initFilterForm() {
@@ -165,6 +239,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       this.dataSource.data = res.results;
       this.listOfParameters = res.results;
       this.isLoading = false;
+      this.parameterContains = res.results;      
     })
   }
 

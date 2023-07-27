@@ -32,7 +32,7 @@ export class SmuDashboard {
     isDashboardStatus = false;
     dashboardStatus:any;
     pieSeries:any[] =[];
-
+    donutSeries:any[] =[];
     loadingCompletedSample = false;
     completedSamples:any[] = [];
     isLoadingDownloadBtn = false;
@@ -49,34 +49,38 @@ export class SmuDashboard {
         ) {
         this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-        this.chartOptionsB = {
-            series: [44, 15, 13, 40],
-            chart: {
-              type: "donut",
-              fontFamily: 'Poppins',
-              sparkline: {
-                enabled: true
-              }
-            },
-            labels: ["Industry", "Importer/Expoter", "Government Agency", "DFTQC Office"],
-            
-            responsive: [
-              {
-                breakpoint: 2000,
-                options: {
-                  colors: ['#010080', '#4682b4', '#476ee2', '#0000fe'],
-                  chart: {
-                    width: 400
-                  },
-                  dataLabels:{enabled: false},
-                  legend: {
-                    fontFamily: 'Poppins',
-                    position: "middle"
-                  },    
-                }
-              }
-            ]
-          };
+    }
+
+    initDonutSeries() {
+
+      this.chartOptionsB = {
+        series: this.donutSeries,
+        chart: {
+          type: "donut",
+          fontFamily: 'Poppins',
+          sparkline: {
+            enabled: true
+          }
+        },
+        labels: ["Industry", "Importer/Expoter", "Government Agency", "DFTQC Office"],
+        
+        responsive: [
+          {
+            breakpoint: 2000,
+            options: {
+              colors: ['#010080', '#4682b4', '#476ee2', '#0000fe'],
+              chart: {
+                width: 400
+              },
+              dataLabels:{enabled: false},
+              legend: {
+                fontFamily: 'Poppins',
+                position: "middle"
+              },    
+            }
+          }
+        ]
+      };
     }
 
     getUserRequests() {
@@ -126,9 +130,15 @@ export class SmuDashboard {
             // a.rejected = 0;
             this.dashboardStatus = a;
 
-            let chaartSeries = [this.calculatePercentage(a?.completed, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.reject, a.total_request)];
+            let chaartSeries = [this.calculatePercentage(a?.completed, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request),this.calculatePercentage(a.reject, a.total_request)];
+            let totalClients = a?.client_category?.dftqc_section+a?.client_category?.government_agencies+a.client_category?.import_export+a?.client_category?.industry;
+            let donutSeries = [this.calculatePercentage(a?.client_category?.dftqc_section, totalClients),this.calculatePercentage(a?.client_category?.government_agencies, totalClients),this.calculatePercentage(a.client_category?.import_export, totalClients),this.calculatePercentage(a?.client_category?.industry, totalClients)];
             this.pieSeries = chaartSeries;
+            this.donutSeries = donutSeries;
+
+            console.log(donutSeries, 'DONUUUU')
             this.initializeGraph();
+            this.initDonutSeries();
             this.isDashboardStatus = false;
         },(error)=> {
             this.isDashboardStatus = false;
@@ -188,14 +198,14 @@ export class SmuDashboard {
 
     initializeGraph() {
         this.chartOptions = {
-            // series: this.pieSeries,
-            series: [50, 20, 10, 7, 3],
+            series: this.pieSeries,
+            // series: [50, 20, 10, 7, 3],
             chart: {
                 width: 400,
                 type: "pie",
                 fontFamily: 'Poppins',
             },
-            labels: ["Completed", "Pending", "Not Verified", "Recheck", "Rejected"],
+            labels: ["Completed","Processing", "Pending", "Not Verified", "Rejected"],
             responsive: [
                 {
                     breakpoint: 2000,

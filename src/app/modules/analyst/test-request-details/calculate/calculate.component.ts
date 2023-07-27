@@ -34,6 +34,8 @@ export class CalculateComponent implements OnInit {
 
   microParametersDetails: any;
 
+  convertedResult;
+
   constructor(
     private fb: FormBuilder,
     private service: TestRequestDetailsService,
@@ -41,10 +43,7 @@ export class CalculateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: any,
     private toast: ToastService
-    ) {
-      this.requestDetails = this.data;
-      console.log('MY DATA', data)
-    }
+    ) {}
 
    splitStringByComma(input: string): string[] {
       const result: string[] = input?.split(',');
@@ -52,10 +51,16 @@ export class CalculateComponent implements OnInit {
     }
 
     getMicroParameterDetails() {
-      console.log(this.data.selectedParameter.micro_table, "MY PARAMETER...")
-      let payload = {
-        id: this.data.selectedParameter.micro_table
+      let payload;
+      if(this.data.is_existing) {
+      payload = {
+        id: this.data?.micro_table
       }
+    }else {
+      payload = {
+        id: this.data.parameters.micro_table
+      }
+    }
       // let id = this.data.selectedParameter.micro_table
       this.service.getMicroParameterDetails(payload).subscribe(res => {
         this.microParametersDetails = res;
@@ -63,12 +68,14 @@ export class CalculateComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    if(this.data) {
     this.getFormParameters();
+    }
     setTimeout(() => {
       this.generateForm();
     }, 1500);
 
-    if(this.data?.selectedParameter?.micro_table) {
+    if(this.data?.type === 'micro') {
       this.getMicroParameterDetails();
     }
 
@@ -82,21 +89,41 @@ export class CalculateComponent implements OnInit {
     this.calculateForm.reset();
   }
 
+  convertDecimal(decimals) {
+    const x = Math.pow(10, Number(decimals) + 2);
+    this.convertedResult =  (Number(this.finalResult) + (1 / x)).toFixed(decimals)
+}
+
   generate() {
     this.isGenerating = true;
-    let requestPayload = {
-      formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
-      sample_form: this.data.details.sample_form.id,
-      commodity: this.data.details.sample_form.commodity.id,
-      parameter: this.data?.parameters?.id
+    let requestPayload;
+    if(this.data.type === 'micro') {
+      requestPayload ={
+        formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
+        sample_form: this.data.details.id,
+        commodity: this.data.details.commodity.id,
+        parameter: this.data?.parameters?.id
+      }
+    } else {
+      requestPayload ={
+        formula_variable_fields_value: JSON.stringify(this.calculateForm.value),
+        sample_form: this.data.details.sample_form.id,
+        commodity: this.data.details.sample_form.commodity.id,
+        parameter: this.data?.parameters?.id
+      }
     }
+    
     this.service.calculateResult(requestPayload).subscribe(res => {
       this.isGenerating = false;
       this.toast.showToast(TOAST_STATE.success, res.message);
       this.dismissMessage();
       this.finalResult = res.result;
+
+      const x = Math.pow(10, Number(2) + 2);
+    this.convertedResult =  (Number(this.finalResult) + (1 / x)).toFixed(2)
+
+      
       this.formulaField = res.formula_variable_fields_value;
-      console.log(res, 'res');
     },(error) => {
       this.responseError = error?.error;
       this.isGenerating = false;
@@ -104,7 +131,6 @@ export class CalculateComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.data, "OK..")
     this.isCalculating = true;
     let requestPayload = {
       formula_variable_fields_value: this.formulaField,
@@ -137,12 +163,21 @@ export class CalculateComponent implements OnInit {
   }
 
   getFormParameters() {
+    // console.log(this.data, "TOTAL FOA")
     this.isLoading = true;
-    let payload = {
+    let payload;
+    if(this.data.type !== 'micro') {
+    payload = {
       commodity_id: this.data?.details?.sample_form?.commodity?.id,
       parameter_id: this.data.parameters.id,
       sample_form_id: this.data?.details?.sample_form?.id
-    };
+    }} else {
+      payload = {
+        commodity_id: this.data?.details?.commodity?.id,
+        parameter_id: this.data.parameters.id,
+        sample_form_id: this.data?.details?.id
+      }
+    }
 
     this.service.getFormParameters(payload).subscribe(res => {
       this.formControls = res.fields;
@@ -168,7 +203,21 @@ export class CalculateComponent implements OnInit {
 
   setResult() {
     this.isCalculating = true;
-    let payload = {
+    let payload
+    if(this.data.type === 'micro') {
+      payload = {
+        sample_form: this.data?.details?.id,
+        result: this.finalResult,
+        parameter: this.data.parameter,
+        commodity: this.data.commodity.id,
+        formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
+        sample_form_has_parameter: this.data?.id,
+        analyst_remarks:this.analyst_remarks,
+        converted_result:this.convertedResult,
+        decimal_place: 2
+      }
+    } else {
+    payload = {
       sample_form: this.data?.details?.sample_form?.id,
       result: this.finalResult,
       parameter: this.data.parameter,
@@ -179,6 +228,7 @@ export class CalculateComponent implements OnInit {
       converted_result:this.finalResult,
       decimal_place: 2
     }
+  }
 
     this.service.setResult(payload).subscribe(res => {
       this.toast.showToast(TOAST_STATE.success, res.message);

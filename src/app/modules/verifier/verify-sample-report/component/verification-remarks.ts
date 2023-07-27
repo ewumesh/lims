@@ -62,7 +62,7 @@ export class VerificationRemarksComponent implements OnInit {
   }
 
   reject() {
-    console.log(this.data, 'date')
+    // console.log(this.data, 'date')
     this.isReject = true;
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {

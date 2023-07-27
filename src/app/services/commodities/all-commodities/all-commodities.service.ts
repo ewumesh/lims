@@ -15,7 +15,7 @@ export class AllCommoditiesService {
   }
 
   getAllCommodities(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
+    return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&category_id=${payload.catetegory}`);
   }
 
   getCommodityCategories(): Observable<any> {

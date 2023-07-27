@@ -59,8 +59,8 @@
       <div class="white-bg mt-3" *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
         <h3 class="rawdata-heading">Raw Data Sheet</h3>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li *ngIf="rawDataSheet?.Microbiological" class="nav-item" role="presentation">
-            <button class="nav-link active" id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
+          <li *ngIf="rawDataSheet?.Microbiological" class="nav-item active" role="presentation">
+            <button class="nav-link active" id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="false">Microbiological Test</button>
           </li>
           <li *ngIf="rawDataSheet?.Chemical" class="nav-item active" role="presentation">
             <button class="nav-link" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane" type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
@@ -70,8 +70,10 @@
           </li>
         </ul>
         <div  class="tab-content mt-3" id="myTabContent">
-          <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+          <!-- {{rawDataSheet | json}} -->
+          <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane show active fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
             <table class="table mb-0">
+              <!-- {{rawDataSheet | json}} -->
               <tbody>
                 <tr *ngFor="let a of rawDataSheet?.Microbiological">
                   <td style="display: flex; justify-content: start; align-items: center;">
@@ -85,7 +87,7 @@
                   <td>
                     <p class="bold-text mb-0 pb-0">Remarks</p>
                     <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                    <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                    <button *ngIf="a.supervisor_remarks" (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
                     <!-- <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button> -->
                   </td>
                   
@@ -95,7 +97,7 @@
                   </td>
                   <td style="width: 20%;" class="text-start">
                     <p class="bold-text mb-0 pb-0">Actions</p>
-                    <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                    <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                 <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
                 <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>

@@ -12,9 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ViewReportRemarksComponent } from './view-remarks';
 import { AvatarModule } from 'ngx-avatar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
 
 @NgModule({
-  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent],
+  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent, ReportMicroRawDataComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,6 +28,7 @@ import { AvatarModule } from 'ngx-avatar';
     MatInputModule,
     MatFormFieldModule,
     AvatarModule,
+    MatTabsModule,
     SharedModule
   ],
   exports: [],

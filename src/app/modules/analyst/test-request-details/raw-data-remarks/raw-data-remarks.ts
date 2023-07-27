@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/toastr/toastr.service';
@@ -20,6 +20,12 @@ export class RawDataRemarksComponent implements OnInit {
 
   rawDatasheetDetails: any;
 
+  selected = new FormControl(0);
+
+  microParameterDetails:any;
+
+  microTableId =0;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -37,6 +43,10 @@ export class RawDataRemarksComponent implements OnInit {
     this.getRawDatasheetDetails();
   }
 
+  tabChange(e) {
+    
+  }
+
   parseJSON(data?) {
     return JSON.parse(data);
   }
@@ -49,6 +59,18 @@ export class RawDataRemarksComponent implements OnInit {
   getRawDatasheetDetails() {
     this.service.getRawDataSheetDetails(this.data.id).subscribe(res => {
       this.rawDatasheetDetails = res;
+
+      this.microTableId = this.rawDatasheetDetails?.parameter[0]?.micro_table;
+      this.getMicroParametersDetails();
+    }) 
+  }
+
+  getMicroParametersDetails() {
+    let payload = {
+      id: this.microTableId
+    }
+    this.service.getMicroParameterDetails(payload).subscribe(res => {
+      this.microParameterDetails = res;
     })
   }
 

@@ -26,7 +26,7 @@
               <li>Commodity List</li>
             </a>
             <a href="https://dftqc.gov.np/" target="_blank">
-              <li>DFDQC Website</li>
+              <li>DFTQC Website</li>
             </a>
             <a (click)="gotoComplain()" href="Javascript:;">
               <li>Complain</li>
@@ -58,36 +58,36 @@
             <h2>Complain Box</h2>
             <div class="border-bottom"></div>
         </div>
-        <form action="">
+        <form [formGroup]="complainForm">
             <div class="row">
                 <div class="col-md-6">
                     <label class="mb-2">Full Name</label>
-                    <input class="form-control kit-form-control" type="text" placeholder="Enter full name">
+                    <input formControlName="name" class="form-control kit-form-control" type="text" placeholder="Enter full name">
                 </div>
                 <div class="col-md-6">
                     <label class="mb-2">Address</label>
-                    <input class="form-control kit-form-control" type="text" placeholder="Enter your address">
+                    <input formControlName="address" class="form-control kit-form-control" type="text" placeholder="Enter your address">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-6">
                     <label class="mb-2">Email Address</label>
-                    <input class="form-control kit-form-control" type="mail" placeholder="Enter mail address">
+                    <input formControlName="email" class="form-control kit-form-control" type="mail" placeholder="Enter mail address">
                 </div>
                 <div class="col-md-6">
                     <label class="mb-2">Phone Number</label>
-                    <input class="form-control kit-form-control" type="text" placeholder="Enter your phone number">
+                    <input formControlName="name" class="form-control kit-form-control" type="text" placeholder="Enter your phone number">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-12">
                     <label class="mb-2">Complain Message</label>
-                    <textarea class="form-control kit-textarea" rows="5" placeholder="Enter your message"></textarea>
+                    <textarea formControlName="message" class="form-control kit-textarea" rows="5" placeholder="Enter your message"></textarea>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-12 text-end">
-                    <button class="submit-btn" type="submit">Send Complain</button>
+                    <button class="submit-btn" type="button" (click)="submit()">Send Complain</button>
                 </div>
             </div>
         </form>

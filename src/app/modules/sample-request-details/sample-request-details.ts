@@ -10,6 +10,7 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 import { MatStepper } from '@angular/material/stepper';
 import { PaymentReceiptComponent } from './receipt/receipt';
 import { RejectComponent } from './reject-sample';
+import { RecheckComponent } from './recheck-sample';
 
 @Component({
   templateUrl: './sample-request-details.html',
@@ -61,6 +62,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
   paymentReceipts:any[] =[];
 
+  sampleUserDetails: any;
+
   constructor(
     private service: SampleRequestDetailsService,
     private route: ActivatedRoute,
@@ -71,6 +74,14 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     ) {
     this.sampleId = this.route.snapshot.paramMap.get('id');
    }
+
+   getSampleUserDetails(userId) {
+    this.service.getUserDetails(userId).subscribe(res => {
+      this.sampleUserDetails = res;
+    })
+   }
+
+   viewImage(url) {}
 
    getUserList() {
     let payload = {
@@ -208,7 +219,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
    }
 
    assign(parameter, testType) { 
-    console.log(testType, 'kJHHN OK')
+    // console.log(testType, 'kJHHN OK')
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
     let payload = {
@@ -236,11 +247,11 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
     let parameters:any[] = [];
     if(test_type === 'Instrumental') {
-      console.log(this.distributedSample.in, 'kjhgfdghjkljcx')
+      // console.log(this.distributedSample.in, 'kjhgfdghjkljcx')
       let actP = this.distributedSample.in;
       
       actP.forEach(a => {
-        console.log(a.exists_supervisor_parameter, 'alask')
+        // console.log(a.exists_supervisor_parameter, 'alask')
         if(a.exists_supervisor_parameter === false) {
           parameters.push(a.id);
         }
@@ -249,7 +260,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       let actP = this.distributedSample.ch;
       
       actP.forEach(a => {
-        console.log(a.exists_supervisor_parameter, 'alask')
+        // console.log(a.exists_supervisor_parameter, 'alask')
         if(a.exists_supervisor_parameter === false) {
           parameters.push(a.id);
         }
@@ -258,14 +269,14 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
       let actP = this.distributedSample.bi;
       
       actP.forEach(a => {
-        console.log(a.exists_supervisor_parameter, 'alask')
+        // console.log(a.exists_supervisor_parameter, 'alask')
         if(a.exists_supervisor_parameter === false) {
           parameters.push(a.id);
         }
       })
     }
 
-    console.log(this.distributedSample, 'DOSPLKMN')
+    // console.log(this.distributedSample, 'DOSPLKMN')
 
     let instance: MatDialogRef<AssignSampleComponent, any>;
 
@@ -307,7 +318,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     }
     this.service.getSampleDetails(payload).subscribe(res => {
       this.sampleDetails = res;
-      console.log(res, 'HAHAHAH')
+      // console.log(res, 'HAHAHAH')
 
       res.parameters.forEach(p => {
         this.totalPrice = this.totalPrice+p.price;
@@ -319,8 +330,11 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
           this.distributedSample.ch.push(p);
         }
 
-        console.log(this.distributedSample, '()*^%')
       });
+
+      this.getSampleUserDetails(res.owner_user.id)
+
+      // console.log(this.distributedSample, "ppp")
     })
   }
 
@@ -348,7 +362,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   }
 
   uploadImage(event) {
-    console.log(this.paymentForm.value, 'PAYMENT DATEI')
+    // console.log(this.paymentForm.value, 'PAYMENT DATEI')
     let file = event.target.files[0];
     this.paymentReceipt = file;
     this.isPaymentReceipt = true;
@@ -439,5 +453,13 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     this.genericValidator
       .initValidationProcess(this.assignSampleForm, this.formInputElements)
       .subscribe({ next: m => this.displayMessage = m });
+  }
+
+  recheckSample() {
+    let instance:MatDialogRef<RecheckComponent, any>;
+
+    instance = this.dialog.open(RecheckComponent, {
+      data:this.sampleDetails
+    })
   }
 }

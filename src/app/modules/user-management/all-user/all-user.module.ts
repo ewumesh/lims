@@ -16,6 +16,7 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [AllUsersComponent],
@@ -38,7 +39,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatProgressSpinnerModule,
     MatMenuModule,
 
-    DeleteConfirmModule
+    DeleteConfirmModule,
+    SharedModule
    ],
   exports: [],
   providers: [AllUsersService],

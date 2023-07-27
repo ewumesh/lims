@@ -21,6 +21,8 @@ export class ApproveUserComponent implements OnInit {
 
   loggedUserDetails: any;
 
+  isRecheck = false;
+
   constructor(
     private fb:FormBuilder,
     private dialogRef: MatDialogRef<ApproveUserComponent>,
@@ -49,6 +51,7 @@ export class ApproveUserComponent implements OnInit {
     let payload = {
       id: this.userDetails.id,
       is_verified: 0,
+      is_reject: true,
       approved_by: this.loggedUserDetails.id,
       approved_date: this.format(new Date()),
       remarks: this.approveForm.value.remarks
@@ -111,5 +114,28 @@ export class ApproveUserComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  recheckuser() {
+    this.isRecheck = true;
+    let payload = {
+      id: this.userDetails.id,
+      is_recheck:true,
+      remarks: this.approveForm.value.remarks
+    }
+
+    // console.log(payload, 'PAYYYY')
+
+    this.service.approveUser(payload).subscribe(res => {
+      this.toast.showToast(TOAST_STATE.success,res.message);
+      this.dismissMessage();
+      this.isRecheck = false;
+      this.dialogRef.close();
+    },(error) => {
+      window.scroll(0, 0)
+        this.message = {};
+        this.isRecheck = false;
+        this.responseError = error?.error;
+    })
   }
 }

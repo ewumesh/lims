@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { UserRequestsService } from 'src/app/services/user-requests/user-requests.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
+import { ViewUserRemarksComponent } from './view-user-remarks';
 
 @Component({
   selector: 'app-name',
@@ -75,6 +76,17 @@ export class UserRequestsComponent {
   format(date: Date): string {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  viewRemarks(remarks) {
+    let payload = {
+      remarks:remarks
+    }
+    let instance: MatDialogRef<ViewUserRemarksComponent, any>;
+
+    instance = this.dialog.open(ViewUserRemarksComponent, {
+      data:payload
+    })
   }
 
   filter() {

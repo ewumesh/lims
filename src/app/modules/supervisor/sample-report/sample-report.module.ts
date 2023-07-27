@@ -19,9 +19,11 @@ import { ReCheckComponent } from './re-check/re-check';
 import { MatTableModule } from '@angular/material/table';
 import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
 import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
+import { MicroRawDataComponent } from './micro-raw-data/micro-raw-data';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent],
+  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent, MicroRawDataComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -39,6 +41,7 @@ import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
     MatTooltipModule,
     MatTableModule,
     MatTooltipModule,
+    MatTabsModule,
 
     SharedModule
    ],

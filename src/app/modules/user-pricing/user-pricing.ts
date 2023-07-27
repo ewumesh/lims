@@ -120,7 +120,7 @@ export class UserPricingComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       this.filterBtnLoading = false;
 
-      console.log(allDatas, "ASDASD")
+      // console.log(allDatas, "ASDASD")
     })
   }
 

@@ -1,5 +1,6 @@
 <div class="row m-0 mb-3" *ngIf="testRequestDetails">
-  <div class="col-md-12 p-0 pt-3 mx-0" style="border-radius: 5px;" *ngIf="testRequestDetails?.is_supervisor_sent === true" >
+  <div class="col-md-12 p-0 pt-3 mx-0" style="border-radius: 5px;"
+    *ngIf="testRequestDetails?.is_supervisor_sent === true">
 
     <div class="alert alert-secondary">Test Completed and sent to Supervisor</div>
     <!-- <span style="background-color: burlywood; padding: 8px" class="badge badge-primary">Sent</span> -->
@@ -21,8 +22,11 @@
 
       <div class="col-md-3">
         <div class="text-muted">Assigned By</div>
-        <div *ngIf="testRequestDetails?.sample_form?.supervisor_user?.first_name" class="font-bold">{{testRequestDetails?.sample_form?.supervisor_user?.first_name}} {{testRequestDetails?.sample_form?.supervisor_user?.last_name}}</div>
-        <div class="text-muted" *ngIf="!testRequestDetails?.sample_form?.supervisor_user?.first_name" class="font-bold">N/A</div>
+        <div *ngIf="testRequestDetails?.assigned_by?.first_name" class="font-bold">
+          {{testRequestDetails?.assigned_by?.first_name}}
+          {{testRequestDetails?.assigned_by?.last_name}}</div>
+        <div class="text-muted" *ngIf="!testRequestDetails?.assigned_by?.first_name" class="font-bold">
+          N/A</div>
       </div>
 
       <div class="col-md-2">
@@ -31,7 +35,8 @@
       </div>
 
       <div class="col-md-2 text-end">
-        <span style="padding: 8px;" *ngIf="testRequestDetails?.status" class="badge badge-primary" [statusColor]="testRequestDetails?.status"> {{testRequestDetails?.status | titlecase}}</span>
+        <span style="padding: 8px;" *ngIf="testRequestDetails?.status" class="badge badge-primary"
+          [statusColor]="testRequestDetails?.status"> {{testRequestDetails?.status | titlecase}}</span>
         <span *ngIf="!testRequestDetails.status" class="text-muted">N/A</span>
       </div>
 
@@ -56,7 +61,8 @@
             </td>
             <td style="width: 30%;" class="pt-3">
               <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm">My Remarks</button>
-              <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+              <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)"
+                class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
             </td>
 
             <td style="width: 20%;" class="pt-3 text-end">
@@ -64,8 +70,8 @@
             </td>
             <td style="width: 30%;" class="text-end pt-3">
               <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
-          <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-          <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
             </td>
           </tr>
         </tbody>
@@ -73,6 +79,49 @@
     </div>
   </div>
 </div>
+
+<div class="row m-0 p-0 mt-3 mb-3 ">
+  <div class="col-md-12 bg-white py-3" style="border-radius: 5px;">
+    <h3 class="mb-0 mt-2" style="font-weight: 600;">RAW Sample tracking</h3>
+    <!-- {{rawSampleTracking | json}} -->
+    <span [matTooltip]="track.status" *ngFor="let track of rawSampleTracking" class="badge badge-primary pt-3 mx-2 px-2"
+      style="background-color: #E7F0F7;color: #000; height: 40px;">
+      <i *ngIf="track.status === 'completed'" style="color: green;" class="fa fa-circle"></i>
+      <i *ngIf="track.status !== 'completed'" style="color: #9747FF;" class="fa fa-circle"></i>
+      {{track?.analyst_user?.first_name}} {{track?.analyst_user?.last_name}}
+
+      <span *ngIf="track?.analyst_user?.test_type?.includes(1)" class="pm" style=" display: inline-block;background-color: #36B37E;
+        border-radius: 20px;
+        padding: 1% 2%;
+        display: inline-block;
+        ">C</span>
+
+<span *ngIf="track?.analyst_user?.test_type?.includes(2)" class="pm" style=" display: inline-block;background-color: #FBBC05;
+border-radius: 20px;
+padding: 1% 2%;
+display: inline-block;
+">M</span>
+
+<span *ngIf="track?.analyst_user?.test_type?.includes(3)" class="pm" style=" display: inline-block;background-color: #917BFF;
+        border-radius: 20px;
+        padding: 1% 2%;
+        display: inline-block;
+        ">I</span>
+    </span>
+  </div>
+</div>
+
+
+
+<!-- .chemical{
+      background: #36B37E;
+    }
+    .micro{
+      background: #FBBC05;
+    }
+    .instrumental{
+      background: #917BFF;
+    } -->
 
 <div class="bg-white">
   <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
@@ -143,7 +192,7 @@
       <th mat-header-cell *matHeaderCellDef> Result </th>
       <td mat-cell class="py-2" *matCellDef="let row; let i  = index;">
         <!-- <mat-form-field  appearance="outline"> -->
-          <!-- <input class="custom-input" [(ngModel)]="row.result" /> -->
+        <!-- <input class="custom-input" [(ngModel)]="row.result" /> -->
         <!-- </mat-form-field> -->
 
         <div class="input-group">
@@ -157,32 +206,56 @@
         <!-- <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
 
         <span *ngIf="row.result !== ''">{{row.result}} </span>
-        <span  *ngIf="row.result === ''" >N/A</span>
-        <!-- <span *ngIf="!row?.result" class="text-muted">N/A</span> -->
+        <span *ngIf="row.result === ''">N/A</span>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="action" >
-      <th mat-header-cell *matHeaderCellDef class="text-center" [width] ="200"> Action </th>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef class="text-center" [width]="200"> Action </th>
       <td mat-cell *matCellDef="let row" class="text-center">
-        <button  (click)="microParameterDetails(row)" class="btn btn-primary btn-lims-primary btn-sm">Calculate</button>
-        <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="!row.result && row.test_type !== 'Microbiological' " (click)="calculate(row)" [matTooltip]="'Calculate Result'"
-          class="btn btn-primary after-disabled btn-sm mx-1 pt-2">Calculate</button>
+
+        <div *ngIf="row.test_type === 'Microbiological'">
+          <button [disabled]="testRequestDetails?.is_supervisor_sent === true"
+            *ngIf="row.test_type === 'Microbiological' && !row.result"
+            (click)="microParameterDetails(row,calculateDetails)"
+            class="btn btn-primary btn-lims-primary btn-sm">Calculate</button>
 
           <div *ngIf="row.status !== 'recheck'">
-            
-        <button [disabled]="testRequestDetails?.is_supervisor_sent === true || row.is_locked === false" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
-          class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate </button>
+            <button [disabled]="testRequestDetails?.is_supervisor_sent || row.is_locked"
+              *ngIf="row.result || row.status === 0" (click)="microParameterDetails(row,calculateDetails)"
+              [matTooltip]="'Calculate Result'"
+              class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate </button>
           </div>
+
           <div *ngIf="row.status === 'recheck'">
-            <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
-          class="btn btn-primary after-disabled btn-lims-danger btn-sm mx-1 pt-2">Re-Check</button>
-          <button [matTooltip]="row.remarks" class="btn btn-outline-primary btn-sm">
-            <!-- <span class="pt-4"> -->
-            <i class="fa fa-info"></i>
-            <!-- </span> -->
-          </button>
+            <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0"
+              (click)="microParameterDetails(row,calculateDetails)" [matTooltip]="'Calculate Result'"
+              class="btn btn-primary after-disabled btn-lims-danger btn-sm mx-1 pt-2">Re-Check</button>
           </div>
+        </div>
+
+        <div *ngIf="row.test_type !== 'Microbiological'">
+          <button [disabled]="testRequestDetails?.is_supervisor_sent === true"
+            *ngIf="!row.result && row.test_type !== 'Microbiological' " (click)="calculate(row)"
+            [matTooltip]="'Calculate Result'" class="btn btn-primary after-disabled btn-sm mx-1 pt-2">Calculate</button>
+
+          <div *ngIf="row.status !== 'recheck'">
+            <button [disabled]="testRequestDetails?.is_supervisor_sent || row.is_locked"
+              *ngIf="row.result || row.status === 0" (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+              class="btn btn-primary btn-lims-primary after-disabled btn-sm mx-1 pt-2">Re-Calculate </button>
+          </div>
+
+          <div *ngIf="row.status === 'recheck'">
+            <button [disabled]="testRequestDetails?.is_supervisor_sent === true" *ngIf="row.result || row.status === 0"
+              (click)="calculate(row)" [matTooltip]="'Calculate Result'"
+              class="btn btn-primary after-disabled btn-lims-danger btn-sm mx-1 pt-2">Re-Check</button>
+            <button [matTooltip]="row.remarks" class="btn btn-outline-primary btn-sm">
+              <!-- <span class="pt-4"> -->
+              <i class="fa fa-info"></i>
+              <!-- </span> -->
+            </button>
+          </div>
+        </div>
       </td>
     </ng-container>
 
@@ -197,6 +270,7 @@
       </td>
     </tr>
   </table>
+
   <div class="row" *ngIf="isLoading">
     <div class="col-md-12 text-center py-3">
       <div class="spinner-border text-dark" role="status">
@@ -214,9 +288,55 @@
   <!-- <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[10, 25,  50, 100]" aria-label="Select page of users"></mat-paginator> -->
 </div>
 
+<div class="row m-0 p-0 mt-3 mb-3 " *ngIf="!testRequestDetails?.started_date">
+  <div class="col-md-12 bg-white py-3" style="border-radius: 5px;">
+    <h3 class="mb-0 mt-2" style="font-weight: 600;">Other Details</h3>
+    <hr />
+    <div *ngIf="otherDetailsErrorResponse" class="col-sm-12 col-md-12 col-lg-12">
+      <div class="alert alert-danger" role="alert">
+        <li *ngFor="let item of otherDetailsErrorResponse | keyvalue">
+          <!-- {{item.key}}: -->
+          {{item.value}}
+        </li>
+      </div>
+    </div>
+    <form [formGroup]="otherDetailsForm" class="row"> 
+      <div class="col-md-6">
+        <label class="label">Sample Received Date</label>
+        <mat-form-field class="w-100" appearance="outline">
+          <input formControlName="sample_received_date" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
+          (click)="mfdPicker.open()" class="custom-input" matInput placeholder="Enter Date" />
 
-<div class="row m-0 p-0 mt-3" >
-  <div class="col-md-12  text-end bg-white py-4 pl-2" *ngIf="!testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
+          <mat-datepicker #mfdPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <label class="label">Started Date</label>
+        <mat-form-field class="w-100" appearance="outline">
+          <input formControlName="started_date" [matDatepicker]="sd" (focus)="sd.open()"
+          (click)="sd.open()" class="custom-input" matInput placeholder="Enter Date" />
+
+          <mat-datepicker #sd></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12 text-end">
+        <button (click)="saveOtherDetails()" class="btn btn-primary btn-sm">
+          <span *ngIf="!isOtherDetails">Update</span>
+            <span *ngIf="isOtherDetails">
+              <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- {{testRequestDetails | json}} -->
+<div class="row m-0 p-0 mt-3" *ngIf="testRequestDetails?.started_date">
+  <div class="col-md-12  text-end bg-white py-4 pl-2"
+    *ngIf="!testRequestDetails?.is_supervisor_sent && testRequestDetails?.status === 'completed'">
     <!-- <button [disabled]="isSend" (click)="procceed()" class="btn btn-primary btn-sm">
       <span *ngIf="!isSend">Procceed</span>
           <span *ngIf="isSend">

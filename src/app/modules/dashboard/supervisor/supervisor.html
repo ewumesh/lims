@@ -1,4 +1,4 @@
-<div *ngIf="!isDashboardStatus" class="row">
+<div *ngIf="!isDashboardStatus && dashboardStatus?.total_request > 0" class="row">
 
     <div class="col-md-6">
         <div class="row">
@@ -14,12 +14,12 @@
                         [responsive]="chartOptions.responsive"></apx-chart>
                 </div>
             </div>
-        </div>
+        </div> 
 
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6 white-bg p-2 user-db-card h-100" style="border-radius: 6px;">
+                    <div class="col-md-12 white-bg p-2 user-db-card h-100" style="border-radius: 6px;">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 class="text-bold">Task By Analyst</h3>
@@ -27,25 +27,25 @@
                         </div>
                         <table class="table table-hover">
                             <thead>
-                                <tr class="db-table-heading">
+                                <tr class="db-table-heading" >
                                     <td>Analyst</td>
-                                    <td> Task</td>
-                                    <td class="text-center">Completed</td>
+                                    <!-- <td> Task</td> -->
+                                    <td class="text-center">Total</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Subarna Bhandari</td>
-                                    <td>20</td>
+                                <tr *ngFor="let task of dashboardStatus?.task_by_analyst; let i= index;">
+                                    <td>{{task?.name}}</td>
+                                    <!-- <td>20</td> -->
                                     <td class="text-center">
-                                        <span style="background-color: #8E4CF7;" class="badge badge-primary">20</span>
+                                        <span style="background-color: #8E4CF7;" class="badge badge-primary">{{task?.total_request}}</span>
                                     </td>
         
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6 padding-left-6" style="padding-right: 0;">
+                    <!-- <div class="col-md-6 padding-left-6" style="padding-right: 0;">
                         <div class="row margin-left me-0">
                             <div class="col-md-12 white-bg p-2  user-db-card h-100" style="border-radius: 6px;">
                                 <div class="row ms-0">
@@ -94,7 +94,7 @@
         
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                     <div class="card-body">
                         <p>Total Request</p>
                         <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3> -->
-                        <h3 class="text-bold mb-0">90</h3>
+                        <h3 class="text-bold mb-0">{{dashboardStatus?.total_request}}</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- [style.height.%]="height"  -->
                             <div class="progress-bar bg-info" role="progressbar" style="width: 100%;" aria-valuenow="25"
@@ -125,11 +125,11 @@
                     <div class="card-body">
                         <p>Completed</p>
                         <!-- <h3 class="text-bold mb-0"> {{dashboardStatus?.completed}} </h3> -->
-                        <h3 class="text-bold mb-0"> 50 </h3>
+                        <h3 class="text-bold mb-0"> {{dashboardStatus?.completed}} </h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 55%;"
+                            <div class="progress-bar bg-success" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.completed,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -141,12 +141,12 @@
                     <div class="card-body">
                         <p>Pending</p>
                         <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3> -->
-                        <h3 class="text-bold mb-0">20</h3>
+                        <h3 class="text-bold mb-0">{{dashboardStatus?.pending}}</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- <div class="progress-bar bg-warning" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)" aria-valuenow="25" aria-valuemin="0"
                                 aria-valuemax="100"></div> -->
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 22%;" aria-valuenow="25" aria-valuemin="0"
+                            <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.pending,dashboardStatus?.total_request)" aria-valuenow="25" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                     <div class="card-body">
                         <p>Not Verified</p>
                         <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3> -->
-                        <h3 class="text-bold mb-0">10</h3>
+                        <h3 class="text-bold mb-0">{{dashboardStatus?.not_verified}}</h3>
                         <!-- <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-noverified" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.not_verified,dashboardStatus?.total_request)"
@@ -166,7 +166,7 @@
                                 aria-valuemin="0" aria-valuemax="100"></div> -->
                         <div class="progress mt-4" style="height: 5.5px;">
                             <div class="progress-bar bg-noverified" role="progressbar"
-                            [style.width.%]="11"
+                            [style.width.%]="calculatePercentage(dashboardStatus?.not_verified,dashboardStatus?.total_request)"
                                 aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -179,14 +179,14 @@
                     <div class="card-body">
                         <p>Rejected</p>
                         <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3> -->
-                        <h3 class="text-bold mb-0">3</h3>
+                        <h3 class="text-bold mb-0">{{dashboardStatus?.reject}}</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- <div class="progress-bar bg-danger" role="progressbar"
                             [style.width.%]="calculatePercentage(dashboardStatus?.reject,dashboardStatus?.total_request)"
                                  aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div> -->
                             <div class="progress-bar bg-danger" role="progressbar"
-                            [style.width.%]="3.33"
+                            [style.width.%]="calculatePercentage(dashboardStatus?.reject,dashboardStatus?.total_request)"
                                  aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -199,11 +199,11 @@
                     <div class="card-body">
                         <p>Recheck</p>
                         <!-- <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3> -->
-                        <h3 class="text-bold mb-0">7</h3>
+                        <h3 class="text-bold mb-0">{{dashboardStatus?.recheck}}</h3>
                         <div class="progress mt-4" style="height: 5.5px;">
                             <!-- <div class="progress-bar bg-danger1" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
-                            <div class="progress-bar bg-danger1" role="progressbar" [style.width.%]="7.78"
+                            <div class="progress-bar bg-danger1" role="progressbar" [style.width.%]="calculatePercentage(dashboardStatus?.recheck,dashboardStatus?.total_request)"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>

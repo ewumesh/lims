@@ -5,6 +5,7 @@ import { DashboarService } from 'src/app/services/dashboard/dashboard.service';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { Color } from 'chartjs-plugin-datalabels/types/options';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   loggedUserDetails: any;
   constructor(
     private title: Title,
+    private router: Router,
     private service: DashboarService
     ) {
     this.title.setTitle('Dashboard - Laboratory Information Management System');
@@ -32,6 +34,10 @@ export class DashboardComponent implements OnInit {
     this.service.getDashboardStatus().subscribe(res => {
       this.dashboardStatus = res;
     })
+  }
+
+  gotoProfile() {
+    this.router.navigate(['/dashboard/my-account']);
   }
 
 }

@@ -14,7 +14,15 @@ export class AddSampleService {
 
   }
 
-  addSample(payload): Observable<any> {
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
+  addSample(payload?): Observable<any> {
+    // let finalData = {
+    //   sampleForm: payload,
+    //   image: image
+    // }
     return this.http.post(`${this.url}/api/sample-form/`, payload);
   }
 
@@ -26,8 +34,8 @@ export class AddSampleService {
     return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&offset=${payload.page}&limit=${payload.size}`)
   }
 
-  updateSample(payload): Observable<any> {
-    return this.http.put(`${this.url}/api/sample-form/${payload.id}/`, payload)
+  updateSample(payload, id): Observable<any> {
+    return this.http.put(`${this.url}/api/sample-form/${id}/`, payload)
   }
 
   getUsersList(payload):Observable<any> {

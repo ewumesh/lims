@@ -48,9 +48,16 @@ export class AuthenticationService {
     return formData;
   }
 
-  userRegister(payload: any, registrationDoc, renewDoc): Observable<any> {
-
+  userRegister(payload: any, registrationDoc, renewDoc, additionalDocuments): Observable<any> {
+    delete payload['additionalDocs'];
     const formData:FormData = this.objectToFormData(payload);
+
+    additionalDocuments.forEach((image,index) => {
+      formData.append(`images[file]`, image.file);
+      formData.append(`images[name]`, image.document_name);
+    })
+
+
     if(registrationDoc) {
       formData.append('registration_document', registrationDoc, registrationDoc?.name);
     }

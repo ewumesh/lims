@@ -46,17 +46,39 @@
 .bd-navbar{
   // background: #eef1f5;
   top: 100px;
-  height: calc(100vh - 100px);
+ 
   // border-right: 1px solid rgba(0,0,0,0.05);
   padding: 1%;
-  position: fixed;
-  width: 16.66666667%;
+ 
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.bell-icon{
+
+@media (min-width: 768px){
+  .bd-navbar{
+    height: calc(100vh - 100px);
+    position: fixed;
+    width: 16.66666667%;
+  }
+}
+
+@media (max-width: 768px){
+  .bd-navbar{
+    margin-top: 120px;
+
+  }
+
+  .navbar-nav{
+    margin: 0;
+  }
+
+  .footer-link{
+    display: none;
+  }
+}
+ .bell-icon{
   color: #2260bf!important;
     font-size: 24px!important;
 }

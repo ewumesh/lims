@@ -11,6 +11,7 @@ import { ReCheckComponent } from './re-check/re-check';
 import { VerificationComponent } from './verify/s-verify';
 import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
 import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
+import { MicroRawDataComponent } from './micro-raw-data/micro-raw-data';
 
 @Component({
   templateUrl: './sample-report.component.html',
@@ -75,7 +76,7 @@ export class SampleReportComponent implements OnInit {
   }
 
   getRawDataSheetDetails() {
-    console.log(this.reportDetails, "REPORT")
+    // console.log(this.reportDetails, "REPORT")
     let id = this.reportDetails?.sample_form?.id
     this.service.getRawDataSheet(id).subscribe(res => {
       this.rawDataSheet = res;
@@ -83,8 +84,9 @@ export class SampleReportComponent implements OnInit {
   }
 
   sentV() {
+    let instance: MatDialogRef<VerificationComponent, any>;
     let id = this.route.snapshot.paramMap.get('id');
-    console.log(id, 'kjhg')
+    // console.log(id, 'kjhg')
     let payload = {
       sample_form: this.reportDetails?.sample_form?.id,
       is_verified: false,
@@ -93,8 +95,12 @@ export class SampleReportComponent implements OnInit {
       id: id
     }
 
-    this.dialog.open(VerificationComponent, {
+    instance =  this.dialog.open(VerificationComponent, {
       data: payload ? payload: null
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getRawDataSheetDetails();
     })
   }
 
@@ -130,7 +136,7 @@ export class SampleReportComponent implements OnInit {
   }
 
   reAssign(data) {
-    console.log(data, this.reportDetails, 'ioas')
+    // console.log(data, this.reportDetails, 'ioas')
     let obj = { 
       commodity: this.reportDetails?.sample_form?.commodity.id,
       parameter: [data.id],
@@ -153,7 +159,7 @@ export class SampleReportComponent implements OnInit {
   }
 
   reCheck(value) {
-    console.log(value, 'VAAAL')
+    // console.log(value, 'VAAAL')
     let id = this.route.snapshot.paramMap.get('id');
     let data = {
       sample_form: this.reportDetails.sample_form?.id,
@@ -206,5 +212,15 @@ export class SampleReportComponent implements OnInit {
       maxHeight:'90vh',
       autoFocus: false,
     })
+  }
+
+  viewMicroRawData(a) {
+    let instance:MatDialogRef<MicroRawDataComponent, any>;
+
+    instance = this.dialog.open(MicroRawDataComponent, {
+      data: a? a : null,
+      maxHeight:'90vh',
+    })
+
   }
 }

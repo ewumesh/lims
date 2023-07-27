@@ -125,7 +125,7 @@ export class LabRequestDetailsComponent implements OnInit {
         data: obj ? obj : null,
         width: '600px',
         autoFocus: false,
-      })
+      }) 
     } else if(type === 'mi') {
       let pm = [];
       this.distributedSample.bi.forEach(e => {
@@ -165,7 +165,7 @@ export class LabRequestDetailsComponent implements OnInit {
 
   assign(data, type, testType) {
 
-    console.log(data, 'DAATAS')
+    // console.log(data, 'DAATAS')
     if (type === 'i') {
       let obj = {
         commodity: data.commodity.id,
@@ -209,7 +209,7 @@ export class LabRequestDetailsComponent implements OnInit {
         super_visor_sample_form: this.route.snapshot.paramMap.get('id'),
         test_type: testType
       }
-      console.log(obj, "OBJECT")
+      // console.log(obj, "OBJECT")
 
     let instance: MatDialogRef<AssignComponent, any>;
 
@@ -254,7 +254,7 @@ export class LabRequestDetailsComponent implements OnInit {
           this.distributedSample.ch.push(p);
         }
 
-        console.log(this.distributedSample, '()*^%')
+        // console.log(this.distributedSample, '()*^%')
       });
       this.isLoading = false;
     }, (error) => {

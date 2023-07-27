@@ -26,7 +26,7 @@
             <li>Commodity List</li>
           </a>
           <a href="https://dftqc.gov.np/" target="_blank">
-            <li>DFDQC Website</li>
+            <li>DFTQC Website</li>
           </a>
           <a (click)="gotoComplain()" href="Javascript:;">
             <li>Complain</li>
@@ -66,13 +66,13 @@
       <div class="col-md-12">
 
         <form [formGroup]="filterForm" class="row">
-          <div class="col-md-5">
+          <div class="col-md-3">
             <mat-form-field appearance="outline" class="w-100">
               <!-- <mat-label>Filter</mat-label> -->
               <input class="custom-input" matInput formControlName="search_text" placeholder="Search" #input>
             </mat-form-field>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-5">
             <mat-form-field appearance="outline" class="custom-select w-100">
               <mat-select placeholder="Category" formControlName="category">
                 <mat-option *ngFor="let item of categories" [value]="item.id">{{item.name | titlecase}}<span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>

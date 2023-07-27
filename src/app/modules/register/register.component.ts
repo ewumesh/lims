@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -43,6 +43,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   clientCategories: any[] = [];
   departmentTypes:[] = [];
 
+  additionalImages:any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private title: Title,
@@ -64,7 +66,8 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
         'pattern': 'Email is not valid.'
       },
       'password': {
-        'required': 'Password is required.'
+        'required': 'Password is required.',
+        'pattern':'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long.'
       },
       'phone': {
         'required': 'Phone Number is required.',
@@ -99,6 +102,21 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getClientCategories();
     this.initForm();
     this.getDepartmentType();
+  }
+
+  get additionalDocuments(): FormArray {
+    return this.registerForm.get('additionalDocs') as FormArray;
+  }
+
+  addDocList() {
+      this.additionalDocuments.push(this.createDocList());
+  }
+
+  createDocList() {
+    return this.fb.group({
+      document_name: new FormControl(''),
+      file: new FormControl('')
+    })
   }
 
   goToHome() {
@@ -140,17 +158,19 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}')]],
       phone: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       client_category: ['', Validators.required],
-      department_name: ['', Validators.required],
-      department_address: ['', Validators.required],
-      registration_number: ['', Validators.required],
+      department_name: [''],
+      department_address: [''],
+      registration_number: [''],
       // date: [this.date],
       username: ['', [Validators.required, Validators.pattern("^[a-z][a-z0-9]*$")]],
       role: 5,
-      department_type: ''
+      department_type: '',
+      additionalDocs: new FormArray([])
     })
+    this.addDocList();
   }
 
   getDepartmentType() {
@@ -160,6 +180,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
+  uploadAdditionalDocs(event) {
+    this.additionalImages.push(event.target.files[0]);
+  }
+
   saveChanges() {
     if (this.registerForm.pristine) {
       this.message = {};
@@ -167,17 +191,15 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    let payload = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      username: '',
-    }
+    let images:any[] =[];
+    this.registerForm.value.additionalDocs.forEach((a, index) => {
+      let obj = {document_name: a.document_name, file:this.additionalImages[index]}
+      images.push(obj);
+    })
 
     this.isLoading = true;
 
-    this.authService.userRegister(this.registerForm.value, this.img, this.renewDoc).subscribe(response => {
+    this.authService.userRegister(this.registerForm.value, this.img, this.renewDoc, images).subscribe(response => {
 
       this.toast.showToast(
         TOAST_STATE.success,

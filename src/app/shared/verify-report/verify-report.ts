@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { ViewVieriferRemarks } from './view-remarks/view-remarks';
+import { MicroRawDataVerifierComponent } from './view-micro-raw/micro-raw-data-verifier';
 
 @Component({
   selector: 'verify-report',
@@ -40,5 +41,13 @@ export class VerifyReportComponent implements OnInit {
 
    printRawData(id) {
     this.service.printRawData(id);
+   }
+
+   viewMicroRawData(a) {
+    let instance: MatDialogRef<MicroRawDataVerifierComponent, any>;
+
+    instance = this.dialog.open(MicroRawDataVerifierComponent, {
+      data:a
+    })
    }
 }

@@ -105,12 +105,12 @@
               All User</a>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 7">
+          <li class="nav-item" *ngIf="userDetails.role === 7 || userDetails.role === 3 || userDetails.role === 4 ">
             <a (click)="navigate('/dashboard/commodities/all-commodities')" class="nav-link"
               [ngClass]="{'active-route':this.router.url === '/dashboard/commodities/all-commodities'}"
               href="Javascript:;">
               <mat-icon class="child-icon" aria-hidden="false" aria-label="add" fontIcon="group_work"></mat-icon>
-              Commodities</a>
+              Commodities</a> 
           </li>
 
           <!-- <dropdown-menu></dropdown-menu> -->

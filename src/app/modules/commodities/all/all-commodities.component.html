@@ -2,7 +2,7 @@
   <div class="col-md-12">
 
     <form  [formGroup]="filterForm" class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group">
           <mat-form-field appearance="outline" class="w-100">
             <input formControlName="search" class="custom-input" matInput
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-5">
         <mat-form-field class="w-100" appearance="outline">
         <mat-select formControlName="category" class="custom-select" placeholder="Select Commodity Category">
           <mat-option *ngFor="let category of commodityCategories" [value]="category.id">{{category.name}}<span *ngIf="category.name_nepali">({{category.name_nepali}})</span></mat-option>
@@ -36,7 +36,7 @@
       </div> -->
 
     </form>
-
+ 
     <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" multiTemplateDataRows>
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <ng-container *ngIf="column !== 'expand'; else action">
@@ -45,7 +45,7 @@
             <span *ngIf="column === 'price'">Rs.{{element[column]}} </span>
             <span *ngIf="column === 'test_duration'">{{element[column]}} </span>
 
-            <span *ngIf="column === 'sn'">{{element.id}}</span>
+            <span *ngIf="column === 'sn'">{{element.number}}</span>
             <span *ngIf="column === 'download'">
               <button [matTooltip]="'Download Commodity with parameters'"class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
             </span>
@@ -84,6 +84,7 @@
                     <th scope="col">Units</th>
                     <th scope="col">Rate</th>
                     <th scope="col">Mandatory Standards</th>
+                    <th scopr="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -123,6 +124,9 @@
                     </td>
                     <td>Rs.{{t.price}}</td>
                     <td>{{t.mandatory_standard}}</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" (click)="editCommodity(t)">Edit</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -154,7 +158,7 @@
       </div>
     </div>
 
-    <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    <mat-paginator class="paginator paginator-border" [pageSizeOptions]="[50,5, 10, 20,100,150,200]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 
   </div>

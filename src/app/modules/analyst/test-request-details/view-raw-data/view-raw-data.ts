@@ -15,7 +15,7 @@ export class ViewRawDataComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.data, 'aa')
+    // console.log(this.data, 'aa')
     this.rawDatasheetDetails  = this.data.data;
   }
 
@@ -25,7 +25,7 @@ export class ViewRawDataComponent implements OnInit {
   }
 
   parseJSON(data) {
-    console.log(JSON.parse(data), 'oi')
+    // console.log(JSON.parse(data), 'oi')
     return JSON.parse(data);
   }
 

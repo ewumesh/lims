@@ -12,25 +12,26 @@
 
     <hr class="mt-0" />
 
+    <!-- {{data | json}} -->
+
     <div class="row p-0 m-0">
-      <div class="col-md-12 text-center"><label style="font-weight:600; font-family: Poppins; font-size: 16px;">{{requestDetails?.parameters?.name}}</label>
+      <div class="col-md-12 text-center"><label style="font-weight:600; font-family: Poppins; font-size: 16px;">{{data?.parameters?.name}}</label>
         <p style="color: #58667E; font-size: 12px; font-weight: 400;">Enter the value in the following fields</p>
       </div>
     </div>
 
+    <div class="row p-3 mx-4" style="font-family: Poppins; border: 1px solid #DBDBDB; border-radius: 6px;" *ngIf="formControls">
 
-    <div class="row p-3 mx-4" style="font-family: Poppins; border: 1px solid #DBDBDB; border-radius: 6px;" *ngIf="formControls && formControls[0]?.name !== 'nan'">
-
-      <div class="col-md-4 d-flex align-items-center" style="border-right: 1px solid #dbdbdb;" *ngIf="requestDetails?.parameters?.formula">  
-        <div><label style="font-weight:bold">Formula</label><br>{{requestDetails?.parameters?.formula}}</div>
+      <div class="col-md-4 d-flex align-items-center" style="border-right: 1px solid #dbdbdb;" *ngIf="data?.parameters?.formula">  
+        <div><label style="font-weight:bold">Formula</label><br>{{data?.parameters?.formula}}</div>
       </div>
 
       <div class="col-md-8 ps-3">
         <label style="font-weight:bold">Notations</label>
-        <div *ngIf="requestDetails.parameters?.formula_notation">
-          <div *ngFor="let n of splitStringByComma(requestDetails?.parameters?.formula_notation)">{{n | titlecase}}</div>
+        <div *ngIf="data.parameters?.formula_notation">
+          <div *ngFor="let n of splitStringByComma(data?.parameters?.formula_notation)">{{n | titlecase}}</div>
         </div>
-        <div *ngIf="!requestDetails.parameters?.formula_notation" class="text-muted">N/A</div>
+        <div *ngIf="!data?.parameters?.formula_notation" class="text-muted">N/A</div>
 
       </div>
     </div>
@@ -38,8 +39,6 @@
     <div class="text-center text-muted" *ngIf="formControls && formControls[0]?.name === 'nan'">
       Formula Not Available.
     </div>
-
-
 
     <mat-dialog-content style="max-height: 100%!important; overflow-x: hidden;">
       <form *ngIf="isControlGenerated" [@collectionInOut]="formControls?.length" [formGroup]="calculateForm">
@@ -54,7 +53,7 @@
             </div>
           </div>
 
-          <table style=" margin: auto;" class="child-table">
+          <table style=" margin: auto;" class="child-table" *ngIf="microParametersDetails?.id">
             <h2 style="font-size: 1.1rem; margin: 1rem 0 0 1rem;">Observation:</h2>
             <tr>
                 <td colspan="2" rowspan="3" class="p-1 text-bold">Observation</td>
@@ -87,7 +86,6 @@
                 <td>A</td>
                 <td>B</td>
             </tr>
-            <!-- {{microParametersDetails | json}} -->
             <ng-container *ngFor="let data of microParametersDetails?.micro_observation_table">
                 <tr >
                     <td colspan="2" class="text-bold">
@@ -154,7 +152,7 @@
 
       <div class="row m-0 mt-3 result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
-          <label for="" >Result: </label>
+          <label for="" >Quantitative Analysis: </label>
           <p class="final-result-value mb-0 ms-2">{{ finalResult || 'N/A'}} Unit</p>
         </div>
       </div>
@@ -173,11 +171,12 @@
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
           <label for="" style="font-size: 14px; font-weight: 400; color: #000; margin-right: 10px;">Convert Decimal Place</label>
           <p class="decimal-places">
-            <span >0.0</span> 
-            <span class="active">0.00</span> 
-            <span>0.000</span> 
-            <span>0.0000</span>
-            <span>0.00000</span>
+            <span (click)="convertDecimal(0)">0</span> 
+            <span (click)="convertDecimal(1)">0.0</span> 
+            <span (click)="convertDecimal(2)">0.00</span> 
+            <span (click)="convertDecimal(3)">0.000</span> 
+            <span (click)="convertDecimal(4)">0.0000</span>
+            <span (click)="convertDecimal(5)">0.00000</span>
           </p>
         </div>
       </div>
@@ -185,7 +184,7 @@
       <div class="row m-0 mt-3 final-result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
           <label for="" >Final Result: </label>
-          <p class="final-result-value mb-0 ms-2">{{finalResult}} Unit</p>
+          <p class="final-result-value mb-0 ms-2">{{convertedResult}} Unit</p>
         </div>
       </div>
 

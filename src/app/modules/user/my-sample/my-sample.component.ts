@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -41,6 +41,8 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
   userDetails: any;
   commodities:any = [];
+
+  dummyData
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -48,7 +50,8 @@ export class MySampleComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private toast: ToastService
+    private toast: ToastService,
+    private changeDetectorRefs: ChangeDetectorRef
   ) {
     this.title.setTitle('My Sample - Laboratory Information Management System');
     this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
@@ -118,16 +121,21 @@ export class MySampleComponent implements OnInit, AfterViewInit {
       user: this.userDetails.email,
     }
 
-    this.service.getMySamples(payload).subscribe(response => {
-      this.dataSource.data = response.results;
+    this.service.getMySamples(payload).subscribe((response: any) => {
+      this.dataSource = new MatTableDataSource(response.results);
+      this.dummyData = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;
+      this.changeDetectorRefs.detectChanges();
+      this.dataSource._updateChangeSubscription
+      // debugger;
     },(error) => {
       this.isFilterBtnLoading = false;
       this.isLoading = false;
     })
   }
 
+  
   deleteSample(userId) {
     this.dialog.open(DeleteConfirmComponent).afterClosed().subscribe(_ => {
       if (_) {
@@ -172,6 +180,7 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
     // this.service.getMySamples(payload).subscribe({next => this.handleResponse(this)})
     this.service.getMySamples(payload).subscribe(response => {
+      console.log(response, 'response Ok ')
       this.dataSource.data = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;

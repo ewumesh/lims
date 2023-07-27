@@ -10,6 +10,7 @@ import { ApproveFinalSampleComponent } from "./approve/approve-final-sample.comp
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { AdminReportComponent } from "./view-sample/admin-view-sample";
 
 @NgModule({
     imports:[
@@ -23,7 +24,7 @@ import { MatInputModule } from "@angular/material/input";
         MatInputModule,
         SharedModule
     ],
-    declarations:[AdminSampleRequestDetailComponent,ApproveFinalSampleComponent],
+    declarations:[AdminSampleRequestDetailComponent,ApproveFinalSampleComponent,AdminReportComponent],
     exports:[],
     providers:[AdminSampleRequestDetailsService]
 })

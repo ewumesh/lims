@@ -94,7 +94,9 @@
 
     <ng-container matColumnDef="registerDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Register Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.date_joined | date}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.date_joined | date}}  
+        <span *ngIf="row.is_recheck" class="badge badge-primary p-2" [statusColor]="'recheck'">Recheck </span>
+      </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="status">
@@ -108,6 +110,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
       <td mat-cell *matCellDef="let row">
+        <button  *ngIf="row.is_recheck" (click)="viewRemarks(row.remarks)" class="btn btn-secondary btn-sm">Remarks</button>
         <button [matTooltip]="'View User Details'" (click)="viewUserDetails(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="view" fontIcon="remove_red_eye"></mat-icon></button>
         <button [matTooltip]="'Download User Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button>
         <button [matTooltip]="'Edit User Details'" (click)="updateUser(row.id)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>

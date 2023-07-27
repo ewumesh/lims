@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AvatarModule } from 'ngx-avatar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [UserReportComponent],
@@ -37,6 +38,7 @@ import { AvatarModule } from 'ngx-avatar';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDialogModule,
     SharedModule
    ],
   exports: [],

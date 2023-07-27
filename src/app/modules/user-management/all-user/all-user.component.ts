@@ -35,7 +35,7 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   clientCategories: any[] = [];
 
-  displayedColumns: string[] = ['sn', 'userName', 'fullName', 'email', 'registerDate', 'userRole', 'action'];
+  displayedColumns: string[] = ['sn', 'userName', 'fullName', 'email', 'registerDate', 'userRole','status', 'action'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -119,15 +119,39 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         search: '',
         page: '',
         size: '',
-        role: '',
+        role: '5',
         client_category_id: ''
       }
-    } else {
+    } else if(this.loggedUserDetails.role === 1) {
       p = {
         search: '',
         page: '',
         size: '',
         role: '',
+        client_category_id: ''
+      }
+    } else if(this.loggedUserDetails.role === 3) {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: '5',
+        client_category_id: ''
+      }
+    }else if(this.loggedUserDetails.role === 4) {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: '5',
+        client_category_id: ''
+      }
+    }else if(this.loggedUserDetails.role === 6) {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: '5',
         client_category_id: ''
       }
     }

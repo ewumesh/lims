@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
   columnsToDisplay = ['expand','sn', 'name', 'price', 'test_duration'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
   expandedElement: any | null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -33,7 +35,8 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private allCommoditiesService: AllCommoditiesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -64,7 +67,15 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
     }
     this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
       // this.allCommodities = res;
-      this.dataSource.data = res.results;
+      // this.dataSource.data = res.results;
+
+      let allDatas = [];
+      res.results.forEach((element, index) => {
+        element.number = index+1;
+        allDatas.push(element);
+      });
+
+      this.dataSource.data = allDatas;
       this.isLoading = false;
     })
   }
@@ -82,18 +93,33 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
     })
   }
 
+  editCommodity(data) {
+    this.router.navigate(
+      ['/dashboard/commodities-parameter'],
+      { queryParams: {id: data.id}}
+      )
+  }
+
   filter() {
     this.isLoading = true;
     this.dataSource = null
     let payload = {
       search: this.filterForm.value.search,
-      catetegory: '',
-      page: '',
+      catetegory: this.filterForm.value.category,
+      page: '', 
       size: 100
     }
 
     this.allCommoditiesService.getAllCommodities(payload).subscribe(res => {
-      this.dataSource = res.results;
+      // this.dataSource = res.results;
+
+      let allDatas = [];
+      res.results.forEach((element, index) => {
+        element.number = index+1;
+        allDatas.push(element);
+      });
+
+      this.dataSource = new MatTableDataSource(allDatas);
       this.isLoading = false;
     })
   }

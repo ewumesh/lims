@@ -29,6 +29,10 @@ export class SampleRequestDetailsService {
     return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
   }
 
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
+
   objectToFormData(obj: any): FormData {
     const formData = new FormData();
 
@@ -59,5 +63,9 @@ export class SampleRequestDetailsService {
 
   rejectSample(payload):Observable<any> {
     return this.http.post(`${this.url}/api/sample-form-reject/`,payload)
+  }
+
+  recheckSample(payload):Observable<any> {
+    return this.http.post(`${this.url}/api/sample-form-recheck/`, payload)
   }
 }

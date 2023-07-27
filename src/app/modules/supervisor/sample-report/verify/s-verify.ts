@@ -24,7 +24,7 @@ export class VerificationComponent implements OnInit {
     private toast: ToastService,
     private router: Router
     ) {
-      console.log(data, 'data...')
+      // console.log(data, 'data...')
     }
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class VerificationComponent implements OnInit {
       is_supervisor_sent: true,
       // super_visor_sample_form: this.data.super_visor_sample_form
     }
-    console.log(payload, 'OK CHAINA')
+    // console.log(payload, 'OK CHAINA')
 
     this.service.sentForVerificationWithRemarks(payload).subscribe(res => {
       // console.log(res, "HAHAHAHAHAHHHHHHH")

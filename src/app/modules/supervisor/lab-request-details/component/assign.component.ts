@@ -146,7 +146,7 @@ export class AssignComponent implements OnInit, AfterViewInit {
     let payload = this.data;
     payload.analyst_user = this.assignToAnalystform.value.analyst_user,
 
-    console.log(payload ,' PAU')
+    // console.log(payload ,' PAU')
 
     this.service.assignSampleToAnalyst(payload).subscribe((res:any) => {
       this.dialogRef.close();
@@ -155,7 +155,11 @@ export class AssignComponent implements OnInit, AfterViewInit {
       this.isLoading = false;
       this.message = {};
       this.responseError = null;
-      this.router.navigate(['/dashboard/samples'])
+
+      if(res.total_assigned === true) {
+        this.router.navigate(['/dashboard/assigned-sample']);
+      }
+      
     },(error) => {
       this.message = {};
       this.responseError = error?.error;

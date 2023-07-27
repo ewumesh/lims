@@ -97,23 +97,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-12 text-right text-end">
-                        <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="setMicroParameter()"
-                            class="btn btn-primary  btn-lims-primary btn-sm">
-                            <span *ngIf="!isSetParameterDetails">Submit</span>
-                            <span *ngIf="isSetParameterDetails">
-                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                            </span>
-                        </button>
 
-                        <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateMicroParameter()"
-                            class="btn btn-primary  btn-lims-primary btn-sm">
-                            <span *ngIf="!isSetParameterDetails">Update</span>
-                            <span *ngIf="isSetParameterDetails">
-                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                            </span>
-                        </button>
-                    </div>
                 </div>
 
             </form>
@@ -160,11 +144,11 @@
                             <td><input formControlName="temperature" type="text"></td>
                             <td><input formControlName="time" type="text"></td>
                             <td><input formControlName="first_exponent_a" type="text"></td>
-                            <td><input formControlNmae="first_exponent_b" type="text"></td>
+                            <td><input formControlName="first_exponent_b" type="text"></td>
                             <td><input formControlName="second_exponent_a" type="text"></td>
                             <td><input formControlName="second_exponent_b" type="text"></td>
-                            <td><input formControlNmae="third_exponent_a" type="text"></td>
-                            <td><input formControlNmae="third_exponent_b" type="text"></td>
+                            <td><input formControlName="third_exponent_a" type="text"></td>
+                            <td><input formControlName="third_exponent_b" type="text"></td>
                             <td><input formControlName="negative_control" type="text"></td>
                             <td><input formControlName="positive_control" type="text"></td>
                         </tr>
@@ -235,11 +219,33 @@
         </mat-dialog-content>
 
         <mat-dialog-actions align="end">
-            <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
-            <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
-                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
-            <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
-                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+
+            <div class="col-md-12 text-right text-end">
+                <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="setMicroParameter()"
+                    class="btn btn-primary  btn-lims-primary btn-sm">
+                    <span *ngIf="!isSetParameterDetails">Submit</span>
+                    <span *ngIf="isSetParameterDetails">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                    </span>
+                </button>
+
+                <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateMicroParameter()"
+                    class="btn btn-primary  btn-lims-primary btn-sm">
+                    <span *ngIf="!isSetParameterDetails">Update</span>
+                    <span *ngIf="isSetParameterDetails">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                    </span>
+                </button>
+            </div>
+
+            <div>
+
+                <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
+                <button *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
+                    class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+                <button *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
+                    class="btn btn-primary btn-sm cancel-btn mx-1">Update and Next</button>
+            </div>
         </mat-dialog-actions>
     </div>
 </div>

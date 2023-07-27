@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { FinalReportViewService } from 'src/app/services/final-report-view/final-report-view.serivce';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { ReportRawDataComponent } from './raw-data/report-raw-data';
 import { ViewReportRemarksComponent } from './view-remarks';
+import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
 
 @Component({
   templateUrl: './final-report-view-component.html',
@@ -111,12 +112,20 @@ export class FinalReportViewComponent implements OnInit {
    }
 
    supervisorRemarks(d) {
-    console.log(d, 'REMARKSW')
+    // console.log(d, 'REMARKSW')
     let data = {
       remarks: d?.sample_form?.remarks
     }
     this.dialog.open(ViewReportRemarksComponent, {
       data:data
+    })
+   }
+
+   viewMicroRawData(a) {
+    let instance: MatDialogRef<ReportMicroRawDataComponent, any>;
+
+    instance = this.dialog.open(ReportMicroRawDataComponent, {
+      data: a
     })
    }
 
