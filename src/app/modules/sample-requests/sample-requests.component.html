@@ -1,5 +1,5 @@
 <form  [formGroup]="filterForm" class="row">
-  <div class="col-md-4">
+  <div class="col-md-2">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
@@ -17,13 +17,13 @@
       <mat-datepicker #toPicker></mat-datepicker>
     </mat-form-field>
   </div>
-  <!-- <div class="col-md-1">
+  <div class="col-md-2">
     <mat-form-field appearance="outline" class="custom-select w-100">
-      <mat-select placeholder="Status" formControlName="status">
-        <mat-option *ngFor="let s of statusList; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
+      <mat-select placeholder="Client Category" formControlName="client_category">
+        <mat-option *ngFor="let s of clients; let i = index" [value]="s.id">{{s.name | titlecase}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div> -->
+  </div>
   <div class="col-md-2 text-end">
     <button (click)="filterUserList()" class="btn btn-primary w-100 h-45">
       <span *ngIf="!isFilterBtnLoading">Filter</span>
@@ -76,6 +76,14 @@
       <th mat-header-cell *matHeaderCellDef> Sample Name </th>
       <td mat-cell *matCellDef="let row">
         <span *ngIf="row.name">{{row.name | titlecase}} </span>
+        <span *ngIf="!row.name" class="text-muted">N/A</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="client"> 
+      <th mat-header-cell *matHeaderCellDef> Client </th>
+      <td mat-cell *matCellDef="let row">
+        <span *ngIf="row.name">{{getClientName(row.client_category_detail?.client_category)}} </span>
         <span *ngIf="!row.name" class="text-muted">N/A</span>
       </td>
     </ng-container>

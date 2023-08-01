@@ -12,7 +12,7 @@
 
     <hr class="mt-0" />
 
-    <!-- {{data | json}} -->
+    <!-- {{data.parameters | json}} -->
 
     <div class="row p-0 m-0">
       <div class="col-md-12 text-center"><label style="font-weight:600; font-family: Poppins; font-size: 16px;">{{data?.parameters?.name}}</label>
@@ -152,8 +152,8 @@
 
       <div class="row m-0 mt-3 result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
-          <label for="" >Quantitative Analysis: </label>
-          <p class="final-result-value mb-0 ms-2">{{ finalResult || 'N/A'}} Unit</p>
+          <label for="" >Results: </label>
+          <p class="final-result-value mb-0 ms-2">{{ finalResult || 'N/A'}}<span *ngIf="finalResult">{{data?.parameters?.insUnits}}</span></p>
         </div>
       </div>
 
@@ -184,12 +184,12 @@
       <div class="row m-0 mt-3 final-result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
           <label for="" >Final Result: </label>
-          <p class="final-result-value mb-0 ms-2">{{convertedResult}} Unit</p>
+          <p class="final-result-value mb-0 ms-2">{{convertedResult || 'N/A'}}<span *ngIf="convertedResult">{{data?.parameters?.insUnits}}</span></p>
         </div>
       </div>
 
       <div class="pt-2">
-        <label style="font-size: 14px; font-weight: 600;"> Remarks</label>
+        <label style="font-size: 14px; font-weight: 600;"> Qualitative Analysis</label>
             <mat-form-field appearance="outline" class="w-100">
               <input [(ngModel)]="analyst_remarks" placeholder="Remarks (eg. Absent, Not applicable etc.)" class="custom-input" matInput type="text" />
             </mat-form-field>

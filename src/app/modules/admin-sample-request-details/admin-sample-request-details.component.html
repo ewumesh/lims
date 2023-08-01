@@ -335,11 +335,12 @@
                       <span *ngIf="!r.formula" class="text-muted">N/A</span>
                     </td> -->
                     <td>
-                      <span *ngIf="r.ref_test_method">
+                      <span>{{r.test_method}}</span>
+                      <!-- <span *ngIf="r.ref_test_method">
                         <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
-                        <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
+                        <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.test_method}}</span>
                         </span>
-                      <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span>
+                      <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span> -->
                     </td>
                     <td>
                       <span *ngIf="r.units">

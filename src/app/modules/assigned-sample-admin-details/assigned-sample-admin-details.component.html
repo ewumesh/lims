@@ -128,7 +128,7 @@
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>{{r.ref_test_method}}</td>
+                <td>{{r.ref_test_method || 'N/A'}}</td>
                 <td>Rs.{{r.price}}</td>
                 <td>
                   <span *ngIf="r?.result || r?.result === 0">{{r.result}}</span>

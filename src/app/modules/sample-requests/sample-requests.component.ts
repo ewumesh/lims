@@ -21,7 +21,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
   filterForm: FormGroup;
   isfilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode','refrenceNumber', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode','refrenceNumber', 'sampleName','client','commodity', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -49,6 +49,8 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     { id: 6, name: 'processing' }
   ];
 
+  clients:any[] = [];
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -63,8 +65,19 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/dashboard/sample-request-details', id]);
   }
 
+  getClientCategories() {
+    this.service.getCategories().subscribe(res => {
+      this.clients = res.results;
+    })
+  }
+
+  getClientName(id) {
+    return this.clients.find(a => a.id === id)?.name;
+  }
+
   ngOnInit(): void {
     this.initFilterForm();
+    this.getClientCategories();
     this.getSampleRequests();
     this.getCommodities();
   }
@@ -75,6 +88,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
       status: '',
       from: '',
       to: '',
+      client_category: ''
     })
   }
 
@@ -105,7 +119,8 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       from: from,
-      to: to
+      to: to,
+      client_category: ''
     }
 
     this.service.getAllSampleRequsets(payload).subscribe(response => {
@@ -151,7 +166,8 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       from: from,
-      to: to
+      to: to,
+      client_category: this.filterForm.value.client_category
     }
 
     // console.log(payload);

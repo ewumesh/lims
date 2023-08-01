@@ -154,8 +154,20 @@ display: inline-block;
     <ng-container matColumnDef="methods">
       <th mat-header-cell *matHeaderCellDef> Method Use For Analysis </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.ref_test_method">{{row?.ref_test_method | titlecase}} </span>
-        <span *ngIf="!row.ref_test_method" class="text-muted">N/A</span>
+        <!-- <span *ngIf="row.ref_test_method">{{row?.ref_test_method | titlecase}} </span>
+        <span *ngIf="!row.ref_test_method" class="text-muted">N/A</span> -->
+          {{groups | json}}
+        <div *ngIf="row.test_type === 'Instrumental'" class="mt-2">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="row.insTestMethod" class="custom-select">
+              <mat-option *ngFor="let a of row.test_method; let i=index;" [value]="a.ref_test_method">{{a.ref_test_method}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf="row.test_type !== 'Instrumental'"> 
+          <span *ngFor="let t of row.test_method">{{t?.ref_test_method}}</span>
+        </div>
+        <span *ngIf="row?.test_method.length < 1" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
@@ -175,16 +187,35 @@ display: inline-block;
     <ng-container matColumnDef="mandatory_standard">
       <th mat-header-cell *matHeaderCellDef> Mandatory Standard </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.mandatory_standard">{{row?.mandatory_standard}} </span>
-        <span *ngIf="!row.mandatory_standard" class="text-muted">N/A</span>
+
+        <div *ngIf="row.test_type === 'Instrumental'" class="mt-2">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="row.insMandatoryStandards" class="custom-select">
+              <mat-option *ngFor="let a of row.mandatory_standard; let i=index;" [value]="a.mandatory_standard">{{a.mandatory_standard}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf="row.test_type !== 'Instrumental'"> 
+          <span *ngFor="let t of row.mandatory_standard">{{t?.mandatory_standard}}</span>
+        </div>
+        <span *ngIf="row?.mandatory_standard.length < 1" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="units">
       <th mat-header-cell *matHeaderCellDef> Units </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row?.units">{{row.units | titlecase}} </span>
-        <span *ngIf="!row?.units" class="text-muted">N/A</span>
+        <div *ngIf="row.test_type === 'Instrumental'" class="mt-2">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="row.insUnits" class="custom-select">
+              <mat-option *ngFor="let a of row.units; let i=index;" [value]="a.units" [selected]="i===0">{{a.units}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div *ngIf="row.test_type !== 'Instrumental'"> 
+          <span *ngFor="let t of row.units">{{t?.units}}</span>
+        </div>
+        <span *ngIf="row?.units.length < 1" class="text-muted">N/A</span>
       </td>
     </ng-container>
 
@@ -205,8 +236,14 @@ display: inline-block;
         </div>
         <!-- <button (click)="saveResult(row.result, testRequestDetails.id, row.id, testRequestDetails.sample_form?.commodity)" class="btn btn-primary btn-lims-primary h-45">Save</button> -->
 
-        <span *ngIf="row.result !== ''">{{row.result}} </span>
+        <div *ngIf="!row.analyst_remarks">
+        <span *ngIf="row.result !== ''">{{row.converted_result}} </span>
         <span *ngIf="row.result === ''">N/A</span>
+        </div>
+
+        <div *ngIf="row.analyst_remarks">
+          {{row?.analyst_remarks}}
+        </div>
       </td>
     </ng-container>
 
@@ -321,7 +358,17 @@ display: inline-block;
         </mat-form-field>
       </div>
 
-      <div class="col-md-12 text-end">
+      <div class="col-md-12">
+        <label class="label">Additional Information</label>
+        <!-- <mat-form-field class="w-100" appearance="outline"> -->
+          <textarea formControlName="additional_info" class="form-control"
+            matInput placeholder="Enter Additional Info" ></textarea>
+
+          <!-- <mat-datepicker #sd></mat-datepicker> -->
+        <!-- </mat-form-field> -->
+      </div>
+
+      <div class="col-md-12 text-end mt-2">
         <button (click)="saveOtherDetails()" class="btn btn-primary btn-sm">
           <span *ngIf="!isOtherDetails">Update</span>
             <span *ngIf="isOtherDetails">

@@ -219,6 +219,7 @@
               <th>Units</th>
               <th>Price</th>
               <th>Tested By</th>
+              <th>Test Type</th>
               <th>Result</th>
               <th>Status</th>
               <th>Remarks</th>
@@ -228,7 +229,7 @@
                 <td>{{i+1}}</td>
                 <td>{{r.name | titlecase}}</td>
                 <td>{{r.formula}}</td>
-                <td>{{r.ref_test_method}}</td>
+                <td>{{r.test_method}}</td>
                 <td>{{r.units}}</td>
                 <td>Rs.{{r.price}}</td>
                 <td>
@@ -242,6 +243,7 @@
                   </div>
 
                 </td>
+                <td>{{r.test_type}}</td>
                 <td>
                   <span>{{r.result}}</span>
                   <!-- <span *ngIf="r?.result === 0">0</span>

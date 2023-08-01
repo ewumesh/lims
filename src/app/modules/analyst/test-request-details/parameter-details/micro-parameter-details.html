@@ -97,7 +97,23 @@
                         </mat-form-field>
                     </div>
 
+                    <div class="col-md-12 text-right text-end">
+                        <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="setMicroParameter()"
+                            class="btn btn-primary  btn-lims-primary btn-sm">
+                            <span *ngIf="!isSetParameterDetails">Submit</span>
+                            <span *ngIf="isSetParameterDetails">
+                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                            </span>
+                        </button>
 
+                        <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateMicroParameter()"
+                            class="btn btn-primary  btn-lims-primary btn-sm">
+                            <span *ngIf="!isSetParameterDetails">Update</span>
+                            <span *ngIf="isSetParameterDetails">
+                                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                            </span>
+                        </button>
+                    </div>
                 </div>
 
             </form>
@@ -219,33 +235,11 @@
         </mat-dialog-content>
 
         <mat-dialog-actions align="end">
-
-            <div class="col-md-12 text-right text-end">
-                <button *ngIf="!this.data?.selectedParameter?.micro_table" (click)="setMicroParameter()"
-                    class="btn btn-primary  btn-lims-primary btn-sm">
-                    <span *ngIf="!isSetParameterDetails">Submit</span>
-                    <span *ngIf="isSetParameterDetails">
-                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                    </span>
-                </button>
-
-                <button *ngIf="this.data?.selectedParameter?.micro_table" (click)="updateMicroParameter()"
-                    class="btn btn-primary  btn-lims-primary btn-sm">
-                    <span *ngIf="!isSetParameterDetails">Update</span>
-                    <span *ngIf="isSetParameterDetails">
-                        <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
-                    </span>
-                </button>
-            </div>
-
-            <div>
-
-                <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
-                <button *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
-                    class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
-                <button *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
-                    class="btn btn-primary btn-sm cancel-btn mx-1">Update and Next</button>
-            </div>
+            <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
+            <button *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
+                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+            <button *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
+                class="btn btn-primary btn-sm cancel-btn mx-1">Update and Next</button>
         </mat-dialog-actions>
     </div>
 </div>

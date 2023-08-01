@@ -23,6 +23,8 @@ export class AdminSampleRequestComponent implements OnInit, AfterViewInit {
 
   statusList: any[] = [];
 
+  clients:any[] =[];
+
   constructor(
     private fb: FormBuilder,
     private service: AdminSampleRequestService,
@@ -33,6 +35,16 @@ export class AdminSampleRequestComponent implements OnInit, AfterViewInit {
     this.initForm();
     this.getSampleDetails();
     this.getStatusList();
+    this.getClients();
+  }
+
+  getClients() {
+    this.service.getCategories().subscribe(res => {
+      this.clients = res.results;
+    })
+  }
+  getClientName(id) {
+    return this.clients.find(a => a.id === id)?.name;
   }
 
   getStatusList() {

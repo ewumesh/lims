@@ -217,8 +217,8 @@
                 <ng-container matColumnDef="method">
                   <th mat-header-cell *matHeaderCellDef> Method </th>
                   <td mat-cell *matCellDef="let row">
-                    <span *ngIf="row.name">{{row?.ref_test_method}}</span>
-                    <span *ngIf="!row.name" class="text-muted">N/A</span>
+                    <span *ngIf="row.test_method">{{row?.test_method}}</span>
+                    <span *ngIf="!row.test_method" class="text-muted">N/A</span>
                   </td>
                 </ng-container>
           

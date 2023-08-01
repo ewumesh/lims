@@ -15,9 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewmultipleDetailsDialogComponent } from './view-details/view-multiple-details';
 
 @NgModule({
-  declarations: [AllCommoditiesComponent],
+  declarations: [AllCommoditiesComponent, ViewmultipleDetailsDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -36,7 +38,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [AllCommoditiesService],

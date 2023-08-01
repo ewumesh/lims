@@ -22,11 +22,13 @@ export class AssignedSampleAdminComponent implements OnInit {
 
   isFilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode', 'sampleName', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId','sampleLabCode', 'sampleName','client', 'commodity', 'assignedDate', 'assigned', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   statusList: any[] = [];
+
+  clients: any[] =[];
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +40,17 @@ export class AssignedSampleAdminComponent implements OnInit {
     this.initFilterForm();
     this.getSamples();
     this.getStatusList();
+    this.getClients();
+  }
+
+  getClients() {
+    this.service.getCategories().subscribe(res => {
+      this.clients = res.results;
+    })
+  }
+
+  getClientName(id) {
+    return this.clients.find(a => a.id === id)?.name;
   }
 
   getSamples() {
@@ -48,7 +61,8 @@ export class AssignedSampleAdminComponent implements OnInit {
       size: '',
       from: '',
       to: '',
-      status: ''
+      status: '',
+      client_category:''
     }
     this.service.getAssignedSampleDetails(payload).subscribe(response => {
       // console.log(response);
@@ -68,7 +82,8 @@ export class AssignedSampleAdminComponent implements OnInit {
       search: '',
       from: '',
       to: '',
-      status: ''
+      status: '',
+      client_category:''
     })
   }
 
@@ -118,7 +133,8 @@ export class AssignedSampleAdminComponent implements OnInit {
       size: '',
       from: from,
       to: to,
-      status: this.filterForm.value.status
+      status: this.filterForm.value.status,
+      client_category:this.filterForm.value.client_category
     }
     this.service.getAssignedSampleDetails(payload).subscribe(response => {
       // console.log(response);

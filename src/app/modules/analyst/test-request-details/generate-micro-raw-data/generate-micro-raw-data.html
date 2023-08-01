@@ -8,7 +8,7 @@
     </div>
     <hr />
 
-    {{data | json}}
+    <!-- {{data | json}} -->
     <mat-dialog-content *ngIf="data?.ok"> 
         <mat-tab-group animationDuration="0ms">
             <mat-tab  *ngFor="let p of data.raw_data; let i=index" [label]="p.parameter.name">

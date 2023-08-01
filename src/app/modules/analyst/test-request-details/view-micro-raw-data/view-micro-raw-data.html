@@ -188,6 +188,9 @@
                                         <span class="text-danger">*</span>{{n | titlecase}}
                                       </div>
                                       <h2>Formula = {{p?.parameter?.formula}}</h2>
+                                      <h2>Result = {{p?.parameter?.result}}</h2>
+                                      <h2>Final Result = {{p?.parameter?.final_result}}</h2>
+                                      <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = {{p?.parameter?.analyst_remarks}}</h2>
                                     </div>
                                     <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                                   </div>
@@ -251,6 +254,11 @@
                 <tr>
                     <td class="text-center">7</td>
                     <td colspan="10">Remarks (If any):<span class="detail"> {{data?.remarks}} </span> </td>
+                </tr>
+
+                <tr>
+                    <td class="text-center">8</td>
+                    <td colspan="10">Additional Information:<span class="detail"> {{data?.additional_info}} </span> </td>
                 </tr>
             </table>
 

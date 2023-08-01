@@ -11,6 +11,7 @@ import { collectionInOut, rowsAnimation } from 'src/app/shared/animations/animat
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
+import { ViewmultipleDetailsComponent } from './view-details/view-multiple-details';
 
 @Component({
   templateUrl: './parameter.component.html',
@@ -18,7 +19,7 @@ import { GenericValidator } from 'src/app/shared/validators/generic-validators';
   animations: [collectionInOut, rowsAnimation ],
 })
 export class ParameterComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price','testMethod','mandatoryStandards','formula', 'action'];
+  displayedColumns: string[] = ['sn', 'name', 'commodities','testType', 'price','testMethod','mandatoryStandards','formula','units', 'action'];
   dataSource = new MatTableDataSource<any>([]);
   isWorking = true;
 
@@ -64,7 +65,8 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
   createUnits() {
     return this.fb.group({
-      units_english: new FormControl(''),
+      id: new FormControl(''),
+      units: new FormControl(''),
       units_nepali: new FormControl('')
     })
   }
@@ -73,7 +75,7 @@ export class ParameterComponent implements OnInit, AfterViewInit {
 
 // for mandatory standards
 get multipleStandards(): FormArray {
-  return this.parameterForm.get('mandatory_standards') as FormArray;
+  return this.parameterForm.get('mandatory_standard') as FormArray;
 }
 
 addStandards() {
@@ -82,6 +84,7 @@ addStandards() {
 
 createStandards() {
   return this.fb.group({
+    id: new FormControl(''),
     mandatory_standard: new FormControl(''),
     mandatory_standard_nepali: new FormControl('')
   })
@@ -90,17 +93,18 @@ createStandards() {
 
 // test methodstest method
 get multipleTestMethods(): FormArray {
-  return this.parameterForm.get('testMethods') as FormArray;
+  return this.parameterForm.get('test_method') as FormArray;
 }
 
 addTestMethod() {
-    this.multipleStandards.push(this.createTestMethod());
+    this.multipleTestMethods.push(this.createTestMethod());
 }
 
 createTestMethod() {
   return this.fb.group({
+    id: new FormControl(''),
     ref_test_method: new FormControl(''),
-    ref_test_method_nepali: new FormControl('')
+    // ref_test_method_nepali: new FormControl('')
   })
 }
 
@@ -160,25 +164,36 @@ createTestMethod() {
       test_type: [''],
       commodity: [''],
       ref_test_method: [''],
-      units: [''],
-      units_nepali: [''],
-      mandatory_standard: [''],
-      mandatory_standard_nepali: [''],
+      // units: [''],
+      // units_nepali: [''],
+      // mandatory_standard: [''],
+      // mandatory_standard_nepali: [''],
       price: [''],
       remarks: '.',
       formula: [''],
       formula_notation: [''],
-      // units:new FormArray([]),
-      mandatory_standards: new FormArray([]),
-      testMethods: new FormArray([])
+      units:new FormArray([]),
+      mandatory_standard: new FormArray([]),
+      test_method: new FormArray([])
+    })
+  }
+
+  viewMoreDetails(array,type) {
+    let viewList = {
+      values:array,
+      type:type
+    }
+    this.dialog.open(ViewmultipleDetailsComponent, {
+      data: viewList,
+      minWidth:'400px'
     })
   }
 
   ngOnInit(): void {
     this.initForm();
-    // this.addUnits();
-    // this.addStandards();
-    // this.addTestMethod();
+    this.addUnits();
+    this.addStandards();
+    this.addTestMethod();
     this.getParameters();
     this.getCommodityCategories();
     this.getCommodities();
@@ -285,13 +300,31 @@ createTestMethod() {
   }
 
   patchForm(data) {
+    console.log(data, 'pwadij')
+    // data?.mandatory_standard.forEach((element, index) => {
+    //   if(data?.mandatory_standard) {
+    //   this.addStandards();
+    //   }
+    // });
+    for(let i=1; i<=data?.mandatory_standard.length-1; i++) {
+      this.addStandards();
+    }
+
+    for(let i=1; i<=data?.units.length-1; i++) {
+      this.addUnits();
+    }
+
+    for(let i=1; i<=data?.test_method.length-1; i++) {
+      this.addTestMethod();
+    }
+
     this.parameterForm.patchValue(
       {
         id: data?.id,
         name: data?.name,
         test_type: data?.test_type,
-        commodity: data?.commodity,
-        ref_test_method: data?.ref_test_method,
+        commodity: data?.commodity?.id,
+        test_method: data?.test_method,
         units: data?.units,
         mandatory_standard: data?.mandatory_standard,
         formula: data?.formula,
@@ -317,7 +350,7 @@ createTestMethod() {
 
   saveChanges() {
     this.submitBtn = true;
-    if (this.parameterForm.pristine) {
+    if (!this.parameterForm.valid) {
       this.message = {};
       this.message.messageBody = 'All the fileds with (*) are required.';
       window.scroll(0,0);
@@ -337,6 +370,16 @@ createTestMethod() {
         this.dismissMessage();
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
+
+        this.parameterForm.setControl('units', new FormArray([]));
+        this.addUnits();
+    
+        this.parameterForm.setControl('test_method', new FormArray([]));
+        this.addTestMethod();
+    
+        this.parameterForm.setControl('mandatory_standard', new FormArray([]));
+        this.addStandards();
+
         this.existingCategory = null;
         this.submitBtn = false
       },
@@ -355,6 +398,16 @@ createTestMethod() {
         this.dismissMessage();
         this.parameterForm.reset();
         this.parameterForm.clearValidators();
+
+        this.parameterForm.setControl('units', new FormArray([]));
+        this.addUnits();
+    
+        this.parameterForm.setControl('test_method', new FormArray([]));
+        this.addTestMethod();
+    
+        this.parameterForm.setControl('mandatory_standard', new FormArray([]));
+        this.addStandards();
+
         this.existingCategory = null;
         this.submitBtn = false;
       },
@@ -378,6 +431,15 @@ createTestMethod() {
     this.getParameters();
     this.getCommodityCategories();
     this.getCommodities();
+
+    this.parameterForm.setControl('units', new FormArray([]));
+    this.addUnits();
+
+    this.parameterForm.setControl('test_method', new FormArray([]));
+    this.addTestMethod();
+
+    this.parameterForm.setControl('mandatory_standard', new FormArray([]));
+    this.addStandards();
   }
 
   ngAfterViewInit() {

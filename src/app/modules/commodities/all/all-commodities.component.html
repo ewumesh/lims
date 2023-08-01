@@ -101,11 +101,11 @@
                     </td>
                     <td>{{t.name}}</td>
                     <td>
-                      <span *ngIf="t.ref_test_method">
-                        <span *ngIf="t.ref_test_method === 'nan'" class="text-muted">N/A</span>
-                        <span *ngIf="t.ref_test_method !== 'nan'" class="text-muted">{{t.ref_test_method}}</span>
-                        </span>
-                      <span *ngIf="!t.ref_test_method" class="text-muted">N/A</span>
+                      <div *ngIf="t?.test_method.length > 0">
+                        <span>{{t?.test_method[0]?.ref_test_method}}</span> &nbsp;
+                        <span><a (click)="viewMoreDetails(t?.test_method, 't')" href="Javascript:;"> More</a></span>
+                      </div>
+                      <span *ngIf="t?.test_method.length < 1">N/A</span>
 
                     </td>
                     <td>
@@ -116,14 +116,23 @@
                       <span *ngIf="!t.formula" class="text-muted">N/A</span>
                     </td>
                     <td>
-                      <span *ngIf="t.units">
-                        <span *ngIf="t.units === 'nan'" class="text-muted">N/A</span>
-                        <span *ngIf="t.units !== 'nan'" class="text-muted">{{t.units}}</span>
-                        </span>
-                      <span *ngIf="!t.units" class="text-muted">N/A</span>
+                      <div *ngIf="t?.units.length > 0">
+                        <span>{{t?.units[0]?.units}}</span> &nbsp;
+                        <span *ngIf="t?.units.length > 1"><a (click)="viewMoreDetails(t?.units, 'u')" href="Javascript:;"> More</a></span>
+                      </div>
+                      <span *ngIf="t?.units.length < 1">N/A</span>
                     </td>
                     <td>Rs.{{t.price}}</td>
-                    <td>{{t.mandatory_standard}}</td>
+                    <td>
+                      <div *ngIf="t?.mandatory_standard.length > 0">
+                        <span>{{t?.mandatory_standard[0].mandatory_standard}}</span> &nbsp;
+                        <span *ngIf="t?.mandatory_standard.length > 1">
+                          <a (click)="viewMoreDetails(t?.mandatory_standard, 'm')" href="Javascript:;"> More</a>
+                        </span>
+                      </div>
+                      <span *ngIf="t?.mandatory_standard.length < 1">N/A</span>
+
+                    </td>
                     <td>
                       <button class="btn btn-primary btn-sm" (click)="editCommodity(t)">Edit</button>
                     </td>

@@ -21,6 +21,10 @@ export class AdminSampleRequestService {
     return this.http.get(`${this.url}/api/report/status/sample-verify/`)
   }
 
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
   verifySample(payload):Observable<any> {
     return this.http.patch(`${this.url}/api/sample-form/${payload.id}/`, payload)
   }

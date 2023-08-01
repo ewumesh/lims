@@ -56,6 +56,10 @@ export class TestRequestDetailsComponent implements OnInit {
 isOtherDetails = false;
   otherDetailsErrorResponse: null
 
+  insTestMethod;
+  insUnits;
+  insMandatoryStandards;
+
 
   constructor(
     private service: TestRequestDetailsService,
@@ -91,7 +95,8 @@ isOtherDetails = false;
   initOtherForm() {
     this.otherDetailsForm = this.fb.group({
       sample_received_date: '',
-      started_date:''
+      started_date:'',
+      additional_info: ''
     })
   }
 
@@ -131,6 +136,29 @@ isOtherDetails = false;
       this.dataMutations.details = response.sample_form;
 
       this.dataSource = response?.parameter;
+      response?.parameter.forEach(element => {
+
+        if(element.mandatory_standard_selected) {
+          element.insMandatoryStandards = element.mandatory_standard_selected;
+        } else {
+          element.insMandatoryStandards =element?.mandatory_standard[0]?.mandatory_standard;
+        }
+
+        if(element.test_method_selected) {
+          element.insTestMethod = element.test_method_selected;
+        } else {
+          element.insTestMethod =element.test_method[0]?.ref_test_method
+        }
+        
+        if(element.units_selected) {
+          element.insUnits = element.units_selected;
+        } else {
+          element.insUnits =element?.units[0]?.units;
+        }
+
+       
+        
+      });
       this.isLoading = false;
       this.getRawSampleTracking();
     })
@@ -155,7 +183,7 @@ isOtherDetails = false;
   }
 
   calculate(data) {
-    // console.log(data, 'da')
+    console.log(data, 'da')
 
     let allValue = {
       parameters: data,

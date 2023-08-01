@@ -214,7 +214,10 @@ export class CalculateComponent implements OnInit {
         sample_form_has_parameter: this.data?.id,
         analyst_remarks:this.analyst_remarks,
         converted_result:this.convertedResult,
-        decimal_place: 2
+        decimal_place: 2,
+        units:this.data?.parameters?.insUnits,
+        test_method: this.data?.parameters?.insTestMethod,
+        mandatory_standard: this.data?.parameters?.insMandatoryStandards
       }
     } else {
     payload = {
@@ -225,8 +228,11 @@ export class CalculateComponent implements OnInit {
       formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
       sample_form_has_parameter: this.data.details?.id,
       analyst_remarks:this.analyst_remarks,
-      converted_result:this.finalResult,
-      decimal_place: 2
+      converted_result:this.convertedResult,
+      decimal_place: 2,
+      units:this.data?.parameters?.insUnits,
+      test_method: this.data?.parameters?.insTestMethod,
+      mandatory_standard: this.data?.parameters?.insMandatoryStandards
     }
   }
 

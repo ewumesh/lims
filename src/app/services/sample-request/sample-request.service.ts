@@ -15,7 +15,11 @@ export class SampleRequestsService {
   }
 
   getAllSampleRequsets(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}`)
+    return this.http.get(`${this.url}/api/sample-form/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&form_available=smu&created_date__date__gte=${payload.from}&created_date__date__lte=${payload.to}&client_category_detail__client_category=${payload.client_category}`)
+  }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
   }
 
   getCommodities():Observable<any> {

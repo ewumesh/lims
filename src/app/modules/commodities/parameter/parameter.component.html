@@ -60,9 +60,9 @@
                   <label class="mb-2">Test Type(परीक्षण प्रकार) *</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <mat-select placeholder="Select Test type" class="custom-select" formControlName="test_type">
-                      <mat-option value="1">Chemical Test(रासायनिक परीक्षण)</mat-option>
-                      <mat-option value="2">Microbiological Test(माइक्रोबायोलोजिकल परीक्षण)</mat-option>
-                      <mat-option value="3">Instrumental Test(इन्स्ट्रुमेन्टल परीक्षण)</mat-option>
+                      <mat-option value="Chemical">Chemical Test(रासायनिक परीक्षण)</mat-option>
+                      <mat-option value="Microbiological">Microbiological Test(माइक्रोबायोलोजिकल परीक्षण)</mat-option>
+                      <mat-option value="Instrumental">Instrumental Test(इन्स्ट्रुमेन्टल परीक्षण)</mat-option>
                     </mat-select>
                     <mat-error [@rowsAnimation]="displayMessage?.test_type" class="text-danger"
                       *ngIf="displayMessage?.test_type">{{displayMessage?.test_type}}</mat-error>
@@ -83,12 +83,10 @@
                 </div>
               </div>
 
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
                   <mat-form-field appearance="outline" class="w-100">
-                    <!-- <input class="form-control custom-input" matInput formControlName="ref_test_method"
-                      placeholder="Enter Ref. Test Method" /> -->
 
                       <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
                     <mat-autocomplete #autoUnits="matAutocomplete">
@@ -102,9 +100,50 @@
                       *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
+                  <div class="row py-2" style="border: 1px solid #0000001c;
+                                margin: 0px;">
+                    <div class="col-md-12" formArrayName="test_method">
+                      <div class="row" *ngFor="let list of multipleTestMethods.controls; let i = index" [formGroupName]="i">
+                        <div class="col-md-12">
+                          <label class="mb-2">Ref. Test Method *</label>
+                          <mat-form-field appearance="outline" class="w-100">
+              
+                            <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput
+                              formControlName="ref_test_method" >
+                            <!-- <mat-autocomplete #autoUnits="matAutocomplete">
+                              <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
+                                {{option.ref_test_method}}
+                              </mat-option>
+                            </mat-autocomplete> -->
+              
+              
+                            <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
+                              *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-6">
+                          <label class="mb-2">Nepali *</label>
+                          <mat-form-field appearance="outline" class="w-100">
+              
+                            <input placeholder="Test Method" type="text" class="custom-input" matInput
+                              formControlName="ref_test_method_nepali">
+                          </mat-form-field>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-end">
+                      <button class="btn btn-primary btn-lims-primary" (click)="addTestMethod()">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Units(एकाइ) *</label>
                   <mat-form-field appearance="outline" class="w-100">
@@ -119,26 +158,63 @@
                       *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Units(एकाइ) *</label>
+                  <div class="row py-2" style="border: 1px solid #0000001c;
+                  margin: 0px;">
+                  <div class="col-md-12" formArrayName="units">
+                    <div class="row" *ngFor="let list of multipleUnits.controls; let i = index" [formGroupName]="i">
+                      <div class="col-md-6">
+                        <label class="mb-2">English *</label>
+                        <mat-form-field appearance="outline" class="w-100">
+  
+                          <input placeholder="Enter Unit Name" type="text" class="custom-input" matInput formControlName="units" >
+                        <!-- <mat-autocomplete #autoUnits="matAutocomplete">
+                          <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                            {{option.units}}
+                          </mat-option>
+                        </mat-autocomplete> -->
+                          <!-- <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                          *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error> -->
+                      </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="mb-2">Nepali *</label>
+                    <mat-form-field appearance="outline" class="w-100">
+  
+                        <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
+                      
+                        <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
+                        *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
+                    </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-md-12 text-end">
+                      <button class="btn btn-primary btn-lims-primary" (click)="addUnits()">Add</button>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">एकाइ *</label>
                   <mat-form-field appearance="outline" class="w-100">
 
                       <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
-                    <!-- <mat-autocomplete #autoUnits="matAutocomplete">
-                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
-                        {{option.units}}
-                      </mat-option>
-                    </mat-autocomplete> -->
+                    
                       <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
                       *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Mandatory Standards*</label>
                   <mat-form-field appearance="outline" class="w-100">
@@ -148,9 +224,44 @@
                       *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mb-2">Mandatory Standards*</label>
+                  <div class="row py-2" style="border: 1px solid #0000001c;
+                  margin: 0px;">
+                  <div class="col-md-12" formArrayName="mandatory_standard">
+                    <div class="row" *ngFor="let list of multipleStandards.controls; let i = index" [formGroupName]="i">
+                      <div class="col-md-6">
+                        <label class="mb-2">English *</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                          <input class=" custom-input" matInput formControlName="mandatory_standard"
+                            placeholder="Enter Mandatory Standard" />
+                            <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
+                            *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="mb-2">Nepali *</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                          <input class=" custom-input" matInput formControlName="mandatory_standard_nepali"
+                            placeholder="तोकिएको मापदण्ड" />
+                            <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard_nepali" class="text-danger"
+                            *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-md-12 text-end">
+                      <button class="btn btn-primary btn-lims-primary" (click)="addStandards()">Add</button>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">तोकिएको मापदण्ड  *</label>
                   <mat-form-field appearance="outline" class="w-100">
@@ -160,7 +271,7 @@
                       *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+              </div> -->
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -281,16 +392,34 @@
         <ng-container matColumnDef="testMethod">
           <th mat-header-cell *matHeaderCellDef> Test Method</th>
           <td mat-cell *matCellDef="let c">
-            <span *ngIf="c.ref_test_method">{{c.ref_test_method | titlecase}}</span>
-            <span *ngIf="!c.ref_test_method" class="text-muted">N/A</span>
+            <!-- <mat-accordion *ngIf="c?.test_method.length > 0">
+              <mat-expansion-panel [hideToggle] = "c?.test_method.length === 1">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [title]="c?.test_method[0]?.ref_test_method">
+                   {{c?.test_method[0]?.ref_test_method}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngIf="c?.test_method.length > 1">
+                <div class="px-3 py-3" *ngFor="let a of c?.test_method">{{a?.ref_test_method}}</div>
+                </div>
+              </mat-expansion-panel>
+              </mat-accordion> -->
+              <div *ngIf="c?.test_method.length > 0">
+                <span>{{c?.test_method[0]?.ref_test_method}}</span> &nbsp;
+                <span><a (click)="viewMoreDetails(c?.test_method, 't')" href="Javascript:;"> More</a></span>
+              </div>
+              <span *ngIf="c?.test_method.length < 1">N/A</span>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="mandatoryStandards">
           <th mat-header-cell *matHeaderCellDef style="width:20%;"> Mandatory Standards</th>
-          <td mat-cell *matCellDef="let c">
-            <span *ngIf="c.mandatory_standard">{{c.mandatory_standard}}</span>
-            <span *ngIf="!c.mandatory_standard" class="text-muted">N/A</span>
+          <td mat-cell *matCellDef="let c; let i=index;">
+              <div *ngIf="c?.mandatory_standard.length > 0">
+                <span>{{c?.mandatory_standard[0]?.mandatory_standard}}</span> &nbsp;
+                <span><a (click)="viewMoreDetails(c?.mandatory_standard, 'm')" href="Javascript:;"> More</a></span>
+              </div>
+              <span *ngIf="c?.mandatory_standard.length < 1">N/A</span>
           </td>
         </ng-container>
 
@@ -299,6 +428,34 @@
           <td mat-cell *matCellDef="let c">
             <span *ngIf="c.formula">{{c.formula}}</span>
             <span *ngIf="!c.formula" class="text-muted">N/A</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="units">
+          <th mat-header-cell *matHeaderCellDef> Units</th>
+          <td mat-cell *matCellDef="let c">
+            <!-- <mat-accordion *ngIf="c?.units.length > 0">
+              <mat-expansion-panel [hideToggle] = "c?.units.length === 1">
+                <mat-expansion-panel-header>
+                  <mat-panel-title [title]="c?.units[0]?.units">
+                   {{c?.units[0]?.units}}
+                  </mat-panel-title>
+                 
+                </mat-expansion-panel-header>
+                <div *ngIf="c?.units.length > 1">
+                <div class="px-3 py-3" *ngFor="let a of c?.units;let i = index;">
+                  <span *ngIf="i !== 0">
+                  {{a?.units}}({{a.units_nepali}})
+                  </span>
+                </div>
+                </div>
+              </mat-expansion-panel>
+              </mat-accordion> -->
+              <div *ngIf="c?.units.length > 0">
+                <span>{{c?.units[0]?.units}}</span> &nbsp;
+                <span *ngIf="c?.units.length > 1"><a (click)="viewMoreDetails(c?.units, 'u')" href="Javascript:;"> More</a></span>
+              </div>
+              <span *ngIf="c?.units.length < 1">N/A</span>
           </td>
         </ng-container>
 

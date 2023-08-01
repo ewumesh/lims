@@ -1,0 +1,33 @@
+<div class="text-center">
+    <h6 class="m-portlet_head-text m--font-brand" matDialogTitle>
+        <span *ngIf="data.type === 'm'">Mandatory Standards</span>
+        <span *ngIf="data.type === 't'">Test Methods</span>
+        <span *ngIf="data.type === 'u'">Units</span>
+    </h6>
+    <div matDialogContent>
+        <mat-list *ngIf="data.type === 'm'">
+            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values">
+              <div matListItemTitle>{{m?.mandatory_standard}}({{m?.mandatory_standard_nepali}})</div>
+            </mat-list-item>
+          </mat-list>
+
+          <mat-list *ngIf="data.type === 't'">
+            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values">
+              <div matListItemTitle>{{m?.ref_test_method}}</div>
+            </mat-list-item>
+          </mat-list>
+
+          <mat-list *ngIf="data.type === 'u'">
+            <mat-list-item style="text-align: left !important;" *ngFor="let m of data.values">
+              <div matListItemTitle>{{m?.units}}({{m?.units_nepali}})</div>
+            </mat-list-item>
+          </mat-list>
+
+    </div>
+    <div matDialogActions class="justify-content-center mb-1">
+        <button (click)="closeDialog()" matTooltip="Cancel" matTooltipPosition="right" class="btn btn-danger">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+  </div>
+  

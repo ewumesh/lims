@@ -26,6 +26,8 @@ export class LabReportComponent implements OnInit {
 
   statusList: any[] = [];
 
+  clients: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private service: AdminLabReportService,
@@ -36,12 +38,22 @@ export class LabReportComponent implements OnInit {
       // if(this.loggedUserDetails.role === 4) {
       //   this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'action'];
       // } else {
-        this.displayedColumns = ['sn', 'sampleId', 'sampleName', 'commodity', 'assignedDate', 'status', 'action'];
+        this.displayedColumns = ['sn', 'sampleId', 'sampleName','client', 'commodity', 'assignedDate', 'status', 'action'];
       // }
 
 
       this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
       this.getStatusList();
+    }
+
+    getClients() {
+      this.service.getClientCategories().subscribe(res => {
+        this.clients = res.results;
+      })
+    }
+
+    getClientName(id) {
+      return this.clients.find(a =>a.id ===id)?.name;
     }
 
     getStatusList() {
@@ -53,6 +65,7 @@ export class LabReportComponent implements OnInit {
   ngOnInit(): void {
     this.initFilterForm();
     this.getSamples();
+    this.getClients();
   }
 
   getSamples() {
@@ -63,7 +76,8 @@ export class LabReportComponent implements OnInit {
       size: '',
       from: '',
       to: '',
-      status: ''
+      status: '',
+      client_category:''
     }
     this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;
@@ -81,7 +95,8 @@ export class LabReportComponent implements OnInit {
       search: '',
       from: '',
       to: '',
-      status: ''
+      status: '',
+      client_category:''
     })
   }
 
@@ -125,7 +140,8 @@ export class LabReportComponent implements OnInit {
       size: '',
       from: from,
       to: to,
-      status: this.filterForm.value.status
+      status: this.filterForm.value.status,
+      client_category:this.filterForm.value.client_category
     }
     this.service.getSampleReportDetails(payload).subscribe(response => {
       this.dataSource.data = response;

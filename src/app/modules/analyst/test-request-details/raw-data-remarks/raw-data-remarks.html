@@ -146,10 +146,16 @@
                                   <span class="text-danger">*</span>{{n | titlecase}}
                                 </div>
                                 <h2>Formula = {{p?.formula}}</h2>
+                                <h2>Result = {{p?.result}}</h2>
+                                <h2>Final Result = {{p?.final_result || 'N/A'}}</h2>
+                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = {{p?.analyst_remarks || 'N/A'}}</h2>
                               </div>
                               <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                             </div>
                       </div>
+                      <!-- <div class="col-md-12">
+                        {{p | json}}
+                      </div> -->
                       
                   </div>
                   
@@ -178,6 +184,11 @@
               <td class="text-center">7</td>
               <td colspan="10">Remarks (If any):<span class="detail"> {{data?.remarks}} </span> </td>
           </tr>
+
+          <tr>
+            <td class="text-center">8</td>
+            <td colspan="10">Additional Information:<span class="detail"> {{data?.additional_info || 'N/A'}} </span> </td>
+        </tr>
       </table>
 
       </mat-tab>
@@ -346,8 +357,8 @@
                     <span>{{item.key}}</span> = <span>{{item.value}}</span>
                   </div>
                   <div>Result: {{p.result}}</div>
-                  <div *ngIf="p?.converted_result">Converted Result: {{p.converted_result}}</div>
-                  <div *ngIf="p?.analyst_remarks">Remarks: {{p?.analyst_remarks}}</div>
+                  <div *ngIf="p?.converted_result">Final Result: {{p.converted_result}}</div>
+                  <div *ngIf="p?.analyst_remarks">Qualitative Analysis: {{p?.analyst_remarks}}</div>
                 </div>
               </div>
 
@@ -395,7 +406,13 @@
       <tr>
       <td class="text-center">7</td>
       <td colspan="10">Remarks (If any);<span class="detail"> {{rawDatasheetDetails?.remarks}} </span> </td>
+
+      
   </tr>
+  <tr>
+    <td class="text-center">8</td>
+    <td colspan="10">Additional Information:<span class="detail"> {{rawDatasheetDetails?.additional_info || 'N/A'}} </span> </td>
+</tr>
     </table>
     <!-- </mat-card> -->
   </mat-dialog-content>

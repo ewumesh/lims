@@ -16,9 +16,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewmultipleDetailsComponent } from './view-details/view-multiple-details';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
-  declarations: [ParameterComponent],
+  declarations: [ParameterComponent,ViewmultipleDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -36,6 +40,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatListModule,
 
     DeleteConfirmModule
    ],

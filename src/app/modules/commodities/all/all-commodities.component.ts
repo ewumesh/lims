@@ -5,6 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AllCommoditiesService } from 'src/app/services/commodities/all-commodities/all-commodities.service';
+import { ViewmultipleDetailsDialogComponent } from './view-details/view-multiple-details';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './all-commodities.component.html',
@@ -35,6 +37,7 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private allCommoditiesService: AllCommoditiesService,
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private router: Router
     ) { }
@@ -44,6 +47,17 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
     this.getCommodityCategories();
 
     this.initFilterForm();
+  }
+
+  viewMoreDetails(array,type) {
+    let viewList = {
+      values:array,
+      type:type
+    }
+    this.dialog.open(ViewmultipleDetailsDialogComponent, {
+      data: viewList,
+      minWidth:'400px'
+    })
   }
 
   download(type) {

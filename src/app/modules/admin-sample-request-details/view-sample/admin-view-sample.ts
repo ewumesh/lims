@@ -13,5 +13,7 @@ export class AdminReportComponent {
         private dialogRef: MatDialogRef<AdminReportComponent>,
       @Inject(MAT_DIALOG_DATA)
       public data: any,
-    ) {}
+    ) {
+        console.log(data, 'ADDJKHBV')
+    }
 }

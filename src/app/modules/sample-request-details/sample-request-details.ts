@@ -373,12 +373,12 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   payNow() {
     
     this.isPaymentProcceed = true;
-    if (this.paymentForm.pristine || !this.isPaymentReceipt) {
-      this.message = {};
-      this.isPaymentProcceed = false;
-      this.message.messageBody = 'All the fileds with (*) are required.';
-      return;
-    }
+    // if (this.paymentForm.pristine || !this.isPaymentReceipt) {
+    //   this.message = {};
+    //   this.isPaymentProcceed = false;
+    //   this.message.messageBody = 'All the fileds with (*) are required.';
+    //   return;
+    // }
 
     // let payload = {
     //   voucher_number: this.paymentForm.value.voucher_number,
