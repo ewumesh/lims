@@ -6,6 +6,8 @@ import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service'
 import { ReportRawDataComponent } from './raw-data/report-raw-data';
 import { ViewReportRemarksComponent } from './view-remarks';
 import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
+import { ViewReportDoc } from './view-docs';
+import { AdminFinalReportComponent } from './view-sample/admin-view-sample';
 
 @Component({
   templateUrl: './final-report-view-component.html',
@@ -26,7 +28,9 @@ export class FinalReportViewComponent implements OnInit {
 
   analystRawData:any;
   supervisorRawData:any;
+  sampleUserDetails:any;
 
+  clientCategories:any
   constructor(
     private service: FinalReportViewService,
     private route: ActivatedRoute,
@@ -36,8 +40,15 @@ export class FinalReportViewComponent implements OnInit {
       this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'))
     }
 
+    getSampleUserDetails(userId) {
+      this.service.getUserDetails(userId).subscribe(res => {
+        this.sampleUserDetails = res;
+      })
+     }
+
   ngOnInit(): void {
     this.getReportDetails();
+    this.getClientCategories();
   }
 
   downloadRawDatasheetAnalyst(id) {
@@ -50,6 +61,12 @@ export class FinalReportViewComponent implements OnInit {
     // let id = this.route.snapshot.paramMap.get('id');
     this.service.printRawDataAnalyst(id).subscribe(res => {
 
+    })
+   }
+
+   viewReceipt(link) {
+    this.dialog.open(ViewReportDoc, {
+      data: link
     })
    }
 
@@ -143,6 +160,16 @@ export class FinalReportViewComponent implements OnInit {
     }, 2500);
   }
 
+  getClientCategories() {
+    this.service.getCategories().subscribe(res => {
+      this.clientCategories = res?.results;
+    })
+  }
+
+  getClientCategoryName(id) {
+    return this.clientCategories.find(a => a.id === id)?.name;
+  }
+
   downloadReport() {
     let payload = {
       id: this.route.snapshot.paramMap.get('id'),
@@ -177,6 +204,7 @@ export class FinalReportViewComponent implements OnInit {
       this.reportDetails = res;
       this.isLoading = false;
       // this.getRawData();
+      this.getSampleUserDetails(res.owner_user.id)
 
       if(this.loggedUserDetails.role ===4) {
         this.getAnalystRawData();
@@ -198,5 +226,12 @@ export class FinalReportViewComponent implements OnInit {
 
   printSupervisorRawData(id) {
     
+  }
+
+  viewSample() {
+    this.dialog.open(AdminFinalReportComponent, {
+      height:'80vh',
+      data:this.reportDetails
+    })
   }
 }

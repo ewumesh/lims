@@ -17,6 +17,10 @@ export class SampleRequestDetailsService {
     return this.http.get(`${this.url}/api/sample-form/${payload.id}/`)
   }
 
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
   getCommodities(payload): Observable<any> {
     return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
   }

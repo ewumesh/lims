@@ -52,7 +52,7 @@ export class ApproveFinalSampleComponent implements OnInit {
         id: this.data.sample_form,
         // sample_form: id,
         status:'completed',
-        remarks: this.remarksForm.value.remarks
+        admin_remarks: this.remarksForm.value.remarks
       }
   
      this.service.verifySample(payload).subscribe(res => {

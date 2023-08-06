@@ -17,12 +17,12 @@
         <div class="col-md-3">
           <div class="row">
             <p>Assigned Date</p>
-            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
+            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date}}</h4>
             <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
-            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
+            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date}}</h4>
             <h4 class="text-muted" *ngIf="!reportDetails?.created_date">N/A</h4>
           </div>
         </div>

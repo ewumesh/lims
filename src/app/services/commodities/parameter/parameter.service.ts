@@ -14,7 +14,7 @@ export class ParameterService {
   constructor(private http: HttpClient) {}
 
   getParameters(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/test-result/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`)
+    return this.http.get(`${this.url}/api/test-result/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&test_type=${payload.test_type}`)
   }
 
   getCommodities(payload):Observable<any> {

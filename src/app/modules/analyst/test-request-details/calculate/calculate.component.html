@@ -74,9 +74,9 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">First Exponent</td>
-                <td colspan="2">Second Exponent</td>
-                <td colspan="2">Third Exponent</td>
+                <td colspan="2"><div [innerHtml]="microParametersDetails?.first_exponent | superscript"></div></td>
+                <td colspan="2"><div [innerHtml]="microParametersDetails?.second_exponent | superscript"></div></td>
+                <td colspan="2"><div [innerHtml]="microParametersDetails?.third_exponent | superscript"></div></td>
             </tr>
             <tr>
                 <td>A</td>
@@ -90,8 +90,8 @@
                 <tr >
                     <td colspan="2" class="text-bold">
                     {{data?.observation_number}}</td>
-                    <td>{{data.temperature}}</td>
-                    <td>{{data.time}}</td>
+                    <td>{{data.temperature}}<sup>o</sup>C</td>
+                    <td>{{data.time | date:'shortTime'}}</td>
                     <td>{{data?.first_exponent_a}}</td>
                     <td>{{data?.first_exponent_b}}</td>
                     <td>{{data?.second_exponent_a}}</td>
@@ -190,9 +190,27 @@
 
       <div class="pt-2">
         <label style="font-size: 14px; font-weight: 600;"> Qualitative Analysis</label>
-            <mat-form-field appearance="outline" class="w-100">
+            <!-- <mat-form-field appearance="outline" class="w-100">
               <input [(ngModel)]="analyst_remarks" placeholder="Remarks (eg. Absent, Not applicable etc.)" class="custom-input" matInput type="text" />
-            </mat-form-field>
+            </mat-form-field> -->
+
+            <angular-editor height="200" [placeholder]="'Enter Qualitative Analysis(For Raw Data Sheet)'" [(ngModel)]="analyst_remarks"></angular-editor>
+      </div>
+
+      <div class="pt-2">
+        <label style="font-size: 14px; font-weight: 600;"> Additional Information</label>
+            <!-- <mat-form-field appearance="outline" class="w-100"> -->
+              <textarea [(ngModel)]="additional_info" placeholder="Additional Information" class="form-control" type="text"></textarea>
+            <!-- </mat-form-field> -->
+
+            <!-- app.component.html -->
+
+<!-- <ckeditor 
+
+ [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
+
+ 
+
       </div>
 
 

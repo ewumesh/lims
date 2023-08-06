@@ -71,11 +71,19 @@ export class FinalReportViewService {
     return this.http.get(`${url}`)
   }
 
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
+
   printRawDataAnalyst(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
 
     window.open(url, "_blank");
     return this.http.get(`${url}`)
+  }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
   }
 
   downloadRawDataSupervisor(id):Observable<any> {

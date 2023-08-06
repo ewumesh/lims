@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AdminReportComponent } from "./view-sample/admin-view-sample";
+import { ViewDoc } from "./view-sample/view-docs";
 
 @NgModule({
     imports:[
@@ -24,7 +25,7 @@ import { AdminReportComponent } from "./view-sample/admin-view-sample";
         MatInputModule,
         SharedModule
     ],
-    declarations:[AdminSampleRequestDetailComponent,ApproveFinalSampleComponent,AdminReportComponent],
+    declarations:[AdminSampleRequestDetailComponent,ApproveFinalSampleComponent,AdminReportComponent,ViewDoc],
     exports:[],
     providers:[AdminSampleRequestDetailsService]
 })

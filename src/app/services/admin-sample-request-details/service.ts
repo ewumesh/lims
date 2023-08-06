@@ -25,6 +25,10 @@ export class AdminSampleRequestDetailsService {
     return this.http.get(`${this.url}/api/sample-form-has-verifier/?sample_form_id${payload.id}`)
   }
 
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
+
 
   
   downloadReport(payload) :Observable<any> {

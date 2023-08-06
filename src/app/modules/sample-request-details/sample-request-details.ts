@@ -64,6 +64,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
   sampleUserDetails: any;
 
+  clientCategories: any;
+
   constructor(
     private service: SampleRequestDetailsService,
     private route: ActivatedRoute,
@@ -73,6 +75,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     private toast: ToastService
     ) {
     this.sampleId = this.route.snapshot.paramMap.get('id');
+    this.getClientCategories();
    }
 
    getSampleUserDetails(userId) {
@@ -101,6 +104,16 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
     this.dialog.open(PaymentReceiptComponent, {
       data: url
     })
+  }
+
+  getClientCategories() {
+    this.service.getCategories().subscribe(res => {
+      this.clientCategories = res?.results;
+    })
+  }
+
+  getClientCategoryName(id) {
+    return this.clientCategories.find(a => a.id === id)?.name;
   }
 
    assignToSupervisor() {

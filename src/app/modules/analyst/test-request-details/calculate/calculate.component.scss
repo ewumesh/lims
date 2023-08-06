@@ -138,3 +138,9 @@ input{
 .text-bold{
   font-weight: 500;
 }
+
+::ng-deep {
+  .angular-editor-textarea {
+    height: 150px !important;
+  }
+}

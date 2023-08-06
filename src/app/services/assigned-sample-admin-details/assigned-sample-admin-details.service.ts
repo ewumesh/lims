@@ -14,4 +14,12 @@ export class AssignedSampleAdminDetailsService {
   getAssignedSampleDetails(payload):Observable<any>{
     return this.http.get(`${this.url}/api/report/detail-sample-form-has-parameter-has-assigned-analyst/${payload.id}/`)
   }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/`);
+  }
+
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
 }

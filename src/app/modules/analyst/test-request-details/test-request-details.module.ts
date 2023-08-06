@@ -27,7 +27,25 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ViewMicroRawDataComponent } from './view-micro-raw-data/view-micro-raw-data';
 import {MatTabsModule} from '@angular/material/tabs';
 import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generate-micro-raw-data';
+import { LabSheetComponent } from './lab-sheet/lab-sheet';
+import { SuperscriptPipe } from 'src/app/shared/s-transform';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
+import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
+export const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
+  parse: {
+    dateInput: 'l, LTS',
+  },
+  display: {
+    dateInput: 'ddd D MMM YYYY HH:mm',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @NgModule({
   declarations: [
     TestRequestDetailsComponent,
@@ -39,7 +57,9 @@ import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generat
     ViewRemarksComponent,
     MicroParameterDetailsComponent,
     ViewMicroRawDataComponent,
-    GenerateMicroRawDataComponent
+    GenerateMicroRawDataComponent,
+    LabSheetComponent,
+    SuperscriptPipe
   ],
   imports: [
     CommonModule,
@@ -62,9 +82,16 @@ import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generat
     MatTabsModule,
 
     DeleteConfirmModule,
-    SharedModule
+    SharedModule,
+    CKEditorModule,
+    AngularEditorModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
+    
    ],
   exports: [],
-  providers: [TestRequestDetailsService],
+  providers: [TestRequestDetailsService,{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }],
+  // providers: [TestRequestDetailsService],
 })
 export class TestRequestDetailsModule {}

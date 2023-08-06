@@ -170,7 +170,7 @@
                    </div>
                    <div>Result: {{p.result}}</div>
                    <div>Final Result: {{p.converted_result || 'N/A'}}</div>
-                   <div *ngIf="p.analyst_remarks">Qualitative Analysis: {{p.analyst_remarks || 'N/A'}}</div>
+                   <div *ngIf="p.analyst_remarks">Qualitative Analysis: <span [innerHtml]="p.analyst_remarks"></span></div>
                    
                     </div>
                   </div>

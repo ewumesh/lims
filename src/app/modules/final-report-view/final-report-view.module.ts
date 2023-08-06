@@ -14,9 +14,11 @@ import { ViewReportRemarksComponent } from './view-remarks';
 import { AvatarModule } from 'ngx-avatar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
+import { ViewReportDoc } from './view-docs';
+import { AdminFinalReportComponent } from './view-sample/admin-view-sample';
 
 @NgModule({
-  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent, ReportMicroRawDataComponent],
+  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent, ReportMicroRawDataComponent,ViewReportDoc,AdminFinalReportComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

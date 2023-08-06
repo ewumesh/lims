@@ -218,7 +218,7 @@
               <th>Method</th>
               <th>Units</th>
               <th>Price</th>
-              <th>Tested By</th>
+              <th>Supervise By</th>
               <th>Test Type</th>
               <th>Result</th>
               <th>Status</th>
@@ -236,8 +236,8 @@
                   <div data-collaborators="10">
                     <div class="author">
                       <div class="mask cursor-pointer">
-                        <ngx-avatar size="30" [name]="r.first_name + ' ' + r.last_name"
-                          [matTooltip]="r.first_name + ' ' + r.last_name"></ngx-avatar>
+                        <ngx-avatar size="30" [name]="r.sup_full_name"
+                          [matTooltip]="r.sup_full_name"></ngx-avatar>
                       </div>
                     </div>
                   </div>
@@ -250,7 +250,10 @@
                   <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                 </td>
                 <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
-                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">{{reportDetails.remarks}}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">
+                  <!-- {{reportDetails.remarks}} -->
+                  <div *ngFor="let r of reportDetails?.supervisor_sample_form">{{r?.remarks}}({{r?.supervisor_user?.first_name}} {{r?.supervisor_user?.last_name}})</div>
+                </td>
               </tr>
             </tbody>
           </table>

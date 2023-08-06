@@ -15,6 +15,10 @@ export class TestRequestDetailsService {
     return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}&status=`);
   }
 
+  getDetailsForLabSheet(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}&status=`);
+  }
+
 
   getAllCommodities(payload):Observable<any> {
     return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}`);
@@ -46,6 +50,12 @@ export class TestRequestDetailsService {
 
   downloadRawData(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  downloadLabSheet(id, role) {
+    let url = `${this.url}/api/report/get-single-report/test-report-sheet/pdf/eng/${id}/${role}/`;
     window.location.href = url;
     return this.http.get(`${url}`)
   }

@@ -24,7 +24,13 @@ export class MicroParameterDetailsComponent implements OnInit {
 
     existingParameterDetails: any;
 
-    microId:number;
+    microId: number;
+
+    public listColors = ['primary', 'accent', 'warn'];
+
+    public stepHours = [1, 2, 3, 4, 5];
+    public stepMinutes = [1, 5, 10, 15, 20, 25];
+    public stepSeconds = [1, 5, 10, 15, 20, 25];
 
     constructor(
         private fb: FormBuilder,
@@ -32,9 +38,9 @@ export class MicroParameterDetailsComponent implements OnInit {
         private toast: ToastService,
         private dialogRef: MatDialogRef<MicroParameterDetailsComponent>,
         @Inject(MAT_DIALOG_DATA)
-        public data: any,) { 
-            // console.log(data, 'MY OB DATAE') 
-        }
+        public data: any,) {
+        // console.log(data, 'MY OB DATAE') 
+    }
 
 
     getExistingParameter() {
@@ -45,6 +51,7 @@ export class MicroParameterDetailsComponent implements OnInit {
             this.existingParameterDetails = res;
             this.parameterDetailsForm.patchValue(res);
             this.addedParameterDetails = res;
+
 
 
             // this.observationForm.value.observation = res.micro_observation_table;
@@ -62,13 +69,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                         observation_time: observation[j]?.observation_time,
                         temperature: observation[j]?.temperature,
                         time: observation[j]?.time,
-                        first_exponent: '',
+                        first_exponent: this.existingParameterDetails?.first_exponent,
                         first_exponent_a: observation[j]?.first_exponent_a,
                         first_exponent_b: observation[j]?.first_exponent_b,
-                        second_exponent: '',
+                        second_exponent: this.existingParameterDetails?.second_exponent,
                         second_exponent_a: observation[j]?.second_exponent_a,
                         second_exponent_b: observation[j]?.second_exponent_b,
-                        third_exponent: '',
+                        third_exponent: this.existingParameterDetails?.third_exponent,
                         third_exponent_a: observation[j]?.third_exponent_a,
                         third_exponent_b: observation[j]?.third_exponent_b,
                         negative_control: observation[j]?.negative_control,
@@ -85,10 +92,13 @@ export class MicroParameterDetailsComponent implements OnInit {
             } else {
                 this.addObservation();
             }
+
+            console.log(this.form.value, 'hjagsbd ok kok okok')
         })
     }
 
     initForm() {
+        console.log(this.data, 'INIT FORM')
         this.parameterDetailsForm = this.fb.group({
             id: null,
             physical_condition_of_sample: '',
@@ -101,7 +111,10 @@ export class MicroParameterDetailsComponent implements OnInit {
             required_temperature: '',
             sample_form: this.data?.sample_form,
             parameter: this.data?.selectedParameter?.id,
-            sample_form_has_parameter: this.data?.id
+            sample_form_has_parameter: this.data?.id,
+            first_exponent: '',
+            second_exponent: '',
+            third_exponent: ''
         })
 
         if (this.data?.selectedParameter?.micro_table && this.data?.selectedParameter?.micro_table !== null) {
@@ -124,7 +137,7 @@ export class MicroParameterDetailsComponent implements OnInit {
             first_exponent: '',
             first_exponent_a: '',
             first_exponent_b: '',
-            second_exponent: '', 
+            second_exponent: '',
             second_exponent_a: '',
             second_exponent_b: '',
             third_exponent: '',
@@ -139,7 +152,10 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     addObservation() {
+        console.log(this.addedParameterDetails, 'PRAM DEWW')
         // this.form.clear();
+        // this.form = new Form
+        this.observationForm.setControl('observation', new FormArray([]));
         for (let a = 1; a <= 5; a++) {
             if (a === 1) {
                 let firstColumn = this.fb.group({
@@ -147,13 +163,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
                     time: this.addedParameterDetails?.date_of_incubation,
-                    first_exponent: '',
+                    first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
-                    second_exponent: '',
+                    second_exponent: this.addedParameterDetails?.second_exponent,
                     second_exponent_a: '',
                     second_exponent_b: '',
-                    third_exponent: '',
+                    third_exponent: this.addedParameterDetails?.third_exponent,
                     third_exponent_a: '',
                     third_exponent_b: '',
                     negative_control: '',
@@ -170,13 +186,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
                     time: this.addedParameterDetails?.date_of_incubation,
-                    first_exponent: '',
+                    first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
-                    second_exponent: '',
+                    second_exponent: this.addedParameterDetails?.second_exponent,
                     second_exponent_a: '',
                     second_exponent_b: '',
-                    third_exponent: '',
+                    third_exponent: this.addedParameterDetails?.third_exponent,
                     third_exponent_a: '',
                     third_exponent_b: '',
                     negative_control: '',
@@ -192,13 +208,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
                     time: this.addedParameterDetails?.date_of_incubation,
-                    first_exponent: '',
+                    first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
-                    second_exponent: '',
+                    second_exponent: this.addedParameterDetails?.second_exponent,
                     second_exponent_a: '',
                     second_exponent_b: '',
-                    third_exponent: '',
+                    third_exponent: this.addedParameterDetails?.third_exponent,
                     third_exponent_a: '',
                     third_exponent_b: '',
                     negative_control: '',
@@ -214,13 +230,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
                     time: this.addedParameterDetails?.date_of_incubation,
-                    first_exponent: '',
+                    first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
-                    second_exponent: '',
+                    second_exponent: this.addedParameterDetails?.second_exponent,
                     second_exponent_a: '',
                     second_exponent_b: '',
-                    third_exponent: '',
+                    third_exponent: this.addedParameterDetails?.third_exponent,
                     third_exponent_a: '',
                     third_exponent_b: '',
                     negative_control: '',
@@ -236,13 +252,13 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
                     time: this.addedParameterDetails?.date_of_incubation,
-                    first_exponent: '',
+                    first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
-                    second_exponent: '',
+                    second_exponent: this.addedParameterDetails?.second_exponent,
                     second_exponent_a: '',
                     second_exponent_b: '',
-                    third_exponent: '',
+                    third_exponent: this.addedParameterDetails?.third_exponent,
                     third_exponent_a: '',
                     third_exponent_b: '',
                     negative_control: '',
@@ -300,13 +316,13 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     updateMicroParameter() {
-        
         this.isSetParameterDetails = true;
         this.service.updateMicorParameters(this.parameterDetailsForm.value).subscribe(res => {
             this.addedParameterDetails = res.data;
+            console.log(res.data, 'OIKJMIUJKM')
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
-            // this.addObservation();
+            this.addObservation();
             this.microId = res.data.id
             this.isSetParameterDetails = false;
         }, (error) => {
@@ -332,31 +348,43 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     updateObservationTable() {
+
         // console.log(this.existingParameterDetails.micro_observation_table, "MY DATA FOR OBSERVATION")
-        if(this.existingParameterDetails.micro_observation_table.length > 0) {
-        let payload = this.parameterDetailsForm.value;
-        this.service.updateObservationTable(payload, this.observationForm.value.observation).subscribe(res => {
-            this.toast.showToast(TOAST_STATE.success, res.message);
-            this.dissmissToast();
-            let closingPayload = {
-                status: true,
-                id: this.microId
-            }
-            this.dialogRef.close(closingPayload);
-        }, (error) => {
-            window.scroll(0, 0);
-            this.responseError = error?.error;
-        })
-    } else {
-        this.service.saveObservationTable(this.observationForm.value.observation).subscribe(res => {
-            this.toast.showToast(TOAST_STATE.success, res.message);
-            this.dissmissToast();
-            this.dialogRef.close(true);
-        }, (error) => {
-            window.scroll(0, 0);
-            this.responseError = error?.error;
-        })
-    }
+        if (this.existingParameterDetails.micro_observation_table.length > 0) {
+            let payload = this.parameterDetailsForm.value;
+            let observationWithId = [];
+            let existingObservation = this.existingParameterDetails.micro_observation_table
+            let observation = this.observationForm.value.observation;
+            observation.forEach((element, index) => {
+               let o = element.id = existingObservation[index].id;
+               observationWithId.push(o);
+            });
+
+            
+
+            console.log(observationWithId, 'PAYLOAD >>>>>')
+            this.service.updateObservationTable(payload, this.observationForm.value.observation).subscribe(res => {
+                this.toast.showToast(TOAST_STATE.success, res.message);
+                this.dissmissToast();
+                let closingPayload = {
+                    status: true,
+                    id: this.microId
+                }
+                this.dialogRef.close(closingPayload);
+            }, (error) => {
+                window.scroll(0, 0);
+                this.responseError = error?.error;
+            })
+        } else {
+            this.service.saveObservationTable(this.observationForm.value.observation).subscribe(res => {
+                this.toast.showToast(TOAST_STATE.success, res.message);
+                this.dissmissToast();
+                this.dialogRef.close(true);
+            }, (error) => {
+                window.scroll(0, 0);
+                this.responseError = error?.error;
+            })
+        }
     }
 
     dissmissToast() {

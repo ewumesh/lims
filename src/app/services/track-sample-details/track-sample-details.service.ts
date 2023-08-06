@@ -15,4 +15,8 @@ export class TrackSampleDetailsService {
   getSampleDetails(paylaod): Observable<any> {
     return this.http.get(`${this.url}/api/report/detail-sample-form-has-parameter-has-assigned-analyst/${paylaod}/`)
   }
+
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
 }

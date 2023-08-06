@@ -71,7 +71,7 @@
               Sample Request</a>
           </li>
 
-          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2 || userDetails.role === 7">
+          <li class="nav-item" *ngIf="userDetails.role === 1 || userDetails.role === 2">
             <a class="nav-link"
               [ngClass]="{'active-route': (this.router.url === '/dashboard/sample-assigned'|| this.router.url.startsWith('/dashboard/sample-assigned-details/'))}"
               (click)="navigate('/dashboard/sample-assigned')" href="Javascript:;">

@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TestRequestDetailsService } from 'src/app/services/analyst/test-request-details/test-request-details.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   templateUrl: './calculate.component.html',
@@ -35,6 +36,8 @@ export class CalculateComponent implements OnInit {
   microParametersDetails: any;
 
   convertedResult;
+
+  additional_info;
 
   constructor(
     private fb: FormBuilder,
@@ -214,6 +217,7 @@ export class CalculateComponent implements OnInit {
         sample_form_has_parameter: this.data?.id,
         analyst_remarks:this.analyst_remarks,
         converted_result:this.convertedResult,
+        additional_info: this.additional_info,
         decimal_place: 2,
         units:this.data?.parameters?.insUnits,
         test_method: this.data?.parameters?.insTestMethod,
@@ -228,6 +232,7 @@ export class CalculateComponent implements OnInit {
       formula_variable_fields_value:JSON.stringify(this.calculateForm.value),
       sample_form_has_parameter: this.data.details?.id,
       analyst_remarks:this.analyst_remarks,
+      additional_info: this.additional_info,
       converted_result:this.convertedResult,
       decimal_place: 2,
       units:this.data?.parameters?.insUnits,

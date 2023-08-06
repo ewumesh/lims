@@ -37,12 +37,12 @@
                     <td class="text-center">1</td>
                     <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name}} </span></td>
                     <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id}} </span></td>
-                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
+                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
-                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
-                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date: 'medium'}} </span></td>
+                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">3</td>

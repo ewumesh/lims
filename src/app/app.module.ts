@@ -16,7 +16,7 @@ import { TokenInterceptor } from './services/token-validator';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -41,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    CKEditorModule
 
   ],
   exports: [MatMenuModule],

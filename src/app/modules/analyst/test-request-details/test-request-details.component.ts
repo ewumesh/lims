@@ -15,6 +15,7 @@ import { ViewRemarksComponent } from './view-remarks/view-remarks';
 import { MicroParameterDetailsComponent } from './parameter-details/micro-parameter-details';
 import { ViewMicroRawDataComponent } from './view-micro-raw-data/view-micro-raw-data';
 import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generate-micro-raw-data';
+import { LabSheetComponent } from './lab-sheet/lab-sheet';
 
 @Component({
   templateUrl: './test-request-details.component.html',
@@ -60,7 +61,6 @@ isOtherDetails = false;
   insUnits;
   insMandatoryStandards;
 
-
   constructor(
     private service: TestRequestDetailsService,
     private fb: FormBuilder,
@@ -70,6 +70,14 @@ isOtherDetails = false;
     private router: Router
   ) { 
     this.initOtherForm();
+  }
+
+  viewLabSheet() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.dialog.open(LabSheetComponent, {
+      height:'80vh',
+      data: id
+    })
   }
 
   sendToSupervisor() {
@@ -121,6 +129,12 @@ isOtherDetails = false;
 
   }
 
+  downloadLabSheet() {
+    let id = this.route.snapshot.paramMap.get('id');
+    let userRole = this.userDetails.role;
+    this.service.downloadLabSheet(id, userRole)
+  }
+
   getTestResultDetails() {
     let id = this.route.snapshot.paramMap.get('id');
     let payload = {
@@ -136,6 +150,7 @@ isOtherDetails = false;
       this.dataMutations.details = response.sample_form;
 
       this.dataSource = response?.parameter;
+      console.log(response, "DATA<<<")
       response?.parameter.forEach(element => {
 
         if(element.mandatory_standard_selected) {
@@ -246,11 +261,11 @@ isOtherDetails = false;
   //     commodity: data.commodity,
 
   microParameterDetails(data, sampleDetails) {
-
+    console.log(this.testRequestDetails, 'CL..')
     let requiredList = this.testRequestDetails;
     requiredList.selectedParameter = data;
     requiredList.parameter = data;
-    requiredList.sample_form = this.testRequestDetails?.sample_form?.id;
+    requiredList.sample_form = this.testRequestDetails?.sample_form?.sample_form;
     requiredList.commodity = data.commodity;
     requiredList.details = this.testRequestDetails;
 

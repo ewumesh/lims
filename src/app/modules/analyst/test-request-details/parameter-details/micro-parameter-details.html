@@ -44,12 +44,55 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label>Prepared Dilution</label>
-                        <mat-form-field appearance="outline" class="w-100">
-                            <input matInput class="custom-input" placeholder="Prepared Dilution"
-                                formControlName="prepared_dilution" />
-                        </mat-form-field>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
+                                        formControlName="prepared_dilution" /> -->
+        
+                                        <mat-select formControlName="first_exponent" class="custom-select" placeholder="Select Dilution">
+                                            <mat-option [value]="'10^0'">10⁰</mat-option>
+                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
+                                        formControlName="prepared_dilution" /> -->
+        
+                                        <mat-select formControlName="second_exponent" class="custom-select" placeholder="Select Dilution">
+                                            <mat-option [value]="'10^0'">10⁰</mat-option>
+                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
+                                        formControlName="prepared_dilution" /> -->
+        
+                                        <mat-select formControlName="third_exponent" class="custom-select" placeholder="Select Dilution">
+                                            <mat-option [value]="'10^0'">10⁰</mat-option>
+                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -77,23 +120,39 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label>Date And Time</label>
-                        <mat-form-field appearance="outline" class="w-100">
-                            <!-- <input matInput class="custom-input" placeholder="Date and time" formControlName="date_and_time" /> -->
+                        <label>Date And Time </label>
+                        <input formControlName="date_of_incubation" placeholder="Enter Date" class="form-control" type="datetime-local">
+                        <!-- <mat-form-field appearance="outline" class="w-100">
 
                             <input matInput class="custom-input" [matDatepicker]="date" (focus)="date.open()"
                                 (click)="date.open()" placeholder="Enter Manufactured Date"
                                 formControlName="date_of_incubation" />
 
                             <mat-datepicker #date></mat-datepicker>
-                        </mat-form-field>
+                        </mat-form-field> -->
+
+                        <!-- <mat-form-field>
+                            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" 
+                               >
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="true"
+                              [stepHour]="stepHours" [stepMinute]="stepMinutes" [stepSecond]="stepSeconds"
+                              >
+                            </ngx-mat-datetime-picker>
+                          </mat-form-field> -->
+
                     </div>
 
                     <div class="col-md-6">
                         <label>Required Temprature</label>
                         <mat-form-field appearance="outline" class="w-100">
-                            <input matInput class="custom-input" placeholder="Temprature"
-                                formControlName="required_temperature" />
+                            <!-- <input matInput class="custom-input" placeholder="Temprature"
+                                formControlName="required_temperature" /> -->
+                                <mat-select formControlName="required_temperature" placeholder="Select Temprature" class="custom-select">
+                                    <mat-option [value]="'25'">25⁰C</mat-option>
+                                    <mat-option [value]="'30'">30⁰C</mat-option>
+                                    <mat-option [value]="'37'">37⁰C</mat-option>
+                                </mat-select>
                         </mat-form-field>
                     </div>
 
@@ -141,9 +200,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">First Exponent</td>
-                        <td colspan="2">Second Exponent</td>
-                        <td colspan="2">Third Exponent</td>
+                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.first_exponent | superscript"></div></td>
+                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.second_exponent | superscript"></div></td>
+                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.third_exponent | superscript"></div></td>
                     </tr>
                     <tr>
                         <td>A</td>
@@ -155,10 +214,18 @@
                     </tr>
                     <ng-container formArrayName="observation">
                         <tr *ngFor="let list of form.controls; let i = index" [formGroupName]="i">
-                            <td colspan="2" class="text-bold"><input formControlName="observation_number" type="text" />
+                            <td colspan="2" class="text-bold">
+                                {{observationForm.value.observation[i].observation_number}}
+                                <!-- <input formControlName="observation_number" type="text" /> -->
                             </td>
-                            <td><input formControlName="temperature" type="text"></td>
-                            <td><input formControlName="time" type="text"></td>
+                            <td style="width: 50px;">
+                                <!-- <input formControlName="temperature" type="text"> -->
+                                {{observationForm.value.observation[i].temperature}} <sup>o</sup>C
+                            </td>
+                            <td style="width: 50px;">
+                                <!-- <input formControlName="time" type="text"> -->
+                                {{observationForm.value.observation[i].time | slice:11:19}}
+                            </td>
                             <td><input formControlName="first_exponent_a" type="text"></td>
                             <td><input formControlName="first_exponent_b" type="text"></td>
                             <td><input formControlName="second_exponent_a" type="text"></td>

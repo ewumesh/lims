@@ -1,14 +1,13 @@
-
 <div>
-    <div class="row">
-      <div class="db-content">
-        <!-- <div class="top-view-page p-2 mb-3">
+  <div class="row">
+    <div class="db-content">
+      <div class="top-view-page p-2 mb-3">
           <div class="row log-details p-3" *ngIf="loggedUserDetails.role !== 4">
             <div class="col-md-3">
               <div class="row">
                 <p>Supervise By</p>
-                <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
-                <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+                <h4 *ngFor="let u of reportDetails?.supervisor_sample_form">{{u?.supervisor_user?.first_name}} {{u?.supervisor_user?.last_name}},</h4>
+                <h4 *ngIf="reportDetails?.supervisor_sample_form?.length < 1" class="text-muted">N/A</h4>
               </div>
               <div class="row mt-2">
                 <p>Created By</p>
@@ -17,7 +16,7 @@
               </div>
             </div>
             <div class="col-md-3">
-              <div class="row">
+              <!-- <div class="row">
                 <p>Assigned Date</p>
                 <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
                 <h4 *ngIf="!reportDetails.approved_date" class="text-muted">N/A</h4>
@@ -25,7 +24,7 @@
               <div class="row mt-2">
                 <p>Created at</p>
                 <h4>{{reportDetails?.created_date | date:'medium'}}</h4>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-2">
               <div class="row">
@@ -80,203 +79,374 @@
                 {{reportDetails?.status}}</span>
             </div>
           </div>
-        </div> -->
-        <div class="view-page">
-          <!-- <h3 class="view-page-heading">Sample Details</h3> -->
-          <div class="row">
-            <div class="col-md-2">
-              <h4>Sample ID</h4>
-              <!-- analyst_encode_id -->
-              <p *ngIf="loggedUserDetails.role === 4">{{reportDetails?.analyst_encode_id}}</p>
-              <p *ngIf="loggedUserDetails.role === 3">{{reportDetails?.supervisor_encode_id}}</p>
-              <p *ngIf="loggedUserDetails.role === 6">{{reportDetails?.verifier_encode_id}}</p>
-              <p *ngIf="loggedUserDetails.role !== 3 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 6">{{reportDetails.id}}</p>
-            </div>
-            <div class="col-md-3">
-              <h4>Sample Name </h4>
-              <p>{{reportDetails.name}}</p>
-            </div>
-            <div class="col-md-3">
-              <div *ngIf="loggedUserDetails.role === 4">
-                <h4>Assigned by </h4>
-                <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last}}</p>
-                <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
-              </div>
-              <div *ngIf="loggedUserDetails.role !== 4">
-                <h4>Supervise by </h4>
-              <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</p>
-              <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
+        </div>
+
+        <div class="row m-0 mt-4">
+          <div class="col-md-12 white-bg p-4">
+            <h3 class="view-page-heading">User Details</h3>
+      
+            <div class="row">
+              <div class="col-md-4">
+                <h4 class="mb-0">Name</h4>
+                <p>{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name || 'N/A'}}</p>
+              </div> 
+      
+              <div class="col-md-4">
+                <h4 class="mb-0">Email</h4>
+                <p>{{sampleUserDetails?.email || 'N/A'}}</p>
+              </div> 
+      
+              <div class="col-md-4">
+                <h4 class="mb-0">Phone</h4>
+                <p>{{sampleUserDetails?.phone || 'N/A'}}</p>
+              </div> 
+              
+              <div class="col-md-4">
+                <h4 class="mb-0">Username</h4>
+                <p>{{sampleUserDetails?.username || 'N/A'}}</p>
               </div>
               
+              
+              <div class="col-md-4">
+                <h4 class="mb-0">Joined Date</h4>
+                <p>{{sampleUserDetails?.date_joined | date:'medium'}}</p>
+              </div>
             </div>
-            <div class="col-md-2">
-              <div *ngIf="loggedUserDetails.role === 4">
-              <h4>Assigned Date </h4>
-              <p *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</p>
-              <p class="text-muted" *ngIf="!reportDetails.approved_date">N/A</p>
+      
+            <div class="row" *ngIf="sampleUserDetails?.custom_user_image?.length > 0">
+      
+              <div class="col-md-12">
+                <h2 class="text-lims-primary mb-0 section-title"> Documents</h2>
+                <hr class="" />
+      
+                <div class="row">
+                  <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
+                    <h3>
+                      <span class="title">Document Name</span>
+                      <p class="detail">{{a?.name | titlecase}}</p>
+                    </h3>
+                    <img matTooltip="View Image" alt="Document" style="height: 100px"
+                    class="img-thumbnail cursor-pointer" (click)="viewReceipt(a?.file)"
+                    [src]="a.file" />
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div class="view-page mt-4 p-4" *ngIf="reportDetails?.payment?.length > 0">
+          <h3 class="view-page-heading pb-0 mb-0">Payment Details</h3>
+          <div class="row m-0 py-1" *ngFor="let p of reportDetails.payment">
+            <div class="col-md-3">
+              <h4 class="mb-0">Voucher No</h4>
+              <p>{{p.voucher_number}}</p>
             </div>
-  
-            <div class="col-md-2 text-end">
-              <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
-                {{reportDetails?.status}}</span>
+            <div class="col-md-3">
+              <h4 class="mb-0">Amount </h4>
+              <p>{{p.amount || ''}}</p>
             </div>
+            <div class="col-md-3">
+              <h4 class="mb-0">Paid Date </h4>
+              <p>{{p.created_date | date: 'medium'}}</p>
+            </div>
+    
+            <div class="col-md-3">
+              <!-- <h4 class="m-0">Payment Receipt </h4> -->
+              <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
+              <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
+            </div>
+            <hr class="m-0" />
           </div>
           <!-- <div class="row">
             <div class="col-md-4">
               <h4>MFD</h4>
-              <p>{{reportDetails.mfd | date}}</p>
+              <p>{{sampleDetails.mfd | date}}</p>
             </div>
             <div class="col-md-4">
               <h4>Best Before Date</h4>
-              <p>{{reportDetails.dfb | date}}</p>
+              <p>{{sampleDetails.dfb | date}}</p>
             </div>
-  
+    
             <div class="col-md-4">
               <h4>Batch</h4>
-              <p>{{reportDetails.batch}}</p>
+              <p>{{sampleDetails.batch}}</p>
             </div>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <div class="col-md-4">
               <h4>Brand</h4>
-              <p>{{reportDetails.brand}}</p>
+              <p>{{sampleDetails.brand}}</p>
             </div>
-  
+    
             <div class="col-md-4">
               <h4>Purpose of Analysis</h4>
-              <p>{{reportDetails?.purpose}}</p>
+              <p>{{sampleDetails?.purpose}}</p>
             </div>
-  
+    
             <div class="col-md-4">
               <h4>Condition</h4>
-              <p>{{reportDetails.condition}}</p>
+              <p>{{sampleDetails.condition}}</p>
             </div>
           </div> -->
         </div>
-  
-        <div *ngIf="loggedUserDetails.role === 6">
-      <div class="white-bg mt-3" *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
-        <h3 class="rawdata-heading">Raw Data Sheet</h3>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li *ngIf="rawDataSheet?.Microbiological" class="nav-item" role="presentation">
-            <button class="nav-link active" id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
-          </li>
-          <li *ngIf="rawDataSheet?.Chemical" class="nav-item" role="presentation">
-            <button class="nav-link" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane" type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
-          </li>
-          <li *ngIf="rawDataSheet?.Instrumental" class="nav-item" role="presentation">
-            <button class="nav-link" id="Instrumental-tab" data-bs-toggle="tab" data-bs-target="#Instrumental-tab-pane" type="button" role="tab" aria-controls="Instrumental-tab-pane" aria-selected="false">Instrumental Test</button>
-          </li>
-        </ul>
-        <div  class="tab-content mt-3" id="myTabContent">
-          <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade show active" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
-            <table class="table mb-0">
-              <tbody>
-                <tr *ngFor="let a of rawDataSheet?.Microbiological[0]?.raw_data">
-                  <td style="display: flex; justify-content: start; align-items: center;">
-                    <ngx-avatar [name]="rawDataSheet?.Microbiological[0]?.analyst_user.first_name +' '+ Microbiological?.Chemical[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                    <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Microbiological[0]?.analyst_user.first_name}} {{rawDataSheet?.Microbiological[0]?.analyst_user.last_name}}</p>
-                  </td>
-                  <td style="width: 16%;">
-                    <p class="bold-text mb-0 pb-0">Generated Date</p>
-                    <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
-                  </td>
-                  <td>
-                    <p class="bold-text mb-0 pb-0">Remarks</p>
-                    <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                    <button (click)="viewRemarks(rawDataSheet?.Microbiological[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                    <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
-                  </td>
-                  
-                  <td style="width: 15%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Status</p>
-                    <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Microbiological[0]?.status">{{rawDataSheet?.Microbiological[0]?.status}}</span>
-                  </td>
-                  <td style="width: 20%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Actions</p>
-                    <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        
+      <div class="view-page mt-3">
+        <!-- <h3 class="view-page-heading">Sample Details</h3> -->
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample ID</h4>
+            <!-- analyst_encode_id -->
+            <p>
+              {{reportDetails.id}}</p>
           </div>
-  
-          <div *ngIf="rawDataSheet?.Chemical" class="tab-pane fade" id="Chemical-tab-pane" role="tabpanel" aria-labelledby="Chemical-tab" tabindex="0">
-            <table class="table mb-0">
-              <tbody>
-                <tr *ngFor="let a of rawDataSheet?.Chemical[0]?.raw_data">
-                  <td style="display: flex; justify-content: start; align-items: center;">
-                    <ngx-avatar [name]="rawDataSheet?.Chemical[0]?.analyst_user.first_name +' '+ rawDataSheet?.Chemical[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                    <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Chemical[0]?.analyst_user.first_name}} {{rawDataSheet?.Chemical[0]?.analyst_user.last_name}}</p>
-                  </td>
-                  <td style="width: 16%;">
-                    <p class="bold-text mb-0 pb-0">Generated Date</p>
-                    <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
-                  </td>
-                  <td>
-                    <p class="bold-text mb-0 pb-0">Remarks</p>
-                    <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                    <button (click)="viewRemarks(rawDataSheet?.Chemical[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                    <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
-                  </td>
-                  
-                  <td style="width: 15%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Status</p>
-                    <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Chemical[0]?.status">{{rawDataSheet?.Chemical[0]?.status}}</span>
-                  </td>
-                  <td style="width: 20%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Actions</p>
-                    <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Name </h4>
+            <p>{{reportDetails.name}}</p>
           </div>
-  
-          <div *ngIf="rawDataSheet?.Instrumental" class="tab-pane fade show active" id="Instrumental-tab-pane" role="tabpanel" aria-labelledby="Instrumental-tab" tabindex="0">
-            <table class="table mb-0">
-              <tbody>
-                <tr *ngFor="let a of rawDataSheet?.Instrumental[0]?.raw_data">
-                  <td style="display: flex; justify-content: start; align-items: center;">
-                    <ngx-avatar [name]="rawDataSheet?.Instrumental[0]?.analyst_user.first_name +' '+ rawDataSheet?.Instrumental[0]?.analyst_user.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                    <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Instrumental[0]?.analyst_user.first_name}} {{rawDataSheet?.Instrumental[0]?.analyst_user.last_name}}</p>
-                  </td>
-                  <td style="width: 16%;">
-                    <p class="bold-text mb-0 pb-0">Generated Date</p>
-                    <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
-                  </td>
-                  <td>
-                    <p class="bold-text mb-0 pb-0">Remarks</p>
-                    <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button>
-                    <button (click)="viewRemarks(rawDataSheet?.Instrumental[0]?.sample_form?.remarks)" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                    <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
-                  </td>
-                  
-                  <td style="width: 15%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Status</p>
-                    <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Instrumental[0]?.status">{{rawDataSheet?.Instrumental[0]?.status}}</span>
-                  </td>
-                  <td style="width: 20%;" class="text-start">
-                    <p class="bold-text mb-0 pb-0">Actions</p>
-                    <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button (click)="downloadRawDatasheet(a.raw_data)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button (click)="printRawData(a.raw_data)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-2">
+            <div>
+              <h4 class="mb-0">Sample Lab Code </h4>
+              <p>{{reportDetails?.sample_lab_id || 'N/A'}}</p>
+            </div>
+
+          </div>
+
+          <div class="col-md-2">
+            <div>
+              <h4 class="mb-0">Refrence Number </h4>
+              <p>{{reportDetails?.refrenace_number|| 'N/A'}}</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">MFD</h4>
+            <p>{{reportDetails.mfd | date}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Best Before Date</h4>
+            <p>{{reportDetails.dfb | date}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Batch</h4>
+            <p>{{reportDetails.batch}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Brand</h4>
+            <p>{{reportDetails.brand}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Purpose of Analysis</h4>
+            <p>{{reportDetails?.purpose}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Condition</h4>
+            <p>{{reportDetails.condition}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Note</h4>
+            <p>{{reportDetails.note || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Amendments</h4>
+            <p>{{reportDetails.amendments || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Language</h4>
+            <p *ngIf="reportDetails.language === 'en'">English</p>
+            <p *ngIf="reportDetails.language === 'np'">Nepali</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Units</h4>
+            <p>{{reportDetails.sample_units || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Type</h4>
+            <p>{{reportDetails.sample_type || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Quantity</h4>
+            <p>{{reportDetails.sample_quantity || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Number of Sample</h4>
+            <p>{{reportDetails.number_of_sample || 'N/A'}}</p>
           </div>
         </div>
       </div>
+
+      <div *ngIf="loggedUserDetails.role === 6">
+        <div class="white-bg mt-3"
+          *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
+          <h3 class="rawdata-heading">Raw Data Sheet</h3>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li *ngIf="rawDataSheet?.Microbiological" class="nav-item" role="presentation">
+              <button class="nav-link active" id="Microbiological-tab" data-bs-toggle="tab"
+                data-bs-target="#Microbiological-tab-pane" type="button" role="tab"
+                aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
+            </li>
+            <li *ngIf="rawDataSheet?.Chemical" class="nav-item" role="presentation">
+              <button class="nav-link" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane"
+                type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
+            </li>
+            <li *ngIf="rawDataSheet?.Instrumental" class="nav-item" role="presentation">
+              <button class="nav-link" id="Instrumental-tab" data-bs-toggle="tab"
+                data-bs-target="#Instrumental-tab-pane" type="button" role="tab" aria-controls="Instrumental-tab-pane"
+                aria-selected="false">Instrumental Test</button>
+            </li>
+          </ul>
+          <div class="tab-content mt-3" id="myTabContent">
+            <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade show active" id="Microbiological-tab-pane"
+              role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+              <table class="table mb-0">
+                <tbody>
+                  <tr *ngFor="let a of rawDataSheet?.Microbiological[0]?.raw_data">
+                    <td style="display: flex; justify-content: start; align-items: center;">
+                      <ngx-avatar
+                        [name]="rawDataSheet?.Microbiological[0]?.analyst_user.first_name +' '+ Microbiological?.Chemical[0]?.analyst_user.last_name"
+                        class="analyst-avatar" [size]="50"></ngx-avatar>
+                      <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Microbiological[0]?.analyst_user.first_name}}
+                        {{rawDataSheet?.Microbiological[0]?.analyst_user.last_name}}</p>
+                    </td>
+                    <td style="width: 16%;">
+                      <p class="bold-text mb-0 pb-0">Generated Date</p>
+                      <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                    </td>
+                    <td>
+                      <p class="bold-text mb-0 pb-0">Remarks</p>
+                      <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst
+                        Remarks</button>
+                      <button (click)="viewRemarks(rawDataSheet?.Microbiological[0]?.sample_form?.remarks)"
+                        class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                      <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)"
+                        class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+                    </td>
+
+                    <td style="width: 15%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Status</p>
+                      <span style="padding: 8px;" class="badge badge-primary"
+                        [statusColor]="rawDataSheet?.Microbiological[0]?.status">{{rawDataSheet?.Microbiological[0]?.status}}</span>
+                    </td>
+                    <td style="width: 20%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Actions</p>
+                      <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
+                      <button (click)="downloadRawDatasheet(a.raw_data)"
+                        class="btn btn-secondary mx-2 btn-sm">Download</button>
+                      <button (click)="printRawData(a.raw_data)"
+                        class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div *ngIf="rawDataSheet?.Chemical" class="tab-pane fade" id="Chemical-tab-pane" role="tabpanel"
+              aria-labelledby="Chemical-tab" tabindex="0">
+              <table class="table mb-0">
+                <tbody>
+                  <tr *ngFor="let a of rawDataSheet?.Chemical[0]?.raw_data">
+                    <td style="display: flex; justify-content: start; align-items: center;">
+                      <ngx-avatar
+                        [name]="rawDataSheet?.Chemical[0]?.analyst_user.first_name +' '+ rawDataSheet?.Chemical[0]?.analyst_user.last_name"
+                        class="analyst-avatar" [size]="50"></ngx-avatar>
+                      <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Chemical[0]?.analyst_user.first_name}}
+                        {{rawDataSheet?.Chemical[0]?.analyst_user.last_name}}</p>
+                    </td>
+                    <td style="width: 16%;">
+                      <p class="bold-text mb-0 pb-0">Generated Date</p>
+                      <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                    </td>
+                    <td>
+                      <p class="bold-text mb-0 pb-0">Remarks</p>
+                      <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst
+                        Remarks</button>
+                      <button (click)="viewRemarks(rawDataSheet?.Chemical[0]?.sample_form?.remarks)"
+                        class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                      <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)"
+                        class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+                    </td>
+
+                    <td style="width: 15%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Status</p>
+                      <span style="padding: 8px;" class="badge badge-primary"
+                        [statusColor]="rawDataSheet?.Chemical[0]?.status">{{rawDataSheet?.Chemical[0]?.status}}</span>
+                    </td>
+                    <td style="width: 20%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Actions</p>
+                      <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
+                      <button (click)="downloadRawDatasheet(a.raw_data)"
+                        class="btn btn-secondary mx-2 btn-sm">Download</button>
+                      <button (click)="printRawData(a.raw_data)"
+                        class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div *ngIf="rawDataSheet?.Instrumental" class="tab-pane fade show active" id="Instrumental-tab-pane"
+              role="tabpanel" aria-labelledby="Instrumental-tab" tabindex="0">
+              <table class="table mb-0">
+                <tbody>
+                  <tr *ngFor="let a of rawDataSheet?.Instrumental[0]?.raw_data">
+                    <td style="display: flex; justify-content: start; align-items: center;">
+                      <ngx-avatar
+                        [name]="rawDataSheet?.Instrumental[0]?.analyst_user.first_name +' '+ rawDataSheet?.Instrumental[0]?.analyst_user.last_name"
+                        class="analyst-avatar" [size]="50"></ngx-avatar>
+                      <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Instrumental[0]?.analyst_user.first_name}}
+                        {{rawDataSheet?.Instrumental[0]?.analyst_user.last_name}}</p>
+                    </td>
+                    <td style="width: 16%;">
+                      <p class="bold-text mb-0 pb-0">Generated Date</p>
+                      <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                    </td>
+                    <td>
+                      <p class="bold-text mb-0 pb-0">Remarks</p>
+                      <button (click)="viewRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst
+                        Remarks</button>
+                      <button (click)="viewRemarks(rawDataSheet?.Instrumental[0]?.sample_form?.remarks)"
+                        class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                      <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)"
+                        class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button>
+                    </td>
+
+                    <td style="width: 15%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Status</p>
+                      <span style="padding: 8px;" class="badge badge-primary"
+                        [statusColor]="rawDataSheet?.Instrumental[0]?.status">{{rawDataSheet?.Instrumental[0]?.status}}</span>
+                    </td>
+                    <td style="width: 20%;" class="text-start">
+                      <p class="bold-text mb-0 pb-0">Actions</p>
+                      <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
+                      <button (click)="downloadRawDatasheet(a.raw_data)"
+                        class="btn btn-secondary mx-2 btn-sm">Download</button>
+                      <button (click)="printRawData(a.raw_data)"
+                        class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-  
-  
-        <!-- <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && (loggedUserDetails.role === 6 || loggedUserDetails.role === 4) ">
+
+
+      <!-- <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && (loggedUserDetails.role === 6 || loggedUserDetails.role === 4) ">
           <table class="table">
             <tbody>
               <h3 class="text-bold mb-0 ms-2 mt-2">Raw Data Sheet</h3>
@@ -302,101 +472,101 @@
             </tbody>
           </table>
         </div> -->
-  
-  
-  
-        <div class="view-page mt-3">
-          <h3 class="view-page-heading">Parameter Details</h3>
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table table-bordered">
-                <tr>
-                  <th>S.N.</th>
-                  <th>Parameter Name</th>
-                  <!-- <th>Formula</th> -->
-                  <th>Method</th>
-                  <th>Units</th>
-                  <!-- <th>Price</th> -->
-                  <!-- <th>Tested By</th> -->
-                  <th>Result</th>
-                  <th>Mandatory Standard</th>
-                  <!-- <th>Status</th> -->
-                  <th>Remarks</th>
-                </tr>
-                <tbody>
-                  <tr *ngFor="let r of reportDetails.parameters; let i = index;">
-                    <td>{{i+1}}</td>
-                    <td>{{r.name | titlecase}}</td>
-                    <!-- <td>
+
+
+
+      <div class="view-page mt-3">
+        <h3 class="view-page-heading">Parameter Details</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered">
+              <tr>
+                <th>S.N.</th>
+                <th>Parameter Name</th>
+                <!-- <th>Formula</th> -->
+                <th>Method</th>
+                <th>Units</th>
+                <!-- <th>Price</th> -->
+                <!-- <th>Tested By</th> -->
+                <th>Result</th>
+                <th>Mandatory Standard</th>
+                <!-- <th>Status</th> -->
+                <th>Remarks</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let r of reportDetails.parameters; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{r.name | titlecase}}</td>
+                  <!-- <td>
                       <span *ngIf="r.formula">
                         <span *ngIf="r.formula === 'nan'" class="text-muted">N/A</span>
                         <span *ngIf="r.formula !== 'nan'" class="text-muted">{{r.formula}}</span>
                         </span>
                       <span *ngIf="!r.formula" class="text-muted">N/A</span>
                     </td> -->
-                    <td>
-                      <span>{{r.test_method}}</span>
-                      <!-- <span *ngIf="r.ref_test_method">
+                  <td>
+                    <span>{{r.test_method}}</span>
+                    <!-- <span *ngIf="r.ref_test_method">
                         <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
                         <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.test_method}}</span>
                         </span>
                       <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span> -->
-                    </td>
-                    <td>
-                      <span *ngIf="r.units">
-                        <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
-                        <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
-                        </span>
-                      <span *ngIf="!r.units" class="text-muted">N/A</span>
-                    </td>
-                    <!-- <td>Rs.{{r.price}}</td> -->
-                    <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
-                    <td>
-                      <span>{{r.result}}</span>
-                      <!-- <span *ngIf="r?.result === 0">0</span>
+                  </td>
+                  <td>
+                    <span *ngIf="r.units">
+                      <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
+                    </span>
+                    <span *ngIf="!r.units" class="text-muted">N/A</span>
+                  </td>
+                  <!-- <td>Rs.{{r.price}}</td> -->
+                  <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
+                  <td>
+                    <span>{{r.result}}</span>
+                    <!-- <span *ngIf="r?.result === 0">0</span>
                       <span *ngIf="r?.result" class="text-muted">N/A</span> -->
-                    </td>
-                    <td>{{r.mandatory_standard}}</td>
-                    <!-- <td>
+                  </td>
+                  <td>{{r.mandatory_standard}}</td>
+                  <!-- <td>
                       <span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
                     </td> -->
-                <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0" >{{reportDetails?.remarks}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-  
-           <!-- <div class="col-md-12 text-end">
+                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0">{{reportDetails?.remarks ||
+                    'N/A'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- <div class="col-md-12 text-end">
             <button class="btn btn-primary btn-sm mx-1">Download Report</button>
             <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
            </div> -->
-          </div>
         </div>
       </div>
     </div>
-  
-    <div class="row m-0" *ngIf="loggedUserDetails.role !== 4">
-      <div class="col-md-12 bg-white p-3 mt-3" style="border-radius: 5px;">
-        <div class="row">
-          <div class="col-md-6 text-left">
-            <!-- <h2 class="mb-0">Download Report</h2> -->
-          </div>
-  
-          <div class="col-md-6 text-end">
-            <!-- <button (click)="viewReport()" class="btn btn-primary btn-sm mx-1">View Report</button> -->
-            <button (click)="approveSample()" class="btn btn-success btn-sm mx-1">Approve</button>
-          </div>
+  </div>
+
+  <div class="row m-0" *ngIf="loggedUserDetails.role !== 4">
+    <div class="col-md-12 bg-white p-3 mt-3" style="border-radius: 5px;">
+      <div class="row">
+        <div class="col-md-6 text-left">
+          <!-- <h2 class="mb-0">Download Report</h2> -->
         </div>
-        
+
+        <div class="col-md-6 text-end">
+          <button (click)="viewReport()" class="btn btn-primary btn-sm mx-1">View Report</button>
+          <button (click)="approveSample()" class="btn btn-success btn-sm mx-1">Approve</button>
+        </div>
       </div>
+
     </div>
   </div>
-  
-  <div class="row" *ngIf="isLoading">
-    <div class="col-md-12 text-center py-3">
-      <div class="spinner-border text-dark" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
+</div>
+
+<div class="row" *ngIf="isLoading">
+  <div class="col-md-12 text-center py-3">
+    <div class="spinner-border text-dark" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
   </div>
-  
+</div>

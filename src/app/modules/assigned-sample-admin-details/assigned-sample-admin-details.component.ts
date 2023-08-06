@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssignedSampleAdminDetailsService } from 'src/app/services/assigned-sample-admin-details/assigned-sample-admin-details.service';
 import { ReAssignSupervisorComponent } from './re-assign-supervisor/re-assign-supervisor';
+import { ViewAssignedSampleDoc } from './view-docs';
 
 @Component({
   templateUrl: './assigned-sample-admin-details.component.html',
@@ -17,6 +18,11 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
   isSending: boolean =false;
 
   sampleStatus:any;
+
+  sampleUserDetails:any;
+
+  clientCategories: any;
+
   constructor(
     private service: AssignedSampleAdminDetailsService,
     private route: ActivatedRoute,
@@ -25,6 +31,13 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssigendSampleDetails();
+    this.getClientCategories();
+   }
+
+   getSampleUserDetails(userId) {
+    this.service.getUserDetails(userId).subscribe(res => {
+      this.sampleUserDetails = res;
+    })
    }
 
   getAssigendSampleDetails() {
@@ -33,6 +46,24 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
     }
     this.service.getAssignedSampleDetails(payload).subscribe(res => {
       this.reportDetails = res;
+
+      this.getSampleUserDetails(res.owner_user.id)
+    })
+  }
+
+  getClientCategories() {
+    this.service.getCategories().subscribe(res => {
+      this.clientCategories = res?.results;
+    })
+  }
+
+  getClientCategoryName(id) {
+    return this.clientCategories.find(a => a.id === id)?.name;
+  }
+
+  viewReceipt(link) {
+    this.dialog.open(ViewAssignedSampleDoc, {
+      data: link
     })
   }
 

@@ -105,9 +105,8 @@
             </div>
             <div *ngIf="loggedUserDetails.role !== 4">
               <h4>Supervise by </h4>
-              <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}}
-                {{reportDetails?.supervisor_user?.last_name}}</p>
-              <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
+              <span class="text-bold" *ngFor="let s of reportDetails?.supervisor_sample_form">{{s?.supervisor_user?.first_name}} {{s?.supervisor_user.last_name}},</span>
+              <p *ngIf="reportDetails?.supervisor_sample_form?.length <1" class="text-muted">N/A</p>
             </div>
 
           </div>
@@ -456,7 +455,7 @@
       </div>
       </div>
 
-
+ 
       <!-- <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && (loggedUserDetails.role === 6 || loggedUserDetails.role === 4) ">
         <table class="table">
           <tbody>
@@ -484,7 +483,235 @@
         </table>
       </div> -->
 
+      <div class="view-page mt-4 p-4" *ngIf="reportDetails?.payment?.length > 0 && (loggedUserDetails?.role === 7 ||loggedUserDetails?.role === 2 )">
+        <h3 class="view-page-heading pb-0 mb-0">Payment Details</h3>
+        <div class="row m-0 py-1" *ngFor="let p of reportDetails.payment">
+          <div class="col-md-3">
+            <h4 class="mb-0">Voucher No</h4>
+            <p>{{p.voucher_number}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="mb-0">Amount </h4>
+            <p>{{p.amount || ''}}</p>
+          </div>
+          <div class="col-md-3">
+            <h4 class="mb-0">Paid Date </h4>
+            <p>{{p.created_date | date: 'medium'}}</p>
+          </div>
+  
+          <div class="col-md-3">
+            <!-- <h4 class="m-0">Payment Receipt </h4> -->
+            <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
+            <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
+          </div>
+          <hr class="m-0" />
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <h4>MFD</h4>
+            <p>{{sampleDetails.mfd | date}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4>Best Before Date</h4>
+            <p>{{sampleDetails.dfb | date}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Batch</h4>
+            <p>{{sampleDetails.batch}}</p>
+          </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <h4>Brand</h4>
+            <p>{{sampleDetails.brand}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Purpose of Analysis</h4>
+            <p>{{sampleDetails?.purpose}}</p>
+          </div>
+  
+          <div class="col-md-4">
+            <h4>Condition</h4>
+            <p>{{sampleDetails.condition}}</p>
+          </div>
+        </div> -->
+      </div>
 
+      <div class="row m-0 mt-4" *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 ">
+        <div class="col-md-12 white-bg p-4">
+          <h3 class="view-page-heading">User Details</h3>
+    
+          <div class="row">
+            <div class="col-md-4">
+              <h4 class="mb-0">Name</h4>
+              <p>{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name || 'N/A'}}</p>
+            </div> 
+    
+            <div class="col-md-4">
+              <h4 class="mb-0">Email</h4>
+              <p>{{sampleUserDetails?.email || 'N/A'}}</p>
+            </div> 
+    
+            <div class="col-md-4">
+              <h4 class="mb-0">Phone</h4>
+              <p>{{sampleUserDetails?.phone || 'N/A'}}</p>
+            </div> 
+            
+            <div class="col-md-4">
+              <h4 class="mb-0">Username</h4>
+              <p>{{sampleUserDetails?.username || 'N/A'}}</p>
+            </div>
+            
+            
+            <div class="col-md-4">
+              <h4 class="mb-0">Joined Date</h4>
+              <p>{{sampleUserDetails?.date_joined | date:'medium'}}</p>
+            </div>
+
+            <div class="col-md-4">
+              <h4 class="mb-0">Client category</h4>
+              <p>{{getClientCategoryName(sampleUserDetails?.client_category) || 'N/A'}}</p>
+            </div>
+            
+            <div class="col-md-4">
+              <h4 class="mb-0">Department Name</h4>
+              <p>{{sampleUserDetails?.department_name || 'N/A'}}</p>
+            </div>
+
+            <div class="col-md-4">
+              <h4 class="mb-0">Department Address</h4>
+              <p>{{sampleUserDetails?.department_address || 'N/A'}}</p>
+            </div>
+
+            <div class="col-md-4">
+              <h4 class="mb-0">Registration Number</h4>
+              <p>{{sampleUserDetails?.registration_number || 'N/A'}}</p>
+            </div>
+
+            
+          </div>
+    
+          <div class="row" *ngIf="sampleUserDetails?.custom_user_image?.length > 0">
+    
+            <div class="col-md-12">
+              <h2 class="text-lims-primary mb-0 section-title"> Documents</h2>
+              <hr class="" />
+    
+              <div class="row">
+                <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
+                  <h3>
+                    <span class="title">Document Name</span>
+                    <p class="detail">{{a?.name | titlecase}}</p>
+                  </h3>
+                  <img matTooltip="View Image" alt="Document" style="height: 100px"
+                  class="img-thumbnail cursor-pointer" (click)="viewReceipt(a?.file)"
+                  [src]="a.file" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-page mt-3" *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 ">
+        <!-- <h3 class="view-page-heading">Sample Details</h3> -->
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample ID</h4>
+            <!-- analyst_encode_id -->
+            <p>
+              {{reportDetails.id}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Name </h4>
+            <p>{{reportDetails.name}}</p>
+          </div>
+          <div class="col-md-2">
+            <div>
+              <h4 class="mb-0">Sample Lab Code </h4>
+              <p>{{reportDetails?.sample_lab_id || 'N/A'}}</p>
+            </div>
+
+          </div>
+
+          <div class="col-md-2">
+            <div>
+              <h4 class="mb-0">Refrence Number </h4>
+              <p>{{reportDetails?.refrence_number|| 'N/A'}}</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">MFD</h4>
+            <p>{{reportDetails.mfd | date}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Best Before Date</h4>
+            <p>{{reportDetails.dfb | date}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Batch</h4>
+            <p>{{reportDetails.batch}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Brand</h4>
+            <p>{{reportDetails.brand}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Purpose of Analysis</h4>
+            <p>{{reportDetails?.purpose}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Condition</h4>
+            <p>{{reportDetails.condition}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Note</h4>
+            <p>{{reportDetails.note || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Amendments</h4>
+            <p>{{reportDetails.amendments || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Language</h4>
+            <p *ngIf="reportDetails.language === 'en'">English</p>
+            <p *ngIf="reportDetails.language === 'np'">Nepali</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Units</h4>
+            <p>{{reportDetails.sample_units || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Type</h4>
+            <p>{{reportDetails.sample_type || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Sample Quantity</h4>
+            <p>{{reportDetails.sample_quantity || 'N/A'}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="mb-0">Number of Sample</h4>
+            <p>{{reportDetails.number_of_sample || 'N/A'}}</p>
+          </div>
+        </div>
+      </div>
 
       <div class="view-page mt-3">
         <h3 class="view-page-heading">Parameter Details</h3>
@@ -498,7 +725,7 @@
                 <th>Method</th>
                 <th>Units</th>
                 <!-- <th>Price</th> -->
-                <!-- <th>Tested By</th> -->
+                <th>Supervise By</th>
                 <th>Result</th>
                 <th>Mandatory Standard</th>
                 <!-- <th>Status</th> -->
@@ -530,6 +757,7 @@
                     </span>
                     <span *ngIf="!r.units" class="text-muted">N/A</span>
                   </td>
+                  <td>{{r.sup_full_name}} </td>
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
                   <td>
@@ -541,7 +769,19 @@
                   <!-- <td>
                     <span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
                   </td> -->
-                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0">{{reportDetails?.remarks}}</td>
+                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 7">
+                    <!-- {{reportDetails?.remarks}} -->
+                    <div *ngFor="let r of reportDetails?.supervisor_sample_form">{{r?.remarks}}({{r?.supervisor_user?.first_name}} {{r?.supervisor_user?.last_name}})</div>
+                  </td>
+
+                  <td *ngIf="loggedUserDetails.role === 4">
+                    <!-- {{reportDetails?.remarks}} -->
+                    <div [innerHtml]="r?.analyst_remarks"></div>
+                  </td>
+                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="loggedUserDetails.role === 7 && i===0">
+                    <!-- {{reportDetails?.remarks}} -->
+                    <div >{{reportDetails?.remarks || 'N/A'}}</div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -564,6 +804,7 @@
         </div>
 
         <div class="col-md-6 text-end">
+          <button *ngIf="loggedUserDetails?.role === 7" class="btn btn-primary btn-sm mx-1" (click)="viewSample()">View Report</button>
           <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReport()"
             class="btn btn-primary btn-lims-primary btn-sm mx-1">English</button>
           <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReportNepali()"

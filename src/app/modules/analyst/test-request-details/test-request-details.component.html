@@ -78,6 +78,31 @@
       </table>
     </div>
   </div>
+
+  <div class="row m-0 p-0 mt-3" *ngIf="rawDataSheet.length > 0">
+    <div class="col-md-12 bg-white" style="border-radius: 5px;">
+
+      <table class="table">
+        <tbody>
+          <h3 class="text-bold mb-0 ms-2 mt-2">Lab Sheet</h3>
+          <tr>
+            <td style="width: 20%;">
+              <p class="text-muted mb-0 pb-0">Generated Date</p>
+              <p class="text-muted mb-0">Date:{{(testRequestDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+            </td>
+            <td style="width: 30%;" class="pt-3">
+              
+            </td>
+
+            <td style="width: 30%;" class="text-end pt-3">
+              <button (click)="viewLabSheet()"  class="btn btn-primary btn-lims-primary btn-sm">View</button>
+              <button (click)="downloadLabSheet()"  class="btn btn-secondary mx-2 btn-sm">Download</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="row m-0 p-0 mt-3 mb-3 ">
@@ -242,7 +267,7 @@ display: inline-block;
         </div>
 
         <div *ngIf="row.analyst_remarks">
-          {{row?.analyst_remarks}}
+          <div [innerHtml]="row?.analyst_remarks"></div>
         </div>
       </td>
     </ng-container>
@@ -350,23 +375,32 @@ display: inline-block;
 
       <div class="col-md-6">
         <label class="label">Started Date</label>
-        <mat-form-field class="w-100" appearance="outline">
+        <!-- <mat-form-field class="w-100" appearance="outline">
           <input formControlName="started_date" [matDatepicker]="sd" (focus)="sd.open()"
           (click)="sd.open()" class="custom-input" matInput placeholder="Enter Date" />
 
           <mat-datepicker #sd></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <mat-form-field>
+          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
+             [min]="minDate" [max]="maxDate" [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+             [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+             [disableMinute]="disableMinute" [hideTime]="hideTime">
+          </ngx-mat-datetime-picker>
+       </mat-form-field>
       </div>
 
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <label class="label">Additional Information</label>
-        <!-- <mat-form-field class="w-100" appearance="outline"> -->
           <textarea formControlName="additional_info" class="form-control"
             matInput placeholder="Enter Additional Info" ></textarea>
 
-          <!-- <mat-datepicker #sd></mat-datepicker> -->
-        <!-- </mat-form-field> -->
-      </div>
+          
+      </div> -->
 
       <div class="col-md-12 text-end mt-2">
         <button (click)="saveOtherDetails()" class="btn btn-primary btn-sm">

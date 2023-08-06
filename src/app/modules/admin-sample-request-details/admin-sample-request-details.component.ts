@@ -8,6 +8,7 @@ import { ViewReportRemarksComponent } from "../final-report-view/view-remarks";
 import { AdminSampleRequestDetailsService } from "src/app/services/admin-sample-request-details/service";
 import { ApproveFinalSampleComponent } from "./approve/approve-final-sample.component";
 import { AdminReportComponent } from "./view-sample/admin-view-sample";
+import { ViewDoc } from "./view-sample/view-docs";
 
 
 @Component({
@@ -27,6 +28,9 @@ export class AdminSampleRequestDetailComponent{
     loggedUserDetails: any;
   
     rawDataSheet:any;
+
+    sampleUserDetails:any;
+
     constructor(
       private service: AdminSampleRequestDetailsService,
       private route: ActivatedRoute,
@@ -41,7 +45,14 @@ export class AdminSampleRequestDetailComponent{
       this.getRawData();
     }
 
+    getSampleUserDetails(userId) {
+      this.service.getUserDetails(userId).subscribe(res => {
+        this.sampleUserDetails = res;
+      })
+     }
+
     viewReport() {
+      console.log(this.reportDetails, 'DETAILS')
       this.dialog.open(AdminReportComponent, {
         // width:'1000px',
         height:'100vh',
@@ -153,6 +164,12 @@ export class AdminSampleRequestDetailComponent{
             data: payload
         })
     }
+
+    viewReceipt(link) {
+      this.dialog.open(ViewDoc, {
+        data: link
+      })
+    }
   
   
     getReportDetails() {
@@ -163,6 +180,7 @@ export class AdminSampleRequestDetailComponent{
       this.service.getSampleRequestDetails(payload).subscribe(res => {
         this.reportDetails = res;
         this.isLoading = false;
+        this.getSampleUserDetails(res.owner_user.id)
         this.getRawData();
       },
        (error) => {

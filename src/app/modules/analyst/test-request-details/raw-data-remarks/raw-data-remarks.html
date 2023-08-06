@@ -44,12 +44,12 @@
               <td class="text-center">1</td>
               <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name}} </span></td>
               <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id}} </span></td>
-              <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
+              <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
           </tr>
           <tr>
               <td class="text-center">2</td>
-              <td colspan="4">Started on:<span class="detail"> {{data?.started_date | date:'medium'}} </span></td>
-              <td colspan="5">Completed on:<span class="detail"> {{data?.completed_date | date: 'medium'}} </span></td>
+              <td colspan="4">Started on:<span class="detail"> {{data?.started_date | date}} </span></td>
+              <td colspan="5">Completed on:<span class="detail"> {{data?.completed_date | date}} </span></td>
           </tr>
           <tr>
               <td class="text-center">3</td>
@@ -104,9 +104,9 @@
                       </td>
                   </tr>
                   <tr>
-                      <td colspan="2">First Exponent</td>
-                      <td colspan="2">Second Exponent</td>
-                      <td colspan="2">Third Exponent</td>
+                    <td colspan="2"><div [innerHtml]="microParameterDetails?.first_exponent | superscript"></div></td>
+                    <td colspan="2"><div [innerHtml]="microParameterDetails?.second_exponent | superscript"></div></td>
+                    <td colspan="2"><div [innerHtml]="microParameterDetails?.third_exponent | superscript"></div></td>
                   </tr>
                   <tr>
                       <td>A</td>
@@ -148,7 +148,7 @@
                                 <h2>Formula = {{p?.formula}}</h2>
                                 <h2>Result = {{p?.result}}</h2>
                                 <h2>Final Result = {{p?.final_result || 'N/A'}}</h2>
-                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = {{p?.analyst_remarks || 'N/A'}}</h2>
+                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = <span [innerHtml]="p?.analyst_remarks"></span></h2>
                               </div>
                               <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                             </div>
@@ -358,7 +358,7 @@
                   </div>
                   <div>Result: {{p.result}}</div>
                   <div *ngIf="p?.converted_result">Final Result: {{p.converted_result}}</div>
-                  <div *ngIf="p?.analyst_remarks">Qualitative Analysis: {{p?.analyst_remarks}}</div>
+                  <div *ngIf="p?.analyst_remarks">Qualitative Analysis: <span [innerHtml]="p?.analyst_remarks"></span></div>
                 </div>
               </div>
 
