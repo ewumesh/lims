@@ -109,27 +109,33 @@
   <div class="col-md-12 bg-white py-3" style="border-radius: 5px;">
     <h3 class="mb-0 mt-2" style="font-weight: 600;">RAW Sample tracking</h3>
     <!-- {{rawSampleTracking | json}} -->
-    <span [matTooltip]="track.status" *ngFor="let track of rawSampleTracking" class="badge badge-primary pt-3 mx-2 px-2"
-      style="background-color: #E7F0F7;color: #000; height: 40px;">
+    <span [matTooltip]="track.status" *ngFor="let track of rawSampleTracking" class="badge badge-primary mx-2 px-2"
+      style="background-color: #E7F0F7;color: #000;">
       <i *ngIf="track.status === 'completed'" style="color: green;" class="fa fa-circle"></i>
       <i *ngIf="track.status !== 'completed'" style="color: #9747FF;" class="fa fa-circle"></i>
       {{track?.analyst_user?.first_name}} {{track?.analyst_user?.last_name}}
 
       <span *ngIf="track?.analyst_user?.test_type?.includes(1)" class="pm" style=" display: inline-block;background-color: #36B37E;
         border-radius: 20px;
-        padding: 1% 2%;
+        padding: 2% 2%;
+        height: 15px;
+        width: 15px;
         display: inline-block;
         ">C</span>
 
 <span *ngIf="track?.analyst_user?.test_type?.includes(2)" class="pm" style=" display: inline-block;background-color: #FBBC05;
 border-radius: 20px;
-padding: 1% 2%;
+padding: 2% 2%;
+height: 15px;
+        width: 15px;
 display: inline-block;
 ">M</span>
 
 <span *ngIf="track?.analyst_user?.test_type?.includes(3)" class="pm" style=" display: inline-block;background-color: #917BFF;
         border-radius: 20px;
-        padding: 1% 2%;
+        padding: 2% 2%;
+        height: 15px;
+        width: 15px;
         display: inline-block;
         ">I</span>
     </span>
@@ -382,8 +388,8 @@ display: inline-block;
           <mat-datepicker #sd></mat-datepicker>
         </mat-form-field> -->
 
-        <mat-form-field>
-          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
+        <mat-form-field class="w-100" appearance="outline">
+          <input matInput [ngxMatDatetimePicker]="picker" class="custom-input" placeholder="Choose a date"
              [min]="minDate" [max]="maxDate" [disabled]="disabled">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"

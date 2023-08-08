@@ -121,7 +121,10 @@
 
                     <div class="col-md-6">
                         <label>Date And Time </label>
-                        <input formControlName="date_of_incubation" placeholder="Enter Date" class="form-control" type="datetime-local">
+                        <!-- <mat-form-field appearance="outline" class="w-100"> -->
+                        <input style="border: 1px solid #0000006e;
+                        border-radius: 5px; height: 45px;" formControlName="date_of_incubation" class="form-control" placeholder="Enter Date" type="datetime-local">
+                        <!-- </mat-form-field> -->
                         <!-- <mat-form-field appearance="outline" class="w-100">
 
                             <input matInput class="custom-input" [matDatepicker]="date" (focus)="date.open()"
