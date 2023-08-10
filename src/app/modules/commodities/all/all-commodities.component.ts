@@ -43,9 +43,8 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit(): void {
-    this.getAllCommodities();
     this.getCommodityCategories();
-
+    this.getAllCommodities();
     this.initFilterForm();
   }
 
@@ -95,8 +94,8 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
   }
 
   getCommodityCategories(){
-    this.allCommoditiesService.getCommodityCategories().subscribe(res => {
-      this.commodityCategories = res?.results;
+    this.allCommoditiesService.getCommodityCategoriesLimited().subscribe(res => {
+      this.commodityCategories = res;
     })
   }
 

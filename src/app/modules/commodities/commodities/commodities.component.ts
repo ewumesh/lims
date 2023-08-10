@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { delay } from 'rxjs';
@@ -9,6 +9,7 @@ import { CommodityCategoryService } from 'src/app/services/settings/commodity-ca
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
+import { AddCommodityComponent } from './add-commodities/add-commodity.component';
 
 @Component({
   templateUrl: './commodities.component.html',
@@ -54,6 +55,30 @@ export class CommoditiesComponent implements OnInit {
       'name': {
         'required': 'Category Name is required.'
       }
+    })
+  }
+
+  addParameter() {
+    let instance: MatDialogRef<AddCommodityComponent, any>
+    instance = this.dialog.open(AddCommodityComponent, {
+      width: '800px',
+      data: ''
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getCommodities();
+    })
+  }
+
+  editCommodity(data) {
+    let instance: MatDialogRef<AddCommodityComponent, any>
+    instance = this.dialog.open(AddCommodityComponent, {
+      width: '800px',
+      data: data
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getCommodities();
     })
   }
 

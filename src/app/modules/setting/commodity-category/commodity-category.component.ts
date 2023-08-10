@@ -10,6 +10,8 @@ import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 import { GenericValidator } from 'src/app/shared/validators/generic-validators';
+import { AddOrUpdateCategoryComponent } from '../category/coponents/add-or-update-category.component';
+import { AddOrUpdateCommodityCategoryComponent } from './components/add-or-update-commodity-category.component';
 
 @Component({
   templateUrl: './commodity-category.component.html',
@@ -57,6 +59,32 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
     })
    }
 
+   addCategory() {
+
+    let instance: MatDialogRef<AddOrUpdateCommodityCategoryComponent, any>
+    instance = this.dialog.open(AddOrUpdateCommodityCategoryComponent, {
+      width: '800px',
+      data: ''
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getCategories();
+    })
+   }
+
+   editCategory(data) {
+
+    let instance: MatDialogRef<AddOrUpdateCommodityCategoryComponent, any>
+    instance = this.dialog.open(AddOrUpdateCommodityCategoryComponent, {
+      width: '800px',
+      data: data
+    })
+
+    instance.afterClosed().subscribe(res => {
+      this.getCategories();
+    })
+   }
+
   private initForm() {
     this.initFilterForm();
 
@@ -81,8 +109,8 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
       page: '',
       size: ''
     }
-    this.sService.getAllCommodityCategories(payload).subscribe(res => {
-      this.dataSource.data = res.results;
+    this.sService.getAllCommodityCategoriesLimited(payload).subscribe(res => {
+      this.dataSource.data = res;
       this.isLoading = false;
     })
   }
@@ -98,8 +126,8 @@ export class CommodityCategoriesComponent implements OnInit, AfterViewInit {
       page: ' ',
       size: '200'
     }
-    this.sService.getAllCommodityCategories(payload).subscribe(res => {
-      this.dataSource.data = res.results;
+    this.sService.getAllCommodityCategoriesLimited(payload).subscribe(res => {
+      this.dataSource.data = res;
       this.isLoading = false;
     },(error) => {
 

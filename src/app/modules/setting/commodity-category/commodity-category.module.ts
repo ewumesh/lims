@@ -13,9 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AddOrUpdateCommodityCategoryComponent } from './components/add-or-update-commodity-category.component';
 
 @NgModule({
-  declarations: [CommodityCategoriesComponent],
+  declarations: [CommodityCategoriesComponent, AddOrUpdateCommodityCategoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

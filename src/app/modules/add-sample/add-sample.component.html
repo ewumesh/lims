@@ -272,22 +272,7 @@
         </div>
       </div>
 
-      <div class="row margin-bottom-24">
-        <div class="col-md-12">
-          <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
-            वस्तु)* </label>
-          <mat-form-field appearance="outline" class="custom-select w-100">
-            <mat-select formControlName="commodity" placeholder="Select Category">
-              <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
-                titlecase}}</mat-option>
-            </mat-select>
-            <mat-error class="text-danger" *ngIf="displayMessage?.commodity">{{displayMessage.commodity}}</mat-error>
-            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
-              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
-          </mat-form-field>
-        </div>
-      </div>
-
+      
       <div *ngIf="!sampleId" style="border: 1px solid #0000001a;
       border-radius: 5px;
       padding: 1%;">
@@ -343,6 +328,23 @@
           <button (click)="addDocList()" type="button" class="btn btn-primary btn-sm">Add new</button>
         </div>
       </div>
+
+      <div class="row margin-bottom-24">
+        <div class="col-md-12">
+          <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
+            वस्तु)* </label>
+          <mat-form-field appearance="outline" class="custom-select w-100">
+            <mat-select formControlName="commodity" placeholder="Select Category">
+              <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
+                titlecase}}</mat-option>
+            </mat-select>
+            <mat-error class="text-danger" *ngIf="displayMessage?.commodity">{{displayMessage.commodity}}</mat-error>
+            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
+              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+
 
       <div>
         <div class="col-md-12 text-start d-flex align-items-center justify-content-between"

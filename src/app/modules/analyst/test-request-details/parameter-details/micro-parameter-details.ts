@@ -32,6 +32,8 @@ export class MicroParameterDetailsComponent implements OnInit {
     public stepMinutes = [1, 5, 10, 15, 20, 25];
     public stepSeconds = [1, 5, 10, 15, 20, 25];
 
+    isLoading = false;
+
     constructor(
         private fb: FormBuilder,
         private service: TestRequestDetailsService,
@@ -333,6 +335,7 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     saveObservationTable() {
+        this.isLoading = true;
         this.service.saveObservationTable(this.observationForm.value.observation).subscribe(res => {
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
@@ -340,6 +343,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                 status: true,
                 id: this.microId
             }
+            this.isLoading =  false;
             this.dialogRef.close(closingPayload);
         }, (error) => {
             window.scroll(0, 0);
@@ -348,7 +352,7 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     updateObservationTable() {
-
+        this.isLoading = true;
         // console.log(this.existingParameterDetails.micro_observation_table, "MY DATA FOR OBSERVATION")
         if (this.existingParameterDetails.micro_observation_table.length > 0) {
             let payload = this.parameterDetailsForm.value;
@@ -371,6 +375,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     id: this.microId
                 }
                 this.dialogRef.close(closingPayload);
+                this.isLoading = false;
             }, (error) => {
                 window.scroll(0, 0);
                 this.responseError = error?.error;
@@ -380,6 +385,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                 this.toast.showToast(TOAST_STATE.success, res.message);
                 this.dissmissToast();
                 this.dialogRef.close(true);
+                this.isLoading = false;
             }, (error) => {
                 window.scroll(0, 0);
                 this.responseError = error?.error;

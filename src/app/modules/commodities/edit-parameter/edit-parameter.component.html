@@ -1,0 +1,327 @@
+<div class="row" style="padding: 1%;">
+    <div class="col-md-12 p-4" style="
+    background-color: #fff;
+    border-radius: 5px; padding-bottom: 1%;">
+        <form [formGroup]="parameterForm">
+          <div class="row">
+            <div class="col-md-12 text-left pt-2">
+              <h1>Add Parameter</h1>
+              <hr /> 
+
+              <div *ngIf="message && message?.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+                <div class="alert alert-danger" role="alert">
+                  {{message?.messageBody}}
+                </div>
+              </div>
+
+              <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="alert alert-danger" role="alert">
+                    <li *ngFor="let item of responseError | keyvalue">
+                      {{item.key}}:{{item.value}}
+                    </li>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="mb-2">Parameter Name(प्यारामिटर नाम) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input placeholder="Enter Parameter Name" type="text" class=" custom-input" matInput formControlName="name" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of listOfParameters" [value]="option.name">
+                      {{option.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Parameter Name *</label>
+                <mat-form-field appearance="outline" class="w-100">
+
+                    <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="autoUnits">
+                  <mat-autocomplete #autoUnits="matAutocomplete">
+                    <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                      {{option.units}}
+                    </mat-option>
+                  </mat-autocomplete>
+                    <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                    *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="mb-2">Test Type(परीक्षण प्रकार) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select placeholder="Select Test type" class="custom-select" formControlName="test_type">
+                    <mat-option value="Chemical">Chemical Test(रासायनिक परीक्षण)</mat-option>
+                    <mat-option value="Microbiological">Microbiological Test(माइक्रोबायोलोजिकल परीक्षण)</mat-option>
+                    <mat-option value="Instrumental">Instrumental Test(इन्स्ट्रुमेन्टल परीक्षण)</mat-option>
+                  </mat-select>
+                  <mat-error [@rowsAnimation]="displayMessage?.test_type" class="text-danger"
+                    *ngIf="displayMessage?.test_type">{{displayMessage?.test_type}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Commodity(कमोडिटी) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-select class="custom-select" formControlName="commodity" placeholder="Select Commodity">
+                    <mat-option *ngFor="let item of commodities" [value]="item.id">{{item.name | titlecase}} <span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>
+                  </mat-select>
+                  <mat-error [@rowsAnimation]="displayMessage?.commodity" class="text-danger"
+                    *ngIf="displayMessage?.commodity">{{displayMessage?.commodity}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+
+                    <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
+                  <mat-autocomplete #autoUnits="matAutocomplete">
+                    <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
+                      {{option.ref_test_method}}
+                    </mat-option>
+                  </mat-autocomplete>
+
+
+                    <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
+                    *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
+                <div class="row py-2" style="border: 1px solid #0000001c;
+                              margin: 0px;">
+                  <div class="col-md-12" formArrayName="test_method">
+                    <div class="row" *ngFor="let list of multipleTestMethods.controls; let i = index" [formGroupName]="i">
+                      <div class="col-md-12">
+                        <label class="mb-2">Ref. Test Method *</label>
+                        <mat-form-field appearance="outline" class="w-100">
+            
+                          <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput
+                            formControlName="ref_test_method" >
+                          <!-- <mat-autocomplete #autoUnits="matAutocomplete">
+                            <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
+                              {{option.ref_test_method}}
+                            </mat-option>
+                          </mat-autocomplete> -->
+            
+            
+                          <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
+                            *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <!-- <div class="col-md-6">
+                        <label class="mb-2">Nepali *</label>
+                        <mat-form-field appearance="outline" class="w-100">
+            
+                          <input placeholder="Test Method" type="text" class="custom-input" matInput
+                            formControlName="ref_test_method_nepali">
+                        </mat-form-field>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-end">
+                    <button class="btn btn-primary btn-lims-primary mx-1" (click)="addTestMethod()">Add</button>
+                    <button [disabled]="multipleTestMethods.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeTestMethod()">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Units(एकाइ) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+
+                    <input placeholder="Enter Parameter Name" type="text" class="custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
+                  <mat-autocomplete #autoUnits="matAutocomplete">
+                    <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                      {{option.units}}
+                    </mat-option>
+                  </mat-autocomplete>
+                    <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                    *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Units(एकाइ) *</label>
+                <div class="row py-2" style="border: 1px solid #0000001c;
+                margin: 0px;">
+                <div class="col-md-12" formArrayName="units">
+                  <div class="row" *ngFor="let list of multipleUnits.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-6">
+                      <label class="mb-2">English *</label>
+                      <mat-form-field appearance="outline" class="w-100">
+
+                        <input placeholder="Enter Unit Name" type="text" class="custom-input" matInput formControlName="units" >
+                      <!-- <mat-autocomplete #autoUnits="matAutocomplete">
+                        <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
+                          {{option.units}}
+                        </mat-option>
+                      </mat-autocomplete> -->
+                        <!-- <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
+                        *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error> -->
+                    </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="mb-2">Nepali *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+
+                      <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
+                    
+                      <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
+                      *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
+                  </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-12 text-end">
+                    <button class="btn btn-primary btn-lims-primary mx-1" (click)="addUnits()">Add</button>
+                    <button [disabled]="multipleUnits.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeUnits()">Remove</button>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">एकाइ *</label>
+                <mat-form-field appearance="outline" class="w-100">
+
+                    <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
+                  
+                    <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
+                    *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Mandatory Standards*</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input class=" custom-input" matInput formControlName="mandatory_standard"
+                    placeholder="Enter Mandatory Standard" />
+                    <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
+                    *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Mandatory Standards*</label>
+                <div class="row py-2" style="border: 1px solid #0000001c;
+                margin: 0px;">
+                <div class="col-md-12" formArrayName="mandatory_standard">
+                  <div class="row" *ngFor="let list of multipleStandards.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-6">
+                      <label class="mb-2">English *</label>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <input class=" custom-input" matInput formControlName="mandatory_standard"
+                          placeholder="Enter Mandatory Standard" />
+                          <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
+                          *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="mb-2">Nepali *</label>
+                      <mat-form-field appearance="outline" class="w-100">
+                        <input class=" custom-input" matInput formControlName="mandatory_standard_nepali"
+                          placeholder="तोकिएको मापदण्ड" />
+                          <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard_nepali" class="text-danger"
+                          *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-12 text-end">
+                    <button class="btn btn-primary btn-lims-primary mx-1" (click)="addStandards()">Add</button>
+                    <button [disabled]="multipleStandards.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeStandards()">Remove</button>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">तोकिएको मापदण्ड  *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input class=" custom-input" matInput formControlName="mandatory_standard_nepali"
+                    placeholder="तोकिएको मापदण्ड" />
+                    <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard_nepali" class="text-danger"
+                    *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div> -->
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="mb-2">Formula(सूत्र) *</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input class=" custom-input" matInput formControlName="formula"
+                    placeholder="Enter Formula" />
+                    <mat-error [@rowsAnimation]="displayMessage?.formula" class="text-danger"
+                    *ngIf="displayMessage?.formula">{{displayMessage?.formula}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label class="mb-2">Parameter Price *</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class=" custom-input" matInput formControlName="price"
+                      placeholder="Enter Parameter Price"/>
+                      <mat-error [@rowsAnimation]="displayMessage?.price" class="text-danger"
+                      *ngIf="displayMessage?.price">{{displayMessage?.price}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="mb-2">Formula Notations(नोटेशन) *</label>
+                <!-- <mat-form-field appearance="outline" class="w-100"> -->
+                  <textarea class="form-control" formControlName="formula_notation"
+                    placeholder="Enter Formula Notation" ></textarea>
+                    <!-- <mat-error [@rowsAnimation]="displayMessage?.formula_notation" class="text-danger"
+                    *ngIf="displayMessage?.formula_notation">{{displayMessage?.formula_notation}}</mat-error> -->
+                <!-- </mat-form-field> -->
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="text-end mt-3 p-4" style="background-color: #fff; border-radius: 5px;">
+        <button class="btn btn-primary mx-1" (click)="saveChanges()">
+          <span *ngIf="!submitBtn">Save</span>
+    <span *ngIf="submitBtn">
+      <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+    </span>
+        </button>
+        <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
+      </div>
+</div>

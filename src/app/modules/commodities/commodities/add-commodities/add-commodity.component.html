@@ -1,0 +1,139 @@
+<div class="row m-0">
+    <div class="col-md-12 pa-4">
+      <form [formGroup]="commoditiesForm">
+        <div class="row">
+          <div class="col-md-12 text-left pt-2">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1>Add Commodity
+                        </h1>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button (click)="close()" style="width: 40px;" class="btn btn-primary btn-lims-danger btn-sm">x</button>
+                </div>
+            </div>
+            <!-- <h1>Add Commodity</h1> -->
+            <hr />
+            <div *ngIf="message && message?.messageBody" class="col-sm-12 col-md-12 col-lg-12">
+              <div class="alert alert-danger" role="alert">
+                {{message?.messageBody}}
+              </div>
+            </div>
+
+            <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
+                <div class="alert alert-danger" role="alert">
+                  <li *ngFor="let item of responseError | keyvalue">
+                    {{item.key}}:{{item.value}}
+                  </li>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Commodity Name *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="name"
+                  placeholder="Enter Commodity Name" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
+                  *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">कमोडिटी नाम *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="name_nepali"
+                  placeholder="कमोडिटी नाम" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
+                  *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Parent Category(माथिल्लो श्रेणी) *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-select class="custom-select" placeholder="Select Category" formControlName="category">
+                  <mat-option *ngFor="let item of commodityCategories" [value]="item.id"> {{item.name}}  <span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>
+                </mat-select>
+                <!-- <input class="form-control custom-input" matInput formControlName="parent_category"
+                  placeholder="Enter Parent Category" />
+                <mat-error [@rowsAnimation]="displayMessage?.parent_category" class="text-danger"
+                  *ngIf="displayMessage?.parent_category">{{displayMessage?.parent_category}}</mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Test Duration *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="test_duration"
+                  placeholder="Enter Test duration" />
+                <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
+                  *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">परीक्षण अवधि *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="test_duration_nepali"
+                  placeholder="परीक्षण अवधि" />
+                
+              </mat-form-field>
+            </div>
+          </div> -->
+
+          <!-- <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Units*</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="units"
+                  placeholder="Enter Units" />
+
+              </mat-form-field>
+            </div>
+          </div> -->
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">Commodity Price *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="price"
+                  placeholder="Enter Commodity Price" />
+                
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-12">
+            <div class="form-group">
+              <label class="mb-2">कमोडिटी मूल्य *</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input class="custom-input" matInput formControlName="price_nepali"
+                  placeholder="कमोडिटी मूल्य" />
+                
+              </mat-form-field>
+            </div>
+          </div> -->
+
+          <div class="text-end my-2">
+            <button class="btn btn-primary mx-1" (click)="saveChanges()">
+              <span *ngIf="!submitBtn">Save</span>
+        <span *ngIf="submitBtn">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+        </span>
+            </button>
+            <button class="btn btn-secondary mx-1" (click)="reset()">Reset</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>

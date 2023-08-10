@@ -18,7 +18,7 @@
                 <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
                     <div class="alert alert-danger" role="alert">
                         <li *ngFor="let item of responseError | keyvalue">
-                            <!-- {{item.key}}: -->
+                            {{item.key}}:&nbsp;
                             {{item.value}}
                         </li>
                     </div>
@@ -306,9 +306,9 @@
 
         <mat-dialog-actions align="end">
             <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
-            <button *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
+            <button [disabled]="isLoading" *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
                 class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
-            <button *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
+            <button [disabled]="isLoading" *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
                 class="btn btn-primary btn-sm cancel-btn mx-1">Update and Next</button>
         </mat-dialog-actions>
     </div>

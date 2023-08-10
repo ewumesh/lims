@@ -6,20 +6,20 @@
     </h6>
     <div matDialogContent>
         <mat-list *ngIf="data.type === 'm'">
-            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values">
-              <div matListItemTitle>{{m?.mandatory_standard}}({{m?.mandatory_standard_nepali}})</div>
+            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values;let i=index;">
+              <div matListItemTitle>{{i+1}}) {{m?.mandatory_standard}}({{m?.mandatory_standard_nepali}})</div>
             </mat-list-item>
           </mat-list>
 
           <mat-list *ngIf="data.type === 't'">
-            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values">
-              <div matListItemTitle>{{m?.ref_test_method}}</div>
+            <mat-list-item  style="text-align: left !important;" *ngFor="let m of data.values;let i = index;">
+              <div matListItemTitle>{{i+1}}) {{m?.ref_test_method}}</div>
             </mat-list-item>
           </mat-list>
 
           <mat-list *ngIf="data.type === 'u'">
-            <mat-list-item style="text-align: left !important;" *ngFor="let m of data.values">
-              <div matListItemTitle>{{m?.units}}({{m?.units_nepali}})</div>
+            <mat-list-item style="text-align: left !important;" *ngFor="let m of data.values; let i=index;">
+              <div matListItemTitle>{{i+1}}) {{m?.units}}({{m?.units_nepali}})</div>
             </mat-list-item>
           </mat-list>
 

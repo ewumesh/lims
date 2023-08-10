@@ -22,6 +22,14 @@ export class AllCommoditiesService {
     return this.http.get(`${this.url}/api/commodity-category/`);
   }
 
+  getAllCommoditiesLimited(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/get-commodity-data-with-parameters/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&category_id=${payload.catetegory}`);
+  }
+
+  getCommodityCategoriesLimited(): Observable<any> {
+    return this.http.get(`${this.url}/api/get-commodity-category-only/`);
+  }
+
   downloadReport(payload) {
     let url = `${this.url}/api/report/get-report/${payload.report_name}/${payload.report_type}/${payload.report_lang}/`
     this.http.get(url);

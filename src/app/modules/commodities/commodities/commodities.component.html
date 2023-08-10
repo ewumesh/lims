@@ -1,6 +1,20 @@
+<div class="row m-0 mb-3">
+  <div class="col-md-12 p-4" style="background-color: #fff;border-radius: 5px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="mb-0" style="font-weight: 500;">Commodities</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <button (click)="addParameter()" class="btn btn-primary btn-lims-primary"><i class="fa fa-plus"></i> Add</button>
+        </div>
+    </div>
+    </div>
+  </div>
+
+
 <div class="bg-white p-4">
   <div class="row">
-    <div class="col-md-4" *ngIf="loggedUserDetails?.role ===1">
+    <!-- <div class="col-md-4" *ngIf="loggedUserDetails?.role ===1">
       <div class="row">
         <div class="col-md-12 pa-4">
           <form [formGroup]="commoditiesForm">
@@ -28,8 +42,7 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="custom-input" matInput formControlName="name"
                       placeholder="Enter Commodity Name" />
-                    <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
-                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
+                   
                   </mat-form-field>
                 </div>
               </div>
@@ -40,8 +53,6 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="custom-input" matInput formControlName="name_nepali"
                       placeholder="कमोडिटी नाम" />
-                    <!-- <mat-error [@rowsAnimation]="displayMessage?.commodity_name" class="text-danger"
-                      *ngIf="displayMessage?.commodity_name">{{displayMessage?.commodity_name}}</mat-error> -->
                   </mat-form-field>
                 </div>
               </div>
@@ -53,10 +64,7 @@
                     <mat-select class="custom-select" placeholder="Select Category" formControlName="category">
                       <mat-option *ngFor="let item of commodityCategories" [value]="item.id"> {{item.name}}  <span *ngIf="item.name_nepali">({{item.name_nepali}})</span></mat-option>
                     </mat-select>
-                    <!-- <input class="form-control custom-input" matInput formControlName="parent_category"
-                      placeholder="Enter Parent Category" />
-                    <mat-error [@rowsAnimation]="displayMessage?.parent_category" class="text-danger"
-                      *ngIf="displayMessage?.parent_category">{{displayMessage?.parent_category}}</mat-error> -->
+                    
                   </mat-form-field>
                 </div>
               </div>
@@ -67,33 +75,12 @@
                   <mat-form-field appearance="outline" class="w-100">
                     <input class="custom-input" matInput formControlName="test_duration"
                       placeholder="Enter Test duration" />
-                    <!-- <mat-error [@rowsAnimation]="displayMessage?.test_duration" class="text-danger"
-                      *ngIf="displayMessage?.test_duration">{{displayMessage?.test_duration}}</mat-error> -->
+                    
                   </mat-form-field>
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">परीक्षण अवधि *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class="custom-input" matInput formControlName="test_duration_nepali"
-                      placeholder="परीक्षण अवधि" />
-                    
-                  </mat-form-field>
-                </div>
-              </div> -->
-
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Units*</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class="custom-input" matInput formControlName="units"
-                      placeholder="Enter Units" />
-
-                  </mat-form-field>
-                </div>
-              </div> -->
+             
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -106,16 +93,7 @@
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">कमोडिटी मूल्य *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class="custom-input" matInput formControlName="price_nepali"
-                      placeholder="कमोडिटी मूल्य" />
-                    
-                  </mat-form-field>
-                </div>
-              </div> -->
+              
 
               <div class="text-end">
                 <button class="btn btn-primary mx-1" (click)="saveChanges()">
@@ -131,8 +109,8 @@
           </form>
         </div>
       </div>
-    </div>
-    <div  [ngClass]="loggedUserDetails?.role === 1 ? 'col-md-8' : 'col-md-12'">
+    </div> -->
+    <div  class="col-md-12">
       <form [formGroup]="filterForm" class="row">
         <div class="col-md-8 text-left">
           <mat-form-field class="w-100 px-2" appearance="outline">
@@ -211,7 +189,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
           <td mat-cell *matCellDef="let element" style="text-align: right;">
-            <button [disabled]="loggedUserDetails?.role !==1" (click)="openDialog(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+            <button [disabled]="loggedUserDetails?.role !==1" (click)="editCommodity(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
             <button [disabled]="loggedUserDetails?.role !==1" (click)="deleteCategory(element.id)" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline"></mat-icon></button>
           </td>
         </ng-container>

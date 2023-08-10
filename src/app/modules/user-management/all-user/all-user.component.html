@@ -97,13 +97,14 @@
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> User Role </th>
+      <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let row">
         <!-- {{row.is_verified}}
         {{row.is_reject}} -->
 
         <span *ngIf="row.is_reject" class="badge badge-primary p-2" [statusColor]="'rejected'">Rejected </span>
-        <span *ngIf="row.is_verified" class="badge badge-primary p-2" [statusColor]="'active'">Active </span>
+        <span *ngIf="row.is_active" class="badge badge-primary p-2" [statusColor]="'active'">Active </span>
+        <span *ngIf="!row.is_active" class="badge badge-primary p-2" [statusColor]="'Inactive'">InActive </span>
         <!-- <span *ngIf="!row.is_verified && !row.is_reject" class="badge badge-primary p-2" [statusColor]="'inactive'">InActive </span> -->
         <!-- <span *ngIf="row.role">{{getRoleName(row.role)}}</span>
         <span *ngIf="!row.role" class="text-muted">N/A</span> -->

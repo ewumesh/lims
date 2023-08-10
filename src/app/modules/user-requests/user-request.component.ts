@@ -42,7 +42,7 @@ export class UserRequestsComponent {
   clientCategories: any[] = [];
   roles: any[] = [];
 
-  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate', 'action'];
+  displayedColumns: string[] = ['sn', 'userId', 'userName', 'clientType', 'email', 'phone', 'registerDate','status', 'action', 'remarks'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

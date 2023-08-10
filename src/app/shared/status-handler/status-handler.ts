@@ -115,6 +115,20 @@ export class StatusHandlerDirective implements OnChanges {
         this.el.nativeElement.style.textTransform = 'Capitalize';
       break;
 
+      case 'Inactive':
+        this.el.nativeElement.style.background = '#C62828';
+        this.el.nativeElement.style.height = '26px';
+        this.el.nativeElement.style.width = '124px';
+        this.el.nativeElement.style.display = 'flex';
+        this.el.nativeElement.style.justifyContent = 'center';
+        this.el.nativeElement.style.alignItems = 'center';
+        this.el.nativeElement.style.borderRadius = '3px';
+        this.el.nativeElement.style.fontFamily = 'Poppins';
+        this.el.nativeElement.style.fontSize = '11px';
+        this.el.nativeElement.style.fontWeight = '500';
+        this.el.nativeElement.style.textTransform = 'Capitalize';
+      break;
+
       
 
       case 'tested':

@@ -369,6 +369,26 @@ const routes: Routes = [
   },
 
   {
+    path: 'add/commodities-parameter',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2,7]
+    },
+    loadChildren: () => import('src/app/modules/commodities/commodities/add-parameter/add-parameter.module')
+    .then(m => m.AddParameterModule)
+  },
+
+  {
+    path: 'edit/commodities-parameter/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2,7]
+    },
+    loadChildren: () => import('src/app/modules/commodities/edit-parameter/edit-parameter.module')
+    .then(m => m.EditParameterModule)
+  },
+
+  {
     path: 'commodities-category',
     canActivate: [RoleGuard],
     data: {

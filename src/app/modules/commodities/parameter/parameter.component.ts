@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Valida
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, delay } from 'rxjs';
 import { ParameterService } from 'src/app/services/commodities/parameter/parameter.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
@@ -63,6 +63,10 @@ export class ParameterComponent implements OnInit, AfterViewInit {
       this.multipleUnits.push(this.createUnits());
   }
 
+  removeUnits() {
+    this.multipleUnits.removeAt(-1)
+  }
+
   createUnits() {
     return this.fb.group({
       id: new FormControl(''),
@@ -80,6 +84,10 @@ get multipleStandards(): FormArray {
 
 addStandards() {
     this.multipleStandards.push(this.createStandards());
+}
+
+removeStandards() {
+  this.multipleStandards.removeAt(-1)
 }
 
 createStandards() {
@@ -100,6 +108,10 @@ addTestMethod() {
     this.multipleTestMethods.push(this.createTestMethod());
 }
 
+removeTestMethod() {
+  this.multipleTestMethods.removeAt(-1)
+}
+
 createTestMethod() {
   return this.fb.group({
     id: new FormControl(''),
@@ -114,7 +126,8 @@ createTestMethod() {
     private cService: CommodityCategoryService,
     private fb: FormBuilder,
     private toast: ToastService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
 
@@ -231,6 +244,10 @@ createTestMethod() {
     })
   }
 
+  addNew() {
+    this.router.navigate(['/dashboard/add/commodities-parameter'])
+  }
+
   getCommodities() {
     let payload = {
       page: '',
@@ -297,6 +314,7 @@ createTestMethod() {
     this.existingCategory = data;
     this.patchForm(data);
     window.scroll(0,0);
+    this.router.navigate(['/dashboard/edit/commodities-parameter', data.id])
   }
 
   patchForm(data) {

@@ -61,6 +61,8 @@ isOtherDetails = false;
   insUnits;
   insMandatoryStandards;
 
+  sampleId;
+
   constructor(
     private service: TestRequestDetailsService,
     private fb: FormBuilder,
@@ -148,6 +150,7 @@ isOtherDetails = false;
       this.testRequestDetails = apiResponse;
       this.calculateDetails = this.testRequestDetails;
       this.dataMutations.details = response.sample_form;
+      this.sampleId = response.sample_form?.id
 
       this.dataSource = response?.parameter;
       console.log(response, "DATA<<<")
@@ -265,7 +268,7 @@ isOtherDetails = false;
     let requiredList = this.testRequestDetails;
     requiredList.selectedParameter = data;
     requiredList.parameter = data;
-    requiredList.sample_form = this.testRequestDetails?.sample_form?.sample_form;
+    requiredList.sample_form = this.sampleId;
     requiredList.commodity = data.commodity;
     requiredList.details = this.testRequestDetails;
 

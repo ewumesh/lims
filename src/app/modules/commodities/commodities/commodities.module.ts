@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommoditiesService } from 'src/app/services/commodities/commodities/commodities.service';
 import { CommodityCategoryService } from 'src/app/services/settings/commodity-category/commodity-category.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddCommodityComponent } from './add-commodities/add-commodity.component';
 
 @NgModule({
-  declarations: [CommoditiesComponent],
+  declarations: [CommoditiesComponent, AddCommodityComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -32,7 +33,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDialogModule,
     MatIconModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
    ],
   exports: [],
   providers: [CommoditiesService, CommodityCategoryService],

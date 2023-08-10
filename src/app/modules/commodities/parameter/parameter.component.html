@@ -1,6 +1,18 @@
+<div class="row m-0 mb-3">
+<div class="col-md-12 p-4" style="background-color: #fff;border-radius: 5px;">
+  <div class="row">
+      <div class="col-md-6">
+          <h1 class="mb-0" style="font-weight: 500;">Parameters</h1>
+      </div>
+      <div class="col-md-6 text-end">
+          <button (click)="addNew()" class="btn btn-primary btn-lims-primary"><i class="fa fa-plus"></i> Add</button>
+      </div>
+  </div>
+  </div>
+</div>
 <div class="bg-white p-4">
   <div class="row">
-    <div class="col-md-4" *ngIf="loggedUserDetails?.role ===1">
+    <!-- <div class="col-md-4" *ngIf="loggedUserDetails?.role ===1">
       <div class="row">
         <div class="col-md-12 pa-4">
           <form [formGroup]="parameterForm">
@@ -38,23 +50,6 @@
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Parameter Name *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-
-                      <input placeholder="Enter Parameter Name" type="text" class="form-control custom-input" matInput formControlName="name" [matAutocomplete]="autoUnits">
-                    <mat-autocomplete #autoUnits="matAutocomplete">
-                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
-                        {{option.units}}
-                      </mat-option>
-                    </mat-autocomplete>
-                      <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
-                      *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
-
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Test Type(परीक्षण प्रकार) *</label>
@@ -83,25 +78,6 @@
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-
-                      <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput formControlName="ref_test_method" [matAutocomplete]="autoUnits">
-                    <mat-autocomplete #autoUnits="matAutocomplete">
-                      <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
-                        {{option.ref_test_method}}
-                      </mat-option>
-                    </mat-autocomplete>
-
-
-                      <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
-                      *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
-
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Ref. Test Method(परीक्षण विधि) *</label>
@@ -115,50 +91,25 @@
               
                             <input placeholder="Enter Ref. Test Method" type="text" class=" custom-input" matInput
                               formControlName="ref_test_method" >
-                            <!-- <mat-autocomplete #autoUnits="matAutocomplete">
-                              <mat-option *ngFor="let option of listOfParameters" [value]="option.ref_test_method">
-                                {{option.ref_test_method}}
-                              </mat-option>
-                            </mat-autocomplete> -->
+                            
               
               
                             <mat-error [@rowsAnimation]="displayMessage?.ref_test_method" class="text-danger"
                               *ngIf="displayMessage?.ref_test_method">{{displayMessage?.ref_test_method}}</mat-error>
                           </mat-form-field>
                         </div>
-                        <!-- <div class="col-md-6">
-                          <label class="mb-2">Nepali *</label>
-                          <mat-form-field appearance="outline" class="w-100">
-              
-                            <input placeholder="Test Method" type="text" class="custom-input" matInput
-                              formControlName="ref_test_method_nepali">
-                          </mat-form-field>
-                        </div> -->
+                        
                       </div>
                     </div>
                     <div class="col-md-12 text-end">
-                      <button class="btn btn-primary btn-lims-primary" (click)="addTestMethod()">Add</button>
+                      <button class="btn btn-primary btn-lims-primary mx-1" (click)="addTestMethod()">Add</button>
+                      <button [disabled]="multipleTestMethods.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeTestMethod()">Remove</button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Units(एकाइ) *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-
-                      <input placeholder="Enter Parameter Name" type="text" class="custom-input" matInput formControlName="units" [matAutocomplete]="autoUnits">
-                    <mat-autocomplete #autoUnits="matAutocomplete">
-                      <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
-                        {{option.units}}
-                      </mat-option>
-                    </mat-autocomplete>
-                      <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
-                      *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
+              
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -172,13 +123,7 @@
                         <mat-form-field appearance="outline" class="w-100">
   
                           <input placeholder="Enter Unit Name" type="text" class="custom-input" matInput formControlName="units" >
-                        <!-- <mat-autocomplete #autoUnits="matAutocomplete">
-                          <mat-option *ngFor="let option of listOfParameters" [value]="option.units">
-                            {{option.units}}
-                          </mat-option>
-                        </mat-autocomplete> -->
-                          <!-- <mat-error [@rowsAnimation]="displayMessage?.units" class="text-danger"
-                          *ngIf="displayMessage?.units">{{displayMessage?.units}}</mat-error> -->
+                        
                       </mat-form-field>
                       </div>
                       <div class="col-md-6">
@@ -194,37 +139,13 @@
                     </div>
                   </div>
                     <div class="col-md-12 text-end">
-                      <button class="btn btn-primary btn-lims-primary" (click)="addUnits()">Add</button>
+                      <button class="btn btn-primary btn-lims-primary mx-1" (click)="addUnits()">Add</button>
+                      <button [disabled]="multipleUnits.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeUnits()">Remove</button>
                     </div>
                   </div>
                  
                 </div>
               </div>
-
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">एकाइ *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-
-                      <input placeholder="एकाइहरू" type="text" class="custom-input" matInput formControlName="units_nepali">
-                    
-                      <mat-error [@rowsAnimation]="displayMessage?.units_nepali" class="text-danger"
-                      *ngIf="displayMessage?.units_nepali">{{displayMessage?.units_nepali}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
-
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">Mandatory Standards*</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class=" custom-input" matInput formControlName="mandatory_standard"
-                      placeholder="Enter Mandatory Standard" />
-                      <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard" class="text-danger"
-                      *ngIf="displayMessage?.mandatory_standard">{{displayMessage?.mandatory_standard}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -254,24 +175,15 @@
                     </div>
                   </div>
                     <div class="col-md-12 text-end">
-                      <button class="btn btn-primary btn-lims-primary" (click)="addStandards()">Add</button>
+                      <button class="btn btn-primary btn-lims-primary mx-1" (click)="addStandards()">Add</button>
+                      <button [disabled]="multipleStandards.length ===1" class="btn btn-primary btn-lims-danger mx-1" (click)="removeStandards()">Remove</button>
                     </div>
                   </div>
                  
                 </div>
               </div>
 
-              <!-- <div class="col-md-12">
-                <div class="form-group">
-                  <label class="mb-2">तोकिएको मापदण्ड  *</label>
-                  <mat-form-field appearance="outline" class="w-100">
-                    <input class=" custom-input" matInput formControlName="mandatory_standard_nepali"
-                      placeholder="तोकिएको मापदण्ड" />
-                      <mat-error [@rowsAnimation]="displayMessage?.mandatory_standard_nepali" class="text-danger"
-                      *ngIf="displayMessage?.mandatory_standard_nepali">{{displayMessage?.mandatory_standard_nepali}}</mat-error>
-                  </mat-form-field>
-                </div>
-              </div> -->
+             
 
               <div class="col-md-12">
                 <div class="form-group">
@@ -288,12 +200,9 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="mb-2">Formula Notations(नोटेशन) *</label>
-                  <!-- <mat-form-field appearance="outline" class="w-100"> -->
                     <textarea class="form-control" formControlName="formula_notation"
                       placeholder="Enter Formula Notation" ></textarea>
-                      <!-- <mat-error [@rowsAnimation]="displayMessage?.formula_notation" class="text-danger"
-                      *ngIf="displayMessage?.formula_notation">{{displayMessage?.formula_notation}}</mat-error> -->
-                  <!-- </mat-form-field> -->
+                      
                 </div>
               </div>
 
@@ -323,8 +232,8 @@
           </form>
         </div>
       </div>
-    </div>
-    <div  [ngClass]="loggedUserDetails?.role === 1 ? 'col-md-8' : 'col-md-12'">
+    </div> -->
+    <div  class="col-md-12">
       <form [formGroup]="filterForm" class="row">
         <div class="col-md-4 text-left">
           <mat-form-field class="w-100 px-2" appearance="outline">
@@ -349,14 +258,11 @@
           <button (click)="resetFilter()" class="btn btn-danger w-100 h-45">Reset</button>
         </div>
 
-        <!-- <div class="col-md-2">
-          <button class="btn btn-secondary dropdown-toggle h-45 w-100" [matMenuTriggerFor]="downloadMenu">Download</button>
-
-          <mat-menu class="download-menu" #downloadMenu="matMenu">
-            <button (click)="download('pdf')" mat-menu-item>PDF</button>
-            <button (click)="download('excel')" mat-menu-item>EXCEL</button>
-          </mat-menu>
+        <!-- <div class="col-md-2 ">
+          <button (click)="addNew()" class="btn btn-danger w-100 h-45">Add</button>
         </div> -->
+
+        
       </form>
       <table *ngIf="!isLoading" mat-table [dataSource]="dataSource" class="table custom-border mb-0" tabindex="0" [@collectionInOut]="dataSource?.length">
 

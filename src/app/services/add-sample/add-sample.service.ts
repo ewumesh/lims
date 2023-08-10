@@ -34,11 +34,19 @@ export class AddSampleService {
     return this.http.get(`${this.url}/api/commodity/?search=${payload.search}&offset=${payload.page}&limit=${payload.size}`)
   }
 
+  getCommoditiesLimited(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/get-commodity-data-with-parameters/?search=${payload.search}&offset=${payload.page}&limit=${payload.size}`)
+  }
+
   updateSample(payload, id): Observable<any> {
     return this.http.put(`${this.url}/api/sample-form/${id}/`, payload)
   }
 
   getUsersList(payload):Observable<any> {
     return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_verified=1`);
+  }
+
+  getUsersListLimited(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/account/get-limited-user-data/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_verified=1`);
   }
 }

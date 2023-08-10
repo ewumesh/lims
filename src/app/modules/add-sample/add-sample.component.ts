@@ -267,8 +267,8 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       page: '',
       size: 500
     }
-    this.service.getCommodities(payload).subscribe(response => {
-      this.commodities = response.results;
+    this.service.getCommoditiesLimited(payload).subscribe(response => {
+      this.commodities = response;
       if (this.sampleId) {
         this.getSampleDetails();
       }
@@ -619,7 +619,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       role: '5',
       client_category_id: ''
     }
-    this.service.getUsersList(payload).subscribe(res => {
+    this.service.getUsersListLimited(payload).subscribe(res => {
       this.users = res;
       this.banks = res;
     })
