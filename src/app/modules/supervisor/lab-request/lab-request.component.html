@@ -54,7 +54,7 @@
     <ng-container matColumnDef="sampleId">
       <th mat-header-cell *matHeaderCellDef> Sample ID </th>
       <td mat-cell *matCellDef="let row">
-        <span *ngIf="row.sample_form?.id" class="text-uppercase">{{row.sample_form?.id}}</span>
+        <span *ngIf="row.sample_form?.id" class="text-uppercase">{{row.sample_form?.sample_lab_id}}</span>
         <span class="text-muted" *ngIf="!row.sample_form?.id">N/A</span>
       </td>
     </ng-container>

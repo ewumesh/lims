@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
 import { AuthGuard } from './services/auth.guard';
 import { NotFoundComponent } from './components/not-found/404.component'
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { UserVerificationSuccessComponent } from './components/email-verification-success/email-verification-success';
 
 const routes: Routes = [
   { path: 'complain', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/complain/complain.module').then(b => b.ComplainModule) },
@@ -15,6 +17,9 @@ const routes: Routes = [
   { path: 'register', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/register/register.module').then(b => b.RegisterModule) },
   { path: 'forgot-password', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/forgot-password/forgot-password.module').then(b => b.ForgotPasswordModule) },
   { path: 'password-reset', canActivate: [AuthGuard], loadChildren: () => import('src/app/modules/password-reset/password-reset.module').then(b => b.PasswordResetModule) },
+
+  { path: 'user-verification', component:EmailVerificationComponent},
+  { path: 'user-verification-success', component:UserVerificationSuccessComponent},
   {
     path: 'dashboard', component: LayoutComponent, children: [
       { path: '', loadChildren: () => import('src/app/core/layout.module').then(b => b.LayoutModule) }

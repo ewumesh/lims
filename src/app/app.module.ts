@@ -17,6 +17,10 @@ import { TokenInterceptor } from './services/token-validator';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { SharedService } from './services/shared/shared.service';
+import { UserVerificationSuccessComponent } from './components/email-verification-success/email-verification-success';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -24,7 +28,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     ToastComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EmailVerificationComponent,
+    UserVerificationSuccessComponent
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -50,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ToastService,
-    LanguageService
+    LanguageService,
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

@@ -208,8 +208,8 @@ createTestMethod() {
     this.addStandards();
     this.addTestMethod();
     this.getParameters();
-    this.getCommodityCategories();
-    this.getCommodities();
+    // this.getCommodityCategories();
+    // this.getCommodities();
     this.initFilterForm();
 
     // setTimeout(() => {

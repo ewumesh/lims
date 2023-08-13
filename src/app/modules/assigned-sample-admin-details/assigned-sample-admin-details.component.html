@@ -286,7 +286,7 @@
               <th>S.N</th>
               <th>Test Type</th>
               <th>Parameter Name</th>
-              <th>Method</th>
+              <!-- <th>Method</th> -->
               <th>Price</th>
               <th>Result</th>
               <th>Status</th>
@@ -297,7 +297,7 @@
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}</td>
-                <td>{{r.ref_test_method || 'N/A'}}</td>
+                <!-- <td>{{r.ref_test_method || 'N/A'}}</td> -->
                 <td>Rs.{{r.price}}</td>
                 <td>
                   <span *ngIf="r?.result || r?.result === 0">{{r.result}}</span>

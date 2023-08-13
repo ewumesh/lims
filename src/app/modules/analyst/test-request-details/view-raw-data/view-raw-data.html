@@ -100,7 +100,7 @@
               <p>DFTQC, Kathmandu, Nepal</p>
           </td>
           <td style=" border-left: 0;">
-              <p >{{data?.id}}</p>
+              <p >{{data.data.id}}</p>
           </td>
       </tr>
 </table>
@@ -155,13 +155,18 @@
                     <div class="col-md-6">
                       <div class="formula">
                         <h2>{{p.parameter?.name}}</h2>
-                        <div *ngIf="p?.parameter?.formula_notation">
+                        <div >
+                          <div *ngIf="p?.parameter?.formula_notation">
                           <div *ngFor="let n of splitStringByComma(p?.parameter?.formula_notation)">
                             <span class="text-danger">*</span>{{n | titlecase}}
                           </div>
+                          </div>
                           <h2>Formula = {{p?.parameter?.formula}}</h2>
+                          <!-- <h2>Result = {{p?.result}}</h2>
+                                <h2>Final Result = {{p?.final_result || 'N/A'}}</h2>
+                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = <span [innerHtml]="p?.analyst_remarks"></span></h2> -->
                         </div>
-                        <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+                        <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div> -->
                       </div>
                     </div>
                     <div class="col-md-6">

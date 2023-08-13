@@ -11,10 +11,18 @@ export class LayoutComponent {
   //** Variable for store splited text from URL */
   breadcrumbs = [];
 
+  loggedUserDetails;
+
   constructor(
     public router: Router,
     private _location: Location
   ) {
+
+    this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+    // if(!this.loggedUserDetails.is_email_verified) {
+    //   this.router.navigate(['/user-verification']);
+    // }
 
     //** After Route change split url text and assign to breadcrumbs variable */
     this.router.events.subscribe(a => {
