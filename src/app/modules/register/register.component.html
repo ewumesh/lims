@@ -11,7 +11,7 @@
               <h3><span> Laboratory Information Management System</span></h3>
 
           </div>
-          <img class="flag" src="https://dftqc.gov.np/wp-content/uploads/2022/12/nepalflag.gif" alt="">
+          <img class="flag" src="../../../assets/nepalflag.gif" alt="">
       </div>
       </div>
   </div>
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label for="exampleInputFullName1" class="form-label">First Name*</label>
+        <label for="exampleInputFullName1" class="form-label">First Name(नाम)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="first_name" placeholder="Enter your First Name" />
           <mat-error [@rowsAnimation]="displayMessage?.first_name" class="text-danger"
@@ -89,7 +89,7 @@
       </div>
 
       <div class="col-md-6">
-        <label for="exampleInputFullName1" class="form-label">Last Name*</label>
+        <label for="exampleInputFullName1" class="form-label">Last Name(थर)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="last_name" placeholder="Enter your Last Name" />
           <mat-error [@rowsAnimation]="displayMessage?.last_name" class="text-danger"
@@ -106,7 +106,7 @@
       </div>
 
       <div class="col-md-6">
-        <label for="userName" class="form-label">Username*</label>
+        <label for="userName" class="form-label">Username(युजरनेम)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input matInput formControlName="username" placeholder="Enter your username" />
           <mat-error [@rowsAnimation]="displayMessage?.username" class="text-danger"
@@ -114,7 +114,7 @@
         </mat-form-field>
       </div>
       <div class="col-md-12">
-        <label for="password" class="form-label">Password*</label>
+        <label for="password" class="form-label">Password(पासवोर्ड)*</label>
         <mat-form-field appearance="outline" class="w-100">
           <input type="password" matInput formControlName="password" placeholder="Enter Password" />
           <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
@@ -130,6 +130,7 @@
         </mat-form-field>
       </div>
       <div >
+
         <div>
           <label class="list-heading form-label">Client Category (
             ग्राहक वर्ग)*</label>
@@ -146,7 +147,7 @@
             [@rowsAnimation]="registerForm.value.client_category">
             <fieldset class="row subform">
               <div class="col-md-12 mb-1">
-                <label class="form-label">Industry Name *</label>
+                <label class="form-label">Industry Name (उद्योगको नाम) *</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="department_name" placeholder="Enter Industry Name" />
                   <mat-error [@rowsAnimation]="displayMessage?.department_name" class="text-danger"
@@ -155,7 +156,7 @@
               </div>
 
               <div class="col-md-6 mb-1">
-                <label class="form-label">Industry Address *</label>
+                <label class="form-label">Industry Address (उद्योगको ठेगाना)*</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-select formControlName="department_address" placeholder="Select Industry Address" class="custom-select" appearance="outline">
                     <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
@@ -175,7 +176,7 @@
                 </mat-form-field>
               </div> -->
               <div class="col-md-6 mb-1">
-                <label class="form-label">Registration No. *</label>
+                <label class="form-label">Registration No. (दर्ता नम्बर)*</label>
                 <mat-form-field appearance="outline" class="w-100">
                   <input matInput formControlName="registration_number" placeholder="Enter Registration Number" />
                   <mat-error [@rowsAnimation]="displayMessage?.registration_number" class="text-danger"
@@ -205,39 +206,40 @@
             </fieldset>
           </div>
 
-            <div class="row py-2" style="border: 1px solid #00000061;
+            <div class="row py-2" style="background: #f8f9fa; padding: 12px; border-radius: 0.2rem;
             margin: 10px 0;" *ngIf="registerForm.value.client_category">
             <div class="col-md-12" formArrayName="additionalDocs">
               <div class="row" *ngFor="let list of additionalDocuments.controls; let i = index" [formGroupName]="i">
                 <div class="col-md-6">
-                  <label>Document Name</label>
+                  <label>Document Name (कागजातको नाम)</label>
                   <mat-form-field appearance="outline" class="w-100">
                     <input formControlName="document_name" matInput placeholder="Enter Document Name" />
                   </mat-form-field>
                 </div>
   
                 <div class="col-md-6">
-                  <label>Document</label>
+                  <label>Document (कागजातको फाइल)</label>
                     <input (change)="uploadAdditionalDocs($event)" type="file" class="form-control">
                 </div>
               </div>
             </div>
 
             <div class="col-md-12 text-end">
-              <button class="btn btn-primary btn-sm" type="button" (click)="addDocList()">Add more</button>
+              <button class="btn btn-primary btn-sm" type="button" (click)="addDocList()">Add more (थप)</button>
             </div>
             </div>
         </div>
+
       </div>
 
       <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary w-100 h-45" id="submit">
-        <span *ngIf="!isLoading">Submit</span>
+        <span *ngIf="!isLoading">Submit (पेश गर्नुहोस्)</span>
         <span *ngIf="isLoading">
           <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
         </span>
       </button>
       <div class="text-center mt-4">
-      <a href="Javascript:;" (click)="gotoLogin()" class="fp mb-4">Back to Login</a>
+      <a href="Javascript:;" (click)="gotoLogin()" class="fp mb-4">Back to Login (लगइनमा जानुहोस्)</a>
       </div>
     </form>
   </div>

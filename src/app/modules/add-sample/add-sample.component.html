@@ -329,7 +329,7 @@
         </div>
       </div>
 
-      <div class="row margin-bottom-24">
+      <div class="row margin-bottom-24 mt-3">
         <div class="col-md-12">
           <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
             वस्तु)* </label>
@@ -351,7 +351,7 @@
           *ngIf="addSampleForm.value.commodity">
           <mat-checkbox formControlName="isParameter" class="select-parameter"
             *ngIf="addSampleForm.value.commodity">Select Parameters </mat-checkbox>
-          <p *ngIf="!addSampleForm.value.isParameter" class="mb-0 price-box">Analysis Fee (Commodity) :
+          <p *ngIf="!addSampleForm.value.isParameter" class="mb-0 price-box">Commodity Analysis Fee (वस्तु परिक्षण दस्तुर) :
             <b>Rs.{{priceOfCommodity}}</b>
           </p>
         </div>
@@ -424,7 +424,7 @@
 
           <div class="row mt-2">
             <div class="col-md-12 text-start d-flex align-items-center justify-content-end last-pp">
-              <p class="mb-0 price-box">Analysis Fee (Parameter) : <b>Rs.{{totalPrice}}</b></p>
+              <p class="mb-0 price-box">Parameter Analysis Fee (पारामिटर परिक्षण दस्तुर): <b>Rs.{{totalPrice}}</b></p>
             </div>
           </div>
 
