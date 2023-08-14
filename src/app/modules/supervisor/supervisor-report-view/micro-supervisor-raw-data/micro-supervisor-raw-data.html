@@ -183,11 +183,19 @@
                             <div class="col-md-6">
                                 <div class="formula">
                                     <h2>{{p.parameter?.name}}</h2>
-                                    <div *ngIf="p?.parameter?.formula_notation">
+                                    <div >
+                                        <div *ngIf="p?.parameter?.formula_notation">
                                       <div *ngFor="let n of splitStringByComma(p?.parameter?.formula_notation)">
                                         <span class="text-danger">*</span>{{n | titlecase}}
                                       </div>
+                                      </div>
                                       <h2>Formula = {{p?.parameter?.formula}}</h2>
+                                      <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
+                                      <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = 
+                                        <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
+                                        <span *ngIf="!p?.analyst_remarks">N/A</span>
+                                    </h2>
                                     </div>
                                     <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
                                   </div>

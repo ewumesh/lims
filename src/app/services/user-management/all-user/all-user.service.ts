@@ -18,7 +18,20 @@ export class AllUsersService {
   }
 
   getUsersList(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
+console.log(payload.status, 'as')
+    let url;
+
+    if(payload.status === 1) {
+     url = this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_active=1`);
+    } else if(payload.status === 2) {
+      url = this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_active=0`);
+    } else if(payload.status === 3) {
+      url = this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_reject=1`);
+    } else {
+      url = this.http.get(`${this.url}/api/account/users/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}`);
+    }
+
+    return url
   }
 
   deleteUser(userId: number): Observable<any> {

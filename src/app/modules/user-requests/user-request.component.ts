@@ -63,7 +63,8 @@ export class UserRequestsComponent {
       role: '',
       client_category: '',
       from: '',
-      to: ''
+      to: '',
+      status:''
     })
   }
 
@@ -118,6 +119,14 @@ export class UserRequestsComponent {
       r = this.filterForm.value.role;
     }
 
+
+    let recheck;
+    if(this.filterForm.value.status === 1) {
+      recheck = 0
+    } else {
+      recheck = 1
+    }
+
     let payload = {
       search: this.filterForm.value.search,
       page: '',
@@ -126,6 +135,7 @@ export class UserRequestsComponent {
       from: from,
       to: to,
       clientCategory: c,
+      is_recheck:recheck
     }
     this.userRequestsService.getUserRequests(payload).subscribe(response => {
       this.dataSource.data = response;
@@ -156,7 +166,8 @@ export class UserRequestsComponent {
         clientCategory: '',
         role: '',
         from: '',
-        to:''
+        to:'',
+        is_recheck:''
       }
     } else {
       payload = {
@@ -166,7 +177,8 @@ export class UserRequestsComponent {
         clientCategory: '',
         role: '5',
         from: '',
-        to:''
+        to:'',
+        is_recheck:''
       }
     }
 

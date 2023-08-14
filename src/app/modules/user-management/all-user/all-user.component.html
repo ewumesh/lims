@@ -1,5 +1,5 @@
 <form [formGroup]="filterForm" class="row">
-  <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-4' : 'col-md-6'">
+  <div [ngClass]="filterForm.get('role')?.value === 5 ? 'col-md-2' : 'col-md-4'">
     <mat-form-field appearance="outline" class="w-100">
       <input class="custom-input" matInput formControlName="search" placeholder="Search" #input>
     </mat-form-field>
@@ -16,6 +16,16 @@
     <mat-form-field appearance="outline" class="custom-select w-100">
       <mat-select placeholder="Client Category" formControlName="client_category_id">
         <mat-option *ngFor="let item of clientCategories" [value]="item.id">{{item.name | titlecase}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-2">
+    <mat-form-field appearance="outline" class="custom-select w-100">
+      <mat-select formControlName="status" placeholder="Select Status">
+        <mat-option [value]="1">Active</mat-option>
+        <mat-option [value]="2">Inactive</mat-option>
+        <mat-option [value]="3">Rejected</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

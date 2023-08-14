@@ -269,6 +269,12 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.service.getCommoditiesLimited(payload).subscribe(response => {
       this.commodities = response;
+
+      if(this.commodities.length > 0) {
+      let ap=   this.commodities.sort((a,b) => a.name.localeCompare(b.name));
+        this.commodities = ap;
+      }
+      
       if (this.sampleId) {
         this.getSampleDetails();
       }

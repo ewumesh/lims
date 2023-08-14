@@ -120,7 +120,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         page: '',
         size: '',
         role: '5',
-        client_category_id: ''
+        client_category_id: '',
+        status:''
       }
     } else if(this.loggedUserDetails.role === 1) {
       p = {
@@ -128,7 +129,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         page: '',
         size: '',
         role: '',
-        client_category_id: ''
+        client_category_id: '',
+        status:''
       }
     } else if(this.loggedUserDetails.role === 3) {
       p = {
@@ -136,7 +138,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         page: '',
         size: '',
         role: '5',
-        client_category_id: ''
+        client_category_id: '',
+        status:''
       }
     }else if(this.loggedUserDetails.role === 4) {
       p = {
@@ -144,7 +147,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         page: '',
         size: '',
         role: '5',
-        client_category_id: ''
+        client_category_id: '',
+        status:''
       }
     }else if(this.loggedUserDetails.role === 6) {
       p = {
@@ -152,7 +156,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         page: '',
         size: '',
         role: '5',
-        client_category_id: ''
+        client_category_id: '',
+        status:''
       }
     }
 
@@ -170,7 +175,8 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
       page: '',
       size: '',
       role: this.filterForm.value.role,
-      client_category_id: this.filterForm.value.client_category_id
+      client_category_id: this.filterForm.value.client_category_id,
+      status: this.filterForm.value.status
     }
     this.isLoading = true;
     this.allUsersService.getUsersList(payload).subscribe(response => {

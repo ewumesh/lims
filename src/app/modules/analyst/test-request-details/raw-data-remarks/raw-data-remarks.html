@@ -150,7 +150,10 @@
                                 <h2>Formula = {{p?.formula}}</h2>
                                 <h2>Result = {{p?.result}}</h2>
                                 <h2>Final Result = {{p?.final_result || 'N/A'}}</h2>
-                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = <span [innerHtml]="p?.analyst_remarks"></span></h2>
+                                <h2>Additional Info = {{p?.additional_info || 'N/A'}}</h2>
+                                <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = 
+                                  <span [innerHtml]="p?.analyst_remarks"></span>
+                                </h2>
                               </div>
                               <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div> -->
                             </div>
@@ -345,13 +348,15 @@
                 <div class="col-md-6">
                   <div class="formula">
                     <h2>{{p?.name}}</h2>
-                    <div *ngIf="p?.formula_notation">
+                    <div >
+                      <div *ngIf="p?.formula_notation">
                       <div *ngFor="let n of splitStringByComma(p?.formula_notation)">
                         <span class="text-danger">*</span>{{n | titlecase}}
                       </div>
+                      </div>
                       <h2>Formula = {{p?.formula}}</h2>
                     </div>
-                    <div *ngIf="!p?.formula_notation" class="text-muted">N/A</div>
+                    <!-- <div *ngIf="!p?.formula_notation" class="text-muted">N/A</div> -->
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -359,7 +364,8 @@
                     <span>{{item.key}}</span> = <span>{{item.value}}</span>
                   </div>
                   <div>Result: {{p.result}}</div>
-                  <div *ngIf="p?.converted_result">Final Result: {{p.converted_result}}</div>
+                  <div *ngIf="p.converted_result">Final Result: {{p.converted_result}}</div>
+                  <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
                   <div *ngIf="p?.analyst_remarks">Qualitative Analysis: <span [innerHtml]="p?.analyst_remarks"></span></div>
                 </div>
               </div>

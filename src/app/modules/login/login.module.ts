@@ -10,6 +10,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { SnackbarModule } from 'src/app/shared/snackbar/snackbar.module';
 import { LoginComponent } from './login.component';
 import { AuthenticationService } from 'src/app/services/auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -24,7 +25,8 @@ import { AuthenticationService } from 'src/app/services/auth/auth.service';
     MatInputModule,
     SnackbarModule,
     MatProgressSpinnerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule
    ],
   exports: [],
   providers: [AuthenticationService],

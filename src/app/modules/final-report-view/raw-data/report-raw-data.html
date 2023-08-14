@@ -163,6 +163,7 @@
                           </div> 
                             <h2>Formula = {{p?.parameter?.formula}}</h2>
                             <h2>Result = {{p?.parameter?.result || 'N/A'}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
                                       <h2>Final Result = {{p?.parameter?.final_result || 'N/A'}}</h2>
                                       <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = <span [innerHtml]="p?.parameter?.analyst_remarks"></span></h2>
                           </div>

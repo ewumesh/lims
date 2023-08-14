@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private readonly toDestroy$ = new Subject<void>();
 
+  hidePass = true;
+
   loginForm: FormGroup;
 
   isLoading: boolean;
