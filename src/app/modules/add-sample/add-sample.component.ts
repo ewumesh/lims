@@ -98,6 +98,28 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
 
   //----------------------------
 
+  // commodity search
+/** list of commodities */
+protected allCommodities: any[] = [
+];
+
+/** control for the selected bank */
+public cCtrl: FormControl = new FormControl();
+
+/** control for the MatSelect filter keyword */
+public cFilterCtrl: FormControl = new FormControl();
+
+/** list of commodities filtered by search keyword */
+public filteredCommodities: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+
+@ViewChild('singleSelectC') singleSelectC: MatSelect;
+
+/** Subject that emits when the component has been destroyed. */
+protected onDestroy = new Subject<void>();
+
+//----------------------------
+  // commodity search
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -244,6 +266,20 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       .subscribe(() => {
         this.filterBanks();
       });
+
+      // Commodity filter 
+          // set initial selection
+    this.cCtrl.setValue(this.allCommodities[10]);
+
+    // load the initial bank list
+    this.filteredCommodities.next(this.allCommodities.slice());
+
+    // listen for search field value changes
+    this.cFilterCtrl.valueChanges
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => {
+        this.filterCommodities();
+      });
   }
 
   get samples(): FormArray {
@@ -269,11 +305,14 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.service.getCommoditiesLimited(payload).subscribe(response => {
       this.commodities = response;
+      
 
       if(this.commodities.length > 0) {
       let ap=   this.commodities.sort((a,b) => a.name.localeCompare(b.name));
         this.commodities = ap;
       }
+
+      this.allCommodities = response;
       
       if (this.sampleId) {
         this.getSampleDetails();
@@ -376,7 +415,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: [''],
       amendments: [''],
       note: [''],
-      commodity: ['', Validators.required],
+      commodity: [''],
       language: ['en'],
       parameters: [[]],
       owner_user: '',
@@ -428,6 +467,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   saveChanges() {
+    console.log(this.cCtrl.value, 'faa')
     this.isSampleSent = true;
     if (this.addSampleForm.invalid) {
       this.message = {};
@@ -483,7 +523,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
       report_date: this.format(this.addSampleForm.value.report_date),
       amendments: this.addSampleForm.value.amendments,
       note: this.addSampleForm.value.note,
-      commodity: this.addSampleForm.value.commodity,
+      commodity: this.cCtrl.value.id,
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
       owner_user: cUser,
@@ -531,7 +571,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     formData.append('report_date', this.format(this.addSampleForm.value.report_date)),
     formData.append('amendments', this.addSampleForm.value.amendments),
     formData.append('note',this.addSampleForm.value.note),
-    formData.append('commodity',this.addSampleForm.value.commodity),
+    formData.append('commodity',this.cCtrl.value.id),
     formData.append('language', this.addSampleForm.value.language),
     formData.set('parameters', p),
     formData.append('owner_user', cUser),
@@ -670,6 +710,21 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
         // this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
+        this.singleSelect.compareWith = (a,b) => a && b && a.first_name === b.first_name;
+      });
+
+      this.filteredCommodities
+      .pipe(take(1), takeUntil(this.onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        // this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
+
+        this.singleSelect.compareWith = (a, b) => a && b && a.name === b.name;
+        
       });
   }
 
@@ -688,6 +743,24 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
     // filter the banks
     this.filteredBanks.next(
       this.banks.filter(bank => bank.first_name.toLowerCase().indexOf(search) > -1)
+    );
+  }
+
+  protected filterCommodities() {
+    if (!this.allCommodities) {
+      return;
+    }
+    // get the search keyword
+    let search = this.cFilterCtrl.value;
+    if (!search) {
+      this.filteredCommodities.next(this.allCommodities.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredCommodities.next(
+      this.allCommodities.filter(a => a.name.toLowerCase().indexOf(search) > -1)
     );
   }
 }

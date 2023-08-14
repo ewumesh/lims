@@ -1,7 +1,7 @@
-<div class="row" *ngIf="!isDashboardStatus && dashboardStatus?.total_request > 0">
+<div class="row">
 
     <div class="col-md-6 h-100">
-        <div class="row">
+        <div class="row" *ngIf="!isDashboardStatus && dashboardStatus?.total_request > 0">
             <div class="col-md-12 bg-white p-2 user-db-card" style="border-radius: 6px;">
                 <div class="row px-2">
                     <div class="col-md-6">
@@ -179,7 +179,7 @@
         
     </div>
 
-    <div class="col-md-6 h-100">
+    <div class="col-md-6 h-100" *ngIf="!isDashboardStatus && dashboardStatus?.total_request > 0">
         <div class="row ms-0">
             <div class="col-md-6 padding-left-6">
                 <div class="card user-db-card" style="height: auto !important;">

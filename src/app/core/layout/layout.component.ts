@@ -20,9 +20,9 @@ export class LayoutComponent {
 
     this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    if(!this.loggedUserDetails.is_email_verified) {
-      this.router.navigate(['/user-verification']);
-    }
+    // if(!this.loggedUserDetails.is_email_verified) {
+    //   this.router.navigate(['/user-verification']);
+    // }
 
     //** After Route change split url text and assign to breadcrumbs variable */
     this.router.events.subscribe(a => {

@@ -333,14 +333,26 @@
         <div class="col-md-12">
           <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
             वस्तु)* </label>
-          <mat-form-field appearance="outline" class="custom-select w-100">
+          <!-- <mat-form-field appearance="outline" class="custom-select w-100">
             <mat-select formControlName="commodity" placeholder="Select Category">
               <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
                 titlecase}}</mat-option>
-            </mat-select>
+            </mat-select> 
             <mat-error class="text-danger" *ngIf="displayMessage?.commodity">{{displayMessage.commodity}}</mat-error>
-            <!-- <mat-error [@rowsAnimation]="displayMessage?.commodityForAnalysis" class="text-danger"
-              *ngIf="displayMessage?.commodityForAnalysis">{{displayMessage?.commodityForAnalysis}}</mat-error> -->
+          </mat-form-field> -->
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select class="custom-select" [formControl]="cCtrl" placeholder="Select Commodity" #singleSelectC>
+              <mat-option>
+                <ngx-mat-select-search [formControl]="cFilterCtrl" placeholderLabel="Search Commodity"
+                  noEntriesFoundLabel="'no matching user found'"></ngx-mat-select-search>
+              </mat-option>
+
+              <mat-option *ngFor="let c of filteredCommodities | async" [value]="c">
+                {{c.name}}
+              </mat-option>
+            </mat-select>
+            
           </mat-form-field>
         </div>
       </div>
