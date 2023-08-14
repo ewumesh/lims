@@ -149,7 +149,7 @@
                                 </div>
                                 <h2>Formula = {{p?.formula}}</h2>
                                 <h2>Result = {{p?.result}}</h2>
-                                <h2>Final Result = {{p?.final_result || 'N/A'}}</h2>
+                                <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
                                 <h2>Additional Info = {{p?.additional_info || 'N/A'}}</h2>
                                 <h2 *ngIf="!p.analyst_remarks ">Qualitative Analysis = 
                                   <span [innerHtml]="p?.analyst_remarks"></span>
@@ -190,10 +190,10 @@
               <td colspan="10">Remarks (If any):<span class="detail"> {{data?.remarks}} </span> </td>
           </tr>
 
-          <tr>
+          <!-- <tr>
             <td class="text-center">8</td>
             <td colspan="10">Additional Information:<span class="detail"> {{data?.additional_info || 'N/A'}} </span> </td>
-        </tr>
+        </tr> -->
       </table>
 
       </mat-tab>
@@ -417,10 +417,10 @@
 
       
   </tr>
-  <tr>
+  <!-- <tr>
     <td class="text-center">8</td>
     <td colspan="10">Additional Information:<span class="detail"> {{rawDatasheetDetails?.additional_info || 'N/A'}} </span> </td>
-</tr>
+</tr> -->
     </table>
     <!-- </mat-card> -->
   </mat-dialog-content>
