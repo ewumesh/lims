@@ -277,7 +277,7 @@
       border-radius: 5px;
       padding: 1%;">
 
-        <span style="font-weight: bold;">{{getClientCategoryName(loggedUser?.client_category)}} User</span>
+        <!-- <span style="font-weight: bold;">{{getClientCategoryName(loggedUser?.client_category)}} User</span> -->
 
 
         <div class="row">
@@ -285,7 +285,7 @@
             <label style="width:100%;" class="list-heading form-label">Client Category</label>
             <mat-form-field appearance="outline" class="w-100">
               <mat-select class="custom-select" placeholer="Select Client Category" formControlName="client_type">
-                <mat-option *ngFor="let c of clientCategories" [value]="c.id">{{c.name}}</mat-option>
+                <mat-option [disabled]="true" *ngFor="let c of clientCategories" [value]="c.id">{{c.name}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -318,14 +318,15 @@
 
             <div class="col-md-6">
               <label for="formFile" class="form-label">Sample Document</label>
-              <input (change)="uploadImage($event)" formControlName="file" class="form-control" type="file"
+              <input (change)="uploadImage($event)" formControlName="file" class="form-control h-45" type="file"
                 id="formFile">
             </div>
           </div>
         </div>
         <div class="col-md-12 text-end p-3 mt-2">
           <!-- <button (click)="save()" class="btn btn-primary btn-sm mx-2">Save Doc</button> -->
-          <button (click)="addDocList()" type="button" class="btn btn-primary btn-sm">Add new</button>
+          <button (click)="addDocList()" type="button" class="btn btn-primary btn-lims-primary btn-sm mx-1">Add new</button>
+          <button *ngIf="samples.length > 1" (click)="remove()" type="button" class="btn btn-primary btn-lims-danger btn-sm mx-1">Remove</button>
         </div>
       </div>
 

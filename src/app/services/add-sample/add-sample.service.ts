@@ -47,6 +47,6 @@ export class AddSampleService {
   }
 
   getUsersListLimited(payload):Observable<any> {
-    return this.http.get(`${this.url}/api/account/get-limited-user-data/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_verified=1`);
+    return this.http.get(`${this.url}/api/account/get-limited-user-data/?search=${payload.search}&limit=${payload.size}&offset=${payload.page}&role=${payload.role}&client_category_id=${payload.client_category_id}&is_verified=1&is_active=1`);
   }
 }

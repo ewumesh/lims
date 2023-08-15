@@ -10,8 +10,8 @@
         
                 </div>
                 <div id="chart">
-                    <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
-                        [responsive]="chartOptions.responsive"></apx-chart>
+                    <apx-chart [series]="chartOptions?.series" [chart]="chartOptions?.chart" [labels]="chartOptions?.labels"
+                        [responsive]="chartOptions?.responsive"></apx-chart>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div id="chartB">
-                    <apx-chart [series]="chartOptionsB.series" [chart]="chartOptionsB.chart" [labels]="chartOptionsB.labels"
-                        [responsive]="chartOptionsB.responsive"></apx-chart>
+                    <apx-chart [series]="chartOptionsB?.series" [chart]="chartOptionsB?.chart" [labels]="chartOptionsB?.labels"
+                        [responsive]="chartOptionsB?.responsive"></apx-chart>
 
                         <table class="table chartB">
                             <thead>
@@ -102,7 +102,7 @@
                             <tr class="cursor-pointer" *ngFor="let a of latestSamples" (click)="gotoSampleReportDetails(a.id)">
                                 <td>{{a?.name | titlecase}}</td>
                                 <td><span class="text-uppercase">{{a.id}}</span></td>
-                                <td>{{a.created_date | date}}</td>
+                                <td>{{a?.created_date | date}}</td>
                                 <td>
                                     <span class="badge badge-primary p-1" [statusColor]="a.status">{{a.status | titlecase}}</span>
                                 </td>
@@ -390,10 +390,10 @@
                                     <tbody>
                                         <tr *ngFor="let a of userRequests">
                                             <!-- <td> <span class="text-uppercase">{{a.id}}</span></td> -->
-                                            <td>{{a.first_name | titlecase}} {{a.last_name | titlecase}}</td>
-                                            <td>{{a.created_date | date}}</td>
-                                            <td>{{a.email}}</td>
-                                            <td>{{a.username}}</td>
+                                            <td>{{a?.first_name | titlecase}} {{a?.last_name | titlecase}}</td>
+                                            <td>{{a?.created_date | date}}</td>
+                                            <td>{{a?.email}}</td>
+                                            <td>{{a?.username}}</td>
                                             <!-- <td>
                                                 <button [disabled]="isLoadingDownloadBtn" (click)="downloadReport(a.id)" class="btn btn-outline-primary btn-sm">
                                                     <span >Download Report <i

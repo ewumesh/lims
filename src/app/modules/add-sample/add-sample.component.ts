@@ -241,6 +241,10 @@ protected onDestroy = new Subject<void>();
 
   }
 
+  remove() {
+    this.samples.removeAt(-1)
+  }
+
   ngOnInit(): void {
     this.initForm();
 
