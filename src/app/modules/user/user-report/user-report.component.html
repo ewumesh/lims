@@ -254,12 +254,12 @@
                         </span>
                         <span *ngIf="!r.test_type">N/A</span>
                   </td>
-                  <td>
-                    <span *ngIf="r.ref_test_method">
+                  <td>{{r.test_method}}
+                    <!-- <span *ngIf="r.ref_test_method">
                       <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
                       <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
                       </span>
-                    <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span>
+                    <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span> -->
 
                   </td>
                   <td><span *ngIf="r.units">
@@ -269,7 +269,9 @@
                   <span *ngIf="!r.units" class="text-muted">N/A</span></td>
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <td>{{r.mandatory_standard}}</td>
-                  <td>{{r?.result}}</td>
+                  <td>
+                    <span [innerHtml]="r?.result"></span>
+                  </td>
                   <!-- <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td> -->
                 </tr>
               </tbody>

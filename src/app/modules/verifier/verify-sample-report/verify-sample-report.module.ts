@@ -14,9 +14,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewVieriferRemarks } from 'src/app/shared/verify-report/view-remarks/view-remarks';
 import { MicroRawDataVerifierComponent } from 'src/app/shared/verify-report/view-micro-raw/micro-raw-data-verifier';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SuperscriptPipe } from 'src/app/shared/s-transform';
+import { VerifierReportComponent } from './view-sample/verifier-view-sample';
 
 @NgModule({
-  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks,MicroRawDataVerifierComponent],
+  declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks,MicroRawDataVerifierComponent, 
+    VerifierReportComponent
+    // SuperscriptPipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -39,7 +39,7 @@
   </div>
 </form>
 
-<div>
+<div style="width: 100%;overflow-x: auto;">
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
     [@collectionInOut]="dataSource.data?.length">
 

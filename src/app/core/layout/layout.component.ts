@@ -1,26 +1,31 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
   //** Variable for store splited text from URL */
   breadcrumbs = [];
 
   loggedUserDetails;
 
+  breakpoints = Breakpoints;
+  isMobileDevice = false;
+
   constructor(
     public router: Router,
-    private _location: Location
+    private _location: Location,
+    private responsive: BreakpointObserver
   ) {
 
     this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    // if(!this.loggedUserDetails.is_email_verified) {
+    // if(!this.loggedUserDetails.is_email_verified && this.loggedUserDetails.role === 5) {
     //   this.router.navigate(['/user-verification']);
     // }
 
@@ -45,5 +50,16 @@ export class LayoutComponent {
   //** Function for remove '-' from the text */
   removeHyphen(input: string): string {
     return input.replace(/-/g, ' ');
+  }
+
+  ngOnInit(): void {
+    this.responsive.observe(Breakpoints.XSmall)
+      .subscribe(result => {
+        console.log(result.matches, 'DEVICE....')
+        if (result.matches) {
+          this.isMobileDevice = true;
+        }
+
+      });
   }
 }

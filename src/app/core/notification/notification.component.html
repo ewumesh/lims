@@ -1,4 +1,4 @@
-<div class="row m-0 p-0 ">
+<div class="row m-0 p-0 " *ngIf="!isMobileDevice">
   <!-- <div class="col-md-12">
     <h3>Notification</h3>
     <hr>
@@ -16,3 +16,11 @@
     </mat-list>
   </div>
 </div>
+
+<mat-nav-list *ngIf="isMobileDevice">
+  <h2 style="margin: 0;">Notification({{allNotifications?.length}})</h2>
+  <a *ngFor="let n of allNotifications" (click)="navigateTo(n?.path)" mat-list-item>
+    <span matListItemTitle>{{n.notification_message | titlecase}}</span>
+    <span matLine>{{n.created_date | date: 'medium'}}</span>
+  </a>
+</mat-nav-list>

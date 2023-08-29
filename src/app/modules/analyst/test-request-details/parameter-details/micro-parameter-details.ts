@@ -41,7 +41,7 @@ export class MicroParameterDetailsComponent implements OnInit {
         private dialogRef: MatDialogRef<MicroParameterDetailsComponent>,
         @Inject(MAT_DIALOG_DATA)
         public data: any,) {
-        // console.log(data, 'MY OB DATAE') 
+        console.log(data, 'MY OB DATAE') 
     }
 
 
@@ -103,12 +103,12 @@ export class MicroParameterDetailsComponent implements OnInit {
         console.log(this.data, 'INIT FORM')
         this.parameterDetailsForm = this.fb.group({
             id: null,
-            physical_condition_of_sample: '',
+            physical_condition_of_sample: 'Good',
             media_used: '',
             prepared_dilution: '',
             diluent_used: '',
             positive_control_used: '',
-            negative_control_used: '',
+            negative_control_used: 'Media Blank',
             date_of_incubation: '',
             required_temperature: '',
             sample_form: this.data?.sample_form,
@@ -116,7 +116,8 @@ export class MicroParameterDetailsComponent implements OnInit {
             sample_form_has_parameter: this.data?.id,
             first_exponent: '',
             second_exponent: '',
-            third_exponent: ''
+            third_exponent: '',
+            duration_of_incubation:''
         })
 
         if (this.data?.selectedParameter?.micro_table && this.data?.selectedParameter?.micro_table !== null) {

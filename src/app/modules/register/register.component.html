@@ -16,7 +16,7 @@
       </div>
   </div>
 
-  <nav class="mainheader-nav">
+  <nav class="mainheader-nav" style="overflow-x: scroll;">
       <div class="user-name">
         <ul class="main-ul">
           <a (click)="goToHome()" href="Javascript:;">
@@ -115,8 +115,9 @@
       </div>
       <div class="col-md-12">
         <label for="password" class="form-label">Password(पासवोर्ड)*</label>
-        <mat-form-field appearance="outline" class="w-100">
-          <input type="password" matInput formControlName="password" placeholder="Enter Password" />
+        <mat-form-field appearance="outline" class="w-100"> 
+          <input [type]="hidePass ? 'password' : 'text'" matInput formControlName="password" placeholder="Enter Password" />
+          <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
           <mat-error [@rowsAnimation]="displayMessage?.password" class="text-danger"
             *ngIf="displayMessage?.password">{{displayMessage?.password}}</mat-error>
         </mat-form-field>
@@ -158,12 +159,12 @@
               <div class="col-md-6 mb-1">
                 <label class="form-label">Industry Address (उद्योगको ठेगाना)*</label>
                 <mat-form-field appearance="outline" class="w-100">
-                  <mat-select formControlName="department_address" placeholder="Select Industry Address" class="custom-select" appearance="outline">
+                  <!-- <mat-select formControlName="department_address" placeholder="Select Industry Address" class="custom-select" appearance="outline">
                     <mat-option *ngFor="let dt of departmentTypes" [value]="dt.code">{{dt.name}}</mat-option>
-                  </mat-select>
-                  <!-- <input matInput formControlName="department_type" placeholder="Enter Department Type" /> -->
-                  <mat-error [@rowsAnimation]="displayMessage?.department_address" class="text-danger"
-                    *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error>
+                  </mat-select> -->
+                  <input matInput formControlName="department_address" placeholder="Enter Department Type" />
+                  <!-- <mat-error [@rowsAnimation]="displayMessage?.department_address" class="text-danger"
+                    *ngIf="displayMessage?.department_address">{{displayMessage?.department_address}}</mat-error> -->
                 </mat-form-field>
               </div>
 
@@ -206,6 +207,27 @@
             </fieldset>
           </div>
 
+          
+          <div class="row" *ngIf="registerForm.value.client_category === 10">
+            <div class="col-md-6">
+              <label>Importer Name</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput placeholder="Enter Importer Name" formControlName="department_name" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <label>Importer Address</label>
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput placeholder="Enter Importer Address" formControlName="department_address" />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-12">
+              <label>Other Details</label>
+              <textarea placeholder="Enter Details.." formControlName="other_detail" class="form-control"></textarea>
+            </div>
+          </div>
+
             <div class="row py-2" style="background: #f8f9fa; padding: 12px; border-radius: 0.2rem;
             margin: 10px 0;" *ngIf="registerForm.value.client_category">
             <div class="col-md-12" formArrayName="additionalDocs">
@@ -225,7 +247,8 @@
             </div>
 
             <div class="col-md-12 text-end">
-              <button class="btn btn-primary btn-sm" type="button" (click)="addDocList()">Add more (थप)</button>
+              <button class="btn btn-primary btn-sm mx-1" type="button" (click)="addDocList()">Add more (थप)</button>
+              <button *ngIf="additionalDocuments.length > 1" class="btn btn-primary btn-lims-danger btn-sm mx-1" type="button" (click)="removeDoc()">Remove</button>
             </div>
             </div>
         </div>

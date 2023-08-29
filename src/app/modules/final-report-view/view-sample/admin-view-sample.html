@@ -68,12 +68,12 @@ padding: 2rem;overflow-y: scroll;">
 <thead>
     <tr>
         <td>Sample Particular: <span>{{data?.name | titlecase}}</span> </td>
-        <td> Issue Date: <span>{{data?.created_date | date:'medium'}}</span> </td>
+        <td> Issue Date: <span>{{data?.created_date | date}}</span> </td>
     </tr>
 </thead>
 <tbody>
     <tr>
-        <td >Sample Registration Date: <span>{{data?.created_date | date:'medium'}}</span> 
+        <td >Sample Registration Date: <span>{{data?.created_date | date}}</span> 
         </td>
         <td>Sample Code: <span> {{data?.id}}</span> </td>
     </tr>
@@ -83,8 +83,8 @@ padding: 2rem;overflow-y: scroll;">
         <td>Test Required:N/A</td>
     </tr>
     <tr>
-        <td>Analysis Starting Date: <span>{{(data?.supervisor_sample_form[0]?.created_date | date:'medium') || 'N/A'}}</span></td>
-        <td>Analysis Completion Date: <span>{{(data?.verified_date | date:'medium') || 'N/A'}}</span></td>
+        <td>Analysis Starting Date: <span>{{(data?.supervisor_sample_form[0]?.created_date | date) || 'N/A'}}</span></td>
+        <td>Analysis Completion Date: <span>{{(data?.verified_date | date) || 'N/A'}}</span></td>
     </tr>
 </tbody>
 </table>
@@ -112,7 +112,10 @@ padding: 2rem;overflow-y: scroll;">
         <td>{{p?.name}}</td>
         <td>{{p.test_method || 'N/A'}}</td>
         <td>{{p?.units || 'N/A'}}</td>
-        <td>{{p?.result || 'N/A'}}</td>
+        <td>
+            <!-- {{p?.result || 'N/A'}} -->
+            <span [innerHtml]="p?.result"></span>
+        </td>
         <td>{{p?.mandatory_standard || 'N/A'}}</td>
         <td [attr.rowspan]="data?.parameters?.length" *ngIf="i === 0">{{data?.remarks || 'N/A'}}</td>
     </tr>

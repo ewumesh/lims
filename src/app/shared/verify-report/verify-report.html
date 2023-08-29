@@ -39,54 +39,136 @@
         </div>
       </div>
     </div>
-    <!-- <div class="view-page">
+
+    <div class="view-page">
+      <h3 class="view-page-heading">Owner Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">Name</h4>
+          <p>{{userDetails?.first_name}} {{userDetails?.last_name}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Email </h4>
+          <p>{{userDetails?.email}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Phone </h4>
+          <p>{{userDetails?.phone}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">Username</h4>
+          <p>{{userDetails?.username}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Joined Date</h4>
+          <p>{{userDetails?.date_joined | date}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Client Category</h4>
+          <p>{{getClientCategoryName(userDetails?.client_category)}}</p>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">Brand</h4>
+          <p>{{reportDetails.brand}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Purpose of Analysis</h4>
+          <p>{{reportDetails?.purpose}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Condition</h4>
+          <p>{{reportDetails.condition}}</p>
+        </div>
+
+      </div> -->
+    </div>
+
+    <div class="view-page mt-3">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
-          <h4>Sample ID</h4>
-          <p>{{reportDetails.verifier_encode_id}}</p>
+          <h4 class="m-0">Sample ID</h4>
+          <p>{{reportDetails?.id}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Sample Name </h4>
-          <p>{{reportDetails.name}}</p>
+          <h4 class="m-0">Sample Name </h4>
+          <p>{{reportDetails?.name}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Commodity </h4>
+          <h4 class="m-0">Commodity </h4>
           <p>{{reportDetails?.commodity?.name}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>MFD</h4>
-          <p>{{reportDetails.mfd | date}}</p>
+          <h4 class="m-0">MFD</h4>
+          <p>{{reportDetails?.mfd | date}}</p>
         </div>
         <div class="col-md-4">
-          <h4>Best Before Date</h4>
-          <p>{{reportDetails.dfb | date}}</p>
+          <h4 class="m-0">Best Before Date</h4>
+          <p>{{reportDetails?.dfb | date}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Batch</h4>
-          <p>{{reportDetails.batch}}</p>
+          <h4 class="m-0">Batch</h4>
+          <p>{{reportDetails?.batch}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <h4>Brand</h4>
-          <p>{{reportDetails.brand}}</p>
+          <h4 class="m-0">Brand</h4>
+          <p>{{reportDetails?.brand}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Purpose of Analysis</h4>
+          <h4 class="m-0">Purpose of Analysis</h4>
           <p>{{reportDetails?.purpose}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Condition</h4>
-          <p>{{reportDetails.condition}}</p>
+          <h4 class="m-0">Condition</h4>
+          <p>{{reportDetails?.condition}}</p>
         </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Note</h4>
+          <p>{{reportDetails?.note}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="m-0">Amendments</h4>
+          <p>{{reportDetails?.amendments}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="m-0">Language</h4>
+          <p>{{reportDetails?.language}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="m-0">Sample Type</h4>
+          <p>{{reportDetails?.sample_type}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="m-0">Sample Quantity</h4>
+          <p>{{reportDetails?.sample_quantity}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <h4 class="m-0">Number Of Sample</h4>
+          <p>{{reportDetails?.number_of_sample}}</p>
+        </div>
+
       </div>
-    </div> -->
+    </div>
 
     <div class="white-bg mt-3" *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
       <h3 class="rawdata-heading">Raw Data Sheet</h3>
@@ -245,7 +327,7 @@
                 </td>
                 <td>{{r.test_type}}</td>
                 <td>
-                  <span>{{r.result}}</span>
+                  <span [innerHtml]="r.result"></span>
                   <!-- <span *ngIf="r?.result === 0">0</span>
                   <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                 </td>

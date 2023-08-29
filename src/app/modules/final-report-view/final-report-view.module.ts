@@ -16,9 +16,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
 import { ViewReportDoc } from './view-docs';
 import { AdminFinalReportComponent } from './view-sample/admin-view-sample';
+import { SuperscriptPipe } from 'src/app/shared/s-transform';
 
 @NgModule({
-  declarations: [FinalReportViewComponent, ReportRawDataComponent,ViewReportRemarksComponent, ReportMicroRawDataComponent,ViewReportDoc,AdminFinalReportComponent],
+  declarations: [
+    FinalReportViewComponent, 
+    ReportRawDataComponent,
+    ViewReportRemarksComponent, 
+    ReportMicroRawDataComponent,
+    ViewReportDoc,
+    AdminFinalReportComponent,
+    // SuperscriptPipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -52,6 +52,7 @@
 </div>
 
 <div class="white-bg">
+  <div style="width: 100%; overflow-x: auto;">
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
     [@collectionInOut]="dataSource.data?.length">
 
@@ -168,6 +169,7 @@
       </td>
     </tr>
   </table>
+  </div>
   <div class="row" *ngIf="isLoading">
     <div class="col-md-12 text-center py-3">
       <div class="spinner-border text-dark" role="status">

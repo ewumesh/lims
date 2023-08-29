@@ -28,7 +28,9 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   message: any;
   responseError = null;
 
-  date = ''
+  date = '';
+
+  hidePass = true;
 
   private readonly toDestroy$ = new Subject<void>();
 
@@ -112,6 +114,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       this.additionalDocuments.push(this.createDocList());
   }
 
+  removeDoc() {
+    this.additionalDocuments.removeAt(-1)
+  }
+
   createDocList() {
     return this.fb.group({
       document_name: new FormControl(''),
@@ -168,7 +174,10 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       username: ['', [Validators.required, Validators.pattern("^[a-z][a-z0-9]*$")]],
       role: 5,
       department_type: '',
-      additionalDocs: new FormArray([])
+      additionalDocs: new FormArray([]),
+      importer_name:'',
+      importer_address:'',
+      other_detail:''
     })
     this.addDocList();
   }

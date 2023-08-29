@@ -1,0 +1,51 @@
+<table *ngIf="!isLoading" mat-table [dataSource]="dataSource" [@collectionInOut]="dataSource.data?.length" class="table custom-border mb-0">
+
+    <ng-container matColumnDef="sn">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let e"> {{e.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Fiscal Year </th>
+      <td mat-cell *matCellDef="let c"> 
+        <div *ngIf="!isEdit">
+        {{c.fiscal_year}} 
+        </div>
+        <div *ngIf="isEdit">
+            <div class="row">
+                <div class="col-md-5">
+                    <mat-form-field appearance="outline" class="w-100" hideDetails>
+                        <input class="custom-input" matInput placeholder="Enter Fiscal Year" [(ngModel)]="fiscal_year"/>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2 pt-2">
+                    <button class="btn btn-primary btn-lims-primary btn-sm" (click)="save(c.id)">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Action </th>
+      <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <!-- <button (click)="openDialog(element)" class="btn btn-primary mx-1">Edit</button>
+        <button (click)="deleteCategory(element.id)" class="btn btn-danger mx-1">Delete</button> -->
+
+        <button *ngIf="!isEdit" [matTooltip]="'Edit Fiscal Year'" (click)="edit(element)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon></button>
+        <button *ngIf="isEdit" (click)="isEdit = !isEdit"  class="btn btn-primary btn-lims-danger btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="edit" fontIcon="close"></mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell text-center py-5" colspan="8">
+        <img src="../../../../assets/no-data.svg" />
+        <div class="text-muted">Data Not Available.</div>
+
+      </td>
+    </tr>
+  </table>

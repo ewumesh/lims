@@ -2,6 +2,11 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } fr
 import { Router } from '@angular/router';
 import { LayoutService } from '../layout.service';
 import { LanguageService } from 'src/app/services/language-service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { NotificationComponent } from '../notification/notification.component';
+import { MatSidenav } from '@angular/material/sidenav';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 export interface Section {
   name: string;
@@ -19,12 +24,15 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   roles: any[] = [];
 
-  notifications:any[] = [];
+  notifications: any[] = [];
 
-  url:string;
+  url: string;
 
-  checked:boolean = false;
-  disabled:boolean = false;
+  checked: boolean = false;
+  disabled: boolean = false;
+
+  breakpoints = Breakpoints;
+  isMobileDevice = false;
 
   folders: Section[] = [
     {
@@ -69,20 +77,42 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     private router: Router,
     private layoutService: LayoutService,
     private langService: LanguageService,
-    private renderer: Renderer2
-    ) {
+    private renderer: Renderer2,
+    private responsive: BreakpointObserver,
+    private _bottomSheet: MatBottomSheet
+    // private _bottomSheetRef: MatBottomSheetRef<NotificationComponent>
+  ) {
     let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.userDetails = userDetails;
     this.url = `https://ui-avatars.com/api/?name=${this.userDetails.first_name}+${this.userDetails.last_name}&rounded=true&background=FB802C&color=ffffff&size=28&bold=true`
-   }
+  }
+
+  openNotification(): void {
+    this._bottomSheet.open(NotificationComponent);
+  }
+
+  openSideNav() {
+    this._bottomSheet.open(SidebarComponent);
+  }
 
   ngOnInit(): void {
+
+    this.responsive.observe(Breakpoints.XSmall)
+      .subscribe(result => {
+        console.log(result.matches, 'DEVICE....')
+        if (result.matches) {
+          this.isMobileDevice = true;
+        }
+
+      });
+
+
     this.getRoles();
     this.getTokenStatus();
     this.getNotificationList();
-   }
+  }
 
-   getNotificationList() {
+  getNotificationList() {
     this.layoutService.getNotification().subscribe(res => {
       this.notifications = res.results;
     })
@@ -113,15 +143,15 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   getTokenStatus() {
     this.layoutService.getTokenStatus().subscribe(res => {
-      if(res.valid === true) {
+      if (res.valid === true) {
 
       } else {
         this.logout();
       }
-    },(error) => {
+    }, (error) => {
       // console.log(error?.error, 'roo')
 
-      if(error?.error?.valid === false) {
+      if (error?.error?.valid === false) {
         this.logout();
       }
     })

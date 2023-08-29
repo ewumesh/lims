@@ -35,7 +35,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
           </div>
           <div class="col-md-4">
             <p class="title">Date of Receipt</p>
-            <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+            <h2 class="detail">{{rawDatasheetDetails?.created_date | date}}</h2>
           </div>
           <div class="col-md-4">
             <p class="title">Sample Codes</p>
@@ -45,15 +45,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
         <div class="row">
           <div class="col-md-4">
             <p class="title">Due Date</p>
-            <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+            <h2 class="detail">{{rawDatasheetDetails?.created_date | date}}</h2>
           </div>
           <div class="col-md-4">
             <p class="title">Started on</p>
-            <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+            <h2 class="detail">{{rawDatasheetDetails?.created_date | date}}</h2>
           </div>
           <div class="col-md-4">
             <p class="title">Completed on </p>
-            <h2 class="detail">{{rawDatasheetDetails?.created_date | date: 'medium'}}</h2>
+            <h2 class="detail">{{rawDatasheetDetails?.created_date | date}}</h2>
           </div>
         </div>
         <div class="row">

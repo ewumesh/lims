@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Deactivate/Active User</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-slide-toggle [(ngModel)]="status">Toggle Activation</mat-slide-toggle>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-primary btn-lims-primary btn-sm mx-1" (click)="save()" mat-dialog-close>Save</button>
+  <button class="btn btn-secondary btn-lims-danger btn-sm mx-1" [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

@@ -59,7 +59,7 @@ export const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     ViewMicroRawDataComponent,
     GenerateMicroRawDataComponent,
     LabSheetComponent,
-    SuperscriptPipe
+    // SuperscriptPipe
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LayoutService } from '../layout.service';
 import { Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-notifications',
@@ -8,9 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
-  constructor(private layoutService: LayoutService, private router: Router) { }
+  constructor(
+    private layoutService: LayoutService, 
+    private router: Router,
+    private responsive: BreakpointObserver,
+    ) { }
 
   @Input() notifications;
+  allNotifications:any[] = [];
+
+  breakpoints = Breakpoints;
+  isMobileDevice = false;
 
   // notifications:any[] = [];
 
@@ -30,8 +39,23 @@ export class NotificationComponent implements OnInit {
   // ]
 
   ngOnInit(): void {
-    // this.getNotificationList();
+    this.getNotificationList();
+
+    this.responsive.observe(Breakpoints.XSmall)
+    .subscribe(result => {
+      console.log(result.matches, 'DEVICE....')
+      if (result.matches) {
+        this.isMobileDevice = true;
+      }
+
+    });
    }
+
+   getNotificationList() {
+    this.layoutService.getNotification().subscribe(res => {
+      this.allNotifications = res.results;
+    })
+  }
 
   // getNotificationList() {
   //   this.layoutService.getNotification().subscribe(res => {

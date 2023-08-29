@@ -12,7 +12,6 @@
 
     <hr class="mt-0" />
 
-    <!-- {{data.parameters | json}} -->
 
     <div class="row p-0 m-0">
       <div class="col-md-12 text-center"><label style="font-weight:600; font-family: Poppins; font-size: 16px;">{{data?.parameters?.name}}</label>
@@ -47,7 +46,7 @@
           <div *ngIf="responseError" class="col-sm-12 col-md-12 col-lg-12">
             <div class="alert alert-danger" role="alert">
               <li *ngFor="let item of responseError | keyvalue">
-                <!-- {{item.key}}: -->
+                {{item.key}}:
                 {{item.value}}
               </li>
             </div>
@@ -78,26 +77,35 @@
                 <td colspan="2"><div [innerHtml]="microParametersDetails?.second_exponent | superscript"></div></td>
                 <td colspan="2"><div [innerHtml]="microParametersDetails?.third_exponent | superscript"></div></td>
             </tr>
-            <tr>
-                <td>A</td>
-                <td>B</td>
-                <td>A</td>
-                <td>B</td>
-                <td>A</td>
-                <td>B</td>
+            <tr *ngIf="data?.parameters?.commodity?.id !== 486">
+                <td *ngIf="microParametersDetails?.first_exponent">A</td>
+                <td *ngIf="microParametersDetails?.first_exponent">B</td>
+                <td *ngIf="microParametersDetails?.second_exponent">A</td>
+                <td *ngIf="microParametersDetails?.second_exponent">B</td>
+                <td *ngIf="microParametersDetails?.third_exponent">A</td>
+                <td *ngIf="microParametersDetails?.third_exponent">B</td>
             </tr>
+
+            <tr *ngIf="data?.parameters?.commodity?.id === 486">
+              <td *ngIf="microParametersDetails?.first_exponent">+Ve</td>
+              <td *ngIf="microParametersDetails?.first_exponent">-Ve</td>
+              <td *ngIf="microParametersDetails?.second_exponent">+Ve</td>
+              <td *ngIf="microParametersDetails?.second_exponent">-Ve</td>
+              <td *ngIf="microParametersDetails?.third_exponent">+Ve</td>
+              <td *ngIf="microParametersDetails?.third_exponent">-Ve</td>
+          </tr>
             <ng-container *ngFor="let data of microParametersDetails?.micro_observation_table">
                 <tr >
                     <td colspan="2" class="text-bold">
                     {{data?.observation_number}}</td>
                     <td>{{data.temperature}}<sup>o</sup>C</td>
                     <td>{{data.time | date:'shortTime'}}</td>
-                    <td>{{data?.first_exponent_a}}</td>
-                    <td>{{data?.first_exponent_b}}</td>
-                    <td>{{data?.second_exponent_a}}</td>
-                    <td>{{data?.second_exponent_b}}</td>
-                    <td>{{data?.third_exponent_a}}</td>
-                    <td>{{data?.third_exponent_b}}</td>
+                    <td *ngIf="microParametersDetails?.first_exponent">{{data?.first_exponent_a}}</td>
+                    <td *ngIf="microParametersDetails?.first_exponent">{{data?.first_exponent_b}}</td>
+                    <td *ngIf="microParametersDetails?.second_exponent">{{data?.second_exponent_a}}</td>
+                    <td *ngIf="microParametersDetails?.second_exponent">{{data?.second_exponent_b}}</td>
+                    <td *ngIf="microParametersDetails?.third_exponent">{{data?.third_exponent_a}}</td>
+                    <td *ngIf="microParametersDetails?.third_exponent">{{data?.third_exponent_b}}</td>
                     <td>{{data?.negative_control}}</td>
                     <td>{{data?.positive_control}}</td>
                 </tr>
@@ -189,12 +197,12 @@
       </div>
 
       <div class="pt-2">
-        <label style="font-size: 14px; font-weight: 600;"> Qualitative Analysis</label>
+        <label style="font-size: 14px; font-weight: 600;"> Analysis Result</label>
             <!-- <mat-form-field appearance="outline" class="w-100">
               <input [(ngModel)]="analyst_remarks" placeholder="Remarks (eg. Absent, Not applicable etc.)" class="custom-input" matInput type="text" />
             </mat-form-field> -->
 
-            <angular-editor height="200" [placeholder]="'Enter Qualitative Analysis(For Raw Data Sheet)'" [(ngModel)]="analyst_remarks"></angular-editor>
+            <angular-editor height="200" [placeholder]="'Enter Analysis Result(For Raw Data Sheet)'" [(ngModel)]="analyst_remarks"></angular-editor>
       </div>
 
       <div class="pt-2">

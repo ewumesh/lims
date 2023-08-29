@@ -10,6 +10,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth/auth.service';
 import { LoginModel } from 'src/app/models/login.model';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 // import { ServerResponse } from 'http';
 
 @Component({
@@ -34,13 +36,19 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren(FormControlName, { read: ElementRef })
   private formInputElements: ElementRef[];
 
+  isMobileDevice = false;
+
   constructor(
     private fb: FormBuilder,
     private toast: ToastService,
-    private title: Title,
+    private title: Title, 
     private router: Router,
+    private responsive: BreakpointObserver,
+    private _bottomSheet: MatBottomSheet,
     private authenticationService: AuthenticationService
   ) {
+
+    localStorage.clear();
     this.title.setTitle('Login - Laboratory Information Management System');
 
     this.genericValidator = new GenericValidator({
@@ -78,6 +86,15 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.responsive.observe(Breakpoints.XSmall)
+    .subscribe(result => {
+      console.log(result.matches, 'DEVICE....')
+      if (result.matches) {
+        this.isMobileDevice = true;
+      }
+
+    });
+    
     this.dismissMessage();
     this.initForm();
   }

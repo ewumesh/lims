@@ -6,6 +6,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { SnackbarModule } from 'src/app/shared/snackbar/snackbar.module';
 import { LoginComponent } from './login.component';
@@ -26,7 +28,9 @@ import { MatIconModule } from '@angular/material/icon';
     SnackbarModule,
     MatProgressSpinnerModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatBottomSheetModule,
+    MatToolbarModule
    ],
   exports: [],
   providers: [AuthenticationService],

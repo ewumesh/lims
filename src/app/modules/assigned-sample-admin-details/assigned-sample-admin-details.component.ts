@@ -58,7 +58,7 @@ export class AssignedSampleAdminDetailsComponent implements OnInit {
   }
 
   getClientCategoryName(id) {
-    return this.clientCategories.find(a => a.id === id)?.name;
+    return this.clientCategories?.find(a => a.id === id)?.name;
   }
 
   viewReceipt(link) {

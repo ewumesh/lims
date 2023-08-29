@@ -58,7 +58,7 @@ export class AddSampleFormComponent implements OnInit, AfterViewInit, OnDestroy 
   // isParameter = false
 
   // for parameter table
-  displayedColumns: string[] = ['select', 'position', 'name', 'price'];
+  displayedColumns: string[] = ['select', 'position', 'name'];
   dataSource = new MatTableDataSource<any>();
   selection = new SelectionModel<any>(true, []);
 
@@ -139,6 +139,8 @@ protected onDestroy = new Subject<void>();
     })
     this.addSampleForm.value.parameters = selectedId;
     this.totalPrice = totalPrice;
+    this.parameterWisePrice = 0;
+    this.parameterWisePrice = totalPrice;
 
     return numSelected === numRows;
   }
@@ -173,6 +175,12 @@ protected onDestroy = new Subject<void>();
   clientCategories:any[] =[];
 
   existingParameters:any[] = [];
+
+  commodityWisePrice = 0;
+  parameterWisePrice = 0;
+  selectedCommodity:any;
+
+  sampleDetails:any
 
   constructor(
     private fb: FormBuilder,
@@ -284,6 +292,8 @@ protected onDestroy = new Subject<void>();
       .subscribe(() => {
         this.filterCommodities();
       });
+
+      this.setTableHeader();
   }
 
   get samples(): FormArray {
@@ -317,6 +327,14 @@ protected onDestroy = new Subject<void>();
       }
 
       this.allCommodities = response;
+
+      this.filteredCommodities.next(
+        this.allCommodities.filter(a => a.name.toLowerCase().indexOf('a') > -1)
+    );
+      // this.filteredCommodities.next(
+      //   this.allCommodities = response.slice(0,5)
+      // );
+      // this.filteredCommodities = response.slice(0,5);
       
       if (this.sampleId) {
         this.getSampleDetails();
@@ -331,12 +349,17 @@ protected onDestroy = new Subject<void>();
   }
 
   getParametersOfCommodity() {
-    this.addSampleForm.get('commodity').valueChanges.subscribe(id => {
-      let parameters = this.commodities.find(x => x.id === id);
+    this.cCtrl.valueChanges.subscribe(data => {
+      console.log(data, 'ooooooooo')
+      this.commodityWisePrice = 0;
+      let parameters = this.commodities.find(x => x.id === data.id);
+      this.selectedCommodity = data
       this.priceOfCommodity = parameters?.price
       this.commodityParameters = parameters?.test_result;
       this.dataSource.data = parameters?.test_result;
       this.isLoading = false;
+
+      this.commodityWisePrice = data?.price
 
     })
   }
@@ -354,16 +377,20 @@ protected onDestroy = new Subject<void>();
   getSampleDetails() {
     this.service.getSampleDetails(this.sampleId).subscribe(response => {
       let actualResponse = response;
+      this.sampleDetails = response;
       // this.dataSource.data = response.parameters;
 
       this.existingParameters = response.parameters;
 
       let reqCommodity = response.commodity.id;
+      let aCommodity = response.commodity;
 
       // let/
       // console.log(this.commodities, "ALL COMPODITIES")
       let com = this.commodities.find(a => a.name = response.commodity.name);
-      this.dataSource.data = com?.test_result;
+      this.dataSource.data = response.parameters;
+
+      console.log(com.test_result, 'PARAMETERS', this.existingParameters)
 
       this.getParametersOfCommodity();
 
@@ -375,12 +402,26 @@ protected onDestroy = new Subject<void>();
           actParameter.push(a.id);
         }
       });
+      this.cFilterCtrl = new FormControl(aCommodity.name);
       actualResponse.parameters = actParameter;
       this.selectedParameters = actParameter;
+      this.selectedCommodity = response.commodity;
 
       actualResponse.commodity = reqCommodity;
+      console.log(reqCommodity, 'required..')
       actualResponse.isParameter = true;
+
+      this.commodityWisePrice = response.price;
+        this.parameterWisePrice = response?.price;
+
+      if(actualResponse.analysis_pricing === true) {
+        actualResponse.analysis_pricing = 1;
+    } else {
+        actualResponse.analysis_pricing = 0;
+    } 
+
       this.addSampleForm.patchValue(actualResponse);
+      this.cCtrl.setValue(this.selectedCommodity);
       this.addSampleForm.value.isParameter = true
 
       // this.selection =new SelectionModel<any>(true, [actParameter]);
@@ -435,6 +476,7 @@ protected onDestroy = new Subject<void>();
       dfb_type: 'date',
       dfb_duration: '',
       days_dfb: '',
+      analysis_pricing:0,
       client_sub_category:'',
       sampleDocuments: new FormArray([]),
       client_type:this.loggedUser.client_category
@@ -442,6 +484,17 @@ protected onDestroy = new Subject<void>();
 
     this.addDocList();
   }
+
+  setTableHeader() {
+    this.addSampleForm.get('analysis_pricing').valueChanges.subscribe(res => {
+
+        if(res === 0) {
+            this.displayedColumns = ['select', 'position', 'name'];
+        } else {
+            this.displayedColumns = ['select', 'position', 'name', 'price'];
+        }
+    })
+}
 
   save() {
     console.log(this.addSampleForm.value, 'LOGIN...')
@@ -527,7 +580,7 @@ protected onDestroy = new Subject<void>();
       report_date: this.format(this.addSampleForm.value.report_date),
       amendments: this.addSampleForm.value.amendments,
       note: this.addSampleForm.value.note,
-      commodity: this.cCtrl.value.id,
+      commodity: this.cCtrl?.value?.id,
       language: this.addSampleForm.value.language,
       parameters: this.addSampleForm.value.parameters,
       owner_user: cUser,
@@ -564,21 +617,38 @@ protected onDestroy = new Subject<void>();
     console.log(p, 'asdasd',this.addSampleForm.value.parameters)
 
     const formData = new FormData();
-    formData.append('id', this.addSampleForm.value.id);
+    formData.append('id', this.sampleId);
     formData.append('name', this.addSampleForm.value.name);
     formData.append('condition',this.addSampleForm.value.condition);
     formData.append('mfd',this.format(this.addSampleForm.value.mfd));
-    formData.append('dfb', this.format(this.addSampleForm.value.dfb));
+    if(this.addSampleForm.value.dfb) {
+      formData.append('dfb', this.format(this.addSampleForm.value.dfb));
+    } else {
+      // formData.append('dfb', );
+    }
+    
     formData.append('batch', this.addSampleForm.value.batch);
     formData.append('brand',this.addSampleForm.value.brand),
     formData.append('purpose', this.addSampleForm.value.purpose),
     formData.append('report_date', this.format(this.addSampleForm.value.report_date)),
     formData.append('amendments', this.addSampleForm.value.amendments),
-    formData.append('note',this.addSampleForm.value.note),
-    formData.append('commodity',this.cCtrl.value.id),
+    formData.append('note',this.addSampleForm.value.note)
+
+    if(this.sampleId) {
+      formData.append('commodity',this.selectedCommodity.id)
+    } else {
+      formData.append('commodity',this.cCtrl.value.id)
+    }
+    
     formData.append('language', this.addSampleForm.value.language),
-    formData.set('parameters', p),
-    formData.append('owner_user', cUser),
+    formData.set('parameters', p)
+
+    if(this.sampleId) {
+      formData.append('owner_user', this.sampleDetails?.owner_user?.email)
+    } else {
+    formData.append('owner_user', cUser)
+    }
+
     formData.append('form_available', 'smu'),
     formData.append('status', 'pending'),
 
@@ -591,6 +661,7 @@ protected onDestroy = new Subject<void>();
     formData.append('dfb_type', this.addSampleForm.value.dfb_type),
     formData.append('dfb_duration', this.addSampleForm.value.dfb_duration),
     formData.append('days_dfb', this.addSampleForm.value.days_dfb),
+    formData.append('analysis_pricing', this.addSampleForm.value.analysis_pricing),
 
     formData.append('client_category', this.loggedUser.client_category)
     formData.append('client_sub_category', this.addSampleForm.value.client_sub_category),
@@ -672,6 +743,10 @@ protected onDestroy = new Subject<void>();
     this.service.getUsersListLimited(payload).subscribe(res => {
       this.users = res;
       this.banks = res;
+
+      this.filteredBanks.next(
+        this.banks.filter(bank => bank.first_name.toLowerCase().indexOf('a') > -1)
+      );
     })
   }
 
@@ -714,7 +789,7 @@ protected onDestroy = new Subject<void>();
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
         // this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
-        this.singleSelect.compareWith = (a,b) => a && b && a.first_name === b.first_name;
+        // this.singleSelect.compareWith = (a,b) => a && b && a.first_name === b.first_name;
       });
 
       this.filteredCommodities
@@ -727,7 +802,7 @@ protected onDestroy = new Subject<void>();
         // and after the mat-option elements are available
         // this.singleSelect.compareWith = (a: any, b: any) => a && b && a?.first_name === b?.first_name;
 
-        this.singleSelect.compareWith = (a, b) => a && b && a.name === b.name;
+        // this.singleSelectC.compareWith = (a, b) => a && b && a.name === b.name;
         
       });
   }

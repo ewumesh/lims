@@ -36,7 +36,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatCheckboxModule,
     MatCardModule,
     NgxMatSelectSearchModule
    ],

@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <nav class="mainheader-nav">
+    <nav class="mainheader-nav" style="overflow-x: scroll;">
       <div class="user-name">
         <ul class="main-ul">
           <a (click)="goToHome()" href="Javascript:;">
@@ -93,6 +93,7 @@
           </div>
         </form>
 
+        <div style="overflow-x: scroll;"> 
         <table *ngIf="!isLoading" class="t" mat-table [dataSource]="dataSource" multiTemplateDataRows
           [@collectionInOut]="dataSource.data?.length">
           <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
@@ -175,6 +176,7 @@
           </tr>
           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table>
+        </div>
 
         <div class="row" *ngIf="isLoading">
           <div class="col-md-12 text-center py-3">

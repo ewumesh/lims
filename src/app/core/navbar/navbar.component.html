@@ -1,4 +1,4 @@
-<div class="container-fluid db-top-bar">
+<div *ngIf="!isMobileDevice" class="container-fluid db-top-bar">
   <div class="db-lims-logo cursor-pointer" (click)="gotoDashboard()">
     <div class="logo">
       <img src="../../../assets/nepal-government.png" alt="">
@@ -8,7 +8,7 @@
     <div class="search-container ms-4">
       <form action="" class="search-form-container">
         <input [(ngModel)]="search" type="search" name="search" id="searchField" class="sample-search" placeholder="Search sample">
-        <div class="search-icon"><mat-icon>search</mat-icon></div>
+        <div class="search-icon"><mat-icon class="mt-2">search</mat-icon></div>
       </form>
     </div>
 
@@ -75,3 +75,19 @@
     </mat-menu> -->
   </div>
 </div>
+
+<mat-toolbar *ngIf="isMobileDevice" color="primary" style="background-color: #2260bf !important;">
+  <!-- <button (click)="openSideNav()" class="btn btn-secondary btn-sm" aria-label="Example icon-button with menu icon"> -->
+    <mat-icon (click)="openSideNav()">menu</mat-icon>
+  <!-- </button> -->
+  <span class="mx-2">LIMS</span>
+  <span class="example-spacer"></span>
+  <button (click)="openNotification()" class="btn btn-primary btn-sm btn-lims-danger mx-1" aria-label="Example icon-button with heart icon">
+    <mat-icon [matBadge]="notifications.length" matBadgeColor="warn" class="pt-1 bell-icon" aria-hidden="false" aria-label="Notification"
+          fontIcon="notifications_none"></mat-icon>
+  </button>
+  <button (click)="navigateToProfile()" class="btn btn-primary btn-lims-primary btn-sm mx-1" aria-label="Example icon-button with share icon">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+

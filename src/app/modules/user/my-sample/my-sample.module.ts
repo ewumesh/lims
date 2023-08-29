@@ -5,6 +5,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { MatChipsModule } from '@angular/material/chips';
+import {NgxPrintModule} from 'ngx-print';
 
 import { MySampleComponent } from './my-sample.component';
 import { MatSortModule } from '@angular/material/sort';
@@ -19,11 +20,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confirm.module';
+import { PrintSampleDetailsComponent } from './print/print-sample.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [MySampleComponent],
+  declarations: [MySampleComponent, PrintSampleDetailsComponent],
   imports: [
     CommonModule,
+    NgxPrintModule,
     RouterModule.forChild([
       { path: '', component: MySampleComponent }
     ]),
@@ -41,6 +45,7 @@ import { DeleteConfirmModule } from 'src/app/shared/delete-confirm/delete-confir
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     SharedModule,
     DeleteConfirmModule
   ],

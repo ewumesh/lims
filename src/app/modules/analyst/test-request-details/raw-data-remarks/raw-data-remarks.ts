@@ -44,7 +44,10 @@ export class RawDataRemarksComponent implements OnInit {
   }
 
   tabChange(e) {
-    
+    console.log(e, 'EEPO')
+
+    this.microTableId = e.micro_table;
+    this.getMicroParametersDetails();
   }
 
   parseJSON(data?) {

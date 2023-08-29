@@ -162,48 +162,48 @@
         <div class="row">
           <div class="col-md-4">
             <h4 class="mb-0">Name</h4>
-            <p>{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name}}</p>
+            <p class="text-bold">{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name}}</p>
           </div> 
   
           <div class="col-md-4">
             <h4 class="mb-0">Email</h4>
-            <p>{{sampleUserDetails?.email || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.email || 'N/A'}}</p>
           </div> 
   
           <div class="col-md-4">
             <h4 class="mb-0">Phone</h4>
-            <p>{{sampleUserDetails?.phone || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.phone || 'N/A'}}</p>
           </div> 
           
           <div class="col-md-4">
             <h4 class="mb-0">Username</h4>
-            <p>{{sampleUserDetails?.username || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.username || 'N/A'}}</p>
           </div>
           
           
           <div class="col-md-4">
             <h4 class="mb-0">Joined Date</h4>
-            <p>{{sampleUserDetails?.date_joined | date:'medium'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.date_joined | date:'medium'}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Client category</h4>
-            <p>{{getClientCategoryName(sampleUserDetails?.client_category) || 'N/A'}}</p>
+            <p class="text-bold">{{getClientCategoryName(sampleUserDetails?.client_category) || 'N/A'}}</p>
           </div>
           
           <div class="col-md-4">
             <h4 class="mb-0">Department Name</h4>
-            <p>{{sampleUserDetails?.department_name || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.department_name || 'N/A'}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Department Address</h4>
-            <p>{{sampleUserDetails?.department_address || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.department_address || 'N/A'}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Registration Number</h4>
-            <p>{{sampleUserDetails?.registration_number || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.registration_number || 'N/A'}}</p>
           </div>
         </div>
   
@@ -216,7 +216,7 @@
             <div class="row">
               <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
                 <h3>
-                  <span class="title">Document Name</span>
+                  <!-- <span class="title">Document Name</span> -->
                   <p class="detail">{{a?.name | titlecase}}</p>
                 </h3>
                 <img matTooltip="View Image" alt="Document" style="height: 100px"
@@ -229,7 +229,7 @@
       </div>
      
     </div>
-    <div class="view-page mt-4">
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.client_category !== 11">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
@@ -247,11 +247,11 @@
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Sample Name </h4>
-          <p>{{sampleDetails.name}}</p>
+          <p>{{sampleDetails.name || 'N/A'}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Commodity </h4>
-          <p>{{(sampleDetails?.commodity?.name)}}</p>
+          <p>{{(sampleDetails?.commodity?.name || 'N/A')}}</p>
         </div>
       </div>
       <div class="row">
@@ -268,34 +268,34 @@
 
         <div class="col-md-4">
           <h4 class="mb-0">Batch</h4>
-          <p>{{sampleDetails.batch}}</p>
+          <p>{{sampleDetails.batch || 'N/A'}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4 class="mb-0">Brand</h4>
-          <p>{{sampleDetails.brand}}</p>
+          <p>{{sampleDetails.brand || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose}}</p>
+          <p>{{sampleDetails?.purpose || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Condition</h4>
-          <p>{{sampleDetails.condition}}</p>
+          <p>{{sampleDetails.condition || 'N/A'}}</p>
         </div> 
 
         
         <div class="col-md-4">
           <h4 class="mb-0">Note</h4>
-          <p>{{sampleDetails.note}}</p>
+          <p>{{sampleDetails.note || 'N/A'}}</p>
         </div> 
 
         <div class="col-md-4">
           <h4 class="mb-0">Amendments</h4>
-          <p>{{sampleDetails.amendments}}</p>
+          <p>{{sampleDetails.amendments || 'N/A'}}</p>
         </div> 
 
         <div class="col-md-4">
@@ -304,10 +304,10 @@
           <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
         </div> 
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <h4 class="mb-0">Sample Units</h4>
           <p>{{sampleDetails.sample_units || 'N/A'}}</p>
-        </div> 
+        </div>  -->
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Type</h4>
@@ -316,13 +316,110 @@
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Quantity</h4>
-          <p>{{sampleDetails.sample_quantity || 'N/A'}}</p>
+          <p>{{sampleDetails.sample_quantity || 'N/A'}} {{sampleDetails.sample_units}}</p>
         </div> 
          
         <div class="col-md-4">
           <h4 class="mb-0">Number of Sample</h4>
           <p>{{sampleDetails.number_of_sample || 'N/A'}}</p>
         </div> 
+
+        <div class="col-md-12" *ngIf="sampleDetails?.analysis_fee">
+          <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Analysis Fee</h4>
+          <p>{{sampleDetails.analysis_fee || 'N/A'}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Voucher Number</h4>
+          <p>{{sampleDetails.voucher_number || 'N/A'}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Voucher Date</h4>
+          <p>{{(sampleDetails.voucher_date | date:'mediumDate') || 'N/A'}}</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.client_category === 11">
+      <h3 class="view-page-heading">Sample Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample ID</h4>
+          <p>{{sampleDetails.id}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Lab Code</h4>
+          <p class="text-uppercase">{{sampleDetails.sample_lab_id}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Refrence Number</h4>
+          <p class="text-uppercase">{{sampleDetails.refrence_number}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Name </h4>
+          <p>{{sampleDetails.name || 'N/A'}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="mb-0">Commodity </h4>
+          <p>{{(sampleDetails?.commodity?.name || 'N/A')}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="mb-0">MFD</h4>
+          <p>{{sampleDetails.mfd | date}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="mb-0">Best Before Date</h4>
+
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
+        </div>
+
+        
+      </div>
+      <div class="row">
+
+        <!-- <div class="col-md-4">
+          <h4 class="mb-0">Sample Units</h4>
+          <p>{{sampleDetails.sample_units || 'N/A'}}</p>
+        </div>  -->
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Type</h4>
+          <p>{{sampleDetails.sample_type || 'N/A'}}</p>
+        </div> 
+
+        <div class="col-md-4">
+          <h4 class="mb-0">Sample Quantity</h4>
+          <p>{{sampleDetails.sample_quantity || 'N/A'}} {{sampleDetails.sample_units}}</p>
+        </div> 
+         
+        <div class="col-md-4">
+          <h4 class="mb-0">Number of Sample</h4>
+          <p>{{sampleDetails.number_of_sample || 'N/A'}}</p>
+        </div> 
+
+        <div class="col-md-12" *ngIf="sampleDetails?.analysis_fee">
+          <div class="row">
+          <div class="col-md-4">
+            <h4 class="mb-0">Analysis Fee</h4>
+          <p>{{sampleDetails.analysis_fee || 'N/A'}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Voucher Number</h4>
+          <p>{{sampleDetails.voucher_number || 'N/A'}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="mb-0">Voucher Date</h4>
+          <p>{{(sampleDetails.voucher_date | date:'mediumDate') || 'N/A'}}</p>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
 
@@ -382,7 +479,7 @@
       </div> -->
     </div>
 
-    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.id">
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.ClientCategoryDetail.length > 0">
       <h3 class="view-page-heading pb-0 mb-0">Additional Details</h3>
       <div class="row m-0 py-1" *ngFor="let p of sampleDetails?.client_category_detail?.ClientCategoryDetail">
         <div class="col-md-4">
@@ -418,8 +515,8 @@
               <tr *ngFor="let r of sampleDetails.parameters; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
-                <td>{{r.name | titlecase}}</td>
-                <td *ngIf="i===0" [attr.rowspan]="sampleDetails?.parameters?.length" style="vertical-align: middle; text-align: center;">Rs.{{totalPrice}}</td>
+                <td>{{r.name | titlecase}} ({{r.name_nepali}})</td>
+                <td *ngIf="i===0" [attr.rowspan]="sampleDetails?.parameters?.length" style="vertical-align: middle; text-align: center;">Rs.{{sampleDetails?.price}}</td>
                 
                 <!-- <td>{{r.units}}</td> -->
                 <!-- <td>Rs.{{r.price}}</td>
@@ -447,7 +544,7 @@
   <div class="row m-0" *ngIf="isProcceedForPayment">
     <div class="col-md-12 white-bg p-4">
       <mat-stepper #stepper>
-        <mat-step *ngIf="!sampleDetails.payment?.id">
+        <mat-step *ngIf="sampleDetails?.client_category_detail?.client_category !== 11">
           <ng-template matStepLabel>Payment</ng-template>
           <!-- <ng-template matStepperIcon="chat">
             <mat-icon>dollar</mat-icon>
@@ -455,7 +552,7 @@
           <div class="row">
             <div class="col-md-12 p-0">
               <!-- <span class="text-bold">Total Amount:</span> Rs.{{totalPrice}} -->
-              <p class="price-box">Total Amount:<b> Rs.{{totalPrice}}</b></p>
+              <p class="price-box">Total Amount:<b> Rs.{{sampleDetails?.price}}</b></p>
             </div>
             <div class="col-md-12">
               <form [formGroup]="paymentForm" class="row">
@@ -731,7 +828,8 @@
         <div class="col-md-6 white-bg text-end" style="border-radius: 8px;">
           <button  (click)="recheckSample()" class="btn btn-danger btn-lims-danger mx-1">Recheck</button>
           <button  (click)="rejectSample()" class="btn btn-danger mx-1">Reject</button>
-          <button  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
+          <button *ngIf="sampleDetails?.client_category_detail?.client_category !== 11"  (click)="eidtSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
+          <button *ngIf="sampleDetails?.client_category_detail?.client_category === 11"  (click)="eidtDftqcSample()" class="btn btn-primary btn-lims-primary mx-1">Edit</button>
           <button *ngIf="!isProcceedForPayment" (click)="procceed()" class="btn btn-success mx-1">Procceed</button>
         </div>
       </div>

@@ -116,15 +116,15 @@
     <tr>
         <td class="text-center">1</td>
         <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name || 'N/A'}} </span></td>
-        <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.created_date | date: 'medium'}}  </span></td>
+        <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.created_date | date}}  </span></td>
         <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id || 'N/A'}} </span></td>
     </tr>
   
     <tr>
         <td class="text-center">2</td>
-        <td colspan="3">Due Date:<span class="detail"> {{data?.created_date | date: 'medium'}} </span></td>
-        <td colspan="3">Started on:<span class="detail"> {{data?.created_date | date: 'medium'}} </span></td>
-        <td colspan="3">Completed on:<span class="detail"> {{data?.created_date | date: 'medium'}} </span></td>
+        <td colspan="3">Due Date:<span class="detail"> N/A </span></td>
+        <td colspan="3">Started on:<span class="detail"> {{data?.started_date.slice(0,10)}} </span></td>
+        <td colspan="3">Completed on:<span class="detail"> {{data?.completed_date.slice(0,10)}} </span></td>
     </tr>
   
     <tr>
@@ -175,7 +175,7 @@
                         <div *ngFor="let item of parseJSON(p?.input_fields_value) | keyvalue">
                           <span>{{item.key}}</span> = <span>{{item.value}}</span>
                      </div>
-                     <div>Result: {{p.result}}</div>
+                     <div>Result: <span [innerHtml]="p?.result"></span></div>
                       </div>
                     </div>
                 </div>

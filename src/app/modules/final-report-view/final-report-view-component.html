@@ -539,7 +539,7 @@
         </div> -->
       </div>
 
-      <div class="row m-0 mt-4" *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 ">
+      <div class="row m-0 mt-4" *ngIf="(loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 || loggedUserDetails?.role === 6 ) ">
         <div class="col-md-12 white-bg p-4">
           <h3 class="view-page-heading">User Details</h3>
     
@@ -615,7 +615,7 @@
         </div>
       </div>
 
-      <div class="view-page mt-3" *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 ">
+      <div class="view-page mt-3" *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 2 || loggedUserDetails?.role === 6 ">
         <!-- <h3 class="view-page-heading">Sample Details</h3> -->
         <div class="row">
           <div class="col-md-4">
@@ -761,7 +761,7 @@
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <!-- <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td> -->
                   <td>
-                    <span>{{r.result}}</span>
+                    <span [innerHtml]="r.result"></span>
                     <!-- <span *ngIf="r?.result === 0">0</span>
                     <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                   </td>
@@ -769,16 +769,15 @@
                   <!-- <td>
                     <span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
                   </td> -->
-                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 7">
+                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="i === 0 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 7 && loggedUserDetails.role !== 2">
                     <!-- {{reportDetails?.remarks}} -->
                     <div *ngFor="let r of reportDetails?.supervisor_sample_form">{{r?.remarks}}({{r?.supervisor_user?.first_name}} {{r?.supervisor_user?.last_name}})</div>
                   </td>
-
                   <td *ngIf="loggedUserDetails.role === 4">
                     <!-- {{reportDetails?.remarks}} -->
                     <div [innerHtml]="r?.analyst_remarks"></div>
                   </td>
-                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="loggedUserDetails.role === 7 && i===0">
+                  <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="(loggedUserDetails.role === 7 || loggedUserDetails.role === 2) && i===0">
                     <!-- {{reportDetails?.remarks}} -->
                     <div >{{reportDetails?.remarks || 'N/A'}}</div>
                   </td>

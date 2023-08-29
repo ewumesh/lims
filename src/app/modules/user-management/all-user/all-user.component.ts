@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { AllUsersService } from 'src/app/services/user-management/all-user/all-user.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
+import { UserActivationComponent } from 'src/app/shared/deactivate-activate-user/user-activation.component';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
 
@@ -159,6 +160,15 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
         client_category_id: '',
         status:''
       }
+    } else {
+      p = {
+        search: '',
+        page: '',
+        size: '',
+        role: '5',
+        client_category_id: '',
+        status:''
+      }
     }
 
     this.isLoading = true;
@@ -197,6 +207,32 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.toast.dismissToast();
     }, 5000);
+  }
+
+  deactivateUser(id, status) {
+
+    let data = {
+      userId: id,
+      status:status
+    }
+
+    // let instance: MatDialogRef<UserActivationComponent, any>;
+
+    // instance = this.dialog.open(UserActivationComponent, {
+    //   minWidth:'500px',
+    //   data: data,
+    // })
+    // instance.afterClosed().subscribe(_ => {
+    //   if(_) {
+    //     this.getAllUsers();
+    //   }
+    // })
+
+    this.dialog.open(UserActivationComponent,{data: data,minWidth:'500px'}).afterClosed().subscribe(_ => {
+      if(_) {
+        this.getAllUsers();
+      }
+    })
   }
 
   deleteUser(userId) {

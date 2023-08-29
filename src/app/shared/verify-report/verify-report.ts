@@ -14,13 +14,36 @@ export class VerifyReportComponent implements OnInit {
   @Input() reportDetails;
 
   @Input()rawDataSheet;
+
+  userDetails:any;
+
+  clientCategories:any[] = [];
+
   constructor(
     private service: SampleReportService,
     private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
+    this.getUserDetails();
+    this.getClientCategories();
     // console.log(this.reportDetails, 'REPORT DETAILS...')
+   }
+
+   getClientCategories() {
+    this.service.getCategories().subscribe(res => {
+      this.clientCategories = res.results;
+    })
+   }
+
+   getClientCategoryName(id) {
+    return this.clientCategories.find(a => a.id === id)?.name;
+   }
+
+   getUserDetails(){
+    this.service.getUserDetails(this.reportDetails?.owner_user?.id).subscribe(res => {
+      this.userDetails = res;
+    })
    }
 
    viewRemarks(data, user) {

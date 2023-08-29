@@ -253,7 +253,11 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
    }
 
    eidtSample() {
-    this.router.navigate(['/dashboard/update-sample',this.sampleId])
+    this.router.navigate(['/dashboard/update-sample',this.sampleId]);
+   }
+
+   eidtDftqcSample() {
+    this.router.navigate(['/dashboard/dftqc/licensing/edit-sample', this.sampleId])
    }
 
    assignAll(test_type) {

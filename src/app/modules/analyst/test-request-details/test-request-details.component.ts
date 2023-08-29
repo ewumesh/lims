@@ -163,9 +163,9 @@ isOtherDetails = false;
         }
 
         if(element.test_method_selected) {
-          element.insTestMethod = element.test_method_selected;
+          element.insTestMethod = element?.test_method_selected;
         } else {
-          element.insTestMethod =element.test_method[0]?.ref_test_method
+          element.insTestMethod =element?.test_method[0]?.ref_test_method
         }
         
         if(element.units_selected) {
@@ -336,6 +336,9 @@ isOtherDetails = false;
   }
 
   viewMicroRawData(data) {
+    console.log(this.testRequestDetails, 'OK DATA')
+
+    data.sampleDetails = this.testRequestDetails?.sample_form.id;
     let instance: MatDialogRef<ViewMicroRawDataComponent, any>;
 
     instance = this.dialog.open(ViewMicroRawDataComponent, {

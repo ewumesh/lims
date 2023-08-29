@@ -12,7 +12,9 @@ export class ViewMicroRawDataComponent {
         private dialogRef: MatDialogRef<ViewMicroRawDataComponent>,
         @Inject(MAT_DIALOG_DATA)
         public data: any
-    ) { }
+    ) { 
+        console.log(data, 'OPAWD')
+    }
 
     closeDialog() {
         this.dialogRef.close();

@@ -66,7 +66,7 @@
 
 @media (max-width: 768px){
   .bd-navbar{
-    margin-top: 120px;
+    // margin-top: 120px;
 
   }
 
@@ -384,4 +384,8 @@ p.status{
 .breadcrumb-icon:hover{
   background: #2260bf!important;
   color: #ffffff!important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }

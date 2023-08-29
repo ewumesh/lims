@@ -157,6 +157,37 @@ const routes: Routes = [
   },
 
   {
+    path: 'dftqc/licensing/add-sample',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1, 2, 5, 7]
+    },
+    loadChildren: () => import('src/app/modules/dftqc-samples/add-sample/ap-add-sample.module')
+      .then(m => m.ApAddSampleModule)
+  },
+
+
+  {
+    path: 'dftqc/licensing/edit-sample/:id',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1, 2, 5, 7]
+    },
+    loadChildren: () => import('src/app/modules/dftqc-samples/add-sample/ap-add-sample.module')
+      .then(m => m.ApAddSampleModule)
+  },
+
+  // {
+  //   path: 'update-sample/:id',
+  //   canActivate: [RoleGuard],
+  //   data: {
+  //     requiredRole: [1,2, 5,7]
+  //   },
+  //   loadChildren: () => import('src/app/modules/edit-sample/edit-sample.module')
+  //     .then(m => m.EditSampleModule)
+  // },
+
+  {
     path: 'update-sample/:id',
     canActivate: [RoleGuard],
     data: {
@@ -551,6 +582,16 @@ const routes: Routes = [
     // },
     loadChildren: () => import('src/app/modules/final-report-view/final-report-view.module')
       .then(m => m.FinalReportViewModule)
+  },
+
+  {
+    path: 'fiscal-year',
+    canActivate: [RoleGuard],
+    data: {
+      requiredRole: [1,2,3,4,5,6, 7]
+    },
+    loadChildren: () => import('../modules/setting/fiscal-year/fiscal-year.module')
+      .then(m => m.FiscalYearModule)
   },
 
 

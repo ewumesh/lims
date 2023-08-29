@@ -126,7 +126,7 @@
         </div> -->
       </div>
 
-      <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.id">
+      <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.ClientCategoryDetail.length > 0">
         <h3 class="view-page-heading pb-0 mb-0">Additional Details</h3>
         <div class="row m-0 py-1" *ngFor="let p of sampleDetails?.client_category_detail?.ClientCategoryDetail">
           <div class="col-md-4">
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-    <div class="view-page mt-4">
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.client_category === 11">
       <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
         <div class="col-md-4">
@@ -151,7 +151,110 @@
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Sample Name </h4>
-          <p>{{sampleDetails.name}}</p>
+          <p>{{sampleDetails.name || 'N/A'}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Commodity </h4>
+          <p>{{(sampleDetails?.commodity.name) | titlecase}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">MFD</h4>
+          <p>{{sampleDetails.mfd | date}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Best Before Date</h4>
+          <!-- <p>{{sampleDetails.dfb | date}}</p> -->
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
+        </div>
+
+        <!-- <div class="col-md-4">
+          <h4 class="m-0">Batch</h4>
+          <p>{{sampleDetails.batch || 'N/A'}}</p>
+        </div> -->
+      </div>
+      <!-- <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">Brand</h4>
+          <p>{{sampleDetails.brand || 'N/A'}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Purpose of Analysis</h4>
+          <p>{{sampleDetails?.purpose || 'N/A'}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Condition</h4>
+          <p>{{sampleDetails.condition || 'N/A'}}</p>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <!-- <div class="col-md-4">
+          <h4 class="m-0">Report Language</h4>
+          <p *ngIf="sampleDetails.language === 'en'">English</p>
+          <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
+        </div> -->
+
+        <!-- <div class="col-md-4">
+          <h4 class="m-0">Amendments</h4>
+          <p>{{sampleDetails?.amendments || 'N/A'}}</p>
+        </div> -->
+
+        <!-- <div class="col-md-4">
+          <h4 class="m-0">Note</h4>
+          <p>{{sampleDetails.note || 'N/A'}}</p>
+        </div> -->
+
+        <div class="col-md-4">
+          <h4 class="m-0">Sample Type</h4>
+          <p>{{sampleDetails?.sample_type || 'N/A'}}</p>
+        </div>
+
+        <div class="col-md-4">
+          <h4 class="m-0">Sample Quantity</h4>
+          <p>{{sampleDetails?.sample_quantity || 'N/A'}} {{sampleDetails?.sample_units}}</p>
+        </div>
+ 
+        <div class="col-md-4">
+          <h4 class="m-0">Number of Sample</h4>
+          <p>{{sampleDetails?.number_of_sample || 'N/A'}}</p>
+        </div>
+        <!-- {{sampleDetails?.client_category_detail?.client_sub_category | json}} -->
+        <div class="col-md-12" *ngIf="sampleDetails?.client_category_detail?.client_sub_category === 'licensing'">
+          <div class="row">
+            <div class="col-md-4">
+              <h4 class="m-0">Analysis Fee</h4>
+              <p>{{sampleDetails?.analysis_fee || 'N/A'}}</p>
+            </div>
+    
+            <div class="col-md-4">
+              <h4 class="m-0">Voucher Number</h4>
+              <p>{{sampleDetails?.voucher_number || 'N/A'}}</p>
+            </div>
+    
+            <div class="col-md-4">
+              <h4 class="m-0">Voucher Date</h4>
+              <p>{{sampleDetails?.voucher_date | date:'mediumDate'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-page mt-4" *ngIf="sampleDetails?.client_category_detail?.client_category !== 11">
+      <h3 class="view-page-heading">Sample Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="m-0">Sample ID</h4>
+          <p class="text-uppercase">{{sampleDetails.id}}</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="m-0">Sample Name </h4>
+          <p>{{sampleDetails.name || 'N/A'}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Commodity </h4>
@@ -172,23 +275,23 @@
 
         <div class="col-md-4">
           <h4 class="m-0">Batch</h4>
-          <p>{{sampleDetails.batch}}</p>
+          <p>{{sampleDetails.batch || 'N/A'}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">Brand</h4>
-          <p>{{sampleDetails.brand}}</p>
+          <p>{{sampleDetails.brand || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose}}</p>
+          <p>{{sampleDetails?.purpose || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Condition</h4>
-          <p>{{sampleDetails.condition}}</p>
+          <p>{{sampleDetails.condition || 'N/A'}}</p>
         </div>
       </div>
 
@@ -200,33 +303,47 @@
         </div>
 
         <div class="col-md-4">
-          <h4>Amendments</h4>
-          <p>{{sampleDetails?.amendments}}</p>
+          <h4 class="m-0">Amendments</h4>
+          <p>{{sampleDetails?.amendments || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Note</h4>
-          <p>{{sampleDetails.note}}</p>
+          <h4 class="m-0">Note</h4>
+          <p>{{sampleDetails.note || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Sample Type</h4>
+          <h4 class="m-0">Sample Type</h4>
           <p>{{sampleDetails?.sample_type || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
-          <h4>Sample Quantity</h4>
-          <p>{{sampleDetails?.sample_quantity || 'N/A'}}</p>
+          <h4 class="m-0">Sample Quantity</h4>
+          <p>{{sampleDetails?.sample_quantity || 'N/A'}} {{sampleDetails?.sample_units}}</p>
         </div>
  
         <div class="col-md-4">
-          <h4>Number of Sample</h4>
+          <h4 class="m-0">Number of Sample</h4>
           <p>{{sampleDetails?.number_of_sample || 'N/A'}}</p>
         </div>
-
-        <div class="col-md-4">
-          <h4>Sample Units</h4>
-          <p>{{sampleDetails?.sample_units || 'N/A'}}</p>
+        <!-- {{sampleDetails?.client_category_detail?.client_sub_category | json}} -->
+        <div class="col-md-12" *ngIf="sampleDetails?.client_category_detail?.client_sub_category === 'licensing'">
+          <div class="row">
+            <div class="col-md-4">
+              <h4 class="m-0">Analysis Fee</h4>
+              <p>{{sampleDetails?.analysis_fee || 'N/A'}}</p>
+            </div>
+    
+            <div class="col-md-4">
+              <h4 class="m-0">Voucher Number</h4>
+              <p>{{sampleDetails?.voucher_number || 'N/A'}}</p>
+            </div>
+    
+            <div class="col-md-4">
+              <h4 class="m-0">Voucher Date</h4>
+              <p>{{sampleDetails?.voucher_date | date:'mediumDate'}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -34,6 +34,10 @@ export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -58,7 +62,9 @@ export function HttpLoaderFactory(http: HttpClient){
     MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
-
+    MatToolbarModule,
+    MatBottomSheetModule,
+    MatSidenavModule,
     TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,
@@ -69,6 +75,11 @@ export function HttpLoaderFactory(http: HttpClient){
 
   ],
   exports: [],
-  providers: [SharedService, LayoutService],
+  providers: [
+    SharedService, 
+    LayoutService,
+    // { provide: MatBottomSheetRef, useValue: {} },
+    // { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }
+  ],
 })
 export class LayoutModule { }

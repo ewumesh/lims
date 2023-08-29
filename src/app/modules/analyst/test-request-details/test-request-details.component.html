@@ -193,6 +193,10 @@ display: inline-block;
               <mat-option *ngFor="let a of row.test_method; let i=index;" [value]="a.ref_test_method">{{a.ref_test_method}}</mat-option>
             </mat-select>
           </mat-form-field>
+
+          <!-- <mat-form-field  *ngIf="row?.test_method_selected" appearance="outline" class="w-100">
+          <input matInput [(ngModel)]="row.insTestMethod" class="custom-input" />
+          </mat-form-field> -->
         </div>
         <div *ngIf="row.test_type !== 'Instrumental'"> 
           <span *ngFor="let t of row.test_method">{{t?.ref_test_method}}</span>

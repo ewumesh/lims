@@ -16,9 +16,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TrackSampleService } from 'src/app/services/track-sample/track-sample.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AvatarModule } from 'ngx-avatar';
+import { TruncatePipe } from 'src/app/shared/truncate/truncate.pipe';
 
 @NgModule({
-  declarations: [TrackSampleComponent],
+  declarations: [TrackSampleComponent, TruncatePipe],
   imports: [
     CommonModule,
     RouterModule.forChild([

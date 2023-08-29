@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     // console.log(this.authService.isLoggedIn(), 'IS LOGGED IN')
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn() && JSON.parse(localStorage.getItem('userDetails')).is_email_verified) {
       this.router.navigate(['/dashboard']);
     } else {
       // this.router.navigate(['/login']);

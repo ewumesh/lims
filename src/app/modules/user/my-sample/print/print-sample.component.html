@@ -1,0 +1,111 @@
+<!-- <!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Samples</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body{
+            margin: 20px 0;
+        }
+        .container{
+            max-width: 700px;
+        }
+        .container h4{
+            font-size: 18px;
+        }
+        .container p{
+            font-size: 18px;
+        }
+        .row b{
+            font-size: 18px;
+        }
+        ul li{
+            font-weight: 600;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body> -->
+
+    <!-- {{data | json}} -->
+<mat-dialog-content id="print-section">
+<div style="max-width: 700px; text-align: center;">
+    <img src="../../../../../assets/nepal-government.png" alt="" style="width: 15%;">
+    <h4 style="font-size: 18px; margin: 0;"><b>नेपाल सरकार</b></h4>
+    <h4 style="font-size: 18px;margin: 0;"><b>कृषि तथा पशुपन्छी विकास मन्त्रालय</b></h4>
+    <h4 style="font-size: 18px;margin: 0;"><b>खाद्य प्रविधि तथा गुण नियन्त्रण विभाग</b></h4>
+    <h3 style="margin: 0; font-size: 22px;"><b>खाद्य तथा दाना स्वछता एवं गुणस्तर नियमन महाशाखा</b></h3>
+    <h5 style="margin: 0; font-size: 16px;"><b>बबरमहल, काठमाडौं</b></h5>
+    <h3 style="margin-top: 20px;"><b>श्री राष्ट्रिय खाद्य तथा दाना रेफ्रेन्स प्रयोगशाला</b></h3>
+</div>
+
+<div class="mt-5" style="max-width: 700px;">
+    <p style="font-size: 18px;"><b>यस अनुज्ञापत्र तथा निरीक्षण शाखामा प्राप्त भएको तपशिल बमोजिमको खाद्य/दाना पदार्थको नमुनाको तपशिल बमोजिमको पारामिटरको परीक्षण गरी यथाशक्य चाँडो प्रतिवेदन पठाईदिनु हुन अनुरोध छ ।</b></p>
+</div>
+
+<div style="max-width: 700px;margin-top: 5px;">
+    <div style="width: 100%; display: flex;">
+        <div  style="width: 50%;"><b>नमुना संकेत नम्बर: <span class="text-uppercase">{{data?.name}}</span></b></div>
+        <div  style="width: 50%; text-align: right;"><b>मिति: {{data?.created_date | date}}</b></div>
+    </div>
+    <div style="width: 100%; display: flex;margin-top: 5px;">
+        <div style="width: 100%;"><b>खाद्य पदार्थ/दाना पदार्थको नमुना विवरण:</b>{{data?.commodity?.name}}</div>
+        <!-- <div style="width: 100%;"><b>{{data?.commodity?.name}}</b></div> -->
+    </div>
+    <div style="width: 100%; display: flex;margin-top: 5px;">
+        <div style="width: 50%;"><b>परीक्षण गर्नुपर्ने पारामिटर:</b></div>
+    </div>
+    <div style="width: 100%; display: flex;margin-top: 5px;">
+        <div style="word-wrap: initial; width: 700px;">
+            <div>
+                <span *ngFor="let p of data?.parameters"><span>{{p?.name}}</span>,&nbsp;</span>
+        </div>
+        </div>
+    </div>
+    <div style="width: 100%;margin-top: 20px; display: flex;">
+        <div style="width: 50%;margin-top: 5px;"><b>परीक्षण दस्तुर रु: </b>{{data?.analysis_fee}}</div>
+        <div style="width: 50%;margin-top: 5px;text-align: right"><b>MFD:</b>{{data?.mfd | date:'mediumDate'}}</div>
+    </div>
+
+        <div style="width: 100%;margin-top: 5px; display: flex;">
+        <div style="width: 50%;margin-top: 5px;"><b>राजस्व रसिद/भौचर नम्बर:</b>{{data?.voucher_number}}</div>
+        <div style="width: 50%;margin-top: 5px;text-align: right"><b>Best Before:</b>
+            <span *ngIf="data?.dfb">
+            {{data?.dfb | date:'mediumDate'}}
+        </span>
+        <span *ngIf="!data?.dfb">
+            {{data?.days_dfb}} {{data.dfb_duration}}
+        </span>
+        </div>
+        
+    </div>
+
+    <div style="width: 100%;margin-top: 5px; display: flex;">
+        <div style="width: 50%;margin-top: 5px;"><b>राजस्व बुझाएको मिति:</b> {{data?.voucher_date | date:'mediumDate'}}</div>
+        <div style="width: 50%;margin-top: 5px; text-align: right;"><b>Quantity:</b>{{data?.sample_quantity}}{{data?.sample_units}}</div>
+    </div>
+</div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="btn btn-danger btn-sm mx-1">Close</button>
+  <button mat-button [mat-dialog-close]="true" class="btn btn-primary btn-sm mx-1" printSectionId="print-section" ngxPrint cdkFocusInitial>Print</button>
+</mat-dialog-actions>
+
+
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+</body>
+
+</html> -->

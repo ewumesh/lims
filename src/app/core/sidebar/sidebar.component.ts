@@ -1,5 +1,7 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
@@ -23,6 +25,8 @@ export class SidebarComponent implements OnInit {
 
   panelOpenState = false;  
 
+  isMobileDevice = false;
+
   con(d) {
     return d.format('mmmm d, yyyy ddd');
   }
@@ -32,6 +36,8 @@ export class SidebarComponent implements OnInit {
     private toast: ToastService,
     private sharedService: SharedService,
     private route: ActivatedRoute,
+    private responsive: BreakpointObserver,
+    private _bottomSheetRef: MatBottomSheetRef<SidebarComponent>
     // public datepipe: DatePipe
   ) {
     setInterval(() => {
@@ -43,7 +49,16 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.responsive.observe(Breakpoints.XSmall)
+    .subscribe(result => {
+      console.log(result.matches, 'DEVICE....')
+      if (result.matches) {
+        this.isMobileDevice = true;
+      }
+
+    });
+  }
 
   userSampleDetails = '/dashboard/sample-details/';
 
@@ -123,11 +138,18 @@ export class SidebarComponent implements OnInit {
   ]
 
   navigate(path) {
+    if(this.isMobileDevice) {
+      this._bottomSheetRef.dismiss();
+    }
     this.router.navigate([`${path}`]);
   }
 
 
   logout() {
+    if(this.isMobileDevice) {
+      this._bottomSheetRef.dismiss();
+    }
+    
     this.toast.showToast(
       TOAST_STATE.success,
       'Logout Successfully');

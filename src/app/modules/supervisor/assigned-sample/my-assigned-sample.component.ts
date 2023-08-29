@@ -22,7 +22,7 @@ export class MyAssignedComponent implements OnInit, AfterViewInit {
 
   isFilterBtnLoading: boolean = false;
 
-  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName', 'submissionDate', 'status', 'action'];
+  displayedColumns: string[] = ['sn', 'sampleId', 'sampleName','commodity', 'submissionDate', 'status', 'action'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

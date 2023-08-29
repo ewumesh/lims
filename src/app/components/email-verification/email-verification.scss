@@ -357,3 +357,57 @@ svg path{
 .kit-footer:hover .kit-web{
   color: #fff!important;
 }
+
+.sent-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Poppins;
+  height: 60vh;
+}
+
+.sent-message-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid whitesmoke;
+}
+​
+.success-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-message h4 {
+  color: #2460b9;
+  font-weight: 600;
+}
+
+.sent-message-box img {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.resend-btn {
+  background-color: #2460b9;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 13px;
+  color: #141414;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 3px;
+}
+
+.resend-btn:hover {
+  background: #0d6efd;
+  color: #ffffff;
+}

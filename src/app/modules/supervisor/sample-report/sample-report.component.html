@@ -180,6 +180,31 @@
         </div>
       </div>
 
+      <div class="row m-0 p-0 mt-3" >
+        <div class="col-md-12 bg-white" style="border-radius: 5px;">
+    
+          <table class="table">
+            <tbody>
+              <h3 class="text-bold mb-0 ms-2 mt-2">Lab Sheet</h3>
+              <tr>
+                <td style="width: 20%;">
+                  <p class="text-muted mb-0 pb-0">Generated Date</p>
+                  <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+                </td>
+                <td style="width: 30%;" class="pt-3">
+                  
+                </td>
+    
+                <td style="width: 30%;" class="text-end pt-3">
+                  <button  (click)="viewLabSheet()" class="btn btn-primary btn-lims-primary btn-sm">View</button>
+                  <!-- <button   class="btn btn-secondary mx-2 btn-sm">Download</button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="view-page mt-3">
         <!-- <h3 class="view-page-heading">Parameter Details</h3> -->
         <div class="row">
@@ -240,8 +265,8 @@
                 <ng-container matColumnDef="result">
                   <th mat-header-cell *matHeaderCellDef> Result </th>
                   <td mat-cell *matCellDef="let row">
-                    <span *ngIf="row.result === null" class="text-muted">N/A</span>
-                    <span *ngIf="row.result !== null">{{row.result}}</span>
+                    <span *ngIf="!row.result" class="text-muted">N/A</span>
+                    <span *ngIf="row.result" [innerHtml]="row.result"></span> {{row?.units}}
                     
                   </td>
                 </ng-container>

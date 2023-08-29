@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UserActivationModule } from 'src/app/shared/deactivate-activate-user/user-activation.module';
 
 @NgModule({
   declarations: [AllUsersComponent],
@@ -40,6 +41,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatMenuModule,
 
     DeleteConfirmModule,
+    UserActivationModule,
     SharedModule
    ],
   exports: [],

@@ -41,7 +41,7 @@ export class ViewUserDetailsComponent implements OnInit {
 
     getDepartmentName(code) {
       let d = this.departmentTypes.find(a => a.code === code);
-      return d.name;
+      return d?.name;
     }
 
     getDepartmentTypes() {

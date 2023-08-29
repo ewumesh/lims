@@ -24,6 +24,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     SampleRequestsComponent,
+    // TruncatePipe
     // AssignSampleDialogComponent,
     // AssignSampleComponentasdasd
   ],

@@ -11,6 +11,7 @@ import { MySampleService } from 'src/app/services/my-sample/my-sample.service';
 import { collectionInOut } from 'src/app/shared/animations/animations';
 import { DeleteConfirmComponent } from 'src/app/shared/delete-confirm/delete-confirm.component';
 import { TOAST_STATE, ToastService } from 'src/app/shared/toastr/toastr.service';
+import { PrintSampleDetailsComponent } from './print/print-sample.component';
 
 
 @Component({
@@ -89,6 +90,10 @@ export class MySampleComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/dashboard/update-sample', id])
   }
 
+  editDftqcSample(id) {
+    this.router.navigate(['/dashboard/dftqc/licensing/edit-sample', id])
+  }
+
   viewSampleDetails(id) {
     this.router.navigate(['/dashboard/sample-details', id]);
   }
@@ -105,6 +110,13 @@ export class MySampleComponent implements OnInit, AfterViewInit {
   format(date: Date): string {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(date, 'yyyy-MM-dd');
+  }
+
+  printDetails(data) {
+    this.dialog.open(PrintSampleDetailsComponent, {
+      maxHeight:'90vh',
+      data:data
+    })
   }
 
   reset() {

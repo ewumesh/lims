@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SampleReportService } from 'src/app/services/supervisor/sample-request/sample-request.service';
 import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 import { VerificationRemarksComponent } from './component/verification-remarks';
+import { VerifierReportComponent } from './view-sample/verifier-view-sample';
 
 @Component({
   templateUrl: './verify-sample-report.html',
@@ -38,6 +39,13 @@ export class VerifySampleReportomponent implements OnInit {
     this.service.getRawData(id).subscribe(res => {
       this.rawDataSheet = res;
     }  )
+   }
+
+   viewReport() {
+    this.dialog.open(VerifierReportComponent, {
+      data: this.reportDetails,
+      height:'80vh'
+    })
    }
 
   openRemarks() {

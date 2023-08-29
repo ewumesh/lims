@@ -1,0 +1,284 @@
+<div class="white-bg pa-4">
+
+    <!-- <div class="db-content"> -->
+    <form [formGroup]="apAddSampleForm" (ngSubmit)="saveChanges()">
+        <div>
+            <p class="sample-detail">Sample Analysis Request Form</p>
+            <hr class="divider">
+
+            <div class="row margin-bottom-24">
+                <div *ngIf="message && message.messageBody" class="col-md-12 col-md-12 col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        {{message?.messageBody}}
+                    </div>
+                </div>
+                <div *ngIf="responseError" class="col-md-12 col-md-12 col-lg-12">
+                    <div class="alert alert-danger" role="alert">
+                        <li *ngFor="let item of responseError | keyvalue">
+                            {{item.key}}: 
+                            {{item.value}}
+                        </li>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 my-2">
+                    <label>Sample Type</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select formControlName="client_sub_category" class="custom-select" placeholder="Select Sampe Type">
+                            <mat-option [value]="'licensing'">Licensing</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-md-6 my-2">
+                    <label>Sample Number</label>
+                    <mat-form-field class="w-100" appearance="outline">
+                        <input matInput class="custom-input" placeholder="Enter Sample Number" />
+                    </mat-form-field>
+                </div> -->
+
+                <!-- <div class="col-md-6 my-2">
+                    <label>Date</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [matDatepicker]="date" (focus)="date.open()" (click)="date.open()"
+                            class="custom-input" placeholder="Enter Date" />
+                        <mat-datepicker #date></mat-datepicker>
+                    </mat-form-field>
+                </div> -->
+
+                <div class="col-md-4 my-2" style="padding-top: 20px;">
+                    <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
+          
+                    <mat-radio-group formControlName="dfb_type" aria-label="Select an option">
+                      <mat-radio-button [value]="'days'">Duration</mat-radio-button>
+                      <mat-radio-button [value]="'date'">Date</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+
+                  <div class="col-md-4" *ngIf="apAddSampleForm.value.dfb_type === 'days'">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="email" class="col-form-label">Duration</label>
+                        <div class="input-group">
+                          <mat-form-field appearance="outline" class="w-100">
+                            <input formControlName="days_dfb" placeholder="Enter Duration" matInput type="text"
+                              class=" custom-input" aria-label="Text input with dropdown button">
+                          </mat-form-field>
+                        </div>
+                      </div>
+          
+                      <div class="col-md-6">
+                        <label for="email" class="col-form-label">Duration in</label>
+                        <mat-form-field class="w-100" appearance="outline">
+                          <mat-select formControlName="dfb_duration" class="custom-select" placeholder="Select">
+                            <mat-option [value]="'days'">Days</mat-option>
+                            <mat-option [value]="'month'">Months</mat-option>
+                            <mat-option [value]="'year'">Year</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 my-2" *ngIf="apAddSampleForm.value.dfb_type === 'date'">
+                    <label>Best Before Date</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input formControlName="dfb" matInput [matDatepicker]="bbd" (focus)="bbd.open()" (click)="bbd.open()"
+                            class="custom-input" placeholder="Enter Date" />
+                        <mat-datepicker #bbd></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 my-2" >
+                    <label>Manufactured Date</label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input formControlName="mfd" matInput [matDatepicker]="mdf" (focus)="mdf.open()" (click)="mdf.open()"
+                            class="custom-input" placeholder="Enter Date" />
+                        <mat-datepicker #mdf></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row  mx-0"
+                        style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px; padding: 24px 0px;">
+                        <div class="col-md-3">
+                            <label>Sample Type (नमुनाको प्रकार)*</label>
+                            <mat-form-field class="w-100" appearance="outline">
+                                <mat-select formControlName="sample_type" class="custom-select" placeholder="Sample Type">
+                                    <mat-option *ngFor="let a of SampleTypes" [value]="a.name">{{a.name |
+                                        titlecase}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Sample Quantity (नमुनाको मात्रा)</label>
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input formControlName="sample_quantity" class="custom-input" placeholder="Enter Quantity" matInput />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Units(एकाई)*</label>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <input formControlName="sample_units" class="custom-input" matInput placeholder="Enter Sample Uint"
+                                    [disabled]="true" />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Number of sample (नमुनाको संख्या)*</label>
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input formControlName="number_of_sample" class="custom-input" matInput placeholder="Enter Sample per unit" />
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 my-2">
+                    <div class="row  mx-0"
+                        style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px; padding: 24px 0px;">
+
+                        <div class="col-md-4">
+                            <label>Analysis Fee</label>
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input formControlName="analysis_fee" class="custom-input" matInput placeholder="Enter Price" />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Voucher Number</label>
+                            <mat-form-field class="w-100" appearance="outline">
+                                <input formControlName="voucher_number" class="custom-input" matInput placeholder="Enter Voucher Number" />
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Paid Date</label>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <input formControlName="voucher_date" matInput [matDatepicker]="pd" (focus)="pd.open()" (click)="pd.open()"
+                                    class="custom-input" placeholder="Enter Date" />
+                                <mat-datepicker #pd></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 my-2">
+                    <label style="width:100%;" class="list-heading form-label">Commodity for Analysis (विश्लेषण गर्नुपर्ने
+                        वस्तु)* </label>
+                      <!-- <mat-form-field appearance="outline" class="custom-select w-100">
+                        <mat-select formControlName="commodity" placeholder="Select Category">
+                          <mat-option *ngFor="let commodity of commodities" [value]="commodity.id">{{commodity.name |
+                            titlecase}}</mat-option>
+                        </mat-select> 
+                        <mat-error class="text-danger" *ngIf="displayMessage?.commodity">{{displayMessage.commodity}}</mat-error>
+                      </mat-form-field> -->
+                      <!-- <pre>
+                      {{cCtrl?.value?.name  }}opp
+                      </pre> -->
+                      <mat-form-field appearance="outline" class="w-100">
+                        <mat-select class="custom-select" [formControl]="cCtrl" placeholder="Select Commodity" #singleSelectC>
+                          <mat-option>
+                            <ngx-mat-select-search [formControl]="cFilterCtrl" placeholderLabel="Search Commodity"
+                              noEntriesFoundLabel="'no matching user found'"></ngx-mat-select-search>
+                          </mat-option>
+            
+                          <mat-option *ngFor="let c of filteredCommodities | async; let i = index;" [value]="c">
+                            <span>{{c.name}}</span>
+                          </mat-option>
+                        </mat-select>
+                        
+                      </mat-form-field>
+                </div>
+                
+                <div class="col-md-12" *ngIf="dataSource.data?.length > 0">
+                    <mat-radio-group formControlName="analysis_pricing" aria-label="Select an option">
+                        <mat-radio-button [value]="0">Commodity Wise</mat-radio-button>
+                        <mat-radio-button [value]="1">Parameter Wise</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+
+                <p *ngIf="sampleId">Selected Parameters of {{selectedCommodity?.name}}: <span class="badge badge-primary mx-1"
+                  style="background-color: #14080855;" *ngFor="let pm of selectedParameters">{{pm?.name}}</span></p>
+
+                  <p *ngIf="sampleId && apAddSampleForm.value.analysis_pricing === 0">Commodity Wise Price: Rs.{{commodityWisePrice}}</p>
+                  <p *ngIf="sampleId && apAddSampleForm.value.analysis_pricing === 1">Parameters Wise Price: Rs.{{commodityWisePrice}}</p>
+                <!-- {{apAddSampleForm.value.analysis_pricing}}ok -->
+                <div class="col-md-12" *ngIf="(apAddSampleForm.value.analysis_pricing === 0 || apAddSampleForm.value.analysis_pricing === 1) && dataSource.data?.length > 0">
+                    <table mat-table [dataSource]="dataSource"
+            [@collectionInOut]="dataSource.data?.length"> 
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="price" *ngIf="apAddSampleForm.value.analysis_pricing === 1">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let element"> Rs.{{element.price}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+          </table>
+                </div>
+
+                <div class="row mt-2" *ngIf="apAddSampleForm.value.analysis_pricing ===0">
+                    <div class="col-md-12 text-start d-flex align-items-center justify-content-end last-pp">
+                      <p class="mb-0 price-box">Analysis Fee (परिक्षण दस्तुर): <b>Rs.{{commodityWisePrice}}</b></p>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2" *ngIf="apAddSampleForm.value.analysis_pricing ===1">
+                    <div class="col-md-12 text-start d-flex align-items-center justify-content-end last-pp">
+                      <p  class="mb-0 price-box">Analysis Fee (परिक्षण दस्तुर): <b>Rs.{{parameterWisePrice}}</b></p>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row white-bg mt-3 mx-0">
+    <div class="col-md-12 text-end">
+        <button type="button" class="btn btn-primary cancel-btn me-3">
+            <span>Cancel</span>
+        </button>
+        <button (click)="saveChanges()" type="submit" class="btn btn-primary submit-btn">
+            <span *ngIf="!isSampleSent">Submit Sample</span>
+            <span *ngIf="isSampleSent">
+                <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+            </span>
+        </button>
+    </div>
+</div>

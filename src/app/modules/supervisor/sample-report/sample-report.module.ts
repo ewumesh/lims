@@ -21,9 +21,15 @@ import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
 import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
 import { MicroRawDataComponent } from './micro-raw-data/micro-raw-data';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SuperscriptPipe } from 'src/app/shared/s-transform';
+import { SupervisorLabSheetComponent } from './supervisor-lab-sheet/supervisor-lab-sheet.component';
 
 @NgModule({
-  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent, MicroRawDataComponent],
+  declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent, MicroRawDataComponent,
+    SupervisorLabSheetComponent
+    // , 
+    // SuperscriptPipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

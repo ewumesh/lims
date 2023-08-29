@@ -11,11 +11,15 @@ import { MatIconModule } from "@angular/material/icon";
 import { SupervisorReportViewRawDataComponent } from "./raw-data/supervisor-report-raw-data";
 import { MicroSupervisorRawDataComponent } from "./micro-supervisor-raw-data/micro-supervisor-raw-data";
 import { MatTabsModule } from "@angular/material/tabs";
+import { SuperscriptPipe } from "src/app/shared/s-transform";
 
 
 
 @NgModule({
-    declarations:[SupervisorReportViewComponent, SupervisorReportViewRemarksComponent, SupervisorReportViewRawDataComponent, MicroSupervisorRawDataComponent],
+    declarations:[SupervisorReportViewComponent, SupervisorReportViewRemarksComponent, SupervisorReportViewRawDataComponent, MicroSupervisorRawDataComponent
+        // , 
+        // SuperscriptPipe
+    ],
     imports: [
         CommonModule,
 

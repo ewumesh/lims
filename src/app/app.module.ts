@@ -20,6 +20,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { SharedService } from './services/shared/shared.service';
 import { UserVerificationSuccessComponent } from './components/email-verification-success/email-verification-success';
+import { SuperscriptPipe } from './shared/s-transform';
+import { TruncatePipe } from './shared/truncate/truncate.pipe';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,12 +34,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     EmailVerificationComponent,
     UserVerificationSuccessComponent
+    // SuperscriptPipe
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
     MatMenuModule,
+    MatBottomSheetModule,
 
     // Custom Modules
     AppRoutingModule,
@@ -51,13 +56,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     CKEditorModule
 
   ],
-  exports: [MatMenuModule],
+  exports: [
+    MatMenuModule,
+     MatBottomSheetModule
+    ],
   providers: [
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ToastService,
     LanguageService,
-    SharedService
+    SharedService,
+    { provide: MatBottomSheetRef, useValue: {} },
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

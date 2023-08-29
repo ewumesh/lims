@@ -68,4 +68,16 @@ export class SampleReportService {
   sendForRecheck(payload):Observable<any> {
     return this.http.post(`${this.url}/api/parameter-has-result-recheck/`, payload)
   }
+
+  getUserDetails(userId):Observable<any> {
+    return this.http.get(`${this.url}/api/account/users/${userId}/`);
+  }
+
+  getCategories():Observable<any> {
+    return this.http.get(`${this.url}/api/client-category/?page=2&records=4`);
+  }
+
+  getDetailsForLabSheet(payload):Observable<any> {
+    return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}&status=`);
+  }
 }

@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -47,10 +48,13 @@ export class UserDashboard implements OnInit {
 
     loggedUserDetails:any;
 
+    isMobileDevice = false;
+
     constructor(
         private service: DashboarService,
         private router: Router,
-        private toast: ToastService
+        private toast: ToastService,
+        private responsive: BreakpointObserver
         ) {
             this.loggedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     }
@@ -63,7 +67,11 @@ export class UserDashboard implements OnInit {
 
             let chaartSeries = [this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.processing, a.total_request), this.calculatePercentage(a.rejected, a.total_request)];
             this.pieSeries = chaartSeries;
+            if(this.isMobileDevice) {
+                this.initializeGraphMobileView();
+            } else {
             this.initializeGraph();
+            }
             // console.log(chaartSeries, 'ser')
             this.isDashboardStatus = false;
         },(error)=> {
@@ -116,6 +124,17 @@ export class UserDashboard implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.responsive.observe(Breakpoints.XSmall)
+        .subscribe(result => {
+          console.log(result.matches, 'DEVICE....')
+          if (result.matches) {
+            this.isMobileDevice = true;
+          }
+    
+        });
+
+
         this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
         this.getDashboardStatus();
         this.getMySamples();
@@ -179,6 +198,37 @@ export class UserDashboard implements OnInit {
                     dataLabels:{enabled: false},
                     chart: {
                       width: 450
+                    },
+                    legend: {
+                      fontFamily: 'Poppins',
+                      position: "bottom"
+                    },
+                      
+                  }
+                }
+              ]
+        };
+    }
+
+
+    initializeGraphMobileView() {
+        this.chartOptions = {
+            series: this.pieSeries,
+            chart: {
+                width: 300,
+                type: "pie",
+                fontFamily: 'Poppins',
+            },
+            labels: ["Completed", "Pending", "Processing", "Rejected"],
+            responsive: [
+                {
+                  breakpoint: 2000,
+                  
+                  options: {
+                    colors: ['#00c853', '#ffc107', '#3f51b5', '#C62828'],
+                    dataLabels:{enabled: false},
+                    chart: {
+                      width: 300
                     },
                     legend: {
                       fontFamily: 'Poppins',

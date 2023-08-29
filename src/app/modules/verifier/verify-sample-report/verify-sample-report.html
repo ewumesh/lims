@@ -1,12 +1,12 @@
 
 <div>
   <verify-report [reportDetails]="reportDetails" [rawDataSheet]="rawDataSheet" *ngIf="!isLoading"></verify-report>
-  <div class="row" *ngIf="reportDetails.status === 'not_verified'">
-    <div class="col-md-12 text-end mt-3" *ngIf="sampleStatus">
-      <!-- <button class="btn btn-primary btn-sm mx-1">Download Report</button> -->
+  <div class="row m-0" *ngIf="reportDetails.status === 'not_verified'">
+    <div class="col-md-12 text-end bg-white mt-3 p-4" style="border-radius: 5px;" *ngIf="sampleStatus">
+      <button (click)="viewReport()" class="btn btn-primary btn-sm mx-1">View Report</button>
       <button [disabled]="sampleStatus[0]?.is_verified && sampleStatus[0]?.is_sent" (click)="openRemarks()" class="btn btn-secondary btn-sm mx-1">
         <span *ngIf="!isSending">Procceed</span>
-            <span *ngIf="isSending"> 
+            <span *ngIf="isSending">  
               <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
             </span>
       </button>

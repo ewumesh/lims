@@ -51,45 +51,57 @@
                                 <mat-form-field appearance="outline" class="w-100">
                                     <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
                                         formControlName="prepared_dilution" /> -->
-        
-                                        <mat-select formControlName="first_exponent" class="custom-select" placeholder="Select Dilution">
-                                            <mat-option [value]="'10^0'">10⁰</mat-option>
-                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
-                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
-                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
-                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
-                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
-                                        </mat-select>
+
+                                    <mat-select formControlName="first_exponent" class="custom-select"
+                                        placeholder="Select Dilution">
+                                        <mat-option [value]="'10^0'">10⁰</mat-option>
+                                        <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                        <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                        <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                        <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                        <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        <mat-option [value]="'10 ml'">10ml</mat-option>
+                                        <mat-option [value]="'1 ml'">1ml</mat-option>
+                                        <mat-option [value]="'0.1 ml'">0.1ml</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
                                         formControlName="prepared_dilution" /> -->
-        
-                                        <mat-select formControlName="second_exponent" class="custom-select" placeholder="Select Dilution">
-                                            <mat-option [value]="'10^0'">10⁰</mat-option>
-                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
-                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
-                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
-                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
-                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
-                                        </mat-select>
+
+                                    <mat-select formControlName="second_exponent" class="custom-select"
+                                        placeholder="Select Dilution">
+                                        <mat-option [value]="'10^0'">10⁰</mat-option>
+                                        <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                        <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                        <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                        <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                        <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        <mat-option [value]="'10 ml'">10ml</mat-option>
+                                        <mat-option [value]="'1 ml'">1ml</mat-option>
+                                        <mat-option [value]="'0.1 ml'">0.1ml</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <!-- <input matInput class="custom-input" placeholder="Prepared Dilution"
                                         formControlName="prepared_dilution" /> -->
-        
-                                        <mat-select formControlName="third_exponent" class="custom-select" placeholder="Select Dilution">
-                                            <mat-option [value]="'10^0'">10⁰</mat-option>
-                                            <mat-option [value]="'10^-1'">10⁻¹</mat-option>
-                                            <mat-option [value]="'10^-2'">10⁻²</mat-option>
-                                            <mat-option [value]="'10^-3'">10⁻³</mat-option>
-                                            <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
-                                            <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
-                                        </mat-select>
+
+                                    <mat-select formControlName="third_exponent" class="custom-select"
+                                        placeholder="Select Dilution">
+                                        <mat-option [value]="'10^0'">10⁰</mat-option>
+                                        <mat-option [value]="'10^-1'">10⁻¹</mat-option>
+                                        <mat-option [value]="'10^-2'">10⁻²</mat-option>
+                                        <mat-option [value]="'10^-3'">10⁻³</mat-option>
+                                        <mat-option [value]="'10^-4'">10⁻⁴</mat-option>
+                                        <mat-option [value]="'10^-5'">10⁻⁵</mat-option>
+                                        <mat-option [value]="'10 ml'">10ml</mat-option>
+                                        <mat-option [value]="'1 ml'">1ml</mat-option>
+                                        <mat-option [value]="'0.1 ml'">0.1ml</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -106,8 +118,17 @@
                     <div class="col-md-6">
                         <label>Positive Control Used</label>
                         <mat-form-field appearance="outline" class="w-100">
-                            <input matInput class="custom-input" placeholder="Positive Control Used"
-                                formControlName="positive_control_used" />
+                            <!-- <input matInput class="custom-input" placeholder="Positive Control Used"
+                                formControlName="positive_control_used" /> -->
+                            <mat-select class="custom-select" placeholder="Select Value"
+                                formControlName="positive_control_used">
+                                <mat-option [value]="'Aspergillus flavus;Sachharomyces cerevisiae'"><i>Aspergillus
+                                        flavus;Sachharomyces cerevisiae</i></mat-option>
+                                <mat-option [value]="'Escherichia coli'"><i>Escherichia coli</i></mat-option>
+                                <mat-option [value]="'Salmonella Typhimurium'"><i>Salmonella
+                                        Typhimurium</i></mat-option>
+                                <mat-option [value]="'Staphylococcus aureus'"><i>Staphylococcus aureus</i></mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
 
@@ -123,7 +144,8 @@
                         <label>Date And Time </label>
                         <!-- <mat-form-field appearance="outline" class="w-100"> -->
                         <input style="border: 1px solid #0000006e;
-                        border-radius: 5px; height: 45px;" formControlName="date_of_incubation" class="form-control" placeholder="Enter Date" type="datetime-local">
+                        border-radius: 5px; height: 45px;" formControlName="date_of_incubation" class="form-control"
+                            placeholder="Enter Date" type="datetime-local">
                         <!-- </mat-form-field> -->
                         <!-- <mat-form-field appearance="outline" class="w-100">
 
@@ -151,11 +173,25 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <!-- <input matInput class="custom-input" placeholder="Temprature"
                                 formControlName="required_temperature" /> -->
-                                <mat-select formControlName="required_temperature" placeholder="Select Temprature" class="custom-select">
-                                    <mat-option [value]="'25'">25⁰C</mat-option>
-                                    <mat-option [value]="'30'">30⁰C</mat-option>
-                                    <mat-option [value]="'37'">37⁰C</mat-option>
-                                </mat-select>
+                            <mat-select formControlName="required_temperature" placeholder="Select Temprature"
+                                class="custom-select">
+                                <mat-option [value]="'25'">25⁰C</mat-option>
+                                <mat-option [value]="'30'">30⁰C</mat-option>
+                                <mat-option [value]="'37'">37⁰C</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Duration of Incubation</label>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-select placeholder="Select Duration" formControlName="duration_of_incubation"
+                                class="custom-select">
+                                <mat-option [value]="'24 hrs'">24 hrs</mat-option>
+                                <mat-option [value]="'48 hrs'">48 hrs</mat-option>
+                                <mat-option [value]="'72 hrs'">72 hrs</mat-option>
+                                <mat-option [value]="'5 days'">5 Days</mat-option>
+                            </mat-select>
+
                         </mat-form-field>
                     </div>
 
@@ -180,6 +216,7 @@
 
             </form>
 
+
             <form action="" [formGroup]="observationForm"
                 *ngIf="addedParameterDetails || data.selectedParameter?.micro_table">
                 <table style=" margin: auto;" class="child-table">
@@ -203,17 +240,32 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.first_exponent | superscript"></div></td>
-                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.second_exponent | superscript"></div></td>
-                        <td colspan="2"><div [innerHtml]="addedParameterDetails?.third_exponent | superscript"></div></td>
+                        <td colspan="2">
+                            <div [innerHtml]="addedParameterDetails?.first_exponent | superscript"></div>
+                        </td>
+                        <td colspan="2">
+                            <div [innerHtml]="addedParameterDetails?.second_exponent | superscript"></div>
+                        </td>
+                        <td colspan="2">
+                            <div [innerHtml]="addedParameterDetails?.third_exponent | superscript"></div>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>A</td>
-                        <td>B</td>
-                        <td>A</td>
-                        <td>B</td>
-                        <td>A</td>
-                        <td>B</td>
+                    <tr *ngIf="data?.commodity?.id !== 486">
+                        <td *ngIf="addedParameterDetails?.first_exponent">A</td>
+                        <td *ngIf="addedParameterDetails?.first_exponent">B</td>
+                        <td *ngIf="addedParameterDetails?.second_exponent">A</td>
+                        <td *ngIf="addedParameterDetails?.second_exponent">B</td>
+                        <td *ngIf="addedParameterDetails?.third_exponent">A</td>
+                        <td *ngIf="addedParameterDetails?.third_exponent">B</td>
+                    </tr>
+
+                    <tr *ngIf="data?.commodity?.id === 486">
+                        <td *ngIf="addedParameterDetails?.first_exponent">+Ve</td>
+                        <td *ngIf="addedParameterDetails?.first_exponent">-Ve</td>
+                        <td *ngIf="addedParameterDetails?.second_exponent">+Ve</td>
+                        <td *ngIf="addedParameterDetails?.second_exponent">-Ve</td>
+                        <td *ngIf="addedParameterDetails?.third_exponent">+Ve</td>
+                        <td *ngIf="addedParameterDetails?.third_exponent">-Ve</td>
                     </tr>
                     <ng-container formArrayName="observation">
                         <tr *ngFor="let list of form.controls; let i = index" [formGroupName]="i">
@@ -229,68 +281,16 @@
                                 <!-- <input formControlName="time" type="text"> -->
                                 {{observationForm.value.observation[i].time | slice:11:19}}
                             </td>
-                            <td><input formControlName="first_exponent_a" type="text"></td>
-                            <td><input formControlName="first_exponent_b" type="text"></td>
-                            <td><input formControlName="second_exponent_a" type="text"></td>
-                            <td><input formControlName="second_exponent_b" type="text"></td>
-                            <td><input formControlName="third_exponent_a" type="text"></td>
-                            <td><input formControlName="third_exponent_b" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.first_exponent"><input formControlName="first_exponent_a" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.first_exponent"><input formControlName="first_exponent_b" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.second_exponent"><input formControlName="second_exponent_a" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.second_exponent"><input formControlName="second_exponent_b" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.third_exponent"><input formControlName="third_exponent_a" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.third_exponent"><input formControlName="third_exponent_b" type="text"></td>
                             <td><input formControlName="negative_control" type="text"></td>
                             <td><input formControlName="positive_control" type="text"></td>
                         </tr>
                     </ng-container>
-                    <!-- <tr>
-                    <td colspan="2" class="text-bold">2 (48hrs)</td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-bold">3 (72hrs)</td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-bold">4 (96hrs)</td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-bold">5 (120hrs)</td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                </tr> -->
                 </table>
                 <div class="row me-1 mt-3">
                     <div class="col-md-11"></div>
@@ -306,10 +306,11 @@
 
         <mat-dialog-actions align="end">
             <button (click)="closeDialog()" class="btn btn-danger btn-sm cancel-btn mx-1">Cancel</button>
-            <button [disabled]="isLoading" *ngIf="!data?.selectedParameter?.micro_table" (click)="saveObservationTable()"
-                class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
-            <button [disabled]="isLoading" *ngIf="data?.selectedParameter?.micro_table" (click)="updateObservationTable()"
-                class="btn btn-primary btn-sm cancel-btn mx-1">Update and Next</button>
+            <button [disabled]="isLoading" *ngIf="!data?.selectedParameter?.micro_table"
+                (click)="saveObservationTable()" class="btn btn-primary btn-sm cancel-btn mx-1">Save and Next</button>
+            <button [disabled]="isLoading" *ngIf="data?.selectedParameter?.micro_table"
+                (click)="updateObservationTable()" class="btn btn-primary btn-sm cancel-btn mx-1">Update and
+                Next</button>
         </mat-dialog-actions>
     </div>
 </div>

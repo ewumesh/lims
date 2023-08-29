@@ -12,6 +12,7 @@ import { VerificationComponent } from './verify/s-verify';
 import { SupervisorViewRemarksComponent } from './view-remarks/view-remarks';
 import { SupervisorViewRawDataComponent } from './view-raw-data/view-raw-data';
 import { MicroRawDataComponent } from './micro-raw-data/micro-raw-data';
+import { SupervisorLabSheetComponent } from './supervisor-lab-sheet/supervisor-lab-sheet.component';
 
 @Component({
   templateUrl: './sample-report.component.html',
@@ -34,6 +35,7 @@ export class SampleReportComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
 
   rawDataSheet:any;
+  labsheetDetails:any;
 
   viewRemarks(data, user) {
     if(user === 'analyst') {
@@ -61,6 +63,13 @@ export class SampleReportComponent implements OnInit {
     
   }
 
+  viewLabSheet() {
+    this.dialog.open(SupervisorLabSheetComponent, {
+      data: this.labsheetDetails,
+      height:'80vh',
+    })
+  }
+
   downloadRawDatasheet(id) {
     let payload = {
       id:id
@@ -76,7 +85,6 @@ export class SampleReportComponent implements OnInit {
   }
 
   getRawDataSheetDetails() {
-    // console.log(this.reportDetails, "REPORT")
     let id = this.reportDetails?.sample_form?.id
     this.service.getRawDataSheet(id).subscribe(res => {
       this.rawDataSheet = res;
@@ -101,6 +109,7 @@ export class SampleReportComponent implements OnInit {
 
     instance.afterClosed().subscribe(res => {
       this.getRawDataSheetDetails();
+      this.reportDetails.is_supervisor_sent = true;
     })
   }
 
@@ -196,8 +205,10 @@ export class SampleReportComponent implements OnInit {
       id: id
     }
     this.service.getSamplesDetails(payload).subscribe(res => {
+      this.labsheetDetails = res;
       this.reportDetails = res;
       this.isLoading = false;
+      console.log(res, 'oooooooooooo')
       this.getRawDataSheetDetails();
     },
      (error) => {

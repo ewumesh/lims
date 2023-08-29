@@ -35,12 +35,12 @@
                     <td class="text-center">1</td>
                     <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name | json}} </span></td>
                     <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id}} </span></td>
-                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
+                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
-                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
-                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date:'medium'}} </span></td>
+                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">3</td>
@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td class="text-center">4</td>
-                    <td colspan="10">Method of Analysis/Testing: <span class="detail"> {{p?.parameter?.ref_test_method}} </span></td>
+                    <td colspan="10">Method of Analysis/Testing: <span class="detail"> {{p?.parameter?.test_method}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">5</td>
@@ -95,9 +95,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">First Exponent</td>
-                            <td colspan="2">Second Exponent</td>
-                            <td colspan="2">Third Exponent</td>
+                            <td colspan="2"><span [innerHtml]="p.micro_table.micro_observation_table_raw_data[0].first_exponent | superscript"></span></td>
+                            <td colspan="2"><span [innerHtml]="p.micro_table.micro_observation_table_raw_data[0].second_exponent | superscript"></span></td>
+                            <td colspan="2"><span [innerHtml]="p.micro_table.micro_observation_table_raw_data[0].third_exponent | superscript"></span></td>
                         </tr>
                         <tr>
                             <td>A</td>
@@ -110,7 +110,7 @@
                         <tr *ngFor="let o of p?.micro_table?.micro_observation_table_raw_data">
                             <td colspan="2">{{o.observation_number}}</td>
                             <td>{{o.temperature}}</td>
-                            <td>{{o.time}}</td>
+                            <td>{{o.time | slice:11:19}}</td>
                             <td>{{o.first_exponent_a}}</td>
                             <td>{{o.first_exponent_b}}</td>
                             <td>{{o.second_exponent_a}}</td>

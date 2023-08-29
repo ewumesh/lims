@@ -56,7 +56,7 @@
           </div>
           <span *ngIf="p?.units.length < 1" class="text-muted">N/A</span>
     </h2></td>
-    <td class="text-center"><h2>{{p.result}}</h2></td>
+    <td class="text-center"><h2 [innerHtml]="p?.result"></h2></td>
     <td class="text-center" colspan="2" ><h2>
         <span *ngFor="let t of p.test_method">{{t.ref_test_method}}</span>
     </h2></td>

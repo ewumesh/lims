@@ -9,6 +9,7 @@ import { NpDatepickerModule } from 'angular-nepali-datepicker';
 
 /** Custom components */
 import { RegisterComponent } from 'src/app/modules/register/register.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    NpDatepickerModule
+    NpDatepickerModule,
+    MatIconModule
   ],
   exports: [],
   providers: [],

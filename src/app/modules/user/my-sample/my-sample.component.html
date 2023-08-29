@@ -43,6 +43,7 @@
 <div>
   <!-- {{dataSource.data}} -->
 
+  <div style="width: 100%; overflow-x: auto;">
   <table *ngIf="!isLoading" class="custom-border" mat-table [dataSource]="dataSource" matSort
     [@collectionInOut]="dataSource.data?.length">
 
@@ -107,14 +108,21 @@
             fontIcon="remove_red_eye"></mat-icon></button>
         <!-- <button [matTooltip]="'Download Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2"><mat-icon aria-hidden="false" aria-label="download" fontIcon="save_alt"></mat-icon></button> -->
 
-        <button *ngIf="row.status === 'pending' || row.status === 'recheck'" (click)="editSampleDetails(row.id)" [matTooltip]="'Edit Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">
+        <button *ngIf="(row.status === 'pending' || row.status === 'recheck') && row?.client_category_detail?.client_category !== 11" (click)="editSampleDetails(row.id)" [matTooltip]="'Edit Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">
           <mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon>
         </button>
 
-        <!-- <button *ngIf="row.status === 'pending'" (click)="deleteSample(row.id)" [matTooltip]="'Delete Sample'" class="btn btn-outline-danger btn-lims-danger btn-sm mx-1 pt-2">
-          <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_outline">
-          </mat-icon>
-        </button> -->
+        <button *ngIf="(row.status === 'pending' || row.status === 'recheck') && row?.client_category_detail?.client_category === 11" (click)="editDftqcSample(row.id)" [matTooltip]="'Edit Sample Details'" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">
+          <mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit"></mat-icon>
+        </button>
+
+        <button *ngIf="row?.client_category_detail?.client_category === 11" (click)="printDetails(row)" class="btn btn-primary btn-lims-primary btn-sm mx-1 pt-2">
+          <mat-icon aria-hidden="false" aria-label="edit" fontIcon="print"></mat-icon>
+        </button>
+        <!-- <button printSectionId="print-section" ngxPrint>print</button>  -->
+
+        
+        <!-- {{row?.client_category_detail?.client_category !== 11 | json}} -->
       </td>
     </ng-container>
 
@@ -129,6 +137,7 @@
       </td>
     </tr>
   </table>
+  </div>
   <div class="row" *ngIf="isLoading">
     <div class="col-md-12 text-center py-3">
       <div class="spinner-border text-dark" role="status">
