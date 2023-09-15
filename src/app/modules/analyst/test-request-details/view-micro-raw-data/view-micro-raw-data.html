@@ -21,7 +21,7 @@
                             <p>DFTQC, Kathmandu, Nepal</p>
                         </td>
                         <td style=" border-left: 0;">
-                            <p >{{p.id}}</p>
+                            <p >-</p>
                         </td>
                     </tr>
             </table>
@@ -29,18 +29,18 @@
             <table style="width: 100%;" class="bottom-table">
                 <tr>
                     <th class="text-center" >S.N.</th>
-                    <th colspan="9"> Name of Laboratory: <span class="detail"> N/A </span></th>
+                    <th colspan="9"> Commodity Category: <span class="detail"> {{data?.commodity?.category?.name || '-'}} </span></th>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name}} </span></td>
-                    <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sampleDetails }} </span></td>
-                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.namuna_code || '-' }} </span></td>
+                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_received_date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
-                    <td colspan="4">Started on:<span class="detail"> {{data?.started_date | date}} </span></td>
-                    <td colspan="5">Completed on:<span class="detail"> {{data?.completed_date | date}} </span></td>
+                    <td colspan="4">Started on:<span class="detail"> {{data?.started_date}} </span></td>
+                    <td colspan="5">Completed on:<span class="detail"> {{convertToNepaliDate(data?.completed_date)}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">3</td>
@@ -65,7 +65,7 @@
                             <span [innerHtml]="p.micro_table.micro_observation_table_raw_data[0].third_exponent | superscript"></span>
                             <br>
                             e) Positive control used: {{p?.micro_table?.positive_control_used}}<br>
-                            g) Date and time of Incubation: {{p?.micro_table?.date_of_incubation | date}}
+                            g) Date of Incubation: {{p?.micro_table?.date_of_incubation | date}}
                         </p>
                     </td>
                     <td colspan="5" style="border-left: none;" >
@@ -73,7 +73,7 @@
                             b) Media Used:{{p?.micro_table?.media_used}} <br>
                             d) Diluent used: {{p?.micro_table?.diluent_used}}<br>
                             f) Negative Control used: {{p?.micro_table?.negative_control_used}}<br>
-                            h) Requierd temperature/time of Incubation:{{p?.micro_table?.required_temperature}}<sup>o</sup>C
+                            h) Required temperature/time of Incubation:{{p?.micro_table?.required_temperature}}<sup>o</sup>C/{{p?.micro_table?.duration_of_incubation || '-'}}
                         </p>
                     </td>
                 </tr>
@@ -114,7 +114,7 @@
                         <tr *ngFor="let o of p?.micro_table?.micro_observation_table_raw_data">
                             <td colspan="2">{{o.observation_number}}</td>
                             <td>{{o.temperature}}<sup>o</sup>C</td>
-                            <td>{{o.time | date:'mediumTime'}}</td>
+                            <td>{{o.time | slice:11:19}}</td>
                             <td>{{o.first_exponent_a}}</td>
                             <td>{{o.first_exponent_b}}</td>
                             <td>{{o.second_exponent_a}}</td>
@@ -195,10 +195,10 @@
                                       </div>
                                       <!-- {{p | json}} -->
                                       <h2>Formula = {{p?.parameter?.formula || 'N/A'}}</h2>
-                                      <h2>Result = {{p?.result || 'N/A'}}</h2>
-                                      <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
+                                      <h2>Result = {{p?.result || 'N/A'}} {{p?.units}}</h2>
+                                      <h2>Final Result = {{p?.converted_result || 'N/A'}} {{p?.units}}</h2>
                                       <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
-                                      <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = 
+                                      <h2 *ngIf="p.analyst_remarks"> Analysis = 
                                         <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
                                         <span *ngIf="!p?.analyst_remarks">N/A</span>
                                     </h2>

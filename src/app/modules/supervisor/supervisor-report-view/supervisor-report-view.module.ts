@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SupervisorReportViewComponent } from "./supervisor-report-view";
 import { SupervisorReportViewService } from "src/app/services/supervisor/supervisor-report-view/service";
@@ -34,7 +34,7 @@ import { SuperscriptPipe } from "src/app/shared/s-transform";
         SharedModule
     ],
     exports:[],
-    providers: [SupervisorReportViewService]
+    providers: [SupervisorReportViewService, DatePipe]
 })
 
 export class SupervisorSampleReportViewModule {

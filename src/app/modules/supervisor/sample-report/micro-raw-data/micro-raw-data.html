@@ -33,14 +33,14 @@
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
-                    <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name | json}} </span></td>
-                    <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.id}} </span></td>
-                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="3">Sample Name: <span class="detail"> {{data?.sample_form?.name}} </span></td>
+                    <td colspan="3"> Sample Codes: <span class="detail"> {{data?.sample_form?.namuna_code || '-'}} </span></td>
+                    <td colspan="3"> Date of Receipt: <span class="detail"> {{data?.sample_received_date}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
-                    <td colspan="4">Started on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
-                    <td colspan="5">Completed on:<span class="detail"> {{data?.sample_form?.created_date | date}} </span></td>
+                    <td colspan="4">Started on:<span class="detail"> {{data?.started_date}} </span></td>
+                    <td colspan="5">Completed on:<span class="detail"> {{convertToNepaliDate(data?.completed_date) || '-'}} </span></td>
                 </tr>
                 <tr>
                     <td class="text-center">3</td>
@@ -61,7 +61,7 @@
                             a) Physical Condition Of Sample: {{p?.micro_table?.physical_condition_of_sample}}<br>
                             c) Prepared Dilution: {{p?.micro_table?.prepared_dilution}}<br>
                             e) Positive control used: {{p?.micro_table?.positive_control_used}}<br>
-                            g) Date and time of Incubation: {{p?.micro_table?.date_of_incubation | date}}
+                            g) Date of Incubation: {{p?.micro_table?.date_of_incubation | date}}
                         </p>
                     </td>
                     <td colspan="5" style="border-left: none;" >
@@ -69,7 +69,7 @@
                             b) Media Used:{{p?.micro_table?.media_used}} <br>
                             d) Diluent used: {{p?.micro_table?.diluent_used}}<br>
                             f) Negative Control used: {{p?.micro_table?.negative_control_used}}<br>
-                            h) Requierd temperature/time of Incubation:{{p?.micro_table?.required_temperature}}
+                            h) Requierd temperature/time of Incubation:{{p?.micro_table?.required_temperature}}/{{p?.micro_table?.duration_of_incubation|| '-'}}
                         </p>
                     </td>
                 </tr>
@@ -190,9 +190,9 @@
                                       </div>
                                       </div>
                                       <h2>Formula = {{p?.parameter?.formula}}</h2>
-                                      <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
-                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
-                                      <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = 
+                                      <h2>Final Result = {{p?.converted_result || 'N/A'}} {{p?.units}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}} {{p?.units}}</div>
+                                      <h2 *ngIf="p.analyst_remarks"> Analysis = 
                                         <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
                                         <span *ngIf="!p?.analyst_remarks">N/A</span>
                                     </h2>

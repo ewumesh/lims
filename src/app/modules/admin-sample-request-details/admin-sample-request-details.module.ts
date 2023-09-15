@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { AdminSampleRequestDetailComponent } from "./admin-sample-request-details.component";
 import { RouterModule } from "@angular/router";
@@ -12,6 +12,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AdminReportComponent } from "./view-sample/admin-view-sample";
 import { ViewDoc } from "./view-sample/view-docs";
+import { NgxPrintModule } from "ngx-print";
 
 @NgModule({
     imports:[
@@ -23,11 +24,12 @@ import { ViewDoc } from "./view-sample/view-docs";
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
+        NgxPrintModule,
         SharedModule
     ],
     declarations:[AdminSampleRequestDetailComponent,ApproveFinalSampleComponent,AdminReportComponent,ViewDoc],
     exports:[],
-    providers:[AdminSampleRequestDetailsService]
+    providers:[AdminSampleRequestDetailsService, DatePipe]
 })
 
 export class AdminSampleRequestDetailModule {

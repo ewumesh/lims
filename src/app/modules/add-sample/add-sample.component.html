@@ -69,13 +69,18 @@
 
         <div class="col-md-4">
           <label for="email" class="col-form-label">Date of Manufactured (उत्पादन मिति)*</label>
-          <mat-form-field appearance="outline" class="w-100">
+          <!-- <mat-form-field appearance="outline" class="w-100">
             <input matInput class="custom-input" [max]="maxDateMFD" [matDatepicker]="mfdPicker"
               (focus)="mfdPicker.open()" (click)="mfdPicker.open()" placeholder="Enter MFD" formControlName="mfd" />
 
             <mat-datepicker #mfdPicker></mat-datepicker>
             <mat-error class="text-danger" *ngIf="displayMessage?.mfd">{{displayMessage.mfd}}</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <np-datepicker class="h-45"
+          formControlName="mfd"
+        [dateFormatter]="formatter">
+</np-datepicker>
         </div>
 
         <!-- <div class="col-md-2">
@@ -126,13 +131,17 @@
         <div class="col-md-4" *ngIf="addSampleForm.value.dfb_type === 'date'">
           <label for="email" class="col-form-label">Best before date (उपभोग्य मिति)*</label>
 
-          <mat-form-field appearance="outline" class="w-100">
+          <!-- <mat-form-field appearance="outline" class="w-100">
             <input matInput [matDatepicker]="dfbPicker" [min]="maxDateB" (focus)="dfbPicker.open()"
               (click)="dfbPicker.open()" class="custom-input" placeholder="Enter Best Before Date"
               formControlName="dfb" />
             <mat-datepicker #dfbPicker></mat-datepicker>
             <mat-error class="text-danger" *ngIf="displayMessage?.dfb">{{displayMessage.dfb}}</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <np-datepicker class="h-45"
+          formControlName="dfb"
+        [dateFormatter]="formatter"></np-datepicker>
         </div>
 
         <!-- <div class="col-md-2" *ngIf="addSampleForm.value.dfb_type === 'date'">
@@ -204,7 +213,7 @@
       </div>
 
       <div class="row margin-bottom-24">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label for="email" class="col-form-label">Brand (ब्राण्ड)*</label>
           <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" matInput formControlName="brand" placeholder="Enter Brand Name" />
@@ -212,16 +221,19 @@
           </mat-form-field>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label for="email" class="col-form-label">Estimated Report Required Date(विश्लेषण प्रतिवेदन प्राप्त हुने
             अनुमानित मिति)</label>
-          <mat-form-field appearance="outline" class="w-100">
+          <!-- <mat-form-field appearance="outline" class="w-100">
             <input class="custom-input" [min]="maxDate" matInput [matDatepicker]="reportDatePicker"
               (focus)="reportDatePicker.open()" (click)="reportDatePicker.open()" formControlName="report_date"
               placeholder="Enter Estimated Date" />
             <mat-datepicker #reportDatePicker></mat-datepicker>
-            <!-- <mat-error class="text-danger" *ngIf="displayMessage?.report_date">{{displayMessage.report_date}}</mat-error> -->
-          </mat-form-field>
+          </mat-form-field> -->
+
+          <np-datepicker class="h-45"
+          formControlName="report_date"
+        [dateFormatter]="formatter"></np-datepicker>
         </div>
 
         <!-- <div class="col-md-2">
@@ -234,7 +246,7 @@
       </div> -->
 
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <label for="email" class="col-form-label">Reporting Language (विश्लेषण प्रतिवेदनको भाषा)*</label>
           <mat-form-field class="custom-select w-100" appearance="outline">
             <mat-select formControlName="language" placeholder="Select Language">
@@ -242,13 +254,7 @@
               <mat-option [value]="'np'">Nepali</mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <section class="example-section">
-          <mat-radio-group formControlName="language">
-            <mat-radio-button class="example-margin" value="en">English</mat-radio-button>
-            <mat-radio-button class="example-margin" value="np">नेपाली</mat-radio-button>
-          </mat-radio-group>
-        </section> -->
-        </div>
+        </div> -->
 
       </div>
 

@@ -192,7 +192,6 @@ export class MySampleComponent implements OnInit, AfterViewInit {
 
     // this.service.getMySamples(payload).subscribe({next => this.handleResponse(this)})
     this.service.getMySamples(payload).subscribe(response => {
-      console.log(response, 'response Ok ')
       this.dataSource.data = response.results;
       this.isFilterBtnLoading = false;
       this.isLoading = false;

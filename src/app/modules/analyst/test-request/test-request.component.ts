@@ -61,7 +61,7 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     let payload = {
       page: '',
-      size: '',
+      size: 500,
       search: '',
       user: this.userDetails?.id,
       from: '',
@@ -115,7 +115,7 @@ export class TestRequestComponent implements OnInit, AfterViewInit {
 
     let payload = {
       page: '',
-      size: '',
+      size: 500,
       search: this.filterForm.value.search,
       from: from,
       to: to,

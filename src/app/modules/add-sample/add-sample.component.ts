@@ -146,7 +146,21 @@ protected onDestroy = new Subject<void>();
   }
 
   formatter: DateFormatter = (date) => {
-    return `${date.year} साल, ${date.month + 1} महिना, ${date.day} गते`;
+    let month;
+    let days;
+    if(date.month < 10) {
+        month = '0' + (date.month+1).toString();
+    } else {
+        month = date.month;
+    }
+
+    if(date.day < 10) {
+        days = '0' + (date.day).toString();
+    } else {
+        days = date.day;
+    }
+    return `${date.year}-${month}-${days}`;
+    // return `${date.year} साल, ${date.month + 1} महिना, ${date.day} गते`;
   } 
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -350,7 +364,6 @@ protected onDestroy = new Subject<void>();
 
   getParametersOfCommodity() {
     this.cCtrl.valueChanges.subscribe(data => {
-      console.log(data, 'ooooooooo')
       this.commodityWisePrice = 0;
       let parameters = this.commodities.find(x => x.id === data.id);
       this.selectedCommodity = data
@@ -390,7 +403,6 @@ protected onDestroy = new Subject<void>();
       let com = this.commodities.find(a => a.name = response.commodity.name);
       this.dataSource.data = response.parameters;
 
-      console.log(com.test_result, 'PARAMETERS', this.existingParameters)
 
       this.getParametersOfCommodity();
 
@@ -408,7 +420,6 @@ protected onDestroy = new Subject<void>();
       this.selectedCommodity = response.commodity;
 
       actualResponse.commodity = reqCommodity;
-      console.log(reqCommodity, 'required..')
       actualResponse.isParameter = true;
 
       this.commodityWisePrice = response.price;
@@ -419,6 +430,42 @@ protected onDestroy = new Subject<void>();
     } else {
         actualResponse.analysis_pricing = 0;
     } 
+
+    const mfdString = actualResponse.mfd.split('-');
+        const dfbString = actualResponse?.dfb.split('-');
+        const reportDateString = actualResponse.report_date.split('-');
+
+        let mfd:any = {};
+        let dfb:any = {};
+        let report_date:any = {}
+    
+        if (mfdString.length === 3) {
+          mfd.year = parseInt(mfdString[0], 10);
+          mfd.month = parseInt(mfdString[1], 10);
+          mfd.day = parseInt(mfdString[2], 10);
+        } else {
+          console.error('Invalid date format');
+        }
+
+        if (dfbString && dfbString.length === 3) {
+            dfb.year = parseInt(dfbString[0], 10);
+            dfb.month = parseInt(dfbString[1], 10);
+            dfb.day = parseInt(dfbString[2], 10);
+          } else {
+            dfb = '';
+          }
+
+          if (reportDateString.length === 3) {
+            report_date.year = parseInt(reportDateString[0], 10);
+            report_date.month = parseInt(reportDateString[1], 10);
+            report_date.day = parseInt(reportDateString[2], 10);
+          } else {
+            console.error('Invalid date format');
+          }
+
+          actualResponse.mfd = mfd;
+          actualResponse.dfb = dfb;
+          actualResponse.report_date = report_date;
 
       this.addSampleForm.patchValue(actualResponse);
       this.cCtrl.setValue(this.selectedCommodity);
@@ -497,14 +544,12 @@ protected onDestroy = new Subject<void>();
 }
 
   save() {
-    console.log(this.addSampleForm.value, 'LOGIN...')
 
     let ok:any[] =[];
     this.addSampleForm.value.sampleDocuments.forEach((a, index) => {
       let obj = {document_name: a.document_name, file:this.dftqcDocs[index]}
       ok.push(obj);
     })
-    console.log(ok, 'OK FILE..')
   }
 
   uploadImage(event) {
@@ -524,7 +569,6 @@ protected onDestroy = new Subject<void>();
   }
 
   saveChanges() {
-    console.log(this.cCtrl.value, 'faa')
     this.isSampleSent = true;
     if (this.addSampleForm.invalid) {
       this.message = {};
@@ -563,7 +607,7 @@ protected onDestroy = new Subject<void>();
 
     let dfbDate = '';
     if(this.addSampleForm.value.dfb) {
-      dfbDate = this.addSampleForm.value.dfb;
+      dfbDate = ''
     } else {
       dfbDate = ''
     }
@@ -572,12 +616,12 @@ protected onDestroy = new Subject<void>();
       id: this.sampleId,
       name: this.addSampleForm.value.name,
       condition: this.addSampleForm.value.condition,
-      mfd: this.format(this.addSampleForm.value.mfd),
+      mfd: '',
       dfb: dfbDate,
       batch: this.addSampleForm.value.batch,
       brand: this.addSampleForm.value.brand,
       purpose: this.addSampleForm.value.purpose,
-      report_date: this.format(this.addSampleForm.value.report_date),
+      report_date: '',
       amendments: this.addSampleForm.value.amendments,
       note: this.addSampleForm.value.note,
       commodity: this.cCtrl?.value?.id,
@@ -614,23 +658,34 @@ protected onDestroy = new Subject<void>();
       p = JSON.stringify([])
     }
 
-    console.log(p, 'asdasd',this.addSampleForm.value.parameters)
 
     const formData = new FormData();
     formData.append('id', this.sampleId);
     formData.append('name', this.addSampleForm.value.name);
     formData.append('condition',this.addSampleForm.value.condition);
-    formData.append('mfd',this.format(this.addSampleForm.value.mfd));
+
+    if(this.addSampleForm.value.mfd) {
+      formData.append('mfd',this.formatter(this.addSampleForm.value.mfd))
+    } else {
+      formData.append('mfd','')
+    }
+
     if(this.addSampleForm.value.dfb) {
-      formData.append('dfb', this.format(this.addSampleForm.value.dfb));
+      formData.append('dfb', this.formatter(this.addSampleForm.value.dfb));
     } else {
       // formData.append('dfb', );
     }
     
     formData.append('batch', this.addSampleForm.value.batch);
     formData.append('brand',this.addSampleForm.value.brand),
-    formData.append('purpose', this.addSampleForm.value.purpose),
-    formData.append('report_date', this.format(this.addSampleForm.value.report_date)),
+    formData.append('purpose', this.addSampleForm.value.purpose)
+
+    if(this.addSampleForm.value.report_date) {
+      formData.append('report_date', this.formatter(this.addSampleForm.value.report_date))
+    } else {
+      formData.append('report_date', '')
+    }
+
     formData.append('amendments', this.addSampleForm.value.amendments),
     formData.append('note',this.addSampleForm.value.note)
 

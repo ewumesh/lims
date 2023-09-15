@@ -16,6 +16,7 @@ import { MicroParameterDetailsComponent } from './parameter-details/micro-parame
 import { ViewMicroRawDataComponent } from './view-micro-raw-data/view-micro-raw-data';
 import { GenerateMicroRawDataComponent } from './generate-micro-raw-data/generate-micro-raw-data';
 import { LabSheetComponent } from './lab-sheet/lab-sheet';
+import { DateFormatter } from 'angular-nepali-datepicker';
 
 @Component({
   templateUrl: './test-request-details.component.html',
@@ -63,6 +64,9 @@ isOtherDetails = false;
 
   sampleId;
 
+  sample_received_date;
+  started_date;
+
   constructor(
     private service: TestRequestDetailsService,
     private fb: FormBuilder,
@@ -81,6 +85,24 @@ isOtherDetails = false;
       data: id
     })
   }
+
+  formatter: DateFormatter = (date) => {
+    let month;
+    let days;
+    if(date.month < 10) {
+        month = '0' + (date.month+1).toString();
+    } else {
+        month = date.month;
+    }
+
+    if(date.day < 10) {
+        days = '0' + (date.day).toString();
+    } else {
+        days = date.day;
+    }
+    return `${date.year}-${month}-${days}`;
+    // return `${date.year} साल, ${date.month + 1} महिना, ${date.day} गते`;
+  } 
 
   sendToSupervisor() {
     this.isSend = true;
@@ -113,7 +135,11 @@ isOtherDetails = false;
   saveOtherDetails() {
     this.isOtherDetails = true;
     let id = this.route.snapshot.paramMap.get('id');
-    let payload = this.otherDetailsForm.value;
+    let payload =  {
+      sample_received_date: this.formatter(this.otherDetailsForm.value.sample_received_date),
+      started_date:this.formatter(this.otherDetailsForm.value.started_date),
+      additional_info: ''
+    }
    this.service.sendForVarification(payload, id).subscribe(res => {
     this.isOtherDetails = false;
     this.toast.showToast(TOAST_STATE.success, 'Date Updated successfully!');
@@ -153,7 +179,6 @@ isOtherDetails = false;
       this.sampleId = response.sample_form?.id
 
       this.dataSource = response?.parameter;
-      console.log(response, "DATA<<<")
       response?.parameter.forEach(element => {
 
         if(element.mandatory_standard_selected) {
@@ -183,7 +208,6 @@ isOtherDetails = false;
   }
 
   getRawSampleTracking() {
-    console.log(this.testRequestDetails, "resttata")
     let payload = {
       id: this.testRequestDetails?.sample_form?.id
     }
@@ -201,7 +225,6 @@ isOtherDetails = false;
   }
 
   calculate(data) {
-    console.log(data, 'da')
 
     let allValue = {
       parameters: data,
@@ -250,6 +273,17 @@ isOtherDetails = false;
     })
   }
 
+  downloadRawDatasheetMicro(id) {
+    this.service.downloadRawDataM(id).subscribe(res => {
+    })
+  }
+
+  printRawDatasheetMicro(id) {
+        this.service.printRawDataM(id).subscribe(res => {
+
+    })
+  }
+
   viewRemarks(data) {
     this.dialog.open(ViewRemarksComponent, {
       data: data
@@ -264,7 +298,6 @@ isOtherDetails = false;
   //     commodity: data.commodity,
 
   microParameterDetails(data, sampleDetails) {
-    console.log(this.testRequestDetails, 'CL..')
     let requiredList = this.testRequestDetails;
     requiredList.selectedParameter = data;
     requiredList.parameter = data;
@@ -336,7 +369,6 @@ isOtherDetails = false;
   }
 
   viewMicroRawData(data) {
-    console.log(this.testRequestDetails, 'OK DATA')
 
     data.sampleDetails = this.testRequestDetails?.sample_form.id;
     let instance: MatDialogRef<ViewMicroRawDataComponent, any>;
@@ -391,10 +423,9 @@ isOtherDetails = false;
     let patchPayload = {
       result: result
     }
-  }
+  } 
 
   generateRawDatasheet() {
-    console.log(this.testRequestDetails.parameter[0].test_type, 'On pa')
 
     // if (this.testRequestDetails.parameter[0].test_type === 'Microbiological') {
     //   this.dialog.open(GenerateMicroRawDataComponent, {

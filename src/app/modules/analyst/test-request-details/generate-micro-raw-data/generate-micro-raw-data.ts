@@ -13,7 +13,6 @@ export class GenerateMicroRawDataComponent {
         @Inject(MAT_DIALOG_DATA)
         public data: any
     ) { 
-        console.log(data, 'MY DATA...')
     }
 
     closeDialog() {

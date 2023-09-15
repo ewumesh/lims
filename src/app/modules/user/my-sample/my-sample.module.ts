@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
@@ -50,6 +50,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     DeleteConfirmModule
   ],
   exports: [],
-  providers: [MySampleService],
+  providers: [MySampleService, DatePipe],
 })
 export class MySampleModule { }

@@ -318,7 +318,6 @@ createTestMethod() {
   }
 
   patchForm(data) {
-    console.log(data, 'pwadij')
     // data?.mandatory_standard.forEach((element, index) => {
     //   if(data?.mandatory_standard) {
     //   this.addStandards();

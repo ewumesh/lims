@@ -40,8 +40,6 @@ export class AssignSampleDialogComponent implements OnInit, AfterViewInit {
     private toast: ToastService
   ) {
 
-    console.log(data, "DATE")
-
     this.genericValidator = new GenericValidator({
       'voucher_number': {
         'required': 'Voucher Number is required.'

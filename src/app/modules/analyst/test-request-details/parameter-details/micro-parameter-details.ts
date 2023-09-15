@@ -41,7 +41,6 @@ export class MicroParameterDetailsComponent implements OnInit {
         private dialogRef: MatDialogRef<MicroParameterDetailsComponent>,
         @Inject(MAT_DIALOG_DATA)
         public data: any,) {
-        console.log(data, 'MY OB DATAE') 
     }
 
 
@@ -95,12 +94,10 @@ export class MicroParameterDetailsComponent implements OnInit {
                 this.addObservation();
             }
 
-            console.log(this.form.value, 'hjagsbd ok kok okok')
         })
     }
 
     initForm() {
-        console.log(this.data, 'INIT FORM')
         this.parameterDetailsForm = this.fb.group({
             id: null,
             physical_condition_of_sample: 'Good',
@@ -155,7 +152,6 @@ export class MicroParameterDetailsComponent implements OnInit {
     }
 
     addObservation() {
-        console.log(this.addedParameterDetails, 'PRAM DEWW')
         // this.form.clear();
         // this.form = new Form
         this.observationForm.setControl('observation', new FormArray([]));
@@ -322,7 +318,6 @@ export class MicroParameterDetailsComponent implements OnInit {
         this.isSetParameterDetails = true;
         this.service.updateMicorParameters(this.parameterDetailsForm.value).subscribe(res => {
             this.addedParameterDetails = res.data;
-            console.log(res.data, 'OIKJMIUJKM')
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
             this.addObservation();
@@ -367,7 +362,6 @@ export class MicroParameterDetailsComponent implements OnInit {
 
             
 
-            console.log(observationWithId, 'PAYLOAD >>>>>')
             this.service.updateObservationTable(payload, this.observationForm.value.observation).subscribe(res => {
                 this.toast.showToast(TOAST_STATE.success, res.message);
                 this.dissmissToast();

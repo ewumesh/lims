@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> 
 
             <div class="row">
                 <div class="col-md-12 my-2">
@@ -85,20 +85,30 @@
 
                   <div class="col-md-4 my-2" *ngIf="apAddSampleForm.value.dfb_type === 'date'">
                     <label>Best Before Date</label>
-                    <mat-form-field appearance="outline" class="w-100">
+
+                    <np-datepicker class="h-45"
+                    formControlName="dfb"
+  [dateFormatter]="formatter">
+</np-datepicker>
+                    <!-- <mat-form-field appearance="outline" class="w-100">
                         <input formControlName="dfb" matInput [matDatepicker]="bbd" (focus)="bbd.open()" (click)="bbd.open()"
                             class="custom-input" placeholder="Enter Date" />
                         <mat-datepicker #bbd></mat-datepicker>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
 
                 <div class="col-md-4 my-2" >
                     <label>Manufactured Date</label>
-                    <mat-form-field appearance="outline" class="w-100">
+                    <!-- <mat-form-field appearance="outline" class="w-100">
                         <input formControlName="mfd" matInput [matDatepicker]="mdf" (focus)="mdf.open()" (click)="mdf.open()"
                             class="custom-input" placeholder="Enter Date" />
                         <mat-datepicker #mdf></mat-datepicker>
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    
+                    <np-datepicker class="h-45"
+                    formControlName="mfd"
+  [dateFormatter]="formatter">
+</np-datepicker>
                 </div>
 
                 <div class="col-md-12">
@@ -159,11 +169,16 @@
 
                         <div class="col-md-4">
                             <label>Paid Date</label>
-                            <mat-form-field appearance="outline" class="w-100">
+                            <!-- <mat-form-field appearance="outline" class="w-100">
                                 <input formControlName="voucher_date" matInput [matDatepicker]="pd" (focus)="pd.open()" (click)="pd.open()"
                                     class="custom-input" placeholder="Enter Date" />
                                 <mat-datepicker #pd></mat-datepicker>
-                            </mat-form-field>
+                            </mat-form-field> -->
+
+                            <np-datepicker class="h-45"
+                            formControlName="voucher_date"
+  [dateFormatter]="formatter">
+</np-datepicker>
                         </div>
                     </div>
                 </div>

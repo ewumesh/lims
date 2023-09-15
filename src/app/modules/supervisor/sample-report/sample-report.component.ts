@@ -63,9 +63,9 @@ export class SampleReportComponent implements OnInit {
     
   }
 
-  viewLabSheet() {
+  viewLabSheet(data?) {
     this.dialog.open(SupervisorLabSheetComponent, {
-      data: this.labsheetDetails,
+      data: data,
       height:'80vh',
     })
   }
@@ -75,6 +75,14 @@ export class SampleReportComponent implements OnInit {
       id:id
     }
     this.service.downloadRawData(id);
+  }
+
+  downloadMicroRawDatasheet(id) {
+    this.service.downloadMicroRawData(id);
+  }
+
+  printMicroRawDatasheet(id) {
+    this.service.printMicroRawData(id);
   }
 
   printRawData(id) {
@@ -208,7 +216,6 @@ export class SampleReportComponent implements OnInit {
       this.labsheetDetails = res;
       this.reportDetails = res;
       this.isLoading = false;
-      console.log(res, 'oooooooooooo')
       this.getRawDataSheetDetails();
     },
      (error) => {

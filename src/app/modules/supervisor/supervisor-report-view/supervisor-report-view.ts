@@ -105,6 +105,20 @@ export class SupervisorReportViewComponent implements OnInit {
         this.service.printRawData(id);
       }
 
+      downloadRawDatasheetM(id) {
+        let payload = {
+          id:id
+        }
+        this.service.downloadRawDataM(id);
+      }
+    
+      printRawDataM(id) {
+        let payload = {
+          id:id
+        }
+        this.service.printRawDataM(id);
+      }
+
 
       viewRawData(a) {
         this.dialog.open(SupervisorReportViewRawDataComponent, {

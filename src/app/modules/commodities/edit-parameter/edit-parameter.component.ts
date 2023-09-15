@@ -139,7 +139,7 @@ commodityCategories: any[] =[];
       let payload = {
         search: '',
         page: '1',
-        size: '500',
+        size: 800,
         test_type: ''
       }
       this.sService.getParameters(payload).subscribe(res => {
@@ -151,7 +151,7 @@ commodityCategories: any[] =[];
     getCommodities() {
       let payload = {
         page: '',
-        size: 500,
+        size: 800,
         search: ''
       }
       this.sService.getCommodities(payload).subscribe(res => {

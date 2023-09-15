@@ -79,7 +79,7 @@ export class SampleRequestsComponent implements OnInit, AfterViewInit {
     this.initFilterForm();
     this.getClientCategories();
     this.getSampleRequests();
-    this.getCommodities();
+    // this.getCommodities();
   }
 
   private initFilterForm() {

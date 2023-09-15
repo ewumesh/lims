@@ -71,14 +71,14 @@
     </div>
     <div style="width: 100%;margin-top: 20px; display: flex;">
         <div style="width: 50%;margin-top: 5px;"><b>परीक्षण दस्तुर रु: </b>{{data?.analysis_fee}}</div>
-        <div style="width: 50%;margin-top: 5px;text-align: right"><b>MFD:</b>{{data?.mfd | date:'mediumDate'}}</div>
+        <div style="width: 50%;margin-top: 5px;text-align: right"><b>MFD:</b>{{data?.mfd}}</div>
     </div>
 
         <div style="width: 100%;margin-top: 5px; display: flex;">
         <div style="width: 50%;margin-top: 5px;"><b>राजस्व रसिद/भौचर नम्बर:</b>{{data?.voucher_number}}</div>
         <div style="width: 50%;margin-top: 5px;text-align: right"><b>Best Before:</b>
             <span *ngIf="data?.dfb">
-            {{data?.dfb | date:'mediumDate'}}
+            {{data?.dfb}}
         </span>
         <span *ngIf="!data?.dfb">
             {{data?.days_dfb}} {{data.dfb_duration}}
@@ -88,7 +88,7 @@
     </div>
 
     <div style="width: 100%;margin-top: 5px; display: flex;">
-        <div style="width: 50%;margin-top: 5px;"><b>राजस्व बुझाएको मिति:</b> {{data?.voucher_date | date:'mediumDate'}}</div>
+        <div style="width: 50%;margin-top: 5px;"><b>राजस्व बुझाएको मिति:</b> {{data?.voucher_date }}</div>
         <div style="width: 50%;margin-top: 5px; text-align: right;"><b>Quantity:</b>{{data?.sample_quantity}}{{data?.sample_units}}</div>
     </div>
 </div>

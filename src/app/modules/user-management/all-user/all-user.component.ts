@@ -180,14 +180,33 @@ export class AllUsersComponent implements OnInit, AfterViewInit {
 
   filter() {
     this.filterBtnLoading = true;
-      let payload = {
-      search: this.filterForm.value.search,
-      page: '',
-      size: '',
-      role: this.filterForm.value.role,
-      client_category_id: this.filterForm.value.client_category_id,
-      status: this.filterForm.value.status
-    }
+      let payload
+      if(this.filterForm.value.role === 5) {
+        let p;
+        if(this.filterForm.value.client_category_id) {
+          p = this.filterForm.value.client_category_id;
+        } else {
+          p = ''
+        }
+        payload = {
+          search: this.filterForm.value.search,
+          page: '',
+          size: '',
+          role: this.filterForm.value.role,
+          client_category_id: p,
+          status: this.filterForm.value.status
+        }
+      } else {
+        payload = {
+          search: this.filterForm.value.search,
+          page: '',
+          size: '',
+          role: this.filterForm.value.role,
+          client_category_id: '',
+          status: this.filterForm.value.status
+        }
+      }
+
     this.isLoading = true;
     this.allUsersService.getUsersList(payload).subscribe(response => {
       this.dataSource.data = response;

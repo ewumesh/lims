@@ -8,6 +8,8 @@ import { ViewReportRemarksComponent } from './view-remarks';
 import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-raw-data';
 import { ViewReportDoc } from './view-docs';
 import { AdminFinalReportComponent } from './view-sample/admin-view-sample';
+import { ReportLabSheetComponent } from './lab-sheet/lab-sheet';
+import { ReportViewRawDataComponent } from './report-view-raw-data/report-view-raw-data.component';
 
 @Component({
   templateUrl: './final-report-view-component.html',
@@ -122,6 +124,14 @@ export class FinalReportViewComponent implements OnInit {
     })
    }
 
+   viewReportRawData(data) {
+
+    this.dialog.open(ReportViewRawDataComponent, {
+      data: data,
+      width:'1000px'
+    })
+   }
+
    viewRemarks(data) {
     this.dialog.open(ViewReportRemarksComponent, {
       data:data
@@ -150,6 +160,14 @@ export class FinalReportViewComponent implements OnInit {
     this.service.downloadRawData(id);
    }
 
+   downloadRawDatasheetMicro(id) {
+    this.service.downloadRawDataM(id);
+   }
+
+   printMicroRawDatasheet(id) {
+    this.service.printRawDataM(id);
+   }
+
    printRawData(id) {
     this.service.printRawData(id);
    }
@@ -170,6 +188,13 @@ export class FinalReportViewComponent implements OnInit {
     return this.clientCategories.find(a => a.id === id)?.name;
   }
 
+  viewLabSheet(data?) {
+    this.dialog.open(ReportLabSheetComponent, {
+      data:data,
+      height:'80vh'
+    })
+  }
+
   downloadReport() {
     let payload = {
       id: this.route.snapshot.paramMap.get('id'),
@@ -178,7 +203,7 @@ export class FinalReportViewComponent implements OnInit {
       report_lang: 'en',
       role: this.loggedUserDetails.role
     }
-    this.service.downloadReport(payload);
+    this.service.downloadReport(payload); 
   }
 
   downloadReportNepali() {
@@ -210,7 +235,7 @@ export class FinalReportViewComponent implements OnInit {
         this.getAnalystRawData();
       } else if(this.loggedUserDetails.role === 3) {
         this.getSupervisorRawData();
-      } else if(this.loggedUserDetails.role ===6) {
+      } else if(this.loggedUserDetails.role ===6 || this.loggedUserDetails.role ===7 || this.loggedUserDetails.role ===1 || this.loggedUserDetails.role ===2) {
         this.getRawData();
       }
     },

@@ -5,7 +5,7 @@
         <div class="col-md-3">
           <div class="row">
             <p>Sample ID</p>
-            <h4>{{reportDetails.id}}</h4>
+            <h4>{{reportDetails.namuna_code || reportDetails?.id}}</h4>
             <!-- <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
             <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4> -->
           </div>
@@ -17,8 +17,6 @@
         </div>
         <div class="col-md-3">
           <div class="row">
-            
-
             <p>Sample Name</p>
             <h4>{{reportDetails.name}}</h4>
           </div>
@@ -30,12 +28,19 @@
         </div>
         <div class="col-md-3">
           <p>Assigned Date</p>
-            <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
-            <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
+          <h4 *ngIf="reportDetails?.created_date">
+            {{reportDetails?.created_date | date: 'medium'}}
+          </h4>
+          <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
         </div>
         <div class="col-md-3 log-status">
-          <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails.status">
-            {{reportDetails.status}}</span>
+          <span
+            style="padding: 8px"
+            class="badge badge-primary"
+            [statusColor]="reportDetails.status"
+          >
+            {{reportDetails.status}}</span
+          >
         </div>
       </div>
     </div>
@@ -48,11 +53,11 @@
           <p>{{userDetails?.first_name}} {{userDetails?.last_name}}</p>
         </div>
         <div class="col-md-4">
-          <h4 class="m-0">Email </h4>
+          <h4 class="m-0">Email</h4>
           <p>{{userDetails?.email}}</p>
         </div>
         <div class="col-md-4">
-          <h4 class="m-0">Phone </h4>
+          <h4 class="m-0">Phone</h4>
           <p>{{userDetails?.phone}}</p>
         </div>
       </div>
@@ -91,195 +96,603 @@
     </div>
 
     <div class="view-page mt-3">
-      <h3 class="view-page-heading">Sample Details</h3>
       <div class="row">
-        <div class="col-md-4">
-          <h4 class="m-0">Sample ID</h4>
-          <p>{{reportDetails?.id}}</p>
+        <div class="col-md-9">
+          <h3 class="view-page-heading">Sample Details</h3>
         </div>
-        <div class="col-md-4">
-          <h4 class="m-0">Sample Name </h4>
-          <p>{{reportDetails?.name}}</p>
-        </div>
-        <div class="col-md-4">
-          <h4 class="m-0">Commodity </h4>
-          <p>{{reportDetails?.commodity?.name}}</p>
+        <div class="col-md-3 text-end">
+          <button (click)="editSample()" *ngIf="!isEdit" class="btn btn-primary btn-lims-primary">
+            Edit Sample Details
+          </button>
+          
+          <button (click)="cancel()" *ngIf="isEdit" class="btn btn-primary btn-lims-primary">
+            Cancel
+          </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <h4 class="m-0">MFD</h4>
-          <p>{{reportDetails?.mfd | date}}</p>
-        </div>
-        <div class="col-md-4">
-          <h4 class="m-0">Best Before Date</h4>
-          <p>{{reportDetails?.dfb | date}}</p>
+
+      <div *ngIf="isEdit">
+        <form class="row" [formGroup]="partialSampleForm" style="    BORDER: 1px solid #1615159c;
+        padding: 17px;
+        border-radius: 5px;">
+          <div class="col-md-6">
+            <label>Sample Name</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="name"
+                class="custom-input"
+                placeholder="Enter Sample Name"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- <div class="col-md-4">
+            <label>Commodity</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input class="custom-input" matInput formControlName="commodity" placeholder="Select Commodity" readonly />
+              
+            </mat-form-field>
+          </div> -->
+
+          <div class="col-md-6">
+            <label>MFD</label>
+            <np-datepicker 
+              class="h-45"
+              formControlName="mfd"
+              [dateFormatter]="formatter"
+            >
+            </np-datepicker>
+          </div>
+
+          <div class="col-md-4 pt-3">
+            <label>Best Before Date</label>
+            <mat-radio-group formControlName="dfb_type" aria-label="Select an option">
+              <mat-radio-button [value]="'days'">Duration</mat-radio-button>
+              <mat-radio-button [value]="'date'">Date</mat-radio-button>
+            </mat-radio-group>
+            <!-- <np-datepicker 
+              class="h-45"
+              formControlName="dfb"
+              [dateFormatter]="formatter"
+            >
+            </np-datepicker> -->
+          </div>
+
+          <div class="col-md-4" *ngIf="partialSampleForm.value.dfb_type === 'days'">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="email" class="col-form-label">Duration</label>
+                <div class="input-group">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input formControlName="days_dfb" placeholder="Enter Duration" matInput type="text"
+                      class=" custom-input" aria-label="Text input with dropdown button">
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <div class="col-md-6">
+                <label for="email" class="col-form-label">Duration in</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-select formControlName="dfb_duration" class="custom-select" placeholder="Select">
+                    <mat-option [value]="'days'">Days</mat-option>
+                    <mat-option [value]="'month'">Months</mat-option>
+                    <mat-option [value]="'year'">Year</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 my-2" *ngIf="partialSampleForm.value.dfb_type === 'date'">
+            <label>Best Before Date</label>
+
+            <np-datepicker class="h-45"
+            formControlName="dfb"
+[dateFormatter]="formatter">
+</np-datepicker>
+           
         </div>
 
-        <div class="col-md-4">
-          <h4 class="m-0">Batch</h4>
-          <p>{{reportDetails?.batch}}</p>
-        </div>
+          <div class="col-md-4">
+            <label>Batch</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="batch"
+                class="custom-input"
+                placeholder="Enter batch"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label>Brand</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="brand"
+                class="custom-input"
+                placeholder="Enter brand"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label>Purpose</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="purpose"
+                class="custom-input"
+                placeholder="Enter purpose"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label>Condition</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="condition"
+                class="custom-input"
+                placeholder="Enter condition"
+              />
+            </mat-form-field>
+          </div>
+
+          
+          
+          <div class="col-md-4">
+            <label>Amendments</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="amendments"
+                class="custom-input"
+                placeholder="Enter Amendments"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <label>Note</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <input
+                matInput
+                formControlName="note"
+                class="custom-input"
+                placeholder="Enter Note"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <div class="row  mx-0"
+              style="border: 1px solid #00000029; margin-right: 0;border-radius: 5px; padding: 24px 0px;">
+              <div class="col-md-3">
+                <label for="email" class="col-form-label">Sample Type (नमुनाको प्रकार)*</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-select formControlName="sample_type" class="custom-select" placeholder="Sample Type">
+                    <mat-option *ngFor="let a of SampleTypes" [value]="a.name">{{a.name | titlecase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+  
+              <div class="col-md-3">
+                <label class="col-form-label">Sample Quantity (नमुनाको मात्रा)</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input class="custom-input" placeholder="Enter Quantity" matInput formControlName="sample_quantity" />
+                </mat-form-field>
+              </div>
+  
+              <div class="col-md-3">
+                <label class="col-form-label">Units(एकाई)*</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input class="custom-input" matInput formControlName="sample_units" placeholder="Enter Sample Uint"
+                    [disabled]="true" />
+                </mat-form-field>
+              </div>
+  
+              <div class="col-md-3">
+                <label for="email" class="col-form-label">Number of sample (नमुनाको संख्या)*</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input class="custom-input" formControlName="number_of_sample" matInput
+                    placeholder="Enter Sample per unit" />
+                </mat-form-field>
+              </div> 
+  
+            </div>
+          </div>
+          <div class="col-md-12 text-end">
+          <button class="btn btn-primary btn-lims-primary" (click)="updateSampleDetails()">Update</button>
+          </div>
+        </form>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <h4 class="m-0">Brand</h4>
-          <p>{{reportDetails?.brand}}</p>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="m-0">Sample ID</h4>
+            <p>{{reportDetails?.id}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="m-0">Sample Name</h4>
+            <p>{{reportDetails?.name}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="m-0">Commodity</h4>
+            <p>{{reportDetails?.commodity?.name}}</p>
+          </div>
         </div>
 
-        <div class="col-md-4">
-          <h4 class="m-0">Purpose of Analysis</h4>
-          <p>{{reportDetails?.purpose}}</p>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="m-0">MFD</h4>
+            <p>{{reportDetails?.mfd | date}}</p>
+          </div>
+          <div class="col-md-4">
+            <h4 class="m-0">Best Before Date</h4>
+            <p>{{reportDetails?.dfb | date}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Batch</h4>
+            <p>{{reportDetails?.batch}}</p>
+          </div>
         </div>
 
-        <div class="col-md-4">
-          <h4 class="m-0">Condition</h4>
-          <p>{{reportDetails?.condition}}</p>
-        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="m-0">Brand</h4>
+            <p>{{reportDetails?.brand}}</p>
+          </div>
 
-        <div class="col-md-4">
-          <h4 class="m-0">Note</h4>
-          <p>{{reportDetails?.note}}</p>
-        </div>
-        
-        <div class="col-md-4">
-          <h4 class="m-0">Amendments</h4>
-          <p>{{reportDetails?.amendments}}</p>
-        </div>
-        
-        <div class="col-md-4">
-          <h4 class="m-0">Language</h4>
-          <p>{{reportDetails?.language}}</p>
-        </div>
-        
-        <div class="col-md-4">
-          <h4 class="m-0">Sample Type</h4>
-          <p>{{reportDetails?.sample_type}}</p>
-        </div>
-        
-        <div class="col-md-4">
-          <h4 class="m-0">Sample Quantity</h4>
-          <p>{{reportDetails?.sample_quantity}}</p>
-        </div>
-        
-        <div class="col-md-4">
-          <h4 class="m-0">Number Of Sample</h4>
-          <p>{{reportDetails?.number_of_sample}}</p>
-        </div>
+          <div class="col-md-4">
+            <h4 class="m-0">Purpose of Analysis</h4>
+            <p>{{reportDetails?.purpose}}</p>
+          </div>
 
+          <div class="col-md-4">
+            <h4 class="m-0">Condition</h4>
+            <p>{{reportDetails?.condition}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Note</h4>
+            <p>{{reportDetails?.note}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Amendments</h4>
+            <p>{{reportDetails?.amendments}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Language</h4>
+            <p>{{reportDetails?.language}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Sample Type</h4>
+            <p>{{reportDetails?.sample_type}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Sample Quantity</h4>
+            <p>{{reportDetails?.sample_quantity}}</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="m-0">Number Of Sample</h4>
+            <p>{{reportDetails?.number_of_sample}}</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="white-bg mt-3" *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
+    <div
+      class="white-bg mt-3"
+      *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental"
+    >
       <h3 class="rawdata-heading">Raw Data Sheet</h3>
       <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li *ngIf="rawDataSheet?.Microbiological" class="nav-item" role="presentation">
-          <button class="nav-link " id="Microbiological-tab" data-bs-toggle="tab" data-bs-target="#Microbiological-tab-pane" type="button" role="tab" aria-controls="Microbiological-tab-pane" aria-selected="true">Microbiological Test</button>
+        <li
+          *ngIf="rawDataSheet?.Microbiological"
+          class="nav-item"
+          role="presentation"
+        >
+          <button
+            class="nav-link"
+            id="Microbiological-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#Microbiological-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="Microbiological-tab-pane"
+            aria-selected="true"
+          >
+            Microbiological Test
+          </button>
         </li>
         <li *ngIf="rawDataSheet?.Chemical" class="nav-item" role="presentation">
-          <button class="nav-link active" id="Chemical-tab" data-bs-toggle="tab" data-bs-target="#Chemical-tab-pane" type="button" role="tab" aria-controls="Chemical-tab-pane" aria-selected="false">Chemical Test</button>
+          <button
+            class="nav-link active"
+            id="Chemical-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#Chemical-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="Chemical-tab-pane"
+            aria-selected="false"
+          >
+            Chemical Test
+          </button>
         </li>
-        <li *ngIf="rawDataSheet?.Instrumental" class="nav-item" role="presentation">
-          <button class="nav-link " id="Instrumental-tab" data-bs-toggle="tab" data-bs-target="#Instrumental-tab-pane" type="button" role="tab" aria-controls="Instrumental-tab-pane" aria-selected="false">Instrumental Test</button>
+        <li
+          *ngIf="rawDataSheet?.Instrumental"
+          class="nav-item"
+          role="presentation"
+        >
+          <button
+            class="nav-link"
+            id="Instrumental-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#Instrumental-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="Instrumental-tab-pane"
+            aria-selected="false"
+          >
+            Instrumental Test
+          </button>
         </li>
       </ul>
-      <div  class="tab-content mt-3" id="myTabContent">
-        <div *ngIf="rawDataSheet?.Microbiological" class="tab-pane fade" id="Microbiological-tab-pane" role="tabpanel" aria-labelledby="Microbiological-tab" tabindex="0">
+      <div class="tab-content mt-3" id="myTabContent">
+        <div
+          *ngIf="rawDataSheet?.Microbiological"
+          class="tab-pane fade"
+          id="Microbiological-tab-pane"
+          role="tabpanel"
+          aria-labelledby="Microbiological-tab"
+          tabindex="0"
+        >
           <table class="table mb-0">
             <tbody>
               <tr *ngFor="let a of rawDataSheet?.Microbiological">
-                <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Microbiological[0]?.supervisor_by.first_name +' '+ Microbiological?.Chemical[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Microbiological[0]?.supervisor_by.first_name}} {{rawDataSheet?.Microbiological[0]?.supervisor_by.last_name}}</p>
+                <td
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                  "
+                >
+                  <ngx-avatar
+                    [name]="rawDataSheet?.Microbiological[0]?.supervisor_by.first_name +' '+ Microbiological?.Chemical[0]?.supervisor_by.last_name"
+                    class="analyst-avatar"
+                    [size]="50"
+                  ></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">
+                    {{rawDataSheet?.Microbiological[0]?.supervisor_by.first_name}}
+                    {{rawDataSheet?.Microbiological[0]?.supervisor_by.last_name}}
+                  </p>
                 </td>
-                <td style="width: 16%;">
+                <td style="width: 16%">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
-                  <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                  <p class="text-muted mb-0">
+                    {{a?.created_date | date: 'medium'}}
+                  </p>
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
                   <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
-                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
-                  <!-- <button *ngIf="a?.sample_form?.remarks" (click)="supervisorRemarks(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">Supervisor Remarks</button> -->
-                </td> 
-                
-                <td style="width: 15%;" class="text-start">
-                  <p class="bold-text mb-0 pb-0">Status</p>
-                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Microbiological[0]?.status">{{rawDataSheet?.Microbiological[0]?.status}}</span>
+                  <button
+                    (click)="viewRemarks(a, 'supervisor')"
+                    class="btn btn-primary btn-lims-primary btn-sm"
+                  >
+                    Supervisor Remarks
+                  </button>
                 </td>
-                <td style="width: 20%;" class="text-start">
+
+                <td style="width: 15%" class="text-start">
+                  <p class="bold-text mb-0 pb-0">Status</p>
+                  <span
+                    style="padding: 8px"
+                    class="badge badge-primary"
+                    [statusColor]="rawDataSheet?.Microbiological[0]?.status"
+                    >{{rawDataSheet?.Microbiological[0]?.status}}</span
+                  >
+                </td>
+                <td style="width: 20%" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
-                  <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
-              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                  <button
+                    (click)="viewMicroRawData(a)"
+                    class="btn btn-primary btn-lims-primary btn-sm"
+                  >
+                    View Raw Data
+                  </button>
+                  <button
+                    (click)="viewLabSheet(a)"
+                    class="btn btn-primary btn-lims-primary btn-sm mx-1"
+                  >
+                    View Lab Sheets
+                  </button>
+                  <button
+                    (click)="downloadRawDatasheetM(a.id)" 
+                    class="btn btn-secondary mx-2 btn-sm"
+                  >
+                    Download
+                  </button>
+                  <button
+                    (click)="printRawDataM(a.id)"
+                    class="btn btn-danger btn-lims-danger btn-sm"
+                  >
+                    Print
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        
-        <div *ngIf="rawDataSheet?.Chemical" class="tab-pane fade show active" id="Chemical-tab-pane" role="tabpanel" aria-labelledby="Chemical-tab" tabindex="0">
+        <div
+          *ngIf="rawDataSheet?.Chemical"
+          class="tab-pane fade show active"
+          id="Chemical-tab-pane"
+          role="tabpanel"
+          aria-labelledby="Chemical-tab"
+          tabindex="0"
+        >
           <table class="table mb-0">
             <tbody>
               <tr *ngFor="let a of rawDataSheet?.Chemical">
-                <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Chemical[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Chemical[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Chemical[0]?.supervisor_by.first_name}} {{rawDataSheet?.Chemical[0]?.supervisor_by.last_name}}</p>
+                <td
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                  "
+                >
+                  <ngx-avatar
+                    [name]="rawDataSheet?.Chemical[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Chemical[0]?.supervisor_by.last_name"
+                    class="analyst-avatar"
+                    [size]="50"
+                  ></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">
+                    {{rawDataSheet?.Chemical[0]?.supervisor_by.first_name}}
+                    {{rawDataSheet?.Chemical[0]?.supervisor_by.last_name}}
+                  </p>
                 </td>
-                <td style="width: 16%;">
+                <td style="width: 16%">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
-                  <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                  <p class="text-muted mb-0">
+                    {{a?.created_date | date: 'medium'}}
+                  </p>
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
                   <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
-                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                  <button
+                    (click)="viewRemarks(a, 'supervisor')"
+                    class="btn btn-primary btn-lims-primary btn-sm"
+                  >
+                    Supervisor Remarks
+                  </button>
                 </td>
-                
-                <td style="width: 15%;" class="text-start">
+
+                <td style="width: 15%" class="text-start">
                   <p class="bold-text mb-0 pb-0">Status</p>
-                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Chemical[0]?.status">{{rawDataSheet?.Chemical[0]?.status}}</span>
+                  <span
+                    style="padding: 8px"
+                    class="badge badge-primary"
+                    [statusColor]="a?.status"
+                    >{{a?.status}}</span
+                  >
                 </td>
-                <td style="width: 20%;" class="text-start">
+                <td style="width: 20%" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
                   <!-- {{rawDataSheet?.Chemical | json}} -->
                   <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                  <button
+                    (click)="viewLabSheet(a)"
+                    class="btn btn-primary btn-lims-primary btn-sm mx-1"
+                  >
+                    View Lab Sheet
+                  </button>
+                  <button
+                    (click)="downloadRawDatasheet(a.id)"
+                    class="btn btn-secondary mx-2 btn-sm"
+                  >
+                    Download
+                  </button>
+                  <button
+                    (click)="printRawData(a.id)"
+                    class="btn btn-danger btn-lims-danger btn-sm"
+                  >
+                    Print
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div *ngIf="rawDataSheet?.Instrumental" class="tab-pane fade " id="Instrumental-tab-pane" role="tabpanel" aria-labelledby="Instrumental-tab" tabindex="0">
+        <div
+          *ngIf="rawDataSheet?.Instrumental"
+          class="tab-pane fade"
+          id="Instrumental-tab-pane"
+          role="tabpanel"
+          aria-labelledby="Instrumental-tab"
+          tabindex="0"
+        >
           <table class="table mb-0">
             <tbody>
               <tr *ngFor="let a of rawDataSheet?.Instrumental">
-                <td style="display: flex; justify-content: start; align-items: center;">
-                  <ngx-avatar [name]="rawDataSheet?.Instrumental[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Instrumental[0]?.supervisor_by.last_name"class="analyst-avatar" [size]="50"></ngx-avatar>
-                  <p class="bold-text mb-0 pb-0 ms-3">{{rawDataSheet?.Instrumental[0]?.supervisor_by.first_name}} {{rawDataSheet?.Instrumental[0]?.supervisor_by.last_name}}</p>
+                <td
+                  style="
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                  "
+                >
+                  <ngx-avatar
+                    [name]="rawDataSheet?.Instrumental[0]?.supervisor_by.first_name +' '+ rawDataSheet?.Instrumental[0]?.supervisor_by.last_name"
+                    class="analyst-avatar"
+                    [size]="50"
+                  ></ngx-avatar>
+                  <p class="bold-text mb-0 pb-0 ms-3">
+                    {{rawDataSheet?.Instrumental[0]?.supervisor_by.first_name}}
+                    {{rawDataSheet?.Instrumental[0]?.supervisor_by.last_name}}
+                  </p>
                 </td>
-                <td style="width: 16%;">
+                <td style="width: 16%">
                   <p class="bold-text mb-0 pb-0">Generated Date</p>
-                  <p class="text-muted mb-0">{{a?.created_date | date: 'medium'}}</p>
+                  <p class="text-muted mb-0">
+                    {{a?.created_date | date: 'medium'}}
+                  </p>
                 </td>
                 <td>
                   <p class="bold-text mb-0 pb-0">Remarks</p>
                   <!-- <button (click)="viewRemarks(a, 'analyst')" class="btn btn-primary btn-lims-primary btn-sm me-3">Analyst Remarks</button> -->
-                  <button (click)="viewRemarks(a, 'supervisor')" class="btn btn-primary btn-lims-primary btn-sm">Supervisor Remarks</button>
+                  <button
+                    (click)="viewRemarks(a, 'supervisor')"
+                    class="btn btn-primary btn-lims-primary btn-sm"
+                  >
+                    Supervisor Remarks
+                  </button>
                 </td>
-                
-                <td style="width: 15%;" class="text-start">
+
+                <td style="width: 15%" class="text-start">
                   <p class="bold-text mb-0 pb-0">Status</p>
-                  <span style="padding: 8px;" class="badge badge-primary" [statusColor]="rawDataSheet?.Instrumental[0]?.status">{{rawDataSheet?.Instrumental[0]?.status}}</span>
+                  <span
+                    style="padding: 8px"
+                    class="badge badge-primary"
+                    [statusColor]="rawDataSheet?.Instrumental[0]?.status"
+                    >{{rawDataSheet?.Instrumental[0]?.status}}</span
+                  >
                 </td>
-                <td style="width: 20%;" class="text-start">
+                <td style="width: 20%" class="text-start">
                   <p class="bold-text mb-0 pb-0">Actions</p>
                   <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                  <button
+                    (click)="viewLabSheet(a)"
+                    class="btn btn-primary btn-lims-primary btn-sm mx-1"
+                  >
+                    View Lab Sheet
+                  </button>
+                  <button
+                    (click)="downloadRawDatasheet(a.id)"
+                    class="btn btn-secondary mx-2 btn-sm"
+                  >
+                    Download
+                  </button>
+                  <button
+                    (click)="printRawData(a.id)"
+                    class="btn btn-danger btn-lims-danger btn-sm"
+                  >
+                    Print
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -287,6 +700,30 @@
         </div>
       </div>
     </div>
+
+    <!-- <div class="row m-0 p-0 mt-3">
+      <div class="col-md-12 bg-white" style="border-radius: 5px;">
+  
+        <table class="table">
+          <tbody>
+            <h3 class="text-bold mb-0 ms-2 mt-2">Lab Sheet</h3>
+            <tr>
+              <td style="width: 20%;">
+                <p class="text-muted mb-0 pb-0">Generated Date</p>
+                <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+              </td>
+              <td style="width: 30%;" class="pt-3">
+                
+              </td>
+  
+              <td style="width: 30%;" class="text-end pt-3">
+                <button (click)="viewLabSheet()"  class="btn btn-primary btn-lims-primary btn-sm">View Lab Sheet</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
 
     <div class="view-page mt-3">
       <h3 class="view-page-heading">Parameter Details</h3>
@@ -318,12 +755,14 @@
                   <div data-collaborators="10">
                     <div class="author">
                       <div class="mask cursor-pointer">
-                        <ngx-avatar size="30" [name]="r.sup_full_name"
-                          [matTooltip]="r.sup_full_name"></ngx-avatar>
+                        <ngx-avatar
+                          size="30"
+                          [name]="r.sup_full_name"
+                          [matTooltip]="r.sup_full_name"
+                        ></ngx-avatar>
                       </div>
                     </div>
                   </div>
-
                 </td>
                 <td>{{r.test_type}}</td>
                 <td>
@@ -331,17 +770,27 @@
                   <!-- <span *ngIf="r?.result === 0">0</span>
                   <span *ngIf="r?.result" class="text-muted">N/A</span> -->
                 </td>
-                <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
-                <td *ngIf="i === 0" [attr.rowspan]="reportDetails.parameters.length">
+                <td>
+                  <span class="badge badge-primary" [statusColor]="r.status"
+                    >{{r.status | titlecase}}</span
+                  >
+                </td>
+                <td
+                  *ngIf="i === 0"
+                  [attr.rowspan]="reportDetails.parameters.length"
+                >
                   <!-- {{reportDetails.remarks}} -->
-                  <div *ngFor="let r of reportDetails?.supervisor_sample_form">{{r?.remarks}}({{r?.supervisor_user?.first_name}} {{r?.supervisor_user?.last_name}})</div>
+                  <div *ngFor="let r of reportDetails?.supervisor_sample_form">
+                    {{r?.remarks}}({{r?.supervisor_user?.first_name}}
+                    {{r?.supervisor_user?.last_name}})
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-       <!-- <div class="col-md-12 text-end">
+        <!-- <div class="col-md-12 text-end">
         <button class="btn btn-primary btn-sm mx-1">Download Report</button>
         <button class="btn btn-secondary btn-sm mx-1">Send for Verification</button>
        </div> -->

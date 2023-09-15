@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ViewSampleComponent } from './view-sample.component';
 import { RouterModule } from '@angular/router';
 import { ViewSampleService } from 'src/app/services/user/view-sample/view-sample.service';
@@ -18,6 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule
    ],
   exports: [],
-  providers: [ViewSampleService],
+  providers: [ViewSampleService, DatePipe],
 })
 export class ViewSampleModule {}

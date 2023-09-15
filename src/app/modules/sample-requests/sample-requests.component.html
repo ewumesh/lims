@@ -64,12 +64,12 @@
 
     <ng-container matColumnDef="sampleLabCode">
       <th mat-header-cell *matHeaderCellDef> Sample Lab Code </th>
-      <td mat-cell *matCellDef="let row"> <span class="text-uppercase">{{row.sample_lab_id}}</span> </td>
+      <td mat-cell *matCellDef="let row"> <span class="text-uppercase">{{row.namuna_code || '-'}}</span> </td>
     </ng-container>
 
     <ng-container matColumnDef="refrenceNumber">
       <th mat-header-cell *matHeaderCellDef> Refrence Number </th>
-      <td mat-cell *matCellDef="let row"> <span class="text-uppercase">{{row.refrence_number}}</span> </td>
+      <td mat-cell *matCellDef="let row"> <span class="text-uppercase">{{row.refrence_number || '-'}}</span> </td>
     </ng-container>
 
     <ng-container matColumnDef="sampleName">
@@ -89,9 +89,10 @@
     </ng-container>    
     
     <ng-container matColumnDef="clientName"> 
-      <th mat-header-cell *matHeaderCellDef> Client Name </th>
+      <th mat-header-cell *matHeaderCellDef> Company Name </th>
       <td mat-cell *matCellDef="let row">
-        {{row?.owner_user?.first_name}} {{row?.owner_user?.last_name}}
+        {{row?.owner_user?.department_name || '-'}} 
+        <!-- {{row?.owner_user?.department_address}} -->
       </td>
     </ng-container>
 

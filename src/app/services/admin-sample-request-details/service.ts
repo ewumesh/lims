@@ -50,7 +50,7 @@ export class AdminSampleRequestDetailsService {
   } 
 
   downloadRawData(id):Observable<any> {
-    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    let url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
     window.location.href = url;
     return this.http.get(`${url}`)
   }

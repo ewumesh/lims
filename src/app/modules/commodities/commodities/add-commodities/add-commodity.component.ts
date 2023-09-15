@@ -72,7 +72,6 @@ export class AddCommodityComponent implements OnInit {
       this.submitBtn = false;
       return;
     }
-    console.log(this.data, 'EXISTING OOOO')
     if (this.data?.id) {
       this.sService.updateCommodity(this.commoditiesForm.value, this.data.id).subscribe(res => {
         this.toast.showToast(

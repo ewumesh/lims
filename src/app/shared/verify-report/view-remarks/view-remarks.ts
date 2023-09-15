@@ -16,7 +16,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-12">
-        <p>{{data.remarks || 'N/A'}}</p>
+        <p>{{data.remarks || '-'}}</p>
       </div>
 
       <div class="col-md-12 text-end mt-4">

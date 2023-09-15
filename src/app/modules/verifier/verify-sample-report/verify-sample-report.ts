@@ -5,6 +5,7 @@ import { SampleReportService } from 'src/app/services/supervisor/sample-request/
 import { ToastService, TOAST_STATE } from 'src/app/shared/toastr/toastr.service';
 import { VerificationRemarksComponent } from './component/verification-remarks';
 import { VerifierReportComponent } from './view-sample/verifier-view-sample';
+import { VerifyLabSheetComponent } from 'src/app/shared/verify-report/lab-shhet/labsheet';
 
 @Component({
   templateUrl: './verify-sample-report.html',
@@ -39,6 +40,12 @@ export class VerifySampleReportomponent implements OnInit {
     this.service.getRawData(id).subscribe(res => {
       this.rawDataSheet = res;
     }  )
+   }
+
+   viewLabSheet() {
+    this.dialog.open(VerifyLabSheetComponent, {
+      data: 'a'
+    })
    }
 
    viewReport() {

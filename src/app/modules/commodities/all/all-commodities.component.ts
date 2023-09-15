@@ -108,8 +108,7 @@ export class AllCommoditiesComponent implements OnInit, AfterViewInit {
 
   editCommodity(data) {
     this.router.navigate(
-      ['/dashboard/commodities-parameter'],
-      { queryParams: {id: data.id}}
+      ['dashboard/edit/commodities-parameter', data.id],
       )
   }
 

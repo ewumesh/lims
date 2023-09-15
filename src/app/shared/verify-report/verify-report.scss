@@ -86,3 +86,29 @@
   background-color: rgb(0, 200, 83);
   color: #FFFFFF;
 }
+
+
+// Customized the material input
+.custom-input, .custom-select {
+  height: 50px!important;
+}
+
+::ng-deep {
+  .datepicker__input {
+    width: 100% !important;
+    height: 45px !important;
+    border-radius: 4px !important;
+    border: 1px solid gray !important;
+
+  }
+
+  .datepicker__input:focus+label {
+    color: #6200EE !important;
+    top: 0 !important;
+    transform: translateY(-50%) scale(.9) !important;
+  }
+
+  .datepicker__input:focus {
+    border-color: #6200EE !important;
+  }
+}

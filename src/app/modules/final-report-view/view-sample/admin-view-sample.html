@@ -1,4 +1,4 @@
-<div style="font-family: poppins;
+<div id="print-section" style="font-family: poppins;
 max-width: 1320px;
 margin: auto;
 padding: 2rem;overflow-y: scroll;">
@@ -45,46 +45,49 @@ padding: 2rem;overflow-y: scroll;">
 
 <div class="ref">
 <div class="left">
-    <p>Our Ref. No.</p>
-    <p>Your Ref. No.</p>
+    <p>Our Ref. No.:RL-{{data?.fiscal_year-1 || '-'}}/ {{data?.fiscal_year || '-'}}</p>
+    <p>Your Ref. No./Date:</p>
 </div>
 <div class="center">
     <p>TEST REPORT</p>
 </div>
 </div>
 
-<div class="date top">
-<p>RL-079/80 ..................</p>
+<!-- <div class="date top">
+<p>RL-{{data?.fiscal_year-1 || '-'}}/ {{data?.fiscal_year || '-'}}<p>
 <p>Date:</p>
-</div>
+</div> -->
 
 <div class="date bottom">
 <p>TO</p>
-<p>M/S ....................</p>
+<p>M/S अनुज्ञापत्र तथा निरीक्षण शाखा <br>
+    खाध्य तथा स्वछता एबम गुणस्तर नियमन महाशाखा,<br>
+     खाध्य प्रबिधि तथा गुण नियन्त्रण विभाग<br> बबरमहल, काठमाडौँ  
+</p>
 </div>
 
 
 <table class="sample-table">
 <thead>
     <tr>
-        <td>Sample Particular: <span>{{data?.name | titlecase}}</span> </td>
-        <td> Issue Date: <span>{{data?.created_date | date}}</span> </td>
+        <td>Sample Particular: <span class="font-bold"><i>{{data?.name | titlecase}}</i></span> </td>
+        <td> Issue Date: <span>-</span> </td>
     </tr>
 </thead>
 <tbody>
     <tr>
-        <td >Sample Registration Date: <span>{{data?.created_date | date}}</span> 
+        <td >Sample Registration Date: <span>{{convertToNepaliDate(data?.created_date)}}</span> 
         </td>
-        <td>Sample Code: <span> {{data?.id}}</span> </td>
+        <td>Sample Code: <span> {{data?.namuna_code || '-'}}</span> </td>
     </tr>
     <tr>
-        <td>Condition of Packaging:{{data?.condition}} 
+        <td>Condition of Packaging:{{data?.condition || '-'}} 
         </td>
-        <td>Test Required:N/A</td>
+        <td>Test Required:<span *ngFor="let p of data?.parameters; let i= index;">{{p.name}},</span></td>
     </tr>
     <tr>
-        <td>Analysis Starting Date: <span>{{(data?.supervisor_sample_form[0]?.created_date | date) || 'N/A'}}</span></td>
-        <td>Analysis Completion Date: <span>{{(data?.verified_date | date) || 'N/A'}}</span></td>
+        <td>Analysis Starting Date: <span>{{(convertToNepaliDate(data?.analysis_started_date)) || '-'}}</span></td>
+        <td>Analysis Completion Date: <span>{{convertToNepaliDate(data?.analysis_completed_date) || '-'}}</span></td>
     </tr>
 </tbody>
 </table>
@@ -110,14 +113,13 @@ padding: 2rem;overflow-y: scroll;">
     <tr *ngFor="let p of data.parameters;let i=index;">
         <td>{{i+1}}</td>
         <td>{{p?.name}}</td>
-        <td>{{p.test_method || 'N/A'}}</td>
-        <td>{{p?.units || 'N/A'}}</td>
+        <td>{{p.test_method || '-'}}</td>
+        <td>{{p?.units || '-'}}</td>
         <td>
-            <!-- {{p?.result || 'N/A'}} -->
-            <span [innerHtml]="p?.result"></span>
+            <span *ngIf="p?.result" [innerHtml]="p?.result"></span>
         </td>
-        <td>{{p?.mandatory_standard || 'N/A'}}</td>
-        <td [attr.rowspan]="data?.parameters?.length" *ngIf="i === 0">{{data?.remarks || 'N/A'}}</td>
+        <td>{{p?.mandatory_standard || '-'}}</td>
+        <td [attr.rowspan]="data?.parameters?.length" *ngIf="i === 0">{{data?.remarks || '-'}}</td>
     </tr>
     <!-- <tr>
         <td>2</td>
@@ -166,6 +168,8 @@ padding: 2rem;overflow-y: scroll;">
     Food Technology and Quality Control, Kathmandu.
     </li>
 </ul>
+
+
 
 
 
@@ -332,3 +336,9 @@ padding: 2rem;overflow-y: scroll;">
 </ul>
 
 </div> -->
+
+<div class="row">
+    <div class="col-md-12 text-end">
+        <button [mat-dialog-close]="true" class="btn btn-primary btn-sm mx-1" printSectionId="print-section" ngxPrint cdkFocusInitial>Print</button>
+    </div>
+</div>

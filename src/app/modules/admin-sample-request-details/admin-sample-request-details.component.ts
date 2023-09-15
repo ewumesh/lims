@@ -52,7 +52,6 @@ export class AdminSampleRequestDetailComponent{
      }
 
     viewReport() {
-      console.log(this.reportDetails, 'DETAILS')
       this.dialog.open(AdminReportComponent, {
         // width:'1000px',
         height:'100vh',

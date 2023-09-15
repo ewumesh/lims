@@ -184,7 +184,6 @@ export class SupervisorDashboard implements OnInit {
       let chaartSeries = [this.calculatePercentage(a.processing, a.total_request),this.calculatePercentage(a.completed, a.total_request), this.calculatePercentage(a.pending, a.total_request), this.calculatePercentage(a.not_verified, a.total_request), this.calculatePercentage(a.recheck, a.total_request),this.calculatePercentage(a.reject, a.total_request)];
       this.pieSeries = chaartSeries;
       this.isDashboardStatus = false;
-      console.log(this.pieSeries, 'asdasd')
       this.initPieChart();
     },(error) => {
       this.isDashboardStatus = false;

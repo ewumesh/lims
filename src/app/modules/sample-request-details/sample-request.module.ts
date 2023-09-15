@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SampleRequestDetailsComponent } from './sample-request-details';
 import { SampleRequestDetailsService } from 'src/app/services/sample-request-details/sample-request-details.service';
@@ -46,6 +46,6 @@ import { RecheckComponent } from './recheck-sample';
     SharedModule
    ],
   exports: [],
-  providers: [SampleRequestDetailsService],
+  providers: [SampleRequestDetailsService, DatePipe],
 })
 export class SampleRequestDetailsModule {}

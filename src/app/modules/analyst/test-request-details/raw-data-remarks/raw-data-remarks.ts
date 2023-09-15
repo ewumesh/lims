@@ -6,6 +6,9 @@ import { ToastService } from 'src/app/shared/toastr/toastr.service';
 import { FinalRawDataRemarksComponent } from './component/final-remarks';
 import { TestRequestDetailsService } from 'src/app/services/analyst/test-request-details/test-request-details.service';
 
+// import NepaliDate from 'nepali-date-converter';
+import  NepaliDate from 'nepali-datetime'
+import { DatePipe } from '@angular/common';
 @Component({
   templateUrl: './raw-data-remarks.html',
   styleUrls: ['./raw-data-remarks.scss']
@@ -26,6 +29,8 @@ export class RawDataRemarksComponent implements OnInit {
 
   microTableId =0;
 
+  today;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -34,8 +39,31 @@ export class RawDataRemarksComponent implements OnInit {
     private dialogRef: MatDialogRef<RawDataRemarksComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: any,
-    private service: TestRequestDetailsService
+    private service: TestRequestDetailsService,
+    private datePipe: DatePipe
     ) {
+
+      this.today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
+      // const date1 = new NepaliDate();
+
+      // const date3 = NepaliDate.fromEnglishDate(2023, 8, 30)
+      // console.log(date3, 'a')
+    }
+
+    convertToNepaliDate(enDate) {
+
+
+      let nepDate:any = {};
+      const eng = enDate.split('-');
+      let time = this.datePipe.transform(enDate, 'hh:mm:ss');
+      nepDate.year = parseInt(eng[0], 10);
+      nepDate.month = parseInt(eng[1], 10);
+      nepDate.day = parseInt(eng[2], 10);
+      nepDate.hour = Number(time.slice(0,2));
+      nepDate.minute = Number(time.slice(3,5));
+      let npDate = NepaliDate.fromEnglishDate(nepDate.year, nepDate.month-1, nepDate.day, nepDate.hour, nepDate.minute, 0);
+      return `${npDate.year}-${npDate.month+1}-${npDate.day}`;
     }
 
   ngOnInit(): void {
@@ -44,7 +72,6 @@ export class RawDataRemarksComponent implements OnInit {
   }
 
   tabChange(e) {
-    console.log(e, 'EEPO')
 
     this.microTableId = e.micro_table;
     this.getMicroParametersDetails();

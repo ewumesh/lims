@@ -127,7 +127,6 @@ export class UserDashboard implements OnInit {
 
         this.responsive.observe(Breakpoints.XSmall)
         .subscribe(result => {
-          console.log(result.matches, 'DEVICE....')
           if (result.matches) {
             this.isMobileDevice = true;
           }

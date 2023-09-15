@@ -33,26 +33,42 @@ export class CreateUserService {
     return formData;
   }
 
-  createUser(payload: any, doc?, renewDoc?):Observable<any> {
+  createUser(payload: any,additionalDocuments, doc?, renewDoc? ):Observable<any> {
+    let images = additionalDocuments;
+    delete payload['additionalDocs'];
     const formData:FormData = this.objectToFormData(payload);
+
+    additionalDocuments.forEach((image,index) => {
+      formData.append(`images[file]`, image.file);
+      formData.append(`images[name]`, image.document_name);
+    })
+
+
     if(doc) {
-    formData.append('registration_document', doc, doc?.name);
+      formData.append('registration_document', doc, doc?.name);
     }
 
     if(renewDoc) {
-
-
-    formData.append('renew_document', renewDoc, renewDoc?.name);
+      formData.append('renew_document', renewDoc, renewDoc?.name);
     }
-    return this.http.post(`${this.url}/api/account/users/`, formData)
+
+
+    return this.http.post(`${this.url}/api/account/users/`, formData);
   }
 
   getGetDepartmentTypes() :Observable<any> {
     return this.http.get(`${this.url}/api/account/department-types/`)
 }
 
-  updateUser(payload, doc?,renewDoc?):Observable<any> {
+  updateUser(payload,additionalDocuments, doc?,renewDoc?):Observable<any> {
+    delete payload['additionalDocs'];
     const formData:FormData = this.objectToFormData(payload);
+
+    additionalDocuments.forEach((image,index) => {
+      formData.append(`images[file]`, image.file);
+      formData.append(`images[name]`, image.document_name);
+    })
+
     if(doc) {
     formData.append('registration_document', doc, doc?.name);
     }

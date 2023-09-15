@@ -139,7 +139,7 @@ export class AddParameterComponent implements OnInit {
         let payload = {
           search: '',
           page: '1',
-          size: '500',
+          size: 900,
           test_type: ''
         }
         this.sService.getParameters(payload).subscribe(res => {
@@ -151,7 +151,7 @@ export class AddParameterComponent implements OnInit {
       getCommodities() {
         let payload = {
           page: '',
-          size: 500,
+          size: 900,
           search: ''
         }
         this.sService.getCommodities(payload).subscribe(res => {

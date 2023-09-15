@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -47,6 +47,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   departmentTypes:any[] = [];
 
+  additionalImages:any[] = [];
+
   constructor(
     private title: Title,
     private fb: FormBuilder,
@@ -92,6 +94,25 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       'role': {
         'required': 'Role is required.'
       }
+    })
+  }
+
+  get additionalDocuments(): FormArray {
+    return this.userForm.get('additionalDocs') as FormArray;
+  }
+
+  addDocList() {
+      this.additionalDocuments.push(this.createDocList());
+  }
+
+  removeDoc() {
+    this.additionalDocuments.removeAt(-1)
+  }
+
+  createDocList() {
+    return this.fb.group({
+      document_name: new FormControl(''),
+      file: new FormControl('')
     })
   }
 
@@ -186,8 +207,15 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       registration_number: [''],
       date: [],
       role: [5, Validators.required],
-      group: ['']
+      group: [''],
+      additionalDocs: new FormArray([]),
     },{ validators: passwordMatchValidator })
+
+    this.addDocList();
+  }
+
+  uploadAdditionalDocs(event) {
+    this.additionalImages.push(event.target.files[0]);
   }
 
   getDepartmentTypes() {
@@ -228,6 +256,12 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       is_verified: 1
     }
 
+    let images:any[] =[];
+    this.userForm.value.additionalDocs.forEach((a, index) => {
+      let obj = {document_name: a.document_name, file:this.additionalImages[index]}
+      images.push(obj);
+    })
+
     // console.log(payload, 'PAYLOAD')
     if (this.userForm.invalid) {
       this.message = {};
@@ -237,7 +271,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       return;
     }
     if(this.userId === null) {
-      this.cService.createUser(payload, this.doc, this.renewDoc).subscribe(response => {
+      this.cService.createUser(payload, images, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
         response.message);
@@ -266,7 +300,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     //     }, 3000);
     // })
   } else {
-    this.cService.updateUser(payload, this.doc, this.renewDoc).subscribe(response => {
+    this.cService.updateUser(payload,images, this.doc, this.renewDoc).subscribe(response => {
       this.toast.showToast(
         TOAST_STATE.success,
         response.message);

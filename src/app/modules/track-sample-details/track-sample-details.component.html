@@ -85,12 +85,12 @@
             <div class="row">
               <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
                 <h3>
-                  <span class="title">Document Name</span>
-                  <p class="detail">{{a?.name | titlecase}}</p>
+                  <div class="title">Document Name</div>
+                  <a [href]="a?.file" target="_blank" class="detail">{{a?.name | titlecase}}</a>
                 </h3>
-                <img matTooltip="View Image" alt="Document" style="height: 100px"
+                <!-- <img matTooltip="View Image" alt="Document" style="height: 100px"
                 class="img-thumbnail cursor-pointer" (click)="viewReceipt(a?.file)"
-                [src]="a.file" />
+                [src]="a.file" /> -->
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
 
         <div class="col-md-3">
           <!-- <h4 class="m-0">Payment Receipt </h4> -->
-          <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
+          <a [href]="p.payment_receipt" target="_blank" class="btn btn-primary btn-sm">View Receipt</a>
           <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
         </div>
         <hr class="m-0" />

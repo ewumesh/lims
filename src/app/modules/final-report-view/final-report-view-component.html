@@ -155,8 +155,7 @@
           </div>
         </div> -->
       </div>
-
-      <div *ngIf="loggedUserDetails.role === 6">
+      <div *ngIf="loggedUserDetails.role === 6 || loggedUserDetails.role === 7 || loggedUserDetails.role === 2 || loggedUserDetails.role === 1">
         <div class="white-bg mt-3"
           *ngIf="rawDataSheet?.Microbiological || rawDataSheet?.Chemical || rawDataSheet?.Instrumental">
           <h3 class="rawdata-heading">Raw Data Sheet</h3>
@@ -208,9 +207,10 @@
                     <td style="width: 20%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Actions</p>
                       <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
-                      <button (click)="downloadRawDatasheet(a.id)"
+                      <button (click)="viewLabSheet(a)"  class="btn btn-primary btn-lims-primary btn-sm">View Lab Sheet</button>
+                      <button (click)="downloadRawDatasheetMicro(a.id)"
                         class="btn btn-secondary mx-2 btn-sm">Download</button>
-                      <button (click)="printRawData(a.id)"
+                      <button (click)="printMicroRawDatasheet(a.id)"
                         class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                     </td>
                   </tr>
@@ -251,6 +251,9 @@
                       <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                       <button (click)="downloadRawDatasheet(a.id)"
                         class="btn btn-secondary mx-2 btn-sm">Download</button>
+                        
+                        <button (click)="viewLabSheet(a)"  class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab Sheet</button>
+                        <button (click)="viewReportRawData(a)"  class="btn btn-primary btn-lims-primary btn-sm mx-1">View Raw Data</button>
                       <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                     </td>
                   </tr>
@@ -289,6 +292,9 @@
                     <td style="width: 20%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Actions</p>
                       <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
+                      
+                      <button (click)="viewLabSheet(a)"  class="btn btn-primary btn-lims-primary btn-sm">View Lab Sheet</button>
+                      <button (click)="viewReportRawData(a)"  class="btn btn-primary btn-lims-primary btn-sm mx-1">View Raw Data</button>
                       <button (click)="downloadRawDatasheet(a.id)"
                         class="btn btn-secondary mx-2 btn-sm">Download</button>
                       <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
@@ -322,6 +328,7 @@
                 </td>
                 <td style="width: 30%;" class="text-end pt-3">
                   <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                  <button (click)="viewLabSheet(a)"  class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab Sheet</button>
               <button (click)="downloadRawDatasheetAnalyst(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
               <button (click)="printRawDataAnalyst(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                 </td>
@@ -455,6 +462,30 @@
       </div>
       </div>
 
+      <!-- <div class="row m-0 p-0 mt-3">
+        <div class="col-md-12 bg-white" style="border-radius: 5px;">
+    
+          <table class="table">
+            <tbody>
+              <h3 class="text-bold mb-0 ms-2 mt-2">Lab Sheet</h3>
+              <tr>
+                <td style="width: 20%;">
+                  <p class="text-muted mb-0 pb-0">Generated Date</p>
+                  <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+                </td>
+                <td style="width: 30%;" class="pt-3">
+                  
+                </td>
+    
+                <td style="width: 30%;" class="text-end pt-3">
+                  <button (click)="viewLabSheet()"  class="btn btn-primary btn-lims-primary btn-sm">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
  
       <!-- <div class="view-page mt-3" *ngIf="rawDataSheet .length > 0 && (loggedUserDetails.role === 6 || loggedUserDetails.role === 4) ">
         <table class="table">
@@ -572,7 +603,7 @@
 
             <div class="col-md-4">
               <h4 class="mb-0">Client category</h4>
-              <p>{{getClientCategoryName(sampleUserDetails?.client_category) || 'N/A'}}</p>
+              <p>{{(sampleUserDetails?.client_category) || 'N/A'}}</p>
             </div>
             
             <div class="col-md-4">
@@ -803,11 +834,11 @@
         </div>
 
         <div class="col-md-6 text-end">
-          <button *ngIf="loggedUserDetails?.role === 7" class="btn btn-primary btn-sm mx-1" (click)="viewSample()">View Report</button>
+          <button *ngIf="loggedUserDetails?.role === 7 || loggedUserDetails?.role === 6 || loggedUserDetails?.role === 1 || loggedUserDetails?.role === 2" class="btn btn-primary btn-sm mx-1" (click)="viewSample()">View Report</button>
           <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReport()"
-            class="btn btn-primary btn-lims-primary btn-sm mx-1">English</button>
-          <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReportNepali()"
-            class="btn btn-primary btn-lims-danger btn-sm mx-1">Nepali</button>
+            class="btn btn-primary btn-lims-primary btn-sm mx-1">Download</button>
+          <!-- <button [disabled]="reportDetails.status !== 'completed'" (click)="downloadReportNepali()"
+            class="btn btn-primary btn-lims-danger btn-sm mx-1">Nepali</button> -->
         </div>
       </div>
 

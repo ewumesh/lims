@@ -163,6 +163,11 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       // userDetails.test_type = a;
     }
 
+
+    if(userDetails.role === 4) {
+      userDetails.test_type = userDetails.test_type[0];
+    }
+
     this.userForm.patchValue(userDetails);
   }
 
@@ -199,7 +204,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       date: [],
       role: ['', Validators.required],
       group: [''],
-      test_type: [[]]
+      test_type: []
     },{ validators: passwordMatchValidator })
   }
 

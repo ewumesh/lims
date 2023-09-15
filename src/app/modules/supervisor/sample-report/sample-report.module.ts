@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SampleReportComponent } from './sample-report.component';
 import { RouterModule } from '@angular/router';
 import { ReportComponent } from 'src/app/shared/report/report';
@@ -23,6 +23,7 @@ import { MicroRawDataComponent } from './micro-raw-data/micro-raw-data';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SuperscriptPipe } from 'src/app/shared/s-transform';
 import { SupervisorLabSheetComponent } from './supervisor-lab-sheet/supervisor-lab-sheet.component';
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   declarations: [SampleReportComponent, ReportComponent, VerificationComponent,ReAssignComponent, ReCheckComponent,SupervisorViewRemarksComponent,SupervisorViewRawDataComponent, MicroRawDataComponent,
@@ -48,10 +49,10 @@ import { SupervisorLabSheetComponent } from './supervisor-lab-sheet/supervisor-l
     MatTableModule,
     MatTooltipModule,
     MatTabsModule,
-
+    NgxPrintModule,
     SharedModule
    ],
   exports: [],
-  providers: [SampleReportService],
+  providers: [SampleReportService, DatePipe],
 })
 export class SampleReportModule {}

@@ -1,5 +1,5 @@
 
-<div class="p-4" *ngIf="sampleDetails">
+<div class="p-4" *ngIf="sampleDetails" id="print-section">
     <table class="top-table">
         <tr>
             <th style=" width: 16.66%; padding: 6px; position: relative;" >
@@ -16,22 +16,22 @@
             <th style=" width: 16.66%; border-left: 0;" >
                 <p>{{sampleDetails?.id}}</p>
             </th>
-        </tr>
+        </tr> 
         <tr>
             <td colspan="4">
-                <h2 class="heading" >NFFRUSR/7.8/02: Laboratory Test Report Sheet ({{sampleDetails?.sample_form?.commodity?.name}})</h2>
+                <h2 class="heading" >NFFRUSR/7.8/02: Laboratory Test Report Sheet</h2>
             </td>
         </tr>
         <tr>
-            <td  ><h2>Name of Lab:{{sampleDetails?.sample_form?.commodity?.name}}</h2></td>
+            <td  ><h2>Commodity Category:{{sampleDetails?.sample_form?.commodity?.name || '-'}}</h2></td>
             <td ><h2>Name of Sample: {{sampleDetails?.sample_form?.name}}</h2></td>
-            <td ><h2>Sample code No:{{sampleDetails?.sample_form?.sample_lab_id}}</h2></td>
-            <td ><h2>Date of Sample Received:{{sampleDetails?.sample_form?.created_date | date}}</h2></td>
+            <td ><h2>Sample code No:{{sampleDetails?.sample_form?.namuna_code}}</h2></td>
+            <td ><h2>Date of Sample Received:{{sampleDetails?.sample_received_date}}</h2></td>
         </tr>
         <tr>
-            <td ><h2>Date of Sample Analysis:{{sampleDetails?.started_date | date}}</h2></td>
-            <td colspan="2"><h2>Date of Sample Completion:  {{sampleDetails?.completed_date | date}}</h2></td>
-            <td ><h2>Reported Date:{{sampleDetails?.completed_date | date}}</h2></td>
+            <td ><h2>Date of Sample Analysis:{{sampleDetails?.started_date}}</h2></td>
+            <td colspan="2"><h2>Date of Sample Completion:  {{convertToNepaliDate(sampleDetails?.completed_date)}}</h2></td>
+            <td ><h2>Reported Date:{{convertToNepaliDate(sampleDetails?.completed_date)}}</h2></td>
         </tr>
     </table>
     
@@ -42,13 +42,14 @@
         <th style="width: 14.285%;"><h2 class="text-center">Parameters</h2></th>
         <th style="width: 14.285%;"><h2 class="text-center">Units</h2></th>
         <th style="width: 14.285%;"><h2 class="text-center">Results</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center">Final Result</h2></th>
         <th style="width: 28.57%;" colspan="2" ><h2 class="text-center">Method used for Analysis</h2></th>
         <th style="width: 14.285%;"><h2 class="text-center" >MU <br> (If needed)</h2></th>
         <th style="width: 14.285%;"><h2 class="text-center">Remarks</h2></th>
     </tr>
     
-    <tr *ngFor="let p of sampleDetails.parameters; let i = index;">
-        <td><h2>{{p.name}}</h2></td>
+    <tr *ngFor="let p of sampleDetails.raw_data; let i = index;">
+        <td><h2>{{p?.parameter?.name}}</h2></td>
         <td><h2 class="text-center">
             
               <div> 
@@ -57,11 +58,12 @@
               <!-- <span *ngIf="p?.units.length < 1" class="text-muted">N/A</span> -->
         </h2></td>
         <td class="text-center"><h2 [innerHtml]="p?.result"></h2></td>
+        <td class="text-center"><h2 [innerHtml]="p?.converted_result"></h2></td>
         <td class="text-center" colspan="2" ><h2>
             <span>{{p.test_method}}</span>
         </h2></td>
-        <td class="text-center"><h2>N/A</h2></td>
-        <td class="text-center"><h2>{{p?.remarks || 'N/A'}}</h2></td>
+        <td class="text-center"><h2></h2></td>
+        <td class="text-center"><h2>{{p?.remarks || ''}}</h2></td>
     </tr>
     <!-- <tr >
         <td><h2>Moisture/TS</h2></td>
@@ -221,4 +223,10 @@
         <!-- <td><h2>Approved by:N/A</h2></td> -->
     </tr>
     </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-end">
+            <button [mat-dialog-close]="true" class="btn btn-primary btn-sm mx-1" printSectionId="print-section" ngxPrint cdkFocusInitial>Print</button>
+        </div>
     </div>

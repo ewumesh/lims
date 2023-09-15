@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TestRequestDetailsComponent } from './test-request-details.component';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -34,7 +34,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
-
+import { NpDatepickerModule } from 'angular-nepali-datepicker';
+import {NgxPrintModule} from 'ngx-print';
 export const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: 'l, LTS',
@@ -75,11 +76,13 @@ export const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     MatDialogModule,
     MatIconModule,
     FormsModule,
+    NgxPrintModule,
     ReactiveFormsModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+    NpDatepickerModule,
 
     DeleteConfirmModule,
     SharedModule,
@@ -91,7 +94,7 @@ export const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     
    ],
   exports: [],
-  providers: [TestRequestDetailsService,{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }],
+  providers: [TestRequestDetailsService,{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },DatePipe],
   // providers: [TestRequestDetailsService],
 })
 export class TestRequestDetailsModule {}

@@ -136,7 +136,6 @@ export class SmuDashboard {
             this.pieSeries = chaartSeries;
             this.donutSeries = donutSeries;
 
-            console.log(donutSeries, 'DONUUUU')
             this.initializeGraph();
             this.initDonutSeries();
             this.isDashboardStatus = false;

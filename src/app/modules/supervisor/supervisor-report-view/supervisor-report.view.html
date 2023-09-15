@@ -6,11 +6,11 @@
           <div class="row">
             <div class="col-md-2">
               <h4>Sample ID</h4>
-              <p *ngIf="loggedUserDetails.role === 4">{{reportDetails?.id}}</p>
-              <p *ngIf="loggedUserDetails.role === 3">{{reportDetails?.sample_form?.sample_lab_id}}</p>
+              <p *ngIf="loggedUserDetails.role === 4">{{reportDetails?.namuna_code || '-'}}</p>
+              <p *ngIf="loggedUserDetails.role === 3">{{reportDetails?.sample_form?.namuna_code || '-'}}</p>
               <p *ngIf="loggedUserDetails.role === 6">{{reportDetails?.id}}</p>
               <p *ngIf="loggedUserDetails.role !== 3 && loggedUserDetails.role !== 4 && loggedUserDetails.role !== 6">
-                {{reportDetails?.id}}</p>
+                {{reportDetails?.namuna_code || '-'}}</p>
             </div>
             <div class="col-md-3">
               <h4>Sample Name </h4>
@@ -88,10 +88,10 @@
                     </td>
                     <td style="width: 20%;" class="text-start">
                       <p class="bold-text mb-0 pb-0">Actions</p>
-                      <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                      <!-- <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                       <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                  <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-                  <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                  <button (click)="downloadRawDatasheetM(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+                  <button (click)="printRawDataM(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                     </td>
                   </tr>
                 </tbody>
@@ -250,7 +250,7 @@
                       <span *ngIf="!r.units" class="text-muted">N/A</span>
                     </td>
                     <!-- <td>Rs.{{r.price}}</td> -->
-                    <td>{{r.first_name | titlecase}} {{r.last_name | titlecase}}</td>
+                    <td>{{reportDetails?.supervisor_user?.first_name | titlecase}} {{reportDetails?.supervisor_user.last_name | titlecase}}</td>
                     <td>
                       <span [innerHtml]="r.result"></span>
                       <!-- <span *ngIf="r?.result === 0">0</span>
@@ -284,9 +284,9 @@
   
           <div class="col-md-6 text-end">
             <button (click)="downloadReport()"
-              class="btn btn-primary btn-lims-primary btn-sm mx-1">English</button>
-            <button (click)="downloadReportNepali()"
-              class="btn btn-primary btn-lims-danger btn-sm mx-1">Nepali</button>
+              class="btn btn-primary btn-lims-primary btn-sm mx-1">Download</button>
+            <!-- <button (click)="downloadReportNepali()"
+              class="btn btn-primary btn-lims-danger btn-sm mx-1">Nepali</button> -->
           </div>
         </div>
   

@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
     template:`
-    <img [src]="data" />
+    <img height="100%" width="100%" [src]="data" />
     `
 })
 

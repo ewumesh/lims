@@ -79,7 +79,7 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Client category</h4>
-            <p class="text-bold">{{getClientCategoryName(sampleUserDetails?.client_category) || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.client_category || 'N/A'}}</p>
           </div>
           
           <div class="col-md-4">
@@ -107,12 +107,12 @@
             <div class="row">
               <div class="col-md-4" *ngFor="let a of sampleUserDetails?.custom_user_image">
                 <h3>
-                  <span class="title">Document Name</span>
-                  <p class="detail">{{a?.name | titlecase}}</p>
+                  <div class="title">Document Name</div>
+                  <a [href]="a?.file" target="_blank" class="detail">{{a?.name | titlecase}}</a>
                 </h3>
-                <img matTooltip="View Image" alt="Document" style="height: 100px"
+                <!-- <img matTooltip="View Image" alt="Document" style="height: 100px"
                 class="img-thumbnail cursor-pointer" (click)="viewReceipt(a?.file)"
-                [src]="a.file" />
+                [src]="a.file" /> -->
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@
 
         <div class="col-md-3">
           <!-- <h4 class="m-0">Payment Receipt </h4> -->
-          <button (click)="viewReceipt(p.payment_receipt)" class="btn btn-primary btn-sm">View Receipt</button>
+          <a [href]="p?.payment_receipt" target="_blank" class="btn btn-primary btn-sm">View Receipt</a>
           <!-- <img (click)="viewReceipt(sampleDetails?.payment?.payment_receipt)" style="height: 60px;" [src]="sampleDetails?.payment?.payment_receipt" class="img-thumbnail cursor-pointer" /> -->
         </div>
         <hr class="m-0" />
@@ -187,7 +187,7 @@
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Lab Code</h4>
-          <p class="text-uppercase">{{reportDetails.sample_lab_id}}</p>
+          <p class="text-uppercase">{{reportDetails.namuna_code || reportDetails?.sample_lab_id}}</p>
         </div>
 
         <div class="col-md-4">
@@ -210,11 +210,11 @@
       <div class="row">
         <div class="col-md-4">
           <h4 class="mb-0">MFD</h4>
-          <p>{{(reportDetails.mfd | date) || 'N/A'}}</p>
+          <p>{{(reportDetails.mfd ) || 'N/A'}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Best Before Date</h4>
-          <p>{{(reportDetails.dfb | date) || 'N/A'}}</p>
+          <p>{{(reportDetails.dfb) || 'N/A'}}</p>
         </div>
 
         <div class="col-md-4">
@@ -248,11 +248,11 @@
           <p>{{reportDetails.amendments || 'N/A'}}</p>
         </div> 
 
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <h4 class="mb-0">Language</h4>
           <p *ngIf="reportDetails.language === 'en'">English</p>
           <p *ngIf="reportDetails.language === 'np'">Nepali</p>
-        </div> 
+        </div>  -->
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Type</h4>
@@ -283,7 +283,7 @@
 
             <div class="col-md-4">
               <h4 class="mb-0">Voucher Date</h4>
-              <p>{{(reportDetails.voucher_date| date:'mediumDate') || 'N/A'}}</p>
+              <p>{{(reportDetails.voucher_date) || 'N/A'}}</p>
             </div> 
 
           </div>

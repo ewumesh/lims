@@ -2,8 +2,12 @@ import { LanguageService } from './services/language-service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import {MatMenuModule} from '@angular/material/menu';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
 /* Custom components */
 import { AppComponent } from 'src/app/app.component';
 import { AppRoutingModule } from 'src/app/app.routing';
@@ -14,15 +18,23 @@ import { JwtInterceptor } from './services/token-interceptor';
 import { NotFoundComponent } from './components/not-found/404.component';
 import { TokenInterceptor } from './services/token-validator';
 
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { SharedService } from './services/shared/shared.service';
 import { UserVerificationSuccessComponent } from './components/email-verification-success/email-verification-success';
 import { SuperscriptPipe } from './shared/s-transform';
 import { TruncatePipe } from './shared/truncate/truncate.pipe';
-import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetModule, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import {
+  MAT_BOTTOM_SHEET_DATA,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,9 +45,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastComponent,
     NotFoundComponent,
     EmailVerificationComponent,
-    UserVerificationSuccessComponent
+    UserVerificationSuccessComponent,
     // SuperscriptPipe
-    ],
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
@@ -50,16 +62,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
-    CKEditorModule
-
+    CKEditorModule,
   ],
-  exports: [
-    MatMenuModule,
-     MatBottomSheetModule
-    ],
+  exports: [MatMenuModule, MatBottomSheetModule],
   providers: [
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -67,8 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageService,
     SharedService,
     { provide: MatBottomSheetRef, useValue: {} },
-    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

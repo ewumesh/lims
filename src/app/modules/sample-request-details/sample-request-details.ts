@@ -102,7 +102,8 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
 
   viewReceipt(url) {
     this.dialog.open(PaymentReceiptComponent, {
-      data: url
+      data: url,
+      width:'800px'
     })
   }
 
@@ -317,7 +318,7 @@ export class SampleRequestDetailsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initPaymentForm();
     this.getSampleDetails();
-    this.getCommodities();
+    // this.getCommodities();
     
     this.getUserList();
     this.initForm();

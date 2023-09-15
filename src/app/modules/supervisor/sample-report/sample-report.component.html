@@ -9,16 +9,21 @@
       <div class="view-page">
         <div class="row">
 
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <h4 class="mb-0">Sample ID </h4>
+            <p class="mb-0">{{reportDetails?.sample_form?.namuna_code || '-'}}</p>
+          </div>
+
+          <div class="col-md-3">
             <h4 class="mb-0">Sample Name </h4>
             <p class="mb-0">{{reportDetails?.sample_form?.name}}</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h4 class="mb-0">Assigned Date</h4>
             <p class="mb-0">{{reportDetails?.created_date | date: 'medium'}}</p>
           </div>
 
-          <div class="col-md-4 text-end pt-3">
+          <div class="col-md-3 text-end pt-3">
             <span style="padding: 8px" class="badge badge-primary" [statusColor]="reportDetails?.status">
               {{reportDetails?.status}}</span>
           </div>
@@ -98,9 +103,10 @@
                   <td style="width: 20%;" class="text-start">
                     <p class="bold-text mb-0 pb-0">Actions</p>
                     <button (click)="viewMicroRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                    <button (click)="viewLabSheet(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab sheet</button>
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
-                <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-                <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+                <button (click)="downloadMicroRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+                <button (click)="printMicroRawDatasheet(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                   </td>
                 </tr>
               </tbody>
@@ -133,6 +139,7 @@
                     <p class="bold-text mb-0 pb-0">Actions</p>
                     
                     <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                    <button (click)="viewLabSheet(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab sheet</button>
                 <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
                 <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
                   </td>
@@ -169,6 +176,7 @@
                     <p class="bold-text mb-0 pb-0">Actions</p>
                     <!-- {{a | json}} -->
                     <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
+                    <button (click)="viewLabSheet(a)" class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab sheet</button>
                     <!-- <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button> -->
                 <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
                 <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
@@ -180,7 +188,7 @@
         </div>
       </div>
 
-      <div class="row m-0 p-0 mt-3" >
+      <!-- <div class="row m-0 p-0 mt-3" >
         <div class="col-md-12 bg-white" style="border-radius: 5px;">
     
           <table class="table">
@@ -197,13 +205,12 @@
     
                 <td style="width: 30%;" class="text-end pt-3">
                   <button  (click)="viewLabSheet()" class="btn btn-primary btn-lims-primary btn-sm">View</button>
-                  <!-- <button   class="btn btn-secondary mx-2 btn-sm">Download</button> -->
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
 
       <div class="view-page mt-3">
         <!-- <h3 class="view-page-heading">Parameter Details</h3> -->

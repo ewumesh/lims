@@ -15,6 +15,7 @@ import { ApAddSampleComponent } from "./ap-add-sample.component";
 import { LicensingAddSampleService } from "src/app/services/dftqc/service";
 import { MatTableModule } from "@angular/material/table";
 import { MatRadioModule } from "@angular/material/radio";
+import { NpDatepickerModule } from "angular-nepali-datepicker";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatRadioModule } from "@angular/material/radio";
         MatDatepickerModule,
         MatNativeDateModule,
         NgxMatSelectSearchModule,
+        NpDatepickerModule,
         MatRadioModule,
         RouterModule.forChild([
             { path: '', component: ApAddSampleComponent }

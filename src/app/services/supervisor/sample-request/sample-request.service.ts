@@ -23,14 +23,46 @@ export class SampleReportService {
     return this.http.get(`${this.url}/api/sample-form-raw-data-sheet-global/${id}/`)
   } 
   downloadRawData(id):Observable<any> {
-    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    // let url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
+    // let nURL = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
+
+    let url;
+    // if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+    //   url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
+    // } else if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+      url = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
+    // }
+
+
     window.location.href = url;
     return this.http.get(`${url}`)
   }
 
   printRawData(id):Observable<any> {
-    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+    // let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+    let nURL = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
 
+    let url;
+    // if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+    //   url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
+    // } else if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+      url = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
+    // }
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
+  }
+
+
+  downloadMicroRawData(id) {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+
+  printMicroRawData(id) {
+    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    
     window.open(url, "_blank");
     return this.http.get(`${url}`)
   }
@@ -79,5 +111,8 @@ export class SampleReportService {
 
   getDetailsForLabSheet(payload):Observable<any> {
     return this.http.get(`${this.url}/api/sample-form-has-parameter-assign-users/${payload.id}?form_available=analyst&analyst_user=${payload.user}&status=`);
+  }
+  updateSample(payload, id): Observable<any> {
+    return this.http.patch(`${this.url}/api/sample-form/${id}/`, payload)
   }
 }

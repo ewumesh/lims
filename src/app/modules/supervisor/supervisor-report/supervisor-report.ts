@@ -66,7 +66,7 @@ export class SupervisorReportComponent {
       }
       this.service.getSampleReport(payload).subscribe(response => {
 
-        console.log(response, 'opoaspdo')
+        console.log( 'opoaspdo')
         // console.log(response);
         this.samples = response;
         this.dataSource.data = response;

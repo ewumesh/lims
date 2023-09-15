@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { VerifyReportComponent } from './verify-report.component';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -30,6 +30,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SharedModule
    ],
   exports: [],
-  providers: [],
+  providers: [DatePipe],
 })
 export class VerifyReportModule {}

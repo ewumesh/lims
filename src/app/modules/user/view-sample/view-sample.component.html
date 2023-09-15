@@ -161,12 +161,12 @@
       <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">MFD</h4>
-          <p>{{sampleDetails.mfd | date}}</p>
+          <p>{{sampleDetails.mfd}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Best Before Date</h4>
           <!-- <p>{{sampleDetails.dfb | date}}</p> -->
-          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb}}</p>
           <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
         </div>
 
@@ -238,7 +238,7 @@
     
             <div class="col-md-4">
               <h4 class="m-0">Voucher Date</h4>
-              <p>{{sampleDetails?.voucher_date | date:'mediumDate'}}</p>
+              <p>{{sampleDetails?.voucher_date}}</p>
             </div>
           </div>
         </div>
@@ -264,12 +264,12 @@
       <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">MFD</h4>
-          <p>{{sampleDetails.mfd | date}}</p>
+          <p>{{sampleDetails.mfd}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Best Before Date</h4>
           <!-- <p>{{sampleDetails.dfb | date}}</p> -->
-          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb | date}}</p>
+          <p *ngIf="sampleDetails?.dfb_type === 'date'">{{sampleDetails.dfb}}</p>
           <p *ngIf="sampleDetails?.dfb_type === 'days'">{{sampleDetails.days_dfb}} {{sampleDetails?.dfb_duration}}</p>
         </div>
 
@@ -296,11 +296,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <h4 class="m-0">Report Language</h4>
           <p *ngIf="sampleDetails.language === 'en'">English</p>
           <p *ngIf="sampleDetails.language === 'np'">Nepali</p>
-        </div>
+        </div> -->
 
         <div class="col-md-4">
           <h4 class="m-0">Amendments</h4>

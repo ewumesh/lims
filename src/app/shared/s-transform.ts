@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'superscript'
+  name: 'superscript',
 })
 export class SuperscriptPipe implements PipeTransform {
-
   transform(value: string): string {
     const parts = value?.split('^');
     if (parts?.length === 2) {
@@ -12,5 +11,4 @@ export class SuperscriptPipe implements PipeTransform {
     }
     return value;
   }
-
 }

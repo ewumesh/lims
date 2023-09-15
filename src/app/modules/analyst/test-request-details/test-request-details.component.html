@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-2">
         <div class="text-muted">Sample lab ID</div>
-        <div class="font-bold">{{testRequestDetails?.sample_form?.id}}</div>
+        <div class="font-bold">{{testRequestDetails?.sample_form?.namuna_code || '-'}}</div>
       </div>
 
       <div class="col-md-3">
@@ -69,9 +69,13 @@
               <span style="padding: 8px;" class="badge badge-primary" [statusColor]="a.status">{{a.status}}</span>
             </td>
             <td style="width: 30%;" class="text-end pt-3">
-              <button (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data</button>
-              <button (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
-              <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button  (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data </button>
+              <button *ngIf="a.test_type === 'Microbiological'"  (click)="printRawDatasheetMicro(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button *ngIf="a.test_type === 'Microbiological'" (click)="downloadRawDatasheetMicro(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              
+              <button *ngIf="a.test_type !== 'Microbiological'"  (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
+              <button *ngIf="a.test_type !== 'Microbiological'" (click)="downloadRawDatasheet(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
+              <!-- <button (click)="printRawData(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button> -->
             </td>
           </tr>
         </tbody>
@@ -88,7 +92,7 @@
           <tr>
             <td style="width: 20%;">
               <p class="text-muted mb-0 pb-0">Generated Date</p>
-              <p class="text-muted mb-0">Date:{{(testRequestDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+              <p class="text-muted mb-0">Date:{{(testRequestDetails?.created_date| date:'medium') || 'N/A'}}</p>
             </td>
             <td style="width: 30%;" class="pt-3">
               
@@ -376,23 +380,36 @@ display: inline-block;
     </div>
     <form [formGroup]="otherDetailsForm" class="row"> 
       <div class="col-md-6">
-        <label class="label">Sample Received Date</label>
-        <mat-form-field class="w-100" appearance="outline">
+        <label class="label">Sample Received Date</label> 
+        <!-- <mat-form-field class="w-100" appearance="outline">
           <input formControlName="sample_received_date" [matDatepicker]="mfdPicker" (focus)="mfdPicker.open()"
           (click)="mfdPicker.open()" class="custom-input" matInput placeholder="Enter Date" />
 
           <mat-datepicker #mfdPicker></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <!-- <div class="col-md-2"> -->
+        <!-- <label for="email" class="col-form-label">उत्पादन मिति</label> -->
+        <np-datepicker class=" h-45"
+        formControlName="sample_received_date"
+  [dateFormatter]="formatter">
+</np-datepicker>
+      <!-- </div> -->
       </div>
 
       <div class="col-md-6">
         <label class="label">Started Date</label>
-        <mat-form-field class="w-100" appearance="outline">
+        <!-- <mat-form-field class="w-100" appearance="outline">
           <input formControlName="started_date" [matDatepicker]="sd" (focus)="sd.open()"
           (click)="sd.open()" class="custom-input" matInput placeholder="Enter Date" />
 
           <mat-datepicker #sd></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
+
+        <np-datepicker class=" h-45"
+        formControlName="started_date"
+  [dateFormatter]="formatter">
+</np-datepicker>
 
         <!-- <mat-form-field class="w-100" appearance="outline">
           <input matInput [ngxMatDatetimePicker]="picker" class="custom-input" placeholder="Choose a date"

@@ -1,0 +1,234 @@
+
+<div class="p-4" *ngIf="sampleDetails" id="print-section">
+    <table class="top-table">
+        <tr>
+            <th style=" width: 16.66%; padding: 6px; position: relative;" >
+                <img src="https://logos-download.com/wp-content/uploads/2021/07/Emblem_of_Nepal.png" alt="logo"
+                    style="width: 100px;">
+            </th>
+            <th style=" width: 66.66%; border-right: 0;" colspan="2" >
+                <h3>Government of Nepal</h3>
+                <h3>Ministry of Agriculture and Livestock Development</h3>
+                <h1>Department of Food Technology and Quality Control</h1>
+                <h1>National Food and Feed Reference Laboratory</h1>
+                <h3>Babarmahal, Kathmandu, Nepal</h3>
+            </th>
+            <th style=" width: 16.66%; border-left: 0;" >
+                <p>{{sampleDetails?.id}}</p>
+            </th>
+        </tr> 
+        <tr>
+            <td colspan="4">
+                <h2 class="heading" >NFFRUSR/7.8/02: Laboratory Test Report Sheet</h2>
+            </td>
+        </tr>
+        <tr>
+            <td  ><h2>Commodity Category:{{sampleDetails?.sample_form_has_parameter?.commodity?.category?.name || '-'}}</h2></td>
+            <td ><h2>Name of Sample: {{sampleDetails?.sample_form?.name || '-'}}</h2></td>
+            <td ><h2>Sample code No:{{sampleDetails?.sample_form?.namuna_code || '-'}}</h2></td>
+            <td ><h2>Date of Sample Received:{{convertToNepaliDate(sampleDetails?.created_date) || '-'}}</h2></td>
+        </tr>
+        <tr>
+            <td ><h2>Date of Sample Analysis:{{sampleDetails?.started_date || '-'}}</h2></td>
+            <td colspan="2"><h2>Date of Sample Completion:  {{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
+            <td ><h2>Reported Date:{{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
+        </tr>
+    </table>
+    
+    
+    
+    <table style="width: 100%;" class="bottom-table mt-4">
+    <tr >
+        <th style="width: 14.285%;"><h2 class="text-center">Parameters</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center">Units</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center">Results</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center">Final Result</h2></th>
+        <th style="width: 28.57%;" colspan="2" ><h2 class="text-center">Method used for Analysis</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center" >MU <br> (If needed)</h2></th>
+        <th style="width: 14.285%;"><h2 class="text-center">Remarks</h2></th>
+    </tr>
+    
+    <tr *ngFor="let p of sampleDetails.raw_data; let i = index;">
+        <td><h2>{{p?.parameter?.name || '-'}}</h2></td>
+        <td>
+            <h2 class="text-center">
+            
+              <div> 
+                <span>{{p?.units || '-'}}</span>
+              </div>
+        </h2>
+    </td>
+        <td class="text-center"><h2 [innerHtml]="p?.result"></h2></td>
+        <td class="text-center"><h2 [innerHtml]="p?.converted_result"></h2></td>
+        <td class="text-center" colspan="2" ><h2>
+            <span>{{p.test_method || '-'}}</span>
+        </h2></td>
+        <td class="text-center"><h2></h2></td>
+        <td class="text-center"><h2>{{p?.remarks || ''}}</h2></td>
+    </tr>
+    <!-- <tr >
+        <td><h2>Moisture/TS</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2></h2></td>
+        <td colspan="2" ><h2></h2></td>
+        <td><h2></h2></td>
+        <td><h2></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Protein</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Total Ash</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >AIA</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Gluten</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    
+    <tr >
+        <td><h2 >Alcoholic acidity</h2></td>
+        <td><h2 class="text-center">m/ of NaOH/100g</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Acid value</h2></td>
+        <td><h2 class="text-center">mgKOH/g</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Peroxide value</h2></td>
+        <td><h2 class="text-center">MEq0<sub>2</sub>/kg </h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Crude fibre</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Fat</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >External Color</h2></td>
+        <td><h2 class="text-center">Qualitative</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Carbohydrate</h2></td>
+        <td><h2 class="text-center">%</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Uric acid</h2></td>
+        <td><h2 class="text-center">mg/kg</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Energy value</h2></td>
+        <td><h2 class="text-center" >Kcal</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 >Acidity of extracted fat(AEF)</h2></td>
+        <td><h2 class="text-center">% (As oleic acid)</h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    
+    <tr >
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr>
+    <tr >
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td colspan="2" ><h2 ></h2></td>
+        <td><h2 ></h2></td>
+        <td><h2 ></h2></td>
+    </tr> -->
+    </table>
+    
+    <table class="footer w-100 mt-4">
+    <tr>
+        <td><h2>Analyze by:{{userDetails?.first_name}} {{userDetails?.last_name}}</h2></td>
+        <!-- <td><h2>Checked by:N/A</h2></td> -->
+    </tr>
+    <tr>
+        <td><h2>Remarks: {{sampleDetails?.remarks || '-'}}</h2></td>
+        <!-- <td><h2>Approved by:N/A</h2></td> -->
+    </tr>
+    </table>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 text-end">
+            <button [mat-dialog-close]="true" class="btn btn-primary btn-sm mx-1" printSectionId="print-section" ngxPrint cdkFocusInitial>Print</button>
+        </div>
+    </div>

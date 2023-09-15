@@ -20,7 +20,7 @@
       <mat-radio-button id="radio_1" value="1">Admin</mat-radio-button>
       <mat-radio-button id="radio_2" value="2">User</mat-radio-button>
     </mat-radio-group>
-  </div> -->
+  </div> --> 
   <div class="col-md-12 bg-white p-4">
     <h2>User Details</h2>
     <form class="userregister" [formGroup]="userForm" (ngSubmit)="saveChanges()">
@@ -108,7 +108,7 @@
             <mat-select formControlName="group" placeholder="Select Role" multiple>
               <mat-option [value]="item.id" *ngFor="let item of roles">{{item.name | titlecase}}</mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> 
         </div>
 
         <div class="col-md-6" *ngIf="userForm.get('role').value === 5">
@@ -153,13 +153,36 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-12 mb-3">
+          <!-- <div class="col-md-12 mb-3">
             <div *ngIf="userId && userDetails?.role ===5">
             <img (click)="viewImage(userDetails?.registration_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.registration_document" />
             </div>
             <label for="exampleInputEmail1" class="form-label">Documents *</label>
             <input  (change)="uploadDocument($event)" class="form-control" type="file" placeholder="Upload file" />
-          </div>
+          </div> -->
+          <div class="row py-2" style="background: #f8f9fa; padding: 12px; border-radius: 0.2rem;
+            margin: 10px 0;">
+            <div class="col-md-12" formArrayName="additionalDocs">
+              <div class="row" *ngFor="let list of additionalDocuments.controls; let i = index" [formGroupName]="i">
+                <div class="col-md-6">
+                  <label>Document Name (कागजातको नाम)</label>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <input class="custom-input" formControlName="document_name" matInput placeholder="Enter Document Name" />
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-md-6">
+                  <label>Document (कागजातको फाइल)</label>
+                    <input (change)="uploadAdditionalDocs($event)" type="file" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-end">
+              <button class="btn btn-primary btn-sm mx-1" type="button" (click)="addDocList()">Add more (थप)</button>
+              <button *ngIf="additionalDocuments.length > 1" class="btn btn-primary btn-lims-danger btn-sm mx-1" type="button" (click)="removeDoc()">Remove</button>
+            </div>
+            </div>
 
           <!-- <h2>User Renew Document</h2> -->
 
@@ -170,13 +193,13 @@
             </mat-form-field>
           </div> -->
 
-          <div class="col-md-12 mb-3">
+          <!-- <div class="col-md-12 mb-3">
             <div *ngIf="userId && userDetails?.role ===5">
               <img (click)="viewImage(userDetails?.renew_document)" class="img-thumbnail cursor-pointer" style="height: 60px;" [src]="userDetails?.renew_document" />
             </div>
             <label for="exampleInputEmail1" class="form-label">Renew Documents *</label>
             <input (change)="uploadRenewDoc($event)" class="form-control" type="file" placeholder="Upload file" />
-          </div>
+          </div> -->
 
 
           <!-- <div class="col-md-12">

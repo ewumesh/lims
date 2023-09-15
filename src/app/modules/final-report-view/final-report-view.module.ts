@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FinalReportViewComponent } from './final-report-view.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -17,7 +17,9 @@ import { ReportMicroRawDataComponent } from './report-view-micro-raw-data/micro-
 import { ViewReportDoc } from './view-docs';
 import { AdminFinalReportComponent } from './view-sample/admin-view-sample';
 import { SuperscriptPipe } from 'src/app/shared/s-transform';
-
+import { ReportLabSheetComponent } from './lab-sheet/lab-sheet';
+import { ReportViewRawDataComponent } from './report-view-raw-data/report-view-raw-data.component';
+import {NgxPrintModule} from 'ngx-print';
 @NgModule({
   declarations: [
     FinalReportViewComponent, 
@@ -26,6 +28,8 @@ import { SuperscriptPipe } from 'src/app/shared/s-transform';
     ReportMicroRawDataComponent,
     ViewReportDoc,
     AdminFinalReportComponent,
+    ReportLabSheetComponent,
+    ReportViewRawDataComponent
     // SuperscriptPipe
   ],
   imports: [
@@ -39,10 +43,11 @@ import { SuperscriptPipe } from 'src/app/shared/s-transform';
     MatInputModule,
     MatFormFieldModule,
     AvatarModule,
+    NgxPrintModule,
     MatTabsModule,
     SharedModule
   ],
   exports: [],
-  providers: [FinalReportViewService],
+  providers: [FinalReportViewService, DatePipe],
 })
 export class FinalReportViewModule {}

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AssignedSampleAdminDetailsComponent } from './assigned-sample-admin-details.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -31,6 +31,6 @@ import { ViewAssignedSampleDoc } from './view-docs';
     SharedModule
   ],
   exports: [],
-  providers: [AssignedSampleAdminDetailsService],
+  providers: [AssignedSampleAdminDetailsService, DatePipe],
 })
 export class AssignedSampleAdminDetailsModule {}

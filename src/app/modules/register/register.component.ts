@@ -185,7 +185,6 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
   getDepartmentType() {
     this.authService.getGetDepartmentTypes().subscribe(res => {
       this.departmentTypes = res?.department_types;
-      console.log(res, 'okopk')
     })
   }
 

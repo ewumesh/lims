@@ -19,7 +19,8 @@ export class SupervisorReportViewService {
   }
 
   downloadReport(payload) :Observable<any> {
-    let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/${payload.role}`;
+    let url = `https://pdfmachine.kantipurinfotech.com.np/public/api/show-english-pdf-report/${payload.id}/${payload.role}`;
+    // let url = `${this.url}/api/report/get-single-report/${payload.report_name}/${payload.report_type}/${payload.lang}/${payload.id}/${payload.role}`;
     window.location.href = url;
     return this.http.get(url);
   }
@@ -38,13 +39,38 @@ export class SupervisorReportViewService {
   }
 
   downloadRawData(id):Observable<any> {
-    let url = `${this.url}/api/report/get-report-raw-data/download/eng/${id}/`;
+    let url;
+    // if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+    //   url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
+    // } else if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+      url = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
+    // }
     window.location.href = url;
     return this.http.get(`${url}`)
   }
 
   printRawData(id):Observable<any> {
+    let url;
+    // if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+    //   url = `https://pdfmachine.kantipurinfotech.com.np/public/api/stage/rawdata/${id}/`;
+    // } else if(this.url.startsWith("https://staginglims.kantipurinfotech.com.np")) {
+      url = `https://pdfmachine.kantipurinfotech.com.np/public/api/rawdata/${id}/`
+    // }
+
+    window.open(url, "_blank");
+    return this.http.get(`${url}`)
+  }  
+  
+  downloadRawDataM(id):Observable<any> {
     let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
+    window.location.href = url;
+    return this.http.get(`${url}`)
+  }
+
+  printRawDataM(id):Observable<any> {
+    let url = `${this.url}/api/report/get-report-raw-data/print/eng/${id}/`
+
 
     window.open(url, "_blank");
     return this.http.get(`${url}`)

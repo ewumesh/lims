@@ -6,7 +6,7 @@ import { TruncatePipe } from './truncate/truncate.pipe';
 
 @NgModule({
   declarations: [StatusHandlerDirective, SuperscriptPipe],
-  imports: [ CommonModule ],
+  imports: [CommonModule],
   exports: [StatusHandlerDirective, SuperscriptPipe],
   providers: [],
 })

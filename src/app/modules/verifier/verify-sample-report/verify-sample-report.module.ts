@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { VerifySampleReportomponent } from './verify-sample-report';
 import { RouterModule } from '@angular/router';
 import { ReportComponent } from 'src/app/shared/report/report';
@@ -16,10 +16,17 @@ import { MicroRawDataVerifierComponent } from 'src/app/shared/verify-report/view
 import { MatTabsModule } from '@angular/material/tabs';
 import { SuperscriptPipe } from 'src/app/shared/s-transform';
 import { VerifierReportComponent } from './view-sample/verifier-view-sample';
+import { VerifyLabSheetComponent } from 'src/app/shared/verify-report/lab-shhet/labsheet';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { NpDatepickerModule } from 'angular-nepali-datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   declarations: [VerifySampleReportomponent, VerifyReportComponent, VerificationRemarksComponent,ViewVieriferRemarks,MicroRawDataVerifierComponent, 
-    VerifierReportComponent
+    VerifierReportComponent, VerifyLabSheetComponent
     // SuperscriptPipe
   ],
   imports: [
@@ -31,12 +38,18 @@ import { VerifierReportComponent } from './view-sample/verifier-view-sample';
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatDialogModule,
     MatIconModule,
+    NpDatepickerModule,
+    MatRadioModule,
     MatTabsModule,
+    NgxPrintModule,
     SharedModule
    ],
   exports: [],
-  providers: [],
+  providers: [DatePipe],
 })
 export class VerifySampleReportModule {}
