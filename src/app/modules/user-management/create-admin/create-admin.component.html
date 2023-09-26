@@ -117,7 +117,7 @@
             <mat-select multiple formControlName="test_type" placeholder="Select Test type" multiple>
               <mat-option [disabled]="userForm.get('test_type').value.includes(2)"  [value]="1">Chemical</mat-option>
               <mat-option [disabled]="userForm.get('test_type').value.includes(3) || userForm.get('test_type').value.includes(1)" [value]="2">Microbiological</mat-option>
-              <mat-option [value]="3" [disabled]="userForm.get('test_type').value.includes(2)">Instrumental</mat-option>
+              <mat-option [value]="3" [disabled]="userForm.get('test_type').value?.includes(2)">Instrumental</mat-option>
             </mat-select>
           </mat-form-field>
 

@@ -204,7 +204,7 @@ export class CreateAdminComponent implements OnInit, AfterViewInit {
       date: [],
       role: ['', Validators.required],
       group: [''],
-      test_type: []
+      test_type: [[]]
     },{ validators: passwordMatchValidator })
   }
 

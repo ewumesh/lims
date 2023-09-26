@@ -15,11 +15,11 @@
       <div class="row">
         <div class="col-md-6">
           <p class="title">Name of Laboratory</p>
-          <h2 class="detail">N/A</h2>
+          <h2 class="detail"></h2>
         </div>
         <div class="col-md-6">
           <p class="title">Reported date </p>
-          <h2 class="detail">{{data?.sample[0]?.sample_form?.created_date | date: 'medium' || 'N/A'}}</h2>
+          <h2 class="detail">{{data?.sample[0]?.sample_form?.created_date | date: 'medium' || ''}}</h2>
         </div>
       </div>
       <div class="row">
@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-4">
           <p class="title">Sample Codes</p>
-          <h2 class="detail text-uppercase">{{data?.sample[0].sample_form?.id || 'N/A'}}</h2>
+          <h2 class="detail text-uppercase">{{data?.sample[0].sample_form?.id || ''}}</h2>
         </div>
       </div>
       <div class="row">
@@ -53,13 +53,13 @@
       <div class="row">
         <div class="col-md-12">
           <p class="title">Parameters to be analyzed</p>
-          <h2 class="detail">N/A</h2>
+          <h2 class="detail"></h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <p class="title">Method of Analysis/Testing</p>
-          <h2 class="detail">N/A</h2>
+          <h2 class="detail"></h2>
         </div>
       </div>
       <div class="row">
@@ -78,7 +78,7 @@
               </div>
               <h2>Formula = {{p?.parameter?.formula}}</h2>
             </div>
-            <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+            <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div>
           </div>
         </div>
 
@@ -122,7 +122,7 @@
 
   <tr>
       <td class="text-center">2</td>
-      <!-- <td colspan="3">Due Date:<span class="detail"> N/A </span></td> -->
+      <!-- <td colspan="3">Due Date:<span class="detail">  </span></td> -->
       <td colspan="5">Started on:<span class="detail"> {{data?.started_date}} </span></td>
       <td colspan="4">Completed on:<span class="detail"> {{convertToNepaliDate(data?.completed_date)}} </span></td>
   </tr>
@@ -168,7 +168,7 @@
                                       <span *ngIf="!p?.analyst_remarks">-</span>
                                   </h2>
                         </div>
-                        <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div> -->
+                        <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div> -->
                       </div>
                     </div>
                     <div class="col-md-6">

@@ -21,13 +21,13 @@
                 <h4>Assigned by </h4>
                 <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}}
                   {{reportDetails?.supervisor_user?.last}}</p>
-                <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
+                <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></p>
               </div>
               <div *ngIf="loggedUserDetails.role !== 4">
                 <h4>Supervise by </h4>
                 <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}}
                   {{reportDetails?.supervisor_user?.last_name}}</p>
-                <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
+                <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></p>
               </div>
   
             </div>
@@ -35,7 +35,7 @@
               <div *ngIf="loggedUserDetails.role === 4">
                 <h4>Assigned Date </h4>
                 <p *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</p>
-                <p class="text-muted" *ngIf="!reportDetails.approved_date">N/A</p>
+                <p class="text-muted" *ngIf="!reportDetails.approved_date"></p>
               </div>
             </div>
   
@@ -229,32 +229,32 @@
                     <td>{{r.name | titlecase}}</td>
                     <!-- <td>
                       <span *ngIf="r.formula">
-                        <span *ngIf="r.formula === 'nan'" class="text-muted">N/A</span>
+                        <span *ngIf="r.formula === 'nan'" class="text-muted"></span>
                         <span *ngIf="r.formula !== 'nan'" class="text-muted">{{r.formula}}</span>
                         </span>
-                      <span *ngIf="!r.formula" class="text-muted">N/A</span>
+                      <span *ngIf="!r.formula" class="text-muted"></span>
                     </td> -->
                     <td>
                       <span *ngIf="r.test_method">
                         {{r?.test_method}}
-                        <!-- <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
+                        <!-- <span *ngIf="r.ref_test_method === 'nan'" class="text-muted"></span>
                         <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span> -->
                       </span>
-                      <span *ngIf="!r.test_method" class="text-muted">N/A</span>
+                      <span *ngIf="!r.test_method" class="text-muted"></span>
                     </td>
                     <td>
                       <span *ngIf="r.units">
-                        <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                        <span *ngIf="r.units === 'nan'" class="text-muted"></span>
                         <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
                       </span>
-                      <span *ngIf="!r.units" class="text-muted">N/A</span>
+                      <span *ngIf="!r.units" class="text-muted"></span>
                     </td>
                     <!-- <td>Rs.{{r.price}}</td> -->
                     <td>{{reportDetails?.supervisor_user?.first_name | titlecase}} {{reportDetails?.supervisor_user.last_name | titlecase}}</td>
                     <td>
                       <span [innerHtml]="r.result"></span>
                       <!-- <span *ngIf="r?.result === 0">0</span>
-                      <span *ngIf="r?.result" class="text-muted">N/A</span> -->
+                      <span *ngIf="r?.result" class="text-muted"></span> -->
                     </td>
                     <td>{{r.mandatory_standard}}</td>
                     <!-- <td>

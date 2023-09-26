@@ -30,7 +30,7 @@
         <div *ngIf="data.parameters?.formula_notation">
           <div *ngFor="let n of splitStringByComma(data?.parameters?.formula_notation)">{{n | titlecase}}</div>
         </div>
-        <div *ngIf="!data?.parameters?.formula_notation" class="text-muted">N/A</div>
+        <div *ngIf="!data?.parameters?.formula_notation" class="text-muted"></div>
 
       </div>
     </div>
@@ -161,7 +161,7 @@
       <div class="row m-0 mt-3 result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
           <label for="" >Results: </label>
-          <p class="final-result-value mb-0 ms-2">{{ finalResult || 'N/A'}}<span *ngIf="finalResult">{{data?.parameters?.insUnits}}</span></p>
+          <p class="final-result-value mb-0 ms-2">{{ finalResult || ''}}<span *ngIf="finalResult">{{data?.parameters?.insUnits}}</span></p>
         </div>
       </div>
 
@@ -192,7 +192,7 @@
       <div class="row m-0 mt-3 final-result">
         <div class="col-md-12 text-end d-flex align-items-center justify-content-end">
           <label for="" >Final Result: </label>
-          <p class="final-result-value mb-0 ms-2">{{convertedResult || 'N/A'}}<span *ngIf="convertedResult">{{data?.parameters?.insUnits}}</span></p>
+          <p class="final-result-value mb-0 ms-2">{{convertedResult || ''}}<span *ngIf="convertedResult">{{data?.parameters?.insUnits}}</span></p>
         </div>
       </div>
 

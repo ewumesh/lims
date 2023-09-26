@@ -190,7 +190,7 @@
                                 <td>{{a.name | titlecase}}</td>
                                 <td>
                                     <span *ngIf="a.completed_date">{{a.completed_date | date}}</span>
-                                    <span *ngIf="!a.completed_date">N/A</span>
+                                    <span *ngIf="!a.completed_date"></span>
                                 </td>
                                 <td>
                                     <button [disabled]="isLoadingDownloadBtn" (click)="downloadReport(a.id)" class="btn btn-outline-primary btn-sm">

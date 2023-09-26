@@ -42,7 +42,7 @@
               <span *ngIf="column == 'units'">{{element[column] | titlecase}}</span>
               <span *ngIf="column !== 'price' && column !== 'test_duration' && column !== 'name'"></span>
             </span>
-            <span *ngIf="!element[column] && column !== 'sn'" class="text-muted">N/A</span>
+            <span *ngIf="!element[column] && column !== 'sn'" class="text-muted"></span>
            </td>
         </ng-container>
         <ng-template #action>
@@ -78,7 +78,7 @@
                     <td class="text-center">{{i+1}}</td>
                     <!-- <td>
                       <span *ngIf="item.test_type">{{item.test_type | titlecase}}</span>
-                      <span *ngIf="!item.test_type" class="text-muted">N/A</span>
+                      <span *ngIf="!item.test_type" class="text-muted"></span>
                     </td> -->
                     <td>{{item.name | titlecase}}</td>
                     <!-- <td>{{item.ref_test_method | titlecase}}</td> -->

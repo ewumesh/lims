@@ -1,82 +1,97 @@
 
 <div class="p-4" *ngIf="sampleDetails" id="print-section">
-    <table class="top-table">
+    <table class="top-table" style="border-collapse: collapse; width: 100%;">
         <tr>
-            <th style=" width: 16.66%; padding: 6px; position: relative;" >
+            <th style=" width: 16.66%; padding: 6px; position: relative;  border: 1px solid black; text-align: left; padding: 4px 2px; font-weight: 600;" >
                 <img src="https://logos-download.com/wp-content/uploads/2021/07/Emblem_of_Nepal.png" alt="logo"
-                    style="width: 100px;">
+                    style="width: 100px; position: absolute; top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);">
             </th>
-            <th style=" width: 66.66%; border-right: 0;" colspan="2" >
-                <h3>Government of Nepal</h3>
-                <h3>Ministry of Agriculture and Livestock Development</h3>
-                <h1>Department of Food Technology and Quality Control</h1>
-                <h1>National Food and Feed Reference Laboratory</h1>
-                <h3>Babarmahal, Kathmandu, Nepal</h3>
+            <th style=" width: 66.66%; border-right: 0; border: 1px solid black; text-align: left; padding: 4px 2px; font-weight: 600;" colspan="2" >
+                <h3 style="font-size: 20px; margin: 0; text-align: center; font-weight: 500;">Government of Nepal</h3>
+                <h3 style="font-size: 20px; margin: 0; text-align: center; font-weight: 500;">Ministry of Agriculture and Livestock Development</h3>
+                <h1 style="font-size: 20px; margin: 0; text-align: center; font-weight: 600;">Department of Food Technology and Quality Control</h1>
+                <h1 style="font-size: 20px; margin: 0; text-align: center; font-weight: 600;">National Food and Feed Reference Laboratory</h1>
+                <h3 style="font-size: 20px; margin: 0; text-align: center; font-weight: 500;">Babarmahal, Kathmandu, Nepal</h3>
             </th>
-            <th style=" width: 16.66%; border-left: 0;" >
-                <p>{{sampleDetails?.id}}</p>
+            <th style=" width: 16.66%; border-left: 0; border: 1px solid black; text-align: left; padding: 4px 2px; font-weight: 600;" >
+                <p style="text-align: center;">{{sampleDetails?.id}}</p>
             </th>
         </tr> 
         <tr>
-            <td colspan="4">
-                <h2 style="padding-inline:  5px;" class="heading" >NFFRUSR/7.8/02: Laboratory Test Report Sheet</h2>
+            <td colspan="4" style="border:none; text-align: left; padding: 4px 2px; font-weight: 600;">
+                <h2 style="padding-inline:  5px; font-size: 22px; font-weight: 600; text-align: center; margin: 10px 0;" class="heading" >NFFRL/7.8/02: Laboratory Test Report Sheet</h2>
             </td>
         </tr>
-        <tr>
-            <td  ><h2 style="padding-inline:  5px;">Commodity Category:{{sampleDetails?.sample_form_has_parameter?.commodity?.category?.name || '-'}}</h2></td>
-            <td ><h2 style="padding-inline:  5px;">Name of Sample: {{sampleDetails?.sample_form?.name || '-'}}</h2></td>
-            <td ><h2 style="padding-inline:  5px;">Sample code No:{{sampleDetails?.sample_form?.namuna_code || '-'}}</h2></td>
-            <td ><h2 style="padding-inline:  5px;">Date of Sample Received:{{(sampleDetails?.sample_received_date) || '-'}}</h2></td>
-        </tr>
-        <tr>
-            <td ><h2 style="padding-inline:  5px;">Date of Sample Analysis:{{sampleDetails?.started_date || '-'}}</h2></td>
-            <td colspan="2"><h2 style="padding-inline:  5px;">Date of Sample Completion:  {{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
-            <td ><h2 style="padding-inline:  5px;">Reported Date:{{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
-        </tr>
-    </table>
+        </table>
+
+        <table style="border-collapse: collapse;">
+            <tr>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Commodity Category:{{sampleDetails?.sample_form_has_parameter?.commodity?.category?.name || '-'}}</h2></td>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Name of Sample: {{sampleDetails?.sample_form?.name || '-'}}</h2></td>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Sample code No:{{sampleDetails?.sample_form?.namuna_code || '-'}}</h2></td>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Date of Sample Received:{{(sampleDetails?.sample_received_date) || '-'}}</h2></td>
+            </tr>
+            <tr>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Date of Sample Analysis start:{{sampleDetails?.started_date || '-'}}</h2></td>
+                <td colspan="2" style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Date of Sample analysis Completion:  {{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
+                <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; " ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; margin: 0;">Reported Date:{{convertToNepaliDate(sampleDetails?.completed_date) || '-'}}</h2></td>
+            </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem;" class="bottom-table mt-4">
+            <tr>
+                <td style="border: 1px solid black; text-align: left; padding: 4px 2px;">Sample's Receipt condition: {{sampleDetails?.sample_receipt_condition}}</td>
+            </tr>
+        </table>
+        
+   
     
     
     
-    <table style="width: 100%;" class="bottom-table mt-4">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem;" class="bottom-table mt-4">
     <tr >
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Parameters</h2></th>
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Units</h2></th>
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Results</h2></th>
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Final Result</h2></th>
-        <th style="width: 28.57%;" colspan="2" ><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Method used for Analysis</h2></th>
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center" >MU <br> (If needed)</h2></th>
-        <th style="width: 14.285%;"><h2 style="padding-inline:  5px; text-align: center;" class="text-center">Remarks</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center; margin: 0;" class="text-center">Parameters</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center">Units</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center">Results</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center">Final Result</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 28.57%;"   colspan="2" ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center">Method used for Analysis</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center" >MU <br> (If needed)</h2></th>
+        <th style=" border: 1px solid black; text-align: left; padding: 4px 2px; width: 14.285%;"  ><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500; text-align: center;  margin: 0;" class="text-center">Remarks</h2></th>
     </tr>
     
     <tr *ngFor="let p of sampleDetails.raw_data; let i = index;">
-        <td><h2>{{p?.parameter?.name || '-'}}</h2></td>
-        <td>
-            <h2 class="text-center">
+        <td style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500;  margin: 0;">{{p?.parameter?.name || '-'}}</h2></td>
+        <td style="border: 1px solid black; text-align: left; padding: 4px 2px;">
+            <h2 style="padding-inline:  5px; font-size: 16px; font-weight: 500;  margin: 0;" class="text-center">
             
               <div> 
                 <span>{{p?.units || '-'}}</span>
               </div>
         </h2>
     </td>
-        <td class="text-center"><h2 style="padding-inline:  5px;" [innerHtml]="p?.result"></h2></td>
-        <td class="text-center"><h2 style="padding-inline:  5px;" [innerHtml]="p?.converted_result"></h2></td>
-        <td class="text-center" colspan="2" ><h2 style="padding-inline:  5px;">
+        <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;" [innerHtml]="p?.result"></h2></td>
+        <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;" [innerHtml]="p?.converted_result"></h2></td>
+        <!-- <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;" [innerHtml]="p?.additional_info"></h2></td> -->
+        <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;" colspan="2" ><h2 style=" margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;">
             <span>{{p.test_method || '-'}}</span>
         </h2></td>
-        <td class="text-center"><h2 style="padding-inline:  5px;"></h2></td>
-        <td class="text-center"><h2 style="padding-inline:  5px;">{{p?.remarks || ''}}</h2></td>
+        <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;"></h2></td>
+        <td class="text-center" style="border: 1px solid black; text-align: left; padding: 4px 2px;"><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;">{{p?.remarks || ''}}</h2></td>
     </tr>
     
     </table>
     
-    <table class="footer w-100 mt-4">
+    <table class="footer w-100 mt-4" style="border-collapse: collapse; margin-top: 1.5rem; width: 100%;">
     <tr>
-        <td><h2 style="padding-inline:  5px;">Analyze by:{{userDetails?.first_name}} {{userDetails?.last_name}}</h2></td>
-        <!-- <td><h2>Checked by:N/A</h2></td> -->
+        <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; "><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;">Checked by:{{userDetails?.first_name}} {{userDetails?.last_name}}</h2></td>
+        <td  style="border: 1px solid black; text-align: left; padding: 4px 2px; "><h2 style="  margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;">Checked by:{{userDetails?.first_name}} {{userDetails?.last_name}}</h2></td>
+        <!-- <td><h2>Checked by:</h2></td> -->
     </tr>
     <tr>
-        <td><h2 style="padding-inline:  5px;">Remarks: {{sampleDetails?.remarks || '-'}}</h2></td>
-        <!-- <td><h2>Approved by:N/A</h2></td> -->
+        <td colspan="2" style="border: 1px solid black; text-align: left; padding: 4px 2px; "><h2 style=" margin: 0; padding-inline:  5px; font-size: 16px; font-weight: 500;">Remarks: {{sampleDetails?.remarks || '-'}}</h2></td>
+        <!-- <td><h2>Approved by:</h2></td> -->
     </tr>
     </table>
     </div> 

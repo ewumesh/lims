@@ -166,7 +166,7 @@
           <th mat-header-cell *matHeaderCellDef> TestDuration </th>
           <td mat-cell *matCellDef="let c">
             <span *ngIf="c.test_duration">{{c.test_duration}} </span>
-            <span *ngIf="!c.test_duration" class="text-muted">N/A</span>
+            <span *ngIf="!c.test_duration" class="text-muted"></span>
           </td>
         </ng-container>
 
@@ -174,7 +174,7 @@
           <th mat-header-cell *matHeaderCellDef> Units </th>
           <td mat-cell *matCellDef="let c">
             <span *ngIf="c.units">{{c.units}} </span>
-            <span *ngIf="!c.units" class="text-muted">N/A</span>
+            <span *ngIf="!c.units" class="text-muted"></span>
           </td>
         </ng-container> -->
 
@@ -182,7 +182,7 @@
           <th mat-header-cell *matHeaderCellDef> Category </th>
           <td mat-cell *matCellDef="let c">
             <span *ngIf="c.category">{{getCommodityCategoryName(c.category)}} <span *ngIf="getCommodityCategoryNameNepali(c.category)">({{getCommodityCategoryNameNepali(c.category)}})</span>  </span>
-            <span *ngIf="!c.category" class="text-muted">N/A</span>
+            <span *ngIf="!c.category" class="text-muted"></span>
           </td>
         </ng-container>
 

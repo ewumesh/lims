@@ -6,30 +6,30 @@
           <div class="row">
             <p>Supervise By</p>
             <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
-            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></h4>
           </div>
           <div class="row mt-2">
             <p>Created By</p>
             <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
-            <h4 *ngIf="!reportDetails?.owner_user?.first_name" class="text-muted">N/A</h4>
+            <h4 *ngIf="!reportDetails?.owner_user?.first_name" class="text-muted"></h4>
           </div>
         </div>
         <div class="col-md-3">
           <div class="row">
             <p>Assigned Date</p>
             <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date}}</h4>
-            <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
+            <h4 *ngIf="!reportDetails?.created_date" class="text-muted"></h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
             <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date}}</h4>
-            <h4 class="text-muted" *ngIf="!reportDetails?.created_date">N/A</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails?.created_date"></h4>
           </div>
         </div>
         <div class="col-md-3">
           <!-- <div class="row">
             <p>Verified By</p>
-            <h4>N/A</h4>
+            <h4></h4>
           </div> -->
           <!-- <div class="row mt-2">
                       <p>Rejected at</p>
@@ -51,7 +51,7 @@
         </div>
         <div class="col-md-4">
           <h4>Sample Name </h4>
-          <p>{{reportDetails.name}}</p>
+          <p>{{reportDetails?.commodity?.name}}</p>
         </div>
         <div class="col-md-4">
           <h4>Commodity </h4>
@@ -129,7 +129,7 @@
                 <td>
                   <span *ngIf="r.result" [innerHtml]="r.result"></span>
                   <!-- <span *ngIf="r?.result === 0">0</span> -->
-                  <span *ngIf="!r?.result" class="text-muted">N/A</span>
+                  <span *ngIf="!r?.result" class="text-muted"></span>
                 </td>
                 <td><span class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span></td>
               </tr>

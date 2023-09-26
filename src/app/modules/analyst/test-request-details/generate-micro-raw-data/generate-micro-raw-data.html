@@ -31,7 +31,7 @@
             <table style="width: 100%;" class="bottom-table">
                 <tr>
                     <th class="text-center" >S.N.</th>
-                    <th colspan="9"> Name of Laboratory: <span class="detail"> N/A </span></th>
+                    <th colspan="9"> Name of Laboratory: <span class="detail">  </span></th>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
@@ -196,14 +196,14 @@
                                       </div>
                                       </div>
                                       <h2>Formula = {{p?.parameter?.formula}}</h2>
-                                      <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
-                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
+                                      <h2>Final Result = {{p?.converted_result || ''}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || ''}}</div>
                                       <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = 
                                         <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
-                                        <span *ngIf="!p?.analyst_remarks">N/A</span>
+                                        <span *ngIf="!p?.analyst_remarks"></span>
                                     </h2>
                                     </div>
-                                    <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+                                    <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div>
                                   </div>
                             </div>
                             <!-- <div class="col-md-6">

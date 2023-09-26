@@ -55,7 +55,7 @@
           <th mat-header-cell *matHeaderCellDef> Sample ID </th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.sample_form?.id" class="text-uppercase">{{row.sample_form?.namuna_code || '-'}}</span>
-            <span class="text-muted" *ngIf="!row.sample_form?.id">N/A</span>
+            <span class="text-muted" *ngIf="!row.sample_form?.id"></span>
           </td>
         </ng-container>
     
@@ -63,7 +63,7 @@
           <th mat-header-cell *matHeaderCellDef> Sample Name </th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row?.sample_form?.name">{{row?.sample_form?.name | titlecase}} </span>
-            <span *ngIf="!row?.sample_form?.name" class="text-muted">N/A</span>
+            <span *ngIf="!row?.sample_form?.name" class="text-muted"></span>
           </td>
         </ng-container>
     
@@ -71,7 +71,7 @@
           <th mat-header-cell *matHeaderCellDef> Commodity </th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.commodity">{{row.commodity?.name}}</span>
-            <span *ngIf="!row.commodity" class="text-muted">N/A</span>
+            <span *ngIf="!row.commodity" class="text-muted"></span>
           </td>
         </ng-container>
     
@@ -79,7 +79,7 @@
           <th mat-header-cell *matHeaderCellDef> Assigned Date </th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.created_date">{{row.created_date | date}}</span>
-            <span *ngIf="!row.created_date" class="text-muted">N/A</span>
+            <span *ngIf="!row.created_date" class="text-muted"></span>
           </td>
         </ng-container> -->
     
@@ -93,7 +93,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="row.sample_has_parameter_analyst.length < 1" class="text-muted">N/A</div>
+            <div *ngIf="row.sample_has_parameter_analyst.length < 1" class="text-muted"></div>
           </td>
         </ng-container> -->
     
@@ -101,7 +101,7 @@
           <th mat-header-cell *matHeaderCellDef> Status</th>
           <td mat-cell *matCellDef="let row">
             <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{ row.status | titlecase }}</span>
-            <span *ngIf="!row.status" class="text-muted">N/A</span>
+            <span *ngIf="!row.status" class="text-muted"></span>
           </td>
         </ng-container>
     

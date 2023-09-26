@@ -97,7 +97,7 @@
                         <span *ngIf="t.test_type === '2'">Microbiological Test</span> -->
                         {{t.test_type | titlecase}}
                       </span>
-                      <span *ngIf="!t.test_type" class="text-muted">N/A</span>
+                      <span *ngIf="!t.test_type" class="text-muted"></span>
                     </td>
                     <td>{{t.name}}</td>
                     <td>
@@ -105,22 +105,22 @@
                         <span>{{t?.test_method[0]?.ref_test_method}}</span> &nbsp;
                         <span><a (click)="viewMoreDetails(t?.test_method, 't')" href="Javascript:;"> More</a></span>
                       </div>
-                      <span *ngIf="t?.test_method.length < 1">N/A</span>
+                      <span *ngIf="t?.test_method.length < 1"></span>
 
                     </td>
                     <td>
                       <span *ngIf="t.formula">
-                        <span *ngIf="t.formula === 'nan'" class="text-muted">N/A</span>
+                        <span *ngIf="t.formula === 'nan'" class="text-muted"></span>
                         <span *ngIf="t.formula !== 'nan'" class="text-muted">{{t.formula}}</span>
                         </span>
-                      <span *ngIf="!t.formula" class="text-muted">N/A</span>
+                      <span *ngIf="!t.formula" class="text-muted"></span>
                     </td>
                     <td>
                       <div *ngIf="t?.units.length > 0">
                         <span>{{t?.units[0]?.units}}</span> &nbsp;
                         <span *ngIf="t?.units.length > 1"><a (click)="viewMoreDetails(t?.units, 'u')" href="Javascript:;"> More</a></span>
                       </div>
-                      <span *ngIf="t?.units.length < 1">N/A</span>
+                      <span *ngIf="t?.units.length < 1"></span>
                     </td>
                     <td>Rs.{{t.price}}</td>
                     <td>
@@ -130,7 +130,7 @@
                           <a (click)="viewMoreDetails(t?.mandatory_standard, 'm')" href="Javascript:;"> More</a>
                         </span>
                       </div>
-                      <span *ngIf="t?.mandatory_standard.length < 1">N/A</span>
+                      <span *ngIf="t?.mandatory_standard.length < 1"></span>
 
                     </td>
                     <td>

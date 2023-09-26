@@ -63,7 +63,7 @@
         ">{{row.assigned_date
           | date}} </span>
         <span *ngIf="!row.assigned_date
-        " class="text-muted">N/A</span>
+        " class="text-muted"></span>
       </td>
     </ng-container>
 
@@ -77,7 +77,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="!row?.first_name" class="text-muted">N/A</div>
+        <div *ngIf="!row?.first_name" class="text-muted"></div>
       </td>
     </ng-container>
 
@@ -87,7 +87,7 @@
         <span *ngIf="row.status" style="padding: 8px;" class="badge badge-primary" [statusColor]="row.status">{{ row.status | titlecase }}</span>
 
         <!-- <span *ngIf="row.status">{{row.status}} </span> -->
-        <span *ngIf="!row.status" class="text-muted">N/A</span>
+        <span *ngIf="!row.status" class="text-muted"></span>
       </td>
     </ng-container>
 

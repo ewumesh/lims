@@ -25,19 +25,19 @@
             <div class="row">
               <p>Approve By</p>
               <h4 *ngIf="reportDetails.approved_by?.first_name">{{reportDetails.approved_by?.first_name}} {{reportDetails?.approved_by?.last_name}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails.approved_by?.first_name">N/A</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_by?.first_name"></h4>
             </div>
 
             <div class="row">
               <p>Approve At</p>
               <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails.approved_date">N/A</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_date"></h4>
             </div>
           </div>
           <div class="col-md-3">
             <div class="row">
               <p>Completed At</p>
-              <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+              <h4 *ngIf="!reportDetails?.completed_date" class="text-muted"></h4>
               <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date:'medium'}}</h4>
             </div>
             <!-- <div class="row mt-2">
@@ -58,7 +58,7 @@
             <h4 class="mb-0">Sample ID</h4>
             <p>
               <span *ngIf="reportDetails?.id">{{reportDetails.id}}</span>
-              <span *ngIf="!reportDetails?.id" class="text-muted">N/A</span>
+              <span *ngIf="!reportDetails?.id" class="text-muted"></span>
             </p>
           </div>
           <div class="col-md-4">
@@ -103,32 +103,32 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Type</h4>
-            <p>{{reportDetails?.sample_type || 'N/A'}}</p>
+            <p>{{reportDetails?.sample_type || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Quantity</h4>
-            <p>{{reportDetails?.sample_quantity || 'N/A'}}</p>
+            <p>{{reportDetails?.sample_quantity || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Number of Sample</h4>
-            <p>{{reportDetails?.number_of_sample || 'N/A'}}</p>
+            <p>{{reportDetails?.number_of_sample || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample units</h4>
-            <p>{{reportDetails?.sample_units || 'N/A'}}</p>
+            <p>{{reportDetails?.sample_units || ''}}</p>
           </div>
           
           <div class="col-md-4">
             <h4 class="mb-0">Amendments</h4>
-            <p>{{reportDetails?.amendments || 'N/A'}}</p>
+            <p>{{reportDetails?.amendments || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Note</h4>
-            <p>{{reportDetails?.note || 'N/A'}}</p>
+            <p>{{reportDetails?.note || ''}}</p>
           </div>
         </div>
       </div>
@@ -252,21 +252,21 @@
                     <!-- <span *ngIf="r.test_type === '1'">Chemical Test</span>
                         <span *ngIf="r.test_type === '2'">Microbiological Test</span> -->
                         </span>
-                        <span *ngIf="!r.test_type">N/A</span>
+                        <span *ngIf="!r.test_type"></span>
                   </td>
                   <td>{{r.test_method}}
                     <!-- <span *ngIf="r.ref_test_method">
-                      <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.ref_test_method === 'nan'" class="text-muted"></span>
                       <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
                       </span>
-                    <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span> -->
+                    <span *ngIf="!r.ref_test_method" class="text-muted"></span> -->
 
                   </td>
                   <td><span *ngIf="r.units">
-                    <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                    <span *ngIf="r.units === 'nan'" class="text-muted"></span>
                     <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
                     </span>
-                  <span *ngIf="!r.units" class="text-muted">N/A</span></td>
+                  <span *ngIf="!r.units" class="text-muted"></span></td>
                   <!-- <td>Rs.{{r.price}}</td> -->
                   <td>{{r.mandatory_standard}}</td>
                   <td>

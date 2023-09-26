@@ -16,7 +16,7 @@
         <div class="text-muted">Sample Name</div>
         <div class="font-bold">
           <span *ngIf="testRequestDetails?.sample_form?.name">{{testRequestDetails?.sample_form?.name}}</span>
-          <span *ngIf="!testRequestDetails?.sample_form?.name" class="text-muted">N/A</span>
+          <span *ngIf="!testRequestDetails?.sample_form?.name" class="text-muted"></span>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
           {{testRequestDetails?.assigned_by?.first_name}}
           {{testRequestDetails?.assigned_by?.last_name}}</div>
         <div class="text-muted" *ngIf="!testRequestDetails?.assigned_by?.first_name" class="font-bold">
-          N/A</div>
+          </div>
       </div>
 
       <div class="col-md-2">
@@ -37,7 +37,7 @@
       <div class="col-md-2 text-end">
         <span style="padding: 8px;" *ngIf="testRequestDetails?.status" class="badge badge-primary"
           [statusColor]="testRequestDetails?.status"> {{testRequestDetails?.status | titlecase}}</span>
-        <span *ngIf="!testRequestDetails.status" class="text-muted">N/A</span>
+        <span *ngIf="!testRequestDetails.status" class="text-muted"></span>
       </div>
 
       <!-- <div class="col-md-3">
@@ -70,6 +70,7 @@
             </td>
             <td style="width: 30%;" class="text-end pt-3">
               <button  (click)="viewRawData(a)" class="btn btn-primary btn-lims-primary btn-sm">View Raw Data </button>
+              <button (click)="viewLabSheet(a)"  class="btn btn-primary btn-lims-primary btn-sm mx-1">View Lab Sheet</button>
               <button *ngIf="a.test_type === 'Microbiological'"  (click)="printRawDatasheetMicro(a.id)" class="btn btn-danger btn-lims-danger btn-sm">Print</button>
               <button *ngIf="a.test_type === 'Microbiological'" (click)="downloadRawDatasheetMicro(a.id)" class="btn btn-secondary mx-2 btn-sm">Download</button>
               
@@ -83,7 +84,7 @@
     </div>
   </div>
 
-  <div class="row m-0 p-0 mt-3" *ngIf="rawDataSheet.length > 0">
+  <!-- <div class="row m-0 p-0 mt-3" *ngIf="rawDataSheet.length > 0">
     <div class="col-md-12 bg-white" style="border-radius: 5px;">
 
       <table class="table">
@@ -92,7 +93,7 @@
           <tr>
             <td style="width: 20%;">
               <p class="text-muted mb-0 pb-0">Generated Date</p>
-              <p class="text-muted mb-0">Date:{{(testRequestDetails?.created_date| date:'medium') || 'N/A'}}</p>
+              <p class="text-muted mb-0">Date:{{(testRequestDetails?.updated_date| date:'medium') || ''}}</p>
             </td>
             <td style="width: 30%;" class="pt-3">
               
@@ -106,7 +107,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="row m-0 p-0 mt-3 mb-3 ">
@@ -181,7 +182,7 @@ display: inline-block;
         <span *ngIf="row.name">
           {{row.name}}
         </span>
-        <span *ngIf="!row?.name" class="text-muted">N/A</span>
+        <span *ngIf="!row?.name" class="text-muted"></span>
 
       </td>
     </ng-container>
@@ -190,7 +191,7 @@ display: inline-block;
       <th mat-header-cell *matHeaderCellDef> Method Use For Analysis </th>
       <td mat-cell *matCellDef="let row">
         <!-- <span *ngIf="row.ref_test_method">{{row?.ref_test_method | titlecase}} </span>
-        <span *ngIf="!row.ref_test_method" class="text-muted">N/A</span> -->
+        <span *ngIf="!row.ref_test_method" class="text-muted"></span> -->
         <div *ngIf="row.test_type === 'Instrumental'" class="mt-2">
           <mat-form-field appearance="outline" class="w-100">
             <mat-select [(ngModel)]="row.insTestMethod" class="custom-select">
@@ -204,7 +205,7 @@ display: inline-block;
         </div>
         <div *ngIf="row.test_type !== 'Instrumental'"> 
           <span *ngFor="let t of row.test_method">{{t?.ref_test_method}}</span>
-          <span *ngIf="row?.test_method.length < 1" class="text-muted">N/A</span>
+          <span *ngIf="row?.test_method.length < 1" class="text-muted"></span>
         </div>
         
       </td>
@@ -219,7 +220,7 @@ display: inline-block;
           <span *ngIf="row?.test_type === '2'">Microbiological Test</span> -->
 
         </span>
-        <span *ngIf="!row.test_type" class="text-muted">N/A</span>
+        <span *ngIf="!row.test_type" class="text-muted"></span>
       </td>
     </ng-container>
 
@@ -236,7 +237,7 @@ display: inline-block;
         </div>
         <div *ngIf="row.test_type !== 'Instrumental'"> 
           <span *ngFor="let t of row.mandatory_standard">{{t?.mandatory_standard}}</span>
-          <span *ngIf="row?.mandatory_standard.length < 1" class="text-muted">N/A</span>
+          <span *ngIf="row?.mandatory_standard.length < 1" class="text-muted"></span>
         </div>
         
       </td>
@@ -254,7 +255,7 @@ display: inline-block;
         </div>
         <div *ngIf="row.test_type !== 'Instrumental'"> 
           <span *ngFor="let t of row.units">{{t?.units}}</span>
-          <span *ngIf="row?.units.length < 1" class="text-muted">N/A</span>
+          <span *ngIf="row?.units.length < 1" class="text-muted"></span>
         </div>
         
       </td>
@@ -279,7 +280,7 @@ display: inline-block;
 
         <div *ngIf="!row.analyst_remarks">
         <span *ngIf="row.result !== ''">{{row.converted_result}} </span>
-        <span *ngIf="row.result === ''">N/A</span>
+        <span *ngIf="row.result === ''"></span>
         </div>
 
         <div *ngIf="row.analyst_remarks">
@@ -430,6 +431,11 @@ display: inline-block;
 
           
       </div> -->
+
+      <div class="col-md-12">
+        <label>Sample's receipt condition.</label>
+        <textarea formControlName="sample_receipt_condition" class="form-control"></textarea>
+      </div>
 
       <div class="col-md-12 text-end mt-2">
         <button (click)="saveOtherDetails()" class="btn btn-primary btn-sm">

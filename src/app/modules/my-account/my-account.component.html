@@ -36,7 +36,7 @@
             <p *ngIf="accountDetails.role === 5" class="mt-1 mb-0">Client Category: <span class="client-cat">
                 <span *ngIf="accountDetails?.client_category">
                   {{getClientCategoryName(accountDetails?.client_category)}}</span>
-                <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+                <span *ngIf="!accountDetails?.client_category" class="text-muted"></span>
               </span>
             </p>
             <!-- {{userDetails  | json}} -->
@@ -153,7 +153,7 @@
                 <h3>
                   <span class="title">Phone Number</span>
                   <p class="detail"><span *ngIf="accountDetails?.phone">{{accountDetails?.phone}}</span>
-                    <span *ngIf="!accountDetails?.phone" class="text-muted">N/A</span>
+                    <span *ngIf="!accountDetails?.phone" class="text-muted"></span>
                   </p>
 
                 </h3>
@@ -167,7 +167,7 @@
                   <p class="detail">
                     <span
                       *ngIf="accountDetails?.client_category">{{getClientCategoryName(accountDetails?.client_category)}}</span>
-                    <span *ngIf="!accountDetails?.client_category" class="text-muted">N/A</span>
+                    <span *ngIf="!accountDetails?.client_category" class="text-muted"></span>
                   </p>
 
                 </h3>

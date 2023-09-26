@@ -194,16 +194,16 @@
                                       </div>
                                       </div>
                                       <!-- {{p | json}} -->
-                                      <h2>Formula = {{p?.parameter?.formula || 'N/A'}}</h2>
-                                      <h2>Result = {{p?.result || 'N/A'}} {{p?.units}}</h2>
-                                      <h2>Final Result = {{p?.converted_result || 'N/A'}} {{p?.units}}</h2>
-                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
+                                      <h2>Formula = {{p?.parameter?.formula || ''}}</h2>
+                                      <h2>Result = {{p?.result || ''}} {{p?.units}}</h2>
+                                      <h2>Final Result = {{p?.converted_result || ''}} {{p?.units}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || ''}}</div>
                                       <h2 *ngIf="p.analyst_remarks"> Analysis = 
                                         <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
-                                        <span *ngIf="!p?.analyst_remarks">N/A</span>
+                                        <span *ngIf="!p?.analyst_remarks"></span>
                                     </h2>
                                     </div>
-                                    <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div> -->
+                                    <!-- <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div> -->
                                   </div>
                             </div>
                             <!-- <div class="col-md-6">

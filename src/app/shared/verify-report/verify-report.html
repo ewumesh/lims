@@ -7,7 +7,7 @@
             <p>Sample ID</p>
             <h4>{{reportDetails.namuna_code || reportDetails?.id}}</h4>
             <!-- <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
-            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4> -->
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></h4> -->
           </div>
           <!-- <div class="row mt-2">
             <p>Sample Name</p>
@@ -23,7 +23,7 @@
           <!-- <div class="row mt-2">
             <p>Created at</p>
             <h4 *ngIf="reportDetails?.created_date">{{reportDetails?.created_date | date: 'medium'}}</h4>
-            <h4 class="text-muted" *ngIf="!reportDetails?.created_date">N/A</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails?.created_date"></h4>
           </div> -->
         </div>
         <div class="col-md-3">
@@ -31,7 +31,7 @@
           <h4 *ngIf="reportDetails?.created_date">
             {{reportDetails?.created_date | date: 'medium'}}
           </h4>
-          <h4 *ngIf="!reportDetails?.created_date" class="text-muted">N/A</h4>
+          <h4 *ngIf="!reportDetails?.created_date" class="text-muted"></h4>
         </div>
         <div class="col-md-3 log-status">
           <span
@@ -710,7 +710,7 @@
             <tr>
               <td style="width: 20%;">
                 <p class="text-muted mb-0 pb-0">Generated Date</p>
-                <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+                <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || ''}}</p>
               </td>
               <td style="width: 30%;" class="pt-3">
                 
@@ -768,7 +768,7 @@
                 <td>
                   <span [innerHtml]="r.result"></span>
                   <!-- <span *ngIf="r?.result === 0">0</span>
-                  <span *ngIf="r?.result" class="text-muted">N/A</span> -->
+                  <span *ngIf="r?.result" class="text-muted"></span> -->
                 </td>
                 <td>
                   <span class="badge badge-primary" [statusColor]="r.status"

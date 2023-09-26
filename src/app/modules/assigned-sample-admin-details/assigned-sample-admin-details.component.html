@@ -7,12 +7,12 @@
           <!-- <div class="row">
             <p>Supervise By</p>
             <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.suervisosupervisor_userr_user?.first_name}} {{reportDetails?.supervisor_user?.last}}</h4>
-            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+            <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></h4>
           </div> -->
           <div class="row mt-2">
             <p>Created By</p>
             <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
-            <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name">N/A</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name"></h4>
           </div>
           <div class="row mt-2">
             <p>Created at</p>
@@ -31,12 +31,12 @@
           <!-- <div class="row">
             <p>Verified By</p>
             <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
-            <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
+            <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name"></h4>
           </div> -->
           <!-- <div class="row mt-2">
                       <p>Verified at</p>
                       <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'long'}}</h4>
-                      <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+                      <h4 *ngIf="!reportDetails?.completed_date" class="text-muted"></h4>
                   </div> -->
         </div>
         <div class="col-md-3 log-status">
@@ -53,22 +53,22 @@
         <div class="row">
           <div class="col-md-4">
             <h4 class="mb-0">Name</h4>
-            <p class="text-bold">{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.first_name || ''}} {{sampleUserDetails?.last_name || ''}}</p>
           </div> 
   
           <div class="col-md-4">
             <h4 class="mb-0">Email</h4>
-            <p class="text-bold">{{sampleUserDetails?.email || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.email || ''}}</p>
           </div> 
   
           <div class="col-md-4">
             <h4 class="mb-0">Phone</h4>
-            <p class="text-bold">{{sampleUserDetails?.phone || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.phone || ''}}</p>
           </div> 
           
           <div class="col-md-4">
             <h4 class="mb-0">Username</h4>
-            <p class="text-bold">{{sampleUserDetails?.username || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.username || ''}}</p>
           </div>
           
           
@@ -79,22 +79,22 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Client category</h4>
-            <p class="text-bold">{{sampleUserDetails?.client_category || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.client_category || ''}}</p>
           </div>
           
           <div class="col-md-4">
             <h4 class="mb-0">Department Name</h4>
-            <p class="text-bold">{{sampleUserDetails?.department_name || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.department_name || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Department Address</h4>
-            <p class="text-bold">{{sampleUserDetails?.department_address || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.department_address || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Registration Number</h4>
-            <p class="text-bold">{{sampleUserDetails?.registration_number || 'N/A'}}</p>
+            <p class="text-bold">{{sampleUserDetails?.registration_number || ''}}</p>
           </div>
         </div>
   
@@ -125,11 +125,11 @@
       <div class="row m-0 py-1" *ngFor="let p of reportDetails.payment">
         <div class="col-md-3">
           <h4 class="mb-0">Voucher No</h4>
-          <p class="text-bold">{{p.voucher_number || 'N/A'}}</p>
+          <p class="text-bold">{{p.voucher_number || ''}}</p>
         </div>
         <div class="col-md-3">
           <h4 class="mb-0">Amount </h4>
-          <p class="text-bold">{{p.amount || 'N/A'}}</p>
+          <p class="text-bold">{{p.amount || ''}}</p>
         </div>
         <div class="col-md-3">
           <h4 class="mb-0">Paid Date </h4>
@@ -200,52 +200,52 @@
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Sample Name </h4>
-          <p>{{reportDetails.name || 'N/A'}}</p>
+          <p>{{reportDetails.name || ''}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Commodity </h4>
-          <p>{{reportDetails?.commodity?.name || 'N/A'}}</p>
+          <p>{{reportDetails?.commodity?.name || ''}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4 class="mb-0">MFD</h4>
-          <p>{{(reportDetails.mfd ) || 'N/A'}}</p>
+          <p>{{(reportDetails.mfd ) || ''}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="mb-0">Best Before Date</h4>
-          <p>{{(reportDetails.dfb) || 'N/A'}}</p>
+          <p>{{(reportDetails.dfb) || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Batch</h4>
-          <p>{{reportDetails.batch || 'N/A'}}</p>
+          <p>{{reportDetails.batch || ''}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4 class="mb-0">Brand</h4>
-          <p>{{reportDetails.brand || 'N/A'}}</p>
+          <p>{{reportDetails.brand || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Purpose of Analysis</h4>
-          <p>{{reportDetails?.purpose || 'N/A'}}</p>
+          <p>{{reportDetails?.purpose || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Condition</h4>
-          <p>{{reportDetails.condition || 'N/A'}}</p>
+          <p>{{reportDetails.condition || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="mb-0">Note</h4>
-          <p>{{reportDetails.note || 'N/A'}}</p>
+          <p>{{reportDetails.note || ''}}</p>
         </div> 
 
         <div class="col-md-4">
           <h4 class="mb-0">Amendments</h4>
-          <p>{{reportDetails.amendments || 'N/A'}}</p>
+          <p>{{reportDetails.amendments || ''}}</p>
         </div> 
 
         <!-- <div class="col-md-4">
@@ -256,34 +256,34 @@
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Type</h4>
-          <p>{{reportDetails.sample_type || 'N/A'}}</p>
+          <p>{{reportDetails.sample_type || ''}}</p>
         </div> 
 
         <div class="col-md-4">
           <h4 class="mb-0">Sample Quantity</h4>
-          <p>{{reportDetails.sample_quantity || 'N/A'}} {{reportDetails.sample_units}}</p>
+          <p>{{reportDetails.sample_quantity || ''}} {{reportDetails.sample_units}}</p>
         </div> 
         
         <div class="col-md-4">
           <h4 class="mb-0">Number of Sample</h4>
-          <p>{{reportDetails.number_of_sample || 'N/A'}}</p>
+          <p>{{reportDetails.number_of_sample || ''}}</p>
         </div> 
         <!-- {{reportDetails?.client_category_detail?.client_category | json}} -->
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-4">
               <h4 class="mb-0">Analysis Fee</h4>
-              <p>{{reportDetails.analysis_fee || 'N/A'}}</p>
+              <p>{{reportDetails.analysis_fee || ''}}</p>
             </div> 
 
             <div class="col-md-4">
               <h4 class="mb-0">Voucher Number</h4>
-              <p>{{reportDetails.voucher_number || 'N/A'}}</p>
+              <p>{{reportDetails.voucher_number || ''}}</p>
             </div> 
 
             <div class="col-md-4">
               <h4 class="mb-0">Voucher Date</h4>
-              <p>{{(reportDetails.voucher_date) || 'N/A'}}</p>
+              <p>{{(reportDetails.voucher_date) || ''}}</p>
             </div> 
 
           </div>
@@ -312,17 +312,17 @@
                 <td>{{i+1}}</td>
                 <td>{{r.test_type}}</td>
                 <td>{{r.name | titlecase}}({{r?.name_nepali}})</td>
-                <!-- <td>{{r.ref_test_method || 'N/A'}}</td> -->
+                <!-- <td>{{r.ref_test_method || ''}}</td> -->
                 <td>Rs.{{r.price}}</td>
                 <td>
                   <span [innerHtml]="r.result"></span>
                   <!-- <span *ngIf="r?.result || r?.result === 0">{{r.result}}</span>
-                    <span *ngIf="!r?.result && r?.result !== 0" class="text-muted">N/A</span> -->
+                    <span *ngIf="!r?.result && r?.result !== 0" class="text-muted"></span> -->
 
                 </td>
                 <td>
                   <span *ngIf="r.status" class="badge badge-primary" [statusColor]="r.status">{{r.status | titlecase}}</span>
-                  <span *ngIf="!r.status" class="text-muted">N/A</span>
+                  <span *ngIf="!r.status" class="text-muted"></span>
                 </td>
                 <td>
                   <div *ngIf="r.sup_full_name" class="authors-container d-flex justify-content-center" data-collaborators="10">

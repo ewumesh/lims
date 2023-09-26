@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-6">
             <p class="title">Reported date </p>
-            <h2 class="detail">{{data?.sample[0]?.sample_form?.created_date | date: 'medium' || 'N/A'}}</h2>
+            <h2 class="detail">{{data?.sample[0]?.sample_form?.created_date | date: 'medium' || ''}}</h2>
           </div>
         </div>
         <div class="row">
@@ -53,13 +53,13 @@
         <div class="row">
           <div class="col-md-12">
             <p class="title">Parameters to be analyzed</p>
-            <h2 class="detail">N/A</h2>
+            <h2 class="detail"></h2>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <p class="title">Method of Analysis/Testing</p>
-            <h2 class="detail">N/A</h2>
+            <h2 class="detail"></h2>
           </div>
         </div>
         <div class="row">
@@ -79,15 +79,15 @@
                 </div>
                 </div>
                 <h2>Formula = {{p?.parameter?.formula}}</h2>
-                <h2>Result = {{p?.result || 'N/A'}}</h2>
-                                      <h2>Final Result = {{p?.converted_result || 'N/A'}}</h2>
-                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || 'N/A'}}</div>
+                <h2>Result = {{p?.result || ''}}</h2>
+                                      <h2>Final Result = {{p?.converted_result || ''}}</h2>
+                                      <div *ngIf="p.additional_info">Additional Info: {{p.additional_info || ''}}</div>
                                       <h2 *ngIf="p.analyst_remarks">Qualitative Analysis = 
                                         <span *ngIf="p?.analyst_remarks" [innerHtml]="p?.analyst_remarks"></span>
-                                        <span *ngIf="!p?.analyst_remarks">N/A</span>
+                                        <span *ngIf="!p?.analyst_remarks"></span>
                                     </h2>
               </div>
-              <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+              <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div>
             </div>
           </div>
   
@@ -147,7 +147,7 @@
   
     <tr style="border-bottom: none;">
         <td style=" border-bottom: none;" class="text-center"> 5</td>
-        <td colspan="10" style="border-bottom: none;" >RAW DATA (Observations, Readings, calculations etc.): <span class="detail"> N/A </span>
+        <td colspan="10" style="border-bottom: none;" >RAW DATA (Observations, Readings, calculations etc.): <span class="detail">  </span>
   
         </td>
     </tr>
@@ -170,7 +170,7 @@
                             </div>
                             <h2>Formula = {{p?.parameter?.formula}}</h2>
                           </div>
-                          <div *ngIf="!p?.parameter?.formula_notation" class="text-muted">N/A</div>
+                          <div *ngIf="!p?.parameter?.formula_notation" class="text-muted"></div>
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -216,7 +216,7 @@
         <td colspan="10">
             <div class="row">
                 <div class="col-md-6"> Name and Signature of analyst:  <span class="detail"> {{data?.analyst_user.first_name}} {{data?.analyst_user.last_name}} </span></div>
-                <div class="col-md-6">Verified by: <span class="detail">N/A </span></div>
+                <div class="col-md-6">Verified by: <span class="detail"> </span></div>
             </div>
         </td>
     </tr>

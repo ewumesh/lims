@@ -31,6 +31,8 @@ export class RawDataRemarksComponent implements OnInit {
 
   today;
 
+  loggedUser;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -42,6 +44,7 @@ export class RawDataRemarksComponent implements OnInit {
     private service: TestRequestDetailsService,
     private datePipe: DatePipe
     ) {
+      this.loggedUser = JSON.parse(localStorage.getItem('userDetails'));
 
       this.today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 

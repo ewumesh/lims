@@ -7,19 +7,19 @@
             <div class="row">
               <p>Supervise By</p>
               <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last_name}}</h4>
-              <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+              <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></h4>
             </div>
             <div class="row mt-2">
               <p>Created By</p>
               <h4 *ngIf="reportDetails?.owner_user?.first_name">{{reportDetails?.owner_user?.first_name}} {{reportDetails?.owner_user?.last_name}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name">N/A</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails?.owner_user?.first_name"></h4>
             </div>
           </div>
           <div class="col-md-3">
             <div class="row">
               <p>Assigned Date</p>
               <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
-              <h4 *ngIf="!reportDetails.approved_date" class="text-muted">N/A</h4>
+              <h4 *ngIf="!reportDetails.approved_date" class="text-muted"></h4>
             </div>
             <div class="row mt-2">
               <p>Created at</p>
@@ -30,12 +30,12 @@
             <div class="row">
               <p>Verified By</p>
               <h4 *ngIf="reportDetails.verified_by?.first_name">{{reportDetails.verified_by?.first_name}} {{reportDetails.verified_by?.last_name}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name">N/A</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.verified_by?.first_name"></h4>
             </div>
             <div class="row mt-2">
                         <p>Verified at</p>
                         <h4 *ngIf="reportDetails?.completed_date">{{reportDetails?.completed_date | date: 'medium'}}</h4>
-                        <h4 *ngIf="!reportDetails?.completed_date" class="text-muted">N/A</h4>
+                        <h4 *ngIf="!reportDetails?.completed_date" class="text-muted"></h4>
                     </div>
           </div>
           <div class="col-md-2">
@@ -52,7 +52,7 @@
             <div class="row">
               <p>Assigned By</p>
               <h4 *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}} {{reportDetails?.supervisor_user?.last}}</h4>
-              <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</h4>
+              <h4 *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></h4>
             </div>
 
             <div class="row mt-2">
@@ -64,7 +64,7 @@
             <div class="row">
               <p>Assigned Date</p>
               <h4 *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</h4>
-              <h4 class="text-muted" *ngIf="!reportDetails.approved_date">N/A</h4>
+              <h4 class="text-muted" *ngIf="!reportDetails.approved_date"></h4>
             </div>
 
           </div>
@@ -101,12 +101,12 @@
               <h4>Assigned by </h4>
               <p *ngIf="reportDetails?.supervisor_user?.first_name">{{reportDetails?.supervisor_user?.first_name}}
                 {{reportDetails?.supervisor_user?.last}}</p>
-              <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted">N/A</p>
+              <p *ngIf="!reportDetails?.supervisor_user?.first_name" class="text-muted"></p>
             </div>
             <div *ngIf="loggedUserDetails.role !== 4">
               <h4>Supervise by </h4>
               <span class="text-bold" *ngFor="let s of reportDetails?.supervisor_sample_form">{{s?.supervisor_user?.first_name}} {{s?.supervisor_user.last_name}},</span>
-              <p *ngIf="reportDetails?.supervisor_sample_form?.length <1" class="text-muted">N/A</p>
+              <p *ngIf="reportDetails?.supervisor_sample_form?.length <1" class="text-muted"></p>
             </div>
 
           </div>
@@ -114,7 +114,7 @@
             <div *ngIf="loggedUserDetails.role === 4">
               <h4>Assigned Date </h4>
               <p *ngIf="reportDetails.approved_date">{{reportDetails.approved_date | date: 'medium'}}</p>
-              <p class="text-muted" *ngIf="!reportDetails.approved_date">N/A</p>
+              <p class="text-muted" *ngIf="!reportDetails.approved_date"></p>
             </div>
           </div>
 
@@ -471,7 +471,7 @@
               <tr>
                 <td style="width: 20%;">
                   <p class="text-muted mb-0 pb-0">Generated Date</p>
-                  <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || 'N/A'}}</p>
+                  <p class="text-muted mb-0">Date:{{(reportDetails?.updated_date| date:'medium') || ''}}</p>
                 </td>
                 <td style="width: 30%;" class="pt-3">
                   
@@ -577,22 +577,22 @@
           <div class="row">
             <div class="col-md-4">
               <h4 class="mb-0">Name</h4>
-              <p>{{sampleUserDetails?.first_name || 'N/A'}} {{sampleUserDetails?.last_name || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.first_name || ''}} {{sampleUserDetails?.last_name || ''}}</p>
             </div> 
     
             <div class="col-md-4">
               <h4 class="mb-0">Email</h4>
-              <p>{{sampleUserDetails?.email || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.email || ''}}</p>
             </div> 
     
             <div class="col-md-4">
               <h4 class="mb-0">Phone</h4>
-              <p>{{sampleUserDetails?.phone || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.phone || ''}}</p>
             </div> 
             
             <div class="col-md-4">
               <h4 class="mb-0">Username</h4>
-              <p>{{sampleUserDetails?.username || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.username || ''}}</p>
             </div>
             
             
@@ -603,22 +603,22 @@
 
             <div class="col-md-4">
               <h4 class="mb-0">Client category</h4>
-              <p>{{(sampleUserDetails?.client_category) || 'N/A'}}</p>
+              <p>{{(sampleUserDetails?.client_category) || ''}}</p>
             </div>
             
             <div class="col-md-4">
               <h4 class="mb-0">Department Name</h4>
-              <p>{{sampleUserDetails?.department_name || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.department_name || ''}}</p>
             </div>
 
             <div class="col-md-4">
               <h4 class="mb-0">Department Address</h4>
-              <p>{{sampleUserDetails?.department_address || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.department_address || ''}}</p>
             </div>
 
             <div class="col-md-4">
               <h4 class="mb-0">Registration Number</h4>
-              <p>{{sampleUserDetails?.registration_number || 'N/A'}}</p>
+              <p>{{sampleUserDetails?.registration_number || ''}}</p>
             </div>
 
             
@@ -662,7 +662,7 @@
           <div class="col-md-2">
             <div>
               <h4 class="mb-0">Sample Lab Code </h4>
-              <p>{{reportDetails?.sample_lab_id || 'N/A'}}</p>
+              <p>{{reportDetails?.sample_lab_id || ''}}</p>
             </div>
 
           </div>
@@ -670,7 +670,7 @@
           <div class="col-md-2">
             <div>
               <h4 class="mb-0">Refrence Number </h4>
-              <p>{{reportDetails?.refrence_number|| 'N/A'}}</p>
+              <p>{{reportDetails?.refrence_number|| ''}}</p>
             </div>
 
           </div>
@@ -708,12 +708,12 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Note</h4>
-            <p>{{reportDetails.note || 'N/A'}}</p>
+            <p>{{reportDetails.note || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Amendments</h4>
-            <p>{{reportDetails.amendments || 'N/A'}}</p>
+            <p>{{reportDetails.amendments || ''}}</p>
           </div>
 
           <div class="col-md-4">
@@ -724,22 +724,22 @@
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Units</h4>
-            <p>{{reportDetails.sample_units || 'N/A'}}</p>
+            <p>{{reportDetails.sample_units || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Type</h4>
-            <p>{{reportDetails.sample_type || 'N/A'}}</p>
+            <p>{{reportDetails.sample_type || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Sample Quantity</h4>
-            <p>{{reportDetails.sample_quantity || 'N/A'}}</p>
+            <p>{{reportDetails.sample_quantity || ''}}</p>
           </div>
 
           <div class="col-md-4">
             <h4 class="mb-0">Number of Sample</h4>
-            <p>{{reportDetails.number_of_sample || 'N/A'}}</p>
+            <p>{{reportDetails.number_of_sample || ''}}</p>
           </div>
         </div>
       </div>
@@ -768,25 +768,25 @@
                   <td>{{r.name | titlecase}}</td>
                   <!-- <td>
                     <span *ngIf="r.formula">
-                      <span *ngIf="r.formula === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.formula === 'nan'" class="text-muted"></span>
                       <span *ngIf="r.formula !== 'nan'" class="text-muted">{{r.formula}}</span>
                       </span>
-                    <span *ngIf="!r.formula" class="text-muted">N/A</span>
+                    <span *ngIf="!r.formula" class="text-muted"></span>
                   </td> -->
                   <td>
-                    {{r.test_method || 'N/A'}}
+                    {{r.test_method || ''}}
                     <!-- <span *ngIf="r.ref_test_method">
-                      <span *ngIf="r.ref_test_method === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.ref_test_method === 'nan'" class="text-muted"></span>
                       <span *ngIf="r.ref_test_method !== 'nan'" class="text-muted">{{r.ref_test_method}}</span>
                     </span>
-                    <span *ngIf="!r.ref_test_method" class="text-muted">N/A</span> -->
+                    <span *ngIf="!r.ref_test_method" class="text-muted"></span> -->
                   </td>
                   <td>
                     <span *ngIf="r.units">
-                      <span *ngIf="r.units === 'nan'" class="text-muted">N/A</span>
+                      <span *ngIf="r.units === 'nan'" class="text-muted"></span>
                       <span *ngIf="r.units !== 'nan'" class="text-muted">{{r.units}}</span>
                     </span>
-                    <span *ngIf="!r.units" class="text-muted">N/A</span>
+                    <span *ngIf="!r.units" class="text-muted"></span>
                   </td>
                   <td>{{r.sup_full_name}} </td>
                   <!-- <td>Rs.{{r.price}}</td> -->
@@ -794,7 +794,7 @@
                   <td>
                     <span [innerHtml]="r.result"></span>
                     <!-- <span *ngIf="r?.result === 0">0</span>
-                    <span *ngIf="r?.result" class="text-muted">N/A</span> -->
+                    <span *ngIf="r?.result" class="text-muted"></span> -->
                   </td>
                   <td>{{r.mandatory_standard}}</td>
                   <!-- <td>
@@ -810,7 +810,7 @@
                   </td>
                   <td [attr.rowspan]="reportDetails?.parameters?.length" *ngIf="(loggedUserDetails.role === 7 || loggedUserDetails.role === 2) && i===0">
                     <!-- {{reportDetails?.remarks}} -->
-                    <div >{{reportDetails?.remarks || 'N/A'}}</div>
+                    <div >{{reportDetails?.remarks || ''}}</div>
                   </td>
                 </tr>
               </tbody>

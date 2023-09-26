@@ -78,11 +78,12 @@ isOtherDetails = false;
     this.initOtherForm();
   }
 
-  viewLabSheet() {
+  viewLabSheet(a) {
+    console.log(a, 'aaaaaaa')
     let id = this.route.snapshot.paramMap.get('id');
     this.dialog.open(LabSheetComponent, {
       height:'80vh',
-      data: id
+      data: a
     })
   }
 
@@ -128,7 +129,8 @@ isOtherDetails = false;
     this.otherDetailsForm = this.fb.group({
       sample_received_date: '',
       started_date:'',
-      additional_info: ''
+      additional_info: '',
+      sample_receipt_condition:''
     })
   }
 
@@ -138,7 +140,8 @@ isOtherDetails = false;
     let payload =  {
       sample_received_date: this.formatter(this.otherDetailsForm.value.sample_received_date),
       started_date:this.formatter(this.otherDetailsForm.value.started_date),
-      additional_info: ''
+      additional_info: '',
+      sample_receipt_condition:this.otherDetailsForm.value.sample_receipt_condition
     }
    this.service.sendForVarification(payload, id).subscribe(res => {
     this.isOtherDetails = false;

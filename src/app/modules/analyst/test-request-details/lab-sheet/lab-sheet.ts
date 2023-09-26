@@ -15,20 +15,20 @@ export class LabSheetComponent {
     data: any;
     userDetails:any;
 
-    sampleDetails:any;
+    // sampleDetails:any;
 
     constructor(
         private route: ActivatedRoute,
         private pipe: DatePipe,
         private dialogRef: MatDialogRef<LabSheetComponent>,
         @Inject(MAT_DIALOG_DATA)
-        public id: any,
+        public sampleDetails: any,
         private service: TestRequestDetailsService
     
     ) {
         this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-        this.getTestResultDetails();
+        // this.getTestResultDetails();
     }
 
     convertToNepaliDate(enDate) {
@@ -45,18 +45,18 @@ export class LabSheetComponent {
     }
 
 
-    getTestResultDetails() {
-        let id = this.route.snapshot.paramMap.get('id');
-        let payload = {
-          id: this.id,
-          user: this.userDetails.id
-        }
-        this.service.getDetailsForLabSheet(payload).subscribe(response => {
-            this.sampleDetails = response;
-          let apiResponse = response;
-          this.data = response;
+    // getTestResultDetails() {
+    //     let id = this.route.snapshot.paramMap.get('id');
+    //     let payload = {
+    //       id: this.id,
+    //       user: this.userDetails.id
+    //     }
+    //     this.service.getDetailsForLabSheet(payload).subscribe(response => {
+    //         this.sampleDetails = response;
+    //       let apiResponse = response;
+    //       this.data = response;
     
-        })
-      }
+    //     })
+    //   }
     
 }

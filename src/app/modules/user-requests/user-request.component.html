@@ -97,7 +97,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
       <td mat-cell *matCellDef="let row">
         <span *ngIf="row.phone">{{row.phone}}</span>
-        <span *ngIf="!row.phone" class="text-muted">N/A</span>
+        <span *ngIf="!row.phone" class="text-muted"></span>
       </td>
     </ng-container>
 
@@ -130,7 +130,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
       <td mat-cell *matCellDef="let row">
         <button  *ngIf="row.is_recheck" (click)="viewRemarks(row.remarks)" class="btn btn-secondary btn-sm">Remarks</button>
-        <div  *ngIf="!row.is_recheck"  class="text-muted">N/A</div>
+        <div  *ngIf="!row.is_recheck"  class="text-muted"></div>
       </td>
     </ng-container>
 

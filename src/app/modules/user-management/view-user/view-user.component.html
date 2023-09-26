@@ -13,7 +13,7 @@
         <h1 class="text-lims-primary">Client Details</h1>
         <hr/>
         <span *ngIf="userDetails?.client_category" class="badge badge-primary" style="background-color: #2260bf;">{{getClientName(userDetails?.client_category)}}</span>
-        <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
+        <span *ngIf="!userDetails?.client_category" class="text-muted"></span>
       </div>
     </div>
 
@@ -36,7 +36,7 @@
         <h3>
           <span class="text-bold">Phone Number: </span>
           <span *ngIf="userDetails?.phone">{{userDetails?.phone}}</span>
-          <span *ngIf="!userDetails?.phone" class="text-muted">N/A</span>
+          <span *ngIf="!userDetails?.phone" class="text-muted"></span>
         </h3>
       </div>
 
@@ -44,7 +44,7 @@
         <h3>
           <span class="text-bold">Username: </span>
           <span *ngIf="userDetails?.username">{{userDetails?.username}}</span>
-          <span *ngIf="!userDetails?.username" class="text-muted">N/A</span>
+          <span *ngIf="!userDetails?.username" class="text-muted"></span>
         </h3>
       </div>
 
@@ -52,7 +52,7 @@
         <h3>
           <span class="text-bold">Joined Date: </span>
           <span *ngIf="userDetails?.date_joined">{{userDetails?.date_joined | date}}</span>
-          <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
+          <span *ngIf="!userDetails?.date_joined" class="text-muted"></span>
         </h3>
       </div>
     </div>
@@ -103,7 +103,7 @@
             <div class="row" *ngIf="userDetails?.approved_by">
               <p>Approve By</p>
               <h4 *ngIf="userDetails?.approved_by">{{userDetails?.approved_by?.first_name}} {{userDetails?.approved_by?.first_name}}</h4>
-              <h4 class="text-muted" *ngIf="!userDetails?.approved_by">N/A</h4>
+              <h4 class="text-muted" *ngIf="!userDetails?.approved_by"></h4>
             </div>
             <div class="row mt-2" *ngIf="userDetails?.first_name">
               <p>Created By</p>
@@ -114,18 +114,18 @@
             <div class="row" *ngIf="userDetails?.approved_date">
               <p>Approved At</p>
               <h4 *ngIf="userDetails?.approved_date">{{userDetails?.approved_date | date:'medium'}}</h4>
-              <h4 class="text-muted" *ngIf="!userDetails?.approved_date">N/A</h4>
+              <h4 class="text-muted" *ngIf="!userDetails?.approved_date"></h4>
             </div>
             <div class="row mt-2" *ngIf="userDetails?.date_joined">
               <p>Created at</p>
               <h4 *ngIf="userDetails?.date_joined ">{{userDetails?.date_joined | date:'medium'}}</h4>
-              <h4 *ngIf="!userDetails?.date_joined " class="text-muted">N/A</h4>
+              <h4 *ngIf="!userDetails?.date_joined " class="text-muted"></h4>
             </div>
           </div>
           <div class="col-md-3">
             <!-- <div class="row">
               <p>Verified By</p>
-              <h4>N/A</h4>
+              <h4></h4>
             </div> -->
           </div>
           <div class="col-md-3 log-status">
@@ -143,12 +143,12 @@
           <div class="col-md-4">
             <h4 class="m-0">User Role</h4>
             <p *ngIf="userDetails.role" >{{getRoleName(userDetails.role)}}</p>
-            <span *ngIf="!userDetails.role" class="text-muted">N/A</span>
+            <span *ngIf="!userDetails.role" class="text-muted"></span>
           </div>
           <div class="col-md-4" *ngIf="userDetails.role === 5"> 
             <h4 class="m-0">Client Category </h4>
             <p *ngIf="userDetails?.client_category">{{getClientName(userDetails?.client_category)}}</p>
-            <span *ngIf="!userDetails?.client_category" class="text-muted">N/A</span>
+            <span *ngIf="!userDetails?.client_category" class="text-muted"></span>
           </div>
 
           <div class="col-md-4" *ngIf="userDetails.role === 3 || userDetails.role === 4">
@@ -160,7 +160,7 @@
               <p *ngIf="userDetails?.test_type.includes(3)">Instrumental</p>
               <!-- {{userDetails?.test_type}} -->
             </span>
-            <span *ngIf="!userDetails?.test_type" class="text-muted">N/A</span>
+            <span *ngIf="!userDetails?.test_type" class="text-muted"></span>
           </div>
           <div class="col-md-4">
             <h4 class="m-0">Full Name </h4>
@@ -171,25 +171,25 @@
           <div class="col-md-4">
             <h4 class="m-0">Email</h4>
             <p *ngIf="userDetails.email">{{userDetails.email}}</p>
-            <span *ngIf="!userDetails.email" class="text-muted">N/A</span>
+            <span *ngIf="!userDetails.email" class="text-muted"></span>
           </div>
           <div class="col-md-4">
             <h4 class="m-0">Phone Number</h4>
             <p *ngIf="userDetails.phone">{{userDetails.phone}}</p>
-            <span *ngIf="!userDetails.phone" class="text-muted">N/A</span>
+            <span *ngIf="!userDetails.phone" class="text-muted"></span>
           </div>
 
           <div class="col-md-4">
             <h4 class="m-0">Username</h4>
             <p *ngIf="userDetails?.username">{{userDetails?.username}}</p>
-          <span *ngIf="!userDetails?.username" class="text-muted">N/A</span>
+          <span *ngIf="!userDetails?.username" class="text-muted"></span>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4">
             <h4 class="m-0">Joined Date</h4>
             <p *ngIf="userDetails?.date_joined">{{userDetails?.date_joined | date}}</p>
-          <span *ngIf="!userDetails?.date_joined" class="text-muted">N/A</span>
+          <span *ngIf="!userDetails?.date_joined" class="text-muted"></span>
           </div>
         </div>
       </div>

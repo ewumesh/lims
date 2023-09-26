@@ -23,7 +23,7 @@
         <div class="col-md-3" >
           <!-- <div class="row" *ngIf="sampleDetails.status !== 'pending'">
             <p>Completed At</p>
-            <h4>N/A</h4>
+            <h4></h4>
           </div> -->
           <div class="row mt-2">
             <p>Created at</p>
@@ -33,7 +33,7 @@
           <div class="row" *ngIf="sampleDetails.approved_date">
             <p>Approved at</p>
             <h4 *ngIf="sampleDetails?.approved_date">{{sampleDetails?.approved_date | date:'medium'}}</h4>
-            <h4 *ngIf="!sampleDetails?.approved_date">N/A</h4>
+            <h4 *ngIf="!sampleDetails?.approved_date"></h4>
           </div>
           <!-- <div class="row mt-2">
                       <p>Rejected at</p>
@@ -151,7 +151,7 @@
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Sample Name </h4>
-          <p>{{sampleDetails.name || 'N/A'}}</p>
+          <p>{{sampleDetails.name || ''}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Commodity </h4>
@@ -172,23 +172,23 @@
 
         <!-- <div class="col-md-4">
           <h4 class="m-0">Batch</h4>
-          <p>{{sampleDetails.batch || 'N/A'}}</p>
+          <p>{{sampleDetails.batch || ''}}</p>
         </div> -->
       </div>
       <!-- <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">Brand</h4>
-          <p>{{sampleDetails.brand || 'N/A'}}</p>
+          <p>{{sampleDetails.brand || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose || 'N/A'}}</p>
+          <p>{{sampleDetails?.purpose || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Condition</h4>
-          <p>{{sampleDetails.condition || 'N/A'}}</p>
+          <p>{{sampleDetails.condition || ''}}</p>
         </div>
       </div> -->
 
@@ -201,39 +201,39 @@
 
         <!-- <div class="col-md-4">
           <h4 class="m-0">Amendments</h4>
-          <p>{{sampleDetails?.amendments || 'N/A'}}</p>
+          <p>{{sampleDetails?.amendments || ''}}</p>
         </div> -->
 
         <!-- <div class="col-md-4">
           <h4 class="m-0">Note</h4>
-          <p>{{sampleDetails.note || 'N/A'}}</p>
+          <p>{{sampleDetails.note || ''}}</p>
         </div> -->
 
         <div class="col-md-4">
           <h4 class="m-0">Sample Type</h4>
-          <p>{{sampleDetails?.sample_type || 'N/A'}}</p>
+          <p>{{sampleDetails?.sample_type || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Sample Quantity</h4>
-          <p>{{sampleDetails?.sample_quantity || 'N/A'}} {{sampleDetails?.sample_units}}</p>
+          <p>{{sampleDetails?.sample_quantity || ''}} {{sampleDetails?.sample_units}}</p>
         </div>
  
         <div class="col-md-4">
           <h4 class="m-0">Number of Sample</h4>
-          <p>{{sampleDetails?.number_of_sample || 'N/A'}}</p>
+          <p>{{sampleDetails?.number_of_sample || ''}}</p>
         </div>
         <!-- {{sampleDetails?.client_category_detail?.client_sub_category | json}} -->
         <div class="col-md-12" *ngIf="sampleDetails?.client_category_detail?.client_sub_category === 'licensing'">
           <div class="row">
             <div class="col-md-4">
               <h4 class="m-0">Analysis Fee</h4>
-              <p>{{sampleDetails?.analysis_fee || 'N/A'}}</p>
+              <p>{{sampleDetails?.analysis_fee || ''}}</p>
             </div>
     
             <div class="col-md-4">
               <h4 class="m-0">Voucher Number</h4>
-              <p>{{sampleDetails?.voucher_number || 'N/A'}}</p>
+              <p>{{sampleDetails?.voucher_number || ''}}</p>
             </div>
     
             <div class="col-md-4">
@@ -254,7 +254,7 @@
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Sample Name </h4>
-          <p>{{sampleDetails.name || 'N/A'}}</p>
+          <p>{{sampleDetails.name || ''}}</p>
         </div>
         <div class="col-md-4">
           <h4 class="m-0">Commodity </h4>
@@ -275,23 +275,23 @@
 
         <div class="col-md-4">
           <h4 class="m-0">Batch</h4>
-          <p>{{sampleDetails.batch || 'N/A'}}</p>
+          <p>{{sampleDetails.batch || ''}}</p>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <h4 class="m-0">Brand</h4>
-          <p>{{sampleDetails.brand || 'N/A'}}</p>
+          <p>{{sampleDetails.brand || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Purpose of Analysis</h4>
-          <p>{{sampleDetails?.purpose || 'N/A'}}</p>
+          <p>{{sampleDetails?.purpose || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Condition</h4>
-          <p>{{sampleDetails.condition || 'N/A'}}</p>
+          <p>{{sampleDetails.condition || ''}}</p>
         </div>
       </div>
 
@@ -304,39 +304,39 @@
 
         <div class="col-md-4">
           <h4 class="m-0">Amendments</h4>
-          <p>{{sampleDetails?.amendments || 'N/A'}}</p>
+          <p>{{sampleDetails?.amendments || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Note</h4>
-          <p>{{sampleDetails.note || 'N/A'}}</p>
+          <p>{{sampleDetails.note || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Sample Type</h4>
-          <p>{{sampleDetails?.sample_type || 'N/A'}}</p>
+          <p>{{sampleDetails?.sample_type || ''}}</p>
         </div>
 
         <div class="col-md-4">
           <h4 class="m-0">Sample Quantity</h4>
-          <p>{{sampleDetails?.sample_quantity || 'N/A'}} {{sampleDetails?.sample_units}}</p>
+          <p>{{sampleDetails?.sample_quantity || ''}} {{sampleDetails?.sample_units}}</p>
         </div>
  
         <div class="col-md-4">
           <h4 class="m-0">Number of Sample</h4>
-          <p>{{sampleDetails?.number_of_sample || 'N/A'}}</p>
+          <p>{{sampleDetails?.number_of_sample || ''}}</p>
         </div>
         <!-- {{sampleDetails?.client_category_detail?.client_sub_category | json}} -->
         <div class="col-md-12" *ngIf="sampleDetails?.client_category_detail?.client_sub_category === 'licensing'">
           <div class="row">
             <div class="col-md-4">
               <h4 class="m-0">Analysis Fee</h4>
-              <p>{{sampleDetails?.analysis_fee || 'N/A'}}</p>
+              <p>{{sampleDetails?.analysis_fee || ''}}</p>
             </div>
     
             <div class="col-md-4">
               <h4 class="m-0">Voucher Number</h4>
-              <p>{{sampleDetails?.voucher_number || 'N/A'}}</p>
+              <p>{{sampleDetails?.voucher_number || ''}}</p>
             </div>
     
             <div class="col-md-4">
