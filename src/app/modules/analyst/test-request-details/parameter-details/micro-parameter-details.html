@@ -67,6 +67,7 @@
                                         <mat-option [value]="'/0.1 ml'">/0.1ml</mat-option>
                                         <mat-option [value]="'/25 g'">/25 g</mat-option>
                                         <mat-option [value]="'/25 ml'">/25 ml</mat-option>
+                                        <mat-option [value]="'macconkey broth'">MacConkey Broth</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -86,6 +87,11 @@
                                         <mat-option [value]="'10 ml'">10ml</mat-option>
                                         <mat-option [value]="'1 ml'">1ml</mat-option>
                                         <mat-option [value]="'0.1 ml'">0.1ml</mat-option>
+                                        <mat-option [value]="'/0.1 g'">/0.1g</mat-option>
+                                        <mat-option [value]="'/0.1 ml'">/0.1ml</mat-option>
+                                        <mat-option [value]="'/25 g'">/25 g</mat-option>
+                                        <mat-option [value]="'/25 ml'">/25 ml</mat-option>
+                                        <mat-option [value]="'macconkey broth'">MacConkey Broth</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -105,6 +111,11 @@
                                         <mat-option [value]="'10 ml'">10ml</mat-option>
                                         <mat-option [value]="'1 ml'">1ml</mat-option>
                                         <mat-option [value]="'0.1 ml'">0.1ml</mat-option>
+                                        <mat-option [value]="'/0.1 g'">/0.1g</mat-option>
+                                        <mat-option [value]="'/0.1 ml'">/0.1ml</mat-option>
+                                        <mat-option [value]="'/25 g'">/25 g</mat-option>
+                                        <mat-option [value]="'/25 ml'">/25 ml</mat-option>
+                                        <mat-option [value]="'macconkey broth'">MacConkey Broth</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -144,12 +155,16 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6">
-                        <label>Date And Time </label>
+                    <div class="col-md-3"> 
+                        <label>Date </label>
                         <!-- <mat-form-field appearance="outline" class="w-100"> -->
-                        <input style="border: 1px solid #0000006e;
+                            <np-datepicker class=" h-45"
+                            formControlName="date_of_incubation"
+                      [dateFormatter]="formatter">
+                    </np-datepicker>
+                        <!-- <input style="border: 1px solid #0000006e;
                         border-radius: 5px; height: 45px;" formControlName="date_of_incubation" class="form-control"
-                            placeholder="Enter Date" type="datetime-local">
+                            placeholder="Enter Date" type="datetime-local"> -->
                         <!-- </mat-form-field> -->
                         <!-- <mat-form-field appearance="outline" class="w-100">
 
@@ -170,6 +185,15 @@
                             </ngx-mat-datetime-picker>
                           </mat-form-field> -->
 
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Time</label>
+                        <!-- <mat-form-field appearance="outline" class="w-100"> -->
+                            <!-- <input type="time" id="picker" name="picker"> -->
+                        <input formControlName="time_of_incubation" type="time" placeholder="select time" style="border: 1px solid #0000006e;
+                        border-radius: 5px; height: 45px;" />
+                        <!-- </mat-form-field> -->
                     </div>
 
                     <div class="col-md-6">
@@ -244,13 +268,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="2" *ngIf="addedParameterDetails?.first_exponent">
                             <div [innerHtml]="addedParameterDetails?.first_exponent | superscript"></div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="2" *ngIf="addedParameterDetails?.second_exponent">
                             <div [innerHtml]="addedParameterDetails?.second_exponent | superscript"></div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="2" *ngIf="addedParameterDetails?.third_exponent">
                             <div [innerHtml]="addedParameterDetails?.third_exponent | superscript"></div>
                         </td>
                     </tr>
@@ -271,6 +295,7 @@
                         <td *ngIf="addedParameterDetails?.third_exponent">+Ve</td>
                         <td *ngIf="addedParameterDetails?.third_exponent">-Ve</td>
                     </tr>
+                    <!-- {{addedParameterDetails | json}} -->
                     <ng-container formArrayName="observation">
                         <tr *ngFor="let list of form.controls; let i = index" [formGroupName]="i">
                             <td colspan="2" class="text-bold">
@@ -283,9 +308,13 @@
                             </td>
                             <td style="width: 50px;">
                                 <!-- <input formControlName="time" type="text"> -->
-                                {{observationForm.value.observation[i].time | slice:11:19}}
+                                <!-- {{observationForm.value | json}} -->
+                                {{observationForm.value.observation[i].time}}
                             </td>
-                            <td *ngIf="addedParameterDetails?.first_exponent"><input formControlName="first_exponent_a" type="text"></td>
+                            <td *ngIf="addedParameterDetails?.first_exponent">
+                                <input formControlName="first_exponent_a" type="text">
+                                <!-- {{addedParameterDetails | json}} -->
+                            </td>
                             <td *ngIf="addedParameterDetails?.first_exponent"><input formControlName="first_exponent_b" type="text"></td>
                             <td *ngIf="addedParameterDetails?.second_exponent"><input formControlName="second_exponent_a" type="text"></td>
                             <td *ngIf="addedParameterDetails?.second_exponent"><input formControlName="second_exponent_b" type="text"></td>

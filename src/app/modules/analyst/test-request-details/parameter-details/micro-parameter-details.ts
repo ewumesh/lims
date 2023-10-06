@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { DateFormatter } from "angular-nepali-datepicker";
 import { TestRequestDetailsService } from "src/app/services/analyst/test-request-details/test-request-details.service";
 import { TOAST_STATE, ToastService } from "src/app/shared/toastr/toastr.service";
 
@@ -50,6 +51,21 @@ export class MicroParameterDetailsComponent implements OnInit {
         }
         this.service.getMicroParameterDetails(payload).subscribe(res => {
             this.existingParameterDetails = res;
+
+            const dateOfIncubtion = res?.date_of_incubation.split('-');
+            let date:any = { };
+            if (dateOfIncubtion.length === 3) {
+                date.year = parseInt(dateOfIncubtion[0], 10);
+                date.month = parseInt(dateOfIncubtion[1], 10);
+                date.day = parseInt(dateOfIncubtion[2], 10);
+              } else {
+                date = '';
+                console.error('Invalid date format');
+              }
+
+              res.date_of_incubation = date;
+
+
             this.parameterDetailsForm.patchValue(res);
             this.addedParameterDetails = res;
 
@@ -114,13 +130,32 @@ export class MicroParameterDetailsComponent implements OnInit {
             first_exponent: '',
             second_exponent: '',
             third_exponent: '',
-            duration_of_incubation:''
+            duration_of_incubation:'',
+            time_of_incubation:''
         })
 
         if (this.data?.selectedParameter?.micro_table && this.data?.selectedParameter?.micro_table !== null) {
             this.getExistingParameter();
         }
     }
+
+    formatter: DateFormatter = (date) => {
+        let month;
+        let days;
+        if(date.month < 10) {
+            month = '0' + (date.month+1).toString();
+        } else {
+            month = date.month;
+        }
+    
+        if(date.day < 10) {
+            days = '0' + (date.day).toString();
+        } else {
+            days = date.day;
+        }
+        return `${date.year}-${month}-${days}`;
+        // return `${date.year} साल, ${date.month + 1} महिना, ${date.day} गते`;
+      } 
 
     initObservationForm() {
         this.observationForm = this.fb.group({
@@ -161,7 +196,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_number: '1 (24hrs)',
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
-                    time: this.addedParameterDetails?.date_of_incubation,
+                    time: this.addedParameterDetails?.time_of_incubation,
                     first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
@@ -184,7 +219,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_number: '2 (48hrs)',
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
-                    time: this.addedParameterDetails?.date_of_incubation,
+                    time: this.addedParameterDetails?.time_of_incubation,
                     first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
@@ -206,7 +241,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_number: '3 (72hrs)',
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
-                    time: this.addedParameterDetails?.date_of_incubation,
+                    time: this.addedParameterDetails?.time_of_incubation,
                     first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
@@ -228,7 +263,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_number: '4 (96hrs)',
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
-                    time: this.addedParameterDetails?.date_of_incubation,
+                    time: this.addedParameterDetails?.time_of_incubation,
                     first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
@@ -250,7 +285,7 @@ export class MicroParameterDetailsComponent implements OnInit {
                     observation_number: '5 (120hrs)',
                     observation_time: '',
                     temperature: this.addedParameterDetails?.required_temperature,
-                    time: this.addedParameterDetails?.date_of_incubation,
+                    time: this.addedParameterDetails?.time_of_incubation,
                     first_exponent: this.addedParameterDetails?.first_exponent,
                     first_exponent_a: '',
                     first_exponent_b: '',
@@ -295,7 +330,9 @@ export class MicroParameterDetailsComponent implements OnInit {
 
     setMicroParameter() {
         this.isSetParameterDetails = true;
-        this.service.setMicorParameters(this.parameterDetailsForm.value).subscribe(res => {
+        let payload = this.parameterDetailsForm.value;
+        payload.date_of_incubation = this.formatter(this.parameterDetailsForm.value.date_of_incubation);
+        this.service.setMicorParameters(payload).subscribe(res => {
             this.addedParameterDetails = res.data;
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();
@@ -316,7 +353,9 @@ export class MicroParameterDetailsComponent implements OnInit {
 
     updateMicroParameter() {
         this.isSetParameterDetails = true;
-        this.service.updateMicorParameters(this.parameterDetailsForm.value).subscribe(res => {
+        let payload = this.parameterDetailsForm.value;
+        payload.date_of_incubation = this.formatter(this.parameterDetailsForm.value.date_of_incubation);
+        this.service.updateMicorParameters(payload).subscribe(res => {
             this.addedParameterDetails = res.data;
             this.toast.showToast(TOAST_STATE.success, res.message);
             this.dissmissToast();

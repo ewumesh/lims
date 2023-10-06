@@ -99,7 +99,7 @@
                     <td colspan="2" class="text-bold">
                     {{data?.observation_number}}</td>
                     <td>{{data.temperature}}<sup>o</sup>C</td>
-                    <td>{{data.time | slice:11:19}}</td>
+                    <td>{{data?.time}}</td>
                     <td *ngIf="microParametersDetails?.first_exponent">{{data?.first_exponent_a}}</td>
                     <td *ngIf="microParametersDetails?.first_exponent">{{data?.first_exponent_b}}</td>
                     <td *ngIf="microParametersDetails?.second_exponent">{{data?.second_exponent_a}}</td>
